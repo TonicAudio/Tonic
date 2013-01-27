@@ -10,9 +10,9 @@
 
 namespace Tonic {
   
-TonicFrames SineWave :: table_;
+TonicFrames SineWave_ :: table_;
 
-SineWave :: SineWave( void )
+SineWave_ :: SineWave_( void )
   : time_(0.0), rate_(1.0), phaseOffset_(0.0)
 {
   if ( table_.empty() ) {
@@ -24,41 +24,41 @@ SineWave :: SineWave( void )
 
 }
 
-SineWave :: ~SineWave()
+SineWave_ :: ~SineWave_()
 {
 }
 
-//void SineWave :: sampleRateChanged( TonicFloat newRate, TonicFloat oldRate )
+//void SineWave_ :: sampleRateChanged( TonicFloat newRate, TonicFloat oldRate )
 //{
 //  if ( !ignoreSampleRateChange_ )
 //    this->setRate( oldRate * rate_ / newRate );
 //}
 
-void SineWave :: reset( void )
+void SineWave_ :: reset( void )
 {
   time_ = 0.0;
   //lastFrame_[0] = 0;
 }
 
-void SineWave :: setFrequency( TonicFloat frequency )
+SineWave_& SineWave_ :: setFrequency( TonicFloat frequency )
 {
   // This is a looping frequency.
   this->setRate( TABLE_SIZE * frequency / Tonic::sampleRate() );
 }
 
-void SineWave :: addTime( TonicFloat time )
+void SineWave_ :: addTime( TonicFloat time )
 {
   // Add an absolute time in samples.
   time_ += time;
 }
 
-void SineWave :: addPhase( TonicFloat phase )
+void SineWave_ :: addPhase( TonicFloat phase )
 {
   // Add a time in cycles (one cycle = TABLE_SIZE).
   time_ += TABLE_SIZE * phase;
 }
 
-void SineWave :: addPhaseOffset( TonicFloat phaseOffset )
+void SineWave_ :: addPhaseOffset( TonicFloat phaseOffset )
 {
   // Add a phase offset relative to any previous offset value.
   time_ += ( phaseOffset - phaseOffset_ ) * TABLE_SIZE;

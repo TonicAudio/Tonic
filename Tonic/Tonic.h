@@ -12,7 +12,12 @@
 #include <stdio.h>
 #include <string>
 #include <math.h>
+#ifdef __APPLE__
+  #import <Accelerate/Accelerate.h>
+  #define USE_APPLE_ACCELERATE
+#endif
 
+using namespace std;
 
 typedef unsigned long         UInt32;
 typedef float                 TonicFloat;
@@ -25,7 +30,12 @@ const TonicFloat PI           = 3.14159265358979;
 const TonicFloat TWO_PI       = 2 * PI;
 #endif
 
+
 namespace Tonic {
+
+
+
+
   static TonicFloat sampleRate(){
     return 44100;
   };

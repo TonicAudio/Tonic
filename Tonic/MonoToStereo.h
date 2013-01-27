@@ -10,22 +10,25 @@
 #define ___013_1_23_melody__MonoToStereo__
 
 #include <iostream>
-#include "Processor.h"
+#include "Generator.h"
+#include "TonicFrames.h"
+
 
 namespace Tonic {
 
-class MonoToStereo : public Processor{
-
-  TonicFrames         mInputFrames;
-
-public:
-
-  MonoToStereo();
-
-  void                tick( TonicFrames& frames );
-  
-  
-};
+//class MonoToStereo{
+//
+//  TonicFrames         mInputFrames;
+//  Generator*          mInputSource;
+//
+//public:
+//
+//  MonoToStereo( Generator& input );
+//
+//  void                tick( TonicFrames& frames );
+//  
+//  
+//};
 
 }
 

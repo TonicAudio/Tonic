@@ -13,6 +13,7 @@
 #include "Tonic.h"
 #include "Generator.h"
 #include "TonicFrames.h"
+#include "GeneratorHandle.h"
 
 namespace Tonic{
   
@@ -24,12 +25,13 @@ private:
 
 protected:
 
-  Generator*              outputGen;
+  Generator              outputGen;
   
 public:
   Synth();
   void                    tick( TonicFrames& frames );
   void                    fillBufferOfFloats(float *outData,  UInt32 numFrames, int numChannels);
+  template<typename T>T&  a(T*);
 };
   
 }

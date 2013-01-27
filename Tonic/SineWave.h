@@ -7,12 +7,12 @@
 //
 
 /*
-  For now, this is a line-for-line copy of STK SineWave. Much thanks to Perry Cook and Gary Scavone. 
+  For now, this is a line-for-line copy of STK SineWave_. Much thanks to Perry Cook and Gary Scavone. 
   https://ccrma.stanford.edu/software/stk/
 */
 
-#ifndef ___013_1_23_melody__SineWave__
-#define ___013_1_23_melody__SineWave__
+#ifndef ___013_1_23_melody__SineWave___
+#define ___013_1_23_melody__SineWave___
 
 #include <iostream>
 #include "Tonic.h"
@@ -23,14 +23,14 @@ namespace Tonic {
 
   const unsigned long TABLE_SIZE = 2048;
 
-  class SineWave : public Generator
+  class SineWave_ : public Generator_
   {
   public:
     //! Default constructor.
-    SineWave( void );
+    SineWave_( void );
 
     //! Class destructor.
-    ~SineWave( void );
+    ~SineWave_( void );
 
     //! Clear output and reset time pointer to zero.
     void reset( void );
@@ -48,7 +48,7 @@ namespace Tonic {
       corresponds to file cycles per second.  The frequency can be
       negative, in which case the loop is read in reverse order.
      */
-    void setFrequency( TonicFloat frequency );
+    SineWave_& setFrequency( TonicFloat frequency );
 
     //! Increment the read pointer by \e time in samples, modulo the table size.
     void addTime( TonicFloat time );
@@ -94,11 +94,11 @@ namespace Tonic {
 
   };
 
-  inline void SineWave :: tick( TonicFrames& frames )
+  inline void SineWave_ :: tick( TonicFrames& frames )
   {
   #if defined(_STK_DEBUG_)
     if ( channel >= frames.channels() ) {
-      oStream_ << "SineWave::tick(): channel and TonicFrames arguments are incompatible!";
+      oStream_ << "SineWave_::tick(): channel and TonicFrames arguments are incompatible!";
       handleError( StkError::FUNCTION_ARGUMENT );
     }
   #endif
@@ -130,7 +130,14 @@ namespace Tonic {
 
   }
 
+  class SineWave : public TemplatedGenerator<SineWave_>{
+  public:
+    SineWave& setFrequency(float freq){
+      gen()->setFrequency(freq);
+      return *this;
+    }
+  };
 
 }
 
-#endif /* defined(___013_1_23_melody__SineWave__) */
+#endif /* defined(___013_1_23_melody__SineWave___) */

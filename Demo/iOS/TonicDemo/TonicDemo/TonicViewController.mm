@@ -8,6 +8,7 @@
 
 #import "TonicViewController.h"
 #include "Novocaine.h"
+#include "Generator.h"
 
 
 @interface TonicViewController ()
@@ -20,6 +21,7 @@
 {
     [super viewDidLoad];
    
+
   
   Novocaine *audioManager = [Novocaine audioManager];
 [audioManager setOutputBlock:^(float *audioToPlay, UInt32 numSamples, UInt32 numChannels) {

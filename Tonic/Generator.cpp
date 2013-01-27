@@ -7,3 +7,25 @@
 //
 
 #include "Generator.h"
+#include "Multiplier.h"
+
+namespace Tonic{
+
+  Generator_::Generator_(){
+  
+  }
+
+  Generator_::~Generator_(){
+
+  }
+
+//  Multiplier& Generator::operator * (Generator& input){
+//    if(!multiplier){
+//      multiplier = new Multiplier();
+//      multiplier->in(*this);
+//    }
+//    multiplier->in(input);
+//    return *multiplier;
+//  }
+
+}

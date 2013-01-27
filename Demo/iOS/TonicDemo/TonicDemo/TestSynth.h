@@ -13,6 +13,7 @@
 #include "Synth.h"
 #include "SineWave.h"
 #include "MonoToStereo.h"
+#include "Multiplier.h"
 
 using namespace Tonic;
 
@@ -21,12 +22,9 @@ class TestSynth : public Synth{
 public:
 
   TestSynth(){
-
-    SineWave* sineWave = new SineWave();
-    sineWave->setFrequency(200);
-    MonoToStereo* panner = new MonoToStereo();
-    panner->in(sineWave);
-    outputGen = panner;
+    
+    outputGen = SineWave().setFrequency(200) * SineWave().setFrequency(2);
+    
   };
 
 

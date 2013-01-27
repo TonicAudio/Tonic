@@ -7,11 +7,17 @@
 //
 
 #include "Synth.h"
+#include "SineWave.h"
 
 namespace Tonic {
 
 Synth::Synth() : synthBufferReadPosition(0){
   outputFrames.resize(kSynthesisBlockSize, 2);
+}
+
+
+template<typename T>T&  Synth::a(T* gen){
+ return *gen;
 }
 
 void Synth::tick( TonicFrames& frames ){
@@ -20,7 +26,7 @@ void Synth::tick( TonicFrames& frames ){
 //        for (int i = 0; i < sequencers.size(); i++) {
 //          sequencers.at(i)->advanceBySamples(frames.frames());
 //        }
-      outputGen->tick(frames);
+      outputGen.tick(frames);
   
 // TODO -- add message queue back in
 //        while (!messageQueue.empty()) {

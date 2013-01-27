@@ -11,18 +11,19 @@
 namespace Tonic {
 
   
-MonoToStereo::MonoToStereo(){
-  mInputFrames.resize(kSynthesisBlockSize, 1);
-}
-  
-void  MonoToStereo::tick( TonicFrames& frames ){
-  mInputSource->tick(mInputFrames);
-  TonicFloat* sourceData = &mInputFrames[0];
-  TonicFloat* destData = &frames[0];
-  for(int i = 0; i < mInputFrames.size(); i++){
-      *(destData++) = *sourceData;
-      *(destData++) = *(sourceData++);
-  }
-}
+//MonoToStereo::MonoToStereo( Generator& input ) : mInputFrames(TonicFrames()){
+//  mInputSource = &input;
+//  mInputFrames.resize(kSynthesisBlockSize, 1);
+//}
+//  
+//void  MonoToStereo::tick( TonicFrames& frames ){
+//  mInputSource->tick(mInputFrames);
+//  TonicFloat* sourceData = &mInputFrames[0];
+//  TonicFloat* destData = &frames[0];
+//  for(int i = 0; i < mInputFrames.size(); i++){
+//      *(destData++) = *sourceData;
+//      *(destData++) = *(sourceData++);
+//  }
+//}
 
 }
