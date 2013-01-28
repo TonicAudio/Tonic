@@ -32,7 +32,8 @@
 		A86C3F2116B2B7B8002A50F0 /* CoreAudio.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A86C3F1E16B2B7B8002A50F0 /* CoreAudio.framework */; };
 		A86C3F2316B2B834002A50F0 /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A86C3F2216B2B834002A50F0 /* Accelerate.framework */; };
 		A86C3F2A16B2BE88002A50F0 /* Multiplier.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A86C3F2816B2BE88002A50F0 /* Multiplier.cpp */; };
-		A86C3F2E16B5AA81002A50F0 /* GeneratorHandle.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A86C3F2C16B5AA80002A50F0 /* GeneratorHandle.cpp */; };
+		A86C3F3416B5F8AC002A50F0 /* FixedValue.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A86C3F3216B5F8AA002A50F0 /* FixedValue.cpp */; };
+		A86C3F3716B60120002A50F0 /* Adder.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A86C3F3516B6011E002A50F0 /* Adder.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -79,8 +80,10 @@
 		A86C3F2216B2B834002A50F0 /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = System/Library/Frameworks/Accelerate.framework; sourceTree = SDKROOT; };
 		A86C3F2816B2BE88002A50F0 /* Multiplier.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Multiplier.cpp; sourceTree = "<group>"; };
 		A86C3F2916B2BE88002A50F0 /* Multiplier.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Multiplier.h; sourceTree = "<group>"; };
-		A86C3F2C16B5AA80002A50F0 /* GeneratorHandle.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GeneratorHandle.cpp; sourceTree = "<group>"; };
-		A86C3F2D16B5AA81002A50F0 /* GeneratorHandle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GeneratorHandle.h; sourceTree = "<group>"; };
+		A86C3F3216B5F8AA002A50F0 /* FixedValue.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = FixedValue.cpp; sourceTree = "<group>"; };
+		A86C3F3316B5F8AB002A50F0 /* FixedValue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FixedValue.h; sourceTree = "<group>"; };
+		A86C3F3516B6011E002A50F0 /* Adder.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Adder.cpp; sourceTree = "<group>"; };
+		A86C3F3616B6011F002A50F0 /* Adder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Adder.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -186,8 +189,10 @@
 				A86C3EF416B2B549002A50F0 /* TonicFrames.h */,
 				A86C3F2816B2BE88002A50F0 /* Multiplier.cpp */,
 				A86C3F2916B2BE88002A50F0 /* Multiplier.h */,
-				A86C3F2C16B5AA80002A50F0 /* GeneratorHandle.cpp */,
-				A86C3F2D16B5AA81002A50F0 /* GeneratorHandle.h */,
+				A86C3F3216B5F8AA002A50F0 /* FixedValue.cpp */,
+				A86C3F3316B5F8AB002A50F0 /* FixedValue.h */,
+				A86C3F3516B6011E002A50F0 /* Adder.cpp */,
+				A86C3F3616B6011F002A50F0 /* Adder.h */,
 			);
 			name = Tonic;
 			path = ../../../../Tonic;
@@ -289,7 +294,8 @@
 				A86C3F1A16B2B5BE002A50F0 /* Novocaine.m in Sources */,
 				A86C3F1B16B2B5BE002A50F0 /* RingBuffer.mm in Sources */,
 				A86C3F2A16B2BE88002A50F0 /* Multiplier.cpp in Sources */,
-				A86C3F2E16B5AA81002A50F0 /* GeneratorHandle.cpp in Sources */,
+				A86C3F3416B5F8AC002A50F0 /* FixedValue.cpp in Sources */,
+				A86C3F3716B60120002A50F0 /* Adder.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

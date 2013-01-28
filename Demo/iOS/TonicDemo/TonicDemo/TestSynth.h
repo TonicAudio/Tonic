@@ -14,6 +14,8 @@
 #include "SineWave.h"
 #include "MonoToStereo.h"
 #include "Multiplier.h"
+#include "FixedValue.h"
+#include "Adder.h"
 
 using namespace Tonic;
 
@@ -23,7 +25,17 @@ public:
 
   TestSynth(){
     
-    outputGen = SineWave().setFrequency(200) * SineWave().setFrequency(2);
+    outputGen =
+    (
+      (
+        SineWave().freq(
+          300 + 50 * SineWave().freq(2)
+        )
+        * SineWave().freq(1000)
+      )
+      +
+       SineWave().freq(1000)
+    ) * 0.5;
     
   };
 

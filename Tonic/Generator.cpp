@@ -9,8 +9,7 @@
 #include "Generator.h"
 #include "Multiplier.h"
 
-namespace Tonic{
-
+namespace Tonic{ namespace Tonic_{
   Generator_::Generator_(){
   
   }
@@ -28,4 +27,4 @@ namespace Tonic{
 //    return *multiplier;
 //  }
 
-}
+}}

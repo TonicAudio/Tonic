@@ -13,37 +13,48 @@
 #include <vector>
 #include "TonicFrames.h"
 #include "Generator.h"
-#include "GeneratorHandle.h"
+#include "FixedValue.h"
 
 namespace Tonic{
 
+  namespace Tonic_{
 
-class Multiplier_ : public Generator_{
-  
-	TonicFrames workSpace;
-  vector<Generator> inputs;
+    class Multiplier_ : public Generator_{
+      
+      TonicFrames workSpace;
+      vector<Generator> inputs;
 
-public:
-  Multiplier_();
-  void in(Generator& inputSource);
-  void tick( TonicFrames& frames);
-  
-};
+    public:
+      Multiplier_();
+      void in(Generator& inputSource);
+      void tick( TonicFrames& frames);
+      
+    };
 
-class Multiplier : public TemplatedGenerator<Multiplier_>{
-public:
-  Multiplier in(Generator& inputSource){
-    gen()->in(inputSource);
-    return *this;
   }
-};
 
-static Multiplier operator*(Generator a, Generator b){
-  Multiplier mult;
-  mult.in(a);
-  mult.in(b);
-  return mult;
-}
+  class Multiplier : public TemplatedGenerator<Tonic_::Multiplier_>{
+  public:
+    Multiplier in(Generator& inputSource){
+      gen()->in(inputSource);
+      return *this;
+    }
+  };
+
+  static Multiplier operator*(Generator a, Generator b){
+    Multiplier mult;
+    mult.in(a);
+    mult.in(b);
+    return mult;
+  }
+  
+  static Multiplier operator*(float a, Generator b){
+      return FixedValue(a) * b;
+  }
+  
+  static Multiplier operator*(Generator a, float b){
+      return a * FixedValue(b);
+  }
 
 }
 

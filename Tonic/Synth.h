@@ -13,7 +13,6 @@
 #include "Tonic.h"
 #include "Generator.h"
 #include "TonicFrames.h"
-#include "GeneratorHandle.h"
 
 namespace Tonic{
   

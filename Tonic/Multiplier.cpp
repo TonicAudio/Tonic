@@ -8,7 +8,7 @@
 
 #include "Multiplier.h"
 
-namespace Tonic {
+namespace Tonic { namespace Tonic_{
   
   Multiplier_::Multiplier_(){
     workSpace.resize(0);
@@ -58,4 +58,4 @@ namespace Tonic {
 
   }
   
-}
+}}
