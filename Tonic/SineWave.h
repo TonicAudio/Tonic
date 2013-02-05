@@ -123,7 +123,7 @@ namespace Tonic {
       TonicFloat tmp = 0.0;
 
       unsigned int hop = frames.channels();
-      for ( unsigned int i=0; i<frames.frames(); i++, samples += hop ) {
+      for ( unsigned int i=0; i<frames.frames(); i++) {
 
         // Check limits of time address ... if necessary, recalculate modulo
         // TABLE_SIZE.
@@ -136,7 +136,12 @@ namespace Tonic {
         alpha_ = time_ - iIndex_;
         tmp = table_[ iIndex_ ];
         tmp += ( alpha_ * ( table_[ iIndex_ + 1 ] - tmp ) );
-        *samples = tmp;
+          
+        // fill all channels of the interleaved output
+        // it's up to the caller to request the right number of channels, since a sine wave is always mono
+        for (unsigned int c=0; c<hop; c++){
+          *samples++ = tmp;
+        }
 
         // Increment time, which can be negative.
         time_ += rate_;
@@ -184,7 +189,7 @@ namespace Tonic {
         TonicFloat *freqBuffer = &modFrames[0];
         
         unsigned int hop = frames.channels();
-        for ( unsigned int i=0; i<frames.frames(); i++, samples += hop ) {
+        for ( unsigned int i=0; i<frames.frames(); i++ ) {
             
             SineWave_::setFrequency(*(freqBuffer++));
             
@@ -199,8 +204,12 @@ namespace Tonic {
             alpha_ = time_ - iIndex_;
             tmp = (*pointerToTable)[ iIndex_ ];
             tmp += ( alpha_ * ( (*pointerToTable)[ iIndex_ + 1 ] - tmp ) );
-            *samples = tmp;
             
+            // fill all channels of the interleaved output
+            // it's up to the caller to request the right number of channels, since a sine wave is always mono
+            for (unsigned int c=0; c<hop; c++){
+                *samples++ = tmp;
+            }
             // Increment time, which can be negative.
             time_ += rate_;
         }

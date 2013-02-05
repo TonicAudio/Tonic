@@ -23,22 +23,28 @@ class TestSynth : public Synth{
 
 public:
 
-  TestSynth(){
+  TestSynth() : depth(1.0) {
     
+    carrier.freq(1000);
+    modulator.freq(400);
+      
     outputGen =
     (
-      (
-        SineWave().freq(
-          300 + 50 * SineWave().freq(2)
-        )
-        * SineWave().freq(1000)
-      )
-      +
-       SineWave().freq(1000)
+      ( modulator + depth ) * carrier
     ) * 0.5;
     
   };
-
+  
+  inline void setDepth(float newDepth) { depth = newDepth; };
+  inline void setCarrierFreq(float nCarFreq) { carrier.freq(nCarFreq); };
+  inline void setModFreq(float nModFreq) { modulator.freq(nModFreq); };
+  
+private:
+  
+  SineWave carrier;
+  SineWave modulator;
+  
+  float    depth;
 
 };
 
