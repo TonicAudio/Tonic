@@ -47,9 +47,21 @@ const TonicFloat TWO_PI       = 2 * PI;
 
 namespace Tonic {
 
+  template <class T>
+  static T max(T a, T b) {
+    return (a > b ? a : b);
+  };
 
+  template <class T>
+  static T min(T a, T b) {
+    return (a < b ? a : b);
+  }
 
-
+  template <class T>
+  static T clamp(T val, T min, T max) {
+    return (val < min ? min : (val > max ? max : val));
+  }
+    
   static TonicFloat sampleRate(){
     return 44100;
   };
