@@ -46,27 +46,8 @@ namespace Tonic { namespace Tonic_{
     
     // for additional generators, use the workspace stkframes for tick, and multiply it into the frames argument
     for(int i = 1; i < inputs.size(); i++) {
-        inputs[i].tick(workSpace);
-        float* framesPointer = &frames[0];
-        float* workspacePointer = &workSpace[0];
-        
-        
-        #ifdef USE_APPLE_ACCELERATE
-            vDSP_vmul (
-               framesPointer,       // __vDSP_input1[],
-               1,                   //__vDSP_stride1,
-               workspacePointer,    //const float __vDSP_input2[],
-               1,                   //__vDSP_stride2,
-               framesPointer,       //float __vDSP_result[],
-               1,                   //vDSP_Stride __vDSP_strideResult,
-               frames.frames() * frames.channels() //vDSP_Length __vDSP_size
-            );
-        #else
-            for (int sampleCount = 0; sampleCount < frames.frames() * frames.channels(); sampleCount++) {
-                *(framesPointer++) *= *(workspacePointer++);
-            }
-        #endif
-        
+      inputs[i].tick(workSpace);
+      frames *= workSpace;
 
     }
 

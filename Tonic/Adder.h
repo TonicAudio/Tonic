@@ -58,13 +58,8 @@ namespace Tonic {
         memset(framesData, 0, sizeof(TonicFloat) * frames.size());
         
         for (int j =0; j < audioSources.size(); j++) {
-            audioSources[j].tick(*workSpace);
-               
-            #ifdef USE_APPLE_ACCELERATE
-                vDSP_vadd(&(*workSpace)[0], 1, &frames[0], 1, &frames[0], 1, frames.frames() * frames.channels());
-            #else
-                frames += *workSpace; // add each sample in frames to each sample in workspace
-            #endif
+          audioSources[j].tick(*workSpace);
+          frames += *workSpace; // add each sample in frames to each sample in workspace
         }
         
       }

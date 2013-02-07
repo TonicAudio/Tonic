@@ -106,10 +106,6 @@
 		A86C3EB116B2B4FC002A50F0 = {
 			isa = PBXGroup;
 			children = (
-				A86C3F2216B2B834002A50F0 /* Accelerate.framework */,
-				A86C3F1C16B2B7B8002A50F0 /* AudioToolbox.framework */,
-				A86C3F1D16B2B7B8002A50F0 /* AudioUnit.framework */,
-				A86C3F1E16B2B7B8002A50F0 /* CoreAudio.framework */,
 				A86C3EC616B2B4FD002A50F0 /* TonicDemo */,
 				A86C3EBF16B2B4FD002A50F0 /* Frameworks */,
 				A86C3EBD16B2B4FD002A50F0 /* Products */,
@@ -127,6 +123,10 @@
 		A86C3EBF16B2B4FD002A50F0 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				A86C3F2216B2B834002A50F0 /* Accelerate.framework */,
+				A86C3F1C16B2B7B8002A50F0 /* AudioToolbox.framework */,
+				A86C3F1D16B2B7B8002A50F0 /* AudioUnit.framework */,
+				A86C3F1E16B2B7B8002A50F0 /* CoreAudio.framework */,
 				A86C3EC016B2B4FD002A50F0 /* UIKit.framework */,
 				A86C3EC216B2B4FD002A50F0 /* Foundation.framework */,
 				A86C3EC416B2B4FD002A50F0 /* CoreGraphics.framework */,

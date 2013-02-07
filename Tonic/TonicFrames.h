@@ -239,8 +239,13 @@ namespace Tonic {
 
     TonicFloat *fptr = &f[0];
     TonicFloat *dptr = data_;
+  #ifdef USE_APPLE_ACCELERATE
+    vDSP_vadd(dptr, 1, fptr, 1, dptr, 1, size_);
+  #else
     for ( unsigned int i=0; i<size_; i++ )
       *dptr++ += *fptr++;
+  #endif
+
   }
 
   inline void TonicFrames :: operator*= ( TonicFrames& f )
@@ -255,8 +260,13 @@ namespace Tonic {
 
     TonicFloat *fptr = &f[0];
     TonicFloat *dptr = data_;
+    
+  #ifdef USE_APPLE_ACCELERATE
+    vDSP_vmul(dptr, 1, fptr, 1, dptr, 1, size_);
+  #else
     for ( unsigned int i=0; i<size_; i++ )
       *dptr++ *= *fptr++;
+  #endif
   }
 
   
