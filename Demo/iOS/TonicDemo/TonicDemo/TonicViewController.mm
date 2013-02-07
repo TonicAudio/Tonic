@@ -38,17 +38,16 @@
 - (void)handlePan:(UIPanGestureRecognizer *)pan{
   switch (pan.state){
       
-    case UIGestureRecognizerStatePossible:
     case UIGestureRecognizerStateBegan:
     case UIGestureRecognizerStateChanged:
     {
       CGPoint touchPoint = [pan locationInView:self.view];
       
       // arbitrarily chosen midi note numbers (linear pitch)
-      TonicFloat car = mtof(Tonic::map(touchPoint.x, 0.0f, self.view.bounds.size.width, 45, 72));
+      TonicFloat car = mtof(Tonic::map(touchPoint.x, 0.0f, self.view.bounds.size.width, 47, 88));
       
-      // exponenetial sweep in frequency, 0-400 Hz
-      TonicFloat mod = 400.0f / powf(10.0f, Tonic::map(touchPoint.y, 0.0f, self.view.bounds.size.height, 0.0f, 3.0f));
+      // exponenetial sweep in frequency, 0-1000 Hz
+      TonicFloat mod = 1000.0f / powf(10.0f, Tonic::map(touchPoint.y, 0.0f, self.view.bounds.size.height, 0.0f, 3.0f));
       
       synth.setCarrierFreq(car);
       synth.setModFreq(mod);

@@ -26,6 +26,8 @@ https://ccrma.stanford.edu/software/stk/
 #include <stdio.h>
 #include <string>
 #include <math.h>
+#include <pthread.h>
+
 #ifdef __APPLE__
   #import <Accelerate/Accelerate.h>
   #define USE_APPLE_ACCELERATE

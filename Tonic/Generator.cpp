@@ -24,21 +24,13 @@ https://ccrma.stanford.edu/software/stk/
 #include "Multiplier.h"
 
 namespace Tonic{ namespace Tonic_{
-  Generator_::Generator_(){
   
+  Generator_::Generator_(){
+    pthread_mutex_init(&genMutex_, NULL);
   }
 
   Generator_::~Generator_(){
-
+    pthread_mutex_destroy(&genMutex_);
   }
-
-//  Multiplier& Generator::operator * (Generator& input){
-//    if(!multiplier){
-//      multiplier = new Multiplier();
-//      multiplier->in(*this);
-//    }
-//    multiplier->in(input);
-//    return *multiplier;
-//  }
 
 }}

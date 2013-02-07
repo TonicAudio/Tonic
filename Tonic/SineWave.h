@@ -167,8 +167,11 @@ namespace Tonic {
           virtual void tick( TonicFrames& frames );
           
           void setFrequency(Generator genArg){
+              // need to lock mutex so we don't replace this in the middle of a tick
+              lockMutex();
               frequencyGenerator = genArg;
-          }  
+              unlockMutex();
+          }
       };
     
         
@@ -180,9 +183,11 @@ namespace Tonic {
             handleError( StkError::FUNCTION_ARGUMENT );
         }
     #endif
-        
+            
+        lockMutex();
         frequencyGenerator.tick(modFrames);
-        
+        unlockMutex();
+      
         TonicFloat *samples = &frames[0];
         TonicFloat tmp = 0.0;
         TonicFloat *freqBuffer = &modFrames[0];
@@ -201,7 +206,7 @@ namespace Tonic {
                 time_ -= TABLE_SIZE;
             
             iIndex_ = (unsigned int) time_;
-            alpha_ = time_ - floorf(time_);
+            alpha_ = time_ - (TonicFloat)iIndex_;
             tmp = (*pointerToTable)[ iIndex_ ];
             tmp += ( alpha_ * ( (*pointerToTable)[ iIndex_ + 1 ] - tmp ) );
             
