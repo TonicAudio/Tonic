@@ -37,32 +37,16 @@ namespace Tonic {
       TonicFrames *workSpace;
       TonicFrames *lastFrames; // in case we want to grab these and examine them
     public:
-      Adder_(int numChannels = 2){
-        workSpace = new TonicFrames(kSynthesisBlockSize, numChannels);
-      }
       
-      ~Adder_(){
-        delete workSpace;
-      }
+      // Not sure how this could ever be called with an argument, since it's always allocated
+      // via a templated container...
+      Adder_(int numChannels = 2);
+      ~Adder_();
       
       // All generators must have the same number of channels, and this must match the number of channels 
       // in frames passed to tick.
-      void in(Generator generator){
-        audioSources.push_back( generator );
-      }
-      
-      inline void tick( TonicFrames& frames ){
-        
-        TonicFloat *framesData =  &frames[0];
-        
-        memset(framesData, 0, sizeof(TonicFloat) * frames.size());
-        
-        for (int j =0; j < audioSources.size(); j++) {
-          audioSources[j].tick(*workSpace);
-          frames += *workSpace; // add each sample in frames to each sample in workspace
-        }
-        
-      }
+      void in(Generator generator);
+      inline void tick( TonicFrames& frames );
     };
 	
   }

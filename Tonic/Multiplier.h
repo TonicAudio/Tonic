@@ -35,13 +35,15 @@ namespace Tonic{
 
     class Multiplier_ : public Generator_{
       
-      TonicFrames workSpace;
+    protected:
+      TonicFrames *workSpace;
       vector<Generator> inputs;
 
     public:
       Multiplier_();
+      ~Multiplier_();
       void in(Generator& inputSource);
-      void tick( TonicFrames& frames);
+      inline void tick( TonicFrames& frames);
       
     };
 

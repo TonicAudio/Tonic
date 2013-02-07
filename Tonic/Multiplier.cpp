@@ -25,18 +25,21 @@ https://ccrma.stanford.edu/software/stk/
 namespace Tonic { namespace Tonic_{
   
   Multiplier_::Multiplier_(){
-    workSpace.resize(0);
+    workSpace = new TonicFrames(kSynthesisBlockSize, 2);
+  }
+  
+  Multiplier_::~Multiplier_(){
+    delete workSpace;
   }
   
   void Multiplier_::in(Generator& inputSource){
     inputs.push_back(inputSource);
   }
-
   
   void Multiplier_::tick( TonicFrames& frames){
   
-    if (workSpace.frames() == 0) {
-      workSpace.resize(frames.frames(), frames.channels());
+    if (workSpace->frames() == 0) {
+      workSpace->resize(frames.frames(), frames.channels());
     }
 
     memset(&frames[0], 0, sizeof(TonicFloat) * frames.size());
@@ -46,8 +49,8 @@ namespace Tonic { namespace Tonic_{
     
     // for additional generators, use the workspace stkframes for tick, and multiply it into the frames argument
     for(int i = 1; i < inputs.size(); i++) {
-      inputs[i].tick(workSpace);
-      frames *= workSpace;
+      inputs[i].tick(*workSpace);
+      frames *= *workSpace;
 
     }
 
