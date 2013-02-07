@@ -50,7 +50,6 @@
       // exponenetial sweep in frequency, 0-400 Hz
       TonicFloat mod = 400.0f / powf(10.0f, Tonic::map(touchPoint.y, 0.0f, self.view.bounds.size.height, 0.0f, 3.0f));
       
-      
       synth.setCarrierFreq(car);
       synth.setModFreq(mod);
     }

@@ -72,8 +72,7 @@ void Synth::fillBufferOfFloats(float *outData,  UInt32 numFrames, int numChannel
   const unsigned int sampleCount = outputFrames.channels() * outputFrames.frames();
   const unsigned int channelsPerSample = (outputFrames.channels() - numChannels) + 1;
     
-    
-  TonicFloat sample;
+  TonicFloat sample = 0.0f;
   
   for(unsigned int i = 0; i<numFrames * numChannels; i++){
       

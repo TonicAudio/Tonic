@@ -51,7 +51,11 @@ namespace Tonic {
         
         inline void tick( TonicFrames& frames){
             float* buffStart = &frames[0];
+        #ifdef USE_APPLE_ACCELERATE
+            vDSP_vfill(&mValue, buffStart, 1, frames.size());
+        #else
             std::fill(buffStart, buffStart + frames.size(), mValue);
+        #endif
         }
 
     };

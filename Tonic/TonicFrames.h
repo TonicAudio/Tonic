@@ -102,6 +102,14 @@ namespace Tonic {
       is performed unless _STK_DEBUG_ is defined.
     */
     TonicFloat operator() ( size_t frame, unsigned int channel ) const;
+      
+      
+    //! Copy one channel to another
+    /*!
+      The \c src and \c dst indices must be between 0 and channels() - 1, and
+      should not be the same number. No range checking is performed (yet)
+    */
+    void copyChannel(unsigned int src, unsigned int dst);
 
     //! Return an interpolated value at the fractional frame index and channel.
     /*!
@@ -226,6 +234,25 @@ namespace Tonic {
 
     return data_[ frame * nChannels_ + channel ];
   }
+    
+  inline void TonicFrames :: copyChannel(unsigned int src, unsigned int dst)
+  {
+    // TODO: Range check
+    TonicFloat *sptr = data_ + src;
+    TonicFloat *dptr = data_ + dst;
+    unsigned int stride = nChannels_;
+    
+    // not sure if using vmul with 1.0 is actually faster or not
+    #ifdef USE_APPLE_ACCELERATE
+    float u = 1.0f;
+    vDSP_vsmul(sptr, stride, &u, dptr, stride, size_);
+    #else
+    for ( unsigned int i=0; i<size_; i++, sptr += stride, dptr += stride ){
+      *sptr = *dptr;
+    }
+    #endif
+  }
+
 
   inline void TonicFrames :: operator+= ( TonicFrames& f )
   {
