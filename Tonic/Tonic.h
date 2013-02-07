@@ -47,20 +47,41 @@ const TonicFloat TWO_PI       = 2 * PI;
 
 namespace Tonic {
 
-  template <class T>
-  static T max(T a, T b) {
+  // A few helper functions. May or may not belong here...
+  
+  //-- Arithmetic --
+  
+  static TonicFloat max(TonicFloat a, TonicFloat b) {
     return (a > b ? a : b);
   };
 
-  template <class T>
-  static T min(T a, T b) {
+  static TonicFloat min(TonicFloat a, TonicFloat b) {
     return (a < b ? a : b);
   }
 
-  template <class T>
-  static T clamp(T val, T min, T max) {
+  static TonicFloat clamp(TonicFloat val, TonicFloat min, TonicFloat max) {
     return (val < min ? min : (val > max ? max : val));
   }
+  
+  static TonicFloat map(TonicFloat val, TonicFloat inMin, TonicFloat inMax, TonicFloat outMin, TonicFloat outMax, bool clamp = true) {
+    TonicFloat result = ((val - inMin)/(inMax - inMin)) * (outMax - outMin) + outMin;
+    if (clamp){
+      result = Tonic::clamp(result, outMin, outMax);
+    }
+    return result;
+  }
+  
+  //-- Freq/MIDI --
+  
+  static TonicFloat mtof(TonicFloat nn){
+    return 440.0f * powf(2.0, (nn-69.0f)/12.0f);
+  }
+  
+  static TonicFloat ftom(TonicFloat f){
+    return 12.0f * log2(f/440.0f) + 69.0f;
+  }
+  
+  // --
     
   static TonicFloat sampleRate(){
     return 44100;

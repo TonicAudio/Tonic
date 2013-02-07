@@ -35,17 +35,17 @@ public:
     
   };
   
-  inline void setDepth(float newDepth) { depth = newDepth; };
-  inline void setCarrierFreq(float nCarFreq) { carrier.freq(nCarFreq); };
-  inline void setModFreq(float nModFreq) { modulator.freq(nModFreq); };
+  inline void setDepth(TonicFloat newDepth) { depth = clamp(newDepth, 0.0f, 1.0f); };
+  inline void setCarrierFreq(TonicFloat nCarFreq) { carrier.freq(nCarFreq); };
+  inline void setModFreq(TonicFloat nModFreq) { modulator.freq(nModFreq); };
   
 private:
   
   SineWave carrier;
   SineWave modulator;
   
-  float    depth;
-
+  TonicFloat depth;
+  
 };
 
 #endif
