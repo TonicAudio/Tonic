@@ -11,11 +11,9 @@
 #include "Generator.h"
 #include <math.h>
 
-#define fRand(min, max) ((float)rand()/RAND_MAX)*(max-min)+min
-
 @interface TonicViewController ()
 
-- (void)handleTap;
+- (void)handlePan:(UIPanGestureRecognizer*)pan;
 
 @end
 
@@ -32,16 +30,42 @@
       synth.fillBufferOfFloats(audioToPlay, numSamples, numChannels);
     }];
   
-  UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTap)];
-  [self.view addGestureRecognizer:tap];
+  UIPanGestureRecognizer *pan = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(handlePan:)];
+  [self.view addGestureRecognizer:pan];
   
 }
 
-- (void)handleTap{
-
-  synth.setCarrierFreq(fRand(200, 1200));
-  synth.setModFreq(fRand(100, 500));
-  
+- (void)handlePan:(UIPanGestureRecognizer *)pan{
+  switch (pan.state){
+      
+    case UIGestureRecognizerStatePossible:
+    case UIGestureRecognizerStateBegan:
+    case UIGestureRecognizerStateChanged:
+    {
+      CGPoint touchPoint = [pan locationInView:self.view];
+      
+      // arbitrarily chosen midi note numbers (linear pitch)
+      TonicFloat car = mtof(Tonic::map(touchPoint.x, 0.0f, self.view.bounds.size.width, 45, 72));
+      
+      // exponenetial sweep in frequency, 0-400 Hz
+      TonicFloat mod = 400.0f / powf(10.0f, Tonic::map(touchPoint.y, 0.0f, self.view.bounds.size.height, 0.0f, 3.0f));
+      
+      
+      synth.setCarrierFreq(car);
+      synth.setModFreq(mod);
+    }
+      break;
+      
+    case UIGestureRecognizerStateCancelled:
+    case UIGestureRecognizerStateEnded:
+    case UIGestureRecognizerStateFailed:
+      
+      break;
+      
+    default:
+      break;
+      
+  }
 }
 
 - (void)didReceiveMemoryWarning
