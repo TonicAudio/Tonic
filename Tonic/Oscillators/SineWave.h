@@ -29,7 +29,6 @@ https://ccrma.stanford.edu/software/stk/
 #define ___013_1_23_melody__SineWave___
 
 #include <iostream>
-#include "Tonic.h"
 #include "Generator.h"
 #include "FixedValue.h"
 
