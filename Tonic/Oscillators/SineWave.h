@@ -190,13 +190,25 @@ namespace Tonic {
         TonicFloat *samples = &frames[0];
         TonicFloat tmp = 0.0;
         TonicFloat *freqBuffer = &modFrames[0];
-        
+      
+        // pre-multiply rate constant
+        static const TonicFloat rateConstant = (TonicFloat)TABLE_SIZE / Tonic::sampleRate();
+        #ifdef USE_APPLE_ACCELERATE
+        vDSP_vsmul(freqBuffer, 1, &rateConstant, freqBuffer, 1, modFrames.frames());
+        #else
+        for (unsigned int i=0; i<modFrames.frames(); i++){
+          *freqBuffer++ = rateConstant;
+        }
+        freqBuffer = &modFrames[0];
+        #endif
+      
         unsigned int hop = frames.channels();
         
         for ( unsigned int i=0; i<frames.frames(); i++ ) {
-            
-            SineWave_::setFrequency(*(freqBuffer++));
-            
+          
+            // This can be optimized by pre-multiplying to get rate
+            // SineWave_::setFrequency(*(freqBuffer++));
+                    
             // Check limits of time address ... if necessary, recalculate modulo
             // TABLE_SIZE.
             while ( time_ < 0.0 )
@@ -215,7 +227,8 @@ namespace Tonic {
             samples += hop;
             
             // Increment time, which can be negative.
-            time_ += rate_;
+            // Directly add the rate, don't need to dive into function call
+            time_ += *freqBuffer++;
         }
         
         // mono source, so copy channels if necessary

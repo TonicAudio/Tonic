@@ -48,6 +48,20 @@ namespace Tonic {
       void in(Generator generator);
       inline void tick( TonicFrames& frames );
     };
+    
+    inline void Adder_::tick( TonicFrames& frames ){
+      
+      TonicFloat *framesData =  &frames[0];
+      
+      memset(framesData, 0, sizeof(TonicFloat) * frames.size());
+      
+      for (int j =0; j < audioSources.size(); j++) {
+        audioSources[j].tick(*workSpace);
+        frames += *workSpace; // add each sample in frames to each sample in workspace
+      }
+      
+      
+    }
 	
   }
   
@@ -57,6 +71,7 @@ namespace Tonic {
       gen()->in(input);
       return *this;
     }
+    
   };
   
   static Adder operator + (Generator a, Generator b){
@@ -81,7 +96,8 @@ namespace Tonic {
     add.in(FixedValue(b));
     return add;
   }
-  
+
+  // TODO: Handle stringing adders together
   
 }
 

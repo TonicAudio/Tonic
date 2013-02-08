@@ -7,11 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "SineAMSynth.h"
+//#import "SineAMSynth.h"
 #import "SineSumSynth.h"
 
 @interface TonicViewController : UIViewController{
-  SineAMSynth amSynth;
+//  SineAMSynth amSynth;
   SineSumSynth sineSumSynth;
 }
 

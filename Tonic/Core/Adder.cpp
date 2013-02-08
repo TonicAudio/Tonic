@@ -38,18 +38,5 @@ namespace Tonic{ namespace Tonic_ {
   void Adder_::in(Generator generator){
     audioSources.push_back( generator );
   }
-  
-  inline void Adder_::tick( TonicFrames& frames ){
-    
-    TonicFloat *framesData =  &frames[0];
-    
-    memset(framesData, 0, sizeof(TonicFloat) * frames.size());
-    
-    for (int j =0; j < audioSources.size(); j++) {
-      audioSources[j].tick(*workSpace);
-      frames += *workSpace; // add each sample in frames to each sample in workspace
-    }
-    
-  }
 
 }}
