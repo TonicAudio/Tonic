@@ -120,15 +120,16 @@ namespace Tonic {
       
       // compute wrapped time values, can use modFrames as workspace
       for (unsigned int i=0; i<modFrames.frames(); i++){
-        time_ += rateBuffer[i];
+        time_ += *rateBuffer;
         
         while ( time_ < 0.0 )
           time_ += TABLE_SIZE;
         while ( time_ >= TABLE_SIZE )
           time_ -= TABLE_SIZE;
         
-        rateBuffer[i] = time_;
+        *rateBuffer++ = time_;
       }
+      rateBuffer = &modFrames[0];
       
       // perform table lookup
       static float tScale = 1.0f;
