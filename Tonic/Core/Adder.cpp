@@ -36,7 +36,7 @@ namespace Tonic{ namespace Tonic_ {
   }
   
   void Adder_::in(Generator generator){
-    audioSources.push_back( generator );
+    inputs.push_back( generator );
   }
 
 }}
