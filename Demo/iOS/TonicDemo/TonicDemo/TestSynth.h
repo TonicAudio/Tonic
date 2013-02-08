@@ -23,19 +23,19 @@ class TestSynth : public Synth{
 
 public:
 
-  TestSynth() : depth(1.0) {
+  TestSynth() : carrierAmt(1.0f) {
     
     carrier.freq(1000);
     modulator.freq(400);
       
     outputGen =
     (
-      ( modulator + depth ) * carrier
-    ) * 0.5;
+      ( modulator + carrierAmt ) * carrier
+    ) * 0.1f;
     
   };
   
-  inline void setDepth(TonicFloat newDepth) { depth = clamp(newDepth, 0.0f, 1.0f); };
+  inline void setCarrierAmt(TonicFloat newCarrierAmt) { carrierAmt = clamp(newCarrierAmt, 0.0f, 1.0f); };
   inline void setCarrierFreq(TonicFloat nCarFreq) { carrier.freq(nCarFreq); };
   inline void setModFreq(TonicFloat nModFreq) { modulator.freq(nModFreq); };
   
@@ -44,7 +44,7 @@ private:
   SineWave carrier;
   SineWave modulator;
   
-  TonicFloat depth;
+  TonicFloat carrierAmt;
   
 };
 

@@ -248,7 +248,7 @@ namespace Tonic {
     vDSP_vsmul(sptr, stride, &u, dptr, stride, size_);
     #else
     for ( unsigned int i=0; i<size_; i++, sptr += stride, dptr += stride ){
-      *sptr = *dptr;
+      *dptr = *sptr;
     }
     #endif
   }
