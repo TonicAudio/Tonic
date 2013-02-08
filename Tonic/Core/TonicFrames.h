@@ -111,6 +111,9 @@ namespace Tonic {
     */
     void copyChannel(unsigned int src, unsigned int dst);
 
+    //! Fill all channels with contents of channel 0
+    void fillChannels();
+    
     //! Return an interpolated value at the fractional frame index and channel.
     /*!
       This function performs linear interpolation.  The \c frame
@@ -253,6 +256,12 @@ namespace Tonic {
     #endif
   }
 
+  inline void TonicFrames::fillChannels()
+  {
+    for (unsigned int i=1; i<nChannels_; i++){
+      this->copyChannel(0, i);
+    }
+  }
 
   inline void TonicFrames :: operator+= ( TonicFrames& f )
   {

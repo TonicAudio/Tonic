@@ -218,10 +218,8 @@ namespace Tonic {
             time_ += rate_;
         }
         
-        // copy channels if necessary
-        for (unsigned int i=1; i<hop; i++){
-            frames.copyChannel(0, i);
-        }
+        // mono source, so copy channels if necessary
+        frames.fillChannels();
     }
 
   
