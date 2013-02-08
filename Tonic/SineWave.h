@@ -64,7 +64,7 @@ namespace Tonic {
         corresponds to file cycles per second.  The frequency can be
         negative, in which case the loop is read in reverse order.
        */
-      SineWave_& setFrequency( TonicFloat frequency );
+      void setFrequency( TonicFloat frequency );
 
       //! Increment the read pointer by \e time in samples, modulo the table size.
       void addTime( TonicFloat time );

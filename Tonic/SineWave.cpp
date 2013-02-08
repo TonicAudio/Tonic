@@ -56,7 +56,7 @@ namespace Tonic_{
     //lastFrame_[0] = 0;
   }
 
-  SineWave_& SineWave_ :: setFrequency( TonicFloat frequency )
+  void SineWave_ :: setFrequency( TonicFloat frequency )
   {
     // This is a looping frequency.
     this->setRate( TABLE_SIZE * frequency / Tonic::sampleRate() );
