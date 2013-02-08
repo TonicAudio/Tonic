@@ -30,18 +30,31 @@ namespace Tonic {
   
   namespace Tonic_ {
     
-    class RampedValue_ : public Generator_
-    {
+    class RampedValue_ : public Generator_{
+      
+    protected:
+      
+    public:
+      RampedValue_();
+      ~RampedValue_();
+      void tick( TonicFrames& frames);
       
     };
     
+    inline void RampedValue_::tick( TonicFrames& frames){
+      
+      
+    }
+    
   }
   
-  class RampedValue : public TemplatedGenerator<Tonic_::RampedValue_>
-  {
+  class RampedValue : public TemplatedGenerator<Tonic_::RampedValue_>{
     
+  public:
+    void setDefaultRampTimeMs( TonicFloat newDefTimeMs );
+    void setDefaultRampTimeSamp( unsigned long long newDefTimeSamp);
+
   };
-  
 }
 
 #endif /* defined(__Tonic__RampedValue__) */

@@ -29,17 +29,29 @@ https://ccrma.stanford.edu/software/stk/
 namespace Tonic {
   
   namespace Tonic_ {
-    
-    class ___FILEBASENAME____ : public Generator_
-    {
+
+    class ___FILEBASENAME____ : public Generator_{
+      
+    protected:
+      
+    public:
+      ___FILEBASENAME____();
+      ~___FILEBASENAME____();
+      void tick( TonicFrames& frames);
       
     };
     
+    inline void ___FILEBASENAME____::tick( TonicFrames& frames){
+      
+      
+    }
+    
   }
   
-  class ___FILEBASENAME___ : public TemplatedGenerator<Tonic_::___FILEBASENAME____>
-  {
+  class ___FILEBASENAME___ : public TemplatedGenerator<Tonic_::___FILEBASENAME____>{
     
+  public:
+
   };
 }
 

@@ -8,3 +8,18 @@
 
 #include "RampedValue.h"
 
+namespace Tonic { namespace Tonic_{
+  
+  RampedValue_::RampedValue_(){
+    
+  }
+  
+  RampedValue_::~RampedValue_(){
+    
+  }
+
+} // Namespace Tonic_
+  
+  
+  
+} // Namespace Tonic

@@ -8,3 +8,18 @@
 
 #include "___FILEBASENAME___.h"
 
+namespace Tonic { namespace Tonic_{
+  
+  ___FILEBASENAME____::___FILEBASENAME____(){
+    
+  }
+  
+  ___FILEBASENAME____::~___FILEBASENAME____(){
+    
+  }
+  
+} // Namespace Tonic_
+  
+  
+  
+} // Namespace Tonic

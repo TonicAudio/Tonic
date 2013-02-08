@@ -43,9 +43,30 @@ namespace Tonic{
       Multiplier_();
       ~Multiplier_();
       void in(Generator& inputSource);
-      inline void tick( TonicFrames& frames);
+      void tick( TonicFrames& frames);
       
     };
+    
+    
+    inline void Multiplier_::tick( TonicFrames& frames){
+      
+      if (workSpace->frames() == 0) {
+        workSpace->resize(frames.frames(), frames.channels());
+      }
+      
+      memset(&frames[0], 0, sizeof(TonicFloat) * frames.size());
+      
+      // for the first generator, store the value in the frame argument
+      inputs[0].tick(frames);
+      
+      // for additional generators, use the workspace stkframes for tick, and multiply it into the frames argument
+      for(int i = 1; i < inputs.size(); i++) {
+        inputs[i].tick(*workSpace);
+        frames *= *workSpace;
+        
+      }
+      
+    }
 
   }
 
