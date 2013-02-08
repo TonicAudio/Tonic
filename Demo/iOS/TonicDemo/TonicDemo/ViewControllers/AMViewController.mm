@@ -29,7 +29,7 @@
 - (void)viewDidLoad
 {
   [super viewDidLoad];
-  self.navigationItem.title = @"Sine Sum";
+  self.navigationItem.title = @"AM Synth";
   
   
   [self addSynthIfNecessary];

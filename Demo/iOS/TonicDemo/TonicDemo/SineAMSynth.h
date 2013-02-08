@@ -25,8 +25,8 @@ public:
 
   SineAMSynth() : carrierAmt(1.0f) {
     
-    carrierFreq.defValue(10).defLenMs(2000);
-    modFreq.defValue(400);
+    carrierFreq.defValue(400).defLenMs(2000);
+    modFreq.defValue(10);
     
     carrier.freq(carrierFreq);
     modulator.freq(modFreq);
