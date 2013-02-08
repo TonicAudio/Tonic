@@ -26,6 +26,8 @@
 		A86C3F1F16B2B7B8002A50F0 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A86C3F1C16B2B7B8002A50F0 /* AudioToolbox.framework */; };
 		A86C3F2116B2B7B8002A50F0 /* CoreAudio.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A86C3F1E16B2B7B8002A50F0 /* CoreAudio.framework */; };
 		A86C3F2316B2B834002A50F0 /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A86C3F2216B2B834002A50F0 /* Accelerate.framework */; };
+		F20FCD4816C566F60039832A /* TableLookupOsc.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F20FCD4616C566F60039832A /* TableLookupOsc.cpp */; };
+		F20FCD4B16C56EF60039832A /* SineWave.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F20FCD4916C56EF50039832A /* SineWave.cpp */; };
 		F2360A7716C4B4EC00A0AD7A /* Noise.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F2360A7516C4B4EC00A0AD7A /* Noise.cpp */; };
 		F2C9F6F916C493870090A78D /* Adder.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F2C9F6E616C493870090A78D /* Adder.cpp */; };
 		F2C9F6FA16C493870090A78D /* FixedValue.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F2C9F6E816C493870090A78D /* FixedValue.cpp */; };
@@ -34,7 +36,6 @@
 		F2C9F6FD16C493870090A78D /* Multiplier.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F2C9F6EE16C493870090A78D /* Multiplier.cpp */; };
 		F2C9F6FE16C493870090A78D /* Synth.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F2C9F6F016C493870090A78D /* Synth.cpp */; };
 		F2C9F6FF16C493870090A78D /* TonicFrames.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F2C9F6F316C493870090A78D /* TonicFrames.cpp */; };
-		F2C9F70016C493870090A78D /* SineWave.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F2C9F6F616C493870090A78D /* SineWave.cpp */; };
 		F2D951D816C49A6700F25663 /* RampedValue.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F2D951D616C49A6700F25663 /* RampedValue.cpp */; };
 /* End PBXBuildFile section */
 
@@ -69,6 +70,10 @@
 		A86C3F1D16B2B7B8002A50F0 /* AudioUnit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioUnit.framework; path = System/Library/Frameworks/AudioUnit.framework; sourceTree = SDKROOT; };
 		A86C3F1E16B2B7B8002A50F0 /* CoreAudio.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreAudio.framework; path = System/Library/Frameworks/CoreAudio.framework; sourceTree = SDKROOT; };
 		A86C3F2216B2B834002A50F0 /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = System/Library/Frameworks/Accelerate.framework; sourceTree = SDKROOT; };
+		F20FCD4616C566F60039832A /* TableLookupOsc.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TableLookupOsc.cpp; sourceTree = "<group>"; };
+		F20FCD4716C566F60039832A /* TableLookupOsc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TableLookupOsc.h; sourceTree = "<group>"; };
+		F20FCD4916C56EF50039832A /* SineWave.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SineWave.cpp; sourceTree = "<group>"; };
+		F20FCD4A16C56EF60039832A /* SineWave.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SineWave.h; sourceTree = "<group>"; };
 		F2360A7516C4B4EC00A0AD7A /* Noise.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Noise.cpp; sourceTree = "<group>"; };
 		F2360A7616C4B4EC00A0AD7A /* Noise.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Noise.h; sourceTree = "<group>"; };
 		F2360A7916C4BC6E00A0AD7A /* SineSumSynth.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SineSumSynth.h; sourceTree = "<group>"; };
@@ -87,8 +92,6 @@
 		F2C9F6F216C493870090A78D /* Tonic.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Tonic.h; sourceTree = "<group>"; };
 		F2C9F6F316C493870090A78D /* TonicFrames.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TonicFrames.cpp; sourceTree = "<group>"; };
 		F2C9F6F416C493870090A78D /* TonicFrames.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TonicFrames.h; sourceTree = "<group>"; };
-		F2C9F6F616C493870090A78D /* SineWave.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SineWave.cpp; sourceTree = "<group>"; };
-		F2C9F6F716C493870090A78D /* SineWave.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SineWave.h; sourceTree = "<group>"; };
 		F2D951D616C49A6700F25663 /* RampedValue.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = RampedValue.cpp; sourceTree = "<group>"; };
 		F2D951D716C49A6700F25663 /* RampedValue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RampedValue.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -232,10 +235,12 @@
 		F2C9F6F516C493870090A78D /* Oscillators */ = {
 			isa = PBXGroup;
 			children = (
-				F2C9F6F616C493870090A78D /* SineWave.cpp */,
-				F2C9F6F716C493870090A78D /* SineWave.h */,
 				F2360A7516C4B4EC00A0AD7A /* Noise.cpp */,
 				F2360A7616C4B4EC00A0AD7A /* Noise.h */,
+				F20FCD4616C566F60039832A /* TableLookupOsc.cpp */,
+				F20FCD4716C566F60039832A /* TableLookupOsc.h */,
+				F20FCD4916C56EF50039832A /* SineWave.cpp */,
+				F20FCD4A16C56EF60039832A /* SineWave.h */,
 			);
 			path = Oscillators;
 			sourceTree = "<group>";
@@ -331,9 +336,10 @@
 				F2C9F6FD16C493870090A78D /* Multiplier.cpp in Sources */,
 				F2C9F6FE16C493870090A78D /* Synth.cpp in Sources */,
 				F2C9F6FF16C493870090A78D /* TonicFrames.cpp in Sources */,
-				F2C9F70016C493870090A78D /* SineWave.cpp in Sources */,
 				F2D951D816C49A6700F25663 /* RampedValue.cpp in Sources */,
 				F2360A7716C4B4EC00A0AD7A /* Noise.cpp in Sources */,
+				F20FCD4816C566F60039832A /* TableLookupOsc.cpp in Sources */,
+				F20FCD4B16C56EF60039832A /* SineWave.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -9,7 +9,7 @@
 #ifndef TonicDemo_SineSumSynth_h
 #define TonicDemo_SineSumSynth_h
 
-#define NUM_SINES 10
+#define NUM_SINES 30
 
 #include "Tonic.h"
 #include "Synth.h"
