@@ -245,7 +245,7 @@ namespace Tonic {
     // not sure if using vmul with 1.0 is actually faster or not
     #ifdef USE_APPLE_ACCELERATE
     float u = 1.0f;
-    vDSP_vsmul(sptr, stride, &u, dptr, stride, size_);
+    vDSP_vsmul(sptr, stride, &u, dptr, stride, nFrames_);
     #else
     for ( unsigned int i=0; i<size_; i++, sptr += stride, dptr += stride ){
       *dptr = *sptr;
