@@ -56,7 +56,7 @@
 		A86C3EDC16B2B4FD002A50F0 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard_iPad.storyboard; sourceTree = "<group>"; };
 		A86C3EDE16B2B4FD002A50F0 /* TonicViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TonicViewController.h; sourceTree = "<group>"; };
 		A86C3EDF16B2B4FD002A50F0 /* TonicViewController.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = TonicViewController.mm; sourceTree = "<group>"; };
-		A86C3F0E16B2B575002A50F0 /* TestSynth.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestSynth.h; sourceTree = "<group>"; };
+		A86C3F0E16B2B575002A50F0 /* SineAMSynth.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SineAMSynth.h; sourceTree = "<group>"; };
 		A86C3F1016B2B5BE002A50F0 /* AudioFileReader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AudioFileReader.h; sourceTree = "<group>"; };
 		A86C3F1116B2B5BE002A50F0 /* AudioFileReader.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = AudioFileReader.mm; sourceTree = "<group>"; };
 		A86C3F1216B2B5BE002A50F0 /* AudioFileWriter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AudioFileWriter.h; sourceTree = "<group>"; };
@@ -71,6 +71,7 @@
 		A86C3F2216B2B834002A50F0 /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = System/Library/Frameworks/Accelerate.framework; sourceTree = SDKROOT; };
 		F2360A7516C4B4EC00A0AD7A /* Noise.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Noise.cpp; sourceTree = "<group>"; };
 		F2360A7616C4B4EC00A0AD7A /* Noise.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Noise.h; sourceTree = "<group>"; };
+		F2360A7916C4BC6E00A0AD7A /* SineSumSynth.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SineSumSynth.h; sourceTree = "<group>"; };
 		F2C9F6E616C493870090A78D /* Adder.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Adder.cpp; sourceTree = "<group>"; };
 		F2C9F6E716C493870090A78D /* Adder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Adder.h; sourceTree = "<group>"; };
 		F2C9F6E816C493870090A78D /* FixedValue.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = FixedValue.cpp; sourceTree = "<group>"; };
@@ -172,8 +173,9 @@
 		A86C3EE616B2B508002A50F0 /* Audio */ = {
 			isa = PBXGroup;
 			children = (
+				A86C3F0E16B2B575002A50F0 /* SineAMSynth.h */,
+				F2360A7916C4BC6E00A0AD7A /* SineSumSynth.h */,
 				A86C3F0F16B2B5BE002A50F0 /* Novocaine */,
-				A86C3F0E16B2B575002A50F0 /* TestSynth.h */,
 				A86C3EE716B2B549002A50F0 /* Tonic */,
 			);
 			name = Audio;

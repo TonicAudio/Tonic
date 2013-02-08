@@ -8,7 +8,6 @@
 
 #import "TonicViewController.h"
 #include "Novocaine.h"
-#include "Generator.h"
 #include <math.h>
 
 @interface TonicViewController ()
@@ -27,7 +26,8 @@
     Novocaine *audioManager = [Novocaine audioManager];
   
     [audioManager setOutputBlock:^(float *audioToPlay, UInt32 numSamples, UInt32 numChannels) {
-      synth.fillBufferOfFloats(audioToPlay, numSamples, numChannels);
+      //amSynth.fillBufferOfFloats(audioToPlay, numSamples, numChannels);
+      sineSumSynth.fillBufferOfFloats(audioToPlay, numSamples, numChannels);
     }];
   
   UIPanGestureRecognizer *pan = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(handlePan:)];
@@ -43,14 +43,17 @@
     {
       CGPoint touchPoint = [pan locationInView:self.view];
       
-      // arbitrarily chosen midi note numbers (linear pitch)
-      TonicFloat car = mtof(Tonic::map(touchPoint.x, 0.0f, self.view.bounds.size.width, 47, 88));
+//      // arbitrarily chosen midi note numbers (linear pitch)
+//      TonicFloat car = mtof(Tonic::map(touchPoint.x, 0.0f, self.view.bounds.size.width, 47, 88));
+//      
+//      // exponenetial sweep in frequency, 0-1000 Hz
+//      TonicFloat mod = 1000.0f / powf(10.0f, Tonic::map(touchPoint.y, 0.0f, self.view.bounds.size.height, 0.0f, 3.0f));
+//      
+//      amSynth.setCarrierFreq(car);
+//      amSynth.setModFreq(mod);
       
-      // exponenetial sweep in frequency, 0-1000 Hz
-      TonicFloat mod = 1000.0f / powf(10.0f, Tonic::map(touchPoint.y, 0.0f, self.view.bounds.size.height, 0.0f, 3.0f));
-      
-      synth.setCarrierFreq(car);
-      synth.setModFreq(mod);
+      TonicFloat spread = Tonic::map(touchPoint.y, 0.0f, self.view.bounds.size.height, 1.0f, 0.0f);
+      sineSumSynth.setSpread(spread);
     }
       break;
       

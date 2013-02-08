@@ -1,8 +1,8 @@
 //
-//  TestSynth.h
-//  2013_1_23_melody
+//  SineAMSynth,h
+//  Tonic
 //
-//  Created by Morgan Packard on 1/23/13.
+//  Created by Nick Donaldson on 02/07/2013
 //
 //
 
@@ -12,20 +12,18 @@
 #include "Tonic.h"
 #include "Synth.h"
 #include "SineWave.h"
-#include "MonoToStereo.h"
 #include "Multiplier.h"
+#include "Adder.h"
 #include "FixedValue.h"
 #include "RampedValue.h"
-#include "Noise.h"
-#include "Adder.h"
 
 using namespace Tonic;
 
-class TestSynth : public Synth{
+class SineAMSynth : public Synth{
 
 public:
 
-  TestSynth() : carrierAmt(1.0f) {
+  SineAMSynth() : carrierAmt(1.0f) {
     
     carrierFreq.defValue(10).defLenMs(2000);
     modFreq.defValue(400);

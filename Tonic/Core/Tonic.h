@@ -69,7 +69,7 @@ namespace Tonic {
   inline static TonicFloat map(TonicFloat val, TonicFloat inMin, TonicFloat inMax, TonicFloat outMin, TonicFloat outMax, bool clamp = true) {
     TonicFloat result = ((val - inMin)/(inMax - inMin)) * (outMax - outMin) + outMin;
     if (clamp){
-      result = Tonic::clamp(result, outMin, outMax);
+      result = Tonic::clamp(result, min(outMin,outMax), max(outMin,outMax));
     }
     return result;
   }
