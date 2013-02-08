@@ -83,6 +83,18 @@ namespace Tonic {
     return 12.0f * log2(f/440.0f) + 69.0f;
   }
   
+  //-- Decibels --
+  /*
+    Working with 0 dB representing 1.0
+  */
+  static TonicFloat linTodB(TonicFloat lv){
+    return 20.0f*log(max(0, lv));
+  }
+  
+  static TonicFloat dBToLin(TonicFloat dBv){
+    return exp(dBv/20.0f);
+  }
+  
   // --
     
   static TonicFloat sampleRate(){
