@@ -12,22 +12,24 @@
 		A86C3EC516B2B4FD002A50F0 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A86C3EC416B2B4FD002A50F0 /* CoreGraphics.framework */; };
 		A86C3ECB16B2B4FD002A50F0 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = A86C3EC916B2B4FD002A50F0 /* InfoPlist.strings */; };
 		A86C3ECD16B2B4FD002A50F0 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = A86C3ECC16B2B4FD002A50F0 /* main.m */; };
-		A86C3ED116B2B4FD002A50F0 /* TonicAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = A86C3ED016B2B4FD002A50F0 /* TonicAppDelegate.m */; };
+		A86C3ED116B2B4FD002A50F0 /* TonicAppDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = A86C3ED016B2B4FD002A50F0 /* TonicAppDelegate.mm */; };
 		A86C3ED316B2B4FD002A50F0 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = A86C3ED216B2B4FD002A50F0 /* Default.png */; };
 		A86C3ED516B2B4FD002A50F0 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A86C3ED416B2B4FD002A50F0 /* Default@2x.png */; };
 		A86C3ED716B2B4FD002A50F0 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A86C3ED616B2B4FD002A50F0 /* Default-568h@2x.png */; };
 		A86C3EDA16B2B4FD002A50F0 /* MainStoryboard_iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A86C3ED816B2B4FD002A50F0 /* MainStoryboard_iPhone.storyboard */; };
 		A86C3EDD16B2B4FD002A50F0 /* MainStoryboard_iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A86C3EDB16B2B4FD002A50F0 /* MainStoryboard_iPad.storyboard */; };
 		A86C3EE016B2B4FD002A50F0 /* TonicViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = A86C3EDF16B2B4FD002A50F0 /* TonicViewController.mm */; };
-		A86C3F1816B2B5BE002A50F0 /* AudioFileReader.mm in Sources */ = {isa = PBXBuildFile; fileRef = A86C3F1116B2B5BE002A50F0 /* AudioFileReader.mm */; };
-		A86C3F1916B2B5BE002A50F0 /* AudioFileWriter.m in Sources */ = {isa = PBXBuildFile; fileRef = A86C3F1316B2B5BE002A50F0 /* AudioFileWriter.m */; };
-		A86C3F1A16B2B5BE002A50F0 /* Novocaine.m in Sources */ = {isa = PBXBuildFile; fileRef = A86C3F1516B2B5BE002A50F0 /* Novocaine.m */; };
+		A86C3F1816B2B5BE002A50F0 /* AudioFileReader.mm in Sources */ = {isa = PBXBuildFile; fileRef = A86C3F1116B2B5BE002A50F0 /* AudioFileReader.mm */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		A86C3F1916B2B5BE002A50F0 /* AudioFileWriter.m in Sources */ = {isa = PBXBuildFile; fileRef = A86C3F1316B2B5BE002A50F0 /* AudioFileWriter.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		A86C3F1A16B2B5BE002A50F0 /* Novocaine.m in Sources */ = {isa = PBXBuildFile; fileRef = A86C3F1516B2B5BE002A50F0 /* Novocaine.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		A86C3F1B16B2B5BE002A50F0 /* RingBuffer.mm in Sources */ = {isa = PBXBuildFile; fileRef = A86C3F1716B2B5BE002A50F0 /* RingBuffer.mm */; };
 		A86C3F1F16B2B7B8002A50F0 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A86C3F1C16B2B7B8002A50F0 /* AudioToolbox.framework */; };
 		A86C3F2116B2B7B8002A50F0 /* CoreAudio.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A86C3F1E16B2B7B8002A50F0 /* CoreAudio.framework */; };
 		A86C3F2316B2B834002A50F0 /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A86C3F2216B2B834002A50F0 /* Accelerate.framework */; };
 		F20FCD4816C566F60039832A /* TableLookupOsc.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F20FCD4616C566F60039832A /* TableLookupOsc.cpp */; };
 		F20FCD4B16C56EF60039832A /* SineWave.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F20FCD4916C56EF50039832A /* SineWave.cpp */; };
+		F20FCD4D16C58B970039832A /* SineSumSynth.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F20FCD4C16C58B970039832A /* SineSumSynth.cpp */; };
+		F20FCD5216C58D5B0039832A /* TonicSynthManager.mm in Sources */ = {isa = PBXBuildFile; fileRef = F20FCD5116C58D5B0039832A /* TonicSynthManager.mm */; };
 		F2360A7716C4B4EC00A0AD7A /* Noise.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F2360A7516C4B4EC00A0AD7A /* Noise.cpp */; };
 		F2C9F6F916C493870090A78D /* Adder.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F2C9F6E616C493870090A78D /* Adder.cpp */; };
 		F2C9F6FA16C493870090A78D /* FixedValue.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F2C9F6E816C493870090A78D /* FixedValue.cpp */; };
@@ -49,7 +51,7 @@
 		A86C3ECC16B2B4FD002A50F0 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		A86C3ECE16B2B4FD002A50F0 /* TonicDemo-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "TonicDemo-Prefix.pch"; sourceTree = "<group>"; };
 		A86C3ECF16B2B4FD002A50F0 /* TonicAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TonicAppDelegate.h; sourceTree = "<group>"; };
-		A86C3ED016B2B4FD002A50F0 /* TonicAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TonicAppDelegate.m; sourceTree = "<group>"; };
+		A86C3ED016B2B4FD002A50F0 /* TonicAppDelegate.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = TonicAppDelegate.mm; sourceTree = "<group>"; };
 		A86C3ED216B2B4FD002A50F0 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
 		A86C3ED416B2B4FD002A50F0 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
 		A86C3ED616B2B4FD002A50F0 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
@@ -74,6 +76,9 @@
 		F20FCD4716C566F60039832A /* TableLookupOsc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TableLookupOsc.h; sourceTree = "<group>"; };
 		F20FCD4916C56EF50039832A /* SineWave.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SineWave.cpp; sourceTree = "<group>"; };
 		F20FCD4A16C56EF60039832A /* SineWave.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SineWave.h; sourceTree = "<group>"; };
+		F20FCD4C16C58B970039832A /* SineSumSynth.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SineSumSynth.cpp; sourceTree = "<group>"; };
+		F20FCD5016C58D5B0039832A /* TonicSynthManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TonicSynthManager.h; sourceTree = "<group>"; };
+		F20FCD5116C58D5B0039832A /* TonicSynthManager.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = TonicSynthManager.mm; sourceTree = "<group>"; };
 		F2360A7516C4B4EC00A0AD7A /* Noise.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Noise.cpp; sourceTree = "<group>"; };
 		F2360A7616C4B4EC00A0AD7A /* Noise.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Noise.h; sourceTree = "<group>"; };
 		F2360A7916C4BC6E00A0AD7A /* SineSumSynth.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SineSumSynth.h; sourceTree = "<group>"; };
@@ -149,7 +154,7 @@
 			children = (
 				A86C3EE616B2B508002A50F0 /* Audio */,
 				A86C3ECF16B2B4FD002A50F0 /* TonicAppDelegate.h */,
-				A86C3ED016B2B4FD002A50F0 /* TonicAppDelegate.m */,
+				A86C3ED016B2B4FD002A50F0 /* TonicAppDelegate.mm */,
 				A86C3ED816B2B4FD002A50F0 /* MainStoryboard_iPhone.storyboard */,
 				A86C3EDB16B2B4FD002A50F0 /* MainStoryboard_iPad.storyboard */,
 				A86C3EDE16B2B4FD002A50F0 /* TonicViewController.h */,
@@ -178,7 +183,9 @@
 			children = (
 				A86C3F0E16B2B575002A50F0 /* SineAMSynth.h */,
 				F2360A7916C4BC6E00A0AD7A /* SineSumSynth.h */,
+				F20FCD4C16C58B970039832A /* SineSumSynth.cpp */,
 				A86C3F0F16B2B5BE002A50F0 /* Novocaine */,
+				F20FCD4E16C58D3E0039832A /* TonicWrappers */,
 				A86C3EE716B2B549002A50F0 /* Tonic */,
 			);
 			name = Audio;
@@ -208,6 +215,24 @@
 				A86C3F1716B2B5BE002A50F0 /* RingBuffer.mm */,
 			);
 			path = Novocaine;
+			sourceTree = "<group>";
+		};
+		F20FCD4E16C58D3E0039832A /* TonicWrappers */ = {
+			isa = PBXGroup;
+			children = (
+				F20FCD4F16C58D3E0039832A /* Obj-C */,
+			);
+			name = TonicWrappers;
+			path = ../../../../TonicWrappers;
+			sourceTree = "<group>";
+		};
+		F20FCD4F16C58D3E0039832A /* Obj-C */ = {
+			isa = PBXGroup;
+			children = (
+				F20FCD5016C58D5B0039832A /* TonicSynthManager.h */,
+				F20FCD5116C58D5B0039832A /* TonicSynthManager.mm */,
+			);
+			path = "Obj-C";
 			sourceTree = "<group>";
 		};
 		F2C9F6E516C493870090A78D /* Core */ = {
@@ -248,8 +273,8 @@
 		F2C9F6F816C493870090A78D /* Utils */ = {
 			isa = PBXGroup;
 			children = (
-				F2D951D616C49A6700F25663 /* RampedValue.cpp */,
 				F2D951D716C49A6700F25663 /* RampedValue.h */,
+				F2D951D616C49A6700F25663 /* RampedValue.cpp */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -323,7 +348,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A86C3ECD16B2B4FD002A50F0 /* main.m in Sources */,
-				A86C3ED116B2B4FD002A50F0 /* TonicAppDelegate.m in Sources */,
+				A86C3ED116B2B4FD002A50F0 /* TonicAppDelegate.mm in Sources */,
 				A86C3EE016B2B4FD002A50F0 /* TonicViewController.mm in Sources */,
 				A86C3F1816B2B5BE002A50F0 /* AudioFileReader.mm in Sources */,
 				A86C3F1916B2B5BE002A50F0 /* AudioFileWriter.m in Sources */,
@@ -340,6 +365,8 @@
 				F2360A7716C4B4EC00A0AD7A /* Noise.cpp in Sources */,
 				F20FCD4816C566F60039832A /* TableLookupOsc.cpp in Sources */,
 				F20FCD4B16C56EF60039832A /* SineWave.cpp in Sources */,
+				F20FCD4D16C58B970039832A /* SineSumSynth.cpp in Sources */,
+				F20FCD5216C58D5B0039832A /* TonicSynthManager.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -428,6 +455,7 @@
 		A86C3EE416B2B4FD002A50F0 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_OBJC_ARC = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "TonicDemo/TonicDemo-Prefix.pch";
 				INFOPLIST_FILE = "TonicDemo/TonicDemo-Info.plist";
@@ -439,6 +467,7 @@
 		A86C3EE516B2B4FD002A50F0 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_OBJC_ARC = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "TonicDemo/TonicDemo-Prefix.pch";
 				INFOPLIST_FILE = "TonicDemo/TonicDemo-Info.plist";

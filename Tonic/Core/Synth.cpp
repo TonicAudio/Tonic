@@ -95,6 +95,10 @@ void Synth::fillBufferOfFloats(float *outData,  UInt32 numFrames, int numChannel
   
 }
 
+// Synth Factory
+  
+SynthFactory::map_type * SynthFactory::map;
+
 
   
 }

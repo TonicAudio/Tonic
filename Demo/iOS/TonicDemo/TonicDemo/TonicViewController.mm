@@ -7,35 +7,55 @@
 //
 
 #import "TonicViewController.h"
-#include "Novocaine.h"
+#import "TonicSynthManager.h"
+
+#import "SineAMSynth.h"
+#import "SineSumSynth.h"
+
 #include <math.h>
+
+#define kSynthKey @"SineSum"
 
 @interface TonicViewController ()
 
+- (void)addSynthIfNecessary;
 - (void)handlePan:(UIPanGestureRecognizer*)pan;
 
 @end
 
 @implementation TonicViewController
 
+- (void)dealloc
+{
+  [[TonicSynthManager sharedManager] removeSynthForKey:kSynthKey];
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
   
-
-    Novocaine *audioManager = [Novocaine audioManager];
-  
-    [audioManager setOutputBlock:^(float *audioToPlay, UInt32 numSamples, UInt32 numChannels) {
-      //amSynth.fillBufferOfFloats(audioToPlay, numSamples, numChannels);
-      sineSumSynth.fillBufferOfFloats(audioToPlay, numSamples, numChannels);
-    }];
+  [self addSynthIfNecessary];
   
   UIPanGestureRecognizer *pan = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(handlePan:)];
   [self.view addGestureRecognizer:pan];
   
 }
 
+- (void)addSynthIfNecessary
+{
+  SineSumSynth *synthInstance = (SineSumSynth*)[[TonicSynthManager sharedManager] synthForKey:kSynthKey];
+  if (synthInstance == nil){
+    [[TonicSynthManager sharedManager] addSynthWithName:@"SineSumSynth" forKey:kSynthKey];
+  }
+}
+
 - (void)handlePan:(UIPanGestureRecognizer *)pan{
+  
+  SineSumSynth *sineSumSynth = (SineSumSynth*)[[TonicSynthManager sharedManager] synthForKey:kSynthKey];
+  
+  if (sineSumSynth == NULL) return;
+  
+  
   switch (pan.state){
       
     case UIGestureRecognizerStateBegan:
@@ -53,7 +73,7 @@
 //      amSynth.setModFreq(mod);
       
       TonicFloat spread = powf(Tonic::map(touchPoint.y, 0.0f, self.view.bounds.size.height, 1.0f, 0.0f), 2.0f);
-      sineSumSynth.setSpread(spread);
+      sineSumSynth->setSpread(spread);
     }
       break;
       
