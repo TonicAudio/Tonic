@@ -154,13 +154,11 @@ namespace Tonic {
           
           Generator frequencyGenerator;
           TonicFrames modFrames;
-          TonicFrames *pointerToTable;
           
       public:
           
           SineWaveMod_(){
               modFrames.resize(kSynthesisBlockSize, 1);
-              pointerToTable = &table_;
           }
           
           virtual void tick( TonicFrames& frames );
@@ -187,9 +185,10 @@ namespace Tonic {
         frequencyGenerator.tick(modFrames);
         unlockMutex();
       
-        TonicFloat *samples = &frames[0];
         TonicFloat tmp = 0.0;
+        TonicFloat *samples = &frames[0];
         TonicFloat *freqBuffer = &modFrames[0];
+        TonicFloat *tableData = &table_[0];
       
         // pre-multiply rate constant
         static const TonicFloat rateConstant = (TonicFloat)TABLE_SIZE / Tonic::sampleRate();
@@ -197,7 +196,7 @@ namespace Tonic {
         vDSP_vsmul(freqBuffer, 1, &rateConstant, freqBuffer, 1, modFrames.frames());
         #else
         for (unsigned int i=0; i<modFrames.frames(); i++){
-          *freqBuffer++ = rateConstant;
+          *freqBuffer++ *= rateConstant;
         }
         freqBuffer = &modFrames[0];
         #endif
@@ -218,8 +217,8 @@ namespace Tonic {
             
             iIndex_ = (unsigned int) time_;
             alpha_ = time_ - (TonicFloat)iIndex_;
-            tmp = (*pointerToTable)[ iIndex_ ];
-            tmp += ( alpha_ * ( (*pointerToTable)[ iIndex_ + 1 ] - tmp ) );
+            tmp = tableData[ iIndex_ ];
+            tmp += ( alpha_ * ( tableData[ iIndex_ + 1 ] - tmp ) );
             
             // fill all channels of the interleaved output
             // it's up to the caller to request the right number of channels, since a sine wave is always mono

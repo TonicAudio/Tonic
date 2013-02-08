@@ -150,10 +150,10 @@ namespace Tonic {
     void resize( size_t nFrames, unsigned int nChannels, TonicFloat value );
 
     //! Return the number of channels represented by the data.
-    unsigned int channels( void ) const { return nChannels_; };
+    inline unsigned int channels( void ) const { return nChannels_; };
 
     //! Return the number of sample frames represented by the data.
-    unsigned int frames( void ) const { return nFrames_; };
+    inline unsigned int frames( void ) const { return nFrames_; };
 
     //! Set the sample rate associated with the TonicFrames data.
     /*!
