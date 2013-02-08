@@ -110,7 +110,7 @@ using Tonic::SynthFactory;
 {
   @synchronized(self){
     if (key){
-      Synth *synth = [[self.synthDict objectForKey:key] pointerValue];
+      Synth *synth = (Synth*)[[self.synthDict objectForKey:key] pointerValue];
       if (synth){
         delete synth;
         [self.synthDict removeObjectForKey:key];

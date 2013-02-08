@@ -16,9 +16,6 @@
 		A86C3ED316B2B4FD002A50F0 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = A86C3ED216B2B4FD002A50F0 /* Default.png */; };
 		A86C3ED516B2B4FD002A50F0 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A86C3ED416B2B4FD002A50F0 /* Default@2x.png */; };
 		A86C3ED716B2B4FD002A50F0 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A86C3ED616B2B4FD002A50F0 /* Default-568h@2x.png */; };
-		A86C3EDA16B2B4FD002A50F0 /* MainStoryboard_iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A86C3ED816B2B4FD002A50F0 /* MainStoryboard_iPhone.storyboard */; };
-		A86C3EDD16B2B4FD002A50F0 /* MainStoryboard_iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A86C3EDB16B2B4FD002A50F0 /* MainStoryboard_iPad.storyboard */; };
-		A86C3EE016B2B4FD002A50F0 /* TonicViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = A86C3EDF16B2B4FD002A50F0 /* TonicViewController.mm */; };
 		A86C3F1816B2B5BE002A50F0 /* AudioFileReader.mm in Sources */ = {isa = PBXBuildFile; fileRef = A86C3F1116B2B5BE002A50F0 /* AudioFileReader.mm */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		A86C3F1916B2B5BE002A50F0 /* AudioFileWriter.m in Sources */ = {isa = PBXBuildFile; fileRef = A86C3F1316B2B5BE002A50F0 /* AudioFileWriter.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		A86C3F1A16B2B5BE002A50F0 /* Novocaine.m in Sources */ = {isa = PBXBuildFile; fileRef = A86C3F1516B2B5BE002A50F0 /* Novocaine.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
@@ -28,9 +25,14 @@
 		A86C3F2316B2B834002A50F0 /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A86C3F2216B2B834002A50F0 /* Accelerate.framework */; };
 		F20FCD4816C566F60039832A /* TableLookupOsc.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F20FCD4616C566F60039832A /* TableLookupOsc.cpp */; };
 		F20FCD4B16C56EF60039832A /* SineWave.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F20FCD4916C56EF50039832A /* SineWave.cpp */; };
-		F20FCD4D16C58B970039832A /* SineSumSynth.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F20FCD4C16C58B970039832A /* SineSumSynth.cpp */; };
 		F20FCD5216C58D5B0039832A /* TonicSynthManager.mm in Sources */ = {isa = PBXBuildFile; fileRef = F20FCD5116C58D5B0039832A /* TonicSynthManager.mm */; };
 		F2360A7716C4B4EC00A0AD7A /* Noise.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F2360A7516C4B4EC00A0AD7A /* Noise.cpp */; };
+		F256C8E416C5A0BF0096574D /* SineSumViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = F256C8E016C5A0BF0096574D /* SineSumViewController.mm */; };
+		F256C8E516C5A0BF0096574D /* SynthChooserViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F256C8E216C5A0BF0096574D /* SynthChooserViewController.m */; };
+		F256C8E616C5A0BF0096574D /* SynthChooserViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F256C8E316C5A0BF0096574D /* SynthChooserViewController.xib */; };
+		F256C8E816C5A6DF0096574D /* SineSumViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F256C8E716C5A6DF0096574D /* SineSumViewController.xib */; };
+		F256C8EC16C5A7F70096574D /* AMViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = F256C8EA16C5A7F60096574D /* AMViewController.mm */; };
+		F256C8ED16C5A7F70096574D /* AMViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F256C8EB16C5A7F70096574D /* AMViewController.xib */; };
 		F2C9F6F916C493870090A78D /* Adder.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F2C9F6E616C493870090A78D /* Adder.cpp */; };
 		F2C9F6FA16C493870090A78D /* FixedValue.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F2C9F6E816C493870090A78D /* FixedValue.cpp */; };
 		F2C9F6FB16C493870090A78D /* Generator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F2C9F6EA16C493870090A78D /* Generator.cpp */; };
@@ -55,10 +57,6 @@
 		A86C3ED216B2B4FD002A50F0 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
 		A86C3ED416B2B4FD002A50F0 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
 		A86C3ED616B2B4FD002A50F0 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
-		A86C3ED916B2B4FD002A50F0 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard_iPhone.storyboard; sourceTree = "<group>"; };
-		A86C3EDC16B2B4FD002A50F0 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard_iPad.storyboard; sourceTree = "<group>"; };
-		A86C3EDE16B2B4FD002A50F0 /* TonicViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TonicViewController.h; sourceTree = "<group>"; };
-		A86C3EDF16B2B4FD002A50F0 /* TonicViewController.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = TonicViewController.mm; sourceTree = "<group>"; };
 		A86C3F0E16B2B575002A50F0 /* SineAMSynth.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SineAMSynth.h; sourceTree = "<group>"; };
 		A86C3F1016B2B5BE002A50F0 /* AudioFileReader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AudioFileReader.h; sourceTree = "<group>"; };
 		A86C3F1116B2B5BE002A50F0 /* AudioFileReader.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = AudioFileReader.mm; sourceTree = "<group>"; };
@@ -76,12 +74,20 @@
 		F20FCD4716C566F60039832A /* TableLookupOsc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TableLookupOsc.h; sourceTree = "<group>"; };
 		F20FCD4916C56EF50039832A /* SineWave.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SineWave.cpp; sourceTree = "<group>"; };
 		F20FCD4A16C56EF60039832A /* SineWave.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SineWave.h; sourceTree = "<group>"; };
-		F20FCD4C16C58B970039832A /* SineSumSynth.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SineSumSynth.cpp; sourceTree = "<group>"; };
 		F20FCD5016C58D5B0039832A /* TonicSynthManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TonicSynthManager.h; sourceTree = "<group>"; };
 		F20FCD5116C58D5B0039832A /* TonicSynthManager.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = TonicSynthManager.mm; sourceTree = "<group>"; };
 		F2360A7516C4B4EC00A0AD7A /* Noise.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Noise.cpp; sourceTree = "<group>"; };
 		F2360A7616C4B4EC00A0AD7A /* Noise.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Noise.h; sourceTree = "<group>"; };
 		F2360A7916C4BC6E00A0AD7A /* SineSumSynth.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SineSumSynth.h; sourceTree = "<group>"; };
+		F256C8DF16C5A0BF0096574D /* SineSumViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SineSumViewController.h; sourceTree = "<group>"; };
+		F256C8E016C5A0BF0096574D /* SineSumViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = SineSumViewController.mm; sourceTree = "<group>"; };
+		F256C8E116C5A0BF0096574D /* SynthChooserViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SynthChooserViewController.h; sourceTree = "<group>"; };
+		F256C8E216C5A0BF0096574D /* SynthChooserViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SynthChooserViewController.m; sourceTree = "<group>"; };
+		F256C8E316C5A0BF0096574D /* SynthChooserViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SynthChooserViewController.xib; sourceTree = "<group>"; };
+		F256C8E716C5A6DF0096574D /* SineSumViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SineSumViewController.xib; sourceTree = "<group>"; };
+		F256C8E916C5A7F60096574D /* AMViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMViewController.h; sourceTree = "<group>"; };
+		F256C8EA16C5A7F60096574D /* AMViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = AMViewController.mm; sourceTree = "<group>"; };
+		F256C8EB16C5A7F70096574D /* AMViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AMViewController.xib; sourceTree = "<group>"; };
 		F2C9F6E616C493870090A78D /* Adder.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Adder.cpp; sourceTree = "<group>"; };
 		F2C9F6E716C493870090A78D /* Adder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Adder.h; sourceTree = "<group>"; };
 		F2C9F6E816C493870090A78D /* FixedValue.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = FixedValue.cpp; sourceTree = "<group>"; };
@@ -155,10 +161,7 @@
 				A86C3EE616B2B508002A50F0 /* Audio */,
 				A86C3ECF16B2B4FD002A50F0 /* TonicAppDelegate.h */,
 				A86C3ED016B2B4FD002A50F0 /* TonicAppDelegate.mm */,
-				A86C3ED816B2B4FD002A50F0 /* MainStoryboard_iPhone.storyboard */,
-				A86C3EDB16B2B4FD002A50F0 /* MainStoryboard_iPad.storyboard */,
-				A86C3EDE16B2B4FD002A50F0 /* TonicViewController.h */,
-				A86C3EDF16B2B4FD002A50F0 /* TonicViewController.mm */,
+				F256C8DE16C5A0BF0096574D /* ViewControllers */,
 				A86C3EC716B2B4FD002A50F0 /* Supporting Files */,
 			);
 			path = TonicDemo;
@@ -183,7 +186,6 @@
 			children = (
 				A86C3F0E16B2B575002A50F0 /* SineAMSynth.h */,
 				F2360A7916C4BC6E00A0AD7A /* SineSumSynth.h */,
-				F20FCD4C16C58B970039832A /* SineSumSynth.cpp */,
 				A86C3F0F16B2B5BE002A50F0 /* Novocaine */,
 				F20FCD4E16C58D3E0039832A /* TonicWrappers */,
 				A86C3EE716B2B549002A50F0 /* Tonic */,
@@ -233,6 +235,22 @@
 				F20FCD5116C58D5B0039832A /* TonicSynthManager.mm */,
 			);
 			path = "Obj-C";
+			sourceTree = "<group>";
+		};
+		F256C8DE16C5A0BF0096574D /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				F256C8E116C5A0BF0096574D /* SynthChooserViewController.h */,
+				F256C8E216C5A0BF0096574D /* SynthChooserViewController.m */,
+				F256C8E316C5A0BF0096574D /* SynthChooserViewController.xib */,
+				F256C8DF16C5A0BF0096574D /* SineSumViewController.h */,
+				F256C8E016C5A0BF0096574D /* SineSumViewController.mm */,
+				F256C8E716C5A6DF0096574D /* SineSumViewController.xib */,
+				F256C8E916C5A7F60096574D /* AMViewController.h */,
+				F256C8EA16C5A7F60096574D /* AMViewController.mm */,
+				F256C8EB16C5A7F70096574D /* AMViewController.xib */,
+			);
+			path = ViewControllers;
 			sourceTree = "<group>";
 		};
 		F2C9F6E516C493870090A78D /* Core */ = {
@@ -335,8 +353,9 @@
 				A86C3ED316B2B4FD002A50F0 /* Default.png in Resources */,
 				A86C3ED516B2B4FD002A50F0 /* Default@2x.png in Resources */,
 				A86C3ED716B2B4FD002A50F0 /* Default-568h@2x.png in Resources */,
-				A86C3EDA16B2B4FD002A50F0 /* MainStoryboard_iPhone.storyboard in Resources */,
-				A86C3EDD16B2B4FD002A50F0 /* MainStoryboard_iPad.storyboard in Resources */,
+				F256C8E616C5A0BF0096574D /* SynthChooserViewController.xib in Resources */,
+				F256C8E816C5A6DF0096574D /* SineSumViewController.xib in Resources */,
+				F256C8ED16C5A7F70096574D /* AMViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -349,7 +368,6 @@
 			files = (
 				A86C3ECD16B2B4FD002A50F0 /* main.m in Sources */,
 				A86C3ED116B2B4FD002A50F0 /* TonicAppDelegate.mm in Sources */,
-				A86C3EE016B2B4FD002A50F0 /* TonicViewController.mm in Sources */,
 				A86C3F1816B2B5BE002A50F0 /* AudioFileReader.mm in Sources */,
 				A86C3F1916B2B5BE002A50F0 /* AudioFileWriter.m in Sources */,
 				A86C3F1A16B2B5BE002A50F0 /* Novocaine.m in Sources */,
@@ -365,8 +383,10 @@
 				F2360A7716C4B4EC00A0AD7A /* Noise.cpp in Sources */,
 				F20FCD4816C566F60039832A /* TableLookupOsc.cpp in Sources */,
 				F20FCD4B16C56EF60039832A /* SineWave.cpp in Sources */,
-				F20FCD4D16C58B970039832A /* SineSumSynth.cpp in Sources */,
 				F20FCD5216C58D5B0039832A /* TonicSynthManager.mm in Sources */,
+				F256C8E416C5A0BF0096574D /* SineSumViewController.mm in Sources */,
+				F256C8E516C5A0BF0096574D /* SynthChooserViewController.m in Sources */,
+				F256C8EC16C5A7F70096574D /* AMViewController.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -379,22 +399,6 @@
 				A86C3ECA16B2B4FD002A50F0 /* en */,
 			);
 			name = InfoPlist.strings;
-			sourceTree = "<group>";
-		};
-		A86C3ED816B2B4FD002A50F0 /* MainStoryboard_iPhone.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				A86C3ED916B2B4FD002A50F0 /* en */,
-			);
-			name = MainStoryboard_iPhone.storyboard;
-			sourceTree = "<group>";
-		};
-		A86C3EDB16B2B4FD002A50F0 /* MainStoryboard_iPad.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				A86C3EDC16B2B4FD002A50F0 /* en */,
-			);
-			name = MainStoryboard_iPad.storyboard;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */

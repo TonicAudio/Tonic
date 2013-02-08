@@ -8,15 +8,26 @@
 
 #import "TonicAppDelegate.h"
 #import "TonicSynthManager.h"
+#import "SynthChooserViewController.h"
 
 @implementation TonicAppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+  
+  [[UINavigationBar appearance] setTintColor:[UIColor blackColor]];
+  [[UINavigationBar appearance] setTitleTextAttributes:@{UITextAttributeFont : [UIFont fontWithName:@"HelveticaNeue-Bold" size:20], UITextAttributeTextColor : [UIColor whiteColor]}];
+  
+  SynthChooserViewController *scVC = [[SynthChooserViewController alloc] initWithNibName:nil bundle:nil];
+  self.rootNavController = [[UINavigationController alloc] initWithRootViewController:scVC];
+  
     // Override point for customization after application launch.
   [[TonicSynthManager sharedManager] startSession];
 
-    return YES;
+  self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+  self.window.rootViewController = self.rootNavController;
+  [self.window makeKeyAndVisible];
+  return YES;
 }
 							
 - (void)applicationWillResignActive:(UIApplication *)application

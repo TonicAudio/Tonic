@@ -1,29 +1,25 @@
 //
-//  TonicViewController.m
+//  SineSumViewController.m
 //  TonicDemo
 //
-//  Created by Morgan Packard on 1/25/13.
+//  Created by Nick Donaldson on 2/8/2013 during a blizzard
 //  Copyright (c) 2013 Morgan Packard. All rights reserved.
 //
 
-#import "TonicViewController.h"
+#import "SineSumViewController.h"
 #import "TonicSynthManager.h"
-
-#import "SineAMSynth.h"
 #import "SineSumSynth.h"
-
-#include <math.h>
 
 #define kSynthKey @"SineSum"
 
-@interface TonicViewController ()
+@interface SineSumViewController ()
 
 - (void)addSynthIfNecessary;
 - (void)handlePan:(UIPanGestureRecognizer*)pan;
 
 @end
 
-@implementation TonicViewController
+@implementation SineSumViewController
 
 - (void)dealloc
 {
@@ -32,7 +28,9 @@
 
 - (void)viewDidLoad
 {
-    [super viewDidLoad];
+  [super viewDidLoad];
+  self.navigationItem.title = @"Sine Sum";
+  
   
   [self addSynthIfNecessary];
   

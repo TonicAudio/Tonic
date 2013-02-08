@@ -52,6 +52,10 @@ private:
   
   TonicFloat carrierAmt;
   
+  static SynthRegister<SineAMSynth> reg;
+  
 };
+
+SynthRegister<SineAMSynth> SineAMSynth::reg("SineAMSynth");
 
 #endif
