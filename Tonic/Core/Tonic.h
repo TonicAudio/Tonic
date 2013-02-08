@@ -31,6 +31,7 @@ https://ccrma.stanford.edu/software/stk/
 #ifdef __APPLE__
   #import <Accelerate/Accelerate.h>
   #define USE_APPLE_ACCELERATE
+  #define ARC4RAND_MAX 0x100000000
 #endif
 
 using namespace std;
@@ -53,19 +54,19 @@ namespace Tonic {
   
   //-- Arithmetic --
   
-  static TonicFloat max(TonicFloat a, TonicFloat b) {
+  inline static TonicFloat max(TonicFloat a, TonicFloat b) {
     return (a > b ? a : b);
   };
 
-  static TonicFloat min(TonicFloat a, TonicFloat b) {
+  inline static TonicFloat min(TonicFloat a, TonicFloat b) {
     return (a < b ? a : b);
   }
 
-  static TonicFloat clamp(TonicFloat val, TonicFloat min, TonicFloat max) {
+  inline static TonicFloat clamp(TonicFloat val, TonicFloat min, TonicFloat max) {
     return (val < min ? min : (val > max ? max : val));
   }
   
-  static TonicFloat map(TonicFloat val, TonicFloat inMin, TonicFloat inMax, TonicFloat outMin, TonicFloat outMax, bool clamp = true) {
+  inline static TonicFloat map(TonicFloat val, TonicFloat inMin, TonicFloat inMax, TonicFloat outMin, TonicFloat outMax, bool clamp = true) {
     TonicFloat result = ((val - inMin)/(inMax - inMin)) * (outMax - outMin) + outMin;
     if (clamp){
       result = Tonic::clamp(result, outMin, outMax);
@@ -75,11 +76,11 @@ namespace Tonic {
   
   //-- Freq/MIDI --
   
-  static TonicFloat mtof(TonicFloat nn){
+  inline static TonicFloat mtof(TonicFloat nn){
     return 440.0f * powf(2.0, (nn-69.0f)/12.0f);
   }
   
-  static TonicFloat ftom(TonicFloat f){
+  inline static TonicFloat ftom(TonicFloat f){
     return 12.0f * log2(f/440.0f) + 69.0f;
   }
   
@@ -87,12 +88,21 @@ namespace Tonic {
   /*
     Working with 0 dB representing 1.0
   */
-  static TonicFloat linTodB(TonicFloat lv){
+  inline static TonicFloat linTodB(TonicFloat lv){
     return 20.0f*log(max(0, lv));
   }
   
-  static TonicFloat dBToLin(TonicFloat dBv){
+  inline static TonicFloat dBToLin(TonicFloat dBv){
     return exp(dBv/20.0f);
+  }
+  
+  // -- Misc --
+  inline static TonicFloat randomSample(){
+    #ifdef __APPLE__
+    return ((TonicFloat)arc4random()/ARC4RAND_MAX) * 2.0f - 1.0f;
+    #else
+    return ((TonicFloat)rand()/RAND_MAX) * 2.0f - 1.0f;
+    #endif
   }
   
   // --

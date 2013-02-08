@@ -16,6 +16,7 @@
 #include "Multiplier.h"
 #include "FixedValue.h"
 #include "RampedValue.h"
+#include "Noise.h"
 #include "Adder.h"
 
 using namespace Tonic;
