@@ -106,23 +106,45 @@ namespace Tonic {
       frequencyGenerator.tick(modFrames);
       unlockMutex();
       
-      TonicFloat tmp = 0.0;
+      unsigned int stride = frames.channels();
       TonicFloat *samples = &frames[0];
-      TonicFloat *freqBuffer = &modFrames[0];
+      TonicFloat *rateBuffer = &modFrames[0];
       TonicFloat *tableData = &(tableReference())[0];
-      
-      // pre-multiply rate constant for speed
       static const TonicFloat rateConstant = (TonicFloat)TABLE_SIZE / Tonic::sampleRate();
-#ifdef USE_APPLE_ACCELERATE
-      vDSP_vsmul(freqBuffer, 1, &rateConstant, freqBuffer, 1, modFrames.frames());
-#else
-      for (unsigned int i=0; i<modFrames.frames(); i++){
-        *freqBuffer++ *= rateConstant;
-      }
-      freqBuffer = &modFrames[0];
-#endif
       
-      unsigned int hop = frames.channels();
+      // can use vDSP_vtabi to perform lookup, with some conditioning first
+      #ifdef USE_APPLE_ACCELERATE
+
+      // pre-multiply rate constant 
+      vDSP_vsmul(rateBuffer, 1, &rateConstant, rateBuffer, 1, modFrames.frames());
+      
+      // compute wrapped time values, can use modFrames as workspace
+      for (unsigned int i=0; i<modFrames.frames(); i++){
+        time_ += rateBuffer[i];
+        
+        while ( time_ < 0.0 )
+          time_ += TABLE_SIZE;
+        while ( time_ >= TABLE_SIZE )
+          time_ -= TABLE_SIZE;
+        
+        rateBuffer[i] = time_;
+      }
+      
+      // perform table lookup
+      static float tScale = 1.0f;
+      static float tOffset = 0.0f;
+      vDSP_vtabi(rateBuffer, 1, &tScale, &tOffset, tableData, TABLE_SIZE, samples, stride, frames.frames());
+      
+      #else
+
+      TonicFloat tmp = 0.0;
+
+      // pre-multiply rate constant for speed
+      for (unsigned int i=0; i<modFrames.frames(); i++){
+        *rateBuffer++ *= rateConstant;
+      }
+      rateBuffer = &modFrames[0];
+      
       
       for ( unsigned int i=0; i<frames.frames(); i++ ) {
         
@@ -144,12 +166,13 @@ namespace Tonic {
         // fill all channels of the interleaved output
         // it's up to the caller to request the right number of channels, since a sine wave is always mono
         *samples = tmp;
-        samples += hop;
+        samples += stride;
         
         // Increment time, which can be negative.
         // Directly add the rate, don't need to dive into function call
-        time_ += *freqBuffer++;
+        time_ += *rateBuffer++;
       }
+      #endif
       
       // mono source, so copy channels if necessary
       frames.fillChannels();

@@ -17,11 +17,11 @@ namespace Tonic { namespace Tonic_{
   }
   
   TableLookupOsc_::~TableLookupOsc_(){
+  
   }
   
-  void TableLookupOsc_::reset()
-  {
-    
+  void TableLookupOsc_::reset(){
+    time_ = 0.0f;
   }
 } // Namespace Tonic_
   
