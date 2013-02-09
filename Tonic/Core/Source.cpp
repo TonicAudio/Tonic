@@ -43,6 +43,7 @@ namespace Tonic {
     const unsigned int channelsPerSample = (outputFrames.channels() - numChannels) + 1;
     
     TonicFloat sample = 0.0f;
+    TonicFloat *outputSamples = &outputFrames[bufferReadPosition];
     
     for(unsigned int i = 0; i<numFrames * numChannels; i++){
       
@@ -53,10 +54,11 @@ namespace Tonic {
           tick(outputFrames);
         }
         
-        sample += outputFrames[bufferReadPosition++];
+        sample += *outputSamples++;
         
-        if(bufferReadPosition == sampleCount){
+        if(++bufferReadPosition == sampleCount){
           bufferReadPosition = 0;
+          outputSamples = &outputFrames[0];
         }
       }
       
