@@ -53,10 +53,10 @@ private:
   RampedValue sineFreqs[NUM_SINES];
   Adder sineMixer;
   
-  static SynthRegister<SineSumSynth> reg;
+  static SourceRegister<SineSumSynth> reg;
   
 };
 
-SynthRegister<SineSumSynth> SineSumSynth::reg("SineSumSynth");
+SourceRegister<SineSumSynth> SineSumSynth::reg("SineSumSynth");
 
 #endif

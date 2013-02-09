@@ -8,18 +8,22 @@
 
 #import "TonicSynthManager.h"
 #import "Novocaine.h"
+
+#include "Mixer.h"
 #include <vector>
 
 using std::vector;
-using Tonic::Synth;
-using Tonic::SynthFactory;
+using Tonic::Source;
+using Tonic::SourceFactory;
+using Tonic::Mixer;
 
 @interface TonicSynthManager ()
 {
-  SynthFactory synthFactory;
+  SourceFactory sourceFactory;
+  Mixer mixer;
 }
 
-@property (nonatomic, strong) NSMutableDictionary *synthDict;
+@property (nonatomic, strong) NSMutableDictionary *sourceDict;
 
 - (void)setupNovocaineOutput;
 
@@ -47,7 +51,7 @@ using Tonic::SynthFactory;
 {
   self = [super init];
   if (self){
-    self.synthDict = [NSMutableDictionary dictionaryWithCapacity:10];
+    self.sourceDict = [NSMutableDictionary dictionaryWithCapacity:10];
     [self setupNovocaineOutput];
   }
   return self;
@@ -56,26 +60,7 @@ using Tonic::SynthFactory;
 - (void)setupNovocaineOutput
 {
   [[Novocaine audioManager] setOutputBlock:^(float *audioToPlay, UInt32 numSamples, UInt32 numChannels) {
-    
-    @autoreleasepool {
-      @synchronized(self){
-        
-        if (self.synthDict.count > 0){
-          for (id synthVal in [self.synthDict allValues]){
-            if ([synthVal isKindOfClass:[NSValue class]]){
-              Synth *synth = (Synth*)[synthVal pointerValue];
-              if (synth){
-                synth->fillBufferOfFloats(audioToPlay, numSamples, numChannels);
-              }
-            }
-          }
-        }
-        else{
-          memset(audioToPlay, 0, numSamples*numChannels*sizeof(float));
-        }
-      }
-    }
-
+      mixer.fillBufferOfFloats(audioToPlay, numSamples, numChannels);
   }];
   
   [[Novocaine audioManager] pause];
@@ -91,41 +76,41 @@ using Tonic::SynthFactory;
   [[Novocaine audioManager] pause];
 }
 
-- (void)addSynthWithName:(NSString *)synthName forKey:(NSString *)key
+- (void)addSourceWithName:(NSString *)synthName forKey:(NSString *)key
 {
-  @synchronized(self){
     if (key){
-      Synth *newSynth = synthFactory.createInstance(synthName.UTF8String);
-      if (newSynth){
-        [self.synthDict setValue:[NSValue valueWithPointer:newSynth] forKey:key];
+      Source *newSource = sourceFactory.createInstance(synthName.UTF8String);
+      if (newSource){
+        mixer.addInput(newSource);
+        [self.sourceDict setValue:[NSValue valueWithPointer:newSource] forKey:key];
       }
     }
     else{
       [NSException raise:NSInvalidArgumentException format:@"Argument \"key\" cannot be nil"];
     }
-  }
+  
 }
 
-- (void)removeSynthForKey:(NSString *)key
+- (void)removeSourceForKey:(NSString *)key
 {
-  @synchronized(self){
     if (key){
-      Synth *synth = (Synth*)[[self.synthDict objectForKey:key] pointerValue];
-      if (synth){
-        delete synth;
-        [self.synthDict removeObjectForKey:key];
+      Source *source = (Source*)[[self.sourceDict objectForKey:key] pointerValue];
+      if (source){
+        mixer.removeInput(source);
+        delete source;
+        [self.sourceDict removeObjectForKey:key];
       }
     }
     else{
       [NSException raise:NSInvalidArgumentException format:@"Argument \"key\" cannot be nil"];
     }
-  }
+  
 }
 
-- (Tonic::Synth*)synthForKey:(NSString *)key
+- (Tonic::Source*)sourceForKey:(NSString *)key
 {
   if (key){
-    return (Tonic::Synth*)[[self.synthDict valueForKey:key] pointerValue];
+    return (Tonic::Source*)[[self.sourceDict valueForKey:key] pointerValue];
   }
   else{
     [NSException raise:NSInvalidArgumentException format:@"Argument \"key\" cannot be nil"];

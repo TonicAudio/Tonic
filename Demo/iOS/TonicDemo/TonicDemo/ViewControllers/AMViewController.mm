@@ -23,7 +23,7 @@
 
 - (void)dealloc
 {
-  [[TonicSynthManager sharedManager] removeSynthForKey:kSynthKey];
+  [[TonicSynthManager sharedManager] removeSourceForKey:kSynthKey];
 }
 
 - (void)viewDidLoad
@@ -41,15 +41,15 @@
 
 - (void)addSynthIfNecessary
 {
-  SineAMSynth *synthInstance = (SineAMSynth*)[[TonicSynthManager sharedManager] synthForKey:kSynthKey];
+  SineAMSynth *synthInstance = (SineAMSynth*)[[TonicSynthManager sharedManager] sourceForKey:kSynthKey];
   if (synthInstance == nil){
-    [[TonicSynthManager sharedManager] addSynthWithName:@"SineAMSynth" forKey:kSynthKey];
+    [[TonicSynthManager sharedManager] addSourceWithName:@"SineAMSynth" forKey:kSynthKey];
   }
 }
 
 - (void)handlePan:(UIPanGestureRecognizer *)pan{
   
-  SineAMSynth *amSynth = (SineAMSynth*)[[TonicSynthManager sharedManager] synthForKey:kSynthKey];
+  SineAMSynth *amSynth = (SineAMSynth*)[[TonicSynthManager sharedManager] sourceForKey:kSynthKey];
   
   if (amSynth == NULL) return;
   

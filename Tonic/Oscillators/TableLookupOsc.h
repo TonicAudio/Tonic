@@ -106,20 +106,22 @@ namespace Tonic {
       frequencyGenerator.tick(modFrames);
       unlockMutex();
       
-      unsigned int stride = frames.channels();
+      static const TonicFloat rateConstant = (TonicFloat)TABLE_SIZE / Tonic::sampleRate();
+      const unsigned int nFrames = frames.frames();
+      const unsigned int stride = frames.channels();
+      
       TonicFloat *samples = &frames[0];
       TonicFloat *rateBuffer = &modFrames[0];
       TonicFloat *tableData = &(tableReference())[0];
-      static const TonicFloat rateConstant = (TonicFloat)TABLE_SIZE / Tonic::sampleRate();
       
       // can use vDSP_vtabi to perform lookup, with some conditioning first
       #ifdef USE_APPLE_ACCELERATE
 
       // pre-multiply rate constant 
-      vDSP_vsmul(rateBuffer, 1, &rateConstant, rateBuffer, 1, modFrames.frames());
+      vDSP_vsmul(rateBuffer, 1, &rateConstant, rateBuffer, 1, nFrames);
       
       // compute wrapped time values, can use modFrames as workspace
-      for (unsigned int i=0; i<modFrames.frames(); i++){
+      for (unsigned int i=0; i<nFrames; i++){
         time_ += *rateBuffer;
         
         while ( time_ < 0.0 )
@@ -134,20 +136,20 @@ namespace Tonic {
       // perform table lookup
       static float tScale = 1.0f;
       static float tOffset = 0.0f;
-      vDSP_vtabi(rateBuffer, 1, &tScale, &tOffset, tableData, TABLE_SIZE, samples, stride, frames.frames());
+      vDSP_vtabi(rateBuffer, 1, &tScale, &tOffset, tableData, TABLE_SIZE, samples, stride, nFrames);
       
       #else
 
       TonicFloat tmp = 0.0;
 
       // pre-multiply rate constant for speed
-      for (unsigned int i=0; i<modFrames.frames(); i++){
+      for (unsigned int i=0; i<nFrames; i++){
         *rateBuffer++ *= rateConstant;
       }
       rateBuffer = &modFrames[0];
       
       
-      for ( unsigned int i=0; i<frames.frames(); i++ ) {
+      for ( unsigned int i=0; i<nFrames; i++ ) {
         
         // This can be optimized by pre-multiplying to get rate
         // SineWave_::setFrequency(*(freqBuffer++));

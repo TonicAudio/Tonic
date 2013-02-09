@@ -36,7 +36,7 @@ namespace Tonic {
       Generator_();
       virtual ~Generator_();
       virtual void tick( TonicFrames& frames) = 0;
-            
+      
       // mutex for swapping inputs, etc
       void lockMutex();
       void unlockMutex();
@@ -87,16 +87,21 @@ namespace Tonic {
       return *this;
     }
     
-    void tick(TonicFrames& frames){
-      mGen->tick(frames);
-    }
-    
     ~Generator(){
       if(--(*pcount) == 0){
         delete mGen;
         delete pcount;
       }
     }
+    
+    bool operator==(const Generator& r){
+      return mGen == r.mGen;
+    }
+    
+    void tick(TonicFrames& frames){
+      mGen->tick(frames);
+    }
+
   };
   
   template<class GenType> class TemplatedGenerator : public Generator{
