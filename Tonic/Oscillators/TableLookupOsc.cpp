@@ -39,67 +39,46 @@ namespace Tonic { namespace Tonic_{
     TonicFloat *rateBuffer = &modFrames[0];
     TonicFloat *tableData = &(tableReference())[0];
     
-    // can use vDSP_vtabi to perform lookup, with some conditioning first
-#ifdef USE_APPLE_ACCELERATE
-    
-    // pre-multiply rate constant
-    vDSP_vsmul(rateBuffer, 1, &rateConstant, rateBuffer, 1, nFrames);
-    
-    // compute wrapped time values, can use modFrames as workspace
-    for (unsigned int i=0; i<nFrames; i++){
-      phase_ += *rateBuffer;
-      
-      while ( phase_ < 0.0 )
-        phase_ += TABLE_SIZE;
-      while ( phase_ >= TABLE_SIZE )
-        phase_ -= TABLE_SIZE;
-      
-      *rateBuffer++ = phase_;
-    }
-    rateBuffer = &modFrames[0];
-    
-    // perform table lookup
-    static float tScale = 1.0f;
-    static float tOffset = 0.0f;
-    vDSP_vtabi(rateBuffer, 1, &tScale, &tOffset, tableData, TABLE_SIZE, samples, stride, nFrames);
-    
-#else
-    
-    TonicFloat tmp = 0.0, alpha_;
-    unsigned int iIndex_;
+    LookupFudge lf;
     
     // pre-multiply rate constant for speed
-    for (unsigned int i=0; i<nFrames; i++){
+#ifdef USE_APPLE_ACCELERATE
+    vDSP_vsmul(rateBuffer, 1, &rateConstant, rateBuffer, 1, nFrames);
+#else
+    for (unsigned int i=0; i<modFrames.frames(); i++){
       *rateBuffer++ *= rateConstant;
     }
     rateBuffer = &modFrames[0];
+#endif
     
+    lf.lf_d = UNITBIT32;
+    int32_t nhi = lf.lf_i[1];
+    double dp = phase_ + UNITBIT32;
     
-    for ( unsigned int i=0; i<nFrames; i++ ) {
+    TonicFloat *tAddr, f1, f2, frac;
+    
+    for ( unsigned int i=0; i<frames.frames(); i++ ) {
       
-      // This can be optimized by pre-multiplying to get rate
-      // SineWave_::setFrequency(*(freqBuffer++));
+      lf.lf_d = dp;
+      dp += *rateBuffer++;
+      tAddr = tableData + (lf.lf_i[1] & (TABLE_SIZE-1));
+      lf.lf_i[1] = nhi;
+      frac = lf.lf_d - UNITBIT32;
+      f1 = tAddr[0];
+      f2 = tAddr[1];
       
-      // Check limits of time address ... if necessary, recalculate modulo
-      // TABLE_SIZE.
-      while ( phase_ < 0.0 )
-        phase_ += TABLE_SIZE;
-      while ( phase_ >= TABLE_SIZE )
-        phase_ -= TABLE_SIZE;
-      
-      iIndex_ = (unsigned int) phase_;
-      alpha_ = phase_ - (TonicFloat)iIndex_;
-      tmp = tableData[ iIndex_ ];
-      tmp += ( alpha_ * ( tableData[ iIndex_ + 1 ] - tmp ) );
-      
-      *samples = tmp;
+      // fill all channels of the interleaved output
+      // it's up to the caller to request the right number of channels, since a sine wave is always mono
+      *samples = f1 + frac * (f2 - f1);
       samples += stride;
       
-      // Increment time, which can be negative.
-      // Directly add the rate, don't need to dive into function call
-      phase_ += *rateBuffer++;
     }
-#endif
+    
+    lf.lf_d = UNITBIT32 * TABLE_SIZE;
+    nhi = lf.lf_i[1];
+    lf.lf_d = dp + (UNITBIT32 * TABLE_SIZE - UNITBIT32);
+    lf.lf_i[1] = nhi;
+    phase_ = lf.lf_d - UNITBIT32 * TABLE_SIZE;
     
     // mono source, so copy channels if necessary
     frames.fillChannels();
