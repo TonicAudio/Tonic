@@ -36,9 +36,24 @@ namespace Tonic {
       Generator_();
       virtual ~Generator_();
       virtual void tick( TonicFrames& frames) = 0;
+            
+      // mutex for swapping inputs, etc
+      void lockMutex();
+      void unlockMutex();
+      
     protected:
+        
+      pthread_mutex_t genMutex_;
 
     };
+    
+    inline void Generator_::lockMutex(){
+      pthread_mutex_lock(&genMutex_);
+    }
+    
+    inline void Generator_::unlockMutex(){
+      pthread_mutex_unlock(&genMutex_);
+    }
     
     /////////////////////
 

@@ -1,9 +1,9 @@
 //
-//  Adder.cpp
-//  TonicDemo
+//  Generator.cpp
+//  2013_1_23_melody
 //
-//  Created by Morgan Packard on 1/27/13.
-//  Copyright (c) 2013 Morgan Packard. All rights reserved.
+//  Created by Morgan Packard on 1/23/13.
+//
 //
 
 /*+++++++++++++++++++++ License ++++++++++++++++++++
@@ -20,8 +20,17 @@ https://ccrma.stanford.edu/software/stk/
 
 ++++++++++++++++++++++++++++++++++++++++++++++++++*/
 
-#include "Adder.h"
 #include "Generator.h"
-#include <vector>
-#include "FixedValue.h"
+#include "Multiplier.h"
 
+namespace Tonic{ namespace Tonic_{
+  
+  Generator_::Generator_(){
+    pthread_mutex_init(&genMutex_, NULL);
+  }
+
+  Generator_::~Generator_(){
+    pthread_mutex_destroy(&genMutex_);
+  }
+
+}}

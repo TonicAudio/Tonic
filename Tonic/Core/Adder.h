@@ -33,51 +33,56 @@ namespace Tonic {
       
     class Adder_ : public Generator_ {
     protected:
-      std::vector<Generator> audioSources;
+      std::vector<Generator> inputs;
       TonicFrames *workSpace;
       TonicFrames *lastFrames; // in case we want to grab these and examine them
     public:
-      Adder_(int numChannels = 2){
-        workSpace = new TonicFrames(kSynthesisBlockSize, numChannels);
-      }
       
-      ~Adder_(){
-        delete workSpace;
-      }
+      // Not sure how this could ever be called with an argument, since it's always allocated
+      // via a templated container...
+      Adder_(int numChannels = 2);
+      ~Adder_();
       
       // All generators must have the same number of channels, and this must match the number of channels 
       // in frames passed to tick.
-      void in(Generator generator){
-        audioSources.push_back( generator );
+      void in(Generator generator);
+      inline void tick( TonicFrames& frames );
+      
+      Generator & getInput(unsigned int index) { return inputs[index]; };
+      unsigned int numInputs() { return inputs.size(); };
+    };
+    
+    inline void Adder_::tick( TonicFrames& frames ){
+      
+      TonicFloat *framesData =  &frames[0];
+      
+      memset(framesData, 0, sizeof(TonicFloat) * frames.size());
+      
+      for (int j =0; j < inputs.size(); j++) {
+        inputs[j].tick(*workSpace);
+        frames += *workSpace; // add each sample in frames to each sample in workspace
       }
       
-      inline void tick( TonicFrames& frames ){
-        
-        TonicFloat *framesData =  &frames[0];
-        
-        memset(framesData, 0, sizeof(TonicFloat) * frames.size());
-        
-        for (int j =0; j < audioSources.size(); j++) {
-            audioSources[j].tick(*workSpace);
-               
-            #ifdef USE_APPLE_ACCELERATE
-                vDSP_vadd(&(*workSpace)[0], 1, &frames[0], 1, &frames[0], 1, frames.frames() * frames.channels());
-            #else
-                frames += *workSpace; // add each sample in frames to each sample in workspace
-            #endif
-        }
-        
-      }
-    };
+    }
 	
   }
   
   class Adder : public TemplatedGenerator<Tonic_::Adder_>{
   public:
+    
     Adder in(Generator input){
       gen()->in(input);
       return *this;
     }
+    
+    Generator & operator[](unsigned int index){
+      return gen()->getInput(index);
+    }
+    
+    unsigned int numInputs(){
+      return gen()->numInputs();
+    }
+    
   };
   
   static Adder operator + (Generator a, Generator b){
@@ -102,7 +107,33 @@ namespace Tonic {
     add.in(FixedValue(b));
     return add;
   }
+
+  static Adder operator + (Adder a, Generator b){
+    a.in(b);
+    return a;
+  }
   
+  static Adder operator + (Generator a, Adder b){
+    b.in(a);
+    return b;
+  }
+  
+  static Adder operator + (Adder a, float b){
+    a.in(FixedValue(b));
+    return a;
+  }
+  
+  static Adder operator + (float a, Adder b){
+    b.in(FixedValue(a));
+    return b;
+  }
+  
+  static Adder operator + (Adder a, Adder b){
+    for (int i=0; i<b.numInputs(); i++){
+      a.in(b[i]);
+    }
+    return a;
+  }
   
 }
 

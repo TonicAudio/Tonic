@@ -102,7 +102,18 @@ namespace Tonic {
       is performed unless _STK_DEBUG_ is defined.
     */
     TonicFloat operator() ( size_t frame, unsigned int channel ) const;
+      
+      
+    //! Copy one channel to another
+    /*!
+      The \c src and \c dst indices must be between 0 and channels() - 1, and
+      should not be the same number. No range checking is performed (yet)
+    */
+    void copyChannel(unsigned int src, unsigned int dst);
 
+    //! Fill all channels with contents of channel 0
+    void fillChannels();
+    
     //! Return an interpolated value at the fractional frame index and channel.
     /*!
       This function performs linear interpolation.  The \c frame
@@ -139,10 +150,10 @@ namespace Tonic {
     void resize( size_t nFrames, unsigned int nChannels, TonicFloat value );
 
     //! Return the number of channels represented by the data.
-    unsigned int channels( void ) const { return nChannels_; };
+    inline unsigned int channels( void ) const { return nChannels_; };
 
     //! Return the number of sample frames represented by the data.
-    unsigned int frames( void ) const { return nFrames_; };
+    inline unsigned int frames( void ) const { return nFrames_; };
 
     //! Set the sample rate associated with the TonicFrames data.
     /*!
@@ -226,6 +237,31 @@ namespace Tonic {
 
     return data_[ frame * nChannels_ + channel ];
   }
+    
+  inline void TonicFrames :: copyChannel(unsigned int src, unsigned int dst)
+  {
+    // TODO: Range check
+    TonicFloat *sptr = data_ + src;
+    TonicFloat *dptr = data_ + dst;
+    unsigned int stride = nChannels_;
+    
+    // not sure if using vmul with 1.0 is actually faster or not
+    #ifdef USE_APPLE_ACCELERATE
+    float u = 1.0f;
+    vDSP_vsmul(sptr, stride, &u, dptr, stride, nFrames_);
+    #else
+    for ( unsigned int i=0; i<size_; i++, sptr += stride, dptr += stride ){
+      *dptr = *sptr;
+    }
+    #endif
+  }
+
+  inline void TonicFrames::fillChannels()
+  {
+    for (unsigned int i=1; i<nChannels_; i++){
+      this->copyChannel(0, i);
+    }
+  }
 
   inline void TonicFrames :: operator+= ( TonicFrames& f )
   {
@@ -239,8 +275,13 @@ namespace Tonic {
 
     TonicFloat *fptr = &f[0];
     TonicFloat *dptr = data_;
+  #ifdef USE_APPLE_ACCELERATE
+    vDSP_vadd(dptr, 1, fptr, 1, dptr, 1, size_);
+  #else
     for ( unsigned int i=0; i<size_; i++ )
       *dptr++ += *fptr++;
+  #endif
+
   }
 
   inline void TonicFrames :: operator*= ( TonicFrames& f )
@@ -255,8 +296,13 @@ namespace Tonic {
 
     TonicFloat *fptr = &f[0];
     TonicFloat *dptr = data_;
+    
+  #ifdef USE_APPLE_ACCELERATE
+    vDSP_vmul(dptr, 1, fptr, 1, dptr, 1, size_);
+  #else
     for ( unsigned int i=0; i<size_; i++ )
       *dptr++ *= *fptr++;
+  #endif
   }
 
   

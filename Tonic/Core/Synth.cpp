@@ -66,18 +66,31 @@ void Synth::tick( TonicFrames& frames ){
     // fill a buffer of floats, assuming the buffer is expecting max/min of 1,-1
 void Synth::fillBufferOfFloats(float *outData,  UInt32 numFrames, int numChannels){
   
-  static const int blockSizeTimes2 = kSynthesisBlockSize * 2;
   
-  if(numChannels != outputFrames.channels()) error("Mismatch in channels sent to Synth::fillBufferOfFloats");
+  if(numChannels > outputFrames.channels()) error("Mismatch in channels sent to Synth::fillBufferOfFloats");
   
-  for(int i = 0; i<numFrames * 2; i++){
-      if(synthBufferReadPosition == 0){
-          tick(outputFrames);
+  const unsigned int sampleCount = outputFrames.channels() * outputFrames.frames();
+  const unsigned int channelsPerSample = (outputFrames.channels() - numChannels) + 1;
+    
+  TonicFloat sample = 0.0f;
+  
+  for(unsigned int i = 0; i<numFrames * numChannels; i++){
+      
+      sample = 0;
+      
+      for (unsigned int c = 0; c<channelsPerSample; c++){
+          if(synthBufferReadPosition == 0){
+              tick(outputFrames);
+          }
+          
+          sample += outputFrames[synthBufferReadPosition++];
+          
+          if(synthBufferReadPosition == sampleCount){
+              synthBufferReadPosition = 0;
+          }
       }
-      *outData++ = outputFrames[synthBufferReadPosition++];
-      if(synthBufferReadPosition == blockSizeTimes2){
-          synthBufferReadPosition = 0;
-      }
+      
+      *outData++ = sample / (float)channelsPerSample;
   }
   
 }

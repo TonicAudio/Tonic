@@ -1,9 +1,9 @@
 //
-//  Generator.cpp
-//  2013_1_23_melody
+//  Multiplier.cpp
+//  TonicDemo
 //
-//  Created by Morgan Packard on 1/23/13.
-//
+//  Created by Morgan Packard on 1/25/13.
+//  Copyright (c) 2013 Morgan Packard. All rights reserved.
 //
 
 /*+++++++++++++++++++++ License ++++++++++++++++++++
@@ -20,25 +20,20 @@ https://ccrma.stanford.edu/software/stk/
 
 ++++++++++++++++++++++++++++++++++++++++++++++++++*/
 
-#include "Generator.h"
 #include "Multiplier.h"
 
-namespace Tonic{ namespace Tonic_{
-  Generator_::Generator_(){
+namespace Tonic { namespace Tonic_{
   
+  Multiplier_::Multiplier_(){
+    workSpace = new TonicFrames(kSynthesisBlockSize, 2);
   }
-
-  Generator_::~Generator_(){
-
+  
+  Multiplier_::~Multiplier_(){
+    delete workSpace;
   }
-
-//  Multiplier& Generator::operator * (Generator& input){
-//    if(!multiplier){
-//      multiplier = new Multiplier();
-//      multiplier->in(*this);
-//    }
-//    multiplier->in(input);
-//    return *multiplier;
-//  }
-
+  
+  void Multiplier_::in(Generator& inputSource){
+    inputs.push_back(inputSource);
+  }
+  
 }}
