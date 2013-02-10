@@ -69,11 +69,8 @@ namespace Tonic {
       */
       virtual void fillTable() = 0;
       
-      TonicFloat time_;
-      TonicFloat rate_;
-      unsigned int iIndex_;
-      TonicFloat alpha_;
-      
+      TonicFloat phase_;
+
       Generator frequencyGenerator;
       TonicFrames modFrames;
       
@@ -99,89 +96,6 @@ namespace Tonic {
       
     };
     
-    inline void TableLookupOsc_::tick( TonicFrames& frames){
-      
-      // Update the frequency data
-      lockMutex();
-      frequencyGenerator.tick(modFrames);
-      unlockMutex();
-      
-      static const TonicFloat rateConstant = (TonicFloat)TABLE_SIZE / Tonic::sampleRate();
-      const unsigned int nFrames = frames.frames();
-      const unsigned int stride = frames.channels();
-      
-      TonicFloat *samples = &frames[0];
-      TonicFloat *rateBuffer = &modFrames[0];
-      TonicFloat *tableData = &(tableReference())[0];
-      
-      // can use vDSP_vtabi to perform lookup, with some conditioning first
-      #ifdef USE_APPLE_ACCELERATE
-
-      // pre-multiply rate constant 
-      vDSP_vsmul(rateBuffer, 1, &rateConstant, rateBuffer, 1, nFrames);
-      
-      // compute wrapped time values, can use modFrames as workspace
-      for (unsigned int i=0; i<nFrames; i++){
-        time_ += *rateBuffer;
-        
-        while ( time_ < 0.0 )
-          time_ += TABLE_SIZE;
-        while ( time_ >= TABLE_SIZE )
-          time_ -= TABLE_SIZE;
-        
-        *rateBuffer++ = time_;
-      }
-      rateBuffer = &modFrames[0];
-      
-      // perform table lookup
-      static float tScale = 1.0f;
-      static float tOffset = 0.0f;
-      vDSP_vtabi(rateBuffer, 1, &tScale, &tOffset, tableData, TABLE_SIZE, samples, stride, nFrames);
-      
-      #else
-
-      TonicFloat tmp = 0.0;
-
-      // pre-multiply rate constant for speed
-      for (unsigned int i=0; i<nFrames; i++){
-        *rateBuffer++ *= rateConstant;
-      }
-      rateBuffer = &modFrames[0];
-      
-      
-      for ( unsigned int i=0; i<nFrames; i++ ) {
-        
-        // This can be optimized by pre-multiplying to get rate
-        // SineWave_::setFrequency(*(freqBuffer++));
-        
-        // Check limits of time address ... if necessary, recalculate modulo
-        // TABLE_SIZE.
-        while ( time_ < 0.0 )
-          time_ += TABLE_SIZE;
-        while ( time_ >= TABLE_SIZE )
-          time_ -= TABLE_SIZE;
-        
-        iIndex_ = (unsigned int) time_;
-        alpha_ = time_ - (TonicFloat)iIndex_;
-        tmp = tableData[ iIndex_ ];
-        tmp += ( alpha_ * ( tableData[ iIndex_ + 1 ] - tmp ) );
-        
-        // fill all channels of the interleaved output
-        // it's up to the caller to request the right number of channels, since a sine wave is always mono
-        *samples = tmp;
-        samples += stride;
-        
-        // Increment time, which can be negative.
-        // Directly add the rate, don't need to dive into function call
-        time_ += *rateBuffer++;
-      }
-      #endif
-      
-      // mono source, so copy channels if necessary
-      frames.fillChannels();
-
-    }
-  
   }
 
 }
