@@ -33,17 +33,19 @@ https://ccrma.stanford.edu/software/stk/
 #include "Generator.h"
 #include "FixedValue.h"
 
-#define UNITBIT32 1572864.  /* 3*2^19; bit 32 has place value 1 */
+// Causes 32nd bit in double to have fractional value 1 (decimal point on 32-bit word boundary)
+// Allowing some efficient shortcuts for table lookup using power-of-two tables
+#define BIT32DECPT 1572864.  
 
 namespace Tonic {
   
   namespace Tonic_ {
     
-    // For fast computation of int/fract
-    // Implementation similar to pd
-    union LookupFudge {
-      double lf_d;
-      uint32_t lf_i[2];
+    // For fast computation of int/fract using some bit-twiddlery
+    // inspired by the pd implementation
+    union ShiftedDouble {
+      double d;
+      uint32_t i[2];
     };
     
     const unsigned long TABLE_SIZE = 2048;
@@ -102,7 +104,6 @@ namespace Tonic {
         unlockMutex();
       };
 
-      
     };
 
   }

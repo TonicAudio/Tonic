@@ -39,7 +39,7 @@ namespace Tonic { namespace Tonic_{
     TonicFloat *rateBuffer = &modFrames[0];
     TonicFloat *tableData = &(tableReference())[0];
     
-    LookupFudge lf;
+    ShiftedDouble sd;
     
     // pre-multiply rate constant for speed
 #ifdef USE_APPLE_ACCELERATE
@@ -51,34 +51,33 @@ namespace Tonic { namespace Tonic_{
     rateBuffer = &modFrames[0];
 #endif
     
-    lf.lf_d = UNITBIT32;
-    int32_t nhi = lf.lf_i[1];
-    double dp = phase_ + UNITBIT32;
+    sd.d = BIT32DECPT;
+    int32_t offs, msbi = sd.i[1];
+    double ps = phase_ + BIT32DECPT;
     
     TonicFloat *tAddr, f1, f2, frac;
     
     for ( unsigned int i=0; i<frames.frames(); i++ ) {
       
-      lf.lf_d = dp;
-      dp += *rateBuffer++;
-      tAddr = tableData + (lf.lf_i[1] & (TABLE_SIZE-1));
-      lf.lf_i[1] = nhi;
-      frac = lf.lf_d - UNITBIT32;
+      sd.d = ps;
+      ps += *rateBuffer;
+      offs = sd.i[1] & (TABLE_SIZE-1);
+      tAddr = tableData + offs;
+      sd.i[1] = msbi;
+      frac = sd.d - BIT32DECPT;
       f1 = tAddr[0];
       f2 = tAddr[1];
       
-      // fill all channels of the interleaved output
-      // it's up to the caller to request the right number of channels, since a sine wave is always mono
       *samples = f1 + frac * (f2 - f1);
       samples += stride;
       
     }
     
-    lf.lf_d = UNITBIT32 * TABLE_SIZE;
-    nhi = lf.lf_i[1];
-    lf.lf_d = dp + (UNITBIT32 * TABLE_SIZE - UNITBIT32);
-    lf.lf_i[1] = nhi;
-    phase_ = lf.lf_d - UNITBIT32 * TABLE_SIZE;
+    sd.d = BIT32DECPT * TABLE_SIZE;
+    msbi = sd.i[1];
+    sd.d = ps + (BIT32DECPT * TABLE_SIZE - BIT32DECPT);
+    sd.i[1] = msbi;
+    phase_ = sd.d - BIT32DECPT * TABLE_SIZE;
     
     // mono source, so copy channels if necessary
     frames.fillChannels();
