@@ -21,10 +21,9 @@ https://ccrma.stanford.edu/software/stk/
 ++++++++++++++++++++++++++++++++++++++++++++++++++*/
 
 /*
- This class is heavily borrowed from the STK implementation of a table-lookup oscillator.
- Much thanks to Perry Cook and Gary Scavone.
- https://ccrma.stanford.edu/software/stk/
- */
+ This class is heavily borrowed from the PD implementation of a table-lookup oscillator.
+ Necessary attribution/license TBD.
+*/
 
 #ifndef __Tonic__TableLookupOsc__
 #define __Tonic__TableLookupOsc__
