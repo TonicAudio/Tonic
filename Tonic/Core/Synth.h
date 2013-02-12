@@ -44,7 +44,7 @@ public:
   Synth();
   void                    tick( TonicFrames& frames );
   void                    fillBufferOfFloats(float *outData,  UInt32 numFrames, int numChannels);
-  template<typename T>T&  a(T*);
+  void                    setOutputGen(Generator);
 };
   
 }

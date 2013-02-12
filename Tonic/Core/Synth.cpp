@@ -29,11 +29,6 @@ Synth::Synth() : synthBufferReadPosition(0){
   outputFrames.resize(kSynthesisBlockSize, 2);
 }
 
-
-template<typename T>T&  Synth::a(T* gen){
- return *gen;
-}
-
 void Synth::tick( TonicFrames& frames ){
 
 // TODO -- add sequencers back in
@@ -95,6 +90,8 @@ void Synth::fillBufferOfFloats(float *outData,  UInt32 numFrames, int numChannel
   
 }
 
-
+void  Synth::setOutputGen(Generator gen){
+  outputGen = gen;
+}
   
 }

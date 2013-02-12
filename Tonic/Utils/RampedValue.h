@@ -25,6 +25,7 @@ https://ccrma.stanford.edu/software/stk/
 
 #include <iostream>
 #include "Generator.h"
+#include "ControlValue.h"
 
 namespace Tonic {
   
@@ -33,7 +34,7 @@ namespace Tonic {
     class RampedValue_ : public Generator_{
       
     protected:
-            
+      
       bool finished_;
       unsigned long count_;
       unsigned long defLen_;
@@ -46,11 +47,16 @@ namespace Tonic {
       RampedValue_();
       ~RampedValue_();
       void tick( TonicFrames& frames);
+      
+      void setValue( ControlValue value);
+      void setTarget( ControlValue target );
+      void setLengthInSeconds( ControlValue length);
+      
+      void setValue( TonicFloat value);
+      void setTarget( TonicFloat target, unsigned long length );
 
       // lengths in samples
       inline void setDefaultLength( unsigned long defLen) { defLen_ = defLen; };
-      void setValue( TonicFloat value);
-      void setTarget( TonicFloat target, unsigned long length );
   
     };
     

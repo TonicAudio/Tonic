@@ -9,6 +9,7 @@
 #import "TonicViewController.h"
 #include "Novocaine.h"
 #include <math.h>
+#include "Tests.h"
 
 @interface TonicViewController ()
 
@@ -22,7 +23,8 @@
 {
     [super viewDidLoad];
   
-
+    Tonic::runPerformanceTests();
+  
     Novocaine *audioManager = [Novocaine audioManager];
   
     [audioManager setOutputBlock:^(float *audioToPlay, UInt32 numSamples, UInt32 numChannels) {

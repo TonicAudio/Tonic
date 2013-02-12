@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A82437C916CA7470000677C7 /* ControlValue.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A82437C716CA7470000677C7 /* ControlValue.cpp */; };
 		A86C3EC116B2B4FD002A50F0 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A86C3EC016B2B4FD002A50F0 /* UIKit.framework */; };
 		A86C3EC316B2B4FD002A50F0 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A86C3EC216B2B4FD002A50F0 /* Foundation.framework */; };
 		A86C3EC516B2B4FD002A50F0 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A86C3EC416B2B4FD002A50F0 /* CoreGraphics.framework */; };
@@ -40,6 +41,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		A82437C716CA7470000677C7 /* ControlValue.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ControlValue.cpp; sourceTree = "<group>"; };
+		A82437C816CA7470000677C7 /* ControlValue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ControlValue.h; sourceTree = "<group>"; };
+		A82437CF16CA7A25000677C7 /* Tests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Tests.h; sourceTree = "<group>"; };
 		A86C3EBC16B2B4FD002A50F0 /* TonicDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TonicDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A86C3EC016B2B4FD002A50F0 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		A86C3EC216B2B4FD002A50F0 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -113,6 +117,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		A82437CE16CA7A24000677C7 /* Tests */ = {
+			isa = PBXGroup;
+			children = (
+				A82437CF16CA7A25000677C7 /* Tests.h */,
+			);
+			path = Tests;
+			sourceTree = "<group>";
+		};
 		A86C3EB116B2B4FC002A50F0 = {
 			isa = PBXGroup;
 			children = (
@@ -187,6 +199,7 @@
 		A86C3EE716B2B549002A50F0 /* Tonic */ = {
 			isa = PBXGroup;
 			children = (
+				A82437CE16CA7A24000677C7 /* Tests */,
 				F2C9F6E516C493870090A78D /* Core */,
 				F2C9F6F516C493870090A78D /* Oscillators */,
 				F2C9F6F816C493870090A78D /* Utils */,
@@ -228,6 +241,8 @@
 				F2C9F6F216C493870090A78D /* Tonic.h */,
 				F2C9F6F316C493870090A78D /* TonicFrames.cpp */,
 				F2C9F6F416C493870090A78D /* TonicFrames.h */,
+				A82437C716CA7470000677C7 /* ControlValue.cpp */,
+				A82437C816CA7470000677C7 /* ControlValue.h */,
 			);
 			path = Core;
 			sourceTree = "<group>";
@@ -340,6 +355,7 @@
 				F2360A7716C4B4EC00A0AD7A /* Noise.cpp in Sources */,
 				F20FCD4816C566F60039832A /* TableLookupOsc.cpp in Sources */,
 				F20FCD4B16C56EF60039832A /* SineWave.cpp in Sources */,
+				A82437C916CA7470000677C7 /* ControlValue.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
