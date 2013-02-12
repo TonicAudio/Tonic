@@ -24,28 +24,18 @@ https://ccrma.stanford.edu/software/stk/
 #define ___013_1_23_melody__Synth__
 
 #include <iostream>
-#include "Tonic.h"
-#include "Generator.h"
-#include "TonicFrames.h"
+#include <map>
+#include "Source.h"
 
 namespace Tonic{
   
-class Synth  : public Generator{
-
-private:
-  int                     synthBufferReadPosition;
-  TonicFrames             outputFrames;
-
-protected:
-
-  Generator              outputGen;
+class Synth  : public Source{
   
 public:
   Synth();
-  void                    tick( TonicFrames& frames );
-  void                    fillBufferOfFloats(float *outData,  UInt32 numFrames, int numChannels);
-  template<typename T>T&  a(T*);
+  void tick( TonicFrames& frames );
 };
+  
   
 }
 

@@ -28,15 +28,29 @@ https://ccrma.stanford.edu/software/stk/
 namespace Tonic{ namespace Tonic_ {
 
   Adder_::Adder_(int numChannels){
-    workSpace = new TonicFrames(kSynthesisBlockSize, numChannels);
+    workSpace.resize(kSynthesisBlockSize, numChannels);
   }
   
   Adder_::~Adder_(){
-    delete workSpace;
   }
   
   void Adder_::in(Generator generator){
+    lockMutex();
     inputs.push_back( generator );
+    unlockMutex();
   }
-
+  
+  void Adder_::remove(Generator generator){
+    
+    vector<Generator>::iterator it = inputs.begin();
+    while (it != inputs.end()){
+      if (*it == generator){
+        lockMutex();
+        inputs.erase(it);
+        unlockMutex();
+        break;
+      }
+      it++;
+    }
+  }
 }}

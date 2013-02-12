@@ -21,10 +21,9 @@ https://ccrma.stanford.edu/software/stk/
 ++++++++++++++++++++++++++++++++++++++++++++++++++*/
 
 /*
- This class is heavily borrowed from the STK implementation of a table-lookup oscillator.
- Much thanks to Perry Cook and Gary Scavone.
- https://ccrma.stanford.edu/software/stk/
- */
+ This class is heavily borrowed from the PD implementation of a table-lookup oscillator.
+ Necessary attribution/license TBD.
+*/
 
 #ifndef __Tonic__TableLookupOsc__
 #define __Tonic__TableLookupOsc__
@@ -33,9 +32,20 @@ https://ccrma.stanford.edu/software/stk/
 #include "Generator.h"
 #include "FixedValue.h"
 
+// Causes 32nd bit in double to have fractional value 1 (decimal point on 32-bit word boundary)
+// Allowing some efficient shortcuts for table lookup using power-of-two tables
+#define BIT32DECPT 1572864.  
+
 namespace Tonic {
   
   namespace Tonic_ {
+    
+    // For fast computation of int/fract using some bit-twiddlery
+    // inspired by the pd implementation
+    union ShiftedDouble {
+      double d;
+      uint32_t i[2];
+    };
     
     const unsigned long TABLE_SIZE = 2048;
     
@@ -69,10 +79,7 @@ namespace Tonic {
       */
       virtual void fillTable() = 0;
       
-      TonicFloat time_;
-      TonicFloat rate_;
-      unsigned int iIndex_;
-      TonicFloat alpha_;
+      double phase_;
       
       Generator frequencyGenerator;
       TonicFrames modFrames;
@@ -96,90 +103,8 @@ namespace Tonic {
         unlockMutex();
       };
 
-      
     };
-    
-    inline void TableLookupOsc_::tick( TonicFrames& frames){
-      
-      // Update the frequency data
-      lockMutex();
-      frequencyGenerator.tick(modFrames);
-      unlockMutex();
-      
-      unsigned int stride = frames.channels();
-      TonicFloat *samples = &frames[0];
-      TonicFloat *rateBuffer = &modFrames[0];
-      TonicFloat *tableData = &(tableReference())[0];
-      static const TonicFloat rateConstant = (TonicFloat)TABLE_SIZE / Tonic::sampleRate();
-      
-      // can use vDSP_vtabi to perform lookup, with some conditioning first
-      #ifdef USE_APPLE_ACCELERATE
 
-      // pre-multiply rate constant 
-      vDSP_vsmul(rateBuffer, 1, &rateConstant, rateBuffer, 1, modFrames.frames());
-      
-      // compute wrapped time values, can use modFrames as workspace
-      for (unsigned int i=0; i<modFrames.frames(); i++){
-        time_ += *rateBuffer;
-        
-        while ( time_ < 0.0 )
-          time_ += TABLE_SIZE;
-        while ( time_ >= TABLE_SIZE )
-          time_ -= TABLE_SIZE;
-        
-        *rateBuffer++ = time_;
-      }
-      rateBuffer = &modFrames[0];
-      
-      // perform table lookup
-      static float tScale = 1.0f;
-      static float tOffset = 0.0f;
-      vDSP_vtabi(rateBuffer, 1, &tScale, &tOffset, tableData, TABLE_SIZE, samples, stride, frames.frames());
-      
-      #else
-
-      TonicFloat tmp = 0.0;
-
-      // pre-multiply rate constant for speed
-      for (unsigned int i=0; i<modFrames.frames(); i++){
-        *rateBuffer++ *= rateConstant;
-      }
-      rateBuffer = &modFrames[0];
-      
-      
-      for ( unsigned int i=0; i<frames.frames(); i++ ) {
-        
-        // This can be optimized by pre-multiplying to get rate
-        // SineWave_::setFrequency(*(freqBuffer++));
-        
-        // Check limits of time address ... if necessary, recalculate modulo
-        // TABLE_SIZE.
-        while ( time_ < 0.0 )
-          time_ += TABLE_SIZE;
-        while ( time_ >= TABLE_SIZE )
-          time_ -= TABLE_SIZE;
-        
-        iIndex_ = (unsigned int) time_;
-        alpha_ = time_ - (TonicFloat)iIndex_;
-        tmp = tableData[ iIndex_ ];
-        tmp += ( alpha_ * ( tableData[ iIndex_ + 1 ] - tmp ) );
-        
-        // fill all channels of the interleaved output
-        // it's up to the caller to request the right number of channels, since a sine wave is always mono
-        *samples = tmp;
-        samples += stride;
-        
-        // Increment time, which can be negative.
-        // Directly add the rate, don't need to dive into function call
-        time_ += *rateBuffer++;
-      }
-      #endif
-      
-      // mono source, so copy channels if necessary
-      frames.fillChannels();
-
-    }
-  
   }
 
 }
