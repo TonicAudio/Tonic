@@ -51,12 +51,13 @@ namespace Tonic {
   }
 
   
+
   class ControlGenerator{
   protected:
     Tonic_::ControlGenerator_* mGen;
     int* pcount;
   public:
-    ControlGenerator() : mGen( NULL ) , pcount(new int(1)) {}
+    ControlGenerator() : mGen() , pcount(new int(1)) {}
     ControlGenerator(const ControlGenerator& r): mGen(r.mGen), pcount(r.pcount){(*pcount)++;}
     ControlGenerator& operator=(const ControlGenerator& r)
     {

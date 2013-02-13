@@ -139,6 +139,7 @@ namespace Tonic {
     
     inline void RampedValue_::setValue(ControlGenerator value){
       valueGen = value;
+      
     }
 
     inline void RampedValue_::setValue( TonicFloat value){

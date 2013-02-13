@@ -17,7 +17,8 @@ namespace Tonic { namespace Tonic_{
     len_(2205),
     target_(0),
     last_(0),
-    inc_(0)
+    inc_(0),
+    valueGen(ControlValue()) // shouldn't need to set this. See https://github.com/morganpackard/Tonic/issues/6
   {
     
   }
@@ -43,11 +44,15 @@ namespace Tonic { namespace Tonic_{
   }
   
   RampedValue & RampedValue::setValue( TonicFloat value){
+    setValue(ControlValue().setValue(value));
     return *this;
   }
   
   RampedValue & RampedValue::setValue( ControlGenerator value){
-    gen()->setValue(value);
+    Tonic_::RampedValue_* localGen = gen();
+    localGen->lockMutex();
+    localGen->setValue(value);
+    localGen->unlockMutex();
     return *this;
   }
   
