@@ -24,33 +24,28 @@ https://ccrma.stanford.edu/software/stk/
 #define ___013_1_23_melody__Synth__
 
 #include <iostream>
-#include "Tonic.h"
-#include "Generator.h"
-#include "TonicFrames.h"
 #include <map>
+#include "Source.h"
 #include "ControlValue.h"
 
 namespace Tonic{
   
-class Synth  : public Generator{
-
-private:
-  int                       synthBufferReadPosition;
-  TonicFrames               outputFrames;
-
-protected:
+  class Synth  : public Source{
+    
+  public:
+    Synth();
+    void                      tick( TonicFrames& frames );
+    
+    // It's quite conceivable that we'll want to move the messaging stuff up into Source
+    ControlValue              registerMessage(string name, float value=0);
+    void                      sendMessage(string name, float value=1);
+    
+  protected:
+    
+    std::map<string, ControlValue> parameters;
+    
+  };
   
-  std::map<string, ControlValue> parameters;
-  Generator                 outputGen;
-  
-public:
-  Synth();
-  void                      tick( TonicFrames& frames );
-  void                      fillBufferOfFloats(float *outData,  UInt32 numFrames, int numChannels);
-  void                      setOutputGen(Generator);
-  ControlValue              registerMessage(string name, float value=0);
-  void                      sendMessage(string name, float value=1);
-};
   
 }
 

@@ -23,7 +23,7 @@ namespace Tonic { namespace Tonic_{
       table.resize( TABLE_SIZE + 1, 1 );
       TonicFloat temp = 1.0 / TABLE_SIZE;
       for ( unsigned long i=0; i<=TABLE_SIZE; i++ )
-        table[i] = sin( TWO_PI * i * temp );
+        table[i] = sinf( TWO_PI * i * temp );
     }
   }
   
