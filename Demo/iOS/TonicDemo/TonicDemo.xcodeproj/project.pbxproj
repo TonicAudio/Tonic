@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		A82437C916CA7470000677C7 /* ControlValue.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A82437C716CA7470000677C7 /* ControlValue.cpp */; };
+		A82437DB16CB3753000677C7 /* ControlGenerator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A82437DA16CB36A8000677C7 /* ControlGenerator.cpp */; };
 		A86C3EC116B2B4FD002A50F0 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A86C3EC016B2B4FD002A50F0 /* UIKit.framework */; };
 		A86C3EC316B2B4FD002A50F0 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A86C3EC216B2B4FD002A50F0 /* Foundation.framework */; };
 		A86C3EC516B2B4FD002A50F0 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A86C3EC416B2B4FD002A50F0 /* CoreGraphics.framework */; };
@@ -44,6 +45,8 @@
 		A82437C716CA7470000677C7 /* ControlValue.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ControlValue.cpp; sourceTree = "<group>"; };
 		A82437C816CA7470000677C7 /* ControlValue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ControlValue.h; sourceTree = "<group>"; };
 		A82437CF16CA7A25000677C7 /* Tests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Tests.h; sourceTree = "<group>"; };
+		A82437D816CB3010000677C7 /* ControlGenerator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ControlGenerator.h; sourceTree = "<group>"; };
+		A82437DA16CB36A8000677C7 /* ControlGenerator.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = ControlGenerator.cpp; sourceTree = "<group>"; };
 		A86C3EBC16B2B4FD002A50F0 /* TonicDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TonicDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A86C3EC016B2B4FD002A50F0 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		A86C3EC216B2B4FD002A50F0 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -243,6 +246,8 @@
 				F2C9F6F416C493870090A78D /* TonicFrames.h */,
 				A82437C716CA7470000677C7 /* ControlValue.cpp */,
 				A82437C816CA7470000677C7 /* ControlValue.h */,
+				A82437D816CB3010000677C7 /* ControlGenerator.h */,
+				A82437DA16CB36A8000677C7 /* ControlGenerator.cpp */,
 			);
 			path = Core;
 			sourceTree = "<group>";
@@ -337,6 +342,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A82437DB16CB3753000677C7 /* ControlGenerator.cpp in Sources */,
 				A86C3ECD16B2B4FD002A50F0 /* main.m in Sources */,
 				A86C3ED116B2B4FD002A50F0 /* TonicAppDelegate.m in Sources */,
 				A86C3EE016B2B4FD002A50F0 /* TonicViewController.mm in Sources */,

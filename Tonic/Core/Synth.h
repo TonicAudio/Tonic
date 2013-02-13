@@ -27,24 +27,29 @@ https://ccrma.stanford.edu/software/stk/
 #include "Tonic.h"
 #include "Generator.h"
 #include "TonicFrames.h"
+#include <map>
+#include "ControlValue.h"
 
 namespace Tonic{
   
 class Synth  : public Generator{
 
 private:
-  int                     synthBufferReadPosition;
-  TonicFrames             outputFrames;
+  int                       synthBufferReadPosition;
+  TonicFrames               outputFrames;
 
 protected:
-
-  Generator              outputGen;
+  
+  std::map<string, ControlValue> parameters;
+  Generator                 outputGen;
   
 public:
   Synth();
-  void                    tick( TonicFrames& frames );
-  void                    fillBufferOfFloats(float *outData,  UInt32 numFrames, int numChannels);
-  void                    setOutputGen(Generator);
+  void                      tick( TonicFrames& frames );
+  void                      fillBufferOfFloats(float *outData,  UInt32 numFrames, int numChannels);
+  void                      setOutputGen(Generator);
+  ControlValue              registerMessage(string name, float value=0);
+  void                      sendMessage(string name, float value=1);
 };
   
 }

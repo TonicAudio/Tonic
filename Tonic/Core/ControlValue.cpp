@@ -10,23 +10,28 @@
 
 namespace Tonic {
   
-  ControlValue::ControlValue():mHasChanged(false),mValue(0){}
-  ControlValue::~ControlValue(){}
+  namespace Tonic_{
   
-  bool ControlValue::hasChanged(){
-    return mHasChanged;
+    ControlValue_::ControlValue_():mHasChanged(false),mValue(0){}
+    ControlValue_::~ControlValue_(){}
+    
+    bool ControlValue_::hasChanged(){
+      return mHasChanged;
+    }
+    
+    void ControlValue_::setHasChanged(bool flagVal){
+      mHasChanged = flagVal;
+    }
+    
+    TonicFloat ControlValue_::getValue(){
+      return mValue;
+    }
+    
+    void ControlValue_::setValue(float value){
+      mValue = value;
+      mHasChanged = true;
+    }
+  
   }
   
-  void ControlValue::setHasChanged(bool flagVal){
-    mHasChanged = flagVal;
-  }
-  
-  bool ControlValue::getValue(){
-    return mValue;
-  }
-  
-  void ControlValue::setValue(float value){
-    mValue = value;
-    mHasChanged = true;
-  }
 }

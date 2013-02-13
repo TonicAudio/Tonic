@@ -10,21 +10,36 @@
 #define __TonicDemo__ControlValue__
 
 #include <iostream>
+#include "ControlGenerator.h"
 
 namespace Tonic {
-  class ControlValue{
-    public:
-      ControlValue();
-      ~ControlValue();
-      bool hasChanged();
-      void setHasChanged(bool flagVal=true);
-      bool getValue();
-      void setValue(float);
 
-    private:
-      bool mHasChanged;
-      float mValue;
+  namespace Tonic_{
+
+    class ControlValue_ : public ControlGenerator_{
+      public:
+        ControlValue_();
+        ~ControlValue_();
+        bool hasChanged();
+        void setHasChanged(bool flagVal=true);
+        TonicFloat getValue();
+        void setValue(float);
+
+      private:
+        bool mHasChanged;
+        float mValue;
+      
+    };
+  }
+  
+  class ControlValue : public TemplatedControlGenerator<Tonic_::ControlValue_>{
+    public:
+      ControlValue & setValue(
+        float value){gen()->setValue(value);
+        return *this;
+      }
   };
+
 }
 
 #endif /* defined(__TonicDemo__ControlValue__) */

@@ -36,15 +36,26 @@ namespace Tonic { namespace Tonic_{
   RampedValue & RampedValue::defValue(TonicFloat defValue){
     gen()->setValue(defValue);
     return *this;
+  }  
+  
+  RampedValue & RampedValue::setTarget( ControlGenerator target ){
+    return *this;
   }
   
-  void RampedValue::setTarget(TonicFloat target, TonicFloat lenMs){
+  RampedValue & RampedValue::setValue( TonicFloat value){
+    return *this;
+  }
+  
+  RampedValue & RampedValue::setValue( ControlGenerator value){
+    gen()->setValue(value);
+    return *this;
+  }
+  
+  RampedValue & RampedValue::setTarget(TonicFloat target, TonicFloat lenMs){
     unsigned long length = lenMs > 0 ? lenMs*Tonic::sampleRate()/1000.0f : 0;
     gen()->setTarget(target, length);
+    return *this;
   }
-  
-  void RampedValue::setValue(TonicFloat value){
-    gen()->setValue(value);
-  }
+
   
 } // Namespace Tonic

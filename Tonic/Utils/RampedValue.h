@@ -42,15 +42,16 @@ namespace Tonic {
       TonicFloat target_;
       TonicFloat last_;
       TonicFloat inc_;
+      ControlGenerator valueGen;
       
     public:
       RampedValue_();
       ~RampedValue_();
       void tick( TonicFrames& frames);
       
-      void setValue( ControlValue value);
-      void setTarget( ControlValue target );
-      void setLengthInSeconds( ControlValue length);
+      void setValue( ControlGenerator value);
+      void setTarget( ControlGenerator target );
+      void setLengthInSeconds( ControlGenerator length);
       
       void setValue( TonicFloat value);
       void setTarget( TonicFloat target, unsigned long length );
@@ -61,6 +62,10 @@ namespace Tonic {
     };
     
     inline void RampedValue_::tick( TonicFrames& frames){
+    
+      if(valueGen.hasChanged()){
+        setValue(valueGen.getValue());
+      }
             
       TonicFloat *fdata = &frames[0];
       unsigned int stride = frames.channels();
@@ -130,6 +135,10 @@ namespace Tonic {
       frames.fillChannels();
       
     }
+    
+    inline void RampedValue_::setValue(ControlGenerator value){
+      valueGen = value;
+    }
 
     inline void RampedValue_::setValue( TonicFloat value){
       finished_ = true;
@@ -157,10 +166,12 @@ namespace Tonic {
     RampedValue & defValue( TonicFloat defValue );
     
     //! Go to target in specified time. If lenMs < 0, uses default length
-    void setTarget( TonicFloat target, TonicFloat lenMs = 0);
+    RampedValue & setTarget( TonicFloat target, TonicFloat lenMs = 0);
+    RampedValue & setTarget( ControlGenerator target );
     
     //! Go to value immediately
-    void setValue( TonicFloat value);
+    RampedValue & setValue( TonicFloat value);
+    RampedValue & setValue( ControlGenerator value);
 
   };
 }
