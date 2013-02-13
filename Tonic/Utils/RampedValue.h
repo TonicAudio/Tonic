@@ -57,13 +57,14 @@ namespace Tonic {
     inline void RampedValue_::tick( TonicFrames& frames){
             
       TonicFloat *fdata = &frames[0];
+      unsigned int nFrames = frames.frames();
       unsigned int stride = frames.channels();
             
       if (finished_){
         #ifdef USE_APPLE_ACCELERATE
-        vDSP_vfill(&last_, fdata, stride, frames.frames());
+        vDSP_vfill(&last_, fdata, stride, nFrames);
         #else
-        for (unsigned int i=0; i<frames.frames(); i++){
+        for (unsigned int i=0; i<nFrames; i++){
           *fdata = last_;
           fdata += stride;
         }
@@ -88,9 +89,9 @@ namespace Tonic {
           
           // fill the rest of the ramp
           #ifdef USE_APPLE_ACCELERATE
-          vDSP_vfill(&target_, fdata + remainder, stride, frames.frames() - remainder);
+          vDSP_vfill(&target_, fdata + remainder, stride, nFrames - remainder);
           #else
-          for (unsigned int i=remainder; i<frames.frames(); i++){
+          for (unsigned int i=remainder; i<nFrames; i++){
             *fdata = target_;
             fdata += stride;
           }
@@ -105,18 +106,18 @@ namespace Tonic {
           // fill the whole ramp
           #ifdef USE_APPLE_ACCELERATE
           TonicFloat segTarget = last_ + frames.frames()*inc_;
-          vDSP_vgen(&last_, &segTarget, fdata, stride, frames.frames());
+          vDSP_vgen(&last_, &segTarget, fdata, stride, nFrames);
           #else
           TonicFloat val = last_ + inc_;
-          for (unsigned int i=0; i<frames.frames(); i++){
+          for (unsigned int i=0; i<nFrames; i++){
             *fdata = val;
             fdata += stride;
             val += inc_;
           }
           #endif
           
-          count_ += frames.frames();
-          last_ = frames(frames.frames() - 1, 0);
+          count_ += nFrames;
+          last_ = frames(nFrames - 1, 0);
         }
       }
       

@@ -25,15 +25,16 @@ https://ccrma.stanford.edu/software/stk/
 namespace Tonic { namespace Tonic_{
   
   Multiplier_::Multiplier_(){
-    workSpace = new TonicFrames(kSynthesisBlockSize, 2);
+    workSpace.resize(kSynthesisBlockSize, 2);
   }
   
   Multiplier_::~Multiplier_(){
-    delete workSpace;
   }
   
   void Multiplier_::in(Generator& inputSource){
+    lockMutex();
     inputs.push_back(inputSource);
+    unlockMutex();
   }
   
 }}

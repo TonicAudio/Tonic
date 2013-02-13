@@ -34,7 +34,7 @@ namespace Tonic {
     class Adder_ : public Generator_ {
     protected:
       std::vector<Generator> inputs;
-      TonicFrames *workSpace;
+      TonicFrames workSpace;
       TonicFrames *lastFrames; // in case we want to grab these and examine them
     public:
       
@@ -46,7 +46,8 @@ namespace Tonic {
       // All generators must have the same number of channels, and this must match the number of channels 
       // in frames passed to tick.
       void in(Generator generator);
-      inline void tick( TonicFrames& frames );
+      void remove(Generator generator);
+      void tick( TonicFrames& frames );
       
       Generator & getInput(unsigned int index) { return inputs[index]; };
       unsigned int numInputs() { return inputs.size(); };
@@ -59,8 +60,8 @@ namespace Tonic {
       memset(framesData, 0, sizeof(TonicFloat) * frames.size());
       
       for (int j =0; j < inputs.size(); j++) {
-        inputs[j].tick(*workSpace);
-        frames += *workSpace; // add each sample in frames to each sample in workspace
+        inputs[j].tick(workSpace);
+        frames += workSpace; // add each sample in frames to each sample in workspace
       }
       
     }
@@ -73,6 +74,10 @@ namespace Tonic {
     Adder in(Generator input){
       gen()->in(input);
       return *this;
+    }
+    
+    void remove(Generator input){
+      gen()->remove(input);
     }
     
     Generator & operator[](unsigned int index){
