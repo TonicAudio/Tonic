@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		A82437C916CA7470000677C7 /* ControlValue.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A82437C716CA7470000677C7 /* ControlValue.cpp */; };
 		A82437DB16CB3753000677C7 /* ControlGenerator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A82437DA16CB36A8000677C7 /* ControlGenerator.cpp */; };
+		A82437F316CEFFC0000677C7 /* FMDroneViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = A82437F116CEFFC0000677C7 /* FMDroneViewController.mm */; };
+		A82437F416CEFFC0000677C7 /* FMDroneViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A82437F216CEFFC0000677C7 /* FMDroneViewController.xib */; };
 		A86C3EC116B2B4FD002A50F0 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A86C3EC016B2B4FD002A50F0 /* UIKit.framework */; };
 		A86C3EC316B2B4FD002A50F0 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A86C3EC216B2B4FD002A50F0 /* Foundation.framework */; };
 		A86C3EC516B2B4FD002A50F0 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A86C3EC416B2B4FD002A50F0 /* CoreGraphics.framework */; };
@@ -53,6 +55,10 @@
 		A82437CF16CA7A25000677C7 /* Tests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Tests.h; sourceTree = "<group>"; };
 		A82437D816CB3010000677C7 /* ControlGenerator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ControlGenerator.h; sourceTree = "<group>"; };
 		A82437DA16CB36A8000677C7 /* ControlGenerator.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = ControlGenerator.cpp; sourceTree = "<group>"; };
+		A82437EF16CEFECD000677C7 /* FMDrone.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FMDrone.h; sourceTree = "<group>"; };
+		A82437F016CEFFC0000677C7 /* FMDroneViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMDroneViewController.h; sourceTree = "<group>"; };
+		A82437F116CEFFC0000677C7 /* FMDroneViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = FMDroneViewController.mm; sourceTree = "<group>"; };
+		A82437F216CEFFC0000677C7 /* FMDroneViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FMDroneViewController.xib; sourceTree = "<group>"; };
 		A86C3EBC16B2B4FD002A50F0 /* TonicDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TonicDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A86C3EC016B2B4FD002A50F0 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		A86C3EC216B2B4FD002A50F0 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -207,6 +213,7 @@
 			children = (
 				A86C3F0E16B2B575002A50F0 /* SineAMSynth.h */,
 				F2360A7916C4BC6E00A0AD7A /* SineSumSynth.h */,
+				A82437EF16CEFECD000677C7 /* FMDrone.h */,
 				A86C3F0F16B2B5BE002A50F0 /* Novocaine */,
 				F20FCD4E16C58D3E0039832A /* TonicWrappers */,
 				A86C3EE716B2B549002A50F0 /* Tonic */,
@@ -271,6 +278,9 @@
 				F256C8E916C5A7F60096574D /* AMViewController.h */,
 				F256C8EA16C5A7F60096574D /* AMViewController.mm */,
 				F256C8EB16C5A7F70096574D /* AMViewController.xib */,
+				A82437F016CEFFC0000677C7 /* FMDroneViewController.h */,
+				A82437F116CEFFC0000677C7 /* FMDroneViewController.mm */,
+				A82437F216CEFFC0000677C7 /* FMDroneViewController.xib */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -386,6 +396,7 @@
 				F256C8E616C5A0BF0096574D /* SynthChooserViewController.xib in Resources */,
 				F256C8E816C5A6DF0096574D /* SineSumViewController.xib in Resources */,
 				F256C8ED16C5A7F70096574D /* AMViewController.xib in Resources */,
+				A82437F416CEFFC0000677C7 /* FMDroneViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -421,6 +432,7 @@
 				F256C8EC16C5A7F70096574D /* AMViewController.mm in Sources */,
 				F23E243E16C6BF450082EF65 /* Mixer.cpp in Sources */,
 				F23E244116C6C5F10082EF65 /* Source.cpp in Sources */,
+				A82437F316CEFFC0000677C7 /* FMDroneViewController.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -9,13 +9,14 @@
 #import "SynthChooserViewController.h"
 #import "SineSumViewController.h"
 #import "AMViewController.h"
+#import "FMDroneViewController.h"
 
 // Just going to hard-code everything for now based on enum
 
 enum {
   SynthChooserSineSum = 0,
   SynthChooserSineAM,
-  
+  SynthChooserFMDrone,
   SynthChooserNumChoices
   
 };
@@ -81,6 +82,10 @@ enum {
       vcToPush = (UIViewController*)[[AMViewController alloc] initWithNibName:nil bundle:nil];
       break;
       
+    case SynthChooserFMDrone:
+      vcToPush = (UIViewController*)[[FMDroneViewController alloc] initWithNibName:nil bundle:nil];
+      break;
+      
     default:
       break;
       
@@ -123,6 +128,11 @@ enum {
     case SynthChooserSineAM:
       synthName = @"Basic Sinusoidal AM";
       synthDesc = @"Basic AM synth with sinusoidal carrier and modulator";
+      break;
+      
+    case SynthChooserFMDrone:
+      synthName = @"FM Drone";
+      synthDesc = @"Basic FM synth with sinusoidal carrier and modulator";
       break;
       
     default:
