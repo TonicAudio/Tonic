@@ -26,7 +26,7 @@ class FMDroneSynth : public Synth {
 public:
   FMDroneSynth(){
     outputGen = SineWave().freq(
-      RampedValue().setValue( registerMessage("baseFreq", 200) )
+       RampedValue().target( registerMessage("baseFreq", 200) ).lengthMs(100)
     );
   }
   
