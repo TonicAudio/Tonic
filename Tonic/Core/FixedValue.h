@@ -26,6 +26,7 @@ https://ccrma.stanford.edu/software/stk/
 #include <iostream>
 #include "TonicFrames.h"
 #include "Generator.h"
+#include "ControlValue.h"
 
 namespace Tonic {
   namespace Tonic_{
@@ -35,15 +36,16 @@ namespace Tonic {
     private:
         
     protected:
+      ControlGenerator valueGen;
         
     public:
         
-        float mValue;
-        
-        FixedValue_(float val) : mValue(val){
+        FixedValue_(float val){
+          valueGen = ControlValue().setValue(val);
         }
         
         FixedValue_(){
+          valueGen = ControlValue().setValue(0);
         }
          
         ~FixedValue_(){
@@ -52,10 +54,15 @@ namespace Tonic {
         inline void tick( TonicFrames& frames){
             float* buffStart = &frames[0];
         #ifdef USE_APPLE_ACCELERATE
-            vDSP_vfill(&mValue, buffStart, 1, frames.size());
+          TonicFloat val = valueGen.getValue();
+            vDSP_vfill( &val , buffStart, 1, frames.size());
         #else
-            std::fill(buffStart, buffStart + frames.size(), mValue);
+            std::fill(buffStart, buffStart + frames.size(), &valueGen.getValue());
         #endif
+        }
+      
+        void setValue(ControlGenerator val){
+          valueGen = val;
         }
 
     };
@@ -69,7 +76,11 @@ namespace Tonic {
       setValue(val);
     }
     FixedValue& setValue(float val){
-      gen()->mValue = val;
+      gen()->setValue(ControlValue().setValue(val));
+      return *this;
+    }
+    FixedValue& setValue(ControlGenerator val){
+      gen()->setValue(val);
       return *this;
     }
   };

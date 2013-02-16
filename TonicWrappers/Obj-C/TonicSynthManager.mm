@@ -83,6 +83,8 @@ using Tonic::Mixer;
       if (newSource){
         mixer.addInput(newSource);
         [self.sourceDict setValue:[NSValue valueWithPointer:newSource] forKey:key];
+      }else{
+        NSLog(@"Error in TonicSynthManager: Failed to add source. Source named %@ not found.", key);
       }
     }
     else{

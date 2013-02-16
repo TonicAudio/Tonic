@@ -8,8 +8,9 @@
 
 #import "FMDroneViewController.h"
 #import "TonicSynthManager.h"
+#import "FMDroneSynth.h"
 
-#define kSynthKey @"FMDrone"
+#define kSynthKey @"FMDroneSynth"
 
 @interface FMDroneViewController ()
 
@@ -53,6 +54,36 @@
 {
   if ([[TonicSynthManager sharedManager] sourceForKey:kSynthKey] == nil){
     [[TonicSynthManager sharedManager] addSourceWithName:@"FMDroneSynth" forKey:kSynthKey];
+  }
+}
+
+- (void)handlePan:(UIPanGestureRecognizer *)pan{
+  
+  Synth *fmSynth =(Synth*)[[TonicSynthManager sharedManager] sourceForKey:kSynthKey];
+  
+  if (fmSynth == NULL) return;
+  
+  
+  switch (pan.state){
+      
+    case UIGestureRecognizerStateBegan:
+    case UIGestureRecognizerStateChanged:
+    {
+      CGPoint touchPoint = [pan locationInView:self.view];
+      
+      fmSynth->sendMessage("baseFreq", touchPoint.y + 100);
+    }
+      break;
+      
+    case UIGestureRecognizerStateCancelled:
+    case UIGestureRecognizerStateEnded:
+    case UIGestureRecognizerStateFailed:
+      
+      break;
+      
+    default:
+      break;
+      
   }
 }
 

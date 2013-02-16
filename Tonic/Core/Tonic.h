@@ -115,7 +115,6 @@ namespace Tonic {
   
   static void error(std::string message){
     printf("Tonic::error: %s\n",  message.c_str());
-    exit(0);
   }
   
 }

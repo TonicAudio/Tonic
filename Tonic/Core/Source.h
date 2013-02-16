@@ -79,8 +79,17 @@ namespace Tonic{
     
     static Source * createInstance(std::string const& s) {
       map_type::iterator it = getMap()->find(s);
-      if(it == getMap()->end())
+      if(it == getMap()->end()){
+        string synthsList = "";
+      
+        for(it = getMap()->begin(); it != getMap()->end(); it++){
+          synthsList = synthsList + it->first + "\n";
+        }
+      
+        error("Error creating sysnth. Synth named \"" + s + "\" not found. Existing registered synths are: \n" + synthsList);
+
         return 0;
+      }
       return it->second();
     }
     

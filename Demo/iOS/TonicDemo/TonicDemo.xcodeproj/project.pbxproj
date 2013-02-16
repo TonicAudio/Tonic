@@ -55,7 +55,7 @@
 		A82437CF16CA7A25000677C7 /* Tests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Tests.h; sourceTree = "<group>"; };
 		A82437D816CB3010000677C7 /* ControlGenerator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ControlGenerator.h; sourceTree = "<group>"; };
 		A82437DA16CB36A8000677C7 /* ControlGenerator.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = ControlGenerator.cpp; sourceTree = "<group>"; };
-		A82437EF16CEFECD000677C7 /* FMDrone.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FMDrone.h; sourceTree = "<group>"; };
+		A82437EF16CEFECD000677C7 /* FMDroneSynth.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FMDroneSynth.h; sourceTree = "<group>"; };
 		A82437F016CEFFC0000677C7 /* FMDroneViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMDroneViewController.h; sourceTree = "<group>"; };
 		A82437F116CEFFC0000677C7 /* FMDroneViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = FMDroneViewController.mm; sourceTree = "<group>"; };
 		A82437F216CEFFC0000677C7 /* FMDroneViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FMDroneViewController.xib; sourceTree = "<group>"; };
@@ -213,7 +213,7 @@
 			children = (
 				A86C3F0E16B2B575002A50F0 /* SineAMSynth.h */,
 				F2360A7916C4BC6E00A0AD7A /* SineSumSynth.h */,
-				A82437EF16CEFECD000677C7 /* FMDrone.h */,
+				A82437EF16CEFECD000677C7 /* FMDroneSynth.h */,
 				A86C3F0F16B2B5BE002A50F0 /* Novocaine */,
 				F20FCD4E16C58D3E0039832A /* TonicWrappers */,
 				A86C3EE716B2B549002A50F0 /* Tonic */,

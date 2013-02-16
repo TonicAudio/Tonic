@@ -20,16 +20,20 @@
 
 using namespace Tonic;
 
-class FMDrone : public Synth {
+class FMDroneSynth : public Synth {
   
 
 public:
-  FMDrone(){
-    outputGen = SineWave().freq(300);
+  FMDroneSynth(){
+    outputGen = SineWave().freq(
+      RampedValue().setValue( registerMessage("baseFreq", 200) )
+    );
   }
+  
+  static SourceRegister<FMDroneSynth> reg;
 };
 
 
-SourceRegister<FMDrone> FMDrone::reg("FMDroneSynth");
+SourceRegister<FMDroneSynth> FMDroneSynth::reg("FMDroneSynth");
 
 #endif
