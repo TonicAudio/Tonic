@@ -28,13 +28,13 @@ public:
   SineSumSynth () {
     
     for (int s=0; s<NUM_SINES; s++){
-      sineMixer.in(sines[s].freq(sineFreqs[s].defValue(440).defLenMs(100)));
+      sineMixer.in(sines[s].freq(sineFreqs[s].value(440).lengthMs(100)));
     }
     
     outputGen =
     (
       sineMixer
-    ) * (1.0f/NUM_SINES) * 0.25;
+    ) * (1.0f/NUM_SINES) * 0.5f;
 
     
   }
@@ -43,7 +43,7 @@ public:
     for (int i=0; i<NUM_SINES; i++){
       // spread up to an octave apart
       TonicFloat freq = 440.0f * powf(2, spread*(i - (NUM_SINES/2)));
-      sineFreqs[i].setTarget(freq);
+      sineFreqs[i].target(freq);
     }
   }
   

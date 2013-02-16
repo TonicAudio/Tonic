@@ -37,36 +37,45 @@ namespace Tonic {
       
       bool finished_;
       unsigned long count_;
-      unsigned long defLen_;
       unsigned long len_;
       TonicFloat target_;
       TonicFloat last_;
       TonicFloat inc_;
-      ControlGenerator valueGen;
+      ControlGenerator targetGen_;
+      ControlGenerator lengthGen_;
+      ControlGenerator valueGen_;
       
     public:
       RampedValue_();
       ~RampedValue_();
       void tick( TonicFrames& frames);
       
-      void setValue( ControlGenerator value);
-      void setTarget( ControlGenerator target );
-      void setLengthInSeconds( ControlGenerator length);
+      void setValueGen( ControlGenerator value );
+      void setTargetGen( ControlGenerator target );
+      void setLengthMsGen( ControlGenerator lengthMs );
       
-      void setValue( TonicFloat value);
-      void setTarget( TonicFloat target, unsigned long length );
-
-      // lengths in samples
-      inline void setDefaultLength( unsigned long defLen) { defLen_ = defLen; };
+      // internal state setters
+      void updateValue( TonicFloat value);
+      void updateTarget( TonicFloat target, unsigned long lengthSamp );
   
     };
     
     inline void RampedValue_::tick( TonicFrames& frames){
     
-      if(valueGen.hasChanged()){
-        setValue(valueGen.getValue());
+      lockMutex();
+      
+      // Must do this in this order - value will override any change to target
+      if (targetGen_.hasChanged() || lengthGen_.hasChanged()){
+        unsigned long lSamp = lengthGen_.getValue()*Tonic::sampleRate()/1000.0f;
+        updateTarget(targetGen_.getValue(), lSamp);
       }
-            
+      
+      if(valueGen_.hasChanged()){
+        updateValue(valueGen_.getValue());
+      }
+
+      unlockMutex();
+      
       TonicFloat *fdata = &frames[0];
       unsigned int nFrames = frames.frames();
       unsigned int stride = frames.channels();
@@ -137,23 +146,42 @@ namespace Tonic {
       
     }
     
-    inline void RampedValue_::setValue(ControlGenerator value){
-      valueGen = value;
-      
+#pragma mark - Generator setters
+    
+    inline void RampedValue_::setValueGen(ControlGenerator value){
+      lockMutex();
+      valueGen_ = value;
+      unlockMutex();
+    }
+    
+    inline void RampedValue_::setTargetGen(ControlGenerator target){
+      lockMutex();
+      targetGen_ = target;
+      unlockMutex();
+    }
+    
+    inline void RampedValue_::setLengthMsGen(ControlGenerator lengthMs){
+      lockMutex();
+      lengthGen_ = lengthMs;
+      unlockMutex();
     }
 
-    inline void RampedValue_::setValue( TonicFloat value){
+#pragma mark - Internal State setters
+    
+    inline void RampedValue_::updateValue( TonicFloat value){
       finished_ = true;
       last_ = value;
       target_ = value;
       inc_ = 0;
       count_ = 0;
+      
+      // need to set target gen's value here for this to work right
     }
 
-    inline void RampedValue_::setTarget(TonicFloat target, unsigned long length){
+    inline void RampedValue_::updateTarget(TonicFloat target, unsigned long lengthSamp ){
       target_ = target;
       count_ = 0;
-      len_ = length > 0 ? length : defLen_;
+      len_ = lengthSamp > 0 ? lengthSamp : 1;
       inc_ = (TonicFloat)(target_ - last_)/len_;
       finished_ = false;
     }
@@ -163,17 +191,17 @@ namespace Tonic {
     
   public:
     
-    // for initialization
-    RampedValue & defLenMs( TonicFloat defLenMs );
-    RampedValue & defValue( TonicFloat defValue );
+    //! Set target value
+    RampedValue & target( TonicFloat target );
+    RampedValue & target( ControlGenerator target );
     
-    //! Go to target in specified time. If lenMs < 0, uses default length
-    RampedValue & setTarget( TonicFloat target, TonicFloat lenMs = 0);
-    RampedValue & setTarget( ControlGenerator target );
+    //! Set length before reaching target value, in ms
+    RampedValue & lengthMs( TonicFloat lengthMs );
+    RampedValue & lengthMs( ControlGenerator lengthMs );
     
     //! Go to value immediately
-    RampedValue & setValue( TonicFloat value);
-    RampedValue & setValue( ControlGenerator value);
+    RampedValue & value( TonicFloat value);
+    RampedValue & value( ControlGenerator value);
 
   };
 }
