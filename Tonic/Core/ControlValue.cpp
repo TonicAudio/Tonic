@@ -24,6 +24,9 @@ namespace Tonic {
     }
     
     TonicFloat ControlValue_::getValue(){
+      // TODO: Until we figure out a better way to manage multiple instances of
+      // ControlGenerators, this should also reset hasChanged()
+      mHasChanged = false;
       return mValue;
     }
     

@@ -25,8 +25,9 @@ public:
 
   SineAMSynth() : carrierAmt(1.0f) {
     
-    carrierFreq.defValue(400).defLenMs(2000);
-    modFreq.defValue(10);
+    // TODO: do this by registering messages
+    carrierFreq.value(400).lengthMs(2000);
+    modFreq.value(10).lengthMs(200);
     
     carrier.freq(carrierFreq);
     modulator.freq(modFreq);
@@ -34,13 +35,13 @@ public:
     outputGen =
     (
       ( modulator + carrierAmt ) * carrier
-    ) * 0.1f;
+    ) * 0.5f;
     
   };
   
   inline void setCarrierAmt(TonicFloat newCarrierAmt) { carrierAmt = clamp(newCarrierAmt, 0.0f, 1.0f); };
-  inline void setCarrierFreq(TonicFloat nCarFreq) { carrierFreq.setTarget(nCarFreq); };
-  inline void setModFreq(TonicFloat nModFreq) { modFreq.setTarget(nModFreq); };
+  inline void setCarrierFreq(TonicFloat nCarFreq) { carrierFreq.target(nCarFreq); };
+  inline void setModFreq(TonicFloat nModFreq) { modFreq.target(nModFreq); };
   
 private:
   

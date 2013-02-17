@@ -31,7 +31,6 @@ namespace Tonic {
 
   inline void Synth::tick( TonicFrames& frames ){
     outputGen.tick(frames);
-    
   };
 
   ControlValue  Synth::registerMessage(string name, float value){
