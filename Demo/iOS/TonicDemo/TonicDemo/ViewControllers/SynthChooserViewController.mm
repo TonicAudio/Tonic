@@ -7,9 +7,10 @@
 //
 
 #import "SynthChooserViewController.h"
-#import "SineSumViewController.h"
-#import "AMViewController.h"
-#import "FMDroneViewController.h"
+#import "SynthTestViewController.h"
+#import "SineSumSynth.h"
+#import "SineAMSynth.h"
+#import "FMDroneSynth.h"
 
 // Just going to hard-code everything for now based on enum
 
@@ -71,19 +72,44 @@ enum {
 {
   [tableView deselectRowAtIndexPath:indexPath animated:YES];
   
-  UIViewController *vcToPush = nil;
+  NSString *synthName = nil;
+  NSString *description = nil;
+  SynthTestPanAction action = nil;
   
   switch(indexPath.row){
     case SynthChooserSineSum:
-      vcToPush = (UIViewController*)[[SineSumViewController alloc] initWithNibName:nil bundle:nil];
+      synthName = @"SineSumSynth";
+      description = @"Swipe up and down to change \"spread\" of additive sines.";
+      action = ^(Tonic::Synth* synth, CGPoint touchPointNorm){
+        SineSumSynth *ss = (SineSumSynth*)synth;
+        TonicFloat spread = powf(touchPointNorm.y, 2.0f);
+        ss->setSpread(spread);
+      };
       break;
       
     case SynthChooserSineAM:
-      vcToPush = (UIViewController*)[[AMViewController alloc] initWithNibName:nil bundle:nil];
+      synthName = @"SineAMSynth";
+      description = @"Swipe up and down to change modulator freq. Swipe L/R to change carrier freq.";
+      action = ^(Tonic::Synth* synth, CGPoint touchPointNorm){
+        SineAMSynth *as = (SineAMSynth*)synth;
+        
+        // arbitrarily chosen midi note numbers (linear pitch)
+        TonicFloat car = Tonic::mtof(Tonic::map(touchPointNorm.x, 0.0f, 1.0f, 47, 88));
+        
+        // exponenetial sweep in frequency, 0-1000 Hz
+        TonicFloat mod = 1000.0f / powf(10.0f, Tonic::map(touchPointNorm.y, 0.0f, 1.0f, 3.0f, 0.0f));
+        
+        as->setCarrierFreq(car);
+        as->setModFreq(mod);
+      };
       break;
       
     case SynthChooserFMDrone:
-      vcToPush = (UIViewController*)[[FMDroneViewController alloc] initWithNibName:nil bundle:nil];
+      synthName = @"FMDroneSynth";
+      description = @"FM Synth";
+      action = ^(Tonic::Synth* synth, CGPoint touchPointNorm){
+        synth->sendMessage("baseFreq", Tonic::map(touchPointNorm.y, 0.0f, 1.0f, 100, 500));
+      };
       break;
       
     default:
@@ -91,8 +117,9 @@ enum {
       
   }
   
-  if (vcToPush){
-    [self.navigationController pushViewController:vcToPush animated:YES];
+  if (synthName && description && action){
+    SynthTestViewController *stVC = [[SynthTestViewController alloc] initWithSynthName:synthName description:description panAction:action];
+    [self.navigationController pushViewController:stVC animated:YES];
   }
 }
 
