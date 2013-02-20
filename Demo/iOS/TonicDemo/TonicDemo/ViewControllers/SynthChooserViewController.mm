@@ -11,6 +11,7 @@
 #import "SineSumSynth.h"
 #import "SineAMSynth.h"
 #import "FMDroneSynth.h"
+#import "FilterTest.h"
 
 // Just going to hard-code everything for now based on enum
 
@@ -18,6 +19,7 @@ enum {
   SynthChooserSineSum = 0,
   SynthChooserSineAM,
   SynthChooserFMDrone,
+  SynthChooserTestFilt,
   SynthChooserNumChoices
   
 };
@@ -112,12 +114,18 @@ enum {
       };
       break;
       
+    case SynthChooserTestFilt:
+      synthName = @"FilterTest";
+      description = @"Test";
+      action = nil;
+      break;
+      
     default:
       break;
       
   }
   
-  if (synthName && description && action){
+  if (synthName){
     SynthTestViewController *stVC = [[SynthTestViewController alloc] initWithSynthName:synthName description:description panAction:action];
     [self.navigationController pushViewController:stVC animated:YES];
   }
@@ -160,6 +168,11 @@ enum {
     case SynthChooserFMDrone:
       synthName = @"FM Drone";
       synthDesc = @"Basic FM synth with sinusoidal carrier and modulator";
+      break;
+      
+    case SynthChooserTestFilt:
+      synthName = @"Filter Test";
+      synthDesc = @"test";
       break;
       
     default:

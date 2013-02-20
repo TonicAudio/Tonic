@@ -12,10 +12,6 @@
 #include "Tonic.h"
 #include "Synth.h"
 #include "SineWave.h"
-#include "Multiplier.h"
-#include "Adder.h"
-#include "FixedValue.h"
-#include "RampedValue.h"
 
 using namespace Tonic;
 

@@ -1,6 +1,6 @@
 //
 //  Synth.h
-//  2013_1_23_melody
+//  Tonic
 //
 //  Created by Morgan Packard on 1/23/13.
 //
@@ -20,13 +20,16 @@ https://ccrma.stanford.edu/software/stk/
 
 ++++++++++++++++++++++++++++++++++++++++++++++++++*/
 
-#ifndef ___013_1_23_melody__Synth__
-#define ___013_1_23_melody__Synth__
+#ifndef __Tonic__Synth__
+#define __Tonic__Synth__
 
 #include <iostream>
 #include <map>
 #include "BufferFiller.h"
 #include "ControlValue.h"
+#include "RampedValue.h"
+#include "Multiplier.h"
+#include "Adder.h"
 
 namespace Tonic{
   
@@ -107,4 +110,4 @@ namespace Tonic{
   
 }
 
-#endif /* defined(___013_1_23_melody__Synth__) */
+#endif /* defined(__Tonic__Synth__) */
