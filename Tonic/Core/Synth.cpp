@@ -48,4 +48,8 @@ namespace Tonic {
     }
   }
   
+  
+  // Synth Factory
+  SynthFactory::map_type * SynthFactory::map;
+  
 }

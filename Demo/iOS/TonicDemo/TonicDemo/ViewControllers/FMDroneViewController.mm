@@ -22,7 +22,7 @@
 
 - (void)dealloc
 {
-  [[TonicSynthManager sharedManager] removeSourceForKey:kSynthKey];
+  [[TonicSynthManager sharedManager] removeSynthForKey:kSynthKey];
 }
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -52,14 +52,14 @@
 
 - (void)addSynthIfNecessary
 {
-  if ([[TonicSynthManager sharedManager] sourceForKey:kSynthKey] == nil){
-    [[TonicSynthManager sharedManager] addSourceWithName:@"FMDroneSynth" forKey:kSynthKey];
+  if ([[TonicSynthManager sharedManager] synthForKey:kSynthKey] == nil){
+    [[TonicSynthManager sharedManager] addSynthWithName:@"FMDroneSynth" forKey:kSynthKey];
   }
 }
 
 - (void)handlePan:(UIPanGestureRecognizer *)pan{
   
-  Synth *fmSynth =(Synth*)[[TonicSynthManager sharedManager] sourceForKey:kSynthKey];
+  Synth *fmSynth =(Synth*)[[TonicSynthManager sharedManager] synthForKey:kSynthKey];
   
   if (fmSynth == NULL) return;
   

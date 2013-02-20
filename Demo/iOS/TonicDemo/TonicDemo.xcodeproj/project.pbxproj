@@ -32,7 +32,7 @@
 		F20FCD5216C58D5B0039832A /* TonicSynthManager.mm in Sources */ = {isa = PBXBuildFile; fileRef = F20FCD5116C58D5B0039832A /* TonicSynthManager.mm */; };
 		F2360A7716C4B4EC00A0AD7A /* Noise.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F2360A7516C4B4EC00A0AD7A /* Noise.cpp */; };
 		F23E243E16C6BF450082EF65 /* Mixer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F23E243C16C6BF450082EF65 /* Mixer.cpp */; };
-		F23E244116C6C5F10082EF65 /* Source.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F23E243F16C6C5F00082EF65 /* Source.cpp */; };
+		F23E244116C6C5F10082EF65 /* BufferFiller.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F23E243F16C6C5F00082EF65 /* BufferFiller.cpp */; };
 		F256C8E416C5A0BF0096574D /* SineSumViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = F256C8E016C5A0BF0096574D /* SineSumViewController.mm */; };
 		F256C8E516C5A0BF0096574D /* SynthChooserViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F256C8E216C5A0BF0096574D /* SynthChooserViewController.m */; };
 		F256C8E616C5A0BF0096574D /* SynthChooserViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F256C8E316C5A0BF0096574D /* SynthChooserViewController.xib */; };
@@ -96,8 +96,8 @@
 		F2360A7916C4BC6E00A0AD7A /* SineSumSynth.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SineSumSynth.h; sourceTree = "<group>"; };
 		F23E243C16C6BF450082EF65 /* Mixer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Mixer.cpp; sourceTree = "<group>"; };
 		F23E243D16C6BF450082EF65 /* Mixer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Mixer.h; sourceTree = "<group>"; };
-		F23E243F16C6C5F00082EF65 /* Source.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Source.cpp; sourceTree = "<group>"; };
-		F23E244016C6C5F00082EF65 /* Source.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Source.h; sourceTree = "<group>"; };
+		F23E243F16C6C5F00082EF65 /* BufferFiller.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = BufferFiller.cpp; sourceTree = "<group>"; };
+		F23E244016C6C5F00082EF65 /* BufferFiller.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BufferFiller.h; sourceTree = "<group>"; };
 		F256C8DF16C5A0BF0096574D /* SineSumViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SineSumViewController.h; sourceTree = "<group>"; };
 		F256C8E016C5A0BF0096574D /* SineSumViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = SineSumViewController.mm; sourceTree = "<group>"; };
 		F256C8E116C5A0BF0096574D /* SynthChooserViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SynthChooserViewController.h; sourceTree = "<group>"; };
@@ -302,8 +302,8 @@
 				F2C9F6EF16C493870090A78D /* Multiplier.h */,
 				F2C9F6F016C493870090A78D /* Synth.cpp */,
 				F2C9F6F116C493870090A78D /* Synth.h */,
-				F23E243F16C6C5F00082EF65 /* Source.cpp */,
-				F23E244016C6C5F00082EF65 /* Source.h */,
+				F23E243F16C6C5F00082EF65 /* BufferFiller.cpp */,
+				F23E244016C6C5F00082EF65 /* BufferFiller.h */,
 				F2C9F6F216C493870090A78D /* Tonic.h */,
 				F2C9F6F316C493870090A78D /* TonicFrames.cpp */,
 				F2C9F6F416C493870090A78D /* TonicFrames.h */,
@@ -431,7 +431,7 @@
 				F256C8E516C5A0BF0096574D /* SynthChooserViewController.m in Sources */,
 				F256C8EC16C5A7F70096574D /* AMViewController.mm in Sources */,
 				F23E243E16C6BF450082EF65 /* Mixer.cpp in Sources */,
-				F23E244116C6C5F10082EF65 /* Source.cpp in Sources */,
+				F23E244116C6C5F10082EF65 /* BufferFiller.cpp in Sources */,
 				A82437F316CEFFC0000677C7 /* FMDroneViewController.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
