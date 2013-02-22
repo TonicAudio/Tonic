@@ -190,6 +190,8 @@ namespace Tonic {
   class RampedValue : public TemplatedGenerator<Tonic_::RampedValue_>{
     
   public:
+      
+    RampedValue(TonicFloat startValue = 0);
     
     //! Set target value
     RampedValue & target( TonicFloat target );

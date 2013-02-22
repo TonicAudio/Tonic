@@ -71,7 +71,7 @@
     {
       CGPoint touchPoint = [pan locationInView:self.view];
       
-      fmSynth->sendMessage("baseFreq", touchPoint.y + 100);
+      fmSynth->sendMessage("fmAmount", touchPoint.y / 10);
     }
       break;
       

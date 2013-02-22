@@ -52,14 +52,9 @@ namespace Tonic {
     
   public:
     
-    SineWave& freq(Generator freq){
-      gen()->setFrequency(freq);
-      return *this;
-    }
-    
-    SineWave& freq(float freqArg){
-      return freq( FixedValue(freqArg) );
-    }
+    createGeneratorSetters(SineWave, freq, setFrequency)
+
+
     
   };
 }

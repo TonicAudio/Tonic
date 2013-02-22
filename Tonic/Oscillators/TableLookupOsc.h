@@ -98,9 +98,10 @@ namespace Tonic {
       //! Set frequency generator input
       void setFrequency( Generator & genArg){
         // need to lock mutex so we don't replace this in the middle of a tick
-        lockMutex();
+        // Morgan 2012.2.22 Handling the mutex stuff in the createGeneratorSetters macro
+        //lockMutex();
         frequencyGenerator = genArg;
-        unlockMutex();
+        //unlockMutex();
       };
 
     };
