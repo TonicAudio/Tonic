@@ -34,13 +34,18 @@ namespace Tonic {
   
   class ControlValue : public TemplatedControlGenerator<Tonic_::ControlValue_>{
     public:
-      ControlValue & setValue(float value)
-      {
-        gen()->setValue(value);
-        return *this;
-      }
     
-    ControlValue & setHasChanged(bool flagVal){
+    ControlValue(float value = 0){
+      setValue(value);
+    }
+    
+    inline ControlValue & setValue(float value)
+    {
+      gen()->setValue(value);
+      return *this;
+    }
+    
+    inline ControlValue & setHasChanged(bool flagVal){
       gen()->setHasChanged(flagVal);
       return *this;
     }

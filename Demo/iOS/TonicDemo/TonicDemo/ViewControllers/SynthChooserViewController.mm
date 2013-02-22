@@ -117,8 +117,11 @@ enum {
       
     case SynthChooserTestFilt:
       synthName = @"FilterTest";
-      description = @"Test";
-      action = nil;
+      description = @"X Axis: cutoff";
+      action = ^(Tonic::Synth* synth, CGPoint touchPointNorm){
+        synth->sendMessage("cutoff", 120.0f * powf(10.0f, touchPointNorm.x * 2));
+        synth->sendMessage("LFO", touchPointNorm.y * 200);
+      };
       break;
       
     default:

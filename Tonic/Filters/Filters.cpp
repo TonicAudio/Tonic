@@ -10,6 +10,17 @@
 
 namespace Tonic { namespace Tonic_{
   
+  // ================================
+  //       Filter Base Class
+  // ================================
+  
+  Filter_::Filter_() :
+    cutoff_(FixedValue(20000)),
+    Q_(FixedValue(0.7071)),
+    bypass_(ControlValue(0))
+  {
+    workspace_.resize(kSynthesisBlockSize, 1, 0);
+  }
 
   
 } // Namespace Tonic_

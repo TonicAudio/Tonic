@@ -13,7 +13,8 @@
 
 #include "Synth.h"
 #include "Noise.h"
-#include "TestFilt.h"
+#include "Filters.h"
+#include "SineWave.h"
 
 using namespace Tonic;
 
@@ -22,7 +23,11 @@ class FilterTest : public Synth {
   
 public:
   FilterTest(){
-    outputGen = TestFilt().input( Noise() ) * 0.5;
+    // Need a limiter class soon - these tend to clip with high-Q
+    outputGen = LPF12().input( Noise() ).cutoff(
+                  RampedValue(1000).target( registerMessage("cutoff",1000) )
+                  + (SineWave().freq(4) * RampedValue(0).target( registerMessage("LFO", 0) ) )
+                ).Q(4) * 0.25;
   }
   
   static SourceRegister<FilterTest> reg;

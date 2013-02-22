@@ -31,7 +31,7 @@ namespace Tonic {
   namespace Tonic_ {
     
     //! Biquad_ is an IIR biquad filter which provides a base object on which to build more advanced filters
-    class Biquad_ : public Effect_ {
+    class Biquad_ : public Generator_ {
       
     protected:
             
@@ -42,7 +42,7 @@ namespace Tonic {
     public:
       Biquad_();
       ~Biquad_();
-      virtual void tick( TonicFrames& frames);
+      void tick( TonicFrames& frames);
       
       //! Set the coefficients for the filtering operation.
       /*
@@ -51,7 +51,7 @@ namespace Tonic {
                   1 + a1*z^-1 + a2*z^-2
       */
       void setCoefficients( TonicFloat b0, TonicFloat b1, TonicFloat b2, TonicFloat a1, TonicFloat a2 );
-      
+      void setCoefficients( TonicFloat *newCoef );
     };
     
     inline void Biquad_::setCoefficients(TonicFloat b0, TonicFloat b1, TonicFloat b2, TonicFloat a1, TonicFloat a2){
@@ -62,12 +62,11 @@ namespace Tonic {
       coef_[4] = a2;
     }
     
+    inline void Biquad_::setCoefficients(TonicFloat *newCoef){
+      memcpy(coef_, newCoef, 5 * sizeof(TonicFloat));
+    }
+    
     inline void Biquad_::tick( TonicFrames& frames){
-      
-      // get input frames
-      lockMutex();
-      input_.tick(frames);
-      unlockMutex();
       
       // resize vectors to match number of channels (if necessary)
       if (inputVec_.channels() != frames.channels()){

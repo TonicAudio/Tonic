@@ -43,37 +43,14 @@ namespace Tonic {
     };
     
     inline void Effect_::setInput( Generator input ){
-      lockMutex();
       input_ = input;
-      unlockMutex();
     }
     
   }
   
-  class Effect : public Generator {
-    
-  public:
-    
-    //! This cast is not 100% safe - assumes underlying generator is an Effect_ subclass
-    inline Effect & input( Generator input ){
-      static_cast<Tonic_::Effect_*>(mGen)->setInput(input);
-      return *this;
-    };
-
-  };
-  
-  template<class GenType> class TemplatedEffect : public Effect{
-  protected:
-    GenType* gen(){
-      return static_cast<GenType*>(mGen);
-    }
-  public:
-    TemplatedEffect(){
-      delete mGen;
-      mGen = new GenType();
-    }
-  };
 }
+
+// TODO: Figure out a way (if possible) for templated smart-pointers to effects to always have a parameter named "input"
 
 #endif /* defined(__Tonic__Effect__) */
 
