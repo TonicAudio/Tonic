@@ -121,14 +121,28 @@ namespace Tonic {
   
   };
   
-
-  
-
-  
-  
-
-
-  
 }
+
+// Each generator should have three flavors of setter -- one that accepts a float, one that accepts a
+// ControlGenerator, and one that accepts a Generator. This macro will automatically build those three
+// setters
+#define createGeneratorSetters(generatorClassName, methodNameInGenerator, methodNameInGenerator_) \
+                                                                                                  \
+                                                                                                  \
+  generatorClassName& methodNameInGenerator(Generator arg){                                       \
+    gen()->lockMutex();                                                                           \
+    gen()->methodNameInGenerator_(arg);                                                           \
+    gen()->unlockMutex();                                                                         \
+        return *this;                                                                             \
+  }                                                                                               \
+                                                                                                  \
+  generatorClassName& methodNameInGenerator(float arg){                                           \
+    return methodNameInGenerator( FixedValue(arg) );                                              \
+  }                                                                                               \
+                                                                                                  \
+  generatorClassName& methodNameInGenerator(ControlGenerator arg){                                \
+    methodNameInGenerator(  FixedValue().setValue(arg) );                                         \
+    return *this;                                                                                 \
+  } 
 
 #endif /* defined(___013_1_23_melody__Generator__) */
