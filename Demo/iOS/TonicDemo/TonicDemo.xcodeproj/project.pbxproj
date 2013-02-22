@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		9A1589F116D7E1D200E2BC81 /* Filters.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9A1589EF16D7E1D200E2BC81 /* Filters.cpp */; };
 		A82437C916CA7470000677C7 /* ControlValue.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A82437C716CA7470000677C7 /* ControlValue.cpp */; };
 		A82437DB16CB3753000677C7 /* ControlGenerator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A82437DA16CB36A8000677C7 /* ControlGenerator.cpp */; };
 		A86C3EC116B2B4FD002A50F0 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A86C3EC016B2B4FD002A50F0 /* UIKit.framework */; };
@@ -48,6 +49,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		9A1589EF16D7E1D200E2BC81 /* Filters.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Filters.cpp; sourceTree = "<group>"; };
+		9A1589F016D7E1D200E2BC81 /* Filters.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Filters.h; sourceTree = "<group>"; };
 		A82437C716CA7470000677C7 /* ControlValue.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ControlValue.cpp; sourceTree = "<group>"; };
 		A82437C816CA7470000677C7 /* ControlValue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ControlValue.h; sourceTree = "<group>"; };
 		A82437CF16CA7A25000677C7 /* Tests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Tests.h; sourceTree = "<group>"; };
@@ -285,6 +288,8 @@
 			children = (
 				F263BD2A16D54E83008AADA6 /* Biquad.cpp */,
 				F263BD2B16D54E83008AADA6 /* Biquad.h */,
+				9A1589EF16D7E1D200E2BC81 /* Filters.cpp */,
+				9A1589F016D7E1D200E2BC81 /* Filters.h */,
 				F263BD3116D56AA5008AADA6 /* TestFilt.cpp */,
 				F263BD3216D56AA5008AADA6 /* TestFilt.h */,
 				F263BD2D16D55AC2008AADA6 /* FilterUtils.h */,
@@ -439,6 +444,7 @@
 				F23E244116C6C5F10082EF65 /* BufferFiller.cpp in Sources */,
 				F263BD2C16D54E83008AADA6 /* Biquad.cpp in Sources */,
 				F263BD3316D56AA5008AADA6 /* TestFilt.cpp in Sources */,
+				9A1589F116D7E1D200E2BC81 /* Filters.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

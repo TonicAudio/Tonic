@@ -25,6 +25,7 @@ https://ccrma.stanford.edu/software/stk/
 
 #include <iostream>
 #include "Biquad.h"
+#include "FilterUtils.h"
 
 namespace Tonic {
   

@@ -54,7 +54,7 @@ namespace Tonic {
     
   public:
     
-    //! This cast is not safe - assumes underlying generator is, in fact, an Effect_ subclass
+    //! This cast is not 100% safe - assumes underlying generator is an Effect_ subclass
     inline Effect & input( Generator input ){
       static_cast<Tonic_::Effect_*>(mGen)->setInput(input);
       return *this;
