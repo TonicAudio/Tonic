@@ -24,8 +24,7 @@ public:
     outputGen = SineWave().freq(
        RampedValue(200).target( registerMessage("baseFreq", 200) )
       + (
-          SineWave().freq( 2 * RampedValue(200).target( registerMessage("baseFreq") ) )
-          * 10 * RampedValue(0).target(registerMessage("fmAmount", 0))
+          SineWave().freq( 10 ) * RampedValue(0).target(registerMessage("fmAmount", 0))
          )
     );
   }
