@@ -45,7 +45,6 @@ namespace Tonic {
       coef_out[4] = (a0 - a1*sf + sfsq)/norm;
   }
     
-    
 };
 
 #endif

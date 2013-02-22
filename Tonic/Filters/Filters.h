@@ -30,6 +30,17 @@ https://ccrma.stanford.edu/software/stk/
 #include "FixedValue.h"
 #include "ControlGenerator.h"
 
+/**********************************************
+ * 
+ *  IIR filter modules
+ *
+ *  WARNING - Use of high Q values may
+ *  cause clipping. It's recommended that you
+ *  add a limiter or greatly reduce the gain
+ *  after a filter stage.
+ *
+ **********************************************/
+
 namespace Tonic {
   
 #pragma mark - Core Generators
@@ -42,7 +53,7 @@ namespace Tonic {
     //       Filter Base Class
     // ================================
     
-    //! Basic biquad-backed filter Effect_ subclass with inputs for cutoff and Q
+    //! Basic filter Effect_ subclass with inputs for cutoff and Q
     class Filter_ : public Effect_{
         
     protected:
@@ -71,7 +82,10 @@ namespace Tonic {
         
         lockMutex();
         
-        // get cutoff and Q inputs (only need first frame - setting coefficients each frame is not feasible)
+        // get cutoff and Q inputs
+        // For now only using first frame of output. Setting coefficients each frame is very inefficient.
+        // Updates every 64-samples is typically fast enough to avoid artifacts when sweeping filters.
+        
         cutoff_.tick(workspace_);
         cCutoff = clamp(workspace_(0,0), 20, sampleRate()/2);
         Q_.tick(workspace_);
@@ -83,14 +97,6 @@ namespace Tonic {
         unlockMutex();
         
         applyFilter(cCutoff, cQ, frames);
-        
-//          // set coefficients
-//          TonicFloat newCoef[5];
-//          bltCoef(0, 0, 1, 1, 1.0f/cQ, cCutoff, newCoef);
-//          biquad_.setCoefficients(newCoef);
-//          
-//          // compute
-//          biquad_.tick(frames);
       }
       
     };
@@ -111,11 +117,44 @@ namespace Tonic {
       inline void applyFilter( TonicFloat cutoff, TonicFloat Q, TonicFrames & frames ){
           // set coefficients
           TonicFloat newCoef[5];
-          bltCoef(0, 0, 1, 1.0f/Q, 1, cutoff, newCoef);
+          bltCoef(0, 0, 1.0f/Q, 1.0f/Q, 1, cutoff, newCoef);
           biquad_.setCoefficients(newCoef);
 
           // compute
           biquad_.tick(frames);
+      }
+      
+    };
+    
+    // ===============================
+    //            LPF 24
+    // ===============================
+    
+    //! Butterworth 4-pole LPF
+    class LPF24_ : public Filter_ {
+      
+    protected:
+      
+      Biquad_ biquad1_;
+      Biquad_ biquad2_;
+      
+    public:
+      
+      inline void applyFilter( TonicFloat cutoff, TonicFloat Q, TonicFrames & frames ){
+        // set coefficients
+        TonicFloat newCoef[5];
+        
+        // stage 1
+        bltCoef(0, 0, 1.0f/Q, 0.5412f/Q, 1, cutoff, newCoef);
+        biquad1_.setCoefficients(newCoef);
+        
+        // stage 2
+        bltCoef(0, 0, 1.0f/Q, 1.3066f/Q, 1, cutoff, newCoef);
+        biquad2_.setCoefficients(newCoef);
+        
+        // compute
+        biquad1_.tick(frames);
+        biquad2_.tick(frames);
       }
       
     };
@@ -137,11 +176,44 @@ namespace Tonic {
         
         // set coefficients
         TonicFloat newCoef[5];
-        bltCoef(1, 0, 0, 1.0f/Q, 1, cutoff, newCoef);
+        bltCoef(1.0f/Q, 0, 0, 1.0f/Q, 1, cutoff, newCoef);
         biquad_.setCoefficients(newCoef);
         
         // compute
         biquad_.tick(frames);
+      }
+      
+    };
+    
+    // ===============================
+    //            HPF 24
+    // ===============================
+    
+    //! Butterworth 4-pole HPF
+    class HPF24_ : public Filter_ {
+      
+    protected:
+      
+      Biquad_ biquad1_;
+      Biquad_ biquad2_;
+      
+    public:
+      
+      inline void applyFilter( TonicFloat cutoff, TonicFloat Q, TonicFrames & frames ){
+        // set coefficients
+        TonicFloat newCoef[5];
+        
+        // stage 1
+        bltCoef(1.0f/Q, 0, 0, 0.5412f/Q, 1, cutoff, newCoef);
+        biquad1_.setCoefficients(newCoef);
+        
+        // stage 2
+        bltCoef(1.0f/Q, 0, 0, 1.3066f/Q, 1, cutoff, newCoef);
+        biquad2_.setCoefficients(newCoef);
+        
+        // compute
+        biquad1_.tick(frames);
+        biquad2_.tick(frames);
       }
       
     };
@@ -171,6 +243,39 @@ namespace Tonic {
       }
       
     };
+    
+    // ===============================
+    //            BPF 24
+    // ===============================
+    
+    //! Butterworth 4-pole BPF
+    class BPF24_ : public Filter_ {
+      
+    protected:
+      
+      Biquad_ biquad1_;
+      Biquad_ biquad2_;
+      
+    public:
+      
+      inline void applyFilter( TonicFloat cutoff, TonicFloat Q, TonicFrames & frames ){
+        // set coefficients
+        TonicFloat newCoef[5];
+        
+        // stage 1
+        bltCoef(0, 1.0f/Q, 0, 0.5412f/Q, 1, cutoff, newCoef);
+        biquad1_.setCoefficients(newCoef);
+        
+        // stage 2
+        bltCoef(0, 1.0f/Q, 0, 1.3066f/Q, 1, cutoff, newCoef);
+        biquad2_.setCoefficients(newCoef);
+        
+        // compute
+        biquad1_.tick(frames);
+        biquad2_.tick(frames);
+      }
+      
+    };
   }
   
 #pragma mark - Smart Pointers
@@ -195,16 +300,20 @@ namespace Tonic {
   createFilterSubtype(LPF12);
   
   // LPF 24
+  createFilterSubtype(LPF24);
   
   // HPF 12
   createFilterSubtype(HPF12);
   
   // HPF 24
+  createFilterSubtype(HPF24);
   
   // BPF 12
   createFilterSubtype(BPF12);
   
   // BPF 24
+  createFilterSubtype(BPF24);
+  
   
 }
 
