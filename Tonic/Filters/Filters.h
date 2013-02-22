@@ -41,7 +41,7 @@ namespace Tonic {
     // ================================
     //       Filter Base Class
     // ================================
-      
+    
     //! Basic biquad-backed filter Effect_ subclass with inputs for cutoff and Q
     class Filter_ : public Effect_{
         
@@ -119,11 +119,63 @@ namespace Tonic {
       }
       
     };
+    
+    // ===============================
+    //            HPF 12
+    // ===============================
+    
+    //! Butterworth 2-pole HPF
+    class HPF12_ : public Filter_ {
+      
+    protected:
+      
+      Biquad_ biquad_;
+      
+    public:
+      
+      inline void applyFilter( TonicFloat cutoff, TonicFloat Q, TonicFrames & frames ){
+        
+        // set coefficients
+        TonicFloat newCoef[5];
+        bltCoef(1, 0, 0, 1.0f/Q, 1, cutoff, newCoef);
+        biquad_.setCoefficients(newCoef);
+        
+        // compute
+        biquad_.tick(frames);
+      }
+      
+    };
+    
+    // ===============================
+    //            BPF 12
+    // ===============================
+    
+    //! Butterworth 2-pole BPF, constant 0dB peak
+    class BPF12_ : public Filter_ {
+      
+    protected:
+      
+      Biquad_ biquad_;
+      
+    public:
+      
+      inline void applyFilter( TonicFloat cutoff, TonicFloat Q, TonicFrames & frames ){
+        
+        // set coefficients
+        TonicFloat newCoef[5];
+        bltCoef(0, 1.0f/Q, 0, 1.0f/Q, 1, cutoff, newCoef);
+        biquad_.setCoefficients(newCoef);
+        
+        // compute
+        biquad_.tick(frames);
+      }
+      
+    };
   }
   
 #pragma mark - Smart Pointers
   
-  // macro to create smart pointer for a given filter type, since many will be identical
+  // macro to create smart pointer for a given filter subtype, since many will be identical
 #define createFilterSubtype(filterClassName)                                        \
                                                                                     \
                                                                                     \
@@ -138,11 +190,21 @@ namespace Tonic {
 
   // ------------------- Smart Pointers -----------------------
   
-  // ===============================
-  //            LPF 12
-  // ===============================
 
+  // LPF 12
   createFilterSubtype(LPF12);
+  
+  // LPF 24
+  
+  // HPF 12
+  createFilterSubtype(HPF12);
+  
+  // HPF 24
+  
+  // BPF 12
+  createFilterSubtype(BPF12);
+  
+  // BPF 24
   
 }
 

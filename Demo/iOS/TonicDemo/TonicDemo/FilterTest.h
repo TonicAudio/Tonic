@@ -20,14 +20,14 @@ using namespace Tonic;
 
 class FilterTest : public Synth {
   
-  
 public:
   FilterTest(){
+    
     // Need a limiter class soon - these tend to clip with high-Q
-    outputGen = LPF12().input( Noise() ).cutoff(
+    outputGen = BPF12().input( Noise() ).Q(10).cutoff(
                   RampedValue(1000).target( registerMessage("cutoff",1000) )
                   + (SineWave().freq(4) * RampedValue(0).target( registerMessage("LFO", 0) ) )
-                ).Q(4) * 0.25;
+                ) * 0.7;
   }
   
   static SourceRegister<FilterTest> reg;
