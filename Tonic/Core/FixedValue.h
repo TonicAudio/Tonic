@@ -57,7 +57,7 @@ namespace Tonic {
           TonicFloat val = valueGen.getValue();
             vDSP_vfill( &val , buffStart, 1, frames.size());
         #else
-            std::fill(buffStart, buffStart + frames.size(), &valueGen.getValue());
+            std::fill(buffStart, buffStart + frames.size(), valueGen.getValue());
         #endif
         }
       
