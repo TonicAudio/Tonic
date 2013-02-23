@@ -38,14 +38,9 @@ namespace Tonic {
       
     public:
       
-      void setInput( Generator input );
+      inline void setInput( Generator input ) { input_ = input; };
       
     };
-    
-    inline void Effect_::setInput( Generator input ){
-      input_ = input;
-    }
-    
   }
   
   template<class EffectType, class EffectType_> class TemplatedEffect : public TemplatedGenerator<EffectType_>{
