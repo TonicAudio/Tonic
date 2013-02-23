@@ -55,11 +55,10 @@ namespace Tonic {
     Generator input_;
     
   public:
-    
-    // input should not be a Fixed Value, so no need for other setters
-    
+        
+    // This cast is not safe - up to implementation to ensure that templated EffectType_ is actually an Effect_ subclass
     inline EffectType & input( Generator input ){
-      dynamic_cast<Tonic_::Effect_*>(this->mGen)->setInput( input );
+      static_cast<Tonic_::Effect_*>(this->mGen)->setInput( input );
       return static_cast<EffectType&>(*this);
     }
     

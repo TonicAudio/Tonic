@@ -151,7 +151,7 @@ namespace Tonic {
                                                                                         \
                                                                                         \
   generatorClassName& methodNameInGenerator(Generator arg){                             \
-    generatorClassName_ *gen = dynamic_cast<generatorClassName_*>(this->mGen);  \
+    generatorClassName_ *gen = static_cast<generatorClassName_*>(this->mGen);           \
     gen->lockMutex();                                                                   \
     gen->methodNameInGenerator_(arg);                                                   \
     gen->unlockMutex();                                                                 \
