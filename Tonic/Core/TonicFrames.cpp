@@ -1,6 +1,6 @@
 //
 //  TonicFrames.cpp
-//  2013_1_23_melody
+//  Tonic
 //
 //  Created by Morgan Packard on 1/23/13.
 //

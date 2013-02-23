@@ -1,6 +1,6 @@
 //
 //  TonicFrames.h
-//  2013_1_23_melody
+//  Tonic
 //
 //  Created by Morgan Packard on 1/23/13.
 //
@@ -20,8 +20,8 @@ https://ccrma.stanford.edu/software/stk/
 
 ++++++++++++++++++++++++++++++++++++++++++++++++++*/
 
-#ifndef ___013_1_23_melody__TonicFrames__
-#define ___013_1_23_melody__TonicFrames__
+#ifndef __Tonic__TonicFrames__
+#define __Tonic__TonicFrames__
 
 #include <iostream>
 #include "Tonic.h"
@@ -361,4 +361,4 @@ namespace Tonic {
   
 }
 
-#endif /* defined(___013_1_23_melody__TonicFrames__) */
+#endif /* defined(__Tonic__TonicFrames__) */
