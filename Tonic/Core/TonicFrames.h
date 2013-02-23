@@ -116,9 +116,11 @@ namespace Tonic {
     
     //! Fill frames from other source.
     /* 
-      Copies or consolidates channels if necessary. Frame count must match.
+      Copies channels from one object to another. Frame count must match.
+      If source has more channels than destination, they will be averaged.
+      If destination has more channels than source, they will be copied to all channels.
     */
-    void fill( TonicFrames & f );
+    void copy( TonicFrames & f );
     
     //! Return an interpolated value at the fractional frame index and channel.
     /*!
@@ -252,14 +254,8 @@ namespace Tonic {
     unsigned int stride = nChannels_;
     
     // not sure if using vmul with 1.0 is actually faster or not
-    #ifdef USE_APPLE_ACCELERATE
-    float u = 1.0f;
-    vDSP_vsmul(sptr, stride, &u, dptr, stride, nFrames_);
-    #else
-    for ( unsigned int i=0; i<size_; i++, sptr += stride, dptr += stride ){
-      *dptr = *sptr;
-    }
-    #endif
+    vcopy(dptr, stride, sptr, stride, nFrames_);
+
   }
 
   inline void TonicFrames::fillChannels()
@@ -269,7 +265,7 @@ namespace Tonic {
     }
   }
   
-  inline void TonicFrames::fill( TonicFrames &f ){
+  inline void TonicFrames::copy( TonicFrames &f ){
     
     if (nFrames_ == f.frames()){
       
@@ -298,15 +294,12 @@ namespace Tonic {
         for (unsigned int i=0; i<nFrames_; i++, dptr+=nChannels_){
           *dptr *= s;
         }
-        
-        // fill all channels if necessary
-        fillChannels();
-        
       }
       else{
-        for (unsigned int i=0; i<nFrames_; i++, fptr += fChannels){
-          *dptr++ = *fptr;
-        }
+        // just copy one channel, then fill
+        vcopy(dptr, nChannels_, fptr, fChannels, nFrames_);
+        
+        // fill all channels if necessary
         fillChannels();
       }
       

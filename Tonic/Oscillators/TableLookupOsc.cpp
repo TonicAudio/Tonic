@@ -60,7 +60,7 @@ namespace Tonic { namespace Tonic_{
     for ( unsigned int i=0; i<synthesisBlock_.frames(); i++ ) {
       
       sd.d = ps;
-      ps += *rateBuffer;
+      ps += *rateBuffer++;
       offs = sd.i[1] & (TABLE_SIZE-1);
       tAddr = tableData + offs;
       sd.i[1] = msbi;

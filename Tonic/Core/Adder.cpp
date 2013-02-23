@@ -28,7 +28,7 @@ https://ccrma.stanford.edu/software/stk/
 namespace Tonic{ namespace Tonic_ {
 
   Adder_::Adder_(){
-    workSpace.resize(kSynthesisBlockSize, 2, 0);
+    workSpace.resize(kSynthesisBlockSize, 1, 0);
   }
   
   Adder_::~Adder_(){
@@ -37,6 +37,10 @@ namespace Tonic{ namespace Tonic_ {
   void Adder_::in(Generator generator){
     lockMutex();
     inputs.push_back( generator );
+    if ( generator.isStereo() && !this->isStereo() ){
+      this->setIsStereo(true);
+      workSpace.resize(kSynthesisBlockSize, 2, 0);
+    }
     unlockMutex();
   }
   

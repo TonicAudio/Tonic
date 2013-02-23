@@ -39,28 +39,29 @@ namespace Tonic {
       virtual void tick( TonicFrames& frames, const SynthesisContext &context );
       
       // override point for defining generator behavior
-      // subclasses should implment to fill synthesisBlock_ with new frames
+      // subclasses should implment to fill frames with new data
       virtual void computeSynthesisBlock( const SynthesisContext &context ) = 0;
       
       // mutex for swapping inputs, etc
       void lockMutex();
       void unlockMutex();
       
+      
+      // set stereo/mono - changes number of channels in synthesisBlock_
+      void setIsStereo( bool stereo );
+      inline bool isStereo(){ return stereo_; };
+      
     protected:
       
-      TonicFrames synthesisBlock_;
-      unsigned long lastFrameIndex_;
+      bool            stereo_;
+      TonicFrames     synthesisBlock_;
+      unsigned long   lastFrameIndex_;
       
       pthread_mutex_t genMutex_;
 
     };
     
     inline void Generator_::tick(TonicFrames &frames, const SynthesisContext &context ){
-      
-      // resize the block if necessary? not sure how to handle this yet
-      if (frames.channels() > synthesisBlock_.channels()){
-        synthesisBlock_.resize(kSynthesisBlockSize, frames.channels(), 0);
-      }
       
       // check context to see if we need new frames
       if (context.elapsedFrames == 0 || lastFrameIndex_ != context.elapsedFrames){
@@ -69,7 +70,7 @@ namespace Tonic {
       }
       
       // need to see how fast this actually is
-      frames.fill(synthesisBlock_);
+      frames.copy(synthesisBlock_);
     }
     
     inline void Generator_::lockMutex(){
@@ -95,7 +96,7 @@ namespace Tonic {
     Tonic_::Generator_* mGen;
     int* pcount;
   public:
-    Generator() : mGen( new Tonic_::PassThroughGenerator_() ) , pcount(new int(1)) {}
+    Generator() : mGen( new Tonic_::PassThroughGenerator_() ), pcount(new int(1)) {}
     Generator(const Generator& r): mGen(r.mGen), pcount(r.pcount){(*pcount)++;}
     Generator& operator=(const Generator& r)
     {
@@ -119,6 +120,10 @@ namespace Tonic {
     
     bool operator==(const Generator& r){
       return mGen == r.mGen;
+    }
+    
+    inline bool isStereo(){
+      return mGen->isStereo();
     }
     
     virtual void tick(TonicFrames& frames, const SynthesisContext & context){

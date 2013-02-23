@@ -25,13 +25,20 @@ https://ccrma.stanford.edu/software/stk/
 
 namespace Tonic{ namespace Tonic_{
   
-  Generator_::Generator_() : lastFrameIndex_(0){
+  Generator_::Generator_() : lastFrameIndex_(0), stereo_(false){
     pthread_mutex_init(&genMutex_, NULL);
     synthesisBlock_.resize(kSynthesisBlockSize, 1, 0);
   }
 
   Generator_::~Generator_(){
     pthread_mutex_destroy(&genMutex_);
+  }
+  
+  void Generator_::setIsStereo(bool stereo){
+    if (stereo != stereo_){
+      synthesisBlock_.resize(kSynthesisBlockSize, stereo ? 2 : 1, 0);
+    }
+    stereo_ = stereo;
   }
 
 }}

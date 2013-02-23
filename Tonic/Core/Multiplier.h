@@ -42,7 +42,7 @@ namespace Tonic{
     public:
       Multiplier_();
       ~Multiplier_();
-      void in(Generator& inputSource);
+      void in(Generator& generator);
       void computeSynthesisBlock( const SynthesisContext & context );
       
       Generator & getInput(unsigned int index) { return inputs[index]; };

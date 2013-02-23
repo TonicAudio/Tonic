@@ -81,11 +81,18 @@ namespace Tonic {
 
 #pragma mark - Utility Functions
   
+  //-- Vector Math --
+  inline static void vcopy( TonicFloat * dst, unsigned int dst_str, const TonicFloat * src, unsigned int src_str, unsigned int length ){
+    for (unsigned int i=0; i<length; i++, dst += dst_str, src += src_str){
+      *dst = *src;
+    }
+  }
+  
   //-- Arithmetic --
   
   inline static TonicFloat max(TonicFloat a, TonicFloat b) {
     return (a > b ? a : b);
-  };
+  }
 
   inline static TonicFloat min(TonicFloat a, TonicFloat b) {
     return (a < b ? a : b);
