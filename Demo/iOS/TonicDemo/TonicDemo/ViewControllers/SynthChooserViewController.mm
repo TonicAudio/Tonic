@@ -119,7 +119,7 @@ enum {
       description = @"X Axis: cutoff\nY Axis: LFO";
       action = ^(Tonic::Synth* synth, CGPoint touchPointNorm){
         synth->sendMessage("cutoff", 120.0f * powf(10.0f, touchPointNorm.x * 2));
-        synth->sendMessage("LFO", touchPointNorm.y * 200);
+        synth->sendMessage("LFO", touchPointNorm.y*touchPointNorm.y );
       };
       break;
       

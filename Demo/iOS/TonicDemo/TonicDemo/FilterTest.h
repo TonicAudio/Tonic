@@ -24,10 +24,12 @@ class FilterTest : public Synth {
 public:
   FilterTest(){
     
+    Tonic::Generator cutoff = RampedValue(1000).target( registerMessage("cutoff",1000) );
+    
     // Need a limiter class soon - these tend to clip with high-Q
     outputGen = LPF24().input( Noise() ).Q(2.5).cutoff(
-                  RampedValue(1000).target( registerMessage("cutoff",1000) )
-                  + (SineWave().freq(4) * RampedValue(0).target( registerMessage("LFO", 0) ) )
+                  cutoff
+                  + (SineWave().freq(4) * cutoff * 0.2 * RampedValue(0).target( registerMessage("LFO", 0) ) )
                 ) * 0.5;
   }
   
