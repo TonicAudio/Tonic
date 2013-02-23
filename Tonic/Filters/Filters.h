@@ -280,39 +280,36 @@ namespace Tonic {
   
 #pragma mark - Smart Pointers
   
-  // macro to create smart pointer for a given filter subtype, since many will be identical
-#define createFilterSubtype(filterClassName)                                        \
-                                                                                    \
-                                                                                    \
-  class filterClassName : public TemplatedGenerator<Tonic_::filterClassName ## _>{  \
-                                                                                    \
-  public:                                                                           \
-                                                                                    \
-    createGeneratorSetters(filterClassName, input, setInput);                       \
-    createGeneratorSetters(filterClassName, cutoff, setCutoff);                     \
-    createGeneratorSetters(filterClassName, Q, setQ);                               \
-  }                                                                                 \
+  template<class FilterType, class FilterType_> class TemplatedFilter : public TemplatedEffect<FilterType, FilterType_>{
+  
+  public:
+  
+    createGeneratorSettersInTemplate(FilterType, Tonic_::Filter_, cutoff, setCutoff);
+    createGeneratorSettersInTemplate(FilterType, Tonic_::Filter_, Q, setQ);
+
+  };
+  
 
   // ------------------- Smart Pointers -----------------------
   
 
   // LPF 12
-  createFilterSubtype(LPF12);
+  class LPF12 : public TemplatedFilter<LPF12, Tonic_::LPF12_>{};
   
   // LPF 24
-  createFilterSubtype(LPF24);
+  class LPF24 : public TemplatedFilter<LPF24, Tonic_::LPF24_>{};
   
   // HPF 12
-  createFilterSubtype(HPF12);
+  class HPF12 : public TemplatedFilter<HPF12, Tonic_::HPF12_>{};
   
   // HPF 24
-  createFilterSubtype(HPF24);
+  class HPF24 : public TemplatedFilter<HPF24, Tonic_::HPF24_>{};
   
   // BPF 12
-  createFilterSubtype(BPF12);
+  class BPF12 : public TemplatedFilter<BPF12, Tonic_::BPF12_>{};
   
   // BPF 24
-  createFilterSubtype(BPF24);
+  class BPF24 : public TemplatedFilter<BPF24, Tonic_::BPF24_>{};
   
   
 }

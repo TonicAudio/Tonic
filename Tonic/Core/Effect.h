@@ -48,9 +48,24 @@ namespace Tonic {
     
   }
   
-}
+  template<class EffectType, class EffectType_> class TemplatedEffect : public TemplatedGenerator<EffectType_>{
+  
+  protected:
+    
+    Generator input_;
+    
+  public:
+    
+    // input should not be a Fixed Value, so no need for other setters
+    
+    inline EffectType & input( Generator input ){
+      dynamic_cast<Tonic_::Effect_*>(this->mGen)->setInput( input );
+      return static_cast<EffectType&>(*this);
+    }
+    
+  };
 
-// TODO: Figure out a way (if possible) for templated smart-pointers to effects to always have a parameter named "input"
+}
 
 #endif /* defined(__Tonic__Effect__) */
 
