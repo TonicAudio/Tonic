@@ -20,15 +20,18 @@ namespace Tonic {
       public:
         ControlValue_();
         ~ControlValue_();
-        bool hasChanged();
+      
+        bool hasChanged(const SynthesisContext & context);
+        TonicFloat getValue(const SynthesisContext & context);
+
         void setHasChanged(bool flagVal=true);
-        TonicFloat getValue();
         void setValue(float);
 
       private:
-        bool mHasChanged;
-        float mValue;
-      
+        bool          mHasChanged;
+        bool          mLastHasChanged;
+        float         mValue;
+        unsigned long mLastFrameIndex;
     };
   }
   

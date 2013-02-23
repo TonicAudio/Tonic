@@ -29,10 +29,6 @@ namespace Tonic {
     
   }
 
-  inline void Synth::tick( TonicFrames& frames ){
-    outputGen.tick(frames);
-  };
-
   ControlValue  Synth::registerMessage(string name, float value){
     if (parameters.find(name)==parameters.end()) {
         parameters[name] = ControlValue().setValue(value);
@@ -46,6 +42,11 @@ namespace Tonic {
     }else{
       error("message: " + name + " was not registered. You can register a message using Synth::registerMessage.");
     }
+    
+    stringstream ss;
+    ss << "message: " << name << " value: " << value;
+    
+    debug(ss.str());
   }
   
   

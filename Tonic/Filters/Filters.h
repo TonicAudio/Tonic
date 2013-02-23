@@ -25,7 +25,6 @@ https://ccrma.stanford.edu/software/stk/
 
 #include <iostream>
 #include "Effect.h"
-#include "Biquad.h"
 #include "FilterUtils.h"
 #include "FixedValue.h"
 #include "ControlGenerator.h"
@@ -73,9 +72,9 @@ namespace Tonic {
       inline void setBypass( ControlGenerator bypass ){ bypass_ = bypass; };
       
       // subclasses override to compute new coefficients and apply filter to passed-in frames
-      virtual void applyFilter( TonicFloat cutoff, TonicFloat Q, TonicFrames & frames ) = 0;
+      virtual void applyFilter( TonicFloat cutoff, TonicFloat Q, TonicFrames & frames, const SynthesisContext & context ) = 0;
       
-      inline void tick( TonicFrames& frames){
+      inline void computeSynthesisBlock( const SynthesisContext & context ){
           
         TonicFloat cCutoff;
         TonicFloat cQ;
@@ -86,17 +85,17 @@ namespace Tonic {
         // For now only using first frame of output. Setting coefficients each frame is very inefficient.
         // Updates every 64-samples is typically fast enough to avoid artifacts when sweeping filters.
         
-        cutoff_.tick(workspace_);
+        cutoff_.tick(workspace_, context);
         cCutoff = clamp(workspace_(0,0), 20, sampleRate()/2);
-        Q_.tick(workspace_);
+        Q_.tick(workspace_, context);
         cQ = max(workspace_(0,0), 0);
         
         // get input frames
-        input_.tick(frames);
+        input_.tick(synthesisBlock_, context);
         
         unlockMutex();
         
-        applyFilter(cCutoff, cQ, frames);
+        applyFilter(cCutoff, cQ, synthesisBlock_, context);
       }
       
     };
@@ -110,18 +109,18 @@ namespace Tonic {
 
     protected:
       
-      Biquad_ biquad_;
+      Biquad biquad_;
       
     public:
       
-      inline void applyFilter( TonicFloat cutoff, TonicFloat Q, TonicFrames & frames ){
+      inline void applyFilter( TonicFloat cutoff, TonicFloat Q, TonicFrames & frames, const SynthesisContext & context ){
           // set coefficients
           TonicFloat newCoef[5];
           bltCoef(0, 0, 1.0f/Q, 1.0f/Q, 1, cutoff, newCoef);
           biquad_.setCoefficients(newCoef);
 
           // compute
-          biquad_.tick(frames);
+          biquad_.filter(frames);
       }
       
     };
@@ -135,12 +134,12 @@ namespace Tonic {
       
     protected:
       
-      Biquad_ biquad1_;
-      Biquad_ biquad2_;
+      Biquad biquad1_;
+      Biquad biquad2_;
       
     public:
       
-      inline void applyFilter( TonicFloat cutoff, TonicFloat Q, TonicFrames & frames ){
+      inline void applyFilter( TonicFloat cutoff, TonicFloat Q, TonicFrames & frames, const SynthesisContext & context ){
         // set coefficients
         TonicFloat newCoef[5];
         
@@ -153,8 +152,8 @@ namespace Tonic {
         biquad2_.setCoefficients(newCoef);
         
         // compute
-        biquad1_.tick(frames);
-        biquad2_.tick(frames);
+        biquad1_.filter(frames);
+        biquad2_.filter(frames);
       }
       
     };
@@ -168,11 +167,11 @@ namespace Tonic {
       
     protected:
       
-      Biquad_ biquad_;
+      Biquad biquad_;
       
     public:
       
-      inline void applyFilter( TonicFloat cutoff, TonicFloat Q, TonicFrames & frames ){
+      inline void applyFilter( TonicFloat cutoff, TonicFloat Q, TonicFrames & frames, const SynthesisContext & context ){
         
         // set coefficients
         TonicFloat newCoef[5];
@@ -180,7 +179,7 @@ namespace Tonic {
         biquad_.setCoefficients(newCoef);
         
         // compute
-        biquad_.tick(frames);
+        biquad_.filter(frames);
       }
       
     };
@@ -194,12 +193,12 @@ namespace Tonic {
       
     protected:
       
-      Biquad_ biquad1_;
-      Biquad_ biquad2_;
+      Biquad biquad1_;
+      Biquad biquad2_;
       
     public:
       
-      inline void applyFilter( TonicFloat cutoff, TonicFloat Q, TonicFrames & frames ){
+      inline void applyFilter( TonicFloat cutoff, TonicFloat Q, TonicFrames & frames, const SynthesisContext & context ){
         // set coefficients
         TonicFloat newCoef[5];
         
@@ -212,8 +211,8 @@ namespace Tonic {
         biquad2_.setCoefficients(newCoef);
         
         // compute
-        biquad1_.tick(frames);
-        biquad2_.tick(frames);
+        biquad1_.filter(frames);
+        biquad2_.filter(frames);
       }
       
     };
@@ -227,11 +226,11 @@ namespace Tonic {
       
     protected:
       
-      Biquad_ biquad_;
+      Biquad biquad_;
       
     public:
       
-      inline void applyFilter( TonicFloat cutoff, TonicFloat Q, TonicFrames & frames ){
+      inline void applyFilter( TonicFloat cutoff, TonicFloat Q, TonicFrames & frames, const SynthesisContext & context ){
         
         // set coefficients
         TonicFloat newCoef[5];
@@ -239,7 +238,7 @@ namespace Tonic {
         biquad_.setCoefficients(newCoef);
         
         // compute
-        biquad_.tick(frames);
+        biquad_.filter(frames);
       }
       
     };
@@ -253,12 +252,12 @@ namespace Tonic {
       
     protected:
       
-      Biquad_ biquad1_;
-      Biquad_ biquad2_;
+      Biquad biquad1_;
+      Biquad biquad2_;
       
     public:
       
-      inline void applyFilter( TonicFloat cutoff, TonicFloat Q, TonicFrames & frames ){
+      inline void applyFilter( TonicFloat cutoff, TonicFloat Q, TonicFrames & frames, const SynthesisContext & context ){
         // set coefficients
         TonicFloat newCoef[5];
         
@@ -271,8 +270,8 @@ namespace Tonic {
         biquad2_.setCoefficients(newCoef);
         
         // compute
-        biquad1_.tick(frames);
-        biquad2_.tick(frames);
+        biquad1_.filter(frames);
+        biquad2_.filter(frames);
       }
       
     };

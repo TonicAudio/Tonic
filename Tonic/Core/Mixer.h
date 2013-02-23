@@ -44,7 +44,6 @@ namespace Tonic {
     Mixer();
     void addInput(BufferFiller* input);
     void removeInput(BufferFiller* input);
-    void tick( TonicFrames& frames );
   };
 }
 

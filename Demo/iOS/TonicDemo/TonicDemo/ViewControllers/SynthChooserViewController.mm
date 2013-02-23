@@ -93,16 +93,15 @@ enum {
       synthName = @"SineAMSynth";
       description = @"Swipe up and down to change modulator freq. Swipe L/R to change carrier freq.";
       action = ^(Tonic::Synth* synth, CGPoint touchPointNorm){
-        SineAMSynth *as = (SineAMSynth*)synth;
         
         // arbitrarily chosen midi note numbers (linear pitch)
         TonicFloat car = Tonic::mtof(Tonic::map(touchPointNorm.x, 0.0f, 1.0f, 47, 88));
         
         // exponenetial sweep in frequency, 0-1000 Hz
         TonicFloat mod = 1000.0f / powf(10.0f, Tonic::map(touchPointNorm.y, 0.0f, 1.0f, 3.0f, 0.0f));
-        
-        as->setCarrierFreq(car);
-        as->setModFreq(mod);
+
+        synth->sendMessage("carrierFreq", car);
+        synth->sendMessage("modFreq", mod);
       };
       break;
       
@@ -110,8 +109,8 @@ enum {
       synthName = @"FMDroneSynth";
       description = @"FM Synth";
       action = ^(Tonic::Synth* synth, CGPoint touchPointNorm){
-        synth->sendMessage("baseFreq", Tonic::map(touchPointNorm.x, 0.0f, 1.0f, 100, 500));
-        synth->sendMessage("fmAmount", Tonic::map(touchPointNorm.y, 0.0f, 1.0f, 0.0f, 50.0f));
+        synth->sendMessage("carrierFreq", Tonic::map(touchPointNorm.x, 0.0f, 1.0f, 100, 500));
+        synth->sendMessage("modIndex", Tonic::map(touchPointNorm.y*touchPointNorm.y, 0.0f, 1.0f, 0.0f, 2.0f));
       };
       break;
       

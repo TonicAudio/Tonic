@@ -19,35 +19,23 @@ class SineAMSynth : public Synth{
 
 public:
 
-  SineAMSynth() : carrierAmt(1.0f) {
+  SineAMSynth() {
     
-    // TODO: do this by registering messages
-    carrierFreq.value(400).lengthMs(2000);
-    modFreq.value(10).lengthMs(200);
-    
-    carrier.freq(carrierFreq);
-    modulator.freq(modFreq);
-      
     outputGen =
     (
-      ( modulator + carrierAmt ) * carrier
+      ( SineWave().freq(
+          RampedValue(10).target( registerMessage("modFreq", 10) )
+        ) +
+        RampedValue(1).target( registerMessage("carrierAmt", 1) )
+      ) *
+      SineWave().freq(
+        RampedValue(400, 1000).target( registerMessage("carrierFreq", 400) )
+      )
     ) * 0.5f;
     
   };
   
-  inline void setCarrierAmt(TonicFloat newCarrierAmt) { carrierAmt = clamp(newCarrierAmt, 0.0f, 1.0f); };
-  inline void setCarrierFreq(TonicFloat nCarFreq) { carrierFreq.target(nCarFreq); };
-  inline void setModFreq(TonicFloat nModFreq) { modFreq.target(nModFreq); };
-  
 private:
-  
-  SineWave carrier;
-  SineWave modulator;
-  
-  RampedValue carrierFreq;
-  RampedValue modFreq;
-  
-  TonicFloat carrierAmt;
   
   static SourceRegister<SineAMSynth> reg;
   

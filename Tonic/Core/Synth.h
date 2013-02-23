@@ -36,8 +36,8 @@ namespace Tonic{
   class Synth  : public BufferFiller{
     
   public:
+    
     Synth();
-    void                      tick( TonicFrames& frames );
     
     // It's quite conceivable that we'll want to move the messaging stuff up into Source
     ControlValue              registerMessage(string name, float value=0);

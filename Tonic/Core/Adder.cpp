@@ -27,8 +27,8 @@ https://ccrma.stanford.edu/software/stk/
 
 namespace Tonic{ namespace Tonic_ {
 
-  Adder_::Adder_(int numChannels){
-    workSpace.resize(kSynthesisBlockSize, numChannels);
+  Adder_::Adder_(){
+    workSpace.resize(kSynthesisBlockSize, 2, 0);
   }
   
   Adder_::~Adder_(){

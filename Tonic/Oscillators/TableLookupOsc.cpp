@@ -24,18 +24,18 @@ namespace Tonic { namespace Tonic_{
     phase_ = 0.0f;
   }
   
-  inline void TableLookupOsc_::tick( TonicFrames& frames){
+  inline void TableLookupOsc_::computeSynthesisBlock( const SynthesisContext & context ){
     
     // Update the frequency data
     lockMutex();
-    frequencyGenerator.tick(modFrames);
+    frequencyGenerator.tick(modFrames, context);
     unlockMutex();
     
     static const TonicFloat rateConstant = (TonicFloat)TABLE_SIZE / Tonic::sampleRate();
-    const unsigned int nFrames = frames.frames();
-    const unsigned int stride = frames.channels();
+    const unsigned int nFrames = synthesisBlock_.frames();
+    const unsigned int stride = synthesisBlock_.channels();
     
-    TonicFloat *samples = &frames[0];
+    TonicFloat *samples = &synthesisBlock_[0];
     TonicFloat *rateBuffer = &modFrames[0];
     TonicFloat *tableData = &(tableReference())[0];
     
@@ -57,7 +57,7 @@ namespace Tonic { namespace Tonic_{
     
     TonicFloat *tAddr, f1, f2, frac;
     
-    for ( unsigned int i=0; i<frames.frames(); i++ ) {
+    for ( unsigned int i=0; i<synthesisBlock_.frames(); i++ ) {
       
       sd.d = ps;
       ps += *rateBuffer;
@@ -80,7 +80,7 @@ namespace Tonic { namespace Tonic_{
     phase_ = sd.d - BIT32DECPT * TABLE_SIZE;
     
     // mono source, so copy channels if necessary
-    frames.fillChannels();
+    synthesisBlock_.fillChannels();
     
   }
 

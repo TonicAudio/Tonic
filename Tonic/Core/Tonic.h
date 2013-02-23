@@ -47,10 +47,39 @@ const TonicFloat PI           = 3.14159265358979;
 const TonicFloat TWO_PI       = 2 * PI;
 #endif
 
-
 namespace Tonic {
+  
+  // -- Global Constants --
+  
+  static TonicFloat sampleRate(){
+      return 44100;
+  };
 
-  // A few helper functions. May or may not belong here...
+  static const unsigned int kSynthesisBlockSize = 64;
+  
+  // -- Synthesis Context Struct --
+  
+  // Context passed down from root BufferFiller graph object to all sub-generators
+  // Synchronizes signal flow in cases when generator output is shared between multiple inputs
+  struct SynthesisContext{
+    
+    // Number of frames elapsed since program start
+    // unsigned long will last 38+ days before overflow at 44.1 kHz
+    unsigned long elapsedFrames;
+    
+    // System time in seconds
+    double elapsedTime;
+    
+    SynthesisContext() : elapsedFrames(0), elapsedTime(0) {};
+    
+    void tick() {
+      elapsedFrames += kSynthesisBlockSize;
+      elapsedTime += (double)kSynthesisBlockSize/sampleRate();
+    };
+    
+  };
+
+#pragma mark - Utility Functions
   
   //-- Arithmetic --
   
@@ -105,16 +134,14 @@ namespace Tonic {
     #endif
   }
   
-  // --
-    
-  static TonicFloat sampleRate(){
-    return 44100;
-  };
-  
-  static const int            kSynthesisBlockSize = 64;
+  // -- Logging --
   
   static void error(std::string message){
     printf("Tonic::error: %s\n",  message.c_str());
+  }
+  
+  static void debug(std::string message){
+    printf("Tonic::debug: %s\n", message.c_str());
   }
   
 }

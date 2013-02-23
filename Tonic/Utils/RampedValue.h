@@ -48,7 +48,8 @@ namespace Tonic {
     public:
       RampedValue_();
       ~RampedValue_();
-      void tick( TonicFrames& frames);
+      
+      void computeSynthesisBlock( const SynthesisContext & context );
       
       void setValueGen( ControlGenerator value );
       void setTargetGen( ControlGenerator target );
@@ -60,25 +61,25 @@ namespace Tonic {
   
     };
     
-    inline void RampedValue_::tick( TonicFrames& frames){
+    inline void RampedValue_::computeSynthesisBlock( const SynthesisContext & context ){
     
       lockMutex();
       
       // Must do this in this order - value will override any change to target
-      if (targetGen_.hasChanged() || lengthGen_.hasChanged()){
-        unsigned long lSamp = lengthGen_.getValue()*Tonic::sampleRate()/1000.0f;
-        updateTarget(targetGen_.getValue(), lSamp);
+      if (targetGen_.hasChanged(context) || lengthGen_.hasChanged(context)){
+        unsigned long lSamp = lengthGen_.getValue(context)*Tonic::sampleRate()/1000.0f;
+        updateTarget(targetGen_.getValue(context), lSamp);
       }
       
-      if(valueGen_.hasChanged()){
-        updateValue(valueGen_.getValue());
+      if(valueGen_.hasChanged(context)){
+        updateValue(valueGen_.getValue(context));
       }
 
       unlockMutex();
       
-      TonicFloat *fdata = &frames[0];
-      unsigned int nFrames = frames.frames();
-      unsigned int stride = frames.channels();
+      TonicFloat *fdata = &synthesisBlock_[0];
+      unsigned int nFrames = synthesisBlock_.frames();
+      unsigned int stride = synthesisBlock_.channels();
             
       if (finished_){
         #ifdef USE_APPLE_ACCELERATE
@@ -94,7 +95,7 @@ namespace Tonic {
         
         // figure out if we will finish the ramp in this tick
         unsigned long remainder = count_ > len_ ? 0 : len_ - count_;
-        if (remainder < frames.frames()){
+        if (remainder < synthesisBlock_.frames()){
           
           // fill part of the ramp
           #ifdef USE_APPLE_ACCELERATE
@@ -125,7 +126,7 @@ namespace Tonic {
           
           // fill the whole ramp
           #ifdef USE_APPLE_ACCELERATE
-          TonicFloat segTarget = last_ + frames.frames()*inc_;
+          TonicFloat segTarget = last_ + synthesisBlock_.frames()*inc_;
           vDSP_vgen(&last_, &segTarget, fdata, stride, nFrames);
           #else
           TonicFloat val = last_ + inc_;
@@ -137,12 +138,12 @@ namespace Tonic {
           #endif
           
           count_ += nFrames;
-          last_ = frames(nFrames - 1, 0);
+          last_ = synthesisBlock_(nFrames - 1, 0);
         }
       }
       
       // mono source, so need to fill out channels if necessary
-      frames.fillChannels();
+      synthesisBlock_.fillChannels();
       
     }
     
@@ -191,7 +192,7 @@ namespace Tonic {
     
   public:
       
-    RampedValue(TonicFloat startValue = 0);
+    RampedValue(TonicFloat startValue = 0, TonicFloat lenMs = 50);
     
     //! Set target value
     RampedValue & target( TonicFloat target );

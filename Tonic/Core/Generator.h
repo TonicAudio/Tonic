@@ -35,17 +35,42 @@ namespace Tonic {
     public:
       Generator_();
       virtual ~Generator_();
-      virtual void tick( TonicFrames& frames) = 0;
+      
+      virtual void tick( TonicFrames& frames, const SynthesisContext &context );
+      
+      // override point for defining generator behavior
+      // subclasses should implment to fill synthesisBlock_ with new frames
+      virtual void computeSynthesisBlock( const SynthesisContext &context ) = 0;
       
       // mutex for swapping inputs, etc
       void lockMutex();
       void unlockMutex();
       
     protected:
-        
+      
+      TonicFrames synthesisBlock_;
+      unsigned long lastFrameIndex_;
+      
       pthread_mutex_t genMutex_;
 
     };
+    
+    inline void Generator_::tick(TonicFrames &frames, const SynthesisContext &context ){
+      
+      // resize the block if necessary? not sure how to handle this yet
+      if (frames.channels() > synthesisBlock_.channels()){
+        synthesisBlock_.resize(kSynthesisBlockSize, frames.channels(), 0);
+      }
+      
+      // check context to see if we need new frames
+      if (context.elapsedFrames == 0 || lastFrameIndex_ != context.elapsedFrames){
+        computeSynthesisBlock(context);
+        lastFrameIndex_ = context.elapsedFrames;
+      }
+      
+      // need to see how fast this actually is
+      frames.fill(synthesisBlock_);
+    }
     
     inline void Generator_::lockMutex(){
       pthread_mutex_lock(&genMutex_);
@@ -59,9 +84,7 @@ namespace Tonic {
 
     class PassThroughGenerator_ : public Tonic_::Generator_{
     public:
-      void tick( TonicFrames& frames){
-      
-      }
+      void computeSynthesisBlock( const SynthesisContext &context ) {};
     };
 
   }
@@ -98,8 +121,8 @@ namespace Tonic {
       return mGen == r.mGen;
     }
     
-    void tick(TonicFrames& frames){
-      mGen->tick(frames);
+    virtual void tick(TonicFrames& frames, const SynthesisContext & context){
+      mGen->tick(frames, context);
     }
 
   };

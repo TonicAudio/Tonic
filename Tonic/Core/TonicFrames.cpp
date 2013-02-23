@@ -90,20 +90,23 @@ TonicFrames& TonicFrames :: operator= ( const TonicFrames& f )
 
 void TonicFrames :: resize( size_t nFrames, unsigned int nChannels )
 {
-  nFrames_ = nFrames;
-  nChannels_ = nChannels;
+  if (nFrames != nFrames_ || nChannels != nChannels_){
+    
+    nFrames_ = nFrames;
+    nChannels_ = nChannels;
 
-  size_ = nFrames_ * nChannels_;
-  if ( size_ > bufferSize_ ) {
-    if ( data_ ) free( data_ );
-    data_ = (TonicFloat *) malloc( size_ * sizeof( TonicFloat ) );
+    size_ = nFrames_ * nChannels_;
+    if ( size_ > bufferSize_ ) {
+      if ( data_ ) free( data_ );
+      data_ = (TonicFloat *) malloc( size_ * sizeof( TonicFloat ) );
 #if defined(_STK_DEBUG_)
-    if ( data_ == NULL ) {
-      std::string error = "TonicFrames::resize: memory allocation error!";
-      Stk::handleError( error, StkError::MEMORY_ALLOCATION );
-    }
+      if ( data_ == NULL ) {
+        std::string error = "TonicFrames::resize: memory allocation error!";
+        Stk::handleError( error, StkError::MEMORY_ALLOCATION );
+      }
 #endif
-    bufferSize_ = size_;
+      bufferSize_ = size_;
+    }
   }
 }
 
@@ -111,7 +114,12 @@ void TonicFrames :: resize( size_t nFrames, unsigned int nChannels, TonicFloat v
 {
   this->resize( nFrames, nChannels );
 
+#ifdef USE_APPLE_ACCELERATE
+  vDSP_vfill(&value, data_, 1, size_);
+#else
   for ( size_t i=0; i<size_; i++ ) data_[i] = value;
+#endif
+  
 }
 
 TonicFloat TonicFrames :: interpolate( TonicFloat frame, unsigned int channel ) const

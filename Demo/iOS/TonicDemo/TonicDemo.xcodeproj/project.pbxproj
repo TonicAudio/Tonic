@@ -36,11 +36,9 @@
 		F256C8E516C5A0BF0096574D /* SynthChooserViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = F256C8E216C5A0BF0096574D /* SynthChooserViewController.mm */; };
 		F256C8E616C5A0BF0096574D /* SynthChooserViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F256C8E316C5A0BF0096574D /* SynthChooserViewController.xib */; };
 		F256C8E816C5A6DF0096574D /* SynthTestViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F256C8E716C5A6DF0096574D /* SynthTestViewController.xib */; };
-		F263BD2C16D54E83008AADA6 /* Biquad.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F263BD2A16D54E83008AADA6 /* Biquad.cpp */; };
 		F2C9F6F916C493870090A78D /* Adder.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F2C9F6E616C493870090A78D /* Adder.cpp */; };
 		F2C9F6FA16C493870090A78D /* FixedValue.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F2C9F6E816C493870090A78D /* FixedValue.cpp */; };
 		F2C9F6FB16C493870090A78D /* Generator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F2C9F6EA16C493870090A78D /* Generator.cpp */; };
-		F2C9F6FC16C493870090A78D /* MonoToStereo.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F2C9F6EC16C493870090A78D /* MonoToStereo.cpp */; };
 		F2C9F6FD16C493870090A78D /* Multiplier.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F2C9F6EE16C493870090A78D /* Multiplier.cpp */; };
 		F2C9F6FE16C493870090A78D /* Synth.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F2C9F6F016C493870090A78D /* Synth.cpp */; };
 		F2C9F6FF16C493870090A78D /* TonicFrames.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F2C9F6F316C493870090A78D /* TonicFrames.cpp */; };
@@ -101,8 +99,6 @@
 		F256C8E216C5A0BF0096574D /* SynthChooserViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = SynthChooserViewController.mm; sourceTree = "<group>"; };
 		F256C8E316C5A0BF0096574D /* SynthChooserViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SynthChooserViewController.xib; sourceTree = "<group>"; };
 		F256C8E716C5A6DF0096574D /* SynthTestViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SynthTestViewController.xib; sourceTree = "<group>"; };
-		F263BD2A16D54E83008AADA6 /* Biquad.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Biquad.cpp; sourceTree = "<group>"; };
-		F263BD2B16D54E83008AADA6 /* Biquad.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Biquad.h; sourceTree = "<group>"; };
 		F263BD2D16D55AC2008AADA6 /* FilterUtils.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FilterUtils.h; sourceTree = "<group>"; };
 		F263BD2F16D56751008AADA6 /* Effect.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Effect.h; sourceTree = "<group>"; };
 		F263BD3416D57228008AADA6 /* FilterTest.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FilterTest.h; sourceTree = "<group>"; };
@@ -112,8 +108,6 @@
 		F2C9F6E916C493870090A78D /* FixedValue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FixedValue.h; sourceTree = "<group>"; };
 		F2C9F6EA16C493870090A78D /* Generator.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Generator.cpp; sourceTree = "<group>"; };
 		F2C9F6EB16C493870090A78D /* Generator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Generator.h; sourceTree = "<group>"; };
-		F2C9F6EC16C493870090A78D /* MonoToStereo.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MonoToStereo.cpp; sourceTree = "<group>"; };
-		F2C9F6ED16C493870090A78D /* MonoToStereo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MonoToStereo.h; sourceTree = "<group>"; };
 		F2C9F6EE16C493870090A78D /* Multiplier.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Multiplier.cpp; sourceTree = "<group>"; };
 		F2C9F6EF16C493870090A78D /* Multiplier.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Multiplier.h; sourceTree = "<group>"; };
 		F2C9F6F016C493870090A78D /* Synth.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Synth.cpp; sourceTree = "<group>"; };
@@ -283,8 +277,6 @@
 		F263BD2916D54E5E008AADA6 /* Filters */ = {
 			isa = PBXGroup;
 			children = (
-				F263BD2A16D54E83008AADA6 /* Biquad.cpp */,
-				F263BD2B16D54E83008AADA6 /* Biquad.h */,
 				9A1589EF16D7E1D200E2BC81 /* Filters.cpp */,
 				9A1589F016D7E1D200E2BC81 /* Filters.h */,
 				F263BD2D16D55AC2008AADA6 /* FilterUtils.h */,
@@ -297,6 +289,12 @@
 			children = (
 				F2C9F6E616C493870090A78D /* Adder.cpp */,
 				F2C9F6E716C493870090A78D /* Adder.h */,
+				F23E243F16C6C5F00082EF65 /* BufferFiller.cpp */,
+				F23E244016C6C5F00082EF65 /* BufferFiller.h */,
+				A82437DA16CB36A8000677C7 /* ControlGenerator.cpp */,
+				A82437D816CB3010000677C7 /* ControlGenerator.h */,
+				A82437C716CA7470000677C7 /* ControlValue.cpp */,
+				A82437C816CA7470000677C7 /* ControlValue.h */,
 				F263BD2F16D56751008AADA6 /* Effect.h */,
 				F2C9F6E816C493870090A78D /* FixedValue.cpp */,
 				F2C9F6E916C493870090A78D /* FixedValue.h */,
@@ -304,21 +302,13 @@
 				F2C9F6EB16C493870090A78D /* Generator.h */,
 				F23E243C16C6BF450082EF65 /* Mixer.cpp */,
 				F23E243D16C6BF450082EF65 /* Mixer.h */,
-				F2C9F6EC16C493870090A78D /* MonoToStereo.cpp */,
-				F2C9F6ED16C493870090A78D /* MonoToStereo.h */,
 				F2C9F6EE16C493870090A78D /* Multiplier.cpp */,
 				F2C9F6EF16C493870090A78D /* Multiplier.h */,
 				F2C9F6F016C493870090A78D /* Synth.cpp */,
 				F2C9F6F116C493870090A78D /* Synth.h */,
-				F23E243F16C6C5F00082EF65 /* BufferFiller.cpp */,
-				F23E244016C6C5F00082EF65 /* BufferFiller.h */,
 				F2C9F6F216C493870090A78D /* Tonic.h */,
 				F2C9F6F316C493870090A78D /* TonicFrames.cpp */,
 				F2C9F6F416C493870090A78D /* TonicFrames.h */,
-				A82437C716CA7470000677C7 /* ControlValue.cpp */,
-				A82437C816CA7470000677C7 /* ControlValue.h */,
-				A82437D816CB3010000677C7 /* ControlGenerator.h */,
-				A82437DA16CB36A8000677C7 /* ControlGenerator.cpp */,
 			);
 			path = Core;
 			sourceTree = "<group>";
@@ -423,7 +413,6 @@
 				F2C9F6F916C493870090A78D /* Adder.cpp in Sources */,
 				F2C9F6FA16C493870090A78D /* FixedValue.cpp in Sources */,
 				F2C9F6FB16C493870090A78D /* Generator.cpp in Sources */,
-				F2C9F6FC16C493870090A78D /* MonoToStereo.cpp in Sources */,
 				F2C9F6FD16C493870090A78D /* Multiplier.cpp in Sources */,
 				F2C9F6FE16C493870090A78D /* Synth.cpp in Sources */,
 				F2C9F6FF16C493870090A78D /* TonicFrames.cpp in Sources */,
@@ -437,7 +426,6 @@
 				F256C8E516C5A0BF0096574D /* SynthChooserViewController.mm in Sources */,
 				F23E243E16C6BF450082EF65 /* Mixer.cpp in Sources */,
 				F23E244116C6C5F10082EF65 /* BufferFiller.cpp in Sources */,
-				F263BD2C16D54E83008AADA6 /* Biquad.cpp in Sources */,
 				9A1589F116D7E1D200E2BC81 /* Filters.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

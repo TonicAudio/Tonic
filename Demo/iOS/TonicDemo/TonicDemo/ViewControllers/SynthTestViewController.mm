@@ -76,8 +76,6 @@
         self.panAction(synthInstance, touchPoint);
       }
       
-//      TonicFloat spread = powf(Tonic::map(touchPoint.y, 0.0f, self.view.bounds.size.height, 1.0f, 0.0f), 2.0f);
-//      sineSumSynth->setSpread(spread);
     }
       break;
       

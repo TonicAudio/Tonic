@@ -31,8 +31,9 @@ namespace Tonic { namespace Tonic_{
 
 } // Namespace Tonic_
   
-  RampedValue::RampedValue(TonicFloat startValue){
-      value(startValue);
+  RampedValue::RampedValue(TonicFloat startValue, TonicFloat lenMs ){
+    value(startValue);
+    lengthMs(lenMs);
   }
   
   //! Set target value

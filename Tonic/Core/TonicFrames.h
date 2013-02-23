@@ -114,6 +114,12 @@ namespace Tonic {
     //! Fill all channels with contents of channel 0
     void fillChannels();
     
+    //! Fill frames from other source.
+    /* 
+      Copies or consolidates channels if necessary. Frame count must match.
+    */
+    void fill( TonicFrames & f );
+    
     //! Return an interpolated value at the fractional frame index and channel.
     /*!
       This function performs linear interpolation.  The \c frame
@@ -260,6 +266,53 @@ namespace Tonic {
   {
     for (unsigned int i=1; i<nChannels_; i++){
       this->copyChannel(0, i);
+    }
+  }
+  
+  inline void TonicFrames::fill( TonicFrames &f ){
+    
+    if (nFrames_ == f.frames()){
+      
+      unsigned int fChannels = f.channels();
+      TonicFloat *dptr = data_;
+      TonicFloat *fptr = &f[0];
+      
+      if (nChannels_ == fChannels){
+        memcpy(dptr, fptr, size_ * sizeof(TonicFloat));
+      }
+      else if (nChannels_ < fChannels){
+        
+        // consolidate channels
+        memset(dptr, 0, size_ * sizeof(TonicFloat));
+        for (unsigned int c=0; c<fChannels; c++){
+          dptr = data_;
+          fptr = &f(0,c);
+          for (unsigned int i=0; i<nFrames_; i++, dptr+=nChannels_, fptr+=fChannels){
+            *dptr += *fptr;
+          }
+        }
+        
+        // apply scaling
+        TonicFloat s = 1.0f/fChannels;
+        dptr = data_;
+        for (unsigned int i=0; i<nFrames_; i++, dptr+=nChannels_){
+          *dptr *= s;
+        }
+        
+        // fill all channels if necessary
+        fillChannels();
+        
+      }
+      else{
+        for (unsigned int i=0; i<nFrames_; i++, fptr += fChannels){
+          *dptr++ = *fptr;
+        }
+        fillChannels();
+      }
+      
+    }
+    else{
+      error("Trying to fill frames from a source with a different number of frames");
     }
   }
 

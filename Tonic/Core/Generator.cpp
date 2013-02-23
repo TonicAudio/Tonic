@@ -25,8 +25,9 @@ https://ccrma.stanford.edu/software/stk/
 
 namespace Tonic{ namespace Tonic_{
   
-  Generator_::Generator_(){
+  Generator_::Generator_() : lastFrameIndex_(0){
     pthread_mutex_init(&genMutex_, NULL);
+    synthesisBlock_.resize(kSynthesisBlockSize, 1, 0);
   }
 
   Generator_::~Generator_(){

@@ -12,22 +12,30 @@ namespace Tonic {
   
   namespace Tonic_{
   
-    ControlValue_::ControlValue_():mHasChanged(false),mValue(0){}
+    ControlValue_::ControlValue_():
+      mHasChanged(false),
+      mLastHasChanged(false),
+      mValue(0),
+      mLastFrameIndex(0)
+    {}
+    
     ControlValue_::~ControlValue_(){}
     
-    bool ControlValue_::hasChanged(){
-      return mHasChanged;
+    bool ControlValue_::hasChanged(const SynthesisContext & context){
+      if (mLastFrameIndex == 0 || mLastFrameIndex != context.elapsedFrames){
+        mLastFrameIndex = context.elapsedFrames;
+        mLastHasChanged = mHasChanged;
+        mHasChanged = false;
+      }
+      return mLastHasChanged;
+    }
+    
+    TonicFloat ControlValue_::getValue(const SynthesisContext & context){
+      return mValue;
     }
     
     void ControlValue_::setHasChanged(bool flagVal){
       mHasChanged = flagVal;
-    }
-    
-    TonicFloat ControlValue_::getValue(){
-      // TODO: Until we figure out a better way to manage multiple instances of
-      // ControlGenerators, this should also reset hasChanged()
-      mHasChanged = false;
-      return mValue;
     }
     
     void ControlValue_::setValue(float value){

@@ -44,7 +44,95 @@ namespace Tonic {
       coef_out[3] = 2.0f * (a0 - sfsq)/norm;
       coef_out[4] = (a0 - a1*sf + sfsq)/norm;
   }
+  
+#pragma mark - Biquad Class
+  
+  //! Biquad_ is an IIR biquad filter which provides a base object on which to build more advanced filters
+  class Biquad {
     
+  protected:
+    
+    TonicFloat coef_[5];
+    TonicFrames inputVec_;
+    TonicFrames outputVec_;
+    
+  public:
+    
+    Biquad(){
+      memset(coef_, 0, 5 * sizeof(TonicFloat));
+      inputVec_.resize(kSynthesisBlockSize + 2, 2, 0);
+      outputVec_.resize(kSynthesisBlockSize + 2, 2, 0);
+    }
+    
+    //! Set the coefficients for the filtering operation.
+    /*
+     b0 + b1*z^-1 + b2*z^-2
+     H(z) = ------------------------
+     1 + a1*z^-1 + a2*z^-2
+     */
+    void setCoefficients( TonicFloat b0, TonicFloat b1, TonicFloat b2, TonicFloat a1, TonicFloat a2 );
+    void setCoefficients( TonicFloat *newCoef );
+    
+    void filter( TonicFrames &frames );
+  };
+  
+  inline void Biquad::setCoefficients(TonicFloat b0, TonicFloat b1, TonicFloat b2, TonicFloat a1, TonicFloat a2){
+    coef_[0] = b0;
+    coef_[1] = b1;
+    coef_[2] = b2;
+    coef_[3] = a1;
+    coef_[4] = a2;
+  }
+  
+  inline void Biquad::setCoefficients(TonicFloat *newCoef){
+    memcpy(coef_, newCoef, 5 * sizeof(TonicFloat));
+  }
+  
+  inline void Biquad::filter( TonicFrames &frames ){
+    
+    // resize vectors to match number of channels (if necessary)
+    if (inputVec_.channels() != frames.channels()){
+      inputVec_.resize(kSynthesisBlockSize + 2, frames.channels(), 0);
+    }
+    
+    if (outputVec_.channels() != frames.channels()){
+      outputVec_.resize(kSynthesisBlockSize + 2, frames.channels(), 0);
+    }
+    
+    // initialize vectors
+    memcpy(&inputVec_[0], &inputVec_(kSynthesisBlockSize, 0), 2 * inputVec_.channels() * sizeof(TonicFloat));
+    memcpy(&inputVec_(2, 0), &frames[0], frames.size() * sizeof(TonicFloat));
+    memcpy(&outputVec_[0], &outputVec_(kSynthesisBlockSize, 0), 2 * outputVec_.channels() * sizeof(TonicFloat));
+    
+    // perform IIR filter
+    
+    unsigned int stride = frames.channels();
+    
+#ifdef USE_APPLE_ACCELERATE
+    for (unsigned int c=0; c<stride; c++){
+      vDSP_deq22(&inputVec_(0,c), stride, coef_, &outputVec_(0,c), stride, kSynthesisBlockSize);
+    }
+#else
+    
+    for (unsigned int c=0; c<stride; c++){
+      
+      TonicFloat* in = &inputVec_(2, c);
+      TonicFloat* out = &outputVec_(2, c);
+      
+      for (unsigned int i=0; i<kSynthesisBlockSize; i++){
+        *out = *(in)*coef_[0] + *(in-stride)*coef_[1] + *(in-2*stride)*coef_[2] - *(out-stride)*coef_[3] - *(out-2*stride)*coef_[4];
+        in += stride;
+        out += stride;
+      }
+      
+    }
+#endif
+    
+    // copy to synthesis block
+    memcpy(&frames[0], &outputVec_(2,0), kSynthesisBlockSize * stride * sizeof(TonicFloat));
+  }
+  
+  
 };
 
 #endif

@@ -21,12 +21,22 @@ class FMDroneSynth : public Synth {
 
 public:
   FMDroneSynth(){
+    
+    RampedValue rCarrierFreq = RampedValue(200).target( registerMessage("carrierFreq", 200) );
+    Tonic::Generator rModFreq = rCarrierFreq * 3; //RampedValue(2).target( registerMessage("mcRatio", 2) );
+    
+//    outputGen = (SineWave().freq(rCarrierFreq) + SineWave().freq(rModFreq) + SineWave().freq(rModFreq * powf(2,10.0/12.0))) * 0.15;
+    
     outputGen = SineWave().freq(
-       RampedValue(200).target( registerMessage("baseFreq", 200) )
-      + (
-          SineWave().freq( 10 ) * RampedValue(0).target(registerMessage("fmAmount", 0))
-         )
-    );
+                  rCarrierFreq  + (
+                    SineWave().freq(
+                        rModFreq
+                    ) *
+                    rModFreq *
+                    RampedValue(0).target( registerMessage("modIndex", 0) )
+                  )
+                )
+                * 0.5f;
   }
   
   static SourceRegister<FMDroneSynth> reg;
