@@ -24,12 +24,12 @@ public:
     outputGen =
     (
       ( SineWave().freq(
-          RampedValue(10).target( registerMessage("modFreq", 10) )
+          registerMessage("modFreq", 10).ramped()
         ) +
-        RampedValue(1).target( registerMessage("carrierAmt", 1) )
+        registerMessage("carrierAmt", 1).ramped()
       ) *
       SineWave().freq(
-        RampedValue(400, 1000).target( registerMessage("carrierFreq", 400) )
+        registerMessage("carrierFreq", 400).ramped(1000)
       )
     ) * 0.5f;
     

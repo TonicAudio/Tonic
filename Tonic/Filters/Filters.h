@@ -282,6 +282,7 @@ namespace Tonic {
   template<class FilterType, class FilterType_> class TemplatedFilter : public TemplatedEffect<FilterType, FilterType_>{
   
   public:
+    
   
     createGeneratorSetters(FilterType, cutoff, setCutoff);
     createGeneratorSetters(FilterType, Q, setQ);

@@ -7,6 +7,7 @@
 //
 
 #include "ControlValue.h"
+#include "RampedValue.h"
 
 namespace Tonic {
   
@@ -34,6 +35,10 @@ namespace Tonic {
       return mValue;
     }
     
+    TonicFloat ControlValue_::getValue(){
+      return mValue;
+    }
+    
     void ControlValue_::setHasChanged(bool flagVal){
       mHasChanged = flagVal;
     }
@@ -43,6 +48,10 @@ namespace Tonic {
       mHasChanged = true;
     }
   
+  }
+  
+  RampedValue ControlValue::ramped(float lenMs){
+    return RampedValue(gen()->getValue(), lenMs).target(*this);
   }
   
 }

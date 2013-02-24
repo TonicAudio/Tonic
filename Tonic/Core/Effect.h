@@ -60,7 +60,7 @@ namespace Tonic {
     
   };
   
-  // signal flow operator
+  // signal flow operator - sets lhs as input to rhs
   template<class EffectType, class EffectType_>
   static EffectType & operator>>(Generator lhs, TemplatedEffect<EffectType, EffectType_> rhs){
     return rhs.input( lhs );
