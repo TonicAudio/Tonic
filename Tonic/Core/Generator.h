@@ -126,35 +126,14 @@ namespace Tonic {
 // Each generator should have three flavors of setter -- one that accepts a float, one that accepts a
 // ControlGenerator, and one that accepts a Generator. This macro will automatically build those three
 // setters
+
 #define createGeneratorSetters(generatorClassName, methodNameInGenerator, methodNameInGenerator_) \
-                                                                                                  \
-                                                                                                  \
-  generatorClassName& methodNameInGenerator(Generator arg){                                       \
-    gen()->lockMutex();                                                                           \
-    gen()->methodNameInGenerator_(arg);                                                           \
-    gen()->unlockMutex();                                                                         \
-        return *this;                                                                             \
-  }                                                                                               \
-                                                                                                  \
-  generatorClassName& methodNameInGenerator(float arg){                                           \
-    return methodNameInGenerator( FixedValue(arg) );                                              \
-  }                                                                                               \
-                                                                                                  \
-  generatorClassName& methodNameInGenerator(ControlGenerator arg){                                \
-    return methodNameInGenerator(  FixedValue().setValue(arg) );                                  \
-  } 
-
-// use this version for templated classes - performs necessary casting
-
-#define createGeneratorSettersInTemplate(generatorClassName, generatorClassName_,       \
-  methodNameInGenerator, methodNameInGenerator_)                                        \
                                                                                         \
                                                                                         \
   generatorClassName& methodNameInGenerator(Generator arg){                             \
-    generatorClassName_ *gen = static_cast<generatorClassName_*>(this->mGen);           \
-    gen->lockMutex();                                                                   \
-    gen->methodNameInGenerator_(arg);                                                   \
-    gen->unlockMutex();                                                                 \
+    this->gen()->lockMutex();                                                           \
+    this->gen()->methodNameInGenerator_(arg);                                           \
+    this->gen()->unlockMutex();                                                         \
     return static_cast<generatorClassName&>(*this);                                     \
   }                                                                                     \
                                                                                         \

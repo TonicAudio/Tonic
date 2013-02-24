@@ -284,8 +284,8 @@ namespace Tonic {
   
   public:
   
-    createGeneratorSettersInTemplate(FilterType, Tonic_::Filter_, cutoff, setCutoff);
-    createGeneratorSettersInTemplate(FilterType, Tonic_::Filter_, Q, setQ);
+    createGeneratorSetters(FilterType, cutoff, setCutoff);
+    createGeneratorSetters(FilterType, Q, setQ);
 
   };
   

@@ -53,7 +53,7 @@ namespace Tonic {
         
     // This cast is not safe - up to implementation to ensure that templated EffectType_ is actually an Effect_ subclass
     inline EffectType & input( Generator input ){
-      static_cast<Tonic_::Effect_*>(this->mGen)->setInput( input );
+      this->gen()->setInput( input );
       return static_cast<EffectType&>(*this);
     }
     
