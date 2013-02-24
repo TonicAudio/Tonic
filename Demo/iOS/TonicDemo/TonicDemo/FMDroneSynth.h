@@ -13,10 +13,6 @@
 
 #include "Synth.h"
 #include "SineWave.h"
-#include "Multiplier.h"
-#include "Adder.h"
-#include "FixedValue.h"
-#include "RampedValue.h"
 
 using namespace Tonic;
 
@@ -26,10 +22,9 @@ class FMDroneSynth : public Synth {
 public:
   FMDroneSynth(){
     outputGen = SineWave().freq(
-       RampedValue(200).target( registerMessage("baseFreq", 200) ).lengthMs(100)
+       RampedValue(200).target( registerMessage("baseFreq", 200) )
       + (
-          SineWave().freq( 2 * RampedValue(200).target( registerMessage("baseFreq") ) )
-          * 10 * RampedValue(1).target(registerMessage("fmAmount", 1)).lengthMs(100)
+          SineWave().freq( 10 ) * RampedValue(0).target(registerMessage("fmAmount", 0))
          )
     );
   }

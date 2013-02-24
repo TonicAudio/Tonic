@@ -13,7 +13,7 @@ namespace Tonic { namespace Tonic_{
   RampedValue_::RampedValue_() :
     finished_(true),
     count_(0),
-    len_(2205),
+    len_(0),
     target_(0),
     last_(0),
     inc_(0)
@@ -21,7 +21,7 @@ namespace Tonic { namespace Tonic_{
     // shouldn't need to set this. See https://github.com/morganpackard/Tonic/issues/6
     // still, good to give default values to the relevant generators
     setTargetGen(ControlValue().setValue(0));
-    setLengthMsGen(ControlValue().setValue(0.5f));
+    setLengthMsGen(ControlValue().setValue(50));
     setValueGen(ControlValue().setValue(0));
   }
   

@@ -27,23 +27,23 @@ https://ccrma.stanford.edu/software/stk/
 
 #include <vector>
 #include "Adder.h"
-#include "Source.h"
+#include "BufferFiller.h"
 
 using std::vector;
 
 namespace Tonic {
 
-  class Mixer : public Source{
+  class Mixer : public BufferFiller{
   
   private:
-    vector<Source*> sources;
+    vector<BufferFiller*> inputs;
     Adder adder;
     
   public:
     
     Mixer();
-    void addInput(Source* input);
-    void removeInput(Source* input);
+    void addInput(BufferFiller* input);
+    void removeInput(BufferFiller* input);
     void tick( TonicFrames& frames );
   };
 }

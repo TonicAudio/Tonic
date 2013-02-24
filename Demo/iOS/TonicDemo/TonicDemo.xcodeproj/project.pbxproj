@@ -7,10 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		9A1589F116D7E1D200E2BC81 /* Filters.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9A1589EF16D7E1D200E2BC81 /* Filters.cpp */; };
 		A82437C916CA7470000677C7 /* ControlValue.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A82437C716CA7470000677C7 /* ControlValue.cpp */; };
 		A82437DB16CB3753000677C7 /* ControlGenerator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A82437DA16CB36A8000677C7 /* ControlGenerator.cpp */; };
-		A82437F316CEFFC0000677C7 /* FMDroneViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = A82437F116CEFFC0000677C7 /* FMDroneViewController.mm */; };
-		A82437F416CEFFC0000677C7 /* FMDroneViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A82437F216CEFFC0000677C7 /* FMDroneViewController.xib */; };
 		A86C3EC116B2B4FD002A50F0 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A86C3EC016B2B4FD002A50F0 /* UIKit.framework */; };
 		A86C3EC316B2B4FD002A50F0 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A86C3EC216B2B4FD002A50F0 /* Foundation.framework */; };
 		A86C3EC516B2B4FD002A50F0 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A86C3EC416B2B4FD002A50F0 /* CoreGraphics.framework */; };
@@ -32,13 +31,12 @@
 		F20FCD5216C58D5B0039832A /* TonicSynthManager.mm in Sources */ = {isa = PBXBuildFile; fileRef = F20FCD5116C58D5B0039832A /* TonicSynthManager.mm */; };
 		F2360A7716C4B4EC00A0AD7A /* Noise.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F2360A7516C4B4EC00A0AD7A /* Noise.cpp */; };
 		F23E243E16C6BF450082EF65 /* Mixer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F23E243C16C6BF450082EF65 /* Mixer.cpp */; };
-		F23E244116C6C5F10082EF65 /* Source.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F23E243F16C6C5F00082EF65 /* Source.cpp */; };
-		F256C8E416C5A0BF0096574D /* SineSumViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = F256C8E016C5A0BF0096574D /* SineSumViewController.mm */; };
-		F256C8E516C5A0BF0096574D /* SynthChooserViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F256C8E216C5A0BF0096574D /* SynthChooserViewController.m */; };
+		F23E244116C6C5F10082EF65 /* BufferFiller.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F23E243F16C6C5F00082EF65 /* BufferFiller.cpp */; };
+		F256C8E416C5A0BF0096574D /* SynthTestViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = F256C8E016C5A0BF0096574D /* SynthTestViewController.mm */; };
+		F256C8E516C5A0BF0096574D /* SynthChooserViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = F256C8E216C5A0BF0096574D /* SynthChooserViewController.mm */; };
 		F256C8E616C5A0BF0096574D /* SynthChooserViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F256C8E316C5A0BF0096574D /* SynthChooserViewController.xib */; };
-		F256C8E816C5A6DF0096574D /* SineSumViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F256C8E716C5A6DF0096574D /* SineSumViewController.xib */; };
-		F256C8EC16C5A7F70096574D /* AMViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = F256C8EA16C5A7F60096574D /* AMViewController.mm */; };
-		F256C8ED16C5A7F70096574D /* AMViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F256C8EB16C5A7F70096574D /* AMViewController.xib */; };
+		F256C8E816C5A6DF0096574D /* SynthTestViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F256C8E716C5A6DF0096574D /* SynthTestViewController.xib */; };
+		F263BD2C16D54E83008AADA6 /* Biquad.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F263BD2A16D54E83008AADA6 /* Biquad.cpp */; };
 		F2C9F6F916C493870090A78D /* Adder.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F2C9F6E616C493870090A78D /* Adder.cpp */; };
 		F2C9F6FA16C493870090A78D /* FixedValue.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F2C9F6E816C493870090A78D /* FixedValue.cpp */; };
 		F2C9F6FB16C493870090A78D /* Generator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F2C9F6EA16C493870090A78D /* Generator.cpp */; };
@@ -50,15 +48,14 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		9A1589EF16D7E1D200E2BC81 /* Filters.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Filters.cpp; sourceTree = "<group>"; };
+		9A1589F016D7E1D200E2BC81 /* Filters.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Filters.h; sourceTree = "<group>"; };
 		A82437C716CA7470000677C7 /* ControlValue.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ControlValue.cpp; sourceTree = "<group>"; };
 		A82437C816CA7470000677C7 /* ControlValue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ControlValue.h; sourceTree = "<group>"; };
 		A82437CF16CA7A25000677C7 /* Tests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Tests.h; sourceTree = "<group>"; };
 		A82437D816CB3010000677C7 /* ControlGenerator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ControlGenerator.h; sourceTree = "<group>"; };
 		A82437DA16CB36A8000677C7 /* ControlGenerator.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = ControlGenerator.cpp; sourceTree = "<group>"; };
 		A82437EF16CEFECD000677C7 /* FMDroneSynth.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FMDroneSynth.h; sourceTree = "<group>"; };
-		A82437F016CEFFC0000677C7 /* FMDroneViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMDroneViewController.h; sourceTree = "<group>"; };
-		A82437F116CEFFC0000677C7 /* FMDroneViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = FMDroneViewController.mm; sourceTree = "<group>"; };
-		A82437F216CEFFC0000677C7 /* FMDroneViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FMDroneViewController.xib; sourceTree = "<group>"; };
 		A86C3EBC16B2B4FD002A50F0 /* TonicDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TonicDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A86C3EC016B2B4FD002A50F0 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		A86C3EC216B2B4FD002A50F0 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -96,17 +93,19 @@
 		F2360A7916C4BC6E00A0AD7A /* SineSumSynth.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SineSumSynth.h; sourceTree = "<group>"; };
 		F23E243C16C6BF450082EF65 /* Mixer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Mixer.cpp; sourceTree = "<group>"; };
 		F23E243D16C6BF450082EF65 /* Mixer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Mixer.h; sourceTree = "<group>"; };
-		F23E243F16C6C5F00082EF65 /* Source.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Source.cpp; sourceTree = "<group>"; };
-		F23E244016C6C5F00082EF65 /* Source.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Source.h; sourceTree = "<group>"; };
-		F256C8DF16C5A0BF0096574D /* SineSumViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SineSumViewController.h; sourceTree = "<group>"; };
-		F256C8E016C5A0BF0096574D /* SineSumViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = SineSumViewController.mm; sourceTree = "<group>"; };
+		F23E243F16C6C5F00082EF65 /* BufferFiller.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = BufferFiller.cpp; sourceTree = "<group>"; };
+		F23E244016C6C5F00082EF65 /* BufferFiller.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BufferFiller.h; sourceTree = "<group>"; };
+		F256C8DF16C5A0BF0096574D /* SynthTestViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SynthTestViewController.h; sourceTree = "<group>"; };
+		F256C8E016C5A0BF0096574D /* SynthTestViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = SynthTestViewController.mm; sourceTree = "<group>"; };
 		F256C8E116C5A0BF0096574D /* SynthChooserViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SynthChooserViewController.h; sourceTree = "<group>"; };
-		F256C8E216C5A0BF0096574D /* SynthChooserViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SynthChooserViewController.m; sourceTree = "<group>"; };
+		F256C8E216C5A0BF0096574D /* SynthChooserViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = SynthChooserViewController.mm; sourceTree = "<group>"; };
 		F256C8E316C5A0BF0096574D /* SynthChooserViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SynthChooserViewController.xib; sourceTree = "<group>"; };
-		F256C8E716C5A6DF0096574D /* SineSumViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SineSumViewController.xib; sourceTree = "<group>"; };
-		F256C8E916C5A7F60096574D /* AMViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMViewController.h; sourceTree = "<group>"; };
-		F256C8EA16C5A7F60096574D /* AMViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = AMViewController.mm; sourceTree = "<group>"; };
-		F256C8EB16C5A7F70096574D /* AMViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AMViewController.xib; sourceTree = "<group>"; };
+		F256C8E716C5A6DF0096574D /* SynthTestViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SynthTestViewController.xib; sourceTree = "<group>"; };
+		F263BD2A16D54E83008AADA6 /* Biquad.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Biquad.cpp; sourceTree = "<group>"; };
+		F263BD2B16D54E83008AADA6 /* Biquad.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Biquad.h; sourceTree = "<group>"; };
+		F263BD2D16D55AC2008AADA6 /* FilterUtils.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FilterUtils.h; sourceTree = "<group>"; };
+		F263BD2F16D56751008AADA6 /* Effect.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Effect.h; sourceTree = "<group>"; };
+		F263BD3416D57228008AADA6 /* FilterTest.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FilterTest.h; sourceTree = "<group>"; };
 		F2C9F6E616C493870090A78D /* Adder.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Adder.cpp; sourceTree = "<group>"; };
 		F2C9F6E716C493870090A78D /* Adder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Adder.h; sourceTree = "<group>"; };
 		F2C9F6E816C493870090A78D /* FixedValue.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = FixedValue.cpp; sourceTree = "<group>"; };
@@ -214,6 +213,7 @@
 				A86C3F0E16B2B575002A50F0 /* SineAMSynth.h */,
 				F2360A7916C4BC6E00A0AD7A /* SineSumSynth.h */,
 				A82437EF16CEFECD000677C7 /* FMDroneSynth.h */,
+				F263BD3416D57228008AADA6 /* FilterTest.h */,
 				A86C3F0F16B2B5BE002A50F0 /* Novocaine */,
 				F20FCD4E16C58D3E0039832A /* TonicWrappers */,
 				A86C3EE716B2B549002A50F0 /* Tonic */,
@@ -224,9 +224,10 @@
 		A86C3EE716B2B549002A50F0 /* Tonic */ = {
 			isa = PBXGroup;
 			children = (
-				A82437CE16CA7A24000677C7 /* Tests */,
 				F2C9F6E516C493870090A78D /* Core */,
+				F263BD2916D54E5E008AADA6 /* Filters */,
 				F2C9F6F516C493870090A78D /* Oscillators */,
+				A82437CE16CA7A24000677C7 /* Tests */,
 				F2C9F6F816C493870090A78D /* Utils */,
 			);
 			name = Tonic;
@@ -270,19 +271,25 @@
 			isa = PBXGroup;
 			children = (
 				F256C8E116C5A0BF0096574D /* SynthChooserViewController.h */,
-				F256C8E216C5A0BF0096574D /* SynthChooserViewController.m */,
+				F256C8E216C5A0BF0096574D /* SynthChooserViewController.mm */,
 				F256C8E316C5A0BF0096574D /* SynthChooserViewController.xib */,
-				F256C8DF16C5A0BF0096574D /* SineSumViewController.h */,
-				F256C8E016C5A0BF0096574D /* SineSumViewController.mm */,
-				F256C8E716C5A6DF0096574D /* SineSumViewController.xib */,
-				F256C8E916C5A7F60096574D /* AMViewController.h */,
-				F256C8EA16C5A7F60096574D /* AMViewController.mm */,
-				F256C8EB16C5A7F70096574D /* AMViewController.xib */,
-				A82437F016CEFFC0000677C7 /* FMDroneViewController.h */,
-				A82437F116CEFFC0000677C7 /* FMDroneViewController.mm */,
-				A82437F216CEFFC0000677C7 /* FMDroneViewController.xib */,
+				F256C8DF16C5A0BF0096574D /* SynthTestViewController.h */,
+				F256C8E016C5A0BF0096574D /* SynthTestViewController.mm */,
+				F256C8E716C5A6DF0096574D /* SynthTestViewController.xib */,
 			);
 			path = ViewControllers;
+			sourceTree = "<group>";
+		};
+		F263BD2916D54E5E008AADA6 /* Filters */ = {
+			isa = PBXGroup;
+			children = (
+				F263BD2A16D54E83008AADA6 /* Biquad.cpp */,
+				F263BD2B16D54E83008AADA6 /* Biquad.h */,
+				9A1589EF16D7E1D200E2BC81 /* Filters.cpp */,
+				9A1589F016D7E1D200E2BC81 /* Filters.h */,
+				F263BD2D16D55AC2008AADA6 /* FilterUtils.h */,
+			);
+			path = Filters;
 			sourceTree = "<group>";
 		};
 		F2C9F6E516C493870090A78D /* Core */ = {
@@ -290,6 +297,7 @@
 			children = (
 				F2C9F6E616C493870090A78D /* Adder.cpp */,
 				F2C9F6E716C493870090A78D /* Adder.h */,
+				F263BD2F16D56751008AADA6 /* Effect.h */,
 				F2C9F6E816C493870090A78D /* FixedValue.cpp */,
 				F2C9F6E916C493870090A78D /* FixedValue.h */,
 				F2C9F6EA16C493870090A78D /* Generator.cpp */,
@@ -302,8 +310,8 @@
 				F2C9F6EF16C493870090A78D /* Multiplier.h */,
 				F2C9F6F016C493870090A78D /* Synth.cpp */,
 				F2C9F6F116C493870090A78D /* Synth.h */,
-				F23E243F16C6C5F00082EF65 /* Source.cpp */,
-				F23E244016C6C5F00082EF65 /* Source.h */,
+				F23E243F16C6C5F00082EF65 /* BufferFiller.cpp */,
+				F23E244016C6C5F00082EF65 /* BufferFiller.h */,
 				F2C9F6F216C493870090A78D /* Tonic.h */,
 				F2C9F6F316C493870090A78D /* TonicFrames.cpp */,
 				F2C9F6F416C493870090A78D /* TonicFrames.h */,
@@ -394,9 +402,7 @@
 				A86C3ED516B2B4FD002A50F0 /* Default@2x.png in Resources */,
 				A86C3ED716B2B4FD002A50F0 /* Default-568h@2x.png in Resources */,
 				F256C8E616C5A0BF0096574D /* SynthChooserViewController.xib in Resources */,
-				F256C8E816C5A6DF0096574D /* SineSumViewController.xib in Resources */,
-				F256C8ED16C5A7F70096574D /* AMViewController.xib in Resources */,
-				A82437F416CEFFC0000677C7 /* FMDroneViewController.xib in Resources */,
+				F256C8E816C5A6DF0096574D /* SynthTestViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -427,12 +433,12 @@
 				F20FCD4B16C56EF60039832A /* SineWave.cpp in Sources */,
 				A82437C916CA7470000677C7 /* ControlValue.cpp in Sources */,
 				F20FCD5216C58D5B0039832A /* TonicSynthManager.mm in Sources */,
-				F256C8E416C5A0BF0096574D /* SineSumViewController.mm in Sources */,
-				F256C8E516C5A0BF0096574D /* SynthChooserViewController.m in Sources */,
-				F256C8EC16C5A7F70096574D /* AMViewController.mm in Sources */,
+				F256C8E416C5A0BF0096574D /* SynthTestViewController.mm in Sources */,
+				F256C8E516C5A0BF0096574D /* SynthChooserViewController.mm in Sources */,
 				F23E243E16C6BF450082EF65 /* Mixer.cpp in Sources */,
-				F23E244116C6C5F10082EF65 /* Source.cpp in Sources */,
-				A82437F316CEFFC0000677C7 /* FMDroneViewController.mm in Sources */,
+				F23E244116C6C5F10082EF65 /* BufferFiller.cpp in Sources */,
+				F263BD2C16D54E83008AADA6 /* Biquad.cpp in Sources */,
+				9A1589F116D7E1D200E2BC81 /* Filters.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

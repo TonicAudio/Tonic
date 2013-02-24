@@ -1,8 +1,8 @@
 //
-//  SineWave.h
+//  Effect.h
 //  Tonic 
 //
-//  Created by Nick Donaldson on 2/8/13.
+//  Created by Nick Donaldson on 2/20/13.
 //  Copyright (c) 2013 Morgan Packard. All rights reserved.
 //
 
@@ -20,43 +20,47 @@ https://ccrma.stanford.edu/software/stk/
 
 ++++++++++++++++++++++++++++++++++++++++++++++++++*/
 
-#ifndef __Tonic__SineWave__
-#define __Tonic__SineWave__
+#ifndef __Tonic__Effect__
+#define __Tonic__Effect__
 
 #include <iostream>
-#include "TableLookupOsc.h"
+#include "Generator.h"
 
 namespace Tonic {
   
   namespace Tonic_ {
     
-    class SineWave_ : public TableLookupOsc_{
+    class Effect_ : public Generator_{
       
     protected:
       
-      static TonicFrames sineTable_;
-      TonicFrames & tableReference();
+      Generator input_;
       
     public:
       
-      SineWave_();
-      void fillTable();
+      inline void setInput( Generator input ) { input_ = input; };
       
     };
-    
-    inline TonicFrames & SineWave_::tableReference(){ return sineTable_; }
-  
   }
   
-  class SineWave : public TemplatedGenerator<Tonic_::SineWave_>{
+  template<class EffectType, class EffectType_> class TemplatedEffect : public TemplatedGenerator<EffectType_>{
+  
+  protected:
+    
+    Generator input_;
     
   public:
+        
+    // This cast is not safe - up to implementation to ensure that templated EffectType_ is actually an Effect_ subclass
+    inline EffectType & input( Generator input ){
+      this->gen()->setInput( input );
+      return static_cast<EffectType&>(*this);
+    }
     
-    createGeneratorSetters(SineWave, freq, setFrequency)
-
   };
+
 }
 
-#endif /* defined(__Tonic__SineWave__) */
+#endif /* defined(__Tonic__Effect__) */
 
 

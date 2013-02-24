@@ -45,7 +45,7 @@ namespace Tonic { namespace Tonic_{
 #ifdef USE_APPLE_ACCELERATE
     vDSP_vsmul(rateBuffer, 1, &rateConstant, rateBuffer, 1, nFrames);
 #else
-    for (unsigned int i=0; i<modFrames.frames(); i++){
+    for (unsigned int i=0; i<nFrames; i++){
       *rateBuffer++ *= rateConstant;
     }
     rateBuffer = &modFrames[0];

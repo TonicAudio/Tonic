@@ -1,5 +1,5 @@
 //
-//  Source.cpp
+//  BufferFiller.cpp
 //  TonicDemo
 //
 //  Created by Nick Donaldson on 2/9/13.
@@ -20,22 +20,22 @@
  
  ++++++++++++++++++++++++++++++++++++++++++++++++++*/
 
-#include "Source.h"
+#include "BufferFiller.h"
 
 namespace Tonic {
   
-  Source::Source() : bufferReadPosition(0){
+  BufferFiller::BufferFiller() : bufferReadPosition(0){
     outputFrames.resize(kSynthesisBlockSize, 2);
     outputGen = PassThroughGenerator();
   }
   
   
-  inline void Source::tick( TonicFrames& frames ){
+  inline void BufferFiller::tick( TonicFrames& frames ){
     outputGen.tick(frames);
   };
   
   // fill a buffer of floats, assuming the buffer is expecting max/min of 1,-1
-  void Source::fillBufferOfFloats(float *outData,  UInt32 numFrames, int numChannels){
+  void BufferFiller::fillBufferOfFloats(float *outData,  UInt32 numFrames, int numChannels){
   
     if(numChannels > outputFrames.channels()) error("Mismatch in channels sent to Synth::fillBufferOfFloats");
     
@@ -66,9 +66,5 @@ namespace Tonic {
     }
     
   }
-  
-  // Source Factory
-  
-  SourceFactory::map_type * SourceFactory::map;
   
 }
