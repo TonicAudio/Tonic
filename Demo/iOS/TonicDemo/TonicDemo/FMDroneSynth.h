@@ -34,10 +34,8 @@ public:
                 ) * 0.5f;
   }
   
-  static SourceRegister<FMDroneSynth> reg;
 };
 
-
-SourceRegister<FMDroneSynth> FMDroneSynth::reg("FMDroneSynth");
+registerSynth(FMDroneSynth);
 
 #endif

@@ -35,12 +35,8 @@ public:
     
   };
   
-private:
-  
-  static SourceRegister<SineAMSynth> reg;
-  
 };
 
-SourceRegister<SineAMSynth> SineAMSynth::reg("SineAMSynth");
+registerSynth(SineAMSynth);
 
 #endif

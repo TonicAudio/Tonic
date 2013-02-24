@@ -110,4 +110,17 @@ namespace Tonic{
   
 }
 
+// This macro will auto-register a synth type. Just add it below the Synth class definition.
+
+#define registerSynth(SynthName)              \
+                                              \
+class SynthName ## _RegistrationPoint {       \
+                                              \
+protected:                                    \
+  static SourceRegister<SynthName> reg;       \
+                                              \
+};                                            \
+                                                                                \
+SourceRegister<SynthName> SynthName ## _RegistrationPoint::reg(#SynthName);     \
+
 #endif /* defined(__Tonic__Synth__) */

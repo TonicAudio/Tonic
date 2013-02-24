@@ -115,10 +115,12 @@ namespace Tonic {
   
   //-- Freq/MIDI --
   
+  //! Midi note number to frequency in Hz
   inline static TonicFloat mtof(TonicFloat nn){
     return 440.0f * powf(2.0, (nn-69.0f)/12.0f);
   }
   
+  //! Frequency in Hz to midi note number
   inline static TonicFloat ftom(TonicFloat f){
     return 12.0f * log2(f/440.0f) + 69.0f;
   }

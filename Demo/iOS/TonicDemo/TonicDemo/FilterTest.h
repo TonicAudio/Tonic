@@ -32,10 +32,8 @@ public:
     outputGen = (Noise() >> lpf) * 0.5;
   }
   
-  static SourceRegister<FilterTest> reg;
 };
 
-
-SourceRegister<FilterTest> FilterTest::reg("FilterTest");
+registerSynth(FilterTest);
 
 #endif

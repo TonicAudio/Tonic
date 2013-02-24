@@ -48,11 +48,9 @@ private:
   SineWave sines[NUM_SINES];
   RampedValue sineFreqs[NUM_SINES];
   Adder sineMixer;
-  
-  static SourceRegister<SineSumSynth> reg;
-  
+    
 };
 
-SourceRegister<SineSumSynth> SineSumSynth::reg("SineSumSynth");
+registerSynth(SineSumSynth);
 
 #endif

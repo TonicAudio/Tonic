@@ -115,7 +115,7 @@ namespace Tonic {
     void fillChannels();
     
     //! Fill frames from other source.
-    /* 
+    /*! 
       Copies channels from one object to another. Frame count must match.
       If source has more channels than destination, they will be averaged.
       If destination has more channels than source, they will be copied to all channels.

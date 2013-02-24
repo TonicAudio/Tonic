@@ -283,7 +283,6 @@ namespace Tonic {
   
   public:
     
-  
     createGeneratorSetters(FilterType, cutoff, setCutoff);
     createGeneratorSetters(FilterType, Q, setQ);
 
