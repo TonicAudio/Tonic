@@ -22,7 +22,7 @@ namespace Tonic {
     
     ControlValue_::~ControlValue_(){}
     
-    bool ControlValue_::hasChanged(const SynthesisContext & context){
+    bool ControlValue_::hasChanged(const SynthesisContext_ & context){
       if (mLastFrameIndex == 0 || mLastFrameIndex != context.elapsedFrames){
         mLastFrameIndex = context.elapsedFrames;
         mLastHasChanged = mHasChanged;
@@ -31,7 +31,7 @@ namespace Tonic {
       return mLastHasChanged;
     }
     
-    TonicFloat ControlValue_::getValue(const SynthesisContext & context){
+    TonicFloat ControlValue_::getValue(const SynthesisContext_ & context){
       return mValue;
     }
     

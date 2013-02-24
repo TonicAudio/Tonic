@@ -52,7 +52,7 @@ namespace Tonic {
         ~FixedValue_(){
         }
         
-        inline void computeSynthesisBlock( const SynthesisContext & context ){
+        inline void computeSynthesisBlock( const SynthesisContext_ & context ){
           
           float* buffStart = &synthesisBlock_[0];
           

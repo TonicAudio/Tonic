@@ -51,11 +51,11 @@ namespace Tonic {
       Generator & getInput(unsigned int index) { return inputs[index]; };
       unsigned int numInputs() { return inputs.size(); };
       
-      void computeSynthesisBlock( const SynthesisContext &context );
+      void computeSynthesisBlock( const SynthesisContext_ &context );
       
     };
     
-    inline void Adder_::computeSynthesisBlock( const SynthesisContext &context ){
+    inline void Adder_::computeSynthesisBlock( const SynthesisContext_ &context ){
       
       TonicFloat *framesData =  &synthesisBlock_[0];
       

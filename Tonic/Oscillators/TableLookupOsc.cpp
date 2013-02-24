@@ -24,7 +24,7 @@ namespace Tonic { namespace Tonic_{
     phase_ = 0.0f;
   }
   
-  inline void TableLookupOsc_::computeSynthesisBlock( const SynthesisContext & context ){
+  inline void TableLookupOsc_::computeSynthesisBlock( const SynthesisContext_ & context ){
     
     // Update the frequency data
     lockMutex();

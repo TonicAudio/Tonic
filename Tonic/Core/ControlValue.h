@@ -21,8 +21,8 @@ namespace Tonic {
         ControlValue_();
         ~ControlValue_();
       
-        bool hasChanged(const SynthesisContext & context);
-        TonicFloat getValue(const SynthesisContext & context);
+        bool hasChanged(const SynthesisContext_ & context);
+        TonicFloat getValue(const SynthesisContext_ & context);
       
         // version without context argument, for use in ramped() shortcut, among other things
         TonicFloat getValue();

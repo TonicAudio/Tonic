@@ -57,27 +57,30 @@ namespace Tonic {
 
   static const unsigned int kSynthesisBlockSize = 64;
   
-  // -- Synthesis Context Struct --
-  
-  // Context passed down from root BufferFiller graph object to all sub-generators
-  // Synchronizes signal flow in cases when generator output is shared between multiple inputs
-  struct SynthesisContext{
+  namespace Tonic_{
+    // -- Synthesis Context Struct --
     
-    // Number of frames elapsed since program start
-    // unsigned long will last 38+ days before overflow at 44.1 kHz
-    unsigned long elapsedFrames;
+    // Context passed down from root BufferFiller graph object to all sub-generators
+    // Synchronizes signal flow in cases when generator output is shared between multiple inputs
+    struct SynthesisContext_{
+      
+      // Number of frames elapsed since program start
+      // unsigned long will last 38+ days before overflow at 44.1 kHz
+      unsigned long elapsedFrames;
+      
+      // System time in seconds
+      double elapsedTime;
+      
+      SynthesisContext_() : elapsedFrames(0), elapsedTime(0) {};
+      
+      void tick() {
+        elapsedFrames += kSynthesisBlockSize;
+        elapsedTime += (double)kSynthesisBlockSize/sampleRate();
+      };
     
-    // System time in seconds
-    double elapsedTime;
-    
-    SynthesisContext() : elapsedFrames(0), elapsedTime(0) {};
-    
-    void tick() {
-      elapsedFrames += kSynthesisBlockSize;
-      elapsedTime += (double)kSynthesisBlockSize/sampleRate();
     };
     
-  };
+  } // namespace Tonic_
 
 #pragma mark - Utility Functions
   

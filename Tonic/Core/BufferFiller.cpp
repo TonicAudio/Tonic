@@ -34,7 +34,7 @@ namespace Tonic {
     context_.tick();
   }
   
-  inline void BufferFiller::tick( TonicFrames& frames, const SynthesisContext & context ){
+  inline void BufferFiller::tick( TonicFrames& frames, const Tonic_::SynthesisContext_ & context ){
     outputGen.tick(frames, context);
   }
 

@@ -43,14 +43,14 @@ namespace Tonic{
       Multiplier_();
       ~Multiplier_();
       void in(Generator& generator);
-      void computeSynthesisBlock( const SynthesisContext & context );
+      void computeSynthesisBlock( const SynthesisContext_ & context );
       
       Generator & getInput(unsigned int index) { return inputs[index]; };
       unsigned int numInputs() { return inputs.size(); };
     };
     
     
-    inline void Multiplier_::computeSynthesisBlock( const SynthesisContext & context ){
+    inline void Multiplier_::computeSynthesisBlock( const SynthesisContext_ & context ){
       
       memset(&synthesisBlock_[0], 0, sizeof(TonicFloat) * synthesisBlock_.size());
       

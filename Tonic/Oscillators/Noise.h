@@ -39,12 +39,12 @@ namespace Tonic {
     public:
       Noise_();
       ~Noise_();
-      void computeSynthesisBlock( const SynthesisContext & context );
+      void computeSynthesisBlock( const SynthesisContext_ & context );
       inline void setStereo(bool stereo) { stereo_ = stereo; };
       
     };
     
-    inline void Noise_::computeSynthesisBlock( const SynthesisContext & context ){
+    inline void Noise_::computeSynthesisBlock( const SynthesisContext_ & context ){
       TonicFloat* fdata = &synthesisBlock_[0];
       if (stereo_){
         for (unsigned int i=0; i<synthesisBlock_.size(); i++){

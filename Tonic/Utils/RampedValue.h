@@ -49,7 +49,7 @@ namespace Tonic {
       RampedValue_();
       ~RampedValue_();
       
-      void computeSynthesisBlock( const SynthesisContext & context );
+      void computeSynthesisBlock( const SynthesisContext_ & context );
       
       void setValueGen( ControlGenerator value );
       void setTargetGen( ControlGenerator target );
@@ -61,7 +61,7 @@ namespace Tonic {
   
     };
     
-    inline void RampedValue_::computeSynthesisBlock( const SynthesisContext & context ){
+    inline void RampedValue_::computeSynthesisBlock( const SynthesisContext_ & context ){
     
       lockMutex();
       

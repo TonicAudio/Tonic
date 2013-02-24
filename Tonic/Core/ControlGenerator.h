@@ -31,8 +31,8 @@ namespace Tonic {
       void lockMutex();
       void unlockMutex();
       
-      virtual bool hasChanged(const SynthesisContext & context) = 0;
-      virtual TonicFloat getValue(const SynthesisContext & context) = 0;
+      virtual bool hasChanged(const SynthesisContext_ & context) = 0;
+      virtual TonicFloat getValue(const SynthesisContext_ & context) = 0;
       
     protected:
         
@@ -79,11 +79,11 @@ namespace Tonic {
       }
     }
     
-    virtual bool hasChanged(const SynthesisContext & context){
+    virtual bool hasChanged(const Tonic_::SynthesisContext_ & context){
       return mGen->hasChanged(context);
     }
     
-    virtual TonicFloat getValue(const SynthesisContext & context){
+    virtual TonicFloat getValue(const Tonic_::SynthesisContext_ & context){
       return mGen->getValue(context);
     }
     

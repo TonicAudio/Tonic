@@ -90,7 +90,7 @@ namespace Tonic {
       ~TableLookupOsc_();
 
       
-      void computeSynthesisBlock( const SynthesisContext & context );
+      void computeSynthesisBlock( const SynthesisContext_ & context );
       
       //! Clear output and reset time pointer to zero.
       void reset( void );

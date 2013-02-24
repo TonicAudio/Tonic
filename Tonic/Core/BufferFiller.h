@@ -39,9 +39,9 @@ namespace Tonic{
   class BufferFiller : Generator {
     
   private:
-    int               bufferReadPosition_;
-    TonicFrames       outputFrames_;
-    SynthesisContext  context_;
+    int                         bufferReadPosition_;
+    TonicFrames                 outputFrames_;
+    Tonic_::SynthesisContext_   context_;
     
   protected:
     
@@ -50,9 +50,9 @@ namespace Tonic{
   public:
     BufferFiller();
     
-    // Tick method without context argument passes down this instance's SynthesisContext
+    // Tick method without context argument passes down this instance's SynthesisContext_
     void          tick( TonicFrames& frames );
-    void          tick( TonicFrames& frames, const SynthesisContext & context );
+    void          tick( TonicFrames& frames, const Tonic_::SynthesisContext_ & context );
     void          fillBufferOfFloats(float *outData,  UInt32 numFrames, int numChannels);
     
     inline const Generator & getOutputGenerator() { return outputGen; };
