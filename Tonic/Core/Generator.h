@@ -1,6 +1,6 @@
 //
 //  Generator.h
-//  2013_1_23_melody
+//  Tonic
 //
 //  Created by Morgan Packard on 1/23/13.
 //
@@ -20,8 +20,8 @@ https://ccrma.stanford.edu/software/stk/
 
 ++++++++++++++++++++++++++++++++++++++++++++++++++*/
 
-#ifndef ___013_1_23_melody__Generator__
-#define ___013_1_23_melody__Generator__
+#ifndef __Tonic__Generator__
+#define __Tonic__Generator__
 
 #include <iostream>
 #include "TonicFrames.h"
@@ -69,7 +69,7 @@ namespace Tonic {
         lastFrameIndex_ = context.elapsedFrames;
       }
       
-      // need to see how fast this actually is
+      // copy synthesis block to frames passed in
       frames.copy(synthesisBlock_);
     }
     
@@ -175,4 +175,4 @@ namespace Tonic {
 
 
 
-#endif /* defined(___013_1_23_melody__Generator__) */
+#endif /* defined(__Tonic__Generator__) */

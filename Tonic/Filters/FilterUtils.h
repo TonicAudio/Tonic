@@ -66,9 +66,9 @@ namespace Tonic {
     
     //! Set the coefficients for the filtering operation.
     /*
-     b0 + b1*z^-1 + b2*z^-2
+             b0 + b1*z^-1 + b2*z^-2
      H(z) = ------------------------
-     1 + a1*z^-1 + a2*z^-2
+             1 + a1*z^-1 + a2*z^-2
      */
     void setCoefficients( TonicFloat b0, TonicFloat b1, TonicFloat b2, TonicFloat a1, TonicFloat a2 );
     void setCoefficients( TonicFloat *newCoef );

@@ -26,8 +26,11 @@ public:
     Tonic::Generator rModFreq     = rCarrierFreq * registerMessage("mcRatio", 2).ramped();
     
     outputGen = SineWave().freq(
-                  rCarrierFreq  + (SineWave().freq( rModFreq ) * rModFreq * registerMessage("modIndex", 0).ramped())
-                  
+                  rCarrierFreq  + (
+                    SineWave().freq( rModFreq ) *
+                    rModFreq *
+                    registerMessage("modIndex", 0).ramped()
+                  )
                 ) * 0.5f;
   }
   
