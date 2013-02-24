@@ -27,8 +27,8 @@ public:
     Noise noise = Noise();
     
     for(int i = 0; i < midiNums.size(); i++){
-      Tonic::Generator tremelo = (SineWave().freq( randomFloat(0.1, 0.3) ) + 1.5) * 0.3;
-      Tonic::Generator cutoff = registerMessage("cutoff", 1).ramped() * mtof(midiNums.at(i) + 80);
+      Generator tremelo = (SineWave().freq( randomFloat(0.1, 0.3) ) + 1.5) * 0.3;
+      Generator cutoff = registerMessage("cutoff", 1).ramped() * mtof(midiNums.at(i) + 80);
       BPF24 filter = BPF24().Q( registerMessage("Q", 5) ).cutoff( cutoff );
       outputGen = outputGen + (noise >> filter) * tremelo;
     }

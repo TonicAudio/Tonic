@@ -22,8 +22,8 @@ class FMDroneSynth : public Synth {
 public:
   FMDroneSynth(){
     
-    Tonic::Generator rCarrierFreq = registerMessage("carrierFreq", mtof(24)).ramped();
-    Tonic::Generator rModFreq     = rCarrierFreq * registerMessage("mcRatio", 2).ramped();
+    Generator rCarrierFreq = registerMessage("carrierFreq", mtof(24)).ramped();
+    Generator rModFreq     = rCarrierFreq * registerMessage("mcRatio", 2).ramped();
     
     outputGen = SineWave().freq(
                   rCarrierFreq  + (
