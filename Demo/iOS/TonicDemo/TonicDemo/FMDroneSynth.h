@@ -13,10 +13,6 @@
 
 #include "Synth.h"
 #include "SineWave.h"
-#include "Multiplier.h"
-#include "Adder.h"
-#include "FixedValue.h"
-#include "RampedValue.h"
 
 using namespace Tonic;
 
@@ -25,19 +21,21 @@ class FMDroneSynth : public Synth {
 
 public:
   FMDroneSynth(){
+    
+    Tonic::Generator rCarrierFreq = registerMessage("carrierFreq", mtof(24)).ramped();
+    Tonic::Generator rModFreq     = rCarrierFreq * registerMessage("mcRatio", 2).ramped();
+    
     outputGen = SineWave().freq(
-       RampedValue(200).target( registerMessage("baseFreq", 200) ).lengthMs(100)
-      + (
-          SineWave().freq( 2 * RampedValue(200).target( registerMessage("baseFreq") ) )
-          * 10 * RampedValue(1).target(registerMessage("fmAmount", 1)).lengthMs(100)
-         )
-    );
+                  rCarrierFreq  + (
+                    SineWave().freq( rModFreq ) *
+                    rModFreq *
+                    registerMessage("modIndex", 0).ramped()
+                  )
+                ) * 0.5f;
   }
   
-  static SourceRegister<FMDroneSynth> reg;
 };
 
-
-SourceRegister<FMDroneSynth> FMDroneSynth::reg("FMDroneSynth");
+registerSynth(FMDroneSynth);
 
 #endif

@@ -35,33 +35,35 @@ namespace Tonic {
     protected:
       std::vector<Generator> inputs;
       TonicFrames workSpace;
-      TonicFrames *lastFrames; // in case we want to grab these and examine them
+
     public:
       
       // Not sure how this could ever be called with an argument, since it's always allocated
       // via a templated container...
-      Adder_(int numChannels = 2);
+      Adder_();
       ~Adder_();
       
       // All generators must have the same number of channels, and this must match the number of channels 
       // in frames passed to tick.
       void in(Generator generator);
       void remove(Generator generator);
-      void tick( TonicFrames& frames );
       
       Generator & getInput(unsigned int index) { return inputs[index]; };
       unsigned int numInputs() { return inputs.size(); };
+      
+      void computeSynthesisBlock( const SynthesisContext_ &context );
+      
     };
     
-    inline void Adder_::tick( TonicFrames& frames ){
+    inline void Adder_::computeSynthesisBlock( const SynthesisContext_ &context ){
       
-      TonicFloat *framesData =  &frames[0];
+      TonicFloat *framesData =  &synthesisBlock_[0];
       
-      memset(framesData, 0, sizeof(TonicFloat) * frames.size());
+      memset(framesData, 0, sizeof(TonicFloat) * synthesisBlock_.size());
       
       for (int j =0; j < inputs.size(); j++) {
-        inputs[j].tick(workSpace);
-        frames += workSpace; // add each sample in frames to each sample in workspace
+        inputs[j].tick(workSpace, context);
+        synthesisBlock_ += workSpace; // add each sample in frames to each sample in workspace
       }
       
     }

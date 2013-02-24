@@ -20,30 +20,47 @@ namespace Tonic {
       public:
         ControlValue_();
         ~ControlValue_();
-        bool hasChanged();
-        void setHasChanged(bool flagVal=true);
+      
+        bool hasChanged(const SynthesisContext_ & context);
+        TonicFloat getValue(const SynthesisContext_ & context);
+      
+        // version without context argument, for use in ramped() shortcut, among other things
         TonicFloat getValue();
+
+        void setHasChanged(bool flagVal=true);
         void setValue(float);
 
       private:
-        bool mHasChanged;
-        float mValue;
-      
+        bool          mHasChanged;
+        bool          mLastHasChanged;
+        float         mValue;
+        unsigned long mLastFrameIndex;
     };
   }
   
+  class RampedValue;
+  
   class ControlValue : public TemplatedControlGenerator<Tonic_::ControlValue_>{
-    public:
-      ControlValue & setValue(float value)
-      {
-        gen()->setValue(value);
-        return *this;
-      }
     
-    ControlValue & setHasChanged(bool flagVal){
+    public:
+    
+    ControlValue(float value = 0){
+      setValue(value);
+    }
+    
+    inline ControlValue & setValue(float value)
+    {
+      gen()->setValue(value);
+      return *this;
+    }
+    
+    inline ControlValue & setHasChanged(bool flagVal){
       gen()->setHasChanged(flagVal);
       return *this;
     }
+
+    // shortcut for creating ramped value
+    RampedValue ramped(float lenMs = 50);
   };
 
 }

@@ -39,26 +39,26 @@ namespace Tonic {
     public:
       Noise_();
       ~Noise_();
-      void tick( TonicFrames& frames);
+      void computeSynthesisBlock( const SynthesisContext_ & context );
       inline void setStereo(bool stereo) { stereo_ = stereo; };
       
     };
     
-    inline void Noise_::tick( TonicFrames& frames){
-      TonicFloat* fdata = &frames[0];
+    inline void Noise_::computeSynthesisBlock( const SynthesisContext_ & context ){
+      TonicFloat* fdata = &synthesisBlock_[0];
       if (stereo_){
-        for (unsigned int i=0; i<frames.size(); i++){
+        for (unsigned int i=0; i<synthesisBlock_.size(); i++){
           *fdata++ = randomSample();
         }
       }
       else{
-        unsigned int stride = frames.channels();
-        for (unsigned int i=0; i<frames.frames(); i++){
+        unsigned int stride = synthesisBlock_.channels();
+        for (unsigned int i=0; i<synthesisBlock_.frames(); i++){
           *fdata = randomSample();
           fdata += stride;
         }
         
-        frames.fillChannels();
+        synthesisBlock_.fillChannels();
       }
     }
     

@@ -54,8 +54,6 @@ namespace Tonic {
     
     createGeneratorSetters(SineWave, freq, setFrequency)
 
-
-    
   };
 }
 

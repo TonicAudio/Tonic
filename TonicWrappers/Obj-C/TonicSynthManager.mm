@@ -13,17 +13,17 @@
 #include <vector>
 
 using std::vector;
-using Tonic::Source;
-using Tonic::SourceFactory;
+using Tonic::Synth;
+using Tonic::SynthFactory;
 using Tonic::Mixer;
 
 @interface TonicSynthManager ()
 {
-  SourceFactory sourceFactory;
+  SynthFactory synthFactory;
   Mixer mixer;
 }
 
-@property (nonatomic, strong) NSMutableDictionary *sourceDict;
+@property (nonatomic, strong) NSMutableDictionary *synthDict;
 
 - (void)setupNovocaineOutput;
 
@@ -51,7 +51,7 @@ using Tonic::Mixer;
 {
   self = [super init];
   if (self){
-    self.sourceDict = [NSMutableDictionary dictionaryWithCapacity:10];
+    self.synthDict = [NSMutableDictionary dictionaryWithCapacity:10];
     [self setupNovocaineOutput];
   }
   return self;
@@ -76,13 +76,13 @@ using Tonic::Mixer;
   [[Novocaine audioManager] pause];
 }
 
-- (void)addSourceWithName:(NSString *)synthName forKey:(NSString *)key
+- (void)addSynthWithName:(NSString *)synthName forKey:(NSString *)key
 {
     if (key){
-      Source *newSource = sourceFactory.createInstance(synthName.UTF8String);
-      if (newSource){
-        mixer.addInput(newSource);
-        [self.sourceDict setValue:[NSValue valueWithPointer:newSource] forKey:key];
+      Synth *newSynth = synthFactory.createInstance(synthName.UTF8String);
+      if (newSynth){
+        mixer.addInput(newSynth);
+        [self.synthDict setValue:[NSValue valueWithPointer:newSynth] forKey:key];
       }else{
         NSLog(@"Error in TonicSynthManager: Failed to add source. Source named %@ not found.", key);
       }
@@ -93,14 +93,14 @@ using Tonic::Mixer;
   
 }
 
-- (void)removeSourceForKey:(NSString *)key
+- (void)removeSynthForKey:(NSString *)key
 {
     if (key){
-      Source *source = (Source*)[[self.sourceDict objectForKey:key] pointerValue];
-      if (source){
-        mixer.removeInput(source);
-        delete source;
-        [self.sourceDict removeObjectForKey:key];
+      Synth *synth = (Synth*)[[self.synthDict objectForKey:key] pointerValue];
+      if (synth){
+        mixer.removeInput(synth);
+        delete synth;
+        [self.synthDict removeObjectForKey:key];
       }
     }
     else{
@@ -109,10 +109,10 @@ using Tonic::Mixer;
   
 }
 
-- (Tonic::Source*)sourceForKey:(NSString *)key
+- (Tonic::Synth*)synthForKey:(NSString *)key
 {
   if (key){
-    return (Tonic::Source*)[[self.sourceDict valueForKey:key] pointerValue];
+    return (Tonic::Synth*)[[self.synthDict valueForKey:key] pointerValue];
   }
   else{
     [NSException raise:NSInvalidArgumentException format:@"Argument \"key\" cannot be nil"];

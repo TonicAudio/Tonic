@@ -12,10 +12,6 @@
 #include "Tonic.h"
 #include "Synth.h"
 #include "SineWave.h"
-#include "Multiplier.h"
-#include "Adder.h"
-#include "FixedValue.h"
-#include "RampedValue.h"
 
 using namespace Tonic;
 
@@ -23,40 +19,24 @@ class SineAMSynth : public Synth{
 
 public:
 
-  SineAMSynth() : carrierAmt(1.0f) {
+  SineAMSynth() {
     
-    // TODO: do this by registering messages
-    carrierFreq.value(400).lengthMs(2000);
-    modFreq.value(10).lengthMs(200);
-    
-    carrier.freq(carrierFreq);
-    modulator.freq(modFreq);
-      
     outputGen =
     (
-      ( modulator + carrierAmt ) * carrier
+      ( SineWave().freq(
+          registerMessage("modFreq", 10).ramped()
+        ) +
+        registerMessage("carrierAmt", 1).ramped()
+      ) *
+      SineWave().freq(
+        registerMessage("carrierFreq", 400).ramped(1000)
+      )
     ) * 0.5f;
     
   };
   
-  inline void setCarrierAmt(TonicFloat newCarrierAmt) { carrierAmt = clamp(newCarrierAmt, 0.0f, 1.0f); };
-  inline void setCarrierFreq(TonicFloat nCarFreq) { carrierFreq.target(nCarFreq); };
-  inline void setModFreq(TonicFloat nModFreq) { modFreq.target(nModFreq); };
-  
-private:
-  
-  SineWave carrier;
-  SineWave modulator;
-  
-  RampedValue carrierFreq;
-  RampedValue modFreq;
-  
-  TonicFloat carrierAmt;
-  
-  static SourceRegister<SineAMSynth> reg;
-  
 };
 
-SourceRegister<SineAMSynth> SineAMSynth::reg("SineAMSynth");
+registerSynth(SineAMSynth);
 
 #endif

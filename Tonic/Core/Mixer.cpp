@@ -14,20 +14,20 @@ namespace Tonic {
     outputGen = adder;
   }
   
-  void Mixer::addInput(Source* input)
+  void Mixer::addInput(BufferFiller* input)
   {
       // no checking for duplicates, maybe we should
-    sources.push_back(input);
+    inputs.push_back(input);
     adder.in(input->getOutputGenerator());
   }
   
-  void Mixer::removeInput(Source* input)
+  void Mixer::removeInput(BufferFiller* input)
   {
-    vector<Source*>::iterator it = sources.begin();
-    while (it != sources.end()){
+    vector<BufferFiller*>::iterator it = inputs.begin();
+    while (it != inputs.end()){
       if (*it == input){
         adder.remove((*it)->getOutputGenerator());
-        sources.erase(it);
+        inputs.erase(it);
         break;
       }
       it++;

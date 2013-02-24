@@ -7,7 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-#include "Source.h"
+#include "Synth.h"
 
 @interface TonicSynthManager : NSObject
 
@@ -16,10 +16,10 @@
 - (void)startSession;
 - (void)endSession;
 
-- (void)addSourceWithName:(NSString*)sourceName forKey:(NSString*)key;
-- (void)removeSourceForKey:(NSString*)key;
+- (void)addSynthWithName:(NSString*)sourceName forKey:(NSString*)key;
+- (void)removeSynthForKey:(NSString*)key;
 
-- (Tonic::Source*)sourceForKey:(NSString*)key;
+- (Tonic::Synth*)synthForKey:(NSString*)key;
 
 
 @end
