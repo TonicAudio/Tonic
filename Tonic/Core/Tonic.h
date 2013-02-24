@@ -47,16 +47,55 @@ const TonicFloat PI           = 3.14159265358979;
 const TonicFloat TWO_PI       = 2 * PI;
 #endif
 
-
 namespace Tonic {
+  
+  // -- Global Constants --
+  
+  static TonicFloat sampleRate(){
+      return 44100;
+  };
 
-  // A few helper functions. May or may not belong here...
+  static const unsigned int kSynthesisBlockSize = 64;
+  
+  namespace Tonic_{
+    // -- Synthesis Context Struct --
+    
+    // Context passed down from root BufferFiller graph object to all sub-generators
+    // Synchronizes signal flow in cases when generator output is shared between multiple inputs
+    struct SynthesisContext_{
+      
+      // Number of frames elapsed since program start
+      // unsigned long will last 38+ days before overflow at 44.1 kHz
+      unsigned long elapsedFrames;
+      
+      // System time in seconds
+      double elapsedTime;
+      
+      SynthesisContext_() : elapsedFrames(0), elapsedTime(0) {};
+      
+      void tick() {
+        elapsedFrames += kSynthesisBlockSize;
+        elapsedTime += (double)kSynthesisBlockSize/sampleRate();
+      };
+    
+    };
+    
+  } // namespace Tonic_
+
+#pragma mark - Utility Functions
+  
+  //-- Vector Math --
+  inline static void vcopy( TonicFloat * dst, unsigned int dst_str, const TonicFloat * src, unsigned int src_str, unsigned int length ){
+    for (unsigned int i=0; i<length; i++, dst += dst_str, src += src_str){
+      *dst = *src;
+    }
+  }
   
   //-- Arithmetic --
   
   inline static TonicFloat max(TonicFloat a, TonicFloat b) {
     return (a > b ? a : b);
-  };
+  }
 
   inline static TonicFloat min(TonicFloat a, TonicFloat b) {
     return (a < b ? a : b);
@@ -76,10 +115,12 @@ namespace Tonic {
   
   //-- Freq/MIDI --
   
+  //! Midi note number to frequency in Hz
   inline static TonicFloat mtof(TonicFloat nn){
     return 440.0f * powf(2.0, (nn-69.0f)/12.0f);
   }
   
+  //! Frequency in Hz to midi note number
   inline static TonicFloat ftom(TonicFloat f){
     return 12.0f * log2(f/440.0f) + 69.0f;
   }
@@ -105,16 +146,14 @@ namespace Tonic {
     #endif
   }
   
-  // --
-    
-  static TonicFloat sampleRate(){
-    return 44100;
-  };
-  
-  static const int            kSynthesisBlockSize = 64;
+  // -- Logging --
   
   static void error(std::string message){
     printf("Tonic::error: %s\n",  message.c_str());
+  }
+  
+  static void debug(std::string message){
+    printf("Tonic::debug: %s\n", message.c_str());
   }
   
 }

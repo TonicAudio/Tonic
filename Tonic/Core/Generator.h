@@ -1,6 +1,6 @@
 //
 //  Generator.h
-//  2013_1_23_melody
+//  Tonic
 //
 //  Created by Morgan Packard on 1/23/13.
 //
@@ -20,8 +20,8 @@ https://ccrma.stanford.edu/software/stk/
 
 ++++++++++++++++++++++++++++++++++++++++++++++++++*/
 
-#ifndef ___013_1_23_melody__Generator__
-#define ___013_1_23_melody__Generator__
+#ifndef __Tonic__Generator__
+#define __Tonic__Generator__
 
 #include <iostream>
 #include "TonicFrames.h"
@@ -35,17 +35,43 @@ namespace Tonic {
     public:
       Generator_();
       virtual ~Generator_();
-      virtual void tick( TonicFrames& frames) = 0;
+      
+      virtual void tick( TonicFrames& frames, const SynthesisContext_ &context );
+      
+      // override point for defining generator behavior
+      // subclasses should implment to fill frames with new data
+      virtual void computeSynthesisBlock( const SynthesisContext_ &context ) = 0;
       
       // mutex for swapping inputs, etc
       void lockMutex();
       void unlockMutex();
       
+      
+      // set stereo/mono - changes number of channels in synthesisBlock_
+      void setIsStereo( bool stereo );
+      inline bool isStereo(){ return stereo_; };
+      
     protected:
-        
+      
+      bool            stereo_;
+      TonicFrames     synthesisBlock_;
+      unsigned long   lastFrameIndex_;
+      
       pthread_mutex_t genMutex_;
 
     };
+    
+    inline void Generator_::tick(TonicFrames &frames, const SynthesisContext_ &context ){
+      
+      // check context to see if we need new frames
+      if (context.elapsedFrames == 0 || lastFrameIndex_ != context.elapsedFrames){
+        computeSynthesisBlock(context);
+        lastFrameIndex_ = context.elapsedFrames;
+      }
+      
+      // copy synthesis block to frames passed in
+      frames.copy(synthesisBlock_);
+    }
     
     inline void Generator_::lockMutex(){
       pthread_mutex_lock(&genMutex_);
@@ -59,9 +85,7 @@ namespace Tonic {
 
     class PassThroughGenerator_ : public Tonic_::Generator_{
     public:
-      void tick( TonicFrames& frames){
-      
-      }
+      void computeSynthesisBlock( const SynthesisContext_ &context ) {};
     };
 
   }
@@ -72,7 +96,7 @@ namespace Tonic {
     Tonic_::Generator_* mGen;
     int* pcount;
   public:
-    Generator() : mGen( new Tonic_::PassThroughGenerator_() ) , pcount(new int(1)) {}
+    Generator() : mGen( new Tonic_::PassThroughGenerator_() ), pcount(new int(1)) {}
     Generator(const Generator& r): mGen(r.mGen), pcount(r.pcount){(*pcount)++;}
     Generator& operator=(const Generator& r)
     {
@@ -98,8 +122,12 @@ namespace Tonic {
       return mGen == r.mGen;
     }
     
-    void tick(TonicFrames& frames){
-      mGen->tick(frames);
+    inline bool isStereo(){
+      return mGen->isStereo();
+    }
+    
+    virtual void tick(TonicFrames& frames, const Tonic_::SynthesisContext_ & context){
+      mGen->tick(frames, context);
     }
 
   };
@@ -126,23 +154,25 @@ namespace Tonic {
 // Each generator should have three flavors of setter -- one that accepts a float, one that accepts a
 // ControlGenerator, and one that accepts a Generator. This macro will automatically build those three
 // setters
-#define createGeneratorSetters(generatorClassName, methodNameInGenerator, methodNameInGenerator_) \
-                                                                                                  \
-                                                                                                  \
-  generatorClassName& methodNameInGenerator(Generator arg){                                       \
-    gen()->lockMutex();                                                                           \
-    gen()->methodNameInGenerator_(arg);                                                           \
-    gen()->unlockMutex();                                                                         \
-        return *this;                                                                             \
-  }                                                                                               \
-                                                                                                  \
-  generatorClassName& methodNameInGenerator(float arg){                                           \
-    return methodNameInGenerator( FixedValue(arg) );                                              \
-  }                                                                                               \
-                                                                                                  \
-  generatorClassName& methodNameInGenerator(ControlGenerator arg){                                \
-    methodNameInGenerator(  FixedValue().setValue(arg) );                                         \
-    return *this;                                                                                 \
-  } 
 
-#endif /* defined(___013_1_23_melody__Generator__) */
+#define createGeneratorSetters(generatorClassName, methodNameInGenerator, methodNameInGenerator_) \
+                                                                                        \
+                                                                                        \
+  generatorClassName& methodNameInGenerator(Generator arg){                             \
+    this->gen()->lockMutex();                                                           \
+    this->gen()->methodNameInGenerator_(arg);                                           \
+    this->gen()->unlockMutex();                                                         \
+    return static_cast<generatorClassName&>(*this);                                     \
+  }                                                                                     \
+                                                                                        \
+  generatorClassName& methodNameInGenerator(float arg){                                 \
+    return methodNameInGenerator( FixedValue(arg) );                                    \
+  }                                                                                     \
+                                                                                        \
+  generatorClassName& methodNameInGenerator(ControlGenerator arg){                      \
+    return methodNameInGenerator(  FixedValue().setValue(arg) );                        \
+  }
+
+
+
+#endif /* defined(__Tonic__Generator__) */

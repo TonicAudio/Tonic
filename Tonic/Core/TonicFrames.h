@@ -1,6 +1,6 @@
 //
 //  TonicFrames.h
-//  2013_1_23_melody
+//  Tonic
 //
 //  Created by Morgan Packard on 1/23/13.
 //
@@ -20,8 +20,8 @@ https://ccrma.stanford.edu/software/stk/
 
 ++++++++++++++++++++++++++++++++++++++++++++++++++*/
 
-#ifndef ___013_1_23_melody__TonicFrames__
-#define ___013_1_23_melody__TonicFrames__
+#ifndef __Tonic__TonicFrames__
+#define __Tonic__TonicFrames__
 
 #include <iostream>
 #include "Tonic.h"
@@ -113,6 +113,14 @@ namespace Tonic {
 
     //! Fill all channels with contents of channel 0
     void fillChannels();
+    
+    //! Fill frames from other source.
+    /*! 
+      Copies channels from one object to another. Frame count must match.
+      If source has more channels than destination, they will be averaged.
+      If destination has more channels than source, they will be copied to all channels.
+    */
+    void copy( TonicFrames & f );
     
     //! Return an interpolated value at the fractional frame index and channel.
     /*!
@@ -246,20 +254,58 @@ namespace Tonic {
     unsigned int stride = nChannels_;
     
     // not sure if using vmul with 1.0 is actually faster or not
-    #ifdef USE_APPLE_ACCELERATE
-    float u = 1.0f;
-    vDSP_vsmul(sptr, stride, &u, dptr, stride, nFrames_);
-    #else
-    for ( unsigned int i=0; i<size_; i++, sptr += stride, dptr += stride ){
-      *dptr = *sptr;
-    }
-    #endif
+    vcopy(dptr, stride, sptr, stride, nFrames_);
+
   }
 
   inline void TonicFrames::fillChannels()
   {
     for (unsigned int i=1; i<nChannels_; i++){
       this->copyChannel(0, i);
+    }
+  }
+  
+  inline void TonicFrames::copy( TonicFrames &f ){
+    
+    if (nFrames_ == f.frames()){
+      
+      unsigned int fChannels = f.channels();
+      TonicFloat *dptr = data_;
+      TonicFloat *fptr = &f[0];
+      
+      if (nChannels_ == fChannels){
+        memcpy(dptr, fptr, size_ * sizeof(TonicFloat));
+      }
+      else if (nChannels_ < fChannels){
+        
+        // consolidate channels
+        memset(dptr, 0, size_ * sizeof(TonicFloat));
+        for (unsigned int c=0; c<fChannels; c++){
+          dptr = data_;
+          fptr = &f(0,c);
+          for (unsigned int i=0; i<nFrames_; i++, dptr+=nChannels_, fptr+=fChannels){
+            *dptr += *fptr;
+          }
+        }
+        
+        // apply scaling
+        TonicFloat s = 1.0f/fChannels;
+        dptr = data_;
+        for (unsigned int i=0; i<nFrames_; i++, dptr+=nChannels_){
+          *dptr *= s;
+        }
+      }
+      else{
+        // just copy one channel, then fill
+        vcopy(dptr, nChannels_, fptr, fChannels, nFrames_);
+        
+        // fill all channels if necessary
+        fillChannels();
+      }
+      
+    }
+    else{
+      error("Trying to fill frames from a source with a different number of frames");
     }
   }
 
@@ -308,4 +354,4 @@ namespace Tonic {
   
 }
 
-#endif /* defined(___013_1_23_melody__TonicFrames__) */
+#endif /* defined(__Tonic__TonicFrames__) */
