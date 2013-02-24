@@ -79,9 +79,6 @@ namespace Tonic { namespace Tonic_{
     sd.i[1] = msbi;
     phase_ = sd.d - BIT32DECPT * TABLE_SIZE;
     
-    // mono source, so copy channels if necessary
-    synthesisBlock_.fillChannels();
-    
   }
 
   
