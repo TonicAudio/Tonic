@@ -43,7 +43,8 @@ namespace Tonic {
     };
   }
   
-  template<class EffectType, class EffectType_> class TemplatedEffect : public TemplatedGenerator<EffectType_>{
+  template<class EffectType, class EffectType_>
+  class TemplatedEffect : public TemplatedGenerator<EffectType_>{
   
   protected:
     
@@ -58,6 +59,12 @@ namespace Tonic {
     }
     
   };
+  
+  // signal flow operator
+  template<class EffectType, class EffectType_>
+  static EffectType & operator>>(Generator lhs, TemplatedEffect<EffectType, EffectType_> rhs){
+    return rhs.input( lhs );
+  }
 
 }
 
