@@ -13,7 +13,12 @@
 
 namespace Tonic{ namespace Tonic_{
   
-  ControlGenerator_::ControlGenerator_(){
+  ControlGenerator_::ControlGenerator_() :
+    lastHasChanged_(false),
+    lastValue_(0),
+    lastFrameIndex_HasChanged_(0),
+    lastFrameIndex_Value_(0)
+  {
     pthread_mutex_init(&genMutex_, NULL);
   }
 
@@ -21,6 +26,22 @@ namespace Tonic{ namespace Tonic_{
     pthread_mutex_destroy(&genMutex_);
   }
 
+  bool ControlGenerator_::hasChanged(const SynthesisContext_ & context){
+    if (lastFrameIndex_HasChanged_ == 0 || lastFrameIndex_HasChanged_ != context.elapsedFrames){
+      lastFrameIndex_HasChanged_ = context.elapsedFrames;
+      lastHasChanged_ = computeHasChanged(context);
+    }
+    return lastHasChanged_;
+  }
+  
+  TonicFloat ControlGenerator_::getValue(const SynthesisContext_ & context){
+    if (lastFrameIndex_Value_ == 0 || lastFrameIndex_Value_ != context.elapsedFrames){
+      lastFrameIndex_Value_ = context.elapsedFrames;
+      lastValue_ = computeValue(context);
+    }
+    return lastValue_;
+  }
+  
 }}
 
 #endif

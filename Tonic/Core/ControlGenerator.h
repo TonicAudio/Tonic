@@ -31,11 +31,21 @@ namespace Tonic {
       void lockMutex();
       void unlockMutex();
       
-      virtual bool hasChanged(const SynthesisContext_ & context) = 0;
-      virtual TonicFloat getValue(const SynthesisContext_ & context) = 0;
+      // Only override the below two functions if you need to customize reuse behavior
+      virtual bool hasChanged(const SynthesisContext_ & context);
+      virtual TonicFloat getValue(const SynthesisContext_ & context);
       
     protected:
-        
+      
+      // Override these two functions to implement a new ControlGenerator
+      virtual bool        computeHasChanged(const SynthesisContext_ & context) = 0;
+      virtual TonicFloat  computeValue(const SynthesisContext_ & context) = 0;
+      
+      bool            lastHasChanged_;
+      TonicFloat      lastValue_;
+      unsigned long   lastFrameIndex_HasChanged_;
+      unsigned long   lastFrameIndex_Value_;
+      
       pthread_mutex_t genMutex_;
 
     };

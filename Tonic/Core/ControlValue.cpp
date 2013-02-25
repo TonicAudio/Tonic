@@ -14,40 +14,33 @@ namespace Tonic {
   namespace Tonic_{
   
     ControlValue_::ControlValue_():
-      mHasChanged(false),
-      mLastHasChanged(false),
-      mValue(0),
-      mLastFrameIndex(0)
+      hasChanged_(false),
+      value_(0)
     {}
     
     ControlValue_::~ControlValue_(){}
     
-    bool ControlValue_::hasChanged(const SynthesisContext_ & context){
-      if (mLastFrameIndex == 0 || mLastFrameIndex != context.elapsedFrames){
-        mLastFrameIndex = context.elapsedFrames;
-        mLastHasChanged = mHasChanged;
-        mHasChanged = false;
-      }
-      return mLastHasChanged;
-    }
-    
-    TonicFloat ControlValue_::getValue(const SynthesisContext_ & context){
-      return mValue;
-    }
     
     TonicFloat ControlValue_::getValue(){
-      return mValue;
+      return value_;
     }
     
     void ControlValue_::setHasChanged(bool flagVal){
-      mHasChanged = flagVal;
+      hasChanged_ = flagVal;
     }
     
     void ControlValue_::setValue(float value){
-      mValue = value;
-      mHasChanged = true;
+      value_ = value;
+      hasChanged_ = true;
     }
   
+    bool ControlValue_::computeHasChanged(const SynthesisContext_ &context){
+      return hasChanged_;
+    }
+    
+    TonicFloat ControlValue_::computeValue(const SynthesisContext_ &context){
+      return value_;
+    }
   }
   
   RampedValue ControlValue::ramped(float lenMs){

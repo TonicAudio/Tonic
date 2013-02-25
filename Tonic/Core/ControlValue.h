@@ -21,20 +21,20 @@ namespace Tonic {
         ControlValue_();
         ~ControlValue_();
       
-        bool hasChanged(const SynthesisContext_ & context);
-        TonicFloat getValue(const SynthesisContext_ & context);
-      
         // version without context argument, for use in ramped() shortcut, among other things
         TonicFloat getValue();
 
         void setHasChanged(bool flagVal=true);
         void setValue(float);
 
-      private:
-        bool          mHasChanged;
-        bool          mLastHasChanged;
-        float         mValue;
-        unsigned long mLastFrameIndex;
+      protected:
+      
+        bool computeHasChanged(const SynthesisContext_ & context);
+        TonicFloat computeValue(const SynthesisContext_ & context);
+      
+        TonicFloat  value_;
+        bool        hasChanged_;
+      
     };
   }
   
