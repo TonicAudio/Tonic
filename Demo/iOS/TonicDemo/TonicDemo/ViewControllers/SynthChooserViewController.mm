@@ -113,7 +113,7 @@ enum {
       synthName = @"FMDroneSynth";
       description = @"FM Synth";
       action = ^(Tonic::Synth* synth, CGPoint touchPointNorm){
-        synth->setParameter("carrierFreq", mtof(Tonic::map(touchPointNorm.x, 0.0f, 1.0f, 20, 32)) );
+        synth->setParameter("carrierFreq", mtof(Tonic::map(touchPointNorm.x, 0.0f, 1.0f, 0, 24)) );
         synth->setParameter("modIndex", Tonic::map(touchPointNorm.y*touchPointNorm.y, 0.0f, 1.0f, 0.0f, 10.0f));
       };
       break;

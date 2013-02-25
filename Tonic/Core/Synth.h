@@ -30,6 +30,7 @@ https://ccrma.stanford.edu/software/stk/
 #include "RampedValue.h"
 #include "Multiplier.h"
 #include "Adder.h"
+#include "ControlAdder.h"
 
 namespace Tonic{
   

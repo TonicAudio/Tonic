@@ -10,6 +10,10 @@
 
 namespace Tonic { namespace Tonic_{
   
+  void ControlAdder_::in(ControlGenerator input){
+    inputs.push_back(input);
+  }
+  
   bool ControlAdder_::computeHasChanged(const SynthesisContext_ &context){
     for (unsigned int i=0; i<inputs.size(); i++){
       if (inputs[i].hasChanged(context)){
