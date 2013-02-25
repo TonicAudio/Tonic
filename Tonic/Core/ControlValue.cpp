@@ -39,6 +39,7 @@ namespace Tonic {
     }
     
     TonicFloat ControlValue_::computeValue(const SynthesisContext_ &context){
+      hasChanged_ = false;
       return value_;
     }
   }
