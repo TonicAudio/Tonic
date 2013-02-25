@@ -32,44 +32,28 @@ namespace Tonic {
     
     class Noise_ : public Generator_{
       
-    protected:
-      
-      bool stereo_;
-      
     public:
-      Noise_();
-      ~Noise_();
+      
       void computeSynthesisBlock( const SynthesisContext_ & context );
-      inline void setStereo(bool stereo) { stereo_ = stereo; };
       
     };
     
     inline void Noise_::computeSynthesisBlock( const SynthesisContext_ & context ){
       TonicFloat* fdata = &synthesisBlock_[0];
-      if (stereo_){
-        for (unsigned int i=0; i<synthesisBlock_.size(); i++){
-          *fdata++ = randomSample();
-        }
-      }
-      else{
-        unsigned int stride = synthesisBlock_.channels();
-        for (unsigned int i=0; i<synthesisBlock_.frames(); i++){
-          *fdata = randomSample();
-          fdata += stride;
-        }
-        
-        synthesisBlock_.fillChannels();
+      for (unsigned int i=0; i<synthesisBlock_.size(); i++){
+        *fdata++ = randomSample();
       }
     }
     
   }
   
   class Noise : public TemplatedGenerator<Tonic_::Noise_>{
-
   public:
-    Noise & stereo(bool stereo);
-    
+    Noise(bool stereo = false){
+      gen()->setIsStereo(stereo);
+    }
   };
+  
 }
 
 #endif /* defined(__Tonic__Noise__) */

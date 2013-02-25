@@ -67,6 +67,8 @@ namespace Tonic {
       
       Filter_();
       
+      void setIsStereo(bool stereo);
+      
       inline void setCutoff( Generator cutoff ){ cutoff_ = cutoff; };
       inline void setQ( Generator Q ){ Q_ = Q; }
       inline void setBypass( ControlGenerator bypass ){ bypass_ = bypass; };

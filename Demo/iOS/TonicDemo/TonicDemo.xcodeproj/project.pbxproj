@@ -30,7 +30,6 @@
 		F20FCD4816C566F60039832A /* TableLookupOsc.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F20FCD4616C566F60039832A /* TableLookupOsc.cpp */; };
 		F20FCD4B16C56EF60039832A /* SineWave.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F20FCD4916C56EF50039832A /* SineWave.cpp */; };
 		F20FCD5216C58D5B0039832A /* TonicSynthManager.mm in Sources */ = {isa = PBXBuildFile; fileRef = F20FCD5116C58D5B0039832A /* TonicSynthManager.mm */; };
-		F2360A7716C4B4EC00A0AD7A /* Noise.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F2360A7516C4B4EC00A0AD7A /* Noise.cpp */; };
 		F23E243E16C6BF450082EF65 /* Mixer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F23E243C16C6BF450082EF65 /* Mixer.cpp */; };
 		F23E244116C6C5F10082EF65 /* BufferFiller.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F23E243F16C6C5F00082EF65 /* BufferFiller.cpp */; };
 		F256C8E416C5A0BF0096574D /* SynthTestViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = F256C8E016C5A0BF0096574D /* SynthTestViewController.mm */; };
@@ -93,7 +92,6 @@
 		F20FCD4A16C56EF60039832A /* SineWave.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SineWave.h; sourceTree = "<group>"; };
 		F20FCD5016C58D5B0039832A /* TonicSynthManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TonicSynthManager.h; sourceTree = "<group>"; };
 		F20FCD5116C58D5B0039832A /* TonicSynthManager.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = TonicSynthManager.mm; sourceTree = "<group>"; };
-		F2360A7516C4B4EC00A0AD7A /* Noise.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Noise.cpp; sourceTree = "<group>"; };
 		F2360A7616C4B4EC00A0AD7A /* Noise.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Noise.h; sourceTree = "<group>"; };
 		F2360A7916C4BC6E00A0AD7A /* SineSumSynth.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SineSumSynth.h; sourceTree = "<group>"; };
 		F23E243C16C6BF450082EF65 /* Mixer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Mixer.cpp; sourceTree = "<group>"; };
@@ -328,7 +326,6 @@
 		F2C9F6F516C493870090A78D /* Oscillators */ = {
 			isa = PBXGroup;
 			children = (
-				F2360A7516C4B4EC00A0AD7A /* Noise.cpp */,
 				F2360A7616C4B4EC00A0AD7A /* Noise.h */,
 				F20FCD4616C566F60039832A /* TableLookupOsc.cpp */,
 				F20FCD4716C566F60039832A /* TableLookupOsc.h */,
@@ -433,7 +430,6 @@
 				F2C9F6FE16C493870090A78D /* Synth.cpp in Sources */,
 				F2C9F6FF16C493870090A78D /* TonicFrames.cpp in Sources */,
 				F2D951D816C49A6700F25663 /* RampedValue.cpp in Sources */,
-				F2360A7716C4B4EC00A0AD7A /* Noise.cpp in Sources */,
 				F20FCD4816C566F60039832A /* TableLookupOsc.cpp in Sources */,
 				F20FCD4B16C56EF60039832A /* SineWave.cpp in Sources */,
 				A82437C916CA7470000677C7 /* ControlValue.cpp in Sources */,
