@@ -1,6 +1,6 @@
 //
 //  FixedValue.cpp
-//  TonicDemo
+//  Tonic
 //
 //  Created by Morgan Packard on 1/27/13.
 //  Copyright (c) 2013 Morgan Packard. All rights reserved.
@@ -22,3 +22,14 @@ https://ccrma.stanford.edu/software/stk/
 
 #include "FixedValue.h"
 
+namespace Tonic {
+  
+  namespace Tonic_ {
+    
+    FixedValue_::FixedValue_(float val) : lastVal_(0){
+      valueGen = ControlValue().setValue(val);
+    }
+    
+    
+  }
+}

@@ -41,42 +41,33 @@ namespace Tonic {
         
     public:
         
-        FixedValue_(float val) : lastVal_(0){
-          valueGen = ControlValue().setValue(val);
-        }
-        
-        FixedValue_(){
-          valueGen = ControlValue().setValue(0);
-        }
-         
-        ~FixedValue_(){
-        }
-        
-        inline void computeSynthesisBlock( const SynthesisContext_ & context ){
-          
-          float* buffStart = &synthesisBlock_[0];
-          
-          TonicFloat val = valueGen.getValue(context);
-          
-          if (val != lastVal_){
-            
-            #ifdef USE_APPLE_ACCELERATE
-            
-            vDSP_vfill( &val , buffStart, 1, synthesisBlock_.size());
-            
-            #else
-            
-            std::fill(buffStart, buffStart + synthesisBlock_.size(), valueGen.getValue(context));
-            
-            #endif
-            
-            lastVal_ = val;
-          }
-        }
+      FixedValue_(float TonicFloat = 0);
       
-        void setValue(ControlGenerator val){
-          valueGen = val;
+      inline void computeSynthesisBlock( const SynthesisContext_ & context ){
+        
+        float* buffStart = &synthesisBlock_[0];
+        
+        TonicFloat val = valueGen.getValue(context);
+        
+        if (val != lastVal_){
+          
+          #ifdef USE_APPLE_ACCELERATE
+          
+          vDSP_vfill( &val , buffStart, 1, synthesisBlock_.size());
+          
+          #else
+          
+          std::fill(buffStart, buffStart + synthesisBlock_.size(), valueGen.getValue(context));
+          
+          #endif
+          
+          lastVal_ = val;
         }
+      }
+    
+      void setValue(ControlGenerator val){
+        valueGen = val;
+      }
 
     };
 

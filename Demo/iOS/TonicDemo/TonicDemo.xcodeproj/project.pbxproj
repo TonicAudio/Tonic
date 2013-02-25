@@ -345,8 +345,8 @@
 				A8786A9316DD86E400FC22F8 /* LFNoise.h */,
 				F23E243C16C6BF450082EF65 /* Mixer.cpp */,
 				F23E243D16C6BF450082EF65 /* Mixer.h */,
-				F2D951D716C49A6700F25663 /* RampedValue.h */,
 				F2D951D616C49A6700F25663 /* RampedValue.cpp */,
+				F2D951D716C49A6700F25663 /* RampedValue.h */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
