@@ -20,12 +20,9 @@ namespace Tonic {
       public:
         ControlValue_();
         ~ControlValue_();
-      
-        // version without context argument, for use in ramped() shortcut, among other things
-        TonicFloat getValue();
 
         void setHasChanged(bool flagVal=true);
-        void setValue(float);
+        void setValue(float value);
 
       protected:
       
@@ -38,14 +35,13 @@ namespace Tonic {
     };
   }
   
-  class RampedValue;
   
   class ControlValue : public TemplatedControlGenerator<Tonic_::ControlValue_>{
     
     public:
     
     ControlValue(float value = 0){
-      setValue(value);
+      gen()->setValue(value);
     }
     
     inline ControlValue & setValue(float value)
@@ -59,8 +55,6 @@ namespace Tonic {
       return *this;
     }
 
-    // shortcut for creating ramped value
-    RampedValue ramped(float lenMs = 50);
   };
 
 }

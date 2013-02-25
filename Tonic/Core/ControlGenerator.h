@@ -16,7 +16,6 @@
 
 #include "Tonic.h"
 
-
 namespace Tonic {
 
   namespace Tonic_{
@@ -34,6 +33,9 @@ namespace Tonic {
       // Only override the below two functions if you need to customize reuse behavior
       virtual bool hasChanged(const SynthesisContext_ & context);
       virtual TonicFloat getValue(const SynthesisContext_ & context);
+      
+      // Used to peek at last value, for initializing other generators (see ramped() method for example)
+      TonicFloat getLastValue() { return lastValue_; };
       
     protected:
       
@@ -60,7 +62,8 @@ namespace Tonic {
 
   }
 
-  
+  // local declaration
+  class RampedValue;
 
   class ControlGenerator{
   protected:
@@ -96,6 +99,9 @@ namespace Tonic {
     virtual TonicFloat getValue(const Tonic_::SynthesisContext_ & context){
       return mGen->getValue(context);
     }
+    
+    // shortcut for creating ramped value
+    RampedValue ramped(float lenMs = 50);
     
   };
   
