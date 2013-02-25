@@ -38,10 +38,6 @@ namespace Tonic {
       
       virtual void tick( TonicFrames& frames, const SynthesisContext_ &context );
       
-      // override point for defining generator behavior
-      // subclasses should implment to fill frames with new data
-      virtual void computeSynthesisBlock( const SynthesisContext_ &context ) = 0;
-      
       // mutex for swapping inputs, etc
       void lockMutex();
       void unlockMutex();
@@ -52,6 +48,10 @@ namespace Tonic {
       inline bool isStereo(){ return stereo_; };
       
     protected:
+      
+      // override point for defining generator behavior
+      // subclasses should implment to fill frames with new data
+      virtual void computeSynthesisBlock( const SynthesisContext_ &context ) = 0;
       
       bool            stereo_;
       TonicFrames     synthesisBlock_;
