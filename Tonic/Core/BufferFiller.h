@@ -20,8 +20,8 @@
  
  ++++++++++++++++++++++++++++++++++++++++++++++++++*/
 
-#ifndef __TonicDemo__BufferFiller__
-#define __TonicDemo__BufferFiller__
+#ifndef __Tonic__BufferFiller__
+#define __Tonic__BufferFiller__
 
 #include <iostream>
 #include <map>

@@ -44,8 +44,8 @@ namespace Tonic {
       
       
       // set stereo/mono - changes number of channels in synthesisBlock_
-      void setIsStereo( bool stereo );
-      inline bool isStereo(){ return stereo_; };
+      virtual void setIsStereo( bool stereo );
+      bool isStereo(){ return stereo_; };
       
     protected:
       

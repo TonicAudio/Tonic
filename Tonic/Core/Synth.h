@@ -51,16 +51,6 @@ namespace Tonic{
   //
   // http://stackoverflow.com/questions/582331/is-there-a-way-to-instantiate-objects-from-a-string-holding-their-class-name
   //
-  // Concrete source subclasses should implement a static registration struct to be registered by default:
-  //
-  // In MySource.h:
-  //
-  // private:
-  //  static SourceRegister<MySource> reg;
-  //
-  // In Source.cpp
-  //  SourceRegister<MySource> MySource::reg("MySource");
-  //
   // -----------------------------
   
   template<typename T> Synth * createSynth() { return new T; }

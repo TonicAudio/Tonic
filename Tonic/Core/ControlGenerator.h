@@ -6,13 +6,9 @@
 //  Copyright (c) 2013 Morgan Packard. All rights reserved.
 //
 
-/*
-  Morgan 2012.02.12 Could probably link this to the class structure of regular generator and save some code, but I don't see any big winds from doing that, and just want to bang it out. Note, however, that this is very very similar to the code for the audio rate generator.
 
-*/
-
-#ifndef TonicDemo_ControlGenerator_h
-#define TonicDemo_ControlGenerator_h
+#ifndef __Tonic_ControlGenerator__
+#define __Tonic_ControlGenerator__
 
 #include "TonicCore.h"
 

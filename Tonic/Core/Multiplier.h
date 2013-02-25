@@ -20,8 +20,8 @@ https://ccrma.stanford.edu/software/stk/
 
 ++++++++++++++++++++++++++++++++++++++++++++++++++*/
 
-#ifndef __TonicDemo__Multiplier__
-#define __TonicDemo__Multiplier__
+#ifndef __Tonic__Multiplier__
+#define __Tonic__Multiplier__
 
 #include <iostream>
 #include <vector>

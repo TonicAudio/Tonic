@@ -20,8 +20,8 @@ https://ccrma.stanford.edu/software/stk/
 
 ++++++++++++++++++++++++++++++++++++++++++++++++++*/
 
-#ifndef __TonicDemo__Adder__
-#define __TonicDemo__Adder__
+#ifndef __Tonic__Adder__
+#define __Tonic__Adder__
 
 #include <vector>
 #include "FixedValue.h"
