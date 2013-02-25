@@ -23,6 +23,7 @@
 #include "Adder.h"
 #include "Multiplier.h"
 #include "ControlAdder.h"
+#include "ControlMultiplier.h"
 #include "Synth.h"
 
 #endif

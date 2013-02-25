@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		017BF2C916DBAE5200FA1046 /* ControlMultiplier.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 017BF2C716DBAE5000FA1046 /* ControlMultiplier.cpp */; };
 		9A1589F116D7E1D200E2BC81 /* Filters.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9A1589EF16D7E1D200E2BC81 /* Filters.cpp */; };
 		A82437C916CA7470000677C7 /* ControlValue.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A82437C716CA7470000677C7 /* ControlValue.cpp */; };
 		A82437DB16CB3753000677C7 /* ControlGenerator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A82437DA16CB36A8000677C7 /* ControlGenerator.cpp */; };
@@ -48,6 +49,8 @@
 
 /* Begin PBXFileReference section */
 		017BF2C616DB24C400FA1046 /* Tonic.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Tonic.h; sourceTree = "<group>"; };
+		017BF2C716DBAE5000FA1046 /* ControlMultiplier.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ControlMultiplier.cpp; sourceTree = "<group>"; };
+		017BF2C816DBAE5100FA1046 /* ControlMultiplier.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ControlMultiplier.h; sourceTree = "<group>"; };
 		9A1589EF16D7E1D200E2BC81 /* Filters.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Filters.cpp; sourceTree = "<group>"; };
 		9A1589F016D7E1D200E2BC81 /* Filters.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Filters.h; sourceTree = "<group>"; };
 		A82437C716CA7470000677C7 /* ControlValue.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ControlValue.cpp; sourceTree = "<group>"; };
@@ -305,6 +308,8 @@
 				F2C9A91F16DAEFE6009D9C08 /* ControlAdder.h */,
 				A82437DA16CB36A8000677C7 /* ControlGenerator.cpp */,
 				A82437D816CB3010000677C7 /* ControlGenerator.h */,
+				017BF2C716DBAE5000FA1046 /* ControlMultiplier.cpp */,
+				017BF2C816DBAE5100FA1046 /* ControlMultiplier.h */,
 				A82437C716CA7470000677C7 /* ControlValue.cpp */,
 				A82437C816CA7470000677C7 /* ControlValue.h */,
 				F263BD2F16D56751008AADA6 /* Effect.h */,
@@ -441,6 +446,7 @@
 				9A1589F116D7E1D200E2BC81 /* Filters.cpp in Sources */,
 				A8786A9416DD86E400FC22F8 /* LFNoise.cpp in Sources */,
 				F2C9A92016DAEFE6009D9C08 /* ControlAdder.cpp in Sources */,
+				017BF2C916DBAE5200FA1046 /* ControlMultiplier.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
