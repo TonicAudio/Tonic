@@ -23,14 +23,9 @@ https://ccrma.stanford.edu/software/stk/
 #ifndef __Tonic__Synth__
 #define __Tonic__Synth__
 
-#include <iostream>
 #include <map>
+#include "Tonic.h"
 #include "BufferFiller.h"
-#include "ControlValue.h"
-#include "RampedValue.h"
-#include "Multiplier.h"
-#include "Adder.h"
-#include "ControlAdder.h"
 
 namespace Tonic{
   

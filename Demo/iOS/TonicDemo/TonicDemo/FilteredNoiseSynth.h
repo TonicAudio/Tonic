@@ -9,7 +9,6 @@
 #ifndef TonicDemo_FilteredNoise_h
 #define TonicDemo_FilteredNoise_h
 
-#include "Tonic.h"
 #include "Synth.h"
 #include "SineWave.h"
 #include "Filters.h"

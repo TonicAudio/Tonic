@@ -14,7 +14,7 @@
 #ifndef TonicDemo_ControlGenerator_h
 #define TonicDemo_ControlGenerator_h
 
-#include "Tonic.h"
+#include "TonicCore.h"
 
 namespace Tonic {
 

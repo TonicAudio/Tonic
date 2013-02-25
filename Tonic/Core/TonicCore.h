@@ -1,6 +1,6 @@
 //
-//  Tonic.h
-//  2013_1_23_melody
+//  TonicCore.h
+//  Tonic
 //
 //  Created by Morgan Packard on 1/23/13.
 //
@@ -20,8 +20,8 @@ https://ccrma.stanford.edu/software/stk/
 
 ++++++++++++++++++++++++++++++++++++++++++++++++++*/
 
-#ifndef _013_1_23_melody_Tonic_h
-#define _013_1_23_melody_Tonic_h
+#ifndef __Tonic__TonicCore__
+#define __Tonic__TonicCore__
 
 #include <stdio.h>
 #include <string>

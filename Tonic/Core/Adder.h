@@ -23,8 +23,6 @@ https://ccrma.stanford.edu/software/stk/
 #ifndef __TonicDemo__Adder__
 #define __TonicDemo__Adder__
 
-#include <iostream>
-#include "Generator.h"
 #include <vector>
 #include "FixedValue.h"
 

@@ -24,7 +24,7 @@ https://ccrma.stanford.edu/software/stk/
 #define __Tonic__TonicFrames__
 
 #include <iostream>
-#include "Tonic.h"
+#include "TonicCore.h"
 
 /*
   This is an almost exact copy of STKFrames. Many thanks to Perry Cook and Gary Scavone.
