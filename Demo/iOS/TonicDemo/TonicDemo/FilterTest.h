@@ -24,7 +24,7 @@ class FilterTest : public Synth {
 public:
   FilterTest(){
     
-    Tonic::Generator cutoff = registerMessage("cutoff",1000).ramped();
+    Generator cutoff = registerMessage("cutoff",1000).ramped();
 
     LPF24 lpf = LPF24().Q(2.5).cutoff( cutoff + (SineWave().freq(4) * cutoff * 0.2 * registerMessage("LFO", 0).ramped() ) );
     
