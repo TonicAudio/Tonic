@@ -36,7 +36,7 @@
 */
 namespace Tonic{
   
-  class BufferFiller : Generator {
+  class BufferFiller : public Generator {
     
   private:
     int                         bufferReadPosition_;
