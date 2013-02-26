@@ -23,7 +23,6 @@ https://ccrma.stanford.edu/software/stk/
 #ifndef __Tonic__Noise__
 #define __Tonic__Noise__
 
-#include <iostream>
 #include "Generator.h"
 
 namespace Tonic {

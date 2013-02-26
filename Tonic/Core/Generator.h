@@ -23,7 +23,6 @@ https://ccrma.stanford.edu/software/stk/
 #ifndef __Tonic__Generator__
 #define __Tonic__Generator__
 
-#include <iostream>
 #include "TonicFrames.h"
 
 namespace Tonic {

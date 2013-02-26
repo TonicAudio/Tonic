@@ -9,7 +9,6 @@
 #ifndef __TonicDemo__ControlValue__
 #define __TonicDemo__ControlValue__
 
-#include <iostream>
 #include "ControlGenerator.h"
 
 namespace Tonic {

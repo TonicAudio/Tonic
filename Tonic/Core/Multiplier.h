@@ -23,9 +23,7 @@ https://ccrma.stanford.edu/software/stk/
 #ifndef __Tonic__Multiplier__
 #define __Tonic__Multiplier__
 
-#include <iostream>
 #include <vector>
-#include "TonicFrames.h"
 #include "Generator.h"
 #include "FixedValue.h"
 

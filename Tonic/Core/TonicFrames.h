@@ -23,7 +23,6 @@ https://ccrma.stanford.edu/software/stk/
 #ifndef __Tonic__TonicFrames__
 #define __Tonic__TonicFrames__
 
-#include <iostream>
 #include "TonicCore.h"
 
 /*

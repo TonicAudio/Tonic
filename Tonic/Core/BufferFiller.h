@@ -23,7 +23,6 @@
 #ifndef __Tonic__BufferFiller__
 #define __Tonic__BufferFiller__
 
-#include <iostream>
 #include <map>
 #include "Generator.h"
 

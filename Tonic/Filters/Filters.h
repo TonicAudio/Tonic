@@ -23,7 +23,6 @@ https://ccrma.stanford.edu/software/stk/
 #ifndef __Tonic__Filters__
 #define __Tonic__Filters__
 
-#include <iostream>
 #include "Effect.h"
 #include "FilterUtils.h"
 #include "FixedValue.h"
