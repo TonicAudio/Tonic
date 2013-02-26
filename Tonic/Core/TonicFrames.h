@@ -248,12 +248,11 @@ namespace Tonic {
     
   inline void TonicFrames :: copyChannel(unsigned int src, unsigned int dst)
   {
-    // TODO: Range check
+
     TonicFloat *sptr = data_ + src;
     TonicFloat *dptr = data_ + dst;
     unsigned int stride = nChannels_;
     
-    // not sure if using vmul with 1.0 is actually faster or not
     vcopy(dptr, stride, sptr, stride, nFrames_);
 
   }
