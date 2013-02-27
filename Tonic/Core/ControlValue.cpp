@@ -19,19 +19,20 @@ namespace Tonic {
     
     ControlValue_::~ControlValue_(){}
     
-    
-    void ControlValue_::setHasChanged(bool flagVal){
-      hasChanged_ = flagVal;
+    ControlGeneratorOutput ControlValue_::peek(){
+      ControlGeneratorOutput peekOutput;
+      peekOutput.value = value_;
+      peekOutput.status = hasChanged_ ? ControlGeneratorStatusHasChanged : ControlGeneratorStatusHasNotChanged;
+      return peekOutput;
     }
     
     void ControlValue_::setValue(float value){
       value_ = value;
-      lastValue_ = value;
       hasChanged_ = true;
     }
   
-    bool ControlValue_::computeHasChanged(const SynthesisContext_ &context){
-      return hasChanged_;
+    ControlGeneratorStatus ControlValue_::computeStatus(const SynthesisContext_ & context){
+      return hasChanged_ ? ControlGeneratorStatusHasChanged : ControlGeneratorStatusHasNotChanged;
     }
     
     TonicFloat ControlValue_::computeValue(const SynthesisContext_ &context){

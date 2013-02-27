@@ -13,12 +13,26 @@
 #include "TonicCore.h"
 
 namespace Tonic {
+  
+  typedef enum {
+    ControlGeneratorStatusHasNotChanged = 0,
+    ControlGeneratorStatusHasChanged
+    
+  } ControlGeneratorStatus;
+  
+  struct ControlGeneratorOutput{
+    TonicFloat value;
+    ControlGeneratorStatus status;
+    
+    ControlGeneratorOutput() : value(0), status(ControlGeneratorStatusHasNotChanged) {};
+  };
 
   namespace Tonic_{
 
     class ControlGenerator_{
       
     public:
+    
       ControlGenerator_();
       virtual ~ControlGenerator_();
             
@@ -26,25 +40,23 @@ namespace Tonic {
       void lockMutex();
       void unlockMutex();
       
-      // Only override the below two functions if you need to customize reuse behavior
-      virtual bool hasChanged(const SynthesisContext_ & context);
-      virtual TonicFloat getValue(const SynthesisContext_ & context);
+      // Only override tick if you need custom reuse behavior
+      // Pass in a pointer to a TonicFloat to return a value. Some generators may not care about value.
+      virtual ControlGeneratorOutput tick( const SynthesisContext_ & context );
       
       // Used to peek at last value, for initializing other generators (see ramped() method for example)
-      TonicFloat getLastValue() { return lastValue_; };
+      virtual ControlGeneratorOutput peek() { return lastOutput_; };
       
     protected:
       
       // Override these two functions to implement a new ControlGenerator
-      virtual bool        computeHasChanged(const SynthesisContext_ & context) = 0;
-      virtual TonicFloat  computeValue(const SynthesisContext_ & context) = 0;
+      virtual ControlGeneratorStatus  computeStatus(const SynthesisContext_ & context) = 0;
+      virtual TonicFloat              computeValue(const SynthesisContext_ & context) = 0;
       
-      bool            lastHasChanged_;
-      TonicFloat      lastValue_;
-      unsigned long   lastFrameIndex_HasChanged_;
-      unsigned long   lastFrameIndex_Value_;
+      ControlGeneratorOutput  lastOutput_;
+      unsigned long           lastFrameIndex_;
       
-      pthread_mutex_t genMutex_;
+      pthread_mutex_t         genMutex_;
 
     };
     
@@ -88,12 +100,8 @@ namespace Tonic {
       }
     }
     
-    virtual bool hasChanged(const Tonic_::SynthesisContext_ & context){
-      return mGen->hasChanged(context);
-    }
-    
-    virtual TonicFloat getValue(const Tonic_::SynthesisContext_ & context){
-      return mGen->getValue(context);
+    ControlGeneratorOutput tick( const Tonic_::SynthesisContext_ & context ){
+      return mGen->tick(context);
     }
     
     // shortcut for creating ramped value

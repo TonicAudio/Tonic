@@ -14,19 +14,19 @@ namespace Tonic { namespace Tonic_{
     inputs.push_back(input);
   }
   
-  bool ControlAdder_::computeHasChanged(const SynthesisContext_ &context){
+  ControlGeneratorStatus ControlAdder_::computeStatus(const SynthesisContext_ &context){
     for (unsigned int i=0; i<inputs.size(); i++){
-      if (inputs[i].hasChanged(context)){
-        return true;
+      if (inputs[i].tick(context).status == ControlGeneratorStatusHasChanged){
+        return ControlGeneratorStatusHasChanged;
       }
     }
-    return false;
+    return ControlGeneratorStatusHasNotChanged;
   }
   
   TonicFloat ControlAdder_::computeValue(const SynthesisContext_ &context){
     TonicFloat sum = 0.0f;
     for (unsigned int i=0; i<inputs.size(); i++){
-      sum += inputs[i].getValue(context);
+      sum += inputs[i].tick(context).value;
     }
     return sum;
   }

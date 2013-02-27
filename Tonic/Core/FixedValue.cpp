@@ -26,7 +26,7 @@ namespace Tonic {
   
   namespace Tonic_ {
     
-    FixedValue_::FixedValue_(float val) : lastVal_(0){
+    FixedValue_::FixedValue_(float val){
       valueGen = ControlValue().setValue(val);
     }
     

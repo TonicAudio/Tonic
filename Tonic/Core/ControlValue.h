@@ -20,12 +20,13 @@ namespace Tonic {
         ControlValue_();
         ~ControlValue_();
 
-        void setHasChanged(bool flagVal=true);
         void setValue(float value);
 
       protected:
       
-        bool computeHasChanged(const SynthesisContext_ & context);
+        ControlGeneratorOutput peek();
+      
+        ControlGeneratorStatus computeStatus(const SynthesisContext_ & context);
         TonicFloat computeValue(const SynthesisContext_ & context);
       
         TonicFloat  value_;
@@ -46,11 +47,6 @@ namespace Tonic {
     inline ControlValue & setValue(float value)
     {
       gen()->setValue(value);
-      return *this;
-    }
-    
-    inline ControlValue & setHasChanged(bool flagVal){
-      gen()->setHasChanged(flagVal);
       return *this;
     }
 

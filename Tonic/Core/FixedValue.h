@@ -32,9 +32,6 @@ namespace Tonic {
   namespace Tonic_{
   
     class FixedValue_ : public Generator_{
-
-    private:
-      TonicFloat lastVal_;
       
     protected:
       ControlGenerator valueGen;
@@ -47,21 +44,19 @@ namespace Tonic {
         
         float* buffStart = &synthesisBlock_[0];
         
-        TonicFloat val = valueGen.getValue(context);
+        ControlGeneratorOutput valueOutput = valueGen.tick(context);
         
-        if (val != lastVal_){
+        if (valueOutput.status == ControlGeneratorStatusHasChanged){
           
           #ifdef USE_APPLE_ACCELERATE
           
-          vDSP_vfill( &val , buffStart, 1, synthesisBlock_.size());
+          vDSP_vfill( &valueOutput.value , buffStart, 1, synthesisBlock_.size());
           
           #else
           
-          std::fill(buffStart, buffStart + synthesisBlock_.size(), valueGen.getValue(context));
+          std::fill(buffStart, buffStart + synthesisBlock_.size(), valueOutput.value);
           
           #endif
-          
-          lastVal_ = val;
         }
       }
     

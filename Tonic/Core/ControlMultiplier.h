@@ -44,7 +44,7 @@ namespace Tonic {
       
     protected:
       
-      bool computeHasChanged( const SynthesisContext_ & context );
+      ControlGeneratorStatus computeStatus( const SynthesisContext_ & context );
       TonicFloat computeValue( const SynthesisContext_ & context );
       
       vector<ControlGenerator> inputs;
