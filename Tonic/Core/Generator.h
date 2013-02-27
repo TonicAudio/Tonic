@@ -23,7 +23,6 @@ https://ccrma.stanford.edu/software/stk/
 #ifndef __Tonic__Generator__
 #define __Tonic__Generator__
 
-#include <iostream>
 #include "TonicFrames.h"
 
 namespace Tonic {
@@ -38,20 +37,20 @@ namespace Tonic {
       
       virtual void tick( TonicFrames& frames, const SynthesisContext_ &context );
       
-      // override point for defining generator behavior
-      // subclasses should implment to fill frames with new data
-      virtual void computeSynthesisBlock( const SynthesisContext_ &context ) = 0;
-      
       // mutex for swapping inputs, etc
       void lockMutex();
       void unlockMutex();
       
       
       // set stereo/mono - changes number of channels in synthesisBlock_
-      void setIsStereo( bool stereo );
-      inline bool isStereo(){ return stereo_; };
+      virtual void setIsStereo( bool stereo );
+      bool isStereo(){ return stereo_; };
       
     protected:
+      
+      // override point for defining generator behavior
+      // subclasses should implment to fill frames with new data
+      virtual void computeSynthesisBlock( const SynthesisContext_ &context ) = 0;
       
       bool            stereo_;
       TonicFrames     synthesisBlock_;

@@ -21,7 +21,11 @@ namespace Tonic { namespace Tonic_{
   {
     workspace_.resize(kSynthesisBlockSize, 1, 0);
   }
-
+  
+  void Filter_::setIsStereo(bool stereo){
+    Generator_::setIsStereo(stereo);
+    workspace_.resize(kSynthesisBlockSize, stereo ? 2 : 1, 0);
+  }
   
 } // Namespace Tonic_
   

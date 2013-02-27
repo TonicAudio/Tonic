@@ -9,7 +9,6 @@
 #ifndef _013_1_23_melody_TestSynth_h
 #define _013_1_23_melody_TestSynth_h
 
-#include "Tonic.h"
 #include "Synth.h"
 #include "SineWave.h"
 

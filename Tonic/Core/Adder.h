@@ -20,11 +20,9 @@ https://ccrma.stanford.edu/software/stk/
 
 ++++++++++++++++++++++++++++++++++++++++++++++++++*/
 
-#ifndef __TonicDemo__Adder__
-#define __TonicDemo__Adder__
+#ifndef __Tonic__Adder__
+#define __Tonic__Adder__
 
-#include <iostream>
-#include "Generator.h"
 #include <vector>
 #include "FixedValue.h"
 
@@ -38,13 +36,9 @@ namespace Tonic {
 
     public:
       
-      // Not sure how this could ever be called with an argument, since it's always allocated
-      // via a templated container...
       Adder_();
       ~Adder_();
       
-      // All generators must have the same number of channels, and this must match the number of channels 
-      // in frames passed to tick.
       void in(Generator generator);
       void remove(Generator generator);
       

@@ -23,7 +23,6 @@ https://ccrma.stanford.edu/software/stk/
 #ifndef __Tonic__SineWave__
 #define __Tonic__SineWave__
 
-#include <iostream>
 #include "TableLookupOsc.h"
 
 namespace Tonic {

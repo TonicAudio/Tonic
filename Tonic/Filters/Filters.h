@@ -23,7 +23,6 @@ https://ccrma.stanford.edu/software/stk/
 #ifndef __Tonic__Filters__
 #define __Tonic__Filters__
 
-#include <iostream>
 #include "Effect.h"
 #include "FilterUtils.h"
 #include "FixedValue.h"
@@ -66,6 +65,8 @@ namespace Tonic {
     public:
       
       Filter_();
+      
+      void setIsStereo(bool stereo);
       
       inline void setCutoff( Generator cutoff ){ cutoff_ = cutoff; };
       inline void setQ( Generator Q ){ Q_ = Q; }

@@ -66,13 +66,16 @@ namespace Tonic {
       lockMutex();
       
       // Must do this in this order - value will override any change to target
-      if (targetGen_.hasChanged(context) || lengthGen_.hasChanged(context)){
-        unsigned long lSamp = lengthGen_.getValue(context)*Tonic::sampleRate()/1000.0f;
-        updateTarget(targetGen_.getValue(context), lSamp);
+      ControlGeneratorOutput lengthOutput = lengthGen_.tick(context);
+      ControlGeneratorOutput targetOutput = targetGen_.tick(context);
+      if (lengthOutput.status == ControlGeneratorStatusHasChanged || targetOutput.status == ControlGeneratorStatusHasChanged){
+        unsigned long lSamp = lengthOutput.value*Tonic::sampleRate()/1000.0f;
+        updateTarget(targetOutput.value, lSamp);
       }
       
-      if(valueGen_.hasChanged(context)){
-        updateValue(valueGen_.getValue(context));
+      ControlGeneratorOutput valueOutput = valueGen_.tick(context);
+      if(valueOutput.status == ControlGeneratorStatusHasChanged){
+        updateValue(valueOutput.value);
       }
 
       unlockMutex();
