@@ -137,8 +137,10 @@ enum {
        
     case SynthChooserLFNOise:
       synthName = @"LFNoiseTestSynth";
-      description = @"";
-      action = ^(Tonic::Synth* synth, CGPoint touchPointNorm){};
+      description = @"Y Axis: Noise Frequency";
+      action = ^(Tonic::Synth* synth, CGPoint touchPointNorm){
+        synth->sendMessage("noiseFreq", 0.1 + 1000 * touchPointNorm.y * touchPointNorm.y);
+      };
       
     default:
       break;
