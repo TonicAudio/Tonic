@@ -9,7 +9,8 @@
 #ifndef TonicDemo_FilterUtils_h
 #define TonicDemo_FilterUtils_h
 
-#include "Tonic.h"
+#include "TonicCore.h"
+#include "TonicFrames.h"
 
 namespace Tonic {
   

@@ -41,7 +41,7 @@ void LFNoise_::computeSynthesisBlock( const SynthesisContext_ &context ){
   TonicFloat* out = &synthesisBlock_[0];
   do{
     if (mCounter<=0) {
-			mCounter = sampleRate() / std::max<float>(mFreq.getValue(context), .001f);
+			mCounter = sampleRate() / std::max<float>(mFreq.tick(context).value, .001f);
 			mCounter = std::max<float>(1, mCounter);
 			float nextlevel = randomFloat(-1, 1);
 			mSlope = (nextlevel - mLevel) / mCounter;

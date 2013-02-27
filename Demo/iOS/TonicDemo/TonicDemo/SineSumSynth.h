@@ -11,7 +11,6 @@
 
 #define NUM_SINES 10
 
-#include "Tonic.h"
 #include "Synth.h"
 #include "SineWave.h"
 

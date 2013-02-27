@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		017BF2C916DBAE5200FA1046 /* ControlMultiplier.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 017BF2C716DBAE5000FA1046 /* ControlMultiplier.cpp */; };
 		9A1589F116D7E1D200E2BC81 /* Filters.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9A1589EF16D7E1D200E2BC81 /* Filters.cpp */; };
 		A82437C916CA7470000677C7 /* ControlValue.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A82437C716CA7470000677C7 /* ControlValue.cpp */; };
 		A82437DB16CB3753000677C7 /* ControlGenerator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A82437DA16CB36A8000677C7 /* ControlGenerator.cpp */; };
@@ -30,13 +31,13 @@
 		F20FCD4816C566F60039832A /* TableLookupOsc.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F20FCD4616C566F60039832A /* TableLookupOsc.cpp */; };
 		F20FCD4B16C56EF60039832A /* SineWave.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F20FCD4916C56EF50039832A /* SineWave.cpp */; };
 		F20FCD5216C58D5B0039832A /* TonicSynthManager.mm in Sources */ = {isa = PBXBuildFile; fileRef = F20FCD5116C58D5B0039832A /* TonicSynthManager.mm */; };
-		F2360A7716C4B4EC00A0AD7A /* Noise.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F2360A7516C4B4EC00A0AD7A /* Noise.cpp */; };
 		F23E243E16C6BF450082EF65 /* Mixer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F23E243C16C6BF450082EF65 /* Mixer.cpp */; };
 		F23E244116C6C5F10082EF65 /* BufferFiller.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F23E243F16C6C5F00082EF65 /* BufferFiller.cpp */; };
 		F256C8E416C5A0BF0096574D /* SynthTestViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = F256C8E016C5A0BF0096574D /* SynthTestViewController.mm */; };
 		F256C8E516C5A0BF0096574D /* SynthChooserViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = F256C8E216C5A0BF0096574D /* SynthChooserViewController.mm */; };
 		F256C8E616C5A0BF0096574D /* SynthChooserViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F256C8E316C5A0BF0096574D /* SynthChooserViewController.xib */; };
 		F256C8E816C5A6DF0096574D /* SynthTestViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F256C8E716C5A6DF0096574D /* SynthTestViewController.xib */; };
+		F2C9A92016DAEFE6009D9C08 /* ControlAdder.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F2C9A91E16DAEFE6009D9C08 /* ControlAdder.cpp */; };
 		F2C9F6F916C493870090A78D /* Adder.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F2C9F6E616C493870090A78D /* Adder.cpp */; };
 		F2C9F6FA16C493870090A78D /* FixedValue.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F2C9F6E816C493870090A78D /* FixedValue.cpp */; };
 		F2C9F6FB16C493870090A78D /* Generator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F2C9F6EA16C493870090A78D /* Generator.cpp */; };
@@ -47,6 +48,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		017BF2C616DB24C400FA1046 /* Tonic.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Tonic.h; sourceTree = "<group>"; };
+		017BF2C716DBAE5000FA1046 /* ControlMultiplier.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ControlMultiplier.cpp; sourceTree = "<group>"; };
+		017BF2C816DBAE5100FA1046 /* ControlMultiplier.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ControlMultiplier.h; sourceTree = "<group>"; };
 		9A1589EF16D7E1D200E2BC81 /* Filters.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Filters.cpp; sourceTree = "<group>"; };
 		9A1589F016D7E1D200E2BC81 /* Filters.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Filters.h; sourceTree = "<group>"; };
 		A82437C716CA7470000677C7 /* ControlValue.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ControlValue.cpp; sourceTree = "<group>"; };
@@ -91,7 +95,6 @@
 		F20FCD4A16C56EF60039832A /* SineWave.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SineWave.h; sourceTree = "<group>"; };
 		F20FCD5016C58D5B0039832A /* TonicSynthManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TonicSynthManager.h; sourceTree = "<group>"; };
 		F20FCD5116C58D5B0039832A /* TonicSynthManager.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = TonicSynthManager.mm; sourceTree = "<group>"; };
-		F2360A7516C4B4EC00A0AD7A /* Noise.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Noise.cpp; sourceTree = "<group>"; };
 		F2360A7616C4B4EC00A0AD7A /* Noise.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Noise.h; sourceTree = "<group>"; };
 		F2360A7916C4BC6E00A0AD7A /* SineSumSynth.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SineSumSynth.h; sourceTree = "<group>"; };
 		F23E243C16C6BF450082EF65 /* Mixer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Mixer.cpp; sourceTree = "<group>"; };
@@ -107,6 +110,8 @@
 		F263BD2D16D55AC2008AADA6 /* FilterUtils.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FilterUtils.h; sourceTree = "<group>"; };
 		F263BD2F16D56751008AADA6 /* Effect.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Effect.h; sourceTree = "<group>"; };
 		F263BD3416D57228008AADA6 /* FilterTest.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FilterTest.h; sourceTree = "<group>"; };
+		F2C9A91E16DAEFE6009D9C08 /* ControlAdder.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ControlAdder.cpp; sourceTree = "<group>"; };
+		F2C9A91F16DAEFE6009D9C08 /* ControlAdder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ControlAdder.h; sourceTree = "<group>"; };
 		F2C9F6E616C493870090A78D /* Adder.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Adder.cpp; sourceTree = "<group>"; };
 		F2C9F6E716C493870090A78D /* Adder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Adder.h; sourceTree = "<group>"; };
 		F2C9F6E816C493870090A78D /* FixedValue.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = FixedValue.cpp; sourceTree = "<group>"; };
@@ -117,7 +122,7 @@
 		F2C9F6EF16C493870090A78D /* Multiplier.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Multiplier.h; sourceTree = "<group>"; };
 		F2C9F6F016C493870090A78D /* Synth.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Synth.cpp; sourceTree = "<group>"; };
 		F2C9F6F116C493870090A78D /* Synth.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Synth.h; sourceTree = "<group>"; };
-		F2C9F6F216C493870090A78D /* Tonic.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Tonic.h; sourceTree = "<group>"; };
+		F2C9F6F216C493870090A78D /* TonicCore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TonicCore.h; sourceTree = "<group>"; };
 		F2C9F6F316C493870090A78D /* TonicFrames.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TonicFrames.cpp; sourceTree = "<group>"; };
 		F2C9F6F416C493870090A78D /* TonicFrames.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TonicFrames.h; sourceTree = "<group>"; };
 		F2D951D616C49A6700F25663 /* RampedValue.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = RampedValue.cpp; sourceTree = "<group>"; };
@@ -230,6 +235,7 @@
 				F2C9F6F516C493870090A78D /* Oscillators */,
 				A82437CE16CA7A24000677C7 /* Tests */,
 				F2C9F6F816C493870090A78D /* Utils */,
+				017BF2C616DB24C400FA1046 /* Tonic.h */,
 			);
 			name = Tonic;
 			path = ../../../../Tonic;
@@ -298,8 +304,12 @@
 				F2C9F6E716C493870090A78D /* Adder.h */,
 				F23E243F16C6C5F00082EF65 /* BufferFiller.cpp */,
 				F23E244016C6C5F00082EF65 /* BufferFiller.h */,
+				F2C9A91E16DAEFE6009D9C08 /* ControlAdder.cpp */,
+				F2C9A91F16DAEFE6009D9C08 /* ControlAdder.h */,
 				A82437DA16CB36A8000677C7 /* ControlGenerator.cpp */,
 				A82437D816CB3010000677C7 /* ControlGenerator.h */,
+				017BF2C716DBAE5000FA1046 /* ControlMultiplier.cpp */,
+				017BF2C816DBAE5100FA1046 /* ControlMultiplier.h */,
 				A82437C716CA7470000677C7 /* ControlValue.cpp */,
 				A82437C816CA7470000677C7 /* ControlValue.h */,
 				F263BD2F16D56751008AADA6 /* Effect.h */,
@@ -307,13 +317,11 @@
 				F2C9F6E916C493870090A78D /* FixedValue.h */,
 				F2C9F6EA16C493870090A78D /* Generator.cpp */,
 				F2C9F6EB16C493870090A78D /* Generator.h */,
-				F23E243C16C6BF450082EF65 /* Mixer.cpp */,
-				F23E243D16C6BF450082EF65 /* Mixer.h */,
 				F2C9F6EE16C493870090A78D /* Multiplier.cpp */,
 				F2C9F6EF16C493870090A78D /* Multiplier.h */,
 				F2C9F6F016C493870090A78D /* Synth.cpp */,
 				F2C9F6F116C493870090A78D /* Synth.h */,
-				F2C9F6F216C493870090A78D /* Tonic.h */,
+				F2C9F6F216C493870090A78D /* TonicCore.h */,
 				F2C9F6F316C493870090A78D /* TonicFrames.cpp */,
 				F2C9F6F416C493870090A78D /* TonicFrames.h */,
 			);
@@ -323,7 +331,6 @@
 		F2C9F6F516C493870090A78D /* Oscillators */ = {
 			isa = PBXGroup;
 			children = (
-				F2360A7516C4B4EC00A0AD7A /* Noise.cpp */,
 				F2360A7616C4B4EC00A0AD7A /* Noise.h */,
 				F20FCD4616C566F60039832A /* TableLookupOsc.cpp */,
 				F20FCD4716C566F60039832A /* TableLookupOsc.h */,
@@ -338,8 +345,10 @@
 			children = (
 				A8786A9216DD86E400FC22F8 /* LFNoise.cpp */,
 				A8786A9316DD86E400FC22F8 /* LFNoise.h */,
-				F2D951D716C49A6700F25663 /* RampedValue.h */,
+				F23E243C16C6BF450082EF65 /* Mixer.cpp */,
+				F23E243D16C6BF450082EF65 /* Mixer.h */,
 				F2D951D616C49A6700F25663 /* RampedValue.cpp */,
+				F2D951D716C49A6700F25663 /* RampedValue.h */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -426,7 +435,6 @@
 				F2C9F6FE16C493870090A78D /* Synth.cpp in Sources */,
 				F2C9F6FF16C493870090A78D /* TonicFrames.cpp in Sources */,
 				F2D951D816C49A6700F25663 /* RampedValue.cpp in Sources */,
-				F2360A7716C4B4EC00A0AD7A /* Noise.cpp in Sources */,
 				F20FCD4816C566F60039832A /* TableLookupOsc.cpp in Sources */,
 				F20FCD4B16C56EF60039832A /* SineWave.cpp in Sources */,
 				A82437C916CA7470000677C7 /* ControlValue.cpp in Sources */,
@@ -437,6 +445,8 @@
 				F23E244116C6C5F10082EF65 /* BufferFiller.cpp in Sources */,
 				9A1589F116D7E1D200E2BC81 /* Filters.cpp in Sources */,
 				A8786A9416DD86E400FC22F8 /* LFNoise.cpp in Sources */,
+				F2C9A92016DAEFE6009D9C08 /* ControlAdder.cpp in Sources */,
+				017BF2C916DBAE5200FA1046 /* ControlMultiplier.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -10,17 +10,36 @@
 #define TonicDemo_ControlGenerator_cpp
 
 #include "ControlGenerator.h"
+#include "RampedValue.h"
 
-namespace Tonic{ namespace Tonic_{
+namespace Tonic{
+  namespace Tonic_{
+    
+    ControlGenerator_::ControlGenerator_() :
+      lastFrameIndex_(0)
+    {
+      pthread_mutex_init(&genMutex_, NULL);
+    }
+
+    ControlGenerator_::~ControlGenerator_(){
+      pthread_mutex_destroy(&genMutex_);
+    }
+
+    ControlGeneratorOutput ControlGenerator_::tick(const SynthesisContext_ & context){
+      if (lastFrameIndex_ == 0 || lastFrameIndex_ != context.elapsedFrames){
+        lastFrameIndex_ = context.elapsedFrames;
+        lastOutput_.status = computeStatus(context);
+        lastOutput_.value = computeValue(context);
+      }
+      return lastOutput_;
+    }
+    
+  }
   
-  ControlGenerator_::ControlGenerator_(){
-    pthread_mutex_init(&genMutex_, NULL);
+  RampedValue ControlGenerator::ramped(float lenMs){
+    return RampedValue( mGen->peek().value, lenMs ).target(*this);
   }
-
-  ControlGenerator_::~ControlGenerator_(){
-    pthread_mutex_destroy(&genMutex_);
-  }
-
-}}
+  
+}
 
 #endif

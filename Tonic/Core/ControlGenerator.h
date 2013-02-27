@@ -6,24 +6,33 @@
 //  Copyright (c) 2013 Morgan Packard. All rights reserved.
 //
 
-/*
-  Morgan 2012.02.12 Could probably link this to the class structure of regular generator and save some code, but I don't see any big winds from doing that, and just want to bang it out. Note, however, that this is very very similar to the code for the audio rate generator.
 
-*/
+#ifndef __Tonic_ControlGenerator__
+#define __Tonic_ControlGenerator__
 
-#ifndef TonicDemo_ControlGenerator_h
-#define TonicDemo_ControlGenerator_h
-
-#include "Tonic.h"
-
+#include "TonicCore.h"
 
 namespace Tonic {
+  
+  typedef enum {
+    ControlGeneratorStatusHasNotChanged = 0,
+    ControlGeneratorStatusHasChanged
+    
+  } ControlGeneratorStatus;
+  
+  struct ControlGeneratorOutput{
+    TonicFloat value;
+    ControlGeneratorStatus status;
+    
+    ControlGeneratorOutput() : value(0), status(ControlGeneratorStatusHasNotChanged) {};
+  };
 
   namespace Tonic_{
 
     class ControlGenerator_{
       
     public:
+    
       ControlGenerator_();
       virtual ~ControlGenerator_();
             
@@ -31,12 +40,23 @@ namespace Tonic {
       void lockMutex();
       void unlockMutex();
       
-      virtual bool hasChanged(const SynthesisContext_ & context) = 0;
-      virtual TonicFloat getValue(const SynthesisContext_ & context) = 0;
+      // Only override tick if you need custom reuse behavior
+      // Pass in a pointer to a TonicFloat to return a value. Some generators may not care about value.
+      virtual ControlGeneratorOutput tick( const SynthesisContext_ & context );
+      
+      // Used to peek at last value, for initializing other generators (see ramped() method for example)
+      virtual ControlGeneratorOutput peek() { return lastOutput_; };
       
     protected:
-        
-      pthread_mutex_t genMutex_;
+      
+      // Override these two functions to implement a new ControlGenerator
+      virtual ControlGeneratorStatus  computeStatus(const SynthesisContext_ & context) = 0;
+      virtual TonicFloat              computeValue(const SynthesisContext_ & context) = 0;
+      
+      ControlGeneratorOutput  lastOutput_;
+      unsigned long           lastFrameIndex_;
+      
+      pthread_mutex_t         genMutex_;
 
     };
     
@@ -50,7 +70,8 @@ namespace Tonic {
 
   }
 
-  
+  // local declaration
+  class RampedValue;
 
   class ControlGenerator{
   protected:
@@ -79,13 +100,12 @@ namespace Tonic {
       }
     }
     
-    virtual bool hasChanged(const Tonic_::SynthesisContext_ & context){
-      return mGen->hasChanged(context);
+    ControlGeneratorOutput tick( const Tonic_::SynthesisContext_ & context ){
+      return mGen->tick(context);
     }
     
-    virtual TonicFloat getValue(const Tonic_::SynthesisContext_ & context){
-      return mGen->getValue(context);
-    }
+    // shortcut for creating ramped value
+    RampedValue ramped(float lenMs = 50);
     
   };
   

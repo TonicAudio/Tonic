@@ -23,13 +23,9 @@ https://ccrma.stanford.edu/software/stk/
 #ifndef __Tonic__Synth__
 #define __Tonic__Synth__
 
-#include <iostream>
 #include <map>
+#include "Tonic.h"
 #include "BufferFiller.h"
-#include "ControlValue.h"
-#include "RampedValue.h"
-#include "Multiplier.h"
-#include "Adder.h"
 
 namespace Tonic{
   
@@ -54,16 +50,6 @@ namespace Tonic{
   // Adding factory/registration for easy wrappers and instantiation
   //
   // http://stackoverflow.com/questions/582331/is-there-a-way-to-instantiate-objects-from-a-string-holding-their-class-name
-  //
-  // Concrete source subclasses should implement a static registration struct to be registered by default:
-  //
-  // In MySource.h:
-  //
-  // private:
-  //  static SourceRegister<MySource> reg;
-  //
-  // In Source.cpp
-  //  SourceRegister<MySource> MySource::reg("MySource");
   //
   // -----------------------------
   
