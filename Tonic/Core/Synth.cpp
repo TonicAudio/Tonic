@@ -29,18 +29,18 @@ namespace Tonic {
     
   }
 
-  ControlValue  Synth::registerMessage(string name, float value){
+  ControlValue  Synth::addParameter(string name, float value){
     if (parameters.find(name)==parameters.end()) {
         parameters[name] = ControlValue().setValue(value);
     }
     return parameters[name];
   }
   
-  void Synth::sendMessage(string name, float value){
+  void Synth::setParameter(string name, float value){
     if (parameters.find(name)!=parameters.end()) {
       parameters[name].setValue(value);
     }else{
-      error("message: " + name + " was not registered. You can register a message using Synth::registerMessage.");
+      error("message: " + name + " was not registered. You can register a message using Synth::addParameter.");
     }
     
     stringstream ss;

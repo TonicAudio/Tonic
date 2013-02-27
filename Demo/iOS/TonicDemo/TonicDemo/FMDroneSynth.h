@@ -22,14 +22,14 @@ class FMDroneSynth : public Synth {
 public:
   FMDroneSynth(){
     
-    Generator rCarrierFreq = registerMessage("carrierFreq", mtof(24)).ramped();
-    Generator rModFreq     = rCarrierFreq * registerMessage("mcRatio", 2).ramped();
+    Generator rCarrierFreq = addParameter("carrierFreq", mtof(24)).ramped();
+    Generator rModFreq     = rCarrierFreq * addParameter("mcRatio", 2).ramped();
     
     outputGen = SineWave().freq(
                   rCarrierFreq  + (
                     SineWave().freq( rModFreq ) *
                     rModFreq *
-                    registerMessage("modIndex", 0).ramped()
+                    addParameter("modIndex", 0).ramped()
                   )
                 ) * 0.5f;
   }
