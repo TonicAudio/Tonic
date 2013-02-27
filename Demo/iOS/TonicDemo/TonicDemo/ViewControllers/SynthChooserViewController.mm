@@ -104,8 +104,8 @@ enum {
         // exponenetial sweep in frequency, 0-1000 Hz
         TonicFloat mod = 1000.0f / powf(10.0f, Tonic::map(touchPointNorm.y, 0.0f, 1.0f, 3.0f, 0.0f));
 
-        synth->sendMessage("carrierFreq", car);
-        synth->sendMessage("modFreq", mod);
+        synth->setParameter("carrierFreq", car);
+        synth->setParameter("modFreq", mod);
       };
       break;
       
@@ -113,8 +113,8 @@ enum {
       synthName = @"FMDroneSynth";
       description = @"FM Synth";
       action = ^(Tonic::Synth* synth, CGPoint touchPointNorm){
-        synth->sendMessage("carrierFreq", mtof(Tonic::map(touchPointNorm.x, 0.0f, 1.0f, 20, 32)) );
-        synth->sendMessage("modIndex", Tonic::map(touchPointNorm.y*touchPointNorm.y, 0.0f, 1.0f, 0.0f, 10.0f));
+        synth->setParameter("carrierFreq", mtof(Tonic::map(touchPointNorm.x, 0.0f, 1.0f, 20, 32)) );
+        synth->setParameter("modIndex", Tonic::map(touchPointNorm.y*touchPointNorm.y, 0.0f, 1.0f, 0.0f, 10.0f));
       };
       break;
       
@@ -122,8 +122,8 @@ enum {
       synthName = @"FilterTest";
       description = @"X Axis: cutoff\nY Axis: LFO";
       action = ^(Tonic::Synth* synth, CGPoint touchPointNorm){
-        synth->sendMessage("cutoff", 120.0f * powf(10.0f, touchPointNorm.x * 2));
-        synth->sendMessage("LFO", touchPointNorm.y*touchPointNorm.y );
+        synth->setParameter("cutoff", 120.0f * powf(10.0f, touchPointNorm.x * 2));
+        synth->setParameter("LFO", touchPointNorm.y*touchPointNorm.y );
       };
       break;
       
@@ -131,15 +131,15 @@ enum {
       synthName = @"FilteredNoiseSynth";
       description = @"X axis: cutoff\nY axis: Q";
       action = ^(Tonic::Synth* synth, CGPoint touchPointNorm){
-        synth->sendMessage("Q", touchPointNorm.y * 135);
-        synth->sendMessage("cutoff", touchPointNorm.x);
+        synth->setParameter("Q", touchPointNorm.y * 135);
+        synth->setParameter("cutoff", touchPointNorm.x);
       };
        
     case SynthChooserLFNOise:
       synthName = @"LFNoiseTestSynth";
       description = @"Y Axis: Noise Frequency";
       action = ^(Tonic::Synth* synth, CGPoint touchPointNorm){
-        synth->sendMessage("noiseFreq", 0.1 + 1000 * touchPointNorm.y * touchPointNorm.y);
+        synth->setParameter("noiseFreq", 0.1 + 1000 * touchPointNorm.y * touchPointNorm.y);
       };
       
     default:
