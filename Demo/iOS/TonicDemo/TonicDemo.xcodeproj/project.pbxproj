@@ -26,6 +26,7 @@
 		A86C3F1F16B2B7B8002A50F0 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A86C3F1C16B2B7B8002A50F0 /* AudioToolbox.framework */; };
 		A86C3F2116B2B7B8002A50F0 /* CoreAudio.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A86C3F1E16B2B7B8002A50F0 /* CoreAudio.framework */; };
 		A86C3F2316B2B834002A50F0 /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A86C3F2216B2B834002A50F0 /* Accelerate.framework */; };
+		A8786A9416DD86E400FC22F8 /* LFNoise.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A8786A9216DD86E400FC22F8 /* LFNoise.cpp */; };
 		F20FCD4816C566F60039832A /* TableLookupOsc.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F20FCD4616C566F60039832A /* TableLookupOsc.cpp */; };
 		F20FCD4B16C56EF60039832A /* SineWave.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F20FCD4916C56EF50039832A /* SineWave.cpp */; };
 		F20FCD5216C58D5B0039832A /* TonicSynthManager.mm in Sources */ = {isa = PBXBuildFile; fileRef = F20FCD5116C58D5B0039832A /* TonicSynthManager.mm */; };
@@ -81,6 +82,9 @@
 		A86C3F1E16B2B7B8002A50F0 /* CoreAudio.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreAudio.framework; path = System/Library/Frameworks/CoreAudio.framework; sourceTree = SDKROOT; };
 		A86C3F2216B2B834002A50F0 /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = System/Library/Frameworks/Accelerate.framework; sourceTree = SDKROOT; };
 		A8786A8016DAC55100FC22F8 /* FilteredNoiseSynth.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FilteredNoiseSynth.h; sourceTree = "<group>"; };
+		A8786A9216DD86E400FC22F8 /* LFNoise.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = LFNoise.cpp; sourceTree = "<group>"; };
+		A8786A9316DD86E400FC22F8 /* LFNoise.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LFNoise.h; sourceTree = "<group>"; };
+		A8786A9516DD8EDE00FC22F8 /* LFNoiseTestSynth.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LFNoiseTestSynth.h; sourceTree = "<group>"; };
 		F20FCD4616C566F60039832A /* TableLookupOsc.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TableLookupOsc.cpp; sourceTree = "<group>"; };
 		F20FCD4716C566F60039832A /* TableLookupOsc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TableLookupOsc.h; sourceTree = "<group>"; };
 		F20FCD4916C56EF50039832A /* SineWave.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SineWave.cpp; sourceTree = "<group>"; };
@@ -205,6 +209,7 @@
 		A86C3EE616B2B508002A50F0 /* Audio */ = {
 			isa = PBXGroup;
 			children = (
+				A8786A9516DD8EDE00FC22F8 /* LFNoiseTestSynth.h */,
 				A8786A8016DAC55100FC22F8 /* FilteredNoiseSynth.h */,
 				A86C3F0E16B2B575002A50F0 /* SineAMSynth.h */,
 				F2360A7916C4BC6E00A0AD7A /* SineSumSynth.h */,
@@ -331,6 +336,8 @@
 		F2C9F6F816C493870090A78D /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				A8786A9216DD86E400FC22F8 /* LFNoise.cpp */,
+				A8786A9316DD86E400FC22F8 /* LFNoise.h */,
 				F2D951D716C49A6700F25663 /* RampedValue.h */,
 				F2D951D616C49A6700F25663 /* RampedValue.cpp */,
 			);
@@ -429,6 +436,7 @@
 				F23E243E16C6BF450082EF65 /* Mixer.cpp in Sources */,
 				F23E244116C6C5F10082EF65 /* BufferFiller.cpp in Sources */,
 				9A1589F116D7E1D200E2BC81 /* Filters.cpp in Sources */,
+				A8786A9416DD86E400FC22F8 /* LFNoise.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

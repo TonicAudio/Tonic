@@ -13,6 +13,7 @@
 #import "FMDroneSynth.h"
 #import "FilterTest.h"
 #import "FilteredNoiseSynth.h"
+#import "LFNoiseTestSynth.h"
 
 // Just going to hard-code everything for now based on enum
 
@@ -22,6 +23,7 @@ enum {
   SynthChooserFMDrone,
   SynthChooserTestFilt,
   SynthChooserFilteredNoise,
+  SynthChooserLFNOise,
   SynthChooserNumChoices
   
 };
@@ -132,6 +134,11 @@ enum {
         synth->sendMessage("Q", touchPointNorm.y * 135);
         synth->sendMessage("cutoff", touchPointNorm.x);
       };
+       
+    case SynthChooserLFNOise:
+      synthName = @"LFNoiseTestSynth";
+      description = @"";
+      action = ^(Tonic::Synth* synth, CGPoint touchPointNorm){};
       
     default:
       break;
@@ -191,6 +198,12 @@ enum {
     case SynthChooserFilteredNoise:
       synthName = @"Filtered Noise";
       synthDesc = @"Filtered Noise";
+      break;
+      
+      
+    case SynthChooserLFNOise:
+      synthName = @"Sine Wave Modulated By LFNoise";
+      synthDesc = @"Sine Wave Modulated By LFNoise";
       break;
       
     default:
