@@ -13,6 +13,7 @@
 #include "Synth.h"
 #include "SineWave.h"
 #include "Filters.h"
+#include "RampedValue.h"
 
 using namespace Tonic;
 
@@ -20,11 +21,14 @@ class FilteredNoiseSynth : public Synth{
 public:
   FilteredNoiseSynth(){
     vector<float> midiNums;
+    midiNums.push_back(-24);
     midiNums.push_back(0);
     midiNums.push_back(3);
     midiNums.push_back(7);
     midiNums.push_back(10);
     Noise noise = Noise();
+    
+    ControlValue cutoff0 = registerMessage("cutoff", 1);
     
     for(int i = 0; i < midiNums.size(); i++){
       Generator tremelo = (SineWave().freq( randomFloat(0.1, 0.3) ) + 1.5) * 0.3;
