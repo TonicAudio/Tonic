@@ -129,7 +129,7 @@ enum {
       synthName = @"FilteredNoiseSynth";
       description = @"X axis: cutoff\nY axis: Q";
       action = ^(Tonic::Synth* synth, CGPoint touchPointNorm){
-        synth->sendMessage("Q", touchPointNorm.y * 15);
+        synth->sendMessage("Q", touchPointNorm.y * 135);
         synth->sendMessage("cutoff", touchPointNorm.x);
       };
       
