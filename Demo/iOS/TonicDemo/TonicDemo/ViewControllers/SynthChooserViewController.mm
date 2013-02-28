@@ -24,11 +24,6 @@
 @end
 
 @implementation SynthDemoDef
-  @synthesize synthClassName;
-  @synthesize synthDisplayName;
-  @synthesize synthDescription;
-  @synthesize synthInstructions;
-  @synthesize synthAction;
 @end
 
 @interface SynthChooserViewController (){
