@@ -23,7 +23,6 @@ https://ccrma.stanford.edu/software/stk/
 #ifndef __Tonic_____FILEBASENAMEASIDENTIFIER_____
 #define __Tonic_____FILEBASENAMEASIDENTIFIER_____
 
-#include <iostream>
 #include "Generator.h"
 
 namespace Tonic {
@@ -37,11 +36,11 @@ namespace Tonic {
     public:
       ___FILEBASENAME____();
       ~___FILEBASENAME____();
-      void tick( TonicFrames& frames);
+      void computeSynthesisBlock( const SynthesisContext_ &context );
       
     };
     
-    inline void ___FILEBASENAME____::tick( TonicFrames& frames){
+    inline void ___FILEBASENAME____::computeSynthesisBlock(const SynthesisContext_ &context){
       
       
     }
