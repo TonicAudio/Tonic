@@ -24,6 +24,7 @@ https://ccrma.stanford.edu/software/stk/
 #define __Tonic__Synth__
 
 #include <map>
+#include <float.h>
 #include "Tonic.h"
 #include "BufferFiller.h"
 
@@ -33,15 +34,43 @@ namespace Tonic{
     
   public:
     
+    typedef enum{
+      
+      SynthParameterTypeContinuous = 0,
+      SynthParameterTypeIncremental,
+      SynthParameterTypeToggle
+//      SynthParameterTypeMomentary,
+//      SynthParameterTypeTrigger
+      
+    } SynthParameterType;
+    
+    
+    struct SynthParameter{
+      string              name;
+      ControlValue        value;
+      SynthParameterType  type;
+      float               min;
+      float               max;
+      float               increment;
+      
+      SynthParameter();
+    };
+    
     Synth();
     
     // It's quite conceivable that we'll want to move the messaging stuff up into Source
-    ControlValue              addParameter(string name, float value=0);
-    void                      setParameter(string name, float value=1);
+    SynthParameter  & addParameter(string name, float value=0, float min=-FLT_MAX, float max=FLT_MAX);
+    SynthParameter  & addParameter(string name, SynthParameterType type, float value=0, float min=-FLT_MAX, float max=FLT_MAX, float inc=0);
+    
+    void              setParameter(string name, float value=1);
+    
+    vector<SynthParameter> getParameters();
     
   protected:
     
-    std::map<string, ControlValue> parameters;
+    typedef std::map<string, SynthParameter> SynthParameterMap;
+
+    SynthParameterMap parameters;
     
   };
   

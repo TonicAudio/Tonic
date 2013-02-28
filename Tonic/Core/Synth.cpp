@@ -24,31 +24,89 @@ https://ccrma.stanford.edu/software/stk/
 #include "SineWave.h"
 
 namespace Tonic {
+  
+  Synth::SynthParameter::SynthParameter() :
+    name(""),
+    type(SynthParameterTypeContinuous),
+    min(-FLT_MIN),
+    max(FLT_MAX),
+    increment(0)
+  {};
 
   Synth::Synth(){
     
   }
 
-  ControlValue  Synth::addParameter(string name, float value){
+  Synth::SynthParameter & Synth::addParameter(string name, float value, float min, float max){
+    return addParameter(name, SynthParameterTypeContinuous, value, min, max);
+  }
+  
+  Synth::SynthParameter & Synth::addParameter(string name, SynthParameterType type, float value, float min, float max, float inc){
     if (parameters.find(name)==parameters.end()) {
-        parameters[name] = ControlValue().setValue(value);
+      
+      SynthParameter newParam;
+      newParam.value.setValue(value);
+      newParam.type = type;
+      newParam.min = min;
+      newParam.max = max;
+      newParam.increment = inc;
+      
+      parameters[name] = newParam;
     }
     return parameters[name];
   }
   
   void Synth::setParameter(string name, float value){
     if (parameters.find(name)!=parameters.end()) {
-      parameters[name].setValue(value);
-    }else{
+      
+      Synth::SynthParameter & param = parameters[name];
+      
+      switch (param.type) {
+        case SynthParameterTypeContinuous:
+          param.value.setValue(clamp(value, param.min, param.max));
+          break;
+          
+        case SynthParameterTypeIncremental:
+        {
+          if (param.increment != 0){
+            float r = floorf((value - param.min)/param.increment);
+            r = param.min + r * param.increment;
+            param.value.setValue(clamp(r, param.min, param.max));
+          }
+          else{
+            param.value.setValue(clamp(value, param.min, param.max));
+          }
+        }
+          break;
+          
+        case SynthParameterTypeToggle:
+          param.value.setValue(param.value.getValue() == 0 ? 1 : 0);
+          break;
+          
+        default:
+          break;
+      }
+      
+      
+      stringstream ss;
+      ss << "message: " << name << " value: " << param.value.getValue();
+      
+      debug(ss.str());
+      
+    }
+    else{
       error("message: " + name + " was not registered. You can register a message using Synth::addParameter.");
     }
-    
-    stringstream ss;
-    ss << "message: " << name << " value: " << value;
-    
-    debug(ss.str());
+
   }
   
+  vector<Synth::SynthParameter> Synth::getParameters(){
+    vector<Synth::SynthParameter> returnParams;
+    for (SynthParameterMap::iterator it = parameters.begin(); it != parameters.end(); it++){
+      returnParams.push_back(it->second);
+    }
+    return returnParams;
+  }
   
   // Synth Factory
   SynthFactory::map_type * SynthFactory::map;

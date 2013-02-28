@@ -111,10 +111,10 @@ enum {
       
     case SynthChooserFMDrone:
       synthName = @"FMDroneSynth";
-      description = @"FM Synth";
+      description = @"X Axis: Modulation Index\nY Axis: M:C Ratio";
       action = ^(Tonic::Synth* synth, CGPoint touchPointNorm){
-        synth->setParameter("carrierFreq", touchPointNorm.x * 20);
-        synth->setParameter("modIndex", touchPointNorm.y*touchPointNorm.y );
+        synth->setParameter("modIndex", touchPointNorm.x * 10);
+        synth->setParameter("mcRatio", touchPointNorm.y * 10 );
       };
       break;
       

@@ -24,9 +24,12 @@ class FilterTest : public Synth {
 public:
   FilterTest(){
     
-    Generator cutoff = addParameter("cutoff",1000).ramped();
-
-    LPF24 lpf = LPF24().Q(2.5).cutoff( cutoff + (SineWave().freq(4) * cutoff * 0.2 * addParameter("LFO", 0).ramped() ) );
+    SynthParameter cutoff = addParameter("cutoff", 1000, 20, 20000);
+    SynthParameter lfo = addParameter("LFO", 0, 0, 10);
+    
+    Generator cutoffRamped = cutoff.value.ramped();
+    
+    LPF24 lpf = LPF24().Q(2.5).cutoff( cutoffRamped + (SineWave().freq(4) * cutoffRamped * 0.2 * lfo.value.ramped() ) );
     
     // Need a limiter class soon - these tend to clip with high-Q
     outputGen = (Noise() >> lpf) * 0.5;
