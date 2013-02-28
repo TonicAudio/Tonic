@@ -23,7 +23,6 @@ https://ccrma.stanford.edu/software/stk/
 #ifndef __Tonic_____FILEBASENAMEASIDENTIFIER_____
 #define __Tonic_____FILEBASENAMEASIDENTIFIER_____
 
-#include <iostream>
 #include "Generator.h"
 
 namespace Tonic {
