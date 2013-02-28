@@ -102,7 +102,7 @@ namespace Tonic {
   
   vector<Synth::SynthParameter> Synth::getParameters(){
     vector<Synth::SynthParameter> returnParams;
-    for (SynthParameterMap::iterator it = parameters.begin(); it != parameters.end(); it++){
+    for (std::map<string, SynthParameter>::iterator it = parameters.begin(); it != parameters.end(); it++){
       returnParams.push_back(it->second);
     }
     return returnParams;

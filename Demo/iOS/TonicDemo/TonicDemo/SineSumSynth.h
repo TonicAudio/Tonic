@@ -22,32 +22,20 @@ public:
   
   SineSumSynth () {
     
+    SynthParameter spread = addParameter("spread",0,0,1);
+    
     for (int s=0; s<NUM_SINES; s++){
-      sineMixer.in(sines[s].freq(sineFreqs[s].value(440).lengthMs(100)));
+      
+      ControlGenerator spreadGen = (spread.value * powf(2,s - (NUM_SINES/2)));
+            
+      outputGen = outputGen + SineWave().freq( 440 * spreadGen.ramped() );
+      
     }
     
-    outputGen =
-    (
-      sineMixer
-    ) * (1.0f/NUM_SINES) * 0.5f;
+    outputGen = outputGen * ((1.0f/NUM_SINES) * 0.5f);
 
-    
   }
-  
-  inline void setSpread(TonicFloat spread){
-    for (int i=0; i<NUM_SINES; i++){
-      // spread up to an octave apart
-      TonicFloat freq = 440.0f * powf(2, spread*(i - (NUM_SINES/2)));
-      sineFreqs[i].target(freq);
-    }
-  }
-  
-private:
-  
-  SineWave sines[NUM_SINES];
-  RampedValue sineFreqs[NUM_SINES];
-  Adder sineMixer;
-    
+
 };
 
 registerSynth(SineSumSynth);

@@ -71,24 +71,24 @@ namespace Tonic {
   };
   
   static ControlMultiplier operator*(ControlGenerator a, ControlGenerator b){
-    ControlMultiplier adder;
-    adder.in(a);
-    adder.in(b);
-    return adder;
+    ControlMultiplier mult;
+    mult.in(a);
+    mult.in(b);
+    return mult;
   }
   
   static ControlMultiplier operator*(ControlGenerator a, float b){
-    ControlMultiplier adder;
-    adder.in(a);
-    adder.in(ControlValue(b));
-    return adder;
+    ControlMultiplier mult;
+    mult.in(a);
+    mult.in(ControlValue(b));
+    return mult;
   }
   
   static ControlMultiplier operator*(float a, ControlGenerator b){
-    ControlMultiplier adder;
-    adder.in(ControlValue(a));
-    adder.in(ControlGenerator(b));
-    return adder;
+    ControlMultiplier mult;
+    mult.in(ControlValue(a));
+    mult.in(ControlGenerator(b));
+    return mult;
   }
   
   static ControlMultiplier operator*(ControlMultiplier a, ControlGenerator b){

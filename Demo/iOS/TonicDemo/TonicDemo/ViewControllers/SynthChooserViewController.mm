@@ -87,9 +87,8 @@ enum {
       synthName = @"SineSumSynth";
       description = @"Swipe up and down to change \"spread\" of additive sines.";
       action = ^(Tonic::Synth* synth, CGPoint touchPointNorm){
-        SineSumSynth *ss = (SineSumSynth*)synth;
-        TonicFloat spread = powf(touchPointNorm.y, 2.0f);
-        ss->setSpread(spread);
+        TonicFloat spread = touchPointNorm.y*touchPointNorm.y;
+        synth->setParameter("spread", spread);
       };
       break;
       

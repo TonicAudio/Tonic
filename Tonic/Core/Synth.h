@@ -67,10 +67,8 @@ namespace Tonic{
     vector<SynthParameter> getParameters();
     
   protected:
-    
-    typedef std::map<string, SynthParameter> SynthParameterMap;
 
-    SynthParameterMap parameters;
+    std::map<string, SynthParameter> parameters;
     
   };
   
