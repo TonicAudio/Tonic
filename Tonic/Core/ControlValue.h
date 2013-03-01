@@ -22,8 +22,9 @@ namespace Tonic {
 
         void setValue(float value);
       
-        ControlGeneratorOutput peek();
-
+        // Get current value directly
+        TonicFloat getValue() { return value_;};
+      
       protected:
             
         ControlGeneratorStatus computeStatus(const SynthesisContext_ & context);
@@ -52,7 +53,7 @@ namespace Tonic {
     
     // for higher-level access - no
     float getValue(){
-      return gen()->peek().value;
+      return gen()->getValue();
     }
 
   };

@@ -34,10 +34,15 @@ namespace Tonic{
       return lastOutput_;
     }
     
+    ControlGeneratorOutput ControlGenerator_::initialOutput(){
+      // return output from passing in an initialized context
+      return tick(SynthesisContext_());
+    }
+    
   }
   
   RampedValue ControlGenerator::ramped(float lenMs){
-    return RampedValue( mGen->peek().value, lenMs ).target(*this);
+    return RampedValue( mGen->initialOutput().value, lenMs ).target(*this);
   }
   
 }

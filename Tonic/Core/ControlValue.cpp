@@ -19,13 +19,6 @@ namespace Tonic {
     
     ControlValue_::~ControlValue_(){}
     
-    ControlGeneratorOutput ControlValue_::peek(){
-      ControlGeneratorOutput peekOutput;
-      peekOutput.value = value_;
-      peekOutput.status = hasChanged_ ? ControlGeneratorStatusHasChanged : ControlGeneratorStatusHasNotChanged;
-      return peekOutput;
-    }
-    
     void ControlValue_::setValue(float value){
       value_ = value;
       hasChanged_ = true;

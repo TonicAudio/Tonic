@@ -85,7 +85,7 @@ enum {
   switch(indexPath.row){
     case SynthChooserSineSum:
       synthName = @"SineSumSynth";
-      description = @"Swipe up and down to change \"spread\" of additive sines.";
+      description = @"Swipe up and down to change pitch.";
       action = ^(Tonic::Synth* synth, CGPoint touchPointNorm){
         synth->setParameter("pitch", touchPointNorm.y);
       };

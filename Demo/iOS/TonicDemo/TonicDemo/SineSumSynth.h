@@ -22,17 +22,19 @@ public:
   
   SineSumSynth () {
     
-    SynthParameter spread = addParameter("spread",0,0,1);
+    SynthParameter pitch = addParameter("pitch",0,0,1);
+      
+      Adder outputAdder;
     
     for (int s=0; s<NUM_SINES; s++){
       
-      ControlGenerator spreadGen = (spread.value * powf(2,s - (NUM_SINES/2)));
+      ControlGenerator pitchGen = ((pitch.value * 220 + 220) * powf(2, (s - (NUM_SINES/2)) * 5.0f / 12.0f));
             
-      outputGen = outputGen + SineWave().freq( 440 * spreadGen.ramped() );
+      outputAdder = outputAdder + SineWave().freq( pitchGen.ramped() );
       
     }
     
-    outputGen = outputGen * ((1.0f/NUM_SINES) * 0.5f);
+    outputGen = outputAdder * ((1.0f/NUM_SINES) * 0.5f);
 
   }
 
