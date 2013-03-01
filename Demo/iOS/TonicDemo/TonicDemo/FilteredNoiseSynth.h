@@ -27,15 +27,20 @@ public:
     midiNums.push_back(10);
     Noise noise = Noise();
     
-    ControlValue cutoff0 = addParameter("cutoff", 1).value;
+    Generator cutoff_v = addParameter("cutoff", 1).value.ramped();
+    Generator q_v = addParameter("Q", 5).value.ramped();
+    
+    Adder sumOfFilters;
     
     for(int i = 0; i < midiNums.size(); i++){
       Generator tremelo = (SineWave().freq( randomFloat(0.1, 0.3) ) + 1.5) * 0.3;
-      Generator cutoff = addParameter("cutoff", 1).value.ramped() * mtof(midiNums.at(i) + 80);
-      BPF24 filter = BPF24().Q( addParameter("Q", 5).value ).cutoff( cutoff );
-      outputGen = outputGen + (noise >> filter) * tremelo;
+      Generator cutoff = cutoff_v * mtof(midiNums.at(i) + 80);
+      BPF24 filter = BPF24().Q( q_v ).cutoff( cutoff );
+      sumOfFilters = sumOfFilters + (noise >> filter) * tremelo;
     }
     
+    // add a bit of gain for higher Q
+    outputGen = sumOfFilters * (1 + q_v * 0.02);
   }
 };
 
