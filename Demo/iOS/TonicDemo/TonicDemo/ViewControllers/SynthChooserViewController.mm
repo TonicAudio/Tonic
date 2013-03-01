@@ -87,8 +87,7 @@ enum {
       synthName = @"SineSumSynth";
       description = @"Swipe up and down to change \"spread\" of additive sines.";
       action = ^(Tonic::Synth* synth, CGPoint touchPointNorm){
-        TonicFloat spread = touchPointNorm.y*touchPointNorm.y;
-        synth->setParameter("spread", spread);
+        synth->setParameter("pitch", touchPointNorm.y);
       };
       break;
       
@@ -112,8 +111,8 @@ enum {
       synthName = @"FMDroneSynth";
       description = @"X Axis: Modulation Index\nY Axis: M:C Ratio";
       action = ^(Tonic::Synth* synth, CGPoint touchPointNorm){
-        synth->setParameter("modIndex", touchPointNorm.x * 10);
-        synth->setParameter("mcRatio", touchPointNorm.y * 10 );
+        synth->setParameter("carrierFreq", touchPointNorm.x * 30);
+        synth->setParameter("modIndex", touchPointNorm.y*touchPointNorm.y );
       };
       break;
       
@@ -133,6 +132,7 @@ enum {
         synth->setParameter("Q", touchPointNorm.y * 135);
         synth->setParameter("cutoff", touchPointNorm.x);
       };
+      break;
        
     case SynthChooserLFNOise:
       synthName = @"LFNoiseTestSynth";

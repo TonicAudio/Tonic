@@ -29,8 +29,7 @@ namespace Tonic {
     name(""),
     type(SynthParameterTypeContinuous),
     min(-FLT_MIN),
-    max(FLT_MAX),
-    increment(0)
+    max(FLT_MAX)
   {};
 
   Synth::Synth(){
@@ -41,15 +40,15 @@ namespace Tonic {
     return addParameter(name, SynthParameterTypeContinuous, value, min, max);
   }
   
-  Synth::SynthParameter & Synth::addParameter(string name, SynthParameterType type, float value, float min, float max, float inc){
+  Synth::SynthParameter & Synth::addParameter(string name, SynthParameterType type, float value, float min, float max){
     if (parameters.find(name)==parameters.end()) {
       
       SynthParameter newParam;
+      newParam.name = name;
       newParam.value.setValue(value);
       newParam.type = type;
       newParam.min = min;
       newParam.max = max;
-      newParam.increment = inc;
       
       parameters[name] = newParam;
     }
@@ -62,25 +61,9 @@ namespace Tonic {
       Synth::SynthParameter & param = parameters[name];
       
       switch (param.type) {
+              
         case SynthParameterTypeContinuous:
           param.value.setValue(clamp(value, param.min, param.max));
-          break;
-          
-        case SynthParameterTypeIncremental:
-        {
-          if (param.increment != 0){
-            float r = floorf((value - param.min)/param.increment);
-            r = param.min + r * param.increment;
-            param.value.setValue(clamp(r, param.min, param.max));
-          }
-          else{
-            param.value.setValue(clamp(value, param.min, param.max));
-          }
-        }
-          break;
-          
-        case SynthParameterTypeToggle:
-          param.value.setValue(param.value.getValue() == 0 ? 1 : 0);
           break;
           
         default:

@@ -37,8 +37,9 @@ namespace Tonic{
     typedef enum{
       
       SynthParameterTypeContinuous = 0,
-      SynthParameterTypeIncremental,
-      SynthParameterTypeToggle
+        
+//      TODO: other types
+//      SynthParameterTypeToggle
 //      SynthParameterTypeMomentary,
 //      SynthParameterTypeTrigger
       
@@ -51,7 +52,6 @@ namespace Tonic{
       SynthParameterType  type;
       float               min;
       float               max;
-      float               increment;
       
       SynthParameter();
     };
@@ -60,7 +60,7 @@ namespace Tonic{
     
     // It's quite conceivable that we'll want to move the messaging stuff up into Source
     SynthParameter  & addParameter(string name, float value=0, float min=-FLT_MAX, float max=FLT_MAX);
-    SynthParameter  & addParameter(string name, SynthParameterType type, float value=0, float min=-FLT_MAX, float max=FLT_MAX, float inc=0);
+    SynthParameter  & addParameter(string name, SynthParameterType type, float value=0, float min=-FLT_MAX, float max=FLT_MAX);
     
     void              setParameter(string name, float value=1);
     
