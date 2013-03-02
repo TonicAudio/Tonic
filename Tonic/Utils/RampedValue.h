@@ -65,17 +65,18 @@ namespace Tonic {
     
       lockMutex();
       
-      // Must do this in this order - value will override any change to target
+      // First set the value, if necessary (abort ramp, go immediately to value)
+      ControlGeneratorOutput valueOutput = valueGen_.tick(context);
+      if(valueOutput.status == ControlGeneratorStatusHasChanged){
+        updateValue(valueOutput.value);
+      }
+      
+      // Then update the target or ramp length (start a new ramp)
       ControlGeneratorOutput lengthOutput = lengthGen_.tick(context);
       ControlGeneratorOutput targetOutput = targetGen_.tick(context);
       if (lengthOutput.status == ControlGeneratorStatusHasChanged || targetOutput.status == ControlGeneratorStatusHasChanged){
         unsigned long lSamp = lengthOutput.value*Tonic::sampleRate()/1000.0f;
         updateTarget(targetOutput.value, lSamp);
-      }
-      
-      ControlGeneratorOutput valueOutput = valueGen_.tick(context);
-      if(valueOutput.status == ControlGeneratorStatusHasChanged){
-        updateValue(valueOutput.value);
       }
 
       unlockMutex();
@@ -173,13 +174,14 @@ namespace Tonic {
 #pragma mark - Internal State setters
     
     inline void RampedValue_::updateValue( TonicFloat value){
+      
+      // When the value gen changes, immediately abort the current ramp and go to the new value.
+      
       finished_ = true;
       last_ = value;
       target_ = value;
       inc_ = 0;
       count_ = 0;
-      
-      // need to set target gen's value here for this to work right
     }
 
     inline void RampedValue_::updateTarget(TonicFloat target, unsigned long lengthSamp ){
@@ -198,14 +200,24 @@ namespace Tonic {
     RampedValue(TonicFloat startValue = 0, TonicFloat lenMs = 50);
     
     //! Set target value
+    /*!
+        Changes to target gen input will create a new ramp from current value to target over the current length
+    */
     RampedValue & target( TonicFloat target );
     RampedValue & target( ControlGenerator target );
     
     //! Set length before reaching target value, in ms
+    /*!
+        Changes to length gen input will create a new ramp from current value to target over the provided length
+    */
     RampedValue & lengthMs( TonicFloat lengthMs );
     RampedValue & lengthMs( ControlGenerator lengthMs );
     
     //! Go to value immediately
+    /*!
+        Changes to the value gen input will abort the current ramp and go immediately to the specified value.
+        Output will remain steady until a new target or length is set.
+    */
     RampedValue & value( TonicFloat value);
     RampedValue & value( ControlGenerator value);
 
