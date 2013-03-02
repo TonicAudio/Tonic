@@ -26,6 +26,7 @@ https://ccrma.stanford.edu/software/stk/
 #include <map>
 #include "Tonic.h"
 #include "BufferFiller.h"
+#include "FixedValue.h"
 
 namespace Tonic{
   

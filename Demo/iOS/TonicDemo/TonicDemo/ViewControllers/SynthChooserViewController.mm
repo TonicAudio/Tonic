@@ -14,6 +14,7 @@
 #import "FilterTest.h"
 #import "FilteredNoiseSynth.h"
 #import "LFNoiseTestSynth.h"
+#import "ADSRTestSynth.h"
 
 @interface SynthDemoDef : NSObject
   @property NSString* synthClassName;
@@ -132,6 +133,19 @@
         def.synthInstructions = @"Y Axis: Noise Frequency";
         def.synthAction = ^(Tonic::Synth* synth, CGPoint touchPointNorm){
           synth->setParameter("noiseFreq", 0.1 + 1000 * touchPointNorm.y * touchPointNorm.y);
+        };
+      }
+            
+      {
+        SynthDemoDef* def = [[SynthDemoDef alloc] init];
+        [synthDefinitions addObject:def];
+        def.synthClassName = @"ADSRTestSynth";
+        def.synthDisplayName = @"ADSR";
+        def.synthDescription = @"ADSR";
+        def.synthInstructions = @"Touch movement in top half of screen is keydown. Touch movement in bottom is keyup.";
+        def.synthAction = ^(Tonic::Synth* synth, CGPoint touchPointNorm){
+          float val = touchPointNorm.y > 0.5?  touchPointNorm.y : 0;
+          synth->setParameter("trigger", val);
         };
       }
       
