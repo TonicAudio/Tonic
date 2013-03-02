@@ -20,7 +20,13 @@ class ADSRTestSynth : public Synth {
 public:
   ADSRTestSynth(){
 
-    outputGen = ADSR().setTrigger( addParameter("trigger") ) * Noise() * 0.1;
+    outputGen = ADSR()
+      .setTrigger( addParameter("trigger") )
+      .setAttack(0.5)
+      .setDecay(0.5)
+      .setSustain(0.5)
+      .setRelease(0.5)
+       * Noise() * 0.1;
   }
   
 };

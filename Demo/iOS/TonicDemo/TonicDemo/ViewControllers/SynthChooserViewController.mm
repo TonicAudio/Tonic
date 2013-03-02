@@ -142,9 +142,10 @@
         def.synthClassName = @"ADSRTestSynth";
         def.synthDisplayName = @"ADSR";
         def.synthDescription = @"ADSR";
-        def.synthInstructions = @"";
+        def.synthInstructions = @"Touch movement in top half of screen is keydown. Touch movement in bottom is keyup.";
         def.synthAction = ^(Tonic::Synth* synth, CGPoint touchPointNorm){
-          synth->setParameter("trigger", touchPointNorm.y);
+          float val = touchPointNorm.y > 0.5?  touchPointNorm.y : 0;
+          synth->setParameter("trigger", val);
         };
       }
       

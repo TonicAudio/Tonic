@@ -31,39 +31,93 @@ https://ccrma.stanford.edu/software/stk/
 namespace Tonic {
   
   namespace Tonic_ {
+  
+    #define MILLIS_PER_SECOND 1000
 
     class ADSR_ : public Generator_{
       
     protected:
     
-      void trigger();
     
-      RampedValue decay;
+      RampedValue ramp;
       ControlGenerator mTrigger;
+      ControlGenerator attack;
+      ControlGenerator decay;
+      ControlGenerator sustain;
+      ControlGenerator release;
       
+      enum State{
+        ATTACK,
+        SUSTAIN,
+        DECAY,
+        RELEASE
+      };
+      
+      State state;
+      void switchState(State newState, const SynthesisContext_ &context);
+            
     public:
       ADSR_();
       ~ADSR_();
       void computeSynthesisBlock( const SynthesisContext_ &context );
       void setTrigger(ControlGenerator trig){mTrigger = trig;}
+      void setAttack(ControlGenerator gen){attack = gen * MILLIS_PER_SECOND;}
+      void setDecay(ControlGenerator gen){decay = gen * MILLIS_PER_SECOND;}
+      void setSustain(ControlGenerator gen){sustain = gen;}
+      void setRelease(ControlGenerator gen){release = gen * MILLIS_PER_SECOND;}
       
     };
     
     inline void ADSR_::computeSynthesisBlock(const SynthesisContext_ &context){
-      ControlGeneratorOutput output = mTrigger.tick(context);
-      if(output.status == ControlGeneratorStatusHasChanged && output.value != 0){
-        decay.value(output.value);
-        decay.target(0);
+      ControlGeneratorOutput triggerOutput = mTrigger.tick(context);
+      
+      // did a trigger message happen?
+      if(triggerOutput.status == ControlGeneratorStatusHasChanged){
+        if(triggerOutput.value != 0){
+          switchState(ATTACK, context);
+        }else{
+          switchState(RELEASE, context);
+        }
+        
+      }else{
+      
+        switch (state) {
+          case ATTACK:
+            if(ramp.isFinished()){
+              switchState(DECAY, context);
+            }
+            break;
+            
+          case DECAY:
+            if(ramp.isFinished()){
+              switchState(SUSTAIN, context);
+            }
+            break;
+
+          default:
+            break;
+        }
       }
-      decay.tick(synthesisBlock_, context);
+      ramp.tick(synthesisBlock_, context);
     }
     
   }
+  
+  
+  /*!
+    Classic ADSR envlelope. Non-zero trigger values correspond to key down. Trigger values of zero correspond to keyup.
+    Time values are rounded up to the nearest buffer size.
+    Time values are in milliseconds. 
+  */
   
   class ADSR : public TemplatedGenerator<Tonic_::ADSR_>{
     
   public:
     createControlGeneratorSetters(ADSR, setTrigger, setTrigger);
+    createControlGeneratorSetters(ADSR, setAttack, setAttack);
+    createControlGeneratorSetters(ADSR, setDecay, setDecay);
+    createControlGeneratorSetters(ADSR, setSustain, setSustain);
+    createControlGeneratorSetters(ADSR, setRelease, setRelease);
 
   };
 }
