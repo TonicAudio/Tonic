@@ -27,8 +27,8 @@ public:
     midiNums.push_back(10);
     Noise noise = Noise();
     
-    Generator cutoff_v = addParameter("cutoff", 1).value.ramped();
-    Generator q_v = addParameter("Q", 5).value.ramped();
+    Generator cutoff_v = addParameter("cutoff", 1).ramped();
+    Generator q_v = addParameter("Q", 5).ramped();
     
     Adder sumOfFilters;
     

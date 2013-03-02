@@ -59,8 +59,8 @@ namespace Tonic{
     Synth();
     
     // It's quite conceivable that we'll want to move the messaging stuff up into Source
-    SynthParameter  & addParameter(string name, float value=0, float min=-FLT_MAX, float max=FLT_MAX);
-    SynthParameter  & addParameter(string name, SynthParameterType type, float value=0, float min=-FLT_MAX, float max=FLT_MAX);
+    ControlValue  & addParameter(string name, float value=0, float min=-FLT_MAX, float max=FLT_MAX);
+    ControlValue  & addParameter(string name, SynthParameterType type, float value=0, float min=-FLT_MAX, float max=FLT_MAX);
     
     void              setParameter(string name, float value=1);
     

@@ -36,11 +36,11 @@ namespace Tonic {
     
   }
 
-  Synth::SynthParameter & Synth::addParameter(string name, float value, float min, float max){
+  ControlValue & Synth::addParameter(string name, float value, float min, float max){
     return addParameter(name, SynthParameterTypeContinuous, value, min, max);
   }
   
-  Synth::SynthParameter & Synth::addParameter(string name, SynthParameterType type, float value, float min, float max){
+  ControlValue & Synth::addParameter(string name, SynthParameterType type, float value, float min, float max){
     if (parameters.find(name)==parameters.end()) {
       
       SynthParameter newParam;
@@ -52,7 +52,7 @@ namespace Tonic {
       
       parameters[name] = newParam;
     }
-    return parameters[name];
+    return parameters[name].value;
   }
   
   void Synth::setParameter(string name, float value){

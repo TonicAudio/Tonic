@@ -22,13 +22,13 @@ public:
   
   SineSumSynth () {
     
-    SynthParameter pitch = addParameter("pitch",0,0,1);
+    ControlValue pitch = addParameter("pitch",0,0,1);
       
       Adder outputAdder;
     
     for (int s=0; s<NUM_SINES; s++){
       
-      ControlGenerator pitchGen = ((pitch.value * 220 + 220) * powf(2, (s - (NUM_SINES/2)) * 5.0f / 12.0f));
+      ControlGenerator pitchGen = ((pitch * 220 + 220) * powf(2, (s - (NUM_SINES/2)) * 5.0f / 12.0f));
             
       outputAdder = outputAdder + SineWave().freq( pitchGen.ramped() );
       

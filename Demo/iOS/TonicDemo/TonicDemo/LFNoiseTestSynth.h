@@ -21,7 +21,7 @@ class LFNoiseTestSynth : public Synth{
 public:
   LFNoiseTestSynth(){
 
-    outputGen = SineWave().freq(500 + 500 * LFNoise().setFreq( addParameter("noiseFreq", 100).value )) * 0.3;
+    outputGen = SineWave().freq(500 + 500 * LFNoise().setFreq( addParameter("noiseFreq", 100) )) * 0.3;
     
   }
 };
