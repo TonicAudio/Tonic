@@ -27,6 +27,7 @@
 		A86C3F1F16B2B7B8002A50F0 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A86C3F1C16B2B7B8002A50F0 /* AudioToolbox.framework */; };
 		A86C3F2116B2B7B8002A50F0 /* CoreAudio.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A86C3F1E16B2B7B8002A50F0 /* CoreAudio.framework */; };
 		A86C3F2316B2B834002A50F0 /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A86C3F2216B2B834002A50F0 /* Accelerate.framework */; };
+		A86FA81316DF973E00B9DD67 /* ADSR.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A86FA81116DF973E00B9DD67 /* ADSR.cpp */; };
 		A8786A9416DD86E400FC22F8 /* LFNoise.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A8786A9216DD86E400FC22F8 /* LFNoise.cpp */; };
 		F20FCD4816C566F60039832A /* TableLookupOsc.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F20FCD4616C566F60039832A /* TableLookupOsc.cpp */; };
 		F20FCD4B16C56EF60039832A /* SineWave.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F20FCD4916C56EF50039832A /* SineWave.cpp */; };
@@ -85,6 +86,9 @@
 		A86C3F1D16B2B7B8002A50F0 /* AudioUnit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioUnit.framework; path = System/Library/Frameworks/AudioUnit.framework; sourceTree = SDKROOT; };
 		A86C3F1E16B2B7B8002A50F0 /* CoreAudio.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreAudio.framework; path = System/Library/Frameworks/CoreAudio.framework; sourceTree = SDKROOT; };
 		A86C3F2216B2B834002A50F0 /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = System/Library/Frameworks/Accelerate.framework; sourceTree = SDKROOT; };
+		A86FA81116DF973E00B9DD67 /* ADSR.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ADSR.cpp; sourceTree = "<group>"; };
+		A86FA81216DF973E00B9DD67 /* ADSR.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ADSR.h; sourceTree = "<group>"; };
+		A86FA81416E0380B00B9DD67 /* ADSRTestSynth.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ADSRTestSynth.h; sourceTree = "<group>"; };
 		A8786A8016DAC55100FC22F8 /* FilteredNoiseSynth.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FilteredNoiseSynth.h; sourceTree = "<group>"; };
 		A8786A9216DD86E400FC22F8 /* LFNoise.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = LFNoise.cpp; sourceTree = "<group>"; };
 		A8786A9316DD86E400FC22F8 /* LFNoise.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LFNoise.h; sourceTree = "<group>"; };
@@ -220,6 +224,7 @@
 				F2360A7916C4BC6E00A0AD7A /* SineSumSynth.h */,
 				A82437EF16CEFECD000677C7 /* FMDroneSynth.h */,
 				F263BD3416D57228008AADA6 /* FilterTest.h */,
+				A86FA81416E0380B00B9DD67 /* ADSRTestSynth.h */,
 				A86C3F0F16B2B5BE002A50F0 /* Novocaine */,
 				F20FCD4E16C58D3E0039832A /* TonicWrappers */,
 				A86C3EE716B2B549002A50F0 /* Tonic */,
@@ -349,6 +354,8 @@
 				F23E243D16C6BF450082EF65 /* Mixer.h */,
 				F2D951D616C49A6700F25663 /* RampedValue.cpp */,
 				F2D951D716C49A6700F25663 /* RampedValue.h */,
+				A86FA81116DF973E00B9DD67 /* ADSR.cpp */,
+				A86FA81216DF973E00B9DD67 /* ADSR.h */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -447,6 +454,7 @@
 				A8786A9416DD86E400FC22F8 /* LFNoise.cpp in Sources */,
 				F2C9A92016DAEFE6009D9C08 /* ControlAdder.cpp in Sources */,
 				017BF2C916DBAE5200FA1046 /* ControlMultiplier.cpp in Sources */,
+				A86FA81316DF973E00B9DD67 /* ADSR.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
