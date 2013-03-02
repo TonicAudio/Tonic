@@ -28,6 +28,11 @@ namespace Tonic { namespace Tonic_{
   RampedValue_::~RampedValue_(){
     
   }
+  
+  
+  bool RampedValue_::isFinished(){
+    return finished_;
+  }
 
 } // Namespace Tonic_
   
@@ -70,6 +75,10 @@ namespace Tonic { namespace Tonic_{
   RampedValue & RampedValue::value( ControlGenerator value){
     gen()->setValueGen(value);
     return *this;
+  }
+  
+  bool RampedValue::isFinished(){
+    return gen()->isFinished();
   }
   
 } // Namespace Tonic
