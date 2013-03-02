@@ -28,7 +28,7 @@ public:
         addParameter("carrierAmt", 1, 0, 1).ramped()
       ) *
       SineWave().freq(
-        addParameter("carrierFreq", 400, 100, 800).ramped(1000)
+        addParameter("carrierFreq", 400, 100, 800).ramped(1.0)
       )
     ) * 0.5f;
     

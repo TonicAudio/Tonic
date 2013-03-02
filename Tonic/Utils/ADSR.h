@@ -32,8 +32,6 @@ namespace Tonic {
   
   namespace Tonic_ {
   
-    #define MILLIS_PER_SECOND 1000
-
     class ADSR_ : public Generator_{
       
     protected:
@@ -61,10 +59,10 @@ namespace Tonic {
       ~ADSR_();
       void computeSynthesisBlock( const SynthesisContext_ &context );
       void setTrigger(ControlGenerator trig){mTrigger = trig;}
-      void setAttack(ControlGenerator gen){attack = gen * MILLIS_PER_SECOND;}
-      void setDecay(ControlGenerator gen){decay = gen * MILLIS_PER_SECOND;}
+      void setAttack(ControlGenerator gen){attack = gen;}
+      void setDecay(ControlGenerator gen){decay = gen;}
       void setSustain(ControlGenerator gen){sustain = gen;}
-      void setRelease(ControlGenerator gen){release = gen * MILLIS_PER_SECOND;}
+      void setRelease(ControlGenerator gen){release = gen;}
       
     };
     

@@ -11,7 +11,7 @@
 namespace Tonic { namespace Tonic_{
   
   ADSR_::ADSR_() : state(ATTACK){
-    ramp.lengthMs(1000);
+    ramp.length(1.0);
     ramp.target(0);
     ramp.value(0);
   }
@@ -26,11 +26,11 @@ namespace Tonic { namespace Tonic_{
       case ATTACK:
         ramp.value(0);
         ramp.target(mTrigger.tick(context).value);
-        ramp.lengthMs(attack.tick(context).value);
+        ramp.length(attack.tick(context).value);
       break;
       case DECAY:
         ramp.target(sustain.tick(context).value);
-        ramp.lengthMs(decay.tick(context).value);
+        ramp.length(decay.tick(context).value);
         ramp.value(mTrigger.tick(context).value);
       break;
       case SUSTAIN:
@@ -39,7 +39,7 @@ namespace Tonic { namespace Tonic_{
       break;
       case RELEASE:
         ramp.target(0);
-        ramp.lengthMs(release.tick(context).value);
+        ramp.length(release.tick(context).value);
       break;
       
       default:
