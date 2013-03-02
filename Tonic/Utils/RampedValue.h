@@ -58,6 +58,7 @@ namespace Tonic {
       // internal state setters
       void updateValue( TonicFloat value);
       void updateTarget( TonicFloat target, unsigned long lengthSamp );
+      bool isFinished();
   
     };
     
@@ -220,6 +221,8 @@ namespace Tonic {
     */
     RampedValue & value( TonicFloat value);
     RampedValue & value( ControlGenerator value);
+
+    bool isFinished();
 
   };
 }
