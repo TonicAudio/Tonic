@@ -49,6 +49,10 @@ const TonicFloat PI           = 3.14159265358979;
 const TonicFloat TWO_PI       = 2 * PI;
 #endif
 
+// Causes 32nd bit in double to have fractional value 1 (decimal point on 32-bit word boundary)
+// Allowing some efficient shortcuts for table lookup using power-of-two tables
+#define BIT32DECPT 1572864.
+
 namespace Tonic {
   
   // -- Global Constants --
@@ -58,6 +62,17 @@ namespace Tonic {
   };
 
   static const unsigned int kSynthesisBlockSize = 64;
+  
+  
+  // -- Global Types --
+  
+  // For fast computation of int/fract using some bit-twiddlery
+  // inspired by the pd implementation
+  union ShiftedDouble {
+    double d;
+    uint32_t i[2];
+  };
+  
   
   namespace Tonic_{
     // -- Synthesis Context Struct --

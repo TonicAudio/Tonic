@@ -15,6 +15,7 @@
 #import "FilteredNoiseSynth.h"
 #import "LFNoiseTestSynth.h"
 #import "ADSRTestSynth.h"
+#import "RectWaveTestSynth.h"
 
 @interface SynthDemoDef : NSObject
   @property NSString* synthClassName;
@@ -143,6 +144,19 @@
         def.synthAction = ^(Tonic::Synth* synth, CGPoint touchPointNorm){
           float val = touchPointNorm.y > 0.5?  touchPointNorm.y : 0;
           synth->setParameter("trigger", val);
+        };
+      }
+      
+      {
+        SynthDemoDef* def = [[SynthDemoDef alloc] init];
+        [synthDefinitions addObject:def];
+        def.synthClassName = @"RectWaveTestSynth";
+        def.synthDisplayName = @"Rectangular Wave";
+        def.synthDescription = @"Aliasing rectangular waveform oscillator";
+        def.synthInstructions = @"X-Axis: pulse width\nY-Axis: frequency";
+        def.synthAction = ^(Tonic::Synth* synth, CGPoint touchPointNorm){
+          synth->setParameter("freq", mtof(touchPointNorm.y * 24 + 48));
+          synth->setParameter("pwm", touchPointNorm.x);
         };
       }
       

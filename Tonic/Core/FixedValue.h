@@ -23,12 +23,11 @@ https://ccrma.stanford.edu/software/stk/
 #ifndef __TonicDemo__FixedValue__
 #define __TonicDemo__FixedValue__
 
-#include <iostream>
-#include "TonicFrames.h"
-#include "Generator.h"
 #include "ControlValue.h"
+#include "Generator.h"
 
 namespace Tonic {
+  
   namespace Tonic_{
   
     class FixedValue_ : public Generator_{

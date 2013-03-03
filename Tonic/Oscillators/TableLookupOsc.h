@@ -31,20 +31,9 @@ https://ccrma.stanford.edu/software/stk/
 #include "Generator.h"
 #include "FixedValue.h"
 
-// Causes 32nd bit in double to have fractional value 1 (decimal point on 32-bit word boundary)
-// Allowing some efficient shortcuts for table lookup using power-of-two tables
-#define BIT32DECPT 1572864.  
-
 namespace Tonic {
   
   namespace Tonic_ {
-    
-    // For fast computation of int/fract using some bit-twiddlery
-    // inspired by the pd implementation
-    union ShiftedDouble {
-      double d;
-      uint32_t i[2];
-    };
     
     const unsigned long TABLE_SIZE = 2048;
     
@@ -80,8 +69,8 @@ namespace Tonic {
       
       double phase_;
       
-      Generator frequencyGenerator;
-      TonicFrames modFrames;
+      Generator frequencyGenerator_;
+      TonicFrames modFrames_;
       
     public:
       
@@ -96,11 +85,7 @@ namespace Tonic {
       
       //! Set frequency generator input
       void setFrequency( Generator & genArg){
-        // need to lock mutex so we don't replace this in the middle of a tick
-        // Morgan 2012.2.22 Handling the mutex stuff in the createGeneratorSetters macro
-        //lockMutex();
-        frequencyGenerator = genArg;
-        //unlockMutex();
+        frequencyGenerator_ = genArg;
       };
 
     };
