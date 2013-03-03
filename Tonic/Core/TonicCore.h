@@ -25,6 +25,8 @@ https://ccrma.stanford.edu/software/stk/
 
 #include <stdio.h>
 #include <string>
+#include <vector>
+#include <stdexcept>
 #include <math.h>
 #include <pthread.h>
 
@@ -47,6 +49,10 @@ const TonicFloat PI           = 3.14159265358979;
 const TonicFloat TWO_PI       = 2 * PI;
 #endif
 
+// Causes 32nd bit in double to have fractional value 1 (decimal point on 32-bit word boundary)
+// Allowing some efficient shortcuts for table lookup using power-of-two tables
+#define BIT32DECPT 1572864.
+
 namespace Tonic {
   
   // -- Global Constants --
@@ -56,6 +62,17 @@ namespace Tonic {
   };
 
   static const unsigned int kSynthesisBlockSize = 64;
+  
+  
+  // -- Global Types --
+  
+  // For fast computation of int/fract using some bit-twiddlery
+  // inspired by the pd implementation
+  union ShiftedDouble {
+    double d;
+    uint32_t i[2];
+  };
+  
   
   namespace Tonic_{
     // -- Synthesis Context Struct --
@@ -152,18 +169,35 @@ namespace Tonic {
     float r = random * diff;
     return a + r;
 }
+
+  //! Tonic exception class
+  class TonicException : public runtime_error
+  {
+    public:
+    TonicException(string const& error) : runtime_error(error) {};
+
+    // May want to implement custom exception behavior here, but for now, this is essentially a typedef
+
+  };
+  
   
   // -- Logging --
   
-  static void error(std::string message){
-    printf("Tonic::error: %s\n",  message.c_str());
+  static void error(string message, bool fatal = false){
+    // maybe also log to console?
+    printf("Tonic::error: %s\n", message.c_str() );
+    if (fatal){
+      throw TonicException(message);
+    }
   }
   
   static void debug(std::string message){
     printf("Tonic::debug: %s\n", message.c_str());
   }
+
+
   
-}
+} // namespace Tonic
 
 
 #endif
