@@ -22,10 +22,11 @@ public:
 
     outputGen = ADSR()
       .setTrigger( addParameter("trigger") )
-      .setAttack(0.5)
+      .setAttack(true)
       .setDecay(0.5)
       .setSustain(0.5)
       .setRelease(0.5)
+      .setDoesSustain(true)
        * Noise() * 0.1;
   }
   
