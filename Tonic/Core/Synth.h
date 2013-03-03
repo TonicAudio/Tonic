@@ -96,7 +96,7 @@ namespace Tonic{
           synthsList = synthsList + it->first + "\n";
         }
         
-        error("Error creating sysnth. Synth named \"" + s + "\" not found. Existing registered synths are: \n" + synthsList);
+        error("Error creating synth. Synth named \"" + s + "\" not found. Existing registered synths are: \n" + synthsList);
         
         return 0;
       }
