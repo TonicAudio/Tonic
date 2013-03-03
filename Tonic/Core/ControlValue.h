@@ -21,11 +21,12 @@ namespace Tonic {
         ~ControlValue_();
 
         void setValue(float value);
-
+      
+        // Get current value directly
+        TonicFloat getValue() { return value_;};
+      
       protected:
-      
-        ControlGeneratorOutput peek();
-      
+            
         ControlGeneratorStatus computeStatus(const SynthesisContext_ & context);
         TonicFloat computeValue(const SynthesisContext_ & context);
       
@@ -44,10 +45,15 @@ namespace Tonic {
       gen()->setValue(value);
     }
     
-    inline ControlValue & setValue(float value)
+    ControlValue & setValue(float value)
     {
       gen()->setValue(value);
       return *this;
+    }
+    
+    // for higher-level access - no
+    float getValue(){
+      return gen()->getValue();
     }
 
   };
