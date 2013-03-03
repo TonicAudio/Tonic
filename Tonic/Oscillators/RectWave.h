@@ -66,8 +66,6 @@ namespace Tonic {
       pwmGen_.tick(pwmFrames_, context);
       unlockMutex();
       
-      // somewhat inefficient implementation, perhaps...
-      
       static TonicFloat const T = 1.0f/Tonic::sampleRate();
       
       TonicFloat period;
@@ -78,7 +76,7 @@ namespace Tonic {
       for (unsigned int i=0; i<kSynthesisBlockSize; i++){
 
         // update the current period in seconds
-        period = 1.0f/(*freqptr++);
+        period = 1.0f/(max(std::numeric_limits<float>::min(),*freqptr++));
         
         // update the current phase in seconds
         phaseAccum_ += T;
@@ -103,7 +101,10 @@ namespace Tonic {
     
   public:
     
+    //! Set the frequency of the waveform
     createGeneratorSetters(RectWave, freq, setFrequencyGenerator);
+    
+    //! Set the pulse width of the rectangle. Input should be clipped between 0-1
     createGeneratorSetters(RectWave, pwm, setPwmGenerator);
 
   };
