@@ -21,7 +21,7 @@ namespace Tonic { namespace Tonic_{
     // shouldn't need to set this. See https://github.com/morganpackard/Tonic/issues/6
     // still, good to give default values to the relevant generators
     setTargetGen(ControlValue().setValue(0));
-    setLengthMsGen(ControlValue().setValue(50));
+    setLengthGen(ControlValue().setValue(0.05));
     setValueGen(ControlValue().setValue(0));
   }
   
@@ -36,44 +36,56 @@ namespace Tonic { namespace Tonic_{
 
 } // Namespace Tonic_
   
-  RampedValue::RampedValue(TonicFloat startValue, TonicFloat lenMs ){
+  RampedValue::RampedValue(TonicFloat startValue, TonicFloat initLength ){
     value(startValue);
-    lengthMs(lenMs);
+    length(initLength);
   }
   
   //! Set target value
   RampedValue & RampedValue::target( TonicFloat target ){
     ControlValue v = ControlValue().setValue(target);
+    gen()->lockMutex();
     gen()->setTargetGen(v);
+    gen()->unlockMutex();
     return *this;
   }
   
   RampedValue & RampedValue::target( ControlGenerator target ){
+    gen()->lockMutex();
     gen()->setTargetGen(target);
+    gen()->unlockMutex();
     return *this;
   }
   
   //! Set length before reaching target value, in ms
-  RampedValue & RampedValue::lengthMs( TonicFloat lengthMs ){
-    ControlValue v = ControlValue().setValue(lengthMs);
-    gen()->setLengthMsGen(v);
+  RampedValue & RampedValue::length( TonicFloat length ){
+    ControlValue v = ControlValue().setValue(length);
+    gen()->lockMutex();
+    gen()->setLengthGen(v);
+    gen()->unlockMutex();
     return *this;
   }
   
-  RampedValue & RampedValue::lengthMs( ControlGenerator lengthMs ){
-    gen()->setLengthMsGen(lengthMs);
+  RampedValue & RampedValue::length( ControlGenerator lengthMs ){
+    gen()->lockMutex();
+    gen()->setLengthGen(lengthMs);
+    gen()->unlockMutex();
     return *this;
   }
   
   //! Go to value immediately
   RampedValue & RampedValue::value( TonicFloat value){
     ControlValue v = ControlValue().setValue(value);
+    gen()->lockMutex();
     gen()->setValueGen(v);
+    gen()->unlockMutex();
     return *this;
   }
   
   RampedValue & RampedValue::value( ControlGenerator value){
+    gen()->lockMutex();
     gen()->setValueGen(value);
+    gen()->unlockMutex();
     return *this;
   }
   

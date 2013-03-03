@@ -52,12 +52,10 @@
         [synthDefinitions addObject:def];
         def.synthClassName = @"SineSumSynth";
         def.synthDisplayName = @"10-Sine Additive Spread";
-        def.synthDescription = @"10 sinewave oscillators diverging from central frequency";
-        def.synthInstructions = @"Swipe up and down to change \"spread\" of additive sines.";
+        def.synthDescription = @"10 sinewave oscillators in fifths";
+        def.synthInstructions = @"Swipe up and down to change pitch.";
         def.synthAction = ^(Tonic::Synth* synth, CGPoint touchPointNorm){
-          SineSumSynth *ss = (SineSumSynth*)synth;
-          TonicFloat spread = powf(touchPointNorm.y, 2.0f);
-          ss->setSpread(spread);
+          synth->setParameter("pitch", touchPointNorm.y);
         };
       }
       
@@ -89,9 +87,8 @@
         def.synthDescription = @"Basic FM synth with sinusoidal carrier and modulator";
         def.synthInstructions = @"Swipe up and down to change modulation amount. Swipe L/R to change modulator and carrier freqs.";
         def.synthAction = ^(Tonic::Synth* synth, CGPoint touchPointNorm){
-        synth->setParameter("carrierFreq", touchPointNorm.x * 20);
-        synth->setParameter("modIndex", touchPointNorm.y*touchPointNorm.y );
-
+          synth->setParameter("carrierFreq", touchPointNorm.x * 30);
+          synth->setParameter("modIndex", touchPointNorm.y*touchPointNorm.y );
         };
       }
       
@@ -191,7 +188,6 @@
   NSString *synthName = nil;
   NSString *description = nil;
   SynthTestPanAction action = nil;
-  
   
   if (indexPath.row < [synthDefinitions count]) {
       SynthDemoDef* def = [synthDefinitions objectAtIndex:indexPath.row];
