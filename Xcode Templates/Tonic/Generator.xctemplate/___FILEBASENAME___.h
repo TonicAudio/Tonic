@@ -24,6 +24,7 @@ https://ccrma.stanford.edu/software/stk/
 #define __Tonic_____FILEBASENAMEASIDENTIFIER_____
 
 #include "Generator.h"
+#include "FixedValue.h"
 
 namespace Tonic {
   
