@@ -41,7 +41,7 @@ namespace Tonic {
   // fill a buffer of floats, assuming the buffer is expecting max/min of 1,-1
   void BufferFiller::fillBufferOfFloats(float *outData,  UInt32 numFrames, int numChannels){
   
-    if(numChannels > outputFrames_.channels()) error("Mismatch in channels sent to Synth::fillBufferOfFloats");
+    if(numChannels > outputFrames_.channels()) error("Mismatch in channels sent to Synth::fillBufferOfFloats", true);
     
     const unsigned int sampleCount = outputFrames_.channels() * outputFrames_.frames();
     const unsigned int channelsPerSample = (outputFrames_.channels() - numChannels) + 1;
