@@ -31,7 +31,7 @@ namespace Tonic { namespace Tonic_{
     frequencyGenerator_.tick(modFrames_, context);
     unlockMutex();
     
-    static const TonicFloat rateConstant = (TonicFloat)TABLE_SIZE / Tonic::sampleRate();
+    const TonicFloat rateConstant = (TonicFloat)TABLE_SIZE / Tonic::sampleRate();
     const unsigned int nFrames = synthesisBlock_.frames();
     const unsigned int stride = synthesisBlock_.channels();
     

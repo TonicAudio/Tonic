@@ -67,7 +67,7 @@ namespace Tonic {
       unlockMutex();
       
       // calculate the output wave
-      static TonicFloat const T = 1.0f/Tonic::sampleRate();
+      TonicFloat const T = 1.0f/Tonic::sampleRate();
       
       TonicFloat period, normPhase, slope;
       TonicFloat *outptr = &synthesisBlock_[0];

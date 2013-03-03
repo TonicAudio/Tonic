@@ -66,7 +66,7 @@ namespace Tonic {
       pwmGen_.tick(pwmFrames_, context);
       unlockMutex();
       
-      static TonicFloat const T = 1.0f/Tonic::sampleRate();
+      TonicFloat const T = 1.0f/Tonic::sampleRate();
       
       TonicFloat period;
       TonicFloat *outptr = &synthesisBlock_[0];
