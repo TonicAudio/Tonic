@@ -33,7 +33,6 @@ namespace Tonic { namespace Tonic_{
     
     const TonicFloat rateConstant = (TonicFloat)TABLE_SIZE / Tonic::sampleRate();
     const unsigned int nFrames = synthesisBlock_.frames();
-    const unsigned int stride = synthesisBlock_.channels();
     
     TonicFloat *samples = &synthesisBlock_[0];
     TonicFloat *rateBuffer = &modFrames_[0];
@@ -68,9 +67,7 @@ namespace Tonic { namespace Tonic_{
       f1 = tAddr[0];
       f2 = tAddr[1];
       
-      *samples = f1 + frac * (f2 - f1);
-      samples += stride;
-      
+      *samples++ = f1 + frac * (f2 - f1);
     }
     
     sd.d = BIT32DECPT * TABLE_SIZE;

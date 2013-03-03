@@ -26,6 +26,8 @@ https://ccrma.stanford.edu/software/stk/
 #include "Generator.h"
 #include "FixedValue.h"
 
+#define TONIC_RECT_RES 4096
+
 namespace Tonic {
   
   namespace Tonic_ {
@@ -40,7 +42,7 @@ namespace Tonic {
         TonicFrames freqFrames_;
         TonicFrames pwmFrames_;
         
-        float phaseAccum_;
+        double phaseAccum_;
         
       public:
         RectWave_();
@@ -66,28 +68,42 @@ namespace Tonic {
       pwmGen_.tick(pwmFrames_, context);
       unlockMutex();
       
-      TonicFloat const T = 1.0f/Tonic::sampleRate();
-      
-      TonicFloat period;
+      const TonicFloat rateConstant =  TONIC_RECT_RES / Tonic::sampleRate();
+
       TonicFloat *outptr = &synthesisBlock_[0];
       TonicFloat *freqptr = &freqFrames_[0];
       TonicFloat *pwmptr = &pwmFrames_[0];
       
-      for (unsigned int i=0; i<kSynthesisBlockSize; i++){
-
-        // update the current period in seconds
-        period = 1.0f/(max(std::numeric_limits<float>::min(),*freqptr++));
+      ShiftedDouble sd;
+      
+      // pre-multiply rate constant for speed
+#ifdef USE_APPLE_ACCELERATE
+      vDSP_vsmul(freqptr, 1, &rateConstant, freqptr, 1, kSynthesisBlockSize);
+#else
+      for (unsigned int i=0; i<nFrames; i++){
+        *rateBuffer++ *= rateConstant;
+      }
+      rateBuffer = &modFrames[0];
+#endif
+      
+      sd.d = BIT32DECPT;
+      int32_t offs, msbi = sd.i[1];
+      double ps = phaseAccum_ + BIT32DECPT;
+      for ( unsigned int i=0; i<synthesisBlock_.frames(); i++ ) {
         
-        // update the current phase in seconds
-        phaseAccum_ += T;
+        sd.d = ps;
+        ps += *freqptr++;
+        offs = sd.i[1] & (TONIC_RECT_RES-1);
+        sd.i[1] = msbi;
         
-        // wrap the phase
-        phaseAccum_ = fmodf(phaseAccum_, period);
-        
-        // compute output sample
-        *outptr++ = phaseAccum_ > (period * clamp(*pwmptr++, 0.0f, 1.0f)) ? -1.0f : 1.0f;
+        *outptr++ = offs > (TONIC_RECT_RES * *pwmptr++) ? -1.0f : 1.0f;
       }
       
+      sd.d = BIT32DECPT * TONIC_RECT_RES;
+      msbi = sd.i[1];
+      sd.d = ps + (BIT32DECPT * TONIC_RECT_RES - BIT32DECPT);
+      sd.i[1] = msbi;
+      phaseAccum_ = sd.d - BIT32DECPT * TONIC_RECT_RES;
         
     }
     
