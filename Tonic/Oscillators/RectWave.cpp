@@ -10,7 +10,8 @@
 
 namespace Tonic { namespace Tonic_{
   
-  RectWave_::RectWave_(){
+  RectWave_::RectWave_() : phaseAccum_(0) {
+    pwmGen_ = FixedValue(0.5);
     freqFrames_.resize(kSynthesisBlockSize, 1 ,0);
     pwmFrames_.resize(kSynthesisBlockSize, 1, 0);
   }
