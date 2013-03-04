@@ -115,12 +115,12 @@ namespace Tonic {
   class ADSR : public TemplatedGenerator<Tonic_::ADSR_>{
     
     public:
-      createControlGeneratorSetters(ADSR, setTrigger, setTrigger);
-      createControlGeneratorSetters(ADSR, setAttack, setAttack);
-      createControlGeneratorSetters(ADSR, setDecay, setDecay);
-      createControlGeneratorSetters(ADSR, setSustain, setSustain);
-      createControlGeneratorSetters(ADSR, setRelease, setRelease);
-      createControlGeneratorSetters(ADSR, setDoesSustain, setSustains);
+      createControlGeneratorSetters(ADSR, trigger, setTrigger);
+      createControlGeneratorSetters(ADSR, attack, setAttack);
+      createControlGeneratorSetters(ADSR, decay, setDecay);
+      createControlGeneratorSetters(ADSR, sustain, setSustain);
+      createControlGeneratorSetters(ADSR, release, setRelease);
+      createControlGeneratorSetters(ADSR, doesSustain, setSustains);
 
   };
   
