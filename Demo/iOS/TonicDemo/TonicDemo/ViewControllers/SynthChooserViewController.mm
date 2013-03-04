@@ -15,6 +15,9 @@
 #import "FilteredNoiseSynth.h"
 #import "LFNoiseTestSynth.h"
 #import "ADSRTestSynth.h"
+#import "RectWaveTestSynth.h"
+#import "FlexToothTestSynth.h"
+#import "FlexToothLFOTestSynth.h"
 
 @interface SynthDemoDef : NSObject
   @property NSString* synthClassName;
@@ -143,6 +146,45 @@
         def.synthAction = ^(Tonic::Synth* synth, CGPoint touchPointNorm){
           float val = touchPointNorm.y > 0.5?  touchPointNorm.y : 0;
           synth->setParameter("trigger", val);
+        };
+      }
+      
+      {
+        SynthDemoDef* def = [[SynthDemoDef alloc] init];
+        [synthDefinitions addObject:def];
+        def.synthClassName = @"RectWaveTestSynth";
+        def.synthDisplayName = @"Rectangular Wave";
+        def.synthDescription = @"Aliasing rectangular waveform oscillator";
+        def.synthInstructions = @"X-Axis: pulse width\nY-Axis: frequency";
+        def.synthAction = ^(Tonic::Synth* synth, CGPoint touchPointNorm){
+          synth->setParameter("freq", mtof(touchPointNorm.y * 24 + 48));
+          synth->setParameter("pwm", touchPointNorm.x);
+        };
+      }
+      
+      {
+        SynthDemoDef* def = [[SynthDemoDef alloc] init];
+        [synthDefinitions addObject:def];
+        def.synthClassName = @"FlexToothTestSynth";
+        def.synthDisplayName = @"Flexible Sawtooth Oscillator";
+        def.synthDescription = @"Aliasing sawtooth oscillator as audio oscillator";
+        def.synthInstructions = @"X-Axis: slope of sawtooth\nY-Axis: frequency";
+        def.synthAction = ^(Tonic::Synth* synth, CGPoint touchPointNorm){
+          synth->setParameter("freq", mtof(touchPointNorm.y * 24 + 48));
+          synth->setParameter("slope", touchPointNorm.x);
+        };
+      }
+      
+      {
+        SynthDemoDef* def = [[SynthDemoDef alloc] init];
+        [synthDefinitions addObject:def];
+        def.synthClassName = @"FlexToothLFOTestSynth";
+        def.synthDisplayName = @"Flexible Sawtooth LFO demo";
+        def.synthDescription = @"Aliasing sawtooth oscillator as morphable LFO";
+        def.synthInstructions = @"X-Axis: slope of sawtooth\nY-Axis: frequency";
+        def.synthAction = ^(Tonic::Synth* synth, CGPoint touchPointNorm){
+          synth->setParameter("freq", touchPointNorm.y * touchPointNorm.y * 20 + 0.1);
+          synth->setParameter("slope", touchPointNorm.x);
         };
       }
       
