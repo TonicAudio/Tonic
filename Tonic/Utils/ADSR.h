@@ -43,6 +43,7 @@ namespace Tonic {
       ControlGenerator decay;
       ControlGenerator sustain;
       ControlGenerator release;
+      ControlGenerator sustains;
       
       enum State{
         ATTACK,
@@ -64,6 +65,9 @@ namespace Tonic {
       void setSustain(ControlGenerator gen){sustain = gen;}
       void setRelease(ControlGenerator gen){release = gen;}
       
+      //! Controls whether or not the envelope pauses on the SUSTAIN stage
+      void setSustains(ControlGenerator gen){sustains = gen;};
+      
     };
     
     inline void ADSR_::computeSynthesisBlock(const SynthesisContext_ &context){
@@ -73,7 +77,7 @@ namespace Tonic {
       if(triggerOutput.status == ControlGeneratorStatusHasChanged){
         if(triggerOutput.value != 0){
           switchState(ATTACK, context);
-        }else{
+        }else if(sustains.tick(context).value != 0){
           switchState(RELEASE, context);
         }
         
@@ -88,7 +92,7 @@ namespace Tonic {
             
           case DECAY:
             if(ramp.isFinished()){
-              switchState(SUSTAIN, context);
+              switchState(sustains.tick(context).value != 0 ? SUSTAIN : RELEASE, context);
             }
             break;
 
@@ -110,14 +114,16 @@ namespace Tonic {
   
   class ADSR : public TemplatedGenerator<Tonic_::ADSR_>{
     
-  public:
-    createControlGeneratorSetters(ADSR, setTrigger, setTrigger);
-    createControlGeneratorSetters(ADSR, setAttack, setAttack);
-    createControlGeneratorSetters(ADSR, setDecay, setDecay);
-    createControlGeneratorSetters(ADSR, setSustain, setSustain);
-    createControlGeneratorSetters(ADSR, setRelease, setRelease);
+    public:
+      createControlGeneratorSetters(ADSR, trigger, setTrigger);
+      createControlGeneratorSetters(ADSR, attack, setAttack);
+      createControlGeneratorSetters(ADSR, decay, setDecay);
+      createControlGeneratorSetters(ADSR, sustain, setSustain);
+      createControlGeneratorSetters(ADSR, release, setRelease);
+      createControlGeneratorSetters(ADSR, doesSustain, setSustains);
 
   };
+  
 }
 
 #endif /* defined(__Tonic__ADSR__) */

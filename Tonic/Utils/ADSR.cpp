@@ -14,6 +14,9 @@ namespace Tonic { namespace Tonic_{
     ramp.length(1.0);
     ramp.target(0);
     ramp.value(0);
+    
+    sustains = ControlValue(true);
+    
   }
   
   ADSR_::~ADSR_(){
@@ -49,7 +52,6 @@ namespace Tonic { namespace Tonic_{
   
   
 } // Namespace Tonic_
-  
-  
+
   
 } // Namespace Tonic

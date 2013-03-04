@@ -21,11 +21,12 @@ public:
   ADSRTestSynth(){
 
     outputGen = ADSR()
-      .setTrigger( addParameter("trigger") )
-      .setAttack(0.5)
-      .setDecay(0.5)
-      .setSustain(0.5)
-      .setRelease(0.5)
+      .trigger( addParameter("trigger") )
+      .attack(0.1)
+      .decay(0.5)
+      .sustain(0.5)
+      .release(0.5)
+      .doesSustain(true)
        * Noise() * 0.1;
   }
   
