@@ -21,7 +21,6 @@ https://ccrma.stanford.edu/software/stk/
 ++++++++++++++++++++++++++++++++++++++++++++++++++*/
 
 #include "LFNoise.h"
-#include <algorithm>
 #include "Util.h"
 
 namespace Tonic {

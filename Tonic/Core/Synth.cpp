@@ -71,7 +71,7 @@ namespace Tonic {
       }
       
       
-      stringstream ss;
+      std::stringstream ss;
       ss << "message: " << name << " value: " << param.value.getValue();
       
       debug(ss.str());

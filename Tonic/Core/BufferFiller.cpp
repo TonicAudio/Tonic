@@ -30,7 +30,7 @@ namespace Tonic {
   }
   
   inline void BufferFiller::tick( TonicFrames& frames ){
-    outputGen.tick(frames, context_);
+    this->tick(frames, context_);
     context_.tick();
   }
   

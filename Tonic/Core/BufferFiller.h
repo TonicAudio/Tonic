@@ -49,11 +49,19 @@ namespace Tonic{
   public:
     BufferFiller();
     
-    // Tick method without context argument passes down this instance's SynthesisContext_
-    void          tick( TonicFrames& frames );
-    void          tick( TonicFrames& frames, const Tonic_::SynthesisContext_ & context );
-    void          fillBufferOfFloats(float *outData,  UInt32 numFrames, int numChannels);
+    //! tick method without context argument passes down this instance's SynthesisContext_
+    void tick( TonicFrames& frames );
     
+    //! tick method with context argument uses passed-in context
+    virtual void tick( TonicFrames& frames, const Tonic_::SynthesisContext_ & context );
+    
+    //! Fill an arbitrarily-sized, interleaved buffer of audio samples as floats
+    /*!
+        This BufferFiller's outputGen is used to fill an interleaved buffer starting at outData.
+    */
+    void fillBufferOfFloats(float *outData,  UInt32 numFrames, int numChannels);
+    
+    //! Returns a reference to outputGen
     inline const Generator & getOutputGenerator() { return outputGen; };
   };
   

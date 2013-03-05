@@ -39,15 +39,4 @@ namespace Tonic{ namespace Tonic_ {
     }
   }
   
-  void Adder_::remove(Generator generator){
-    
-    vector<Generator>::iterator it = inputs.begin();
-    while (it != inputs.end()){
-      if (*it == generator){
-        inputs.erase(it);
-        break;
-      }
-      it++;
-    }
-  }
 }}

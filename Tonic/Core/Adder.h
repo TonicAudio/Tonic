@@ -40,7 +40,6 @@ namespace Tonic {
       ~Adder_();
       
       void in(Generator generator);
-      void remove(Generator generator);
       
       Generator & getInput(unsigned int index) { return inputs[index]; };
       unsigned int numInputs() { return inputs.size(); };
@@ -70,10 +69,6 @@ namespace Tonic {
     Adder in(Generator input){
       gen()->in(input);
       return *this;
-    }
-    
-    void remove(Generator input){
-      gen()->remove(input);
     }
     
     Generator & operator[](unsigned int index){
