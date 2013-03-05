@@ -35,17 +35,11 @@ namespace Tonic {
     memset(&frames[0], 0, frames.size() * sizeof(TonicFloat));
     
     // Tick and add inputs
-    
-    // !!!: 2013/03/04-ND
-    // Using anonymous function because I wanted to try it. If there's need to support earlier than
-    // C++11 we can take it out.
-    
-    std::for_each(inputs_.begin(), inputs_.end(), [&](BufferFiller * b) {
-      
+    for (unsigned int i=0; i<inputs_.size(); i++){
       // Tick each bufferFiller every time, with our context (for now).
-      b->tick(workSpace_, context);
+      inputs_[i]->tick(workSpace_, context);
       frames += workSpace_;
-    });
+    }
   }
 
   
