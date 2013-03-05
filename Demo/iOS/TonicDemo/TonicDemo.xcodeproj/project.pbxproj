@@ -31,6 +31,8 @@
 		A86C3F2316B2B834002A50F0 /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A86C3F2216B2B834002A50F0 /* Accelerate.framework */; };
 		A86FA81316DF973E00B9DD67 /* ADSR.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A86FA81116DF973E00B9DD67 /* ADSR.cpp */; };
 		A8786A9416DD86E400FC22F8 /* LFNoise.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A8786A9216DD86E400FC22F8 /* LFNoise.cpp */; };
+		A88F5A7416E5729200C187E7 /* ControlConditioner.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A88F5A7216E5729200C187E7 /* ControlConditioner.cpp */; };
+		A88F5A7716E573F900C187E7 /* CtrlFloor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A88F5A7516E573F900C187E7 /* CtrlFloor.cpp */; };
 		F20FCD4816C566F60039832A /* TableLookupOsc.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F20FCD4616C566F60039832A /* TableLookupOsc.cpp */; };
 		F20FCD4B16C56EF60039832A /* SineWave.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F20FCD4916C56EF50039832A /* SineWave.cpp */; };
 		F20FCD5216C58D5B0039832A /* TonicSynthManager.mm in Sources */ = {isa = PBXBuildFile; fileRef = F20FCD5116C58D5B0039832A /* TonicSynthManager.mm */; };
@@ -104,6 +106,11 @@
 		A86FA81216DF973E00B9DD67 /* ADSR.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ADSR.h; sourceTree = "<group>"; };
 		A8786A9216DD86E400FC22F8 /* LFNoise.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = LFNoise.cpp; sourceTree = "<group>"; };
 		A8786A9316DD86E400FC22F8 /* LFNoise.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LFNoise.h; sourceTree = "<group>"; };
+		A8786A9516DD8EDE00FC22F8 /* LFNoiseTestSynth.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LFNoiseTestSynth.h; sourceTree = "<group>"; };
+		A88F5A7216E5729200C187E7 /* ControlConditioner.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ControlConditioner.cpp; sourceTree = "<group>"; };
+		A88F5A7316E5729200C187E7 /* ControlConditioner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ControlConditioner.h; sourceTree = "<group>"; };
+		A88F5A7516E573F900C187E7 /* CtrlFloor.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CtrlFloor.cpp; sourceTree = "<group>"; };
+		A88F5A7616E573F900C187E7 /* CtrlFloor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CtrlFloor.h; sourceTree = "<group>"; };
 		F20FCD4616C566F60039832A /* TableLookupOsc.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TableLookupOsc.cpp; sourceTree = "<group>"; };
 		F20FCD4716C566F60039832A /* TableLookupOsc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TableLookupOsc.h; sourceTree = "<group>"; };
 		F20FCD4916C56EF50039832A /* SineWave.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SineWave.cpp; sourceTree = "<group>"; };
@@ -349,6 +356,10 @@
 				F2C9F6F216C493870090A78D /* TonicCore.h */,
 				F2C9F6F316C493870090A78D /* TonicFrames.cpp */,
 				F2C9F6F416C493870090A78D /* TonicFrames.h */,
+				A88F5A7216E5729200C187E7 /* ControlConditioner.cpp */,
+				A88F5A7316E5729200C187E7 /* ControlConditioner.h */,
+				A88F5A7516E573F900C187E7 /* CtrlFloor.cpp */,
+				A88F5A7616E573F900C187E7 /* CtrlFloor.h */,
 			);
 			path = Core;
 			sourceTree = "<group>";
@@ -481,6 +492,8 @@
 				A86FA81316DF973E00B9DD67 /* ADSR.cpp in Sources */,
 				01F540C116E2EE8B00F85B98 /* RectWave.cpp in Sources */,
 				0116165516E2FB2900952A7F /* FlexToothWave.cpp in Sources */,
+				A88F5A7416E5729200C187E7 /* ControlConditioner.cpp in Sources */,
+				A88F5A7716E573F900C187E7 /* CtrlFloor.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
