@@ -24,13 +24,10 @@ namespace Tonic {
       hasChanged_ = true;
     }
   
-    ControlGeneratorStatus ControlValue_::computeStatus(const SynthesisContext_ & context){
-      return hasChanged_ ? ControlGeneratorStatusHasChanged : ControlGeneratorStatusHasNotChanged;
-    }
-    
-    TonicFloat ControlValue_::computeValue(const SynthesisContext_ &context){
+    void ControlValue_::computeOutput(const SynthesisContext_ & context){
+      lastOutput_.status =  hasChanged_ ? ControlGeneratorStatusHasChanged : ControlGeneratorStatusHasNotChanged;
       hasChanged_ = false;
-      return value_;
+      lastOutput_.value = value_;
     }
   }
   

@@ -28,8 +28,7 @@ namespace Tonic{
     ControlGeneratorOutput ControlGenerator_::tick(const SynthesisContext_ & context){
       if (lastFrameIndex_ == 0 || lastFrameIndex_ != context.elapsedFrames){
         lastFrameIndex_ = context.elapsedFrames;
-        lastOutput_.status = computeStatus(context);
-        lastOutput_.value = computeValue(context);
+        computeOutput(context);
       }
       return lastOutput_;
     }

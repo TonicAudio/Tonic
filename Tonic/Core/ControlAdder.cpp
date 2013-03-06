@@ -14,21 +14,23 @@ namespace Tonic { namespace Tonic_{
     inputs.push_back(input);
   }
   
-  ControlGeneratorStatus ControlAdder_::computeStatus(const SynthesisContext_ &context){
+  void ControlAdder_::computeOutput(const SynthesisContext_ &context){
+    
+    lastOutput_.status = ControlGeneratorStatusHasNotChanged;
+    
     for (unsigned int i=0; i<inputs.size(); i++){
       if (inputs[i].tick(context).status == ControlGeneratorStatusHasChanged){
-        return ControlGeneratorStatusHasChanged;
+        lastOutput_.status = ControlGeneratorStatusHasChanged;
+        break;
       }
+      
+      TonicFloat sum = 0.0f;
+      for (unsigned int i=0; i<inputs.size(); i++){
+        sum += inputs[i].tick(context).value;
+      }
+      lastOutput_.value = sum;
+      
     }
-    return ControlGeneratorStatusHasNotChanged;
-  }
-  
-  TonicFloat ControlAdder_::computeValue(const SynthesisContext_ &context){
-    TonicFloat sum = 0.0f;
-    for (unsigned int i=0; i<inputs.size(); i++){
-      sum += inputs[i].tick(context).value;
-    }
-    return sum;
   }
   
 } // Namespace Tonic_
