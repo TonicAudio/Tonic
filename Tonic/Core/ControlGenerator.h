@@ -49,9 +49,11 @@ namespace Tonic {
       
     protected:
       
-      // Override these two functions to implement a new ControlGenerator
-      virtual ControlGeneratorStatus  computeStatus(const SynthesisContext_ & context) = 0;
-      virtual TonicFloat              computeValue(const SynthesisContext_ & context) = 0;
+      //! Override this function to implement a new ControlGenerator
+      /*!
+          Subclasses should use this function to put new data into lastOutput_
+      */
+      virtual void computeOutput(const SynthesisContext_ & context) = 0;
       
       ControlGeneratorOutput  lastOutput_;
       unsigned long           lastFrameIndex_;
