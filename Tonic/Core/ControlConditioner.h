@@ -42,7 +42,7 @@ namespace Tonic {
     ControlConditionerType & in( ControlGenerator input ){
       // why doesn't this compile without 'this' ?
       this->gen()->in( input );
-      return this;
+      return static_cast<ControlConditionerType&>(*this);
     }
     
   };
@@ -50,7 +50,7 @@ namespace Tonic {
     // signal flow operator - sets lhs as input to rhs
   template<class ControlConditionerType, class ControlConditionerType_>
   static ControlConditionerType & operator>>(ControlGenerator lhs, TemplatedControlConditioner<ControlConditionerType, ControlConditionerType_> rhs){
-    return rhs.input( lhs );
+    return rhs.in( lhs );
   }
   
 }
