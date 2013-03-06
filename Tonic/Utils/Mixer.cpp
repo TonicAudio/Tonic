@@ -11,27 +11,36 @@
 namespace Tonic {
   
   Mixer::Mixer(){
-    outputGen = adder;
+    workSpace_.resize(kSynthesisBlockSize, 2, 0);
   }
   
   void Mixer::addInput(BufferFiller* input)
   {
       // no checking for duplicates, maybe we should
-    inputs.push_back(input);
-    adder.in(input->getOutputGenerator());
+    inputs_.push_back(input);
   }
   
   void Mixer::removeInput(BufferFiller* input)
   {
-    vector<BufferFiller*>::iterator it = inputs.begin();
-    while (it != inputs.end()){
-      if (*it == input){
-        adder.remove((*it)->getOutputGenerator());
-        inputs.erase(it);
-        break;
-      }
-      it++;
+    vector<BufferFiller*>::iterator it = std::find(inputs_.begin(), inputs_.end(), input);
+    if (it != inputs_.end()){
+      inputs_.erase(it);
+    }
+
+  }
+  
+  void Mixer::tick( TonicFrames& frames, const Tonic_::SynthesisContext_ & context )
+  {
+    // Clear buffer
+    memset(&frames[0], 0, frames.size() * sizeof(TonicFloat));
+    
+    // Tick and add inputs
+    for (unsigned int i=0; i<inputs_.size(); i++){
+      // Tick each bufferFiller every time, with our context (for now).
+      inputs_[i]->tick(workSpace_, context);
+      frames += workSpace_;
     }
   }
+
   
 } // Namespace Tonic
