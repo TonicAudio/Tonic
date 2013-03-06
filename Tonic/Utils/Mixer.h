@@ -36,14 +36,17 @@ namespace Tonic {
   class Mixer : public BufferFiller{
   
   private:
-    vector<BufferFiller*> inputs;
-    Adder adder;
+    TonicFrames workSpace_;
+    vector<BufferFiller*> inputs_;
     
   public:
     
     Mixer();
+    
     void addInput(BufferFiller* input);
     void removeInput(BufferFiller* input);
+    
+    void tick( TonicFrames& frames, const Tonic_::SynthesisContext_ & context );
   };
 }
 

@@ -23,10 +23,11 @@ https://ccrma.stanford.edu/software/stk/
 #ifndef __Tonic__TonicCore__
 #define __Tonic__TonicCore__
 
-#include <stdio.h>
 #include <string>
 #include <vector>
+#include <algorithm>
 #include <stdexcept>
+#include <stdio.h>
 #include <math.h>
 #include <pthread.h>
 
