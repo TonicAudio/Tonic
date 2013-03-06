@@ -87,9 +87,10 @@ namespace Tonic {
         // Updates every 64-samples is typically fast enough to avoid artifacts when sweeping filters.
         
         cutoff_.tick(workspace_, context);
-        cCutoff = clamp(workspace_(0,0), 20, sampleRate()/2);
+        cCutoff = clamp(workspace_(0,0), 20, sampleRate()/2); // clamp to reasonable range
+        
         Q_.tick(workspace_, context);
-        cQ = max(workspace_(0,0), 0);
+        cQ = max(workspace_(0,0), 0.7071); // clamp to reasonable range
         
         // get input frames
         input_.tick(synthesisBlock_, context);
