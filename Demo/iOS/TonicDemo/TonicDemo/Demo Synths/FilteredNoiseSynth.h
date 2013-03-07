@@ -13,8 +13,8 @@
 #include "SineWave.h"
 #include "Filters.h"
 #include "RampedValue.h"
-#include "CtrlFloor.h"
-#include "CtrlMidiCps.h"
+#include "ControlFloor.h"
+#include "ControlMidiToFreq.h"
 
 using namespace Tonic;
 
@@ -37,7 +37,7 @@ public:
     
     for(int i = 0; i < midiNums.size(); i++){
       Generator tremelo = (SineWave().freq( randomFloat(0.1, 0.3) ) + 1.5) * 0.3;
-      Generator cutoff = CtrlMidiCps().in( CtrlFloor().in( midiNums.at(i) + cutoffCtrl * 100  )).ramped();
+      Generator cutoff = ControlMidiToFreq().in( ControlFloor().in( midiNums.at(i) + cutoffCtrl * 100  )).ramped().length(0.01);
       BPF24 filter = BPF24().Q( q_v ).cutoff( cutoff );
       sumOfFilters = sumOfFilters + (noise >> filter) * tremelo;
     }
