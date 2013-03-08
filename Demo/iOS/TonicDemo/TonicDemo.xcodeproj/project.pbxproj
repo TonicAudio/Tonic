@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		0116165516E2FB2900952A7F /* FlexToothWave.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0116165316E2FB2900952A7F /* FlexToothWave.cpp */; };
+		01428B3716E978CA00E67802 /* Noise.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 01428B3616E978CA00E67802 /* Noise.cpp */; };
 		017BF2C916DBAE5200FA1046 /* ControlMultiplier.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 017BF2C716DBAE5000FA1046 /* ControlMultiplier.cpp */; };
 		01F540C116E2EE8B00F85B98 /* RectWave.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 01F540BF16E2EE8B00F85B98 /* RectWave.cpp */; };
 		9A1589F116D7E1D200E2BC81 /* Filters.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9A1589EF16D7E1D200E2BC81 /* Filters.cpp */; };
@@ -53,6 +54,7 @@
 /* Begin PBXFileReference section */
 		0116165316E2FB2900952A7F /* FlexToothWave.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = FlexToothWave.cpp; sourceTree = "<group>"; };
 		0116165416E2FB2900952A7F /* FlexToothWave.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FlexToothWave.h; sourceTree = "<group>"; };
+		01428B3616E978CA00E67802 /* Noise.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Noise.cpp; sourceTree = "<group>"; };
 		017BF2C616DB24C400FA1046 /* Tonic.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Tonic.h; sourceTree = "<group>"; };
 		017BF2C716DBAE5000FA1046 /* ControlMultiplier.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ControlMultiplier.cpp; sourceTree = "<group>"; };
 		017BF2C816DBAE5100FA1046 /* ControlMultiplier.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ControlMultiplier.h; sourceTree = "<group>"; };
@@ -357,6 +359,7 @@
 			isa = PBXGroup;
 			children = (
 				F2360A7616C4B4EC00A0AD7A /* Noise.h */,
+				01428B3616E978CA00E67802 /* Noise.cpp */,
 				F20FCD4616C566F60039832A /* TableLookupOsc.cpp */,
 				F20FCD4716C566F60039832A /* TableLookupOsc.h */,
 				F20FCD4916C56EF50039832A /* SineWave.cpp */,
@@ -481,6 +484,7 @@
 				A86FA81316DF973E00B9DD67 /* ADSR.cpp in Sources */,
 				01F540C116E2EE8B00F85B98 /* RectWave.cpp in Sources */,
 				0116165516E2FB2900952A7F /* FlexToothWave.cpp in Sources */,
+				01428B3716E978CA00E67802 /* Noise.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
