@@ -14,6 +14,7 @@
 #include "SineWave.h"
 #include "Filters.h"
 #include "LFNoise.h"
+#include "ControlConditioner.h"
 
 using namespace Tonic;
 
