@@ -61,7 +61,7 @@ namespace Tonic {
       
     private:
       
-      int countTrailingZeros(int n);
+      unsigned long countTrailingZeros(unsigned long n);
       
       TonicFloat    pinkAccum_;
       TonicFloat    pinkBins_[kNumPinkNoiseBins];
@@ -106,10 +106,10 @@ namespace Tonic {
   
     }
     
-    inline int PinkNoise_::countTrailingZeros(int n)
+    inline unsigned long PinkNoise_::countTrailingZeros(unsigned long n)
     {
-      int i=0;
-      while (((n>>i)&1) == 0 && i<sizeof(int)*8) i++;
+      unsigned long i=0;
+      while (((n>>i)&1) == 0 && i<sizeof(unsigned long)*8) i++;
       return i;
     }
   }
