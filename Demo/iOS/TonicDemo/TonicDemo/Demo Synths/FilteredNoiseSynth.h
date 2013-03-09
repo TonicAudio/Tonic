@@ -27,7 +27,8 @@ public:
     midiNums.push_back(3);
     midiNums.push_back(7);
     midiNums.push_back(10);
-    Noise noise = Noise();
+    
+    PinkNoise noise = PinkNoise();
     
     ControlGenerator cutoffCtrl = addParameter("cutoff");
     
@@ -44,6 +45,7 @@ public:
     
     // add a bit of gain for higher Q
     outputGen = sumOfFilters * (1 + q_v * 0.02);
+    
   }
 };
 
