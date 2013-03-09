@@ -276,7 +276,7 @@ namespace Tonic {
       }
       else if (nChannels_ < fChannels){
         
-        // consolidate channels
+        // sum channels
         memset(dptr, 0, size_ * sizeof(TonicFloat));
         for (unsigned int c=0; c<fChannels; c++){
           dptr = data_;
@@ -286,7 +286,7 @@ namespace Tonic {
           }
         }
         
-        // apply scaling
+        // apply scaling (average of channels)
         TonicFloat s = 1.0f/fChannels;
         dptr = data_;
         for (unsigned int i=0; i<nFrames_; i++, dptr+=nChannels_){
