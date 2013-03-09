@@ -11,12 +11,28 @@
 #include "Tonic.h"
 #include "StereoFixedTestGen.h"
 
+#define kTestOutputBlockSize kSynthesisBlockSize*4
+
 using namespace Tonic;
+
+// BufferFiller with publicly settable output generator for testing
+
+class TestBufferFiller : public BufferFiller
+{
+  
+public:
+  void setOutputGen(Generator & gen) { outputGen = gen; };
+};
+
+// ======================================================
 
 @interface TonicTests ()
 {
   TonicFrames testFrames;
-  Tonic_::SynthesisContext_ testContext;  
+  Tonic_::SynthesisContext_ testContext;
+  
+  float * stereoOutBuffer;
+  float * monoOutBuffer;
 }
 
 - (void)configureStereo:(BOOL)stereo;
@@ -29,6 +45,16 @@ using namespace Tonic;
 - (void)setUp{
   [super setUp];
   [self configureStereo:NO];
+  
+  stereoOutBuffer = new float[kTestOutputBlockSize * 2];
+  monoOutBuffer = new float[kTestOutputBlockSize];
+}
+
+- (void)tearDown{
+  [super tearDown];
+  
+  delete [] stereoOutBuffer;
+  delete [] monoOutBuffer;
 }
 
 - (void)configureStereo:(BOOL)stereo
@@ -52,6 +78,25 @@ using namespace Tonic;
     
     STAssertEquals(testFrames[2*i+1], r, @"Right channel did not produce expected output");
     if (testFrames[2*i+1] != r) break;
+  }
+}
+
+- (void)verifyBufferFillerMonoFixedOutputEquals:(float)expectedOutput
+{
+  for (unsigned int i=0; i<kTestOutputBlockSize; i++){
+    STAssertEquals(monoOutBuffer[i], expectedOutput, @"Did not produce expected output");
+    if (monoOutBuffer[i] != expectedOutput) break;
+  }
+}
+
+- (void)verifyBufferFillerStereoFixedOutputEqualsLeft:(float)l right:(float)r
+{
+  for (unsigned int i=0; i<kTestOutputBlockSize; i++){
+    STAssertEquals(stereoOutBuffer[2*i], l, @"Left channel not produce expected output");
+    if (stereoOutBuffer[2*i] != l) break;
+    
+    STAssertEquals(stereoOutBuffer[2*i+1], r, @"Right channel did not produce expected output");
+    if (stereoOutBuffer[2*i+1] != r) break;
   }
 }
 
@@ -196,8 +241,65 @@ using namespace Tonic;
   [self verifyFixedOutputEquals:0.0f];
   
 }
+
 #pragma mark - Control Generator Tests
 
 // TODO
+
+#pragma mark - Buffer filler tests
+
+- (void)test300BufferFillerMonoOutMonoSource
+{
+  TestBufferFiller testFiller;
+  
+  // Mono fixed value
+  FixedValue fv = FixedValue(0.5);
+  testFiller.setOutputGen(fv);
+  
+  testFiller.fillBufferOfFloats(monoOutBuffer, kTestOutputBlockSize, 1);
+  
+  [self verifyBufferFillerMonoFixedOutputEquals:0.5];
+}
+
+- (void)test301BufferFillerMonoOutStereoSource
+{
+  TestBufferFiller testFiller;
+  
+  // Stereo fixed value
+  StereoFixedTestGen fv = StereoFixedTestGen(0.5, 1.0);
+  testFiller.setOutputGen(fv);
+  
+  testFiller.fillBufferOfFloats(monoOutBuffer, kTestOutputBlockSize, 1);
+  
+  // average
+  [self verifyBufferFillerMonoFixedOutputEquals:0.75];
+}
+
+- (void)test302BufferFillerStereoOutMonoSource
+{
+  TestBufferFiller testFiller;
+  
+  // Mono fixed value
+  FixedValue fv = FixedValue(0.5);
+  testFiller.setOutputGen(fv);
+  
+  testFiller.fillBufferOfFloats(stereoOutBuffer, kTestOutputBlockSize, 2);
+  
+  [self verifyBufferFillerStereoFixedOutputEqualsLeft:0.5 right:0.5];
+}
+
+- (void)test303BufferFillerStereoOutStereoSource
+{
+  TestBufferFiller testFiller;
+  
+  // Stereo fixed value
+  StereoFixedTestGen fv = StereoFixedTestGen(0.5, 1.0);
+  testFiller.setOutputGen(fv);
+  
+  testFiller.fillBufferOfFloats(stereoOutBuffer, kTestOutputBlockSize, 2);
+  
+  [self verifyBufferFillerStereoFixedOutputEqualsLeft:0.5 right:1.0];
+  
+}
 
 @end
