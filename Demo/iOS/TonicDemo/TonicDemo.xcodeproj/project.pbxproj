@@ -32,6 +32,7 @@
 		A86C3F2316B2B834002A50F0 /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A86C3F2216B2B834002A50F0 /* Accelerate.framework */; };
 		A86FA81316DF973E00B9DD67 /* ADSR.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A86FA81116DF973E00B9DD67 /* ADSR.cpp */; };
 		A8786A9416DD86E400FC22F8 /* LFNoise.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A8786A9216DD86E400FC22F8 /* LFNoise.cpp */; };
+		A88DA83C16EBE76300B41662 /* MonoToStereoPanner.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A88F5A7B16E9822600C187E7 /* MonoToStereoPanner.cpp */; };
 		A88F5A7416E5729200C187E7 /* ControlConditioner.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A88F5A7216E5729200C187E7 /* ControlConditioner.cpp */; };
 		A88F5A7716E573F900C187E7 /* ControlFloor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A88F5A7516E573F900C187E7 /* ControlFloor.cpp */; };
 		A88F5A7A16E6D0DB00C187E7 /* ControlMidiToFreq.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A88F5A7816E6D0DB00C187E7 /* ControlMidiToFreq.cpp */; };
@@ -663,6 +664,7 @@
 				F253182316EBA32100A8CFDC /* ControlMidiToFreq.cpp in Sources */,
 				F25317EC16EBA0A100A8CFDC /* TonicTests.mm in Sources */,
 				F253182916EBA73200A8CFDC /* StereoFixedTestGen.cpp in Sources */,
+				A88DA83C16EBE76300B41662 /* MonoToStereoPanner.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -836,6 +838,7 @@
 				F25317EF16EBA0A100A8CFDC /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

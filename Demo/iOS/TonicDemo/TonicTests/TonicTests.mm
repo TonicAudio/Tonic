@@ -73,10 +73,10 @@ public:
 - (void)verifyStereoFixedOutputEqualsLeft:(float)l right:(float)r
 {
   for (unsigned int i=0; i<testFrames.frames(); i++){
-    STAssertEquals(testFrames[2*i], l, @"Left channel not produce expected output");
+    STAssertEquals(testFrames[2*i], l, @"Left channel not produce expected output on frame %i", i);
     if (testFrames[2*i] != l) break;
     
-    STAssertEquals(testFrames[2*i+1], r, @"Right channel did not produce expected output");
+    STAssertEquals(testFrames[2*i+1], r, @"Right channel did not produce expected output on frame %i", i);
     if (testFrames[2*i+1] != r) break;
   }
 }
@@ -239,6 +239,22 @@ public:
   
   // Both channels 0
   [self verifyFixedOutputEquals:0.0f];
+  
+}
+
+- (void)test109PannerMonoToStereo{
+  [self configureStereo:YES];
+  MonoToStereoPanner panner = MonoToStereoPanner().pan(-1).input(FixedValue(1));
+  panner.tick(testFrames, testContext);
+  [self verifyStereoFixedOutputEqualsLeft:1 right:0];
+  
+  panner.pan(0);
+  panner.tick(testFrames, testContext);
+  [self verifyStereoFixedOutputEqualsLeft:1 right:1];
+  
+  panner.pan(1);
+  panner.tick(testFrames, testContext);
+  [self verifyStereoFixedOutputEqualsLeft:0 right:1];
   
 }
 

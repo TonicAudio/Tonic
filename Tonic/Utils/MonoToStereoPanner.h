@@ -35,6 +35,7 @@ namespace Tonic {
       
     protected:
       ControlGenerator panControlGen;
+      TonicFrames panFrames;
       
     public:
       MonoToStereoPanner_();
@@ -47,7 +48,7 @@ namespace Tonic {
     inline void MonoToStereoPanner_::computeSynthesisBlock(const SynthesisContext_ &context){
       input_.tick(synthesisBlock_, context);
       TonicFloat *synthBlockWriteHead = &synthesisBlock_[0];
-      TonicFloat *synthBlockEnd = &synthesisBlock_[kSynthesisBlockSize]; // is this safe?
+      TonicFloat *synthBlockEnd = &synthesisBlock_[kSynthesisBlockSize * 2]; // is this safe?
       float panValue = panControlGen.tick(context).value;
       float leftVol = 1. - max(0., panValue);
       float rightVol = 1 + min(0., panValue);

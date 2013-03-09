@@ -14,6 +14,7 @@ namespace Tonic{
   
     MonoToStereoPanner_::MonoToStereoPanner_(){
       setIsStereo(true);
+      panFrames.resize(kSynthesisBlockSize, 1);
     }
     MonoToStereoPanner_::~MonoToStereoPanner_(){}
   

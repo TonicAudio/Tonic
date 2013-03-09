@@ -195,8 +195,10 @@
         def.synthClassName = @"PannerTest";
         def.synthDisplayName = @"Panner";
         def.synthDescription = @"Panner";
-        def.synthInstructions = @"Panner";
-        def.synthAction = ^(Tonic::Synth* synth, CGPoint touchPointNorm){};
+        def.synthInstructions = @"X-Axis controls pan";
+        def.synthAction = ^(Tonic::Synth* synth, CGPoint touchPointNorm){
+          synth->setParameter("pan", touchPointNorm.x * 2 - 1);
+        };
       }
       
     }
