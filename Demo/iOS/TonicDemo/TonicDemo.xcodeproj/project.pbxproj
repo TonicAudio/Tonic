@@ -35,6 +35,7 @@
 		A88F5A7416E5729200C187E7 /* ControlConditioner.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A88F5A7216E5729200C187E7 /* ControlConditioner.cpp */; };
 		A88F5A7716E573F900C187E7 /* ControlFloor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A88F5A7516E573F900C187E7 /* ControlFloor.cpp */; };
 		A88F5A7A16E6D0DB00C187E7 /* ControlMidiToFreq.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A88F5A7816E6D0DB00C187E7 /* ControlMidiToFreq.cpp */; };
+		A88F5A7D16E9822600C187E7 /* MonoToStereoPanner.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A88F5A7B16E9822600C187E7 /* MonoToStereoPanner.cpp */; };
 		F20FCD4816C566F60039832A /* TableLookupOsc.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F20FCD4616C566F60039832A /* TableLookupOsc.cpp */; };
 		F20FCD4B16C56EF60039832A /* SineWave.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F20FCD4916C56EF50039832A /* SineWave.cpp */; };
 		F20FCD5216C58D5B0039832A /* TonicSynthManager.mm in Sources */ = {isa = PBXBuildFile; fileRef = F20FCD5116C58D5B0039832A /* TonicSynthManager.mm */; };
@@ -146,6 +147,9 @@
 		A88F5A7616E573F900C187E7 /* ControlFloor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ControlFloor.h; path = ../Core/ControlFloor.h; sourceTree = "<group>"; };
 		A88F5A7816E6D0DB00C187E7 /* ControlMidiToFreq.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ControlMidiToFreq.cpp; sourceTree = "<group>"; };
 		A88F5A7916E6D0DB00C187E7 /* ControlMidiToFreq.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ControlMidiToFreq.h; sourceTree = "<group>"; };
+		A88F5A7B16E9822600C187E7 /* MonoToStereoPanner.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MonoToStereoPanner.cpp; sourceTree = "<group>"; };
+		A88F5A7C16E9822600C187E7 /* MonoToStereoPanner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MonoToStereoPanner.h; sourceTree = "<group>"; };
+		A88F5A7E16E98B8F00C187E7 /* PannerTest.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PannerTest.h; sourceTree = "<group>"; };
 		F20FCD4616C566F60039832A /* TableLookupOsc.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TableLookupOsc.cpp; sourceTree = "<group>"; };
 		F20FCD4716C566F60039832A /* TableLookupOsc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TableLookupOsc.h; sourceTree = "<group>"; };
 		F20FCD4916C56EF50039832A /* SineWave.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SineWave.cpp; sourceTree = "<group>"; };
@@ -234,6 +238,7 @@
 				01ACE2F916E57FA300C03828 /* RectWaveTestSynth.h */,
 				01ACE2FA16E57FA300C03828 /* SineAMSynth.h */,
 				01ACE2FB16E57FA300C03828 /* SineSumSynth.h */,
+				A88F5A7E16E98B8F00C187E7 /* PannerTest.h */,
 			);
 			path = "Demo Synths";
 			sourceTree = "<group>";
@@ -474,6 +479,8 @@
 				A86FA81216DF973E00B9DD67 /* ADSR.h */,
 				A88F5A7816E6D0DB00C187E7 /* ControlMidiToFreq.cpp */,
 				A88F5A7916E6D0DB00C187E7 /* ControlMidiToFreq.h */,
+				A88F5A7B16E9822600C187E7 /* MonoToStereoPanner.cpp */,
+				A88F5A7C16E9822600C187E7 /* MonoToStereoPanner.h */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -622,6 +629,7 @@
 				A88F5A7416E5729200C187E7 /* ControlConditioner.cpp in Sources */,
 				A88F5A7716E573F900C187E7 /* ControlFloor.cpp in Sources */,
 				A88F5A7A16E6D0DB00C187E7 /* ControlMidiToFreq.cpp in Sources */,
+				A88F5A7D16E9822600C187E7 /* MonoToStereoPanner.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

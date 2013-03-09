@@ -18,6 +18,7 @@
 #import "RectWaveTestSynth.h"
 #import "FlexToothTestSynth.h"
 #import "FlexToothLFOTestSynth.h"
+#import "PannerTest.h"
 
 @interface SynthDemoDef : NSObject
   @property NSString* synthClassName;
@@ -186,6 +187,16 @@
           synth->setParameter("freq", touchPointNorm.y * touchPointNorm.y * 20 + 0.1);
           synth->setParameter("slope", touchPointNorm.x);
         };
+      }
+      
+      {
+        SynthDemoDef* def = [[SynthDemoDef alloc] init];
+        [synthDefinitions addObject:def];
+        def.synthClassName = @"PannerTest";
+        def.synthDisplayName = @"Panner";
+        def.synthDescription = @"Panner";
+        def.synthInstructions = @"Panner";
+        def.synthAction = ^(Tonic::Synth* synth, CGPoint touchPointNorm){};
       }
       
     }
