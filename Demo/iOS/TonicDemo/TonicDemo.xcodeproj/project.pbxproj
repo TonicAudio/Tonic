@@ -40,6 +40,37 @@
 		F20FCD5216C58D5B0039832A /* TonicSynthManager.mm in Sources */ = {isa = PBXBuildFile; fileRef = F20FCD5116C58D5B0039832A /* TonicSynthManager.mm */; };
 		F23E243E16C6BF450082EF65 /* Mixer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F23E243C16C6BF450082EF65 /* Mixer.cpp */; };
 		F23E244116C6C5F10082EF65 /* BufferFiller.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F23E243F16C6C5F00082EF65 /* BufferFiller.cpp */; };
+		F25317E116EBA0A100A8CFDC /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F25317E016EBA0A100A8CFDC /* SenTestingKit.framework */; };
+		F25317E216EBA0A100A8CFDC /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A86C3EC016B2B4FD002A50F0 /* UIKit.framework */; };
+		F25317E316EBA0A100A8CFDC /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A86C3EC216B2B4FD002A50F0 /* Foundation.framework */; };
+		F25317E916EBA0A100A8CFDC /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = F25317E716EBA0A100A8CFDC /* InfoPlist.strings */; };
+		F25317EC16EBA0A100A8CFDC /* TonicTests.mm in Sources */ = {isa = PBXBuildFile; fileRef = F25317EB16EBA0A100A8CFDC /* TonicTests.mm */; };
+		F25317F116EBA32100A8CFDC /* Adder.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F2C9F6E616C493870090A78D /* Adder.cpp */; };
+		F25317F316EBA32100A8CFDC /* BufferFiller.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F23E243F16C6C5F00082EF65 /* BufferFiller.cpp */; };
+		F25317F516EBA32100A8CFDC /* ControlAdder.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F2C9A91E16DAEFE6009D9C08 /* ControlAdder.cpp */; };
+		F25317F716EBA32100A8CFDC /* ControlGenerator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A82437DA16CB36A8000677C7 /* ControlGenerator.cpp */; };
+		F25317F916EBA32100A8CFDC /* ControlMultiplier.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 017BF2C716DBAE5000FA1046 /* ControlMultiplier.cpp */; };
+		F25317FB16EBA32100A8CFDC /* ControlValue.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A82437C716CA7470000677C7 /* ControlValue.cpp */; };
+		F25317FE16EBA32100A8CFDC /* FixedValue.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F2C9F6E816C493870090A78D /* FixedValue.cpp */; };
+		F253180016EBA32100A8CFDC /* Generator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F2C9F6EA16C493870090A78D /* Generator.cpp */; };
+		F253180216EBA32100A8CFDC /* Multiplier.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F2C9F6EE16C493870090A78D /* Multiplier.cpp */; };
+		F253180416EBA32100A8CFDC /* Synth.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F2C9F6F016C493870090A78D /* Synth.cpp */; };
+		F253180716EBA32100A8CFDC /* TonicFrames.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F2C9F6F316C493870090A78D /* TonicFrames.cpp */; };
+		F253180916EBA32100A8CFDC /* ControlConditioner.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A88F5A7216E5729200C187E7 /* ControlConditioner.cpp */; };
+		F253180B16EBA32100A8CFDC /* Filters.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9A1589EF16D7E1D200E2BC81 /* Filters.cpp */; };
+		F253180F16EBA32100A8CFDC /* Noise.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 01428B3616E978CA00E67802 /* Noise.cpp */; };
+		F253181016EBA32100A8CFDC /* TableLookupOsc.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F20FCD4616C566F60039832A /* TableLookupOsc.cpp */; };
+		F253181216EBA32100A8CFDC /* SineWave.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F20FCD4916C56EF50039832A /* SineWave.cpp */; };
+		F253181416EBA32100A8CFDC /* RectWave.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 01F540BF16E2EE8B00F85B98 /* RectWave.cpp */; };
+		F253181616EBA32100A8CFDC /* FlexToothWave.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0116165316E2FB2900952A7F /* FlexToothWave.cpp */; };
+		F253181916EBA32100A8CFDC /* ControlFloor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A88F5A7516E573F900C187E7 /* ControlFloor.cpp */; };
+		F253181B16EBA32100A8CFDC /* LFNoise.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A8786A9216DD86E400FC22F8 /* LFNoise.cpp */; };
+		F253181D16EBA32100A8CFDC /* Mixer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F23E243C16C6BF450082EF65 /* Mixer.cpp */; };
+		F253181F16EBA32100A8CFDC /* RampedValue.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F2D951D616C49A6700F25663 /* RampedValue.cpp */; };
+		F253182116EBA32100A8CFDC /* ADSR.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A86FA81116DF973E00B9DD67 /* ADSR.cpp */; };
+		F253182316EBA32100A8CFDC /* ControlMidiToFreq.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A88F5A7816E6D0DB00C187E7 /* ControlMidiToFreq.cpp */; };
+		F253182616EBA34500A8CFDC /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A86C3F2216B2B834002A50F0 /* Accelerate.framework */; };
+		F253182916EBA73200A8CFDC /* StereoFixedTestGen.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F253182716EBA73200A8CFDC /* StereoFixedTestGen.cpp */; };
 		F256C8E416C5A0BF0096574D /* SynthTestViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = F256C8E016C5A0BF0096574D /* SynthTestViewController.mm */; };
 		F256C8E516C5A0BF0096574D /* SynthChooserViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = F256C8E216C5A0BF0096574D /* SynthChooserViewController.mm */; };
 		F256C8E616C5A0BF0096574D /* SynthChooserViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F256C8E316C5A0BF0096574D /* SynthChooserViewController.xib */; };
@@ -126,6 +157,15 @@
 		F23E243D16C6BF450082EF65 /* Mixer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Mixer.h; sourceTree = "<group>"; };
 		F23E243F16C6C5F00082EF65 /* BufferFiller.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = BufferFiller.cpp; sourceTree = "<group>"; };
 		F23E244016C6C5F00082EF65 /* BufferFiller.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BufferFiller.h; sourceTree = "<group>"; };
+		F25317DF16EBA0A100A8CFDC /* TonicTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TonicTests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
+		F25317E016EBA0A100A8CFDC /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
+		F25317E616EBA0A100A8CFDC /* TonicTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "TonicTests-Info.plist"; sourceTree = "<group>"; };
+		F25317E816EBA0A100A8CFDC /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		F25317EA16EBA0A100A8CFDC /* TonicTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TonicTests.h; sourceTree = "<group>"; };
+		F25317EB16EBA0A100A8CFDC /* TonicTests.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = TonicTests.mm; sourceTree = "<group>"; };
+		F25317ED16EBA0A100A8CFDC /* TonicTests-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "TonicTests-Prefix.pch"; sourceTree = "<group>"; };
+		F253182716EBA73200A8CFDC /* StereoFixedTestGen.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = StereoFixedTestGen.cpp; sourceTree = "<group>"; };
+		F253182816EBA73200A8CFDC /* StereoFixedTestGen.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StereoFixedTestGen.h; sourceTree = "<group>"; };
 		F256C8DF16C5A0BF0096574D /* SynthTestViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SynthTestViewController.h; sourceTree = "<group>"; };
 		F256C8E016C5A0BF0096574D /* SynthTestViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = SynthTestViewController.mm; sourceTree = "<group>"; };
 		F256C8E116C5A0BF0096574D /* SynthChooserViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SynthChooserViewController.h; sourceTree = "<group>"; };
@@ -167,6 +207,17 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		F25317DB16EBA0A100A8CFDC /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F253182616EBA34500A8CFDC /* Accelerate.framework in Frameworks */,
+				F25317E116EBA0A100A8CFDC /* SenTestingKit.framework in Frameworks */,
+				F25317E216EBA0A100A8CFDC /* UIKit.framework in Frameworks */,
+				F25317E316EBA0A100A8CFDC /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -199,6 +250,7 @@
 			isa = PBXGroup;
 			children = (
 				A86C3EC616B2B4FD002A50F0 /* TonicDemo */,
+				F25317E416EBA0A100A8CFDC /* TonicTests */,
 				A86C3EBF16B2B4FD002A50F0 /* Frameworks */,
 				A86C3EBD16B2B4FD002A50F0 /* Products */,
 			);
@@ -208,6 +260,7 @@
 			isa = PBXGroup;
 			children = (
 				A86C3EBC16B2B4FD002A50F0 /* TonicDemo.app */,
+				F25317DF16EBA0A100A8CFDC /* TonicTests.octest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -222,6 +275,7 @@
 				A86C3EC016B2B4FD002A50F0 /* UIKit.framework */,
 				A86C3EC216B2B4FD002A50F0 /* Foundation.framework */,
 				A86C3EC416B2B4FD002A50F0 /* CoreGraphics.framework */,
+				F25317E016EBA0A100A8CFDC /* SenTestingKit.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -308,6 +362,28 @@
 				F20FCD5116C58D5B0039832A /* TonicSynthManager.mm */,
 			);
 			path = "Obj-C";
+			sourceTree = "<group>";
+		};
+		F25317E416EBA0A100A8CFDC /* TonicTests */ = {
+			isa = PBXGroup;
+			children = (
+				F25317EA16EBA0A100A8CFDC /* TonicTests.h */,
+				F25317EB16EBA0A100A8CFDC /* TonicTests.mm */,
+				F253182716EBA73200A8CFDC /* StereoFixedTestGen.cpp */,
+				F253182816EBA73200A8CFDC /* StereoFixedTestGen.h */,
+				F25317E516EBA0A100A8CFDC /* Supporting Files */,
+			);
+			path = TonicTests;
+			sourceTree = "<group>";
+		};
+		F25317E516EBA0A100A8CFDC /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				F25317E616EBA0A100A8CFDC /* TonicTests-Info.plist */,
+				F25317E716EBA0A100A8CFDC /* InfoPlist.strings */,
+				F25317ED16EBA0A100A8CFDC /* TonicTests-Prefix.pch */,
+			);
+			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
 		F256C8DE16C5A0BF0096574D /* ViewControllers */ = {
@@ -422,6 +498,24 @@
 			productReference = A86C3EBC16B2B4FD002A50F0 /* TonicDemo.app */;
 			productType = "com.apple.product-type.application";
 		};
+		F25317DE16EBA0A100A8CFDC /* TonicTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = F25317F016EBA0A100A8CFDC /* Build configuration list for PBXNativeTarget "TonicTests" */;
+			buildPhases = (
+				F25317DA16EBA0A100A8CFDC /* Sources */,
+				F25317DB16EBA0A100A8CFDC /* Frameworks */,
+				F25317DC16EBA0A100A8CFDC /* Resources */,
+				F25317DD16EBA0A100A8CFDC /* ShellScript */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = TonicTests;
+			productName = TonicTests;
+			productReference = F25317DF16EBA0A100A8CFDC /* TonicTests.octest */;
+			productType = "com.apple.product-type.bundle";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -445,6 +539,7 @@
 			projectRoot = "";
 			targets = (
 				A86C3EBB16B2B4FC002A50F0 /* TonicDemo */,
+				F25317DE16EBA0A100A8CFDC /* TonicTests */,
 			);
 		};
 /* End PBXProject section */
@@ -463,7 +558,31 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		F25317DC16EBA0A100A8CFDC /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F25317E916EBA0A100A8CFDC /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		F25317DD16EBA0A100A8CFDC /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Run the unit tests in this test bundle.\n\"${SYSTEM_DEVELOPER_DIR}/Tools/RunUnitTests\"\n";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		A86C3EB816B2B4FC002A50F0 /* Sources */ = {
@@ -506,6 +625,39 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		F25317DA16EBA0A100A8CFDC /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F25317F116EBA32100A8CFDC /* Adder.cpp in Sources */,
+				F25317F316EBA32100A8CFDC /* BufferFiller.cpp in Sources */,
+				F25317F516EBA32100A8CFDC /* ControlAdder.cpp in Sources */,
+				F25317F716EBA32100A8CFDC /* ControlGenerator.cpp in Sources */,
+				F25317F916EBA32100A8CFDC /* ControlMultiplier.cpp in Sources */,
+				F25317FB16EBA32100A8CFDC /* ControlValue.cpp in Sources */,
+				F25317FE16EBA32100A8CFDC /* FixedValue.cpp in Sources */,
+				F253180016EBA32100A8CFDC /* Generator.cpp in Sources */,
+				F253180216EBA32100A8CFDC /* Multiplier.cpp in Sources */,
+				F253180416EBA32100A8CFDC /* Synth.cpp in Sources */,
+				F253180716EBA32100A8CFDC /* TonicFrames.cpp in Sources */,
+				F253180916EBA32100A8CFDC /* ControlConditioner.cpp in Sources */,
+				F253180B16EBA32100A8CFDC /* Filters.cpp in Sources */,
+				F253180F16EBA32100A8CFDC /* Noise.cpp in Sources */,
+				F253181016EBA32100A8CFDC /* TableLookupOsc.cpp in Sources */,
+				F253181216EBA32100A8CFDC /* SineWave.cpp in Sources */,
+				F253181416EBA32100A8CFDC /* RectWave.cpp in Sources */,
+				F253181616EBA32100A8CFDC /* FlexToothWave.cpp in Sources */,
+				F253181916EBA32100A8CFDC /* ControlFloor.cpp in Sources */,
+				F253181B16EBA32100A8CFDC /* LFNoise.cpp in Sources */,
+				F253181D16EBA32100A8CFDC /* Mixer.cpp in Sources */,
+				F253181F16EBA32100A8CFDC /* RampedValue.cpp in Sources */,
+				F253182116EBA32100A8CFDC /* ADSR.cpp in Sources */,
+				F253182316EBA32100A8CFDC /* ControlMidiToFreq.cpp in Sources */,
+				F25317EC16EBA0A100A8CFDC /* TonicTests.mm in Sources */,
+				F253182916EBA73200A8CFDC /* StereoFixedTestGen.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
@@ -513,6 +665,14 @@
 			isa = PBXVariantGroup;
 			children = (
 				A86C3ECA16B2B4FD002A50F0 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		F25317E716EBA0A100A8CFDC /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				F25317E816EBA0A100A8CFDC /* en */,
 			);
 			name = InfoPlist.strings;
 			sourceTree = "<group>";
@@ -600,6 +760,46 @@
 			};
 			name = Release;
 		};
+		F25317EE16EBA0A100A8CFDC /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"\"$(SDKROOT)/Developer/Library/Frameworks\"",
+					"\"$(DEVELOPER_LIBRARY_DIR)/Frameworks\"",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "TonicTests/TonicTests-Prefix.pch";
+				INFOPLIST_FILE = "TonicTests/TonicTests-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = octest;
+			};
+			name = Debug;
+		};
+		F25317EF16EBA0A100A8CFDC /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"\"$(SDKROOT)/Developer/Library/Frameworks\"",
+					"\"$(DEVELOPER_LIBRARY_DIR)/Frameworks\"",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "TonicTests/TonicTests-Prefix.pch";
+				INFOPLIST_FILE = "TonicTests/TonicTests-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = octest;
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -620,6 +820,14 @@
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
+		};
+		F25317F016EBA0A100A8CFDC /* Build configuration list for PBXNativeTarget "TonicTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F25317EE16EBA0A100A8CFDC /* Debug */,
+				F25317EF16EBA0A100A8CFDC /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
 		};
 /* End XCConfigurationList section */
 	};
