@@ -27,7 +27,6 @@ https://ccrma.stanford.edu/software/stk/
 #include <float.h>
 #include "Tonic.h"
 #include "BufferFiller.h"
-#include "FixedValue.h"
 
 namespace Tonic{
   

@@ -19,6 +19,7 @@
 #import "FlexToothTestSynth.h"
 #import "FlexToothLFOTestSynth.h"
 #import "PannerTest.h"
+#import "MetroTestSynth.h"
 
 @interface SynthDemoDef : NSObject
   @property NSString* synthClassName;
@@ -200,6 +201,19 @@
           synth->setParameter("pan", touchPointNorm.x * 2 - 1);
         };
       }
+      
+      {
+        SynthDemoDef* def = [[SynthDemoDef alloc] init];
+        [synthDefinitions addObject:def];
+        def.synthClassName = @"MetroTestSynth";
+        def.synthDisplayName = @"Metronome to pulse as gate";
+        def.synthDescription = @"Metronome fed to a pulse generator driving ADSR * Noise";
+        def.synthInstructions = @"Y-Axis controls BPM";
+        def.synthAction = ^(Tonic::Synth* synth, CGPoint touchPointNorm){
+          synth->setParameter("bpm", touchPointNorm.y * 1500);
+        };
+      }
+      
       
     }
     return self;

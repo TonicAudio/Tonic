@@ -154,8 +154,7 @@ namespace Tonic {
 // ControlGenerator, and one that accepts a Generator. This macro will automatically build those three
 // setters
 
-// MP -- Is it weird to do an import here? Classes using these macros need access to ControlValue
-#include "ControlValue.h"
+#include "FixedValue.h"
 
 #define createGeneratorSetters(generatorClassName, methodNameInGenerator, methodNameInGenerator_) \
                                                                                         \
@@ -173,18 +172,6 @@ namespace Tonic {
                                                                                         \
   generatorClassName& methodNameInGenerator(ControlGenerator arg){                      \
     return methodNameInGenerator(  FixedValue().setValue(arg) );                        \
-  }
-
-
-#define createControlGeneratorSetters(generatorClassName, methodNameInGenerator, methodNameInGenerator_)\
-\
-  generatorClassName& methodNameInGenerator(float arg){                                 \
-    return methodNameInGenerator( ControlValue(arg) );                                  \
-  }                                                                                     \
-                                                                                        \
-  generatorClassName& methodNameInGenerator(ControlGenerator arg){                      \
-    gen()->methodNameInGenerator_(arg);                                                   \
-    return static_cast<generatorClassName&>(*this);                                     \
   }
 
 
