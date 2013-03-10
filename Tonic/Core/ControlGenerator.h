@@ -124,7 +124,21 @@ namespace Tonic {
     }
     
   };
+
   
+}
+
+#include "ControlValue.h"
+
+#define createControlGeneratorSetters(generatorClassName, methodNameInGenerator, methodNameInGenerator_)\
+\
+generatorClassName& methodNameInGenerator(float arg){                                 \
+return methodNameInGenerator( ControlValue(arg) );                                  \
+}                                                                                     \
+\
+generatorClassName& methodNameInGenerator(ControlGenerator arg){                      \
+gen()->methodNameInGenerator_(arg);                                                   \
+return static_cast<generatorClassName&>(*this);                                     \
 }
 
 

@@ -23,8 +23,7 @@ https://ccrma.stanford.edu/software/stk/
 #ifndef __Tonic__Adder__
 #define __Tonic__Adder__
 
-#include <vector>
-#include "FixedValue.h"
+#include "Generator.h"
 
 namespace Tonic {
   namespace Tonic_{

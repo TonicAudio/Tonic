@@ -25,7 +25,7 @@ https://ccrma.stanford.edu/software/stk/
 
 #include "Effect.h"
 #include "FilterUtils.h"
-#include "FixedValue.h"
+#include "Generator.h"
 #include "ControlGenerator.h"
 
 /**********************************************
