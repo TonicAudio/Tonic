@@ -137,7 +137,9 @@ return methodNameInGenerator( ControlValue(arg) );                              
 }                                                                                     \
 \
 generatorClassName& methodNameInGenerator(ControlGenerator arg){                      \
+gen()->lockMutex();            \
 gen()->methodNameInGenerator_(arg);                                                   \
+gen()->unlockMutex();            \
 return static_cast<generatorClassName&>(*this);                                     \
 }
 

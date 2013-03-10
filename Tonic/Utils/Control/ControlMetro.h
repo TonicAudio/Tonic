@@ -34,11 +34,17 @@ namespace Tonic {
     class ControlMetro_ : public ControlGenerator_{
       
     protected:
+    
       void computeOutput(const SynthesisContext_ & context);
+    
+      ControlGenerator bpm_;
+      double lastClickTime_;
       
     public:
       ControlMetro_();
       ~ControlMetro_();
+      
+      void setBPMGen( ControlGenerator bpmGen ){ bpm_ = bpmGen; };
       
     };
     
@@ -47,7 +53,12 @@ namespace Tonic {
   class ControlMetro : public TemplatedControlGenerator<Tonic_::ControlMetro_>{
     
   public:
-      
+    
+    ControlMetro(float bpm = 120){
+      gen()->setBPMGen(ControlValue(bpm));
+    }
+    
+    createControlGeneratorSetters(ControlMetro, bpm, setBPMGen);
   };
 }
 

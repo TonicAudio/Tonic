@@ -74,6 +74,7 @@
 		F27605AD16ECF431006684B2 /* ControlMidiToFreq.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F27605A516ECF431006684B2 /* ControlMidiToFreq.cpp */; };
 		F27605AE16ECF45E006684B2 /* RampedValue.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F276059D16ECF431006684B2 /* RampedValue.cpp */; };
 		F27605AF16ECF492006684B2 /* MonoToStereoPanner.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F276059B16ECF431006684B2 /* MonoToStereoPanner.cpp */; };
+		F2B2B5C516ECFBE900BBECC0 /* ControlPulse.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F2B2B5C316ECFBE900BBECC0 /* ControlPulse.cpp */; };
 		F2C9A92016DAEFE6009D9C08 /* ControlAdder.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F2C9A91E16DAEFE6009D9C08 /* ControlAdder.cpp */; };
 		F2C9F6F916C493870090A78D /* Adder.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F2C9F6E616C493870090A78D /* Adder.cpp */; };
 		F2C9F6FA16C493870090A78D /* FixedValue.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F2C9F6E816C493870090A78D /* FixedValue.cpp */; };
@@ -179,6 +180,9 @@
 		F27605A416ECF431006684B2 /* ControlFloor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ControlFloor.h; sourceTree = "<group>"; };
 		F27605A516ECF431006684B2 /* ControlMidiToFreq.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ControlMidiToFreq.cpp; sourceTree = "<group>"; };
 		F27605A616ECF431006684B2 /* ControlMidiToFreq.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ControlMidiToFreq.h; sourceTree = "<group>"; };
+		F2B2B5C316ECFBE900BBECC0 /* ControlPulse.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ControlPulse.cpp; sourceTree = "<group>"; };
+		F2B2B5C416ECFBE900BBECC0 /* ControlPulse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ControlPulse.h; sourceTree = "<group>"; };
+		F2B2B5C616ECFEE100BBECC0 /* MetroTestSynth.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MetroTestSynth.h; sourceTree = "<group>"; };
 		F2C9A91E16DAEFE6009D9C08 /* ControlAdder.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ControlAdder.cpp; sourceTree = "<group>"; };
 		F2C9A91F16DAEFE6009D9C08 /* ControlAdder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ControlAdder.h; sourceTree = "<group>"; };
 		F2C9F6E616C493870090A78D /* Adder.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Adder.cpp; sourceTree = "<group>"; };
@@ -238,6 +242,7 @@
 				01ACE2FA16E57FA300C03828 /* SineAMSynth.h */,
 				01ACE2FB16E57FA300C03828 /* SineSumSynth.h */,
 				A88F5A7E16E98B8F00C187E7 /* PannerTest.h */,
+				F2B2B5C616ECFEE100BBECC0 /* MetroTestSynth.h */,
 			);
 			path = "Demo Synths";
 			sourceTree = "<group>";
@@ -446,6 +451,8 @@
 				F27605A616ECF431006684B2 /* ControlMidiToFreq.h */,
 				F21E19B816ECF73900B961BF /* ControlMetro.cpp */,
 				F21E19B916ECF73900B961BF /* ControlMetro.h */,
+				F2B2B5C316ECFBE900BBECC0 /* ControlPulse.cpp */,
+				F2B2B5C416ECFBE900BBECC0 /* ControlPulse.h */,
 			);
 			path = Control;
 			sourceTree = "<group>";
@@ -656,6 +663,7 @@
 				F27605AC16ECF431006684B2 /* ControlFloor.cpp in Sources */,
 				F27605AD16ECF431006684B2 /* ControlMidiToFreq.cpp in Sources */,
 				F21E19BA16ECF73900B961BF /* ControlMetro.cpp in Sources */,
+				F2B2B5C516ECFBE900BBECC0 /* ControlPulse.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
