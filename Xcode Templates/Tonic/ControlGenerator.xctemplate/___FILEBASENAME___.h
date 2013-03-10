@@ -32,8 +32,7 @@ namespace Tonic {
     class ___FILEBASENAME____ : public ControlGenerator_{
       
     protected:
-      TonicFloat computeValue(const SynthesisContext_ & context);
-      ControlGeneratorStatus computeStatus(const SynthesisContext_ & context);
+      void computeOutput(const SynthesisContext_ & context);
       
     public:
       ___FILEBASENAME____();

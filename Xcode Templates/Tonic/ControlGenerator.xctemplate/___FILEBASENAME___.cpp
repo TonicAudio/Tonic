@@ -18,13 +18,10 @@ namespace Tonic { namespace Tonic_{
     
   }
   
-  ControlGeneratorStatus ___FILEBASENAME____::computeStatus(const SynthesisContext_ & context){
-    return ControlGenerator::hasChanged_(context);
+  void ___FILEBASENAME____::computeOutput(const SynthesisContext_ & context){
+  
   }
   
-  TonicFloat ___FILEBASENAME____::computeValue(const SynthesisContext_ &context){
-    return 0;
-  }
   
   
 } // Namespace Tonic_
