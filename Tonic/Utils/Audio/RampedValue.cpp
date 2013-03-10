@@ -18,11 +18,6 @@ namespace Tonic { namespace Tonic_{
     last_(0),
     inc_(0)
   {
-    // shouldn't need to set this. See https://github.com/morganpackard/Tonic/issues/6
-    // still, good to give default values to the relevant generators
-    setTargetGen(ControlValue().setValue(0));
-    setLengthGen(ControlValue().setValue(0.05));
-    setValueGen(ControlValue().setValue(0));
   }
   
   RampedValue_::~RampedValue_(){
@@ -36,58 +31,6 @@ namespace Tonic { namespace Tonic_{
 
 } // Namespace Tonic_
   
-  RampedValue::RampedValue(TonicFloat startValue, TonicFloat initLength ){
-    value(startValue);
-    length(initLength);
-  }
-  
-  //! Set target value
-  RampedValue & RampedValue::target( TonicFloat target ){
-    ControlValue v = ControlValue().setValue(target);
-    gen()->lockMutex();
-    gen()->setTargetGen(v);
-    gen()->unlockMutex();
-    return *this;
-  }
-  
-  RampedValue & RampedValue::target( ControlGenerator target ){
-    gen()->lockMutex();
-    gen()->setTargetGen(target);
-    gen()->unlockMutex();
-    return *this;
-  }
-  
-  //! Set length before reaching target value, in ms
-  RampedValue & RampedValue::length( TonicFloat length ){
-    ControlValue v = ControlValue().setValue(length);
-    gen()->lockMutex();
-    gen()->setLengthGen(v);
-    gen()->unlockMutex();
-    return *this;
-  }
-  
-  RampedValue & RampedValue::length( ControlGenerator lengthMs ){
-    gen()->lockMutex();
-    gen()->setLengthGen(lengthMs);
-    gen()->unlockMutex();
-    return *this;
-  }
-  
-  //! Go to value immediately
-  RampedValue & RampedValue::value( TonicFloat value){
-    ControlValue v = ControlValue().setValue(value);
-    gen()->lockMutex();
-    gen()->setValueGen(v);
-    gen()->unlockMutex();
-    return *this;
-  }
-  
-  RampedValue & RampedValue::value( ControlGenerator value){
-    gen()->lockMutex();
-    gen()->setValueGen(value);
-    gen()->unlockMutex();
-    return *this;
-  }
   
   bool RampedValue::isFinished(){
     return gen()->isFinished();

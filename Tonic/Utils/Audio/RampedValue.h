@@ -192,29 +192,30 @@ namespace Tonic {
     
   public:
       
-    RampedValue(TonicFloat startValue = 0, TonicFloat initLength = 0.05);
+    RampedValue(TonicFloat startValue = 0, TonicFloat initLength = 0.05){
+      target(startValue);
+      value(startValue);
+      length(initLength);
+    }
     
     //! Set target value
     /*!
         Changes to target gen input will create a new ramp from current value to target over the current length
     */
-    RampedValue & target( TonicFloat target );
-    RampedValue & target( ControlGenerator target );
+    createControlGeneratorSetters(RampedValue, target, setTargetGen);
     
     //! Set length before reaching target value, in ms
     /*!
         Changes to length gen input will create a new ramp from current value to target over the provided length
     */
-    RampedValue & length( TonicFloat length );
-    RampedValue & length( ControlGenerator length );
+    createControlGeneratorSetters(RampedValue, length, setLengthGen);
     
     //! Go to value immediately
     /*!
         Changes to the value gen input will abort the current ramp and go immediately to the specified value.
         Output will remain steady until a new target or length is set.
     */
-    RampedValue & value( TonicFloat value);
-    RampedValue & value( ControlGenerator value);
+    createControlGeneratorSetters(RampedValue, value, setValueGen);
 
     bool isFinished();
 
