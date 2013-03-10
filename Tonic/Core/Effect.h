@@ -40,7 +40,9 @@ namespace Tonic {
       
       inline void setInput( Generator input ) {
         input_ = input;
-        setIsStereo(input.isStereo());
+        if(input.isStereo() && !isStereo()){
+          setIsStereo(input.isStereo());
+        }
       };
       
     };

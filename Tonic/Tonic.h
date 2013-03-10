@@ -18,6 +18,7 @@
 #ifndef __Tonic_TonicHeader__
 #define __Tonic_TonicHeader__
 
+#include "MonoToStereoPanner.h"
 #include "FixedValue.h"
 #include "RampedValue.h"
 #include "Adder.h"
