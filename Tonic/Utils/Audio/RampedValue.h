@@ -180,11 +180,13 @@ namespace Tonic {
     }
 
     inline void RampedValue_::updateTarget(TonicFloat target, unsigned long lengthSamp ){
+      
       target_ = target;
       count_ = 0;
       
       // ND- Fixes bug with NaN when using Accelerate ramps
       if (lengthSamp == 0 || target_ == last_){
+        last_ = target_;
         finished_ = true;
         inc_ = 0;
       }
