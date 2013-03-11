@@ -192,6 +192,10 @@ namespace Tonic {
     }
   }
   
+  static void warning(string message){
+    printf("Tonic::warning: %s\n", message.c_str());
+  }
+  
   static void debug(std::string message){
     printf("Tonic::debug: %s\n", message.c_str());
   }

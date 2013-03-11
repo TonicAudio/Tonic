@@ -9,17 +9,15 @@
 #import "SynthChooserViewController.h"
 #import "SynthTestViewController.h"
 #import "SineSumSynth.h"
-#import "SineAMSynth.h"
 #import "FMDroneSynth.h"
-#import "FilterTest.h"
 #import "FilteredNoiseSynth.h"
 #import "LFNoiseTestSynth.h"
 #import "ADSRTestSynth.h"
 #import "RectWaveTestSynth.h"
-#import "FlexToothTestSynth.h"
 #import "FlexToothLFOTestSynth.h"
 #import "PannerTest.h"
 #import "MetroTestSynth.h"
+#import "DelayTestSynth.h"
 
 @interface SynthDemoDef : NSObject
   @property NSString* synthClassName;
@@ -64,25 +62,6 @@
         };
       }
       
-      {
-        SynthDemoDef* def = [[SynthDemoDef alloc] init];
-        [synthDefinitions addObject:def];
-        def.synthClassName = @"SineAMSynth";
-        def.synthDisplayName = @"Basic Sinusoidal AM";
-        def.synthDescription = @"Basic AM synth with sinusoidal carrier and modulator";
-        def.synthInstructions = @"Swipe up and down to change modulator freq. Swipe L/R to change carrier freq.";
-        def.synthAction = ^(Tonic::Synth* synth, CGPoint touchPointNorm){
-          // arbitrarily chosen midi note numbers (linear pitch)
-          TonicFloat car = Tonic::mtof(Tonic::map(touchPointNorm.x, 0.0f, 1.0f, 47, 88));
-          
-          // exponenetial sweep in frequency, 0-1000 Hz
-          TonicFloat mod = 1000.0f / powf(10.0f, Tonic::map(touchPointNorm.y, 0.0f, 1.0f, 3.0f, 0.0f));
-
-          synth->setParameter("carrierFreq", car);
-          synth->setParameter("modFreq", mod);
-        };
-      }
-      
       
       {
         SynthDemoDef* def = [[SynthDemoDef alloc] init];
@@ -96,21 +75,6 @@
           synth->setParameter("modIndex", touchPointNorm.y*touchPointNorm.y );
         };
       }
-      
-      {
-        SynthDemoDef* def = [[SynthDemoDef alloc] init];
-        [synthDefinitions addObject:def];
-        def.synthClassName = @"FilterTest";
-        def.synthDisplayName = @"Filter Test";
-        def.synthDescription = @"Basic FM synth with sinusoidal carrier and modulator";
-        def.synthInstructions = @"Test of filter implementations.";
-        def.synthAction = ^(Tonic::Synth* synth, CGPoint touchPointNorm){
-          synth->setParameter("cutoff", 120.0f * powf(10.0f, touchPointNorm.x * 2));
-          synth->setParameter("LFO", touchPointNorm.y*touchPointNorm.y );
-        };
-      }
-      
-      
       
       {
         SynthDemoDef* def = [[SynthDemoDef alloc] init];
@@ -167,19 +131,6 @@
       {
         SynthDemoDef* def = [[SynthDemoDef alloc] init];
         [synthDefinitions addObject:def];
-        def.synthClassName = @"FlexToothTestSynth";
-        def.synthDisplayName = @"Flexible Sawtooth Oscillator";
-        def.synthDescription = @"Aliasing sawtooth oscillator as audio oscillator";
-        def.synthInstructions = @"X-Axis: slope of sawtooth\nY-Axis: frequency";
-        def.synthAction = ^(Tonic::Synth* synth, CGPoint touchPointNorm){
-          synth->setParameter("freq", mtof(touchPointNorm.y * 24 + 48));
-          synth->setParameter("slope", touchPointNorm.x);
-        };
-      }
-      
-      {
-        SynthDemoDef* def = [[SynthDemoDef alloc] init];
-        [synthDefinitions addObject:def];
         def.synthClassName = @"FlexToothLFOTestSynth";
         def.synthDisplayName = @"Flexible Sawtooth LFO demo";
         def.synthDescription = @"Aliasing sawtooth oscillator as morphable LFO";
@@ -211,6 +162,19 @@
         def.synthInstructions = @"Y-Axis controls BPM";
         def.synthAction = ^(Tonic::Synth* synth, CGPoint touchPointNorm){
           synth->setParameter("bpm", touchPointNorm.y * 1500);
+        };
+      }
+      
+      {
+        SynthDemoDef* def = [[SynthDemoDef alloc] init];
+        [synthDefinitions addObject:def];
+        def.synthClassName = @"DelayTestSynth";
+        def.synthDisplayName = @"Mono Delay";
+        def.synthDescription = @"Repeating note with mono delay effect";
+        def.synthInstructions = @"X-Axis controls feedback\nY-Axis controls delay time";
+        def.synthAction = ^(Tonic::Synth* synth, CGPoint touchPointNorm){
+          synth->setParameter("feedback", touchPointNorm.x);
+          synth->setParameter("delayTime", touchPointNorm.y);
         };
       }
       

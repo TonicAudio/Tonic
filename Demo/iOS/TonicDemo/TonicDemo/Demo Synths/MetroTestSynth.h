@@ -25,9 +25,9 @@ public:
     
     ControlValue bpm = addParameter("bpm", 120, 60, 5000);
     ControlMetro metro = ControlMetro().bpm(bpm);
-    ControlPulse pulseGate = ControlPulse().in(metro).length(bpm * (1.0f/120.0f));
+    ControlPulse pulseGate = ControlPulse().in(metro).length(0.002);
     
-    ADSR envelope = ADSR().attack(0.001).decay(0.0).sustain(1.0).release(0.025).doesSustain(false);
+    ADSR envelope = ADSR().attack(0.001).decay(0.0).sustain(1.0).release(0.003);
     
     outputGen = Noise() * envelope.trigger(pulseGate) * 0.25;
   }

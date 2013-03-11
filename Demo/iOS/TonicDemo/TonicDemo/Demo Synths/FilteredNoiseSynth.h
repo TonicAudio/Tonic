@@ -12,6 +12,7 @@
 #include "Synth.h"
 #include "SineWave.h"
 #include "Filters.h"
+#include "Noise.h"
 #include "RampedValue.h"
 #include "ControlFloor.h"
 #include "ControlMidiToFreq.h"

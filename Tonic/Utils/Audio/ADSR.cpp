@@ -34,10 +34,8 @@ namespace Tonic { namespace Tonic_{
       case DECAY:
         ramp.target(sustain.tick(context).value);
         ramp.length(decay.tick(context).value);
-        ramp.value(mTrigger.tick(context).value);
       break;
       case SUSTAIN:
-        ramp.target(sustain.tick(context).value);
         ramp.value(sustain.tick(context).value);
       break;
       case RELEASE:

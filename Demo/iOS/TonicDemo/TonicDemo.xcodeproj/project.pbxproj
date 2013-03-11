@@ -61,6 +61,8 @@
 		F253181616EBA32100A8CFDC /* FlexToothWave.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0116165316E2FB2900952A7F /* FlexToothWave.cpp */; };
 		F253182616EBA34500A8CFDC /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A86C3F2216B2B834002A50F0 /* Accelerate.framework */; };
 		F253182916EBA73200A8CFDC /* StereoFixedTestGen.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F253182716EBA73200A8CFDC /* StereoFixedTestGen.cpp */; };
+		F254909016ED38610022B229 /* DelayUtils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F254908F16ED38610022B229 /* DelayUtils.cpp */; };
+		F254909916ED7D140022B229 /* MonoDelay.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F254909716ED7D140022B229 /* MonoDelay.cpp */; };
 		F256C8E416C5A0BF0096574D /* SynthTestViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = F256C8E016C5A0BF0096574D /* SynthTestViewController.mm */; };
 		F256C8E516C5A0BF0096574D /* SynthChooserViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = F256C8E216C5A0BF0096574D /* SynthChooserViewController.mm */; };
 		F256C8E616C5A0BF0096574D /* SynthChooserViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F256C8E316C5A0BF0096574D /* SynthChooserViewController.xib */; };
@@ -93,13 +95,10 @@
 		017BF2C816DBAE5100FA1046 /* ControlMultiplier.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ControlMultiplier.h; sourceTree = "<group>"; };
 		01ACE2F216E57FA300C03828 /* ADSRTestSynth.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ADSRTestSynth.h; sourceTree = "<group>"; };
 		01ACE2F316E57FA300C03828 /* FilteredNoiseSynth.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FilteredNoiseSynth.h; sourceTree = "<group>"; };
-		01ACE2F416E57FA300C03828 /* FilterTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FilterTest.h; sourceTree = "<group>"; };
 		01ACE2F516E57FA300C03828 /* FlexToothLFOTestSynth.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FlexToothLFOTestSynth.h; sourceTree = "<group>"; };
-		01ACE2F616E57FA300C03828 /* FlexToothTestSynth.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FlexToothTestSynth.h; sourceTree = "<group>"; };
 		01ACE2F716E57FA300C03828 /* FMDroneSynth.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMDroneSynth.h; sourceTree = "<group>"; };
 		01ACE2F816E57FA300C03828 /* LFNoiseTestSynth.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LFNoiseTestSynth.h; sourceTree = "<group>"; };
 		01ACE2F916E57FA300C03828 /* RectWaveTestSynth.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RectWaveTestSynth.h; sourceTree = "<group>"; };
-		01ACE2FA16E57FA300C03828 /* SineAMSynth.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SineAMSynth.h; sourceTree = "<group>"; };
 		01ACE2FB16E57FA300C03828 /* SineSumSynth.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SineSumSynth.h; sourceTree = "<group>"; };
 		01F540BF16E2EE8B00F85B98 /* RectWave.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = RectWave.cpp; sourceTree = "<group>"; };
 		01F540C016E2EE8B00F85B98 /* RectWave.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RectWave.h; sourceTree = "<group>"; };
@@ -158,6 +157,11 @@
 		F25317ED16EBA0A100A8CFDC /* TonicTests-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "TonicTests-Prefix.pch"; sourceTree = "<group>"; };
 		F253182716EBA73200A8CFDC /* StereoFixedTestGen.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = StereoFixedTestGen.cpp; sourceTree = "<group>"; };
 		F253182816EBA73200A8CFDC /* StereoFixedTestGen.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StereoFixedTestGen.h; sourceTree = "<group>"; };
+		F254908E16ED35FC0022B229 /* DelayUtils.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DelayUtils.h; sourceTree = "<group>"; };
+		F254908F16ED38610022B229 /* DelayUtils.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = DelayUtils.cpp; sourceTree = "<group>"; };
+		F254909716ED7D140022B229 /* MonoDelay.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MonoDelay.cpp; sourceTree = "<group>"; };
+		F254909816ED7D140022B229 /* MonoDelay.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MonoDelay.h; sourceTree = "<group>"; };
+		F254909B16ED84800022B229 /* DelayTestSynth.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DelayTestSynth.h; sourceTree = "<group>"; };
 		F256C8DF16C5A0BF0096574D /* SynthTestViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SynthTestViewController.h; sourceTree = "<group>"; };
 		F256C8E016C5A0BF0096574D /* SynthTestViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = SynthTestViewController.mm; sourceTree = "<group>"; };
 		F256C8E116C5A0BF0096574D /* SynthChooserViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SynthChooserViewController.h; sourceTree = "<group>"; };
@@ -233,16 +237,14 @@
 			children = (
 				01ACE2F216E57FA300C03828 /* ADSRTestSynth.h */,
 				01ACE2F316E57FA300C03828 /* FilteredNoiseSynth.h */,
-				01ACE2F416E57FA300C03828 /* FilterTest.h */,
 				01ACE2F516E57FA300C03828 /* FlexToothLFOTestSynth.h */,
-				01ACE2F616E57FA300C03828 /* FlexToothTestSynth.h */,
 				01ACE2F716E57FA300C03828 /* FMDroneSynth.h */,
 				01ACE2F816E57FA300C03828 /* LFNoiseTestSynth.h */,
 				01ACE2F916E57FA300C03828 /* RectWaveTestSynth.h */,
-				01ACE2FA16E57FA300C03828 /* SineAMSynth.h */,
 				01ACE2FB16E57FA300C03828 /* SineSumSynth.h */,
 				A88F5A7E16E98B8F00C187E7 /* PannerTest.h */,
 				F2B2B5C616ECFEE100BBECC0 /* MetroTestSynth.h */,
+				F254909B16ED84800022B229 /* DelayTestSynth.h */,
 			);
 			path = "Demo Synths";
 			sourceTree = "<group>";
@@ -330,6 +332,7 @@
 			isa = PBXGroup;
 			children = (
 				F2C9F6E516C493870090A78D /* Core */,
+				F254908D16ED35E90022B229 /* DelayEffects */,
 				F263BD2916D54E5E008AADA6 /* Filters */,
 				F2C9F6F516C493870090A78D /* Oscillators */,
 				A82437CE16CA7A24000677C7 /* Tests */,
@@ -393,6 +396,17 @@
 				F25317ED16EBA0A100A8CFDC /* TonicTests-Prefix.pch */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		F254908D16ED35E90022B229 /* DelayEffects */ = {
+			isa = PBXGroup;
+			children = (
+				F254908F16ED38610022B229 /* DelayUtils.cpp */,
+				F254908E16ED35FC0022B229 /* DelayUtils.h */,
+				F254909716ED7D140022B229 /* MonoDelay.cpp */,
+				F254909816ED7D140022B229 /* MonoDelay.h */,
+			);
+			path = DelayEffects;
 			sourceTree = "<group>";
 		};
 		F256C8DE16C5A0BF0096574D /* ViewControllers */ = {
@@ -664,6 +678,8 @@
 				F27605AD16ECF431006684B2 /* ControlMidiToFreq.cpp in Sources */,
 				F21E19BA16ECF73900B961BF /* ControlMetro.cpp in Sources */,
 				F2B2B5C516ECFBE900BBECC0 /* ControlPulse.cpp in Sources */,
+				F254909016ED38610022B229 /* DelayUtils.cpp in Sources */,
+				F254909916ED7D140022B229 /* MonoDelay.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

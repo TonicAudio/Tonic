@@ -98,6 +98,7 @@ namespace Tonic {
         unlockMutex();
         
         applyFilter(cCutoff, cQ, synthesisBlock_, context);
+
       }
       
     };
