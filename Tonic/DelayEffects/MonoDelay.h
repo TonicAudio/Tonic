@@ -67,10 +67,6 @@ namespace Tonic {
     
     inline void MonoDelay_::computeSynthesisBlock(const SynthesisContext_ &context){
       
-      if (delayLine_ == NULL){
-        error("Delay Line ticked prior to calling initialize()!", true);
-      }
-      
       delayTimeGen_.tick(delayTimeFrames_, context);
       mixGen_.tick(mixFrames_, context);
       fbkGen_.tick(fbkFrames_, context);
