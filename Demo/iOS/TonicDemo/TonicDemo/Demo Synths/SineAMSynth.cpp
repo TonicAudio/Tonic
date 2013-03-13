@@ -6,6 +6,12 @@
 //
 //
 
+/*
+Because of the fancy registerSynth macro, and because this synth has the same interface
+as Synth it's not necessary to create a header file. You can create an instance of this synth using 
+SynthFactory::createInstance(SYNTH_NAME), where SYNTH_NAME is the name supplied to registerSynth.
+*/
+
 #ifndef _013_1_23_melody_TestSynth_h
 #define _013_1_23_melody_TestSynth_h
 
