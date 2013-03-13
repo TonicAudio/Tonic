@@ -36,6 +36,8 @@ namespace Tonic { namespace Tonic_{
       lastOutput_.status = ControlGeneratorStatusHasNotChanged;
     }
     
+    lastOutput_.value = 1;
+    
   }
   
 } // Namespace Tonic_
