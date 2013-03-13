@@ -33,6 +33,28 @@
 		A86FA81316DF973E00B9DD67 /* ADSR.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A86FA81116DF973E00B9DD67 /* ADSR.cpp */; };
 		A8786A9416DD86E400FC22F8 /* LFNoise.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A8786A9216DD86E400FC22F8 /* LFNoise.cpp */; };
 		A88DA83C16EBE76300B41662 /* MonoToStereoPanner.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A88F5A7B16E9822600C187E7 /* MonoToStereoPanner.cpp */; };
+		A88DA84016F09F5400B41662 /* ADSRTestSynth.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 01ACE2F216E57FA300C03828 /* ADSRTestSynth.cpp */; };
+		A88DA84116F09F5400B41662 /* FilteredNoiseSynth.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 01ACE2F316E57FA300C03828 /* FilteredNoiseSynth.cpp */; };
+		A88DA84216F09F5400B41662 /* FilterTest.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 01ACE2F416E57FA300C03828 /* FilterTest.cpp */; };
+		A88DA84316F09F5400B41662 /* FlexToothLFOTestSynth.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 01ACE2F516E57FA300C03828 /* FlexToothLFOTestSynth.cpp */; };
+		A88DA84416F09F5400B41662 /* FlexToothTestSynth.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 01ACE2F616E57FA300C03828 /* FlexToothTestSynth.cpp */; };
+		A88DA84516F09F5400B41662 /* FMDroneSynth.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 01ACE2F716E57FA300C03828 /* FMDroneSynth.cpp */; };
+		A88DA84616F09F5400B41662 /* LFNoiseTestSynth.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 01ACE2F816E57FA300C03828 /* LFNoiseTestSynth.cpp */; };
+		A88DA84716F09F5400B41662 /* RectWaveTestSynth.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 01ACE2F916E57FA300C03828 /* RectWaveTestSynth.cpp */; };
+		A88DA84816F09F5400B41662 /* SineAMSynth.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 01ACE2FA16E57FA300C03828 /* SineAMSynth.cpp */; };
+		A88DA84916F09F5400B41662 /* SineSumSynth.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 01ACE2FB16E57FA300C03828 /* SineSumSynth.cpp */; };
+		A88DA84A16F09F5400B41662 /* PannerTest.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A88F5A7E16E98B8F00C187E7 /* PannerTest.cpp */; };
+		A88DA84B16F09F5500B41662 /* ADSRTestSynth.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 01ACE2F216E57FA300C03828 /* ADSRTestSynth.cpp */; };
+		A88DA84C16F09F5500B41662 /* FilteredNoiseSynth.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 01ACE2F316E57FA300C03828 /* FilteredNoiseSynth.cpp */; };
+		A88DA84D16F09F5500B41662 /* FilterTest.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 01ACE2F416E57FA300C03828 /* FilterTest.cpp */; };
+		A88DA84E16F09F5500B41662 /* FlexToothLFOTestSynth.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 01ACE2F516E57FA300C03828 /* FlexToothLFOTestSynth.cpp */; };
+		A88DA84F16F09F5500B41662 /* FlexToothTestSynth.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 01ACE2F616E57FA300C03828 /* FlexToothTestSynth.cpp */; };
+		A88DA85016F09F5500B41662 /* FMDroneSynth.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 01ACE2F716E57FA300C03828 /* FMDroneSynth.cpp */; };
+		A88DA85116F09F5500B41662 /* LFNoiseTestSynth.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 01ACE2F816E57FA300C03828 /* LFNoiseTestSynth.cpp */; };
+		A88DA85216F09F5500B41662 /* RectWaveTestSynth.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 01ACE2F916E57FA300C03828 /* RectWaveTestSynth.cpp */; };
+		A88DA85316F09F5500B41662 /* SineAMSynth.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 01ACE2FA16E57FA300C03828 /* SineAMSynth.cpp */; };
+		A88DA85416F09F5500B41662 /* SineSumSynth.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 01ACE2FB16E57FA300C03828 /* SineSumSynth.cpp */; };
+		A88DA85516F09F5500B41662 /* PannerTest.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A88F5A7E16E98B8F00C187E7 /* PannerTest.cpp */; };
 		A88F5A7416E5729200C187E7 /* ControlConditioner.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A88F5A7216E5729200C187E7 /* ControlConditioner.cpp */; };
 		A88F5A7716E573F900C187E7 /* ControlFloor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A88F5A7516E573F900C187E7 /* ControlFloor.cpp */; };
 		A88F5A7A16E6D0DB00C187E7 /* ControlMidiToFreq.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A88F5A7816E6D0DB00C187E7 /* ControlMidiToFreq.cpp */; };
@@ -94,16 +116,16 @@
 		017BF2C616DB24C400FA1046 /* Tonic.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Tonic.h; sourceTree = "<group>"; };
 		017BF2C716DBAE5000FA1046 /* ControlMultiplier.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ControlMultiplier.cpp; sourceTree = "<group>"; };
 		017BF2C816DBAE5100FA1046 /* ControlMultiplier.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ControlMultiplier.h; sourceTree = "<group>"; };
-		01ACE2F216E57FA300C03828 /* ADSRTestSynth.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ADSRTestSynth.h; sourceTree = "<group>"; };
-		01ACE2F316E57FA300C03828 /* FilteredNoiseSynth.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FilteredNoiseSynth.h; sourceTree = "<group>"; };
-		01ACE2F416E57FA300C03828 /* FilterTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FilterTest.h; sourceTree = "<group>"; };
-		01ACE2F516E57FA300C03828 /* FlexToothLFOTestSynth.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FlexToothLFOTestSynth.h; sourceTree = "<group>"; };
-		01ACE2F616E57FA300C03828 /* FlexToothTestSynth.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FlexToothTestSynth.h; sourceTree = "<group>"; };
-		01ACE2F716E57FA300C03828 /* FMDroneSynth.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMDroneSynth.h; sourceTree = "<group>"; };
-		01ACE2F816E57FA300C03828 /* LFNoiseTestSynth.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LFNoiseTestSynth.h; sourceTree = "<group>"; };
-		01ACE2F916E57FA300C03828 /* RectWaveTestSynth.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RectWaveTestSynth.h; sourceTree = "<group>"; };
-		01ACE2FA16E57FA300C03828 /* SineAMSynth.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SineAMSynth.h; sourceTree = "<group>"; };
-		01ACE2FB16E57FA300C03828 /* SineSumSynth.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SineSumSynth.h; sourceTree = "<group>"; };
+		01ACE2F216E57FA300C03828 /* ADSRTestSynth.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ADSRTestSynth.cpp; sourceTree = "<group>"; };
+		01ACE2F316E57FA300C03828 /* FilteredNoiseSynth.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = FilteredNoiseSynth.cpp; sourceTree = "<group>"; };
+		01ACE2F416E57FA300C03828 /* FilterTest.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = FilterTest.cpp; sourceTree = "<group>"; };
+		01ACE2F516E57FA300C03828 /* FlexToothLFOTestSynth.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = FlexToothLFOTestSynth.cpp; sourceTree = "<group>"; };
+		01ACE2F616E57FA300C03828 /* FlexToothTestSynth.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = FlexToothTestSynth.cpp; sourceTree = "<group>"; };
+		01ACE2F716E57FA300C03828 /* FMDroneSynth.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = FMDroneSynth.cpp; sourceTree = "<group>"; };
+		01ACE2F816E57FA300C03828 /* LFNoiseTestSynth.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = LFNoiseTestSynth.cpp; sourceTree = "<group>"; };
+		01ACE2F916E57FA300C03828 /* RectWaveTestSynth.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = RectWaveTestSynth.cpp; sourceTree = "<group>"; };
+		01ACE2FA16E57FA300C03828 /* SineAMSynth.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SineAMSynth.cpp; sourceTree = "<group>"; };
+		01ACE2FB16E57FA300C03828 /* SineSumSynth.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SineSumSynth.cpp; sourceTree = "<group>"; };
 		01F540BF16E2EE8B00F85B98 /* RectWave.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = RectWave.cpp; sourceTree = "<group>"; };
 		01F540C016E2EE8B00F85B98 /* RectWave.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RectWave.h; sourceTree = "<group>"; };
 		9A1589EF16D7E1D200E2BC81 /* Filters.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Filters.cpp; sourceTree = "<group>"; };
@@ -150,7 +172,7 @@
 		A88F5A7916E6D0DB00C187E7 /* ControlMidiToFreq.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ControlMidiToFreq.h; sourceTree = "<group>"; };
 		A88F5A7B16E9822600C187E7 /* MonoToStereoPanner.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MonoToStereoPanner.cpp; sourceTree = "<group>"; };
 		A88F5A7C16E9822600C187E7 /* MonoToStereoPanner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MonoToStereoPanner.h; sourceTree = "<group>"; };
-		A88F5A7E16E98B8F00C187E7 /* PannerTest.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PannerTest.h; sourceTree = "<group>"; };
+		A88F5A7E16E98B8F00C187E7 /* PannerTest.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = PannerTest.cpp; sourceTree = "<group>"; };
 		F20FCD4616C566F60039832A /* TableLookupOsc.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TableLookupOsc.cpp; sourceTree = "<group>"; };
 		F20FCD4716C566F60039832A /* TableLookupOsc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TableLookupOsc.h; sourceTree = "<group>"; };
 		F20FCD4916C56EF50039832A /* SineWave.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SineWave.cpp; sourceTree = "<group>"; };
@@ -229,17 +251,17 @@
 		01ACE2F116E57FA300C03828 /* Demo Synths */ = {
 			isa = PBXGroup;
 			children = (
-				01ACE2F216E57FA300C03828 /* ADSRTestSynth.h */,
-				01ACE2F316E57FA300C03828 /* FilteredNoiseSynth.h */,
-				01ACE2F416E57FA300C03828 /* FilterTest.h */,
-				01ACE2F516E57FA300C03828 /* FlexToothLFOTestSynth.h */,
-				01ACE2F616E57FA300C03828 /* FlexToothTestSynth.h */,
-				01ACE2F716E57FA300C03828 /* FMDroneSynth.h */,
-				01ACE2F816E57FA300C03828 /* LFNoiseTestSynth.h */,
-				01ACE2F916E57FA300C03828 /* RectWaveTestSynth.h */,
-				01ACE2FA16E57FA300C03828 /* SineAMSynth.h */,
-				01ACE2FB16E57FA300C03828 /* SineSumSynth.h */,
-				A88F5A7E16E98B8F00C187E7 /* PannerTest.h */,
+				01ACE2F216E57FA300C03828 /* ADSRTestSynth.cpp */,
+				01ACE2F316E57FA300C03828 /* FilteredNoiseSynth.cpp */,
+				01ACE2F416E57FA300C03828 /* FilterTest.cpp */,
+				01ACE2F516E57FA300C03828 /* FlexToothLFOTestSynth.cpp */,
+				01ACE2F616E57FA300C03828 /* FlexToothTestSynth.cpp */,
+				01ACE2F716E57FA300C03828 /* FMDroneSynth.cpp */,
+				01ACE2F816E57FA300C03828 /* LFNoiseTestSynth.cpp */,
+				01ACE2F916E57FA300C03828 /* RectWaveTestSynth.cpp */,
+				01ACE2FA16E57FA300C03828 /* SineAMSynth.cpp */,
+				01ACE2FB16E57FA300C03828 /* SineSumSynth.cpp */,
+				A88F5A7E16E98B8F00C187E7 /* PannerTest.cpp */,
 			);
 			path = "Demo Synths";
 			sourceTree = "<group>";
@@ -631,6 +653,17 @@
 				A88F5A7716E573F900C187E7 /* ControlFloor.cpp in Sources */,
 				A88F5A7A16E6D0DB00C187E7 /* ControlMidiToFreq.cpp in Sources */,
 				A88F5A7D16E9822600C187E7 /* MonoToStereoPanner.cpp in Sources */,
+				A88DA84016F09F5400B41662 /* ADSRTestSynth.cpp in Sources */,
+				A88DA84116F09F5400B41662 /* FilteredNoiseSynth.cpp in Sources */,
+				A88DA84216F09F5400B41662 /* FilterTest.cpp in Sources */,
+				A88DA84316F09F5400B41662 /* FlexToothLFOTestSynth.cpp in Sources */,
+				A88DA84416F09F5400B41662 /* FlexToothTestSynth.cpp in Sources */,
+				A88DA84516F09F5400B41662 /* FMDroneSynth.cpp in Sources */,
+				A88DA84616F09F5400B41662 /* LFNoiseTestSynth.cpp in Sources */,
+				A88DA84716F09F5400B41662 /* RectWaveTestSynth.cpp in Sources */,
+				A88DA84816F09F5400B41662 /* SineAMSynth.cpp in Sources */,
+				A88DA84916F09F5400B41662 /* SineSumSynth.cpp in Sources */,
+				A88DA84A16F09F5400B41662 /* PannerTest.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -665,6 +698,17 @@
 				F25317EC16EBA0A100A8CFDC /* TonicTests.mm in Sources */,
 				F253182916EBA73200A8CFDC /* StereoFixedTestGen.cpp in Sources */,
 				A88DA83C16EBE76300B41662 /* MonoToStereoPanner.cpp in Sources */,
+				A88DA84B16F09F5500B41662 /* ADSRTestSynth.cpp in Sources */,
+				A88DA84C16F09F5500B41662 /* FilteredNoiseSynth.cpp in Sources */,
+				A88DA84D16F09F5500B41662 /* FilterTest.cpp in Sources */,
+				A88DA84E16F09F5500B41662 /* FlexToothLFOTestSynth.cpp in Sources */,
+				A88DA84F16F09F5500B41662 /* FlexToothTestSynth.cpp in Sources */,
+				A88DA85016F09F5500B41662 /* FMDroneSynth.cpp in Sources */,
+				A88DA85116F09F5500B41662 /* LFNoiseTestSynth.cpp in Sources */,
+				A88DA85216F09F5500B41662 /* RectWaveTestSynth.cpp in Sources */,
+				A88DA85316F09F5500B41662 /* SineAMSynth.cpp in Sources */,
+				A88DA85416F09F5500B41662 /* SineSumSynth.cpp in Sources */,
+				A88DA85516F09F5500B41662 /* PannerTest.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
