@@ -30,6 +30,11 @@
 		A86C3F1F16B2B7B8002A50F0 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A86C3F1C16B2B7B8002A50F0 /* AudioToolbox.framework */; };
 		A86C3F2116B2B7B8002A50F0 /* CoreAudio.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A86C3F1E16B2B7B8002A50F0 /* CoreAudio.framework */; };
 		A86C3F2316B2B834002A50F0 /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A86C3F2216B2B834002A50F0 /* Accelerate.framework */; };
+		A86FA81316DF973E00B9DD67 /* ADSR.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A86FA81116DF973E00B9DD67 /* ADSR.cpp */; };
+		A8786A9416DD86E400FC22F8 /* LFNoise.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A8786A9216DD86E400FC22F8 /* LFNoise.cpp */; };
+		A88DA83C16EBE76300B41662 /* MonoToStereoPanner.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A88F5A7B16E9822600C187E7 /* MonoToStereoPanner.cpp */; };
+		A88DA85816F0A64B00B41662 /* StereoDelay.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A88DA85616F0A64B00B41662 /* StereoDelay.cpp */; };
+		A88DA85916F0A64B00B41662 /* StereoDelay.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A88DA85616F0A64B00B41662 /* StereoDelay.cpp */; };
 		A88F5A7416E5729200C187E7 /* ControlConditioner.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A88F5A7216E5729200C187E7 /* ControlConditioner.cpp */; };
 		F20FCD4816C566F60039832A /* TableLookupOsc.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F20FCD4616C566F60039832A /* TableLookupOsc.cpp */; };
 		F20FCD4B16C56EF60039832A /* SineWave.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F20FCD4916C56EF50039832A /* SineWave.cpp */; };
@@ -134,6 +139,12 @@
 		A86C3F1D16B2B7B8002A50F0 /* AudioUnit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioUnit.framework; path = System/Library/Frameworks/AudioUnit.framework; sourceTree = SDKROOT; };
 		A86C3F1E16B2B7B8002A50F0 /* CoreAudio.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreAudio.framework; path = System/Library/Frameworks/CoreAudio.framework; sourceTree = SDKROOT; };
 		A86C3F2216B2B834002A50F0 /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = System/Library/Frameworks/Accelerate.framework; sourceTree = SDKROOT; };
+		A86FA81116DF973E00B9DD67 /* ADSR.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ADSR.cpp; sourceTree = "<group>"; };
+		A86FA81216DF973E00B9DD67 /* ADSR.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ADSR.h; sourceTree = "<group>"; };
+		A8786A9216DD86E400FC22F8 /* LFNoise.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = LFNoise.cpp; sourceTree = "<group>"; };
+		A8786A9316DD86E400FC22F8 /* LFNoise.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LFNoise.h; sourceTree = "<group>"; };
+		A88DA85616F0A64B00B41662 /* StereoDelay.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = StereoDelay.cpp; sourceTree = "<group>"; };
+		A88DA85716F0A64B00B41662 /* StereoDelay.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StereoDelay.h; sourceTree = "<group>"; };
 		A88F5A7216E5729200C187E7 /* ControlConditioner.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ControlConditioner.cpp; sourceTree = "<group>"; };
 		A88F5A7316E5729200C187E7 /* ControlConditioner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ControlConditioner.h; sourceTree = "<group>"; };
 		A88F5A7E16E98B8F00C187E7 /* PannerTest.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PannerTest.h; sourceTree = "<group>"; };
@@ -669,17 +680,10 @@
 				0116165516E2FB2900952A7F /* FlexToothWave.cpp in Sources */,
 				01428B3716E978CA00E67802 /* Noise.cpp in Sources */,
 				A88F5A7416E5729200C187E7 /* ControlConditioner.cpp in Sources */,
-				F27605A716ECF431006684B2 /* ADSR.cpp in Sources */,
-				F27605A816ECF431006684B2 /* LFNoise.cpp in Sources */,
-				F27605A916ECF431006684B2 /* MonoToStereoPanner.cpp in Sources */,
-				F27605AA16ECF431006684B2 /* RampedValue.cpp in Sources */,
-				F27605AB16ECF431006684B2 /* Mixer.cpp in Sources */,
-				F27605AC16ECF431006684B2 /* ControlFloor.cpp in Sources */,
-				F27605AD16ECF431006684B2 /* ControlMidiToFreq.cpp in Sources */,
-				F21E19BA16ECF73900B961BF /* ControlMetro.cpp in Sources */,
-				F2B2B5C516ECFBE900BBECC0 /* ControlPulse.cpp in Sources */,
-				F254909016ED38610022B229 /* DelayUtils.cpp in Sources */,
-				F254909916ED7D140022B229 /* MonoDelay.cpp in Sources */,
+				A88F5A7716E573F900C187E7 /* ControlFloor.cpp in Sources */,
+				A88F5A7A16E6D0DB00C187E7 /* ControlMidiToFreq.cpp in Sources */,
+				A88F5A7D16E9822600C187E7 /* MonoToStereoPanner.cpp in Sources */,
+				A88DA85816F0A64B00B41662 /* StereoDelay.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -707,8 +711,8 @@
 				F253181616EBA32100A8CFDC /* FlexToothWave.cpp in Sources */,
 				F25317EC16EBA0A100A8CFDC /* TonicTests.mm in Sources */,
 				F253182916EBA73200A8CFDC /* StereoFixedTestGen.cpp in Sources */,
-				F27605AE16ECF45E006684B2 /* RampedValue.cpp in Sources */,
-				F27605AF16ECF492006684B2 /* MonoToStereoPanner.cpp in Sources */,
+				A88DA83C16EBE76300B41662 /* MonoToStereoPanner.cpp in Sources */,
+				A88DA85916F0A64B00B41662 /* StereoDelay.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
