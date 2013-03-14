@@ -49,6 +49,10 @@ namespace Tonic {
       ~StereoDelay_();
       void computeSynthesisBlock( const SynthesisContext_ &context );
       void setInput(Generator);
+      void setMix(Generator);
+      void setFeedback(Generator);
+      void setDelayTimeLeft(Generator);
+      void setDelayTimeRight(Generator);
       
     };
     
@@ -62,6 +66,11 @@ namespace Tonic {
   class StereoDelay : public TemplatedEffect<StereoDelay, Tonic_::StereoDelay_>{
     
   public:
+  
+  createGeneratorSetters(StereoDelay, mix, setMix)
+  createGeneratorSetters(StereoDelay, feedback, setFeedback)
+  createGeneratorSetters(StereoDelay, delayTimeLeft, setDelayTimeLeft)
+  createGeneratorSetters(StereoDelay, delayTimeRight, setDelayTimeRight)
 
   };
 }

@@ -25,6 +25,24 @@ namespace Tonic { namespace Tonic_{
     leftDelay.input(inputArg);
     rightDelay.input(inputArg);
   }
+  
+  
+  void StereoDelay_::setMix(Generator arg){
+    leftDelay.mix(arg);
+    rightDelay.mix(arg);
+  };
+  void StereoDelay_::setFeedback(Generator arg){
+    leftDelay.feedback(arg);
+    rightDelay.feedback(arg);
+  };
+  void StereoDelay_::setDelayTimeLeft(Generator arg){
+    leftDelay.delayTime(arg);
+  };
+  void StereoDelay_::setDelayTimeRight(Generator arg){
+    rightDelay.delayTime(arg);
+  };
+  
+  
 } // Namespace Tonic_
   
   

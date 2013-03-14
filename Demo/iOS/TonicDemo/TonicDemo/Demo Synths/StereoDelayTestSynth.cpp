@@ -15,6 +15,7 @@
 #include "RectWave.h"
 #include "ADSR.h"
 #include "ControlRandom.h"
+#include "SineWave.h"
 
 using namespace Tonic;
 
@@ -22,7 +23,7 @@ class StereoDelayTestSynth : public Synth {
   
 public:
   ControlMetro metro = ControlMetro().bpm(100);
-  ControlGenerator freq = ControlRandom().trigger(metro).min(100).max(1000);
+  ControlGenerator freq = ControlValue(300);// ControlRandom().trigger(metro).min(100).max(1000);
   StereoDelayTestSynth(){
     ADSR env = ADSR()
       .attack(0.01)
@@ -31,7 +32,9 @@ public:
       .release(0)
       .doesSustain(false)
       .trigger(metro);
-    outputGen = StereoDelay().input( RectWave().freq( freq ) * env );
+    outputGen = StereoDelay().input( RectWave().freq( freq ) * env )
+      .delayTimeLeft(0.5 + SineWave().freq(0.1) * 0.2)
+      .delayTimeRight(0.5 + SineWave().freq(0.15) * 0.3);
   }
 };
 
