@@ -24,14 +24,14 @@ namespace Tonic { namespace Tonic_{
   {
     if (delayLine_ == NULL){
       
+      if (maxDelayTime < 0) maxDelayTime = delayTime * 1.5;
+      
       if (maxDelayTime < delayTime){
         error("MonoDelay_ - initial delay time is greater than max delay time", true);
       }
       else if (delayTime <= 0){
         error("MonoDelay_ - initial delay time must be greater than zero");
       }
-      
-      if (maxDelayTime < 0) maxDelayTime = delayTime * 1.5;
       
       delayLine_ = new DelayLine(delayTime, maxDelayTime, 1);
     }

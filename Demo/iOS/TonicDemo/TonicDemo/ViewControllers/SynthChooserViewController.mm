@@ -179,6 +179,22 @@
       }
       
       
+      
+      {
+        SynthDemoDef* def = [[SynthDemoDef alloc] init];
+        [synthDefinitions addObject:def];
+        def.synthClassName = @"StereoDelayTestSynth";
+        def.synthDisplayName = @"Stereo Delay";
+        def.synthDescription = @"Repeating note with stereo delay effect";
+        def.synthInstructions = @"";
+        def.synthAction = ^(Tonic::Synth* synth, CGPoint touchPointNorm){
+//          synth->setParameter("feedback", touchPointNorm.x);
+//          synth->setParameter("delayTime", touchPointNorm.y);
+        };
+      }
+      
+      
+      
     }
     return self;
 }

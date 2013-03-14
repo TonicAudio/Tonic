@@ -27,31 +27,39 @@ https://ccrma.stanford.edu/software/stk/
 #include "FixedValue.h"
 #include "MonoToStereoPanner.h"
 #include "MonoDelay.h"
+#include "Adder.h"
+#include "Effect.h"
 
 namespace Tonic {
   
   namespace Tonic_ {
 
-    class StereoDelay_ : public Generator_{
+    class StereoDelay_ : public Effect_{
       
     protected:
     
+      MonoDelay leftDelay;
+      MonoDelay rightDelay;
+      MonoToStereoPanner leftPanner;
+      MonoToStereoPanner rightPanner;
+      Generator outputGen;
       
     public:
       StereoDelay_();
       ~StereoDelay_();
       void computeSynthesisBlock( const SynthesisContext_ &context );
+      void setInput(Generator);
       
     };
     
     inline void StereoDelay_::computeSynthesisBlock(const SynthesisContext_ &context){
-      
-      
+      outputGen.tick(synthesisBlock_, context);
     }
+    
     
   }
   
-  class StereoDelay : public TemplatedGenerator<Tonic_::StereoDelay_>{
+  class StereoDelay : public TemplatedEffect<StereoDelay, Tonic_::StereoDelay_>{
     
   public:
 

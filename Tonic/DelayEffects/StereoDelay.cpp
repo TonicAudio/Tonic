@@ -11,13 +11,20 @@
 namespace Tonic { namespace Tonic_{
   
   StereoDelay_::StereoDelay_(){
-    
+    setIsStereo(true);
+    leftDelay = MonoDelay(0.2).mix(0.5).feedback(0.5);
+    rightDelay = MonoDelay(0.22).mix(0.5).feedback(0.5);
+    outputGen = leftPanner.pan(-1).input(leftDelay) + rightPanner.input(rightDelay).pan(1);
   }
   
   StereoDelay_::~StereoDelay_(){
     
   }
   
+  void StereoDelay_::setInput(Generator inputArg){
+    leftDelay.input(inputArg);
+    rightDelay.input(inputArg);
+  }
 } // Namespace Tonic_
   
   
