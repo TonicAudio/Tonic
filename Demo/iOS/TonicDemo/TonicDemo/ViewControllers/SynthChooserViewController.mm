@@ -188,8 +188,12 @@
         def.synthDescription = @"Repeating note with stereo delay effect";
         def.synthInstructions = @"";
         def.synthAction = ^(Tonic::Synth* synth, CGPoint touchPointNorm){
-//          synth->setParameter("feedback", touchPointNorm.x);
-//          synth->setParameter("delayTime", touchPointNorm.y);
+          synth->setParameter("freq", touchPointNorm.x * 500);
+          synth->setParameter("frequencyRandomAmount", touchPointNorm.y);
+          synth->setParameter("decay", touchPointNorm.y * 0.5);
+          
+          
+          
         };
       }
       

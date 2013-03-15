@@ -15,6 +15,7 @@
 #include "RectWave.h"
 #include "ADSR.h"
 #include "ControlRandom.h"
+#include "Filters.h"
 #include "SineWave.h"
 
 using namespace Tonic;
@@ -23,19 +24,37 @@ class StereoDelayTestSynth : public Synth {
   
 public:
   ControlMetro metro = ControlMetro().bpm(100);
-  ControlGenerator freq = ControlValue(300);// ControlRandom().trigger(metro).min(100).max(1000);
+  ControlGenerator freq = ControlRandom().trigger(metro).min(0).max(1);
   StereoDelayTestSynth(){
+  
+  
+  
+  
+    SineWave filterSine = SineWave().freq(0.01);
     ADSR env = ADSR()
       .attack(0.01)
-      .decay(0.1)
+      .decay( addParameter("decay") )
       .sustain(0)
       .release(0)
       .doesSustain(false)
       .trigger(metro);
-    outputGen = StereoDelay().input( RectWave().freq( freq ) * env )
-      .delayTimeLeft(0.5 + SineWave().freq(0.1) * 0.2)
-      .delayTimeRight(0.5 + SineWave().freq(0.15) * 0.3);
+    outputGen = StereoDelay().input(
+      RectWave().freq(
+        freq * addParameter("frequencyRandomAmount") + 100
+        + addParameter("freq")
+      )
+      * env
+      * SineWave().freq(50)
+    )
+    .delayTimeLeft(0.5)
+    .delayTimeRight(0.55);
+    outputGen = (outputGen * 0.5) >> LPF24().cutoff((filterSine + 1) * 200 + 400);
   }
+  
+  
+  
+  
+  
 };
 
 registerSynth(StereoDelayTestSynth)
