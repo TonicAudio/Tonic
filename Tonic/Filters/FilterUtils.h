@@ -127,6 +127,12 @@ namespace Tonic {
       
     }
 #endif
+
+#ifdef TONIC_DEBUG
+    if(frames(0,0) != frames(0,0)){
+      Tonic::error("Biquad::filter NaN detected.", false);
+    }
+#endif
     
     // copy to synthesis block
     memcpy(&frames[0], &outputVec_(2,0), kSynthesisBlockSize * stride * sizeof(TonicFloat));

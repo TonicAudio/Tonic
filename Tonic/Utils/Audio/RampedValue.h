@@ -105,6 +105,13 @@ namespace Tonic {
           // fill part of the ramp
           #ifdef USE_APPLE_ACCELERATE
           vDSP_vgen(&last_, &target_, fdata, stride, remainder);
+          
+            #ifdef TONIC_DEBUG
+            if(*fdata != *fdata){
+              Tonic::error("RampedValue_::computeSynthesisBlock NaN detected.\n");
+            }
+            #endif
+          
           #else
           TonicFloat val = last_ + inc_;
           for (unsigned int i=0; i<remainder; i++){
@@ -133,6 +140,13 @@ namespace Tonic {
           #ifdef USE_APPLE_ACCELERATE
           TonicFloat segTarget = last_ + synthesisBlock_.frames()*inc_;
           vDSP_vgen(&last_, &segTarget, fdata, stride, nFrames);
+          
+            #ifdef TONIC_DEBUG
+            if(*fdata != *fdata){
+              Tonic::error("RampedValue_::computeSynthesisBlock NaN detected.\n");
+            }
+            #endif
+          
           #else
           TonicFloat val = last_ + inc_;
           for (unsigned int i=0; i<nFrames; i++){
@@ -195,6 +209,14 @@ namespace Tonic {
         inc_ = (TonicFloat)(target_ - last_)/len_;
         finished_ = false;
       }
+      
+      #ifdef TONIC_DEBUG
+      if(inc_ != inc_){
+        Tonic::error("RampedValue_::updateTarget NaN found\n");
+      }
+      #endif
+      
+      
     }
   }
   

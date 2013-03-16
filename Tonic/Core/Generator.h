@@ -67,9 +67,16 @@ namespace Tonic {
         computeSynthesisBlock(context);
         lastFrameIndex_ = context.elapsedFrames;
       }
-      
+    
       // copy synthesis block to frames passed in
       frames.copy(synthesisBlock_);
+      
+      #ifdef TONIC_DEBUG
+      if(frames(0,0) != frames(0,0)){
+        Tonic::error("Generator_::tick NaN detected.");
+      }
+      #endif
+      
     }
     
     inline void Generator_::lockMutex(){
