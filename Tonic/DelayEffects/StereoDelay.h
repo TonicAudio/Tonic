@@ -53,6 +53,7 @@ namespace Tonic {
       void setFeedback(Generator);
       void setDelayTimeLeft(Generator);
       void setDelayTimeRight(Generator);
+      void initialize(float leftDelay, float rightDelay, float maxDelayLeft, float maxDelayRight);
       
     };
     
@@ -66,6 +67,8 @@ namespace Tonic {
   class StereoDelay : public TemplatedEffect<StereoDelay, Tonic_::StereoDelay_>{
     
   public:
+  
+  StereoDelay(float leftDelay, float rightDelay, float maxDelayLeft = -1, float maxDelayRight = -1);
   
   createGeneratorSetters(StereoDelay, mix, setMix)
   createGeneratorSetters(StereoDelay, feedback, setFeedback)

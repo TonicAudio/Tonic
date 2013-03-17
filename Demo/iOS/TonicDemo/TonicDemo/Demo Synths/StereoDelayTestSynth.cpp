@@ -27,10 +27,11 @@ public:
   ControlGenerator freq = ControlRandom().trigger(metro).min(0).max(1);
   StereoDelayTestSynth(){
   
-  
-  
-  
-    SineWave filterSine = SineWave().freq(0.01);
+    Generator tone = RectWave().freq(
+        freq * addParameter("frequencyRandomAmount") + 100
+        + addParameter("freq")
+      ) * SineWave().freq(50);
+    
     ADSR env = ADSR()
       .attack(0.01)
       .decay( addParameter("decay") )
@@ -38,17 +39,16 @@ public:
       .release(0)
       .doesSustain(false)
       .trigger(metro);
-    outputGen = StereoDelay().input(
-      RectWave().freq(
-        freq * addParameter("frequencyRandomAmount") + 100
-        + addParameter("freq")
-      )
-      * env
-      * SineWave().freq(50)
-    )
-    .delayTimeLeft(0.5)
-    .delayTimeRight(0.55);
-    outputGen = (outputGen * 0.5) >> LPF24().cutoff((filterSine + 1) * 200 + 400);
+    
+    StereoDelay delay = StereoDelay(3,3)
+    .delayTimeLeft( 0.5 + SineWave().freq(0.2) * 0.01)
+    .delayTimeRight(0.55 + SineWave().freq(0.23) * 0.01);
+    
+    Generator filterFreq = (SineWave().freq(0.01) + 1) * 200 + 225;
+    
+    LPF24 filter = LPF24().Q(2).cutoff( filterFreq );
+
+    outputGen = filter.input(delay.input( tone * env )) * 0.3;
   }
   
   

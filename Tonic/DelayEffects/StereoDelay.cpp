@@ -12,7 +12,12 @@ namespace Tonic { namespace Tonic_{
   
   StereoDelay_::StereoDelay_(){
     setIsStereo(true);
-    leftDelay = MonoDelay(0.2).mix(0.5).feedback(0.5);
+  }
+  
+  void StereoDelay_::initialize(float leftDelayArg, float rightDelayArg, float maxDelayLeft, float maxDelayRight){
+    maxDelayLeft = maxDelayLeft > 0? maxDelayLeft : 2 * leftDelayArg;
+    maxDelayRight = maxDelayRight > 0? maxDelayRight : 2 * rightDelayArg;
+    leftDelay = MonoDelay(maxDelayLeft).delayTime(leftDelayArg).mix(0.5).feedback(0.5);
     rightDelay = MonoDelay(0.22).mix(0.5).feedback(0.5);
     outputGen = leftPanner.pan(-1).input(leftDelay) + rightPanner.input(rightDelay).pan(1);
   }
@@ -46,5 +51,8 @@ namespace Tonic { namespace Tonic_{
 } // Namespace Tonic_
   
   
+  StereoDelay:: StereoDelay(float leftDelay, float rightDelay, float maxDelayLeft, float maxDelayRight){
+    gen()->initialize(leftDelay, rightDelay, maxDelayLeft, maxDelayRight);
+  }
   
 } // Namespace Tonic
