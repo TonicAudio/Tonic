@@ -100,7 +100,11 @@ namespace Tonic {
         
         // figure out if we will finish the ramp in this tick
         unsigned long remainder = count_ > len_ ? 0 : len_ - count_;
-        if (remainder < synthesisBlock_.frames()){
+        
+        // vDSP_vgen fails (NaN) if size is 1
+        if(remainder == 1){
+          *fdata = target_;
+        }else if (remainder < synthesisBlock_.frames()){
           
           // fill part of the ramp
           #ifdef USE_APPLE_ACCELERATE

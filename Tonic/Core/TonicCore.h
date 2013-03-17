@@ -54,7 +54,7 @@ const TonicFloat TWO_PI       = 2 * PI;
 // Allowing some efficient shortcuts for table lookup using power-of-two tables
 #define BIT32DECPT 1572864.
 
-#define TONIC_DEBUG
+#define TONIC_DEBUG_disabled
 
 namespace Tonic {
   
