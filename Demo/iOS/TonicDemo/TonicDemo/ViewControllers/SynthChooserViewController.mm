@@ -8,16 +8,10 @@
 
 #import "SynthChooserViewController.h"
 #import "SynthTestViewController.h"
-#import "SineSumSynth.h"
-#import "FMDroneSynth.h"
-#import "FilteredNoiseSynth.h"
-#import "LFNoiseTestSynth.h"
-#import "ADSRTestSynth.h"
-#import "RectWaveTestSynth.h"
-#import "FlexToothLFOTestSynth.h"
-#import "PannerTest.h"
-#import "MetroTestSynth.h"
-#import "DelayTestSynth.h"
+#import "TonicCore.h"
+#import "Synth.h"
+
+using namespace Tonic;
 
 @interface SynthDemoDef : NSObject
   @property NSString* synthClassName;
