@@ -79,10 +79,10 @@ namespace Tonic {
 #ifdef USE_APPLE_ACCELERATE
       vDSP_vsmul(freqptr, 1, &rateConstant, freqptr, 1, kSynthesisBlockSize);
 #else
-      for (unsigned int i=0; i<nFrames; i++){
-        *rateBuffer++ *= rateConstant;
+      for (unsigned int i=0; i<kSynthesisBlockSize; i++){
+        *freqptr++ *= rateConstant;
       }
-      rateBuffer = &modFrames[0];
+      freqptr = &freqFrames_[0];
 #endif
       
       sd.d = BIT32DECPT;

@@ -32,7 +32,6 @@ namespace Tonic { namespace Tonic_{
     unlockMutex();
     
     const TonicFloat rateConstant = (TonicFloat)TABLE_SIZE / Tonic::sampleRate();
-    const unsigned int nFrames = synthesisBlock_.frames();
     
     TonicFloat *samples = &synthesisBlock_[0];
     TonicFloat *rateBuffer = &modFrames_[0];
@@ -42,12 +41,12 @@ namespace Tonic { namespace Tonic_{
     
     // pre-multiply rate constant for speed
 #ifdef USE_APPLE_ACCELERATE
-    vDSP_vsmul(rateBuffer, 1, &rateConstant, rateBuffer, 1, nFrames);
+    vDSP_vsmul(rateBuffer, 1, &rateConstant, rateBuffer, 1, kSynthesisBlockSize);
 #else
-    for (unsigned int i=0; i<nFrames; i++){
+    for (unsigned int i=0; i<kSynthesisBlockSize; i++){
       *rateBuffer++ *= rateConstant;
     }
-    rateBuffer = &modFrames[0];
+    rateBuffer = &modFrames_[0];
 #endif
     
     sd.d = BIT32DECPT;
@@ -56,7 +55,7 @@ namespace Tonic { namespace Tonic_{
     
     TonicFloat *tAddr, f1, f2, frac;
     
-    for ( unsigned int i=0; i<synthesisBlock_.frames(); i++ ) {
+    for ( unsigned int i=0; i<kSynthesisBlockSize; i++ ) {
       
       sd.d = ps;
       ps += *rateBuffer++;

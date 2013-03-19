@@ -123,7 +123,7 @@ namespace Tonic {
             for (unsigned int i=0; i<remainder; i++){
               *fdata = val;
               fdata += stride;
-              val += inc;
+              val += inc_;
             }
             #endif
           }
