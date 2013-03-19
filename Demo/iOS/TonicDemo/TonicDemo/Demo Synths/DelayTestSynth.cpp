@@ -1,5 +1,5 @@
 //
-//  DelayTestSynth.h
+//  DelayTestSynth.cpp
 //  TonicDemo
 //
 //  Created by Nick Donaldson on 3/10/13.
@@ -16,6 +16,8 @@
 #include "MonoDelay.h"
 #include "ControlMetro.h"
 #include "ControlPulse.h"
+
+using namespace Tonic;
 
 class DelayTestSynth : public Synth {
   
