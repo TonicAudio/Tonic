@@ -243,7 +243,9 @@ public:
 }
 
 - (void)test109PannerMonoToStereo{
+  
   [self configureStereo:YES];
+  
   MonoToStereoPanner panner = MonoToStereoPanner().pan(-1).input(FixedValue(1));
   panner.tick(testFrames, testContext);
   [self verifyStereoFixedOutputEqualsLeft:1 right:0];

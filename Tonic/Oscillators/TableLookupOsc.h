@@ -29,7 +29,6 @@ https://ccrma.stanford.edu/software/stk/
 #define __Tonic__TableLookupOsc__
 
 #include "Generator.h"
-#include "FixedValue.h"
 
 namespace Tonic {
   

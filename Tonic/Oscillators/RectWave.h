@@ -24,7 +24,6 @@ https://ccrma.stanford.edu/software/stk/
 #define __Tonic__RectWave__
 
 #include "Generator.h"
-#include "FixedValue.h"
 
 #define TONIC_RECT_RES 4096
 

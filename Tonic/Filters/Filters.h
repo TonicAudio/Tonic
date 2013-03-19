@@ -25,7 +25,7 @@ https://ccrma.stanford.edu/software/stk/
 
 #include "Effect.h"
 #include "FilterUtils.h"
-#include "FixedValue.h"
+#include "Generator.h"
 #include "ControlGenerator.h"
 
 /**********************************************
@@ -98,6 +98,7 @@ namespace Tonic {
         unlockMutex();
         
         applyFilter(cCutoff, cQ, synthesisBlock_, context);
+
       }
       
     };

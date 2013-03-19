@@ -54,6 +54,8 @@ const TonicFloat TWO_PI       = 2 * PI;
 // Allowing some efficient shortcuts for table lookup using power-of-two tables
 #define BIT32DECPT 1572864.
 
+#define TONIC_DEBUG_disabled
+
 namespace Tonic {
   
   // -- Global Constants --
@@ -190,6 +192,10 @@ namespace Tonic {
     if (fatal){
       throw TonicException(message);
     }
+  }
+  
+  static void warning(string message){
+    printf("Tonic::warning: %s\n", message.c_str());
   }
   
   static void debug(std::string message){

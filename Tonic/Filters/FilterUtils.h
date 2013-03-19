@@ -9,7 +9,6 @@
 #ifndef TonicDemo_FilterUtils_h
 #define TonicDemo_FilterUtils_h
 
-#include "TonicCore.h"
 #include "TonicFrames.h"
 
 namespace Tonic {
@@ -126,6 +125,12 @@ namespace Tonic {
         out += stride;
       }
       
+    }
+#endif
+
+#ifdef TONIC_DEBUG
+    if(frames(0,0) != frames(0,0)){
+      Tonic::error("Biquad::filter NaN detected.", false);
     }
 #endif
     
