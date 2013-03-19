@@ -176,7 +176,7 @@ namespace Tonic {
      */
     TonicFloat dataRate( void ) const { return dataRate_; };
 
-  private:
+  protected:
 
     TonicFloat *data_;
     TonicFloat dataRate_;
@@ -303,7 +303,7 @@ namespace Tonic {
       
     }
     else{
-      error("Trying to fill frames from a source with a different number of frames");
+      error("Trying to fill frames from a source with a different number of frames", true);
     }
   }
 

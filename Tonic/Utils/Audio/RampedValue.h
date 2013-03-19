@@ -100,11 +100,22 @@ namespace Tonic {
         
         // figure out if we will finish the ramp in this tick
         unsigned long remainder = count_ > len_ ? 0 : len_ - count_;
-        if (remainder < synthesisBlock_.frames()){
+        
+        // vDSP_vgen fails (NaN) if size is 1
+        if(remainder == 1){
+          *fdata = target_;
+        }else if (remainder < synthesisBlock_.frames()){
           
           // fill part of the ramp
           #ifdef USE_APPLE_ACCELERATE
           vDSP_vgen(&last_, &target_, fdata, stride, remainder);
+          
+            #ifdef TONIC_DEBUG
+            if(*fdata != *fdata){
+              Tonic::error("RampedValue_::computeSynthesisBlock NaN detected.\n");
+            }
+            #endif
+          
           #else
           TonicFloat val = last_ + inc_;
           for (unsigned int i=0; i<remainder; i++){
@@ -133,6 +144,13 @@ namespace Tonic {
           #ifdef USE_APPLE_ACCELERATE
           TonicFloat segTarget = last_ + synthesisBlock_.frames()*inc_;
           vDSP_vgen(&last_, &segTarget, fdata, stride, nFrames);
+          
+            #ifdef TONIC_DEBUG
+            if(*fdata != *fdata){
+              Tonic::error("RampedValue_::computeSynthesisBlock NaN detected.\n");
+            }
+            #endif
+          
           #else
           TonicFloat val = last_ + inc_;
           for (unsigned int i=0; i<nFrames; i++){
@@ -180,11 +198,29 @@ namespace Tonic {
     }
 
     inline void RampedValue_::updateTarget(TonicFloat target, unsigned long lengthSamp ){
+      
       target_ = target;
       count_ = 0;
-      len_ = lengthSamp > 0 ? lengthSamp : 1;
-      inc_ = (TonicFloat)(target_ - last_)/len_;
-      finished_ = false;
+      
+      // ND- Fixes bug with NaN when using Accelerate ramps
+      if (lengthSamp == 0 || target_ == last_){
+        last_ = target_;
+        finished_ = true;
+        inc_ = 0;
+      }
+      else{
+        len_ = lengthSamp;
+        inc_ = (TonicFloat)(target_ - last_)/len_;
+        finished_ = false;
+      }
+      
+      #ifdef TONIC_DEBUG
+      if(inc_ != inc_){
+        Tonic::error("RampedValue_::updateTarget NaN found\n");
+      }
+      #endif
+      
+      
     }
   }
   
@@ -192,29 +228,30 @@ namespace Tonic {
     
   public:
       
-    RampedValue(TonicFloat startValue = 0, TonicFloat initLength = 0.05);
+    RampedValue(TonicFloat startValue = 0, TonicFloat initLength = 0.05){
+      target(startValue);
+      value(startValue);
+      length(initLength);
+    }
     
     //! Set target value
     /*!
         Changes to target gen input will create a new ramp from current value to target over the current length
     */
-    RampedValue & target( TonicFloat target );
-    RampedValue & target( ControlGenerator target );
+    createControlGeneratorSetters(RampedValue, target, setTargetGen);
     
     //! Set length before reaching target value, in ms
     /*!
         Changes to length gen input will create a new ramp from current value to target over the provided length
     */
-    RampedValue & length( TonicFloat length );
-    RampedValue & length( ControlGenerator length );
+    createControlGeneratorSetters(RampedValue, length, setLengthGen);
     
     //! Go to value immediately
     /*!
         Changes to the value gen input will abort the current ramp and go immediately to the specified value.
         Output will remain steady until a new target or length is set.
     */
-    RampedValue & value( TonicFloat value);
-    RampedValue & value( ControlGenerator value);
+    createControlGeneratorSetters(RampedValue, value, setValueGen);
 
     bool isFinished();
 

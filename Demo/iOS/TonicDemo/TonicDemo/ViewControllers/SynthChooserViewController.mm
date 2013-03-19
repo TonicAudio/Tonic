@@ -56,25 +56,6 @@ using namespace Tonic;
         };
       }
       
-      {
-        SynthDemoDef* def = [[SynthDemoDef alloc] init];
-        [synthDefinitions addObject:def];
-        def.synthClassName = @"SineAMSynth";
-        def.synthDisplayName = @"Basic Sinusoidal AM";
-        def.synthDescription = @"Basic AM synth with sinusoidal carrier and modulator";
-        def.synthInstructions = @"Swipe up and down to change modulator freq. Swipe L/R to change carrier freq.";
-        def.synthAction = ^(Tonic::Synth* synth, CGPoint touchPointNorm){
-          // arbitrarily chosen midi note numbers (linear pitch)
-          TonicFloat car = Tonic::mtof(Tonic::map(touchPointNorm.x, 0.0f, 1.0f, 47, 88));
-          
-          // exponenetial sweep in frequency, 0-1000 Hz
-          TonicFloat mod = 1000.0f / powf(10.0f, Tonic::map(touchPointNorm.y, 0.0f, 1.0f, 3.0f, 0.0f));
-
-          synth->setParameter("carrierFreq", car);
-          synth->setParameter("modFreq", mod);
-        };
-      }
-      
       
       {
         SynthDemoDef* def = [[SynthDemoDef alloc] init];
@@ -88,21 +69,6 @@ using namespace Tonic;
           synth->setParameter("modIndex", touchPointNorm.y*touchPointNorm.y );
         };
       }
-      
-      {
-        SynthDemoDef* def = [[SynthDemoDef alloc] init];
-        [synthDefinitions addObject:def];
-        def.synthClassName = @"FilterTest";
-        def.synthDisplayName = @"Filter Test";
-        def.synthDescription = @"Basic FM synth with sinusoidal carrier and modulator";
-        def.synthInstructions = @"Test of filter implementations.";
-        def.synthAction = ^(Tonic::Synth* synth, CGPoint touchPointNorm){
-          synth->setParameter("cutoff", 120.0f * powf(10.0f, touchPointNorm.x * 2));
-          synth->setParameter("LFO", touchPointNorm.y*touchPointNorm.y );
-        };
-      }
-      
-      
       
       {
         SynthDemoDef* def = [[SynthDemoDef alloc] init];
@@ -159,19 +125,6 @@ using namespace Tonic;
       {
         SynthDemoDef* def = [[SynthDemoDef alloc] init];
         [synthDefinitions addObject:def];
-        def.synthClassName = @"FlexToothTestSynth";
-        def.synthDisplayName = @"Flexible Sawtooth Oscillator";
-        def.synthDescription = @"Aliasing sawtooth oscillator as audio oscillator";
-        def.synthInstructions = @"X-Axis: slope of sawtooth\nY-Axis: frequency";
-        def.synthAction = ^(Tonic::Synth* synth, CGPoint touchPointNorm){
-          synth->setParameter("freq", mtof(touchPointNorm.y * 24 + 48));
-          synth->setParameter("slope", touchPointNorm.x);
-        };
-      }
-      
-      {
-        SynthDemoDef* def = [[SynthDemoDef alloc] init];
-        [synthDefinitions addObject:def];
         def.synthClassName = @"FlexToothLFOTestSynth";
         def.synthDisplayName = @"Flexible Sawtooth LFO demo";
         def.synthDescription = @"Aliasing sawtooth oscillator as morphable LFO";
@@ -193,6 +146,52 @@ using namespace Tonic;
           synth->setParameter("pan", touchPointNorm.x * 2 - 1);
         };
       }
+      
+      {
+        SynthDemoDef* def = [[SynthDemoDef alloc] init];
+        [synthDefinitions addObject:def];
+        def.synthClassName = @"MetroTestSynth";
+        def.synthDisplayName = @"Metronome to pulse as gate";
+        def.synthDescription = @"Metronome fed to a pulse generator driving ADSR * Noise";
+        def.synthInstructions = @"Y-Axis controls BPM";
+        def.synthAction = ^(Tonic::Synth* synth, CGPoint touchPointNorm){
+          synth->setParameter("bpm", touchPointNorm.y * 1500);
+        };
+      }
+      
+      {
+        SynthDemoDef* def = [[SynthDemoDef alloc] init];
+        [synthDefinitions addObject:def];
+        def.synthClassName = @"DelayTestSynth";
+        def.synthDisplayName = @"Mono Delay";
+        def.synthDescription = @"Repeating note with mono delay effect";
+        def.synthInstructions = @"X-Axis controls feedback\nY-Axis controls delay time";
+        def.synthAction = ^(Tonic::Synth* synth, CGPoint touchPointNorm){
+          synth->setParameter("feedback", touchPointNorm.x);
+          synth->setParameter("delayTime", touchPointNorm.y);
+        };
+      }
+      
+      
+      
+      {
+        SynthDemoDef* def = [[SynthDemoDef alloc] init];
+        [synthDefinitions addObject:def];
+        def.synthClassName = @"StereoDelayTestSynth";
+        def.synthDisplayName = @"Stereo Delay";
+        def.synthDescription = @"Repeating note with stereo delay effect";
+        def.synthInstructions = @"";
+        def.synthAction = ^(Tonic::Synth* synth, CGPoint touchPointNorm){
+          synth->setParameter("freq", touchPointNorm.x * 500);
+          synth->setParameter("frequencyRandomAmount", touchPointNorm.y);
+          synth->setParameter("decay", touchPointNorm.y * 0.5);
+          
+          
+          
+        };
+      }
+      
+      
       
     }
     return self;

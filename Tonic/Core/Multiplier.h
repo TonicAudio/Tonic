@@ -25,7 +25,6 @@ https://ccrma.stanford.edu/software/stk/
 
 #include <vector>
 #include "Generator.h"
-#include "FixedValue.h"
 
 namespace Tonic{
 

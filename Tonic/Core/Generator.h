@@ -67,9 +67,16 @@ namespace Tonic {
         computeSynthesisBlock(context);
         lastFrameIndex_ = context.elapsedFrames;
       }
-      
+    
       // copy synthesis block to frames passed in
       frames.copy(synthesisBlock_);
+      
+      #ifdef TONIC_DEBUG
+      if(frames(0,0) != frames(0,0)){
+        Tonic::error("Generator_::tick NaN detected.");
+      }
+      #endif
+      
     }
     
     inline void Generator_::lockMutex(){
@@ -154,8 +161,7 @@ namespace Tonic {
 // ControlGenerator, and one that accepts a Generator. This macro will automatically build those three
 // setters
 
-// MP -- Is it weird to do an import here? Classes using these macros need access to ControlValue
-#include "ControlValue.h"
+#include "FixedValue.h"
 
 #define createGeneratorSetters(generatorClassName, methodNameInGenerator, methodNameInGenerator_) \
                                                                                         \
@@ -173,18 +179,6 @@ namespace Tonic {
                                                                                         \
   generatorClassName& methodNameInGenerator(ControlGenerator arg){                      \
     return methodNameInGenerator(  FixedValue().setValue(arg) );                        \
-  }
-
-
-#define createControlGeneratorSetters(generatorClassName, methodNameInGenerator, methodNameInGenerator_)\
-\
-  generatorClassName& methodNameInGenerator(float arg){                                 \
-    return methodNameInGenerator( ControlValue(arg) );                                  \
-  }                                                                                     \
-                                                                                        \
-  generatorClassName& methodNameInGenerator(ControlGenerator arg){                      \
-    gen()->methodNameInGenerator_(arg);                                                   \
-    return static_cast<generatorClassName&>(*this);                                     \
   }
 
 

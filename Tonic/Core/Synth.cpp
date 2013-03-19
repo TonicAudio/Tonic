@@ -21,7 +21,6 @@ https://ccrma.stanford.edu/software/stk/
 ++++++++++++++++++++++++++++++++++++++++++++++++++*/
 
 #include "Synth.h"
-#include "SineWave.h"
 
 namespace Tonic {
   

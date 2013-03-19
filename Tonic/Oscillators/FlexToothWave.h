@@ -24,7 +24,6 @@ https://ccrma.stanford.edu/software/stk/
 #define __Tonic__FlexToothWave__
 
 #include "Generator.h"
-#include "FixedValue.h"
 
 #define TONIC_FLEXTOOTH_RES 4096
 
