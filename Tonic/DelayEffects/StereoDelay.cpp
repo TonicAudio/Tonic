@@ -18,7 +18,7 @@ namespace Tonic { namespace Tonic_{
     maxDelayLeft = maxDelayLeft > 0? maxDelayLeft : 2 * leftDelayArg;
     maxDelayRight = maxDelayRight > 0? maxDelayRight : 2 * rightDelayArg;
     leftDelay = MonoDelay(maxDelayLeft).delayTime(leftDelayArg).mix(0.5).feedback(0.5);
-    rightDelay = MonoDelay(0.22).mix(0.5).feedback(0.5);
+    rightDelay = MonoDelay(maxDelayRight).delayTime(rightDelayArg).mix(0.5).feedback(0.5);
     outputGen = leftPanner.pan(-1).input(leftDelay) + rightPanner.input(rightDelay).pan(1);
   }
   
