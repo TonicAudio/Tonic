@@ -101,39 +101,49 @@ namespace Tonic {
         // figure out if we will finish the ramp in this tick
         unsigned long remainder = count_ > len_ ? 0 : len_ - count_;
         
-        // vDSP_vgen fails (NaN) if size is 1
-        if(remainder == 1){
-          *fdata = target_;
-        }else if (remainder < synthesisBlock_.frames()){
+        if (remainder < synthesisBlock_.frames()){
           
-          // fill part of the ramp
-          #ifdef USE_APPLE_ACCELERATE
-          vDSP_vgen(&last_, &target_, fdata, stride, remainder);
-          
-            #ifdef TONIC_DEBUG
-            if(*fdata != *fdata){
-              Tonic::error("RampedValue_::computeSynthesisBlock NaN detected.\n");
+          // vDSP_vgen fails (NaN) if size is 1
+          if(remainder == 1){
+            *fdata = target_;
+          }
+          else {
+            // fill part of the ramp
+            #ifdef USE_APPLE_ACCELERATE
+            vDSP_vgen(&last_, &target_, fdata, stride, remainder);
+            
+              #ifdef TONIC_DEBUG
+              if(*fdata != *fdata){
+                Tonic::error("RampedValue_::computeSynthesisBlock NaN detected.\n");
+              }
+              #endif
+            
+            #else
+            TonicFloat val = last_ + inc_;
+            for (unsigned int i=0; i<remainder; i++){
+              *fdata = val;
+              fdata += stride;
+              val += inc;
             }
             #endif
-          
-          #else
-          TonicFloat val = last_ + inc_;
-          for (unsigned int i=0; i<remainder; i++){
-            *fdata = val;
-            fdata += stride;
           }
-          #endif
           
           // fill the rest of the ramp
-          #ifdef USE_APPLE_ACCELERATE
-          vDSP_vfill(&target_, fdata + remainder, stride, nFrames - remainder);
-          #else
-          for (unsigned int i=remainder; i<nFrames; i++){
+          if (nFrames - remainder == 1){
             *fdata = target_;
-            fdata += stride;
           }
-          #endif
-          
+          else{
+            #ifdef USE_APPLE_ACCELERATE
+            vDSP_vfill(&target_, fdata + remainder, stride, nFrames - remainder);
+            #else
+            for (unsigned int i=remainder; i<nFrames; i++){
+              *fdata = target_;
+              fdata += stride;
+            }
+            #endif
+            
+          }
+
           count_ = len_;
           last_ = target_;
           finished_ = true;
