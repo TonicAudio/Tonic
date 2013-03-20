@@ -746,22 +746,23 @@ OSStatus renderCallback (void						*inRefCon,
     // TODO: convert SInt16 ranges to float ranges.
     if ( sm.numBytesPerSample == 4 ) // then we've already got floats
     {
-      if (sm.isInterleaved){
-      
-          for (int iBuffer=0; iBuffer < ioData->mNumberBuffers; ++iBuffer) {  
-              
-              int thisNumChannels = ioData->mBuffers[iBuffer].mNumberChannels;
-              
-              for (int iChannel = 0; iChannel < thisNumChannels; ++iChannel) {
-                  vDSP_vsadd(sm.outData+iChannel, sm.numOutputChannels, &zero, (float *)ioData->mBuffers[iBuffer].mData, thisNumChannels, inNumberFrames);
-              }
-          }
-      }
-      else{
-          for (int iChannel = 0; iChannel < sm.numOutputChannels; iChannel++){
-            vDSP_vsadd(sm.outData+iChannel, sm.numOutputChannels, &zero, (float *)ioData->mBuffers[iChannel].mData, 1, inNumberFrames);
-          }
-      }
+        if (sm.isInterleaved){
+
+            for (int iBuffer=0; iBuffer < ioData->mNumberBuffers; ++iBuffer) {  
+                
+                int thisNumChannels = ioData->mBuffers[iBuffer].mNumberChannels;
+                
+                for (int iChannel = 0; iChannel < thisNumChannels; ++iChannel) {
+                    vDSP_vsadd(sm.outData+iChannel, sm.numOutputChannels, &zero, (float *)ioData->mBuffers[iBuffer].mData, thisNumChannels, inNumberFrames);
+                }
+            }
+        }
+        else{
+            for (int iChannel = 0; iChannel < sm.numOutputChannels; iChannel++){
+              if (iChannel > ioData->mNumberBuffers) break; // this shouldn't happen
+              vDSP_vsadd(sm.outData+iChannel, sm.numOutputChannels, &zero, (float *)ioData->mBuffers[iChannel].mData, 1, inNumberFrames);
+            }
+        }
       
     }
     else if ( sm.numBytesPerSample == 2 ) // then we need to convert SInt16 -> Float (and also scale)
@@ -782,6 +783,7 @@ OSStatus renderCallback (void						*inRefCon,
         else{
           
           for (int iChannel = 0; iChannel < sm.numOutputChannels; iChannel++){
+            if (iChannel > ioData->mNumberBuffers) break; // this shouldn't happen
               vDSP_vfix16(sm.outData+iChannel, sm.numOutputChannels, (SInt16 *)ioData->mBuffers[iChannel].mData, 1, inNumberFrames);
           }
           
