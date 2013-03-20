@@ -39,7 +39,7 @@ namespace Tonic {
   }
 
   // fill a buffer of floats, assuming the buffer is expecting max/min of 1,-1
-  void BufferFiller::fillBufferOfFloats(float *outData,  UInt32 numFrames, int numChannels){
+  void BufferFiller::fillBufferOfFloats(float *outData,  unsigned int numFrames, unsigned int numChannels){
   
     if(numChannels > outputFrames_.channels()) error("Mismatch in channels sent to Synth::fillBufferOfFloats", true);
     
