@@ -42,11 +42,8 @@ namespace Tonic {
       
       Generator fbkGen_;
       TonicFrames fbkFrames_;
-      
-      // Need to allocate manually to set fixed max delay length
-      // without assinging over another instance, which would inefficiently
-      // allocate DelayLine data twice.
-      DelayLine* delayLine_;
+
+      DelayLine delayLine_;
       
     public:
       
@@ -83,12 +80,12 @@ namespace Tonic {
         
         inSamp = *dptr;
         mix = clamp(*mptr++, 0.0f, 1.0f);
-        outSamp = delayLine_->tickOut();
+        outSamp = delayLine_.tickOut();
         *dptr++ = (inSamp * (1.0f - mix)) + (outSamp * mix);;
         
         // Don't clamp feeback - be careful! Negative feedback could be interesting.
-        delayLine_->tickIn(inSamp + outSamp * (*fbkptr++));
-        delayLine_->advance(*delptr++);
+        delayLine_.tickIn(inSamp + outSamp * (*fbkptr++));
+        delayLine_.advance(*delptr++);
       }
     }
     
