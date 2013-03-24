@@ -15,20 +15,25 @@
 #import "ControlMidiToFreq.h"
 #import "ControlSnapToScale.h"
 #import "StereoDelay.h"
+#import "ADSR.h"
 
 using namespace Tonic;
 
 class ControlSnapToScaleTestSynth : public Synth{
   public:
   ControlSnapToScaleTestSynth(){
+  
+    ControlSnapToScale scaleSnapper =  ControlSnapToScale()
+      .setScale({0,2,3,7,10})
+      .in( addParameter("pitch") * 80 + 10 );
+   
+    ADSR env = ADSR(0.01, 0.1, 0, 0)
+      .trigger(scaleSnapper)
+      .doesSustain(false);
+  
     outputGen = SineWave().freq(
-      ControlMidiToFreq().in(
-        ControlSnapToScale().setScale({0,2,3,7,10})
-        .in(
-          addParameter("pitch") * 80 + 10
-        )
-      )
-    ) * 0.2 >> StereoDelay(1,1.1).feedback(0.1);
+      ControlMidiToFreq().in(scaleSnapper)
+    ) * 0.3 * env >> StereoDelay(0.1,0.11).feedback(0.3);
   }
 };
 
