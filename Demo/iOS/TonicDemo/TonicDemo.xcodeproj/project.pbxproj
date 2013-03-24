@@ -47,7 +47,7 @@
 		F20FCD4B16C56EF60039832A /* SineWave.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F20FCD4916C56EF50039832A /* SineWave.cpp */; };
 		F20FCD5216C58D5B0039832A /* TonicSynthManager.mm in Sources */ = {isa = PBXBuildFile; fileRef = F20FCD5116C58D5B0039832A /* TonicSynthManager.mm */; };
 		F23E244116C6C5F10082EF65 /* BufferFiller.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F23E243F16C6C5F00082EF65 /* BufferFiller.cpp */; };
-		F24864F216FF842400305369 /* Compressor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F24864F016FF842400305369 /* Compressor.cpp */; };
+		F24864F216FF842400305369 /* CompressorLimiter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F24864F016FF842400305369 /* CompressorLimiter.cpp */; };
 		F25317E116EBA0A100A8CFDC /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F25317E016EBA0A100A8CFDC /* SenTestingKit.framework */; };
 		F25317E216EBA0A100A8CFDC /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A86C3EC016B2B4FD002A50F0 /* UIKit.framework */; };
 		F25317E316EBA0A100A8CFDC /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A86C3EC216B2B4FD002A50F0 /* Foundation.framework */; };
@@ -162,8 +162,8 @@
 		F2360A7616C4B4EC00A0AD7A /* Noise.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Noise.h; sourceTree = "<group>"; };
 		F23E243F16C6C5F00082EF65 /* BufferFiller.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = BufferFiller.cpp; sourceTree = "<group>"; };
 		F23E244016C6C5F00082EF65 /* BufferFiller.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BufferFiller.h; sourceTree = "<group>"; };
-		F24864F016FF842400305369 /* Compressor.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Compressor.cpp; sourceTree = "<group>"; };
-		F24864F116FF842400305369 /* Compressor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Compressor.h; sourceTree = "<group>"; };
+		F24864F016FF842400305369 /* CompressorLimiter.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CompressorLimiter.cpp; sourceTree = "<group>"; };
+		F24864F116FF842400305369 /* CompressorLimiter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CompressorLimiter.h; sourceTree = "<group>"; };
 		F25317DF16EBA0A100A8CFDC /* TonicTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TonicTests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
 		F25317E016EBA0A100A8CFDC /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
 		F25317E616EBA0A100A8CFDC /* TonicTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "TonicTests-Info.plist"; sourceTree = "<group>"; };
@@ -472,14 +472,14 @@
 			children = (
 				F276059716ECF431006684B2 /* ADSR.cpp */,
 				F276059816ECF431006684B2 /* ADSR.h */,
+				F24864F016FF842400305369 /* CompressorLimiter.cpp */,
+				F24864F116FF842400305369 /* CompressorLimiter.h */,
 				F276059916ECF431006684B2 /* LFNoise.cpp */,
 				F276059A16ECF431006684B2 /* LFNoise.h */,
 				F276059B16ECF431006684B2 /* MonoToStereoPanner.cpp */,
 				F276059C16ECF431006684B2 /* MonoToStereoPanner.h */,
 				F276059D16ECF431006684B2 /* RampedValue.cpp */,
 				F276059E16ECF431006684B2 /* RampedValue.h */,
-				F24864F016FF842400305369 /* Compressor.cpp */,
-				F24864F116FF842400305369 /* Compressor.h */,
 			);
 			path = Audio;
 			sourceTree = "<group>";
@@ -739,7 +739,7 @@
 				F2759AFF16F7E19900347633 /* ControlPulse.cpp in Sources */,
 				A8742F3916FF666700056E1C /* ControlSnapToScale.cpp in Sources */,
 				A8742F3C16FF694300056E1C /* ControlOctaveSnapTestSynth.cpp in Sources */,
-				F24864F216FF842400305369 /* Compressor.cpp in Sources */,
+				F24864F216FF842400305369 /* CompressorLimiter.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

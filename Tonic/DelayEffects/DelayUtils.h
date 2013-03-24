@@ -27,6 +27,9 @@ namespace Tonic {
     //! MUST be called prior to usage
     void initialize(float initialDelay = 0.5f, float maxDelay = 1.0f, unsigned int channels = 1);
     
+    //! Set whether interpolates or not
+    void setInterpolates( bool doesInterpolate ) { interpolates_ = doesInterpolate; };
+    
     //! Zero delay line
     void clear();
     
@@ -42,15 +45,21 @@ namespace Tonic {
         error("Delay Line is not initialized!", true);
       }
       
-      // Fractional and integral part of read head
-      float fidx;
-      float frac = modf(readHead_, &fidx);
-      int idx_a = ((int)fidx * nChannels_ + channel);
-      int idx_b = idx_a + nChannels_;
-      if (idx_b >= nFrames_) idx_b -= nFrames_;
-      
-      // Linear interpolation, for now. Would like to use allpass - better in general for delay lines.
-      return (data_[idx_a] + frac * (data_[idx_b] - data_[idx_a]));
+      if (interpolates_){
+        // Fractional and integral part of read head
+        float fidx;
+        float frac = modf(readHead_, &fidx);
+        int idx_a = ((int)fidx * nChannels_ + channel);
+        int idx_b = idx_a + nChannels_;
+        if (idx_b >= nFrames_) idx_b -= nFrames_;
+        
+        // Linear interpolation, for now. Would like to use allpass - better in general for delay lines.
+        return (data_[idx_a] + frac * (data_[idx_b] - data_[idx_a]));
+      }
+      else{
+        
+        return (data_[(int)floorf(readHead_)*nChannels_ + channel]);
+      }
     }
     
     //! Tick one sample in (write at write head). Does not advance read/write head.
@@ -92,6 +101,7 @@ namespace Tonic {
   private:
     
     bool  isInitialized_;
+    bool  interpolates_;
     
     long  writeHead_;
     float readHead_;

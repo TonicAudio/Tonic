@@ -15,7 +15,12 @@ namespace Tonic {
   
   //! Calculate coefficient for a pole with given time constant in milliseconds (t60ms)
   inline static TonicFloat msToTc( TonicFloat t60ms ){
-    return expf(-1000.0f/(t60ms * Tonic::sampleRate()));
+    return t60ms > 0.0f ? expf(-1000.0f/(t60ms * Tonic::sampleRate())) : 0.0f;
+  }
+  
+  //! Tick one sample through one-pole filter
+  inline void onePoleTick( TonicFloat input, TonicFloat & output, TonicFloat coef){
+    output = (coef * input) + ((1.0f - coef) * output);
   }
 
   //! Compute coefficients from analog prototype using bilinear transform
