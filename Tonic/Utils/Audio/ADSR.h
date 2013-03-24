@@ -44,6 +44,7 @@ namespace Tonic {
       ControlGenerator sustain;
       ControlGenerator release;
       ControlGenerator sustains;
+      ControlGenerator isLegato;
       
       enum State{
         ATTACK,
@@ -64,6 +65,7 @@ namespace Tonic {
       void setDecay(ControlGenerator gen){decay = gen;}
       void setSustain(ControlGenerator gen){sustain = gen;}
       void setRelease(ControlGenerator gen){release = gen;}
+      void setIsLegato(ControlGenerator gen){isLegato = gen;}
       
       //! Controls whether or not the envelope pauses on the SUSTAIN stage
       void setSustains(ControlGenerator gen){sustains = gen;};
@@ -115,12 +117,15 @@ namespace Tonic {
   class ADSR : public TemplatedGenerator<Tonic_::ADSR_>{
     
     public:
+      ADSR();
+      ADSR(float attack, float decay, float sustain, float release);
       createControlGeneratorSetters(ADSR, trigger, setTrigger);
       createControlGeneratorSetters(ADSR, attack, setAttack);
       createControlGeneratorSetters(ADSR, decay, setDecay);
       createControlGeneratorSetters(ADSR, sustain, setSustain);
       createControlGeneratorSetters(ADSR, release, setRelease);
       createControlGeneratorSetters(ADSR, doesSustain, setSustains);
+      createControlGeneratorSetters(ADSR, legato, setIsLegato);
 
   };
   

@@ -30,6 +30,10 @@
 		A86C3F1F16B2B7B8002A50F0 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A86C3F1C16B2B7B8002A50F0 /* AudioToolbox.framework */; };
 		A86C3F2116B2B7B8002A50F0 /* CoreAudio.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A86C3F1E16B2B7B8002A50F0 /* CoreAudio.framework */; };
 		A86C3F2316B2B834002A50F0 /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A86C3F2216B2B834002A50F0 /* Accelerate.framework */; };
+		A8742F3916FF666700056E1C /* ControlSnapToScale.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A8742F3716FF666700056E1C /* ControlSnapToScale.cpp */; };
+		A8742F3A16FF666700056E1C /* ControlSnapToScale.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A8742F3716FF666700056E1C /* ControlSnapToScale.cpp */; };
+		A8742F3C16FF694300056E1C /* ControlOctaveSnapTestSynth.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A8742F3B16FF694300056E1C /* ControlOctaveSnapTestSynth.cpp */; };
+		A8742F3D16FF694300056E1C /* ControlOctaveSnapTestSynth.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A8742F3B16FF694300056E1C /* ControlOctaveSnapTestSynth.cpp */; };
 		A88DA86616F0AA7400B41662 /* Mixer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F27605A016ECF431006684B2 /* Mixer.cpp */; };
 		A88DA86816F0AA7A00B41662 /* RampedValue.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F276059D16ECF431006684B2 /* RampedValue.cpp */; };
 		A88DA86A16F0AA7E00B41662 /* MonoToStereoPanner.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F276059B16ECF431006684B2 /* MonoToStereoPanner.cpp */; };
@@ -137,6 +141,9 @@
 		A86C3F1D16B2B7B8002A50F0 /* AudioUnit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioUnit.framework; path = System/Library/Frameworks/AudioUnit.framework; sourceTree = SDKROOT; };
 		A86C3F1E16B2B7B8002A50F0 /* CoreAudio.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreAudio.framework; path = System/Library/Frameworks/CoreAudio.framework; sourceTree = SDKROOT; };
 		A86C3F2216B2B834002A50F0 /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = System/Library/Frameworks/Accelerate.framework; sourceTree = SDKROOT; };
+		A8742F3716FF666700056E1C /* ControlSnapToScale.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ControlSnapToScale.cpp; sourceTree = "<group>"; };
+		A8742F3816FF666700056E1C /* ControlSnapToScale.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ControlSnapToScale.h; sourceTree = "<group>"; };
+		A8742F3B16FF694300056E1C /* ControlOctaveSnapTestSynth.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ControlOctaveSnapTestSynth.cpp; sourceTree = "<group>"; };
 		A88DA85A16F0A82800B41662 /* StereoDelay.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = StereoDelay.cpp; sourceTree = "<group>"; };
 		A88DA85B16F0A82800B41662 /* StereoDelay.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StereoDelay.h; sourceTree = "<group>"; };
 		A88DA87716F1F62100B41662 /* ControlRandom.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ControlRandom.cpp; sourceTree = "<group>"; };
@@ -452,6 +459,7 @@
 				F2759AE916F7E0EF00347633 /* SineAMSynth.cpp */,
 				F2759AEA16F7E0EF00347633 /* SineSumSynth.cpp */,
 				F2759AEB16F7E0EF00347633 /* StereoDelayTestSynth.cpp */,
+				A8742F3B16FF694300056E1C /* ControlOctaveSnapTestSynth.cpp */,
 			);
 			path = "Demo Synths";
 			sourceTree = "<group>";
@@ -483,6 +491,8 @@
 		F27605A216ECF431006684B2 /* Control */ = {
 			isa = PBXGroup;
 			children = (
+				A8742F3716FF666700056E1C /* ControlSnapToScale.cpp */,
+				A8742F3816FF666700056E1C /* ControlSnapToScale.h */,
 				F27605A316ECF431006684B2 /* ControlFloor.cpp */,
 				F27605A416ECF431006684B2 /* ControlFloor.h */,
 				F27605A516ECF431006684B2 /* ControlMidiToFreq.cpp */,
@@ -722,6 +732,8 @@
 				F2759AFC16F7E19000347633 /* ControlMidiToFreq.cpp in Sources */,
 				F2759AFD16F7E19400347633 /* ControlMetro.cpp in Sources */,
 				F2759AFF16F7E19900347633 /* ControlPulse.cpp in Sources */,
+				A8742F3916FF666700056E1C /* ControlSnapToScale.cpp in Sources */,
+				A8742F3C16FF694300056E1C /* ControlOctaveSnapTestSynth.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -745,6 +757,8 @@
 				F253182916EBA73200A8CFDC /* StereoFixedTestGen.cpp in Sources */,
 				F2759B0016F7E1D300347633 /* MonoToStereoPanner.cpp in Sources */,
 				F2759B0116F7E1D600347633 /* RampedValue.cpp in Sources */,
+				A8742F3A16FF666700056E1C /* ControlSnapToScale.cpp in Sources */,
+				A8742F3D16FF694300056E1C /* ControlOctaveSnapTestSynth.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

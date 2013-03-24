@@ -34,6 +34,10 @@ namespace Tonic_{
 
 }
 
+  /*!
+    Outputs a random value when triggered, between in and max.
+  */
+
   class ControlRandom : public TemplatedControlGenerator<Tonic_::ControlRandom_>{
   public:
     createControlGeneratorSetters(ControlRandom, max, setMax)

@@ -39,7 +39,6 @@ namespace Tonic{
     }
     
   }
-  
   RampedValue ControlGenerator::ramped(float length){
     return RampedValue( mGen->initialOutput().value, length ).target(*this);
   }
