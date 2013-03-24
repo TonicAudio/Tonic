@@ -196,7 +196,7 @@ using namespace Tonic;
       {
         SynthDemoDef* def = [[SynthDemoDef alloc] init];
         [synthDefinitions addObject:def];
-        def.synthClassName = @"ControlOctaveSnapTestSynth";
+        def.synthClassName = @"ControlSnapToScaleTestSynth";
         def.synthDisplayName = @"Octave Snap";
         def.synthDescription = @"Snap notes to a scale";
         def.synthInstructions = @"Y axis is pitch.";

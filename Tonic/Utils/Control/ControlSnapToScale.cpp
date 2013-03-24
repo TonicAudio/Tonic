@@ -1,25 +1,25 @@
 //
-//  ControlOctaveSnap.cpp
+//  ControlSnapToScale.cpp
 //  Tonic
 //
 //  Created by Morgan Packard on 3/24/13.
 //  Copyright (c) 2013 Morgan Packard. All rights reserved.
 //
 
-#include "ControlOctaveSnap.h"
+#include "ControlSnapToScale.h"
 
 namespace Tonic { namespace Tonic_{
   
-  ControlOctaveSnap_::ControlOctaveSnap_(){
+  ControlSnapToScale_::ControlSnapToScale_(){
     
   }
   
-  ControlOctaveSnap_::~ControlOctaveSnap_(){
+  ControlSnapToScale_::~ControlSnapToScale_(){
     
   }
   
   
-  float ControlOctaveSnap_::snap(float number){
+  float ControlSnapToScale_::snap(float number){
     float ret = 0;
     
     float leastDistance = -1;
@@ -39,7 +39,7 @@ namespace Tonic { namespace Tonic_{
     return ret;
   }
   
-  void ControlOctaveSnap_::computeOutput(const SynthesisContext_ & context){
+  void ControlSnapToScale_::computeOutput(const SynthesisContext_ & context){
     static const int NOTES_PER_OCTAVE = 12;
     
     if( input_.tick(context).status ==  ControlGeneratorStatusHasChanged){
@@ -47,14 +47,20 @@ namespace Tonic { namespace Tonic_{
       
       int octave = number / NOTES_PER_OCTAVE;
       float baseNumber = number - (octave * NOTES_PER_OCTAVE);
-      //float ret = snap(baseNumber, targets) + (octave * NOTES_PER_OCTAVE);
-      lastOutput_.value = snap(baseNumber) + (octave * NOTES_PER_OCTAVE);
+      float snappedValue = snap(baseNumber) + (octave * NOTES_PER_OCTAVE);
+      if(lastOutput_.value != snappedValue ){
+        lastOutput_.value = snappedValue;
+        lastOutput_.status = ControlGeneratorStatusHasChanged;
+      }else{
+        lastOutput_.status = ControlGeneratorStatusHasNotChanged;
+      }
+    }else{
+      lastOutput_.status = ControlGeneratorStatusHasNotChanged;
     }
-    lastOutput_.status = input_.tick(context).status;
   }
   
   
-  void ControlOctaveSnap_::setScale(vector<float> scale){
+  void ControlSnapToScale_::setScale(vector<float> scale){
     mScale = scale;
   }
   

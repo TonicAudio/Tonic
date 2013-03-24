@@ -1,5 +1,5 @@
 //
-//  ControlOctaveSnap.h
+//  ControlSnapToScale.h
 //  Tonic 
 //
 //  Created by Morgan Packard on 3/24/13.
@@ -20,8 +20,8 @@ https://ccrma.stanford.edu/software/stk/
 
 ++++++++++++++++++++++++++++++++++++++++++++++++++*/
 
-#ifndef __Tonic__ControlOctaveSnap__
-#define __Tonic__ControlOctaveSnap__
+#ifndef __Tonic__ControlSnapToScale__
+#define __Tonic__ControlSnapToScale__
 
 #include "ControlConditioner.h"
 
@@ -29,7 +29,7 @@ namespace Tonic {
   
   namespace Tonic_ {
 
-    class ControlOctaveSnap_ : public ControlConditioner_{
+    class ControlSnapToScale_ : public ControlConditioner_{
       
     protected:
       void computeOutput(const SynthesisContext_ & context);
@@ -37,8 +37,8 @@ namespace Tonic {
       float snap(float number);
       
     public:
-      ControlOctaveSnap_();
-      ~ControlOctaveSnap_();
+      ControlSnapToScale_();
+      ~ControlSnapToScale_();
       void setScale(vector<float>);
       
     };
@@ -49,11 +49,11 @@ namespace Tonic {
     Given a scale, snaps the input value to the nearest scale note, in any octave. 
   */
   
-  class ControlOctaveSnap : public TemplatedControlConditioner<ControlOctaveSnap, Tonic_::ControlOctaveSnap_>{
+  class ControlSnapToScale : public TemplatedControlConditioner<ControlSnapToScale, Tonic_::ControlSnapToScale_>{
   
   public:
 
-    ControlOctaveSnap setScale(vector<float> scale){
+    ControlSnapToScale setScale(vector<float> scale){
       gen()->setScale(scale);
       return *this;
     }
@@ -61,6 +61,6 @@ namespace Tonic {
   };
 }
 
-#endif /* defined(__Tonic__ControlOctaveSnap__) */
+#endif /* defined(__Tonic__ControlSnapToScale__) */
 
 

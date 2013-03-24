@@ -1,37 +1,38 @@
 //
-//  ControlOctaveSnapTestSynth.cpp
+//  ControlSnapToScaleTestSynth.cpp
 //  TonicDemo
 //
 //  Created by Morgan Packard on 3/24/13.
 //  Copyright (c) 2013 Morgan Packard. All rights reserved.
 //
 
-#ifndef TonicDemo_ControlOctaveSnapTestSynth_cpp
-#define TonicDemo_ControlOctaveSnapTestSynth_cpp
+#ifndef TonicDemo_ControlSnapToScaleTestSynth_cpp
+#define TonicDemo_ControlSnapToScaleTestSynth_cpp
 
 #import "Synth.h"
-#import "ControlOctaveSnap.h"
+#import "ControlSnapToScale.h"
 #import "SineWave.h"
 #import "ControlMidiToFreq.h"
-#import "ControlOctaveSnap.h"
+#import "ControlSnapToScale.h"
+#import "StereoDelay.h"
 
 using namespace Tonic;
 
-class ControlOctaveSnapTestSynth : public Synth{
+class ControlSnapToScaleTestSynth : public Synth{
   public:
-  ControlOctaveSnapTestSynth(){
+  ControlSnapToScaleTestSynth(){
     outputGen = SineWave().freq(
       ControlMidiToFreq().in(
-        ControlOctaveSnap().setScale({0,2,3,7,10})
+        ControlSnapToScale().setScale({0,2,3,7,10})
         .in(
           addParameter("pitch") * 80 + 10
         )
       )
-    );
+    ) * 0.2 >> StereoDelay(1,1.1).feedback(0.1);
   }
 };
 
 
-registerSynth(ControlOctaveSnapTestSynth);
+registerSynth(ControlSnapToScaleTestSynth);
 
 #endif
