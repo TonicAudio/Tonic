@@ -28,7 +28,7 @@ namespace Tonic { namespace Tonic_{
     switch(state){
       case ATTACK:
         ramp.value(0);
-        ramp.target(mTrigger.tick(context).value);
+        ramp.target(1);
         ramp.length(attack.tick(context).value);
       break;
       case DECAY:
