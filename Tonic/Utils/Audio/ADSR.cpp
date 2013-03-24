@@ -51,5 +51,15 @@ namespace Tonic { namespace Tonic_{
   
 } // Namespace Tonic_
 
+
+  ADSR::ADSR(){}  
+  
+  ADSR::ADSR(float attackArg, float decayArg, float sustainArg, float releaseArg){
+    attack(attackArg);
+    decay(decayArg);
+    sustain(sustainArg);
+    release(releaseArg);
+  }
+
   
 } // Namespace Tonic
