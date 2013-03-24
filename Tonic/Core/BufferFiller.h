@@ -59,7 +59,7 @@ namespace Tonic{
     /*!
         This BufferFiller's outputGen is used to fill an interleaved buffer starting at outData.
     */
-    void fillBufferOfFloats(float *outData,  UInt32 numFrames, int numChannels);
+    void fillBufferOfFloats(float *outData,  unsigned int numFrames, unsigned int numChannels);
     
     //! Returns a reference to outputGen
     inline const Generator & getOutputGenerator() { return outputGen; };

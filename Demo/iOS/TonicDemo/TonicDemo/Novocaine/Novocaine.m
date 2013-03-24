@@ -746,30 +746,49 @@ OSStatus renderCallback (void						*inRefCon,
     // TODO: convert SInt16 ranges to float ranges.
     if ( sm.numBytesPerSample == 4 ) // then we've already got floats
     {
-        
-        for (int iBuffer=0; iBuffer < ioData->mNumberBuffers; ++iBuffer) {  
-            
-            int thisNumChannels = ioData->mBuffers[iBuffer].mNumberChannels;
-            
-            for (int iChannel = 0; iChannel < thisNumChannels; ++iChannel) {
-                vDSP_vsadd(sm.outData+iChannel, sm.numOutputChannels, &zero, (float *)ioData->mBuffers[iBuffer].mData, thisNumChannels, inNumberFrames);
+        if (sm.isInterleaved){
+
+            for (int iBuffer=0; iBuffer < ioData->mNumberBuffers; ++iBuffer) {  
+                
+                int thisNumChannels = ioData->mBuffers[iBuffer].mNumberChannels;
+                
+                for (int iChannel = 0; iChannel < thisNumChannels; ++iChannel) {
+                    vDSP_vsadd(sm.outData+iChannel, sm.numOutputChannels, &zero, (float *)ioData->mBuffers[iBuffer].mData, thisNumChannels, inNumberFrames);
+                }
             }
         }
+        else{
+            for (int iChannel = 0; iChannel < sm.numOutputChannels; iChannel++){
+              if (iChannel > ioData->mNumberBuffers) break; // this shouldn't happen
+              vDSP_vsadd(sm.outData+iChannel, sm.numOutputChannels, &zero, (float *)ioData->mBuffers[iChannel].mData, 1, inNumberFrames);
+            }
+        }
+      
     }
     else if ( sm.numBytesPerSample == 2 ) // then we need to convert SInt16 -> Float (and also scale)
     {
         float scale = (float)INT16_MAX;
         vDSP_vsmul(sm.outData, 1, &scale, sm.outData, 1, inNumberFrames*sm.numOutputChannels);
-        
-        for (int iBuffer=0; iBuffer < ioData->mNumberBuffers; ++iBuffer) {  
-            
-            int thisNumChannels = ioData->mBuffers[iBuffer].mNumberChannels;
-            
-            for (int iChannel = 0; iChannel < thisNumChannels; ++iChannel) {
-                vDSP_vfix16(sm.outData+iChannel, sm.numOutputChannels, (SInt16 *)ioData->mBuffers[iBuffer].mData+iChannel, thisNumChannels, inNumberFrames);
-            }
+      
+        if (sm.isInterleaved){
+          for (int iBuffer=0; iBuffer < ioData->mNumberBuffers; ++iBuffer) {
+              
+              int thisNumChannels = ioData->mBuffers[iBuffer].mNumberChannels;
+              
+              for (int iChannel = 0; iChannel < thisNumChannels; ++iChannel) {
+                  vDSP_vfix16(sm.outData+iChannel, sm.numOutputChannels, (SInt16 *)ioData->mBuffers[iBuffer].mData+iChannel, thisNumChannels, inNumberFrames);
+              }
+          }
         }
-        
+        else{
+          
+          for (int iChannel = 0; iChannel < sm.numOutputChannels; iChannel++){
+            if (iChannel > ioData->mNumberBuffers) break; // this shouldn't happen
+              vDSP_vfix16(sm.outData+iChannel, sm.numOutputChannels, (SInt16 *)ioData->mBuffers[iChannel].mData, 1, inNumberFrames);
+          }
+          
+        }
+      
     }
 
     return noErr;
@@ -783,8 +802,13 @@ void sessionPropertyListener(void *                  inClientData,
 							 UInt32                  inDataSize,
 							 const void *            inData){
 	
+    // Determines the reason for the route change, to ensure that it is not
+    //      because of a category change.
+    CFNumberRef routeChangeReasonRef = (CFNumberRef)CFDictionaryGetValue ((CFDictionaryRef)inData, CFSTR (kAudioSession_AudioRouteChangeKey_Reason) );
+    SInt32 routeChangeReason;
+    CFNumberGetValue (routeChangeReasonRef, kCFNumberSInt32Type, &routeChangeReason);
     
-	if (inID == kAudioSessionProperty_AudioRouteChange)
+    if (inID == kAudioSessionProperty_AudioRouteChange && routeChangeReason != kAudioSessionRouteChangeReason_CategoryChange)
     {
         Novocaine *sm = (Novocaine *)inClientData;
         [sm checkSessionProperties];
