@@ -27,7 +27,7 @@ namespace Tonic { namespace Tonic_{
     state = newState;
     switch(state){
       case ATTACK:
-        ramp.value(0);
+        ramp.value(synthesisBlock_[synthesisBlock_.frames() - 1]);
         ramp.target(1);
         ramp.length(attack.tick(context).value);
       break;
