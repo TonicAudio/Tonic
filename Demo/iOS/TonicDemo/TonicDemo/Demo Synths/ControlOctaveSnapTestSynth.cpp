@@ -29,7 +29,8 @@ class ControlSnapToScaleTestSynth : public Synth{
    
     ADSR env = ADSR(0.01, 0.1, 0, 0)
       .trigger(scaleSnapper)
-      .doesSustain(false);
+      .doesSustain(false)
+      .legato(true);
   
     outputGen = SineWave().freq(
       ControlMidiToFreq().in(scaleSnapper)
