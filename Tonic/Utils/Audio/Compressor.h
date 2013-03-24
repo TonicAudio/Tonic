@@ -34,6 +34,11 @@ namespace Tonic {
       
     protected:
       
+      enum EnvelopeState {
+        ES_ATTACK = 0,
+        ES_RELEASE = 1
+      };
+      
       // Can be overridden for sidechaining
       Generator amplitudeInput_;
       
@@ -41,14 +46,31 @@ namespace Tonic {
       ControlGenerator releaseGen_;
       ControlGenerator threshGen_;
       ControlGenerator ratioGen_;
-      ControlGenerator preDelayGen_;
+      ControlGenerator lookaheadGen_;
       
-      DelayLine preDelayLine_;
+      DelayLine lookaheadDelayLine_;
+      
+      TonicFrames ampInputFrames_;
+      
+      EnvelopeState envState_;
+      
+      TonicFloat ampEnvValue_;
+      TonicFloat gainEnvValue_;
       
     public:
+      
       Compressor_();
       ~Compressor_();
+      
       void computeSynthesisBlock( const SynthesisContext_ &context );
+      
+      // setters
+      void setAmplitudeInput( Generator gen ) { amplitudeInput_ = gen; };
+      void setAttack( ControlGenerator gen ) { attackGen_ = gen; };
+      void setRelease( ControlGenerator gen ) { releaseGen_ = gen; };
+      void setThreshold( ControlGenerator gen ) { threshGen_ = gen; };
+      void setRatio( ControlGenerator gen ) { ratioGen_ = gen; };
+      void setPreDelay( ControlGenerator gen ) { lookaheadGen_ = gen; };
       
     };
     

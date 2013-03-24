@@ -11,7 +11,8 @@
 namespace Tonic { namespace Tonic_{
   
   Compressor_::Compressor_(){
-    
+    setIsStereo(true);
+    lookaheadDelayLine_.initialize(0.001, 0.01, 2);
   }
   
   Compressor_::~Compressor_(){
