@@ -91,18 +91,19 @@ namespace Tonic {
       }
       #endif
       
-      // Tick in input frames
-      input_.tick(synthesisBlock_, context);
-      
       // Iterate through samples
+      unsigned int nChannels = synthesisBlock_.channels();
       TonicFloat ampInputValue, gainValue, gainTarget;
-      TonicFloat * data = &synthesisBlock_[0];
+      TonicFloat * outptr = &synthesisBlock_[0];
+      TonicFloat * dryptr = &dryFrames_[0];
       ampData = &ampInputFrames_[0];
+      
       for (unsigned int i=0; i<kSynthesisBlockSize; i++){
         
         // Tick input into lookahead delay
-        lookaheadDelayLine_.tickIn(*data, 0);
-        lookaheadDelayLine_.tickIn(*(data+1), 1);
+        for (unsigned int i=0; i<nChannels; i++){
+          lookaheadDelayLine_.tickIn(*(dryptr+i), i);
+        }
         
         // Take average of L+R amplitude input
         ampInputValue = *ampData++;
@@ -137,8 +138,9 @@ namespace Tonic {
         }
         
         // apply gain
-        *data++ = lookaheadDelayLine_.tickOut(0) * gainEnvValue_;
-        *data++ = lookaheadDelayLine_.tickOut(1) * gainEnvValue_;
+        for (unsigned int i=0; i<nChannels; i++){
+          *outptr++ = lookaheadDelayLine_.tickOut(i) * gainEnvValue_;
+        }
         
         lookaheadDelayLine_.advance(lookaheadTime);
       }
@@ -153,18 +155,25 @@ namespace Tonic {
     
     //! default input method sets both audio signal and amplitude signal as input
     //! so incoming signal is compressed based on its own amplitude
-    inline Compressor & input( Generator input ){
+    Compressor & input( Generator input ){
       this->gen()->setInput( input );
       this->gen()->setAmplitudeInput( input );
+      this->gen()->setIsStereoOutput( input.isStereoOutput() ); // stereo determined by audio being compressed
+      this->gen()->setIsStereoInput( input.isStereoOutput() );
       return *this;
     }
     
     //! Input for audio to be compressed
-    createGeneratorSetters(Compressor, audioInput, setInput);
+    Compressor & audioInput( Generator input ){
+      this->gen()->setInput( input );
+      return *this;
+    }
     
-    //! Input for amplitude to drive compression
-    createGeneratorSetters(Compressor, sidechainInput, setAmplitudeInput);
-    
+    Compressor & sidechainInput( Generator input ){
+      this->gen()->setAmplitudeInput(input);
+      return *this;
+    }
+
     createControlGeneratorSetters(Compressor, attack, setAttack);
     createControlGeneratorSetters(Compressor, release, setRelease);
     createControlGeneratorSetters(Compressor, threshold, setThreshold); // LINEAR - use dBToLin to convert from dB
@@ -172,7 +181,6 @@ namespace Tonic {
     createControlGeneratorSetters(Compressor, lookahead, setLookahead);
 
     // TODO: RMS
-
     
   };
   
@@ -192,9 +200,11 @@ namespace Tonic {
     
     //! default input method sets both audio signal and amplitude signal as input
     //! so incoming signal is compressed based on its own amplitude
-    inline Limiter & input( Generator input ){
+    Limiter & input( Generator input ){
       this->gen()->setInput( input );
       this->gen()->setAmplitudeInput( input );
+      this->gen()->setIsStereoOutput( input.isStereoOutput() );
+      this->gen()->setIsStereoInput( input.isStereoOutput() );
       return *this;
     }
     

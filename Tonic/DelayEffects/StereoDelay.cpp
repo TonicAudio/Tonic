@@ -11,7 +11,7 @@
 namespace Tonic { namespace Tonic_{
   
   StereoDelay_::StereoDelay_(){
-    setIsStereo(true);
+    setIsStereoOutput(true);
   }
   
   void StereoDelay_::initialize(float leftDelayArg, float rightDelayArg, float maxDelayLeft, float maxDelayRight){

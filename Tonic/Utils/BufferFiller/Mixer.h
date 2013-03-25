@@ -25,8 +25,6 @@ https://ccrma.stanford.edu/software/stk/
 #ifndef __Tonic__Mixer__
 #define __Tonic__Mixer__
 
-#include <vector>
-#include "Adder.h"
 #include "BufferFiller.h"
 
 using std::vector;

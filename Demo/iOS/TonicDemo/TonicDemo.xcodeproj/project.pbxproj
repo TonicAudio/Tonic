@@ -10,6 +10,8 @@
 		0116165516E2FB2900952A7F /* FlexToothWave.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0116165316E2FB2900952A7F /* FlexToothWave.cpp */; };
 		01428B3716E978CA00E67802 /* Noise.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 01428B3616E978CA00E67802 /* Noise.cpp */; };
 		017BF2C916DBAE5200FA1046 /* ControlMultiplier.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 017BF2C716DBAE5000FA1046 /* ControlMultiplier.cpp */; };
+		01C46A6116FFAEC7007EC630 /* ControlDbToLinear.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 01C46A5F16FFAEC7007EC630 /* ControlDbToLinear.cpp */; };
+		01C46A6416FFB0E2007EC630 /* CompressorLimiterTestSynth.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 01C46A6216FFB0E2007EC630 /* CompressorLimiterTestSynth.cpp */; };
 		01F540C116E2EE8B00F85B98 /* RectWave.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 01F540BF16E2EE8B00F85B98 /* RectWave.cpp */; };
 		9A1589F116D7E1D200E2BC81 /* Filters.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9A1589EF16D7E1D200E2BC81 /* Filters.cpp */; };
 		A82437C916CA7470000677C7 /* ControlValue.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A82437C716CA7470000677C7 /* ControlValue.cpp */; };
@@ -108,6 +110,9 @@
 		017BF2C616DB24C400FA1046 /* Tonic.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Tonic.h; sourceTree = "<group>"; };
 		017BF2C716DBAE5000FA1046 /* ControlMultiplier.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ControlMultiplier.cpp; sourceTree = "<group>"; };
 		017BF2C816DBAE5100FA1046 /* ControlMultiplier.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ControlMultiplier.h; sourceTree = "<group>"; };
+		01C46A5F16FFAEC7007EC630 /* ControlDbToLinear.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ControlDbToLinear.cpp; sourceTree = "<group>"; };
+		01C46A6016FFAEC7007EC630 /* ControlDbToLinear.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ControlDbToLinear.h; sourceTree = "<group>"; };
+		01C46A6216FFB0E2007EC630 /* CompressorLimiterTestSynth.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CompressorLimiterTestSynth.cpp; sourceTree = "<group>"; };
 		01F540BF16E2EE8B00F85B98 /* RectWave.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = RectWave.cpp; sourceTree = "<group>"; };
 		01F540C016E2EE8B00F85B98 /* RectWave.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RectWave.h; sourceTree = "<group>"; };
 		9A1589EF16D7E1D200E2BC81 /* Filters.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Filters.cpp; sourceTree = "<group>"; };
@@ -449,6 +454,7 @@
 			isa = PBXGroup;
 			children = (
 				F2759ADE16F7E0EF00347633 /* ADSRTestSynth.cpp */,
+				01C46A6216FFB0E2007EC630 /* CompressorLimiterTestSynth.cpp */,
 				F2759ADF16F7E0EF00347633 /* DelayTestSynth.cpp */,
 				F2759AE016F7E0EF00347633 /* FilteredNoiseSynth.cpp */,
 				F2759AE116F7E0EF00347633 /* FilterTest.cpp */,
@@ -508,6 +514,8 @@
 				F2B2B5C416ECFBE900BBECC0 /* ControlPulse.h */,
 				A88DA87716F1F62100B41662 /* ControlRandom.cpp */,
 				A88DA87816F1F62200B41662 /* ControlRandom.h */,
+				01C46A5F16FFAEC7007EC630 /* ControlDbToLinear.cpp */,
+				01C46A6016FFAEC7007EC630 /* ControlDbToLinear.h */,
 			);
 			path = Control;
 			sourceTree = "<group>";
@@ -740,6 +748,8 @@
 				A8742F3916FF666700056E1C /* ControlSnapToScale.cpp in Sources */,
 				A8742F3C16FF694300056E1C /* ControlOctaveSnapTestSynth.cpp in Sources */,
 				F24864F216FF842400305369 /* CompressorLimiter.cpp in Sources */,
+				01C46A6116FFAEC7007EC630 /* ControlDbToLinear.cpp in Sources */,
+				01C46A6416FFB0E2007EC630 /* CompressorLimiterTestSynth.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

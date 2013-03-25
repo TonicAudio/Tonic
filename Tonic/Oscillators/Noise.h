@@ -117,7 +117,7 @@ namespace Tonic {
   class Noise : public TemplatedGenerator<Tonic_::Noise_>{
   public:
     Noise(bool stereo = false){
-      gen()->setIsStereo(stereo);
+      gen()->setIsStereoOutput(stereo);
     }
   };
 

@@ -34,8 +34,8 @@ namespace Tonic { namespace Tonic_{
   void Multiplier_::in(Generator& generator){
     lockMutex();
     inputs.push_back(generator);
-    if ( generator.isStereo() && !this->isStereo() ){
-      this->setIsStereo(true);
+    if ( generator.isStereoOutput() && !this->isStereoOutput() ){
+      this->setIsStereoOutput(true);
       workSpace.resize(kSynthesisBlockSize, 2, 0);
     }
     unlockMutex();

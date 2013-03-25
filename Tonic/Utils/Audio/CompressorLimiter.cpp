@@ -11,8 +11,7 @@
 namespace Tonic { namespace Tonic_{
   
   Compressor_::Compressor_(){
-    setIsStereo(true);
-    ampInputFrames_.resize(kSynthesisBlockSize, 2, 0);
+    ampInputFrames_.resize(kSynthesisBlockSize, 1, 0);
     lookaheadDelayLine_.initialize(0.001, 0.01, 2);
     lookaheadDelayLine_.setInterpolates(false); // No real need to interpolate here for lookahead
   }

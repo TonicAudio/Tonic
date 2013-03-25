@@ -48,7 +48,7 @@ namespace Tonic{
     
   public:
     BufferFiller();
-    
+        
     //! tick method without context argument passes down this instance's SynthesisContext_
     void tick( TonicFrames& frames );
     

@@ -41,18 +41,20 @@ namespace Tonic {
       void lockMutex();
       void unlockMutex();
       
+      bool isStereoOutput(){ return isStereoOutput_; };
       
       // set stereo/mono - changes number of channels in synthesisBlock_
-      virtual void setIsStereo( bool stereo );
-      bool isStereo(){ return stereo_; };
+      // subclasses should call in constructor to determine channel output
+      virtual void setIsStereoOutput( bool stereo );
       
     protected:
       
       // override point for defining generator behavior
       // subclasses should implment to fill frames with new data
       virtual void computeSynthesisBlock( const SynthesisContext_ &context ) = 0;
+
       
-      bool            stereo_;
+      bool            isStereoOutput_;
       TonicFrames     synthesisBlock_;
       unsigned long   lastFrameIndex_;
       
@@ -128,8 +130,8 @@ namespace Tonic {
       return mGen == r.mGen;
     }
     
-    inline bool isStereo(){
-      return mGen->isStereo();
+    inline bool isStereoOutput(){
+      return mGen->isStereoOutput();
     }
     
     virtual void tick(TonicFrames& frames, const Tonic_::SynthesisContext_ & context){

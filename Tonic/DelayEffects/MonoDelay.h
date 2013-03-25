@@ -68,20 +68,20 @@ namespace Tonic {
       mixGen_.tick(mixFrames_, context);
       fbkGen_.tick(fbkFrames_, context);
       
-      input_.tick(synthesisBlock_, context);
       
       TonicFloat inSamp, outSamp, mix;
-      TonicFloat *dptr = &synthesisBlock_[0];
+      TonicFloat *dryptr = &dryFrames_[0];
+      TonicFloat *outptr = &synthesisBlock_[0];
       TonicFloat *mptr = &mixFrames_[0];
       TonicFloat *fbkptr = &fbkFrames_[0];
       TonicFloat *delptr = &delayTimeFrames_[0];
       
       for (unsigned int i=0; i<kSynthesisBlockSize; i++){
         
-        inSamp = *dptr;
+        inSamp = *dryptr++;
         mix = clamp(*mptr++, 0.0f, 1.0f);
         outSamp = delayLine_.tickOut();
-        *dptr++ = (inSamp * (1.0f - mix)) + (outSamp * mix);;
+        *outptr++ = (inSamp * (1.0f - mix)) + (outSamp * mix);;
         
         // Don't clamp feeback - be careful! Negative feedback could be interesting.
         delayLine_.tickIn(inSamp + outSamp * (*fbkptr++));
