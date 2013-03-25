@@ -43,6 +43,8 @@
 		A88DA87216F0AA9D00B41662 /* MonoDelay.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F254909716ED7D140022B229 /* MonoDelay.cpp */; };
 		A88DA87916F1F62300B41662 /* ControlRandom.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A88DA87716F1F62100B41662 /* ControlRandom.cpp */; };
 		A88F5A7416E5729200C187E7 /* ControlConditioner.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A88F5A7216E5729200C187E7 /* ControlConditioner.cpp */; };
+		A8CF87F01700823200D8F5E1 /* ControlStepper.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A8CF87EE1700823200D8F5E1 /* ControlStepper.cpp */; };
+		A8CF87F11700823200D8F5E1 /* ControlStepper.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A8CF87EE1700823200D8F5E1 /* ControlStepper.cpp */; };
 		F20FCD4816C566F60039832A /* TableLookupOsc.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F20FCD4616C566F60039832A /* TableLookupOsc.cpp */; };
 		F20FCD4B16C56EF60039832A /* SineWave.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F20FCD4916C56EF50039832A /* SineWave.cpp */; };
 		F20FCD5216C58D5B0039832A /* TonicSynthManager.mm in Sources */ = {isa = PBXBuildFile; fileRef = F20FCD5116C58D5B0039832A /* TonicSynthManager.mm */; };
@@ -150,6 +152,8 @@
 		A88DA87816F1F62200B41662 /* ControlRandom.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ControlRandom.h; sourceTree = "<group>"; };
 		A88F5A7216E5729200C187E7 /* ControlConditioner.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ControlConditioner.cpp; sourceTree = "<group>"; };
 		A88F5A7316E5729200C187E7 /* ControlConditioner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ControlConditioner.h; sourceTree = "<group>"; };
+		A8CF87EE1700823200D8F5E1 /* ControlStepper.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ControlStepper.cpp; sourceTree = "<group>"; };
+		A8CF87EF1700823200D8F5E1 /* ControlStepper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ControlStepper.h; sourceTree = "<group>"; };
 		F20FCD4616C566F60039832A /* TableLookupOsc.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TableLookupOsc.cpp; sourceTree = "<group>"; };
 		F20FCD4716C566F60039832A /* TableLookupOsc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TableLookupOsc.h; sourceTree = "<group>"; };
 		F20FCD4916C56EF50039832A /* SineWave.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SineWave.cpp; sourceTree = "<group>"; };
@@ -503,6 +507,8 @@
 				F2B2B5C416ECFBE900BBECC0 /* ControlPulse.h */,
 				A88DA87716F1F62100B41662 /* ControlRandom.cpp */,
 				A88DA87816F1F62200B41662 /* ControlRandom.h */,
+				A8CF87EE1700823200D8F5E1 /* ControlStepper.cpp */,
+				A8CF87EF1700823200D8F5E1 /* ControlStepper.h */,
 			);
 			path = Control;
 			sourceTree = "<group>";
@@ -734,6 +740,7 @@
 				F2759AFF16F7E19900347633 /* ControlPulse.cpp in Sources */,
 				A8742F3916FF666700056E1C /* ControlSnapToScale.cpp in Sources */,
 				A8742F3C16FF694300056E1C /* ControlOctaveSnapTestSynth.cpp in Sources */,
+				A8CF87F01700823200D8F5E1 /* ControlStepper.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -759,6 +766,7 @@
 				F2759B0116F7E1D600347633 /* RampedValue.cpp in Sources */,
 				A8742F3A16FF666700056E1C /* ControlSnapToScale.cpp in Sources */,
 				A8742F3D16FF694300056E1C /* ControlOctaveSnapTestSynth.cpp in Sources */,
+				A8CF87F11700823200D8F5E1 /* ControlStepper.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
