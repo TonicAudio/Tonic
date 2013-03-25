@@ -71,6 +71,11 @@ class ControlSnapToScaleTestSynth : public Synth{
         ControlMidiToFreq().in(scaleSnapper1)
       )
   
+<<<<<<< HEAD
+    outputGen = (SineWave().freq(
+      ControlMidiToFreq().in(scaleSnapper)
+    ) * 0.3 * env) >> StereoDelay(0.1,0.11).feedback(0.3);
+=======
       +
       
       SineWave().freq(
@@ -82,6 +87,7 @@ class ControlSnapToScaleTestSynth : public Synth{
     * 0.3 * env >> StereoDelay(0.1,0.11).feedback(0.3);
     
     
+>>>>>>> Stepper ControlGenerator.
   }
 };
 
