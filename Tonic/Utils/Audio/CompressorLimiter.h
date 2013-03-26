@@ -165,7 +165,7 @@ namespace Tonic {
         
         // Calculate gain value
         
-        if (ampEnvValue_ < threshold){
+        if (ampEnvValue_ <= threshold){
           gainValue = 1.0f;
         }
         else{
@@ -175,7 +175,7 @@ namespace Tonic {
         }
         
         // Smooth gain value
-        if (gainValue < gainEnvValue_){
+        if (gainValue <= gainEnvValue_){
           onePoleTick(gainValue, gainEnvValue_, attackCoef);
         }
         else {
