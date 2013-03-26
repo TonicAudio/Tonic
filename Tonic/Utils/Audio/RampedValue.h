@@ -63,9 +63,7 @@ namespace Tonic {
     };
     
     inline void RampedValue_::computeSynthesisBlock( const SynthesisContext_ & context ){
-    
-      lockMutex();
-      
+          
       // First set the value, if necessary (abort ramp, go immediately to value)
       ControlGeneratorOutput valueOutput = valueGen_.tick(context);
       if(valueOutput.status == ControlGeneratorStatusHasChanged){
@@ -79,8 +77,6 @@ namespace Tonic {
         unsigned long lSamp = lengthOutput.value*Tonic::sampleRate();
         updateTarget(targetOutput.value, lSamp);
       }
-
-      unlockMutex();
       
       TonicFloat *fdata = &synthesisBlock_[0];
       unsigned int nFrames = synthesisBlock_.frames();

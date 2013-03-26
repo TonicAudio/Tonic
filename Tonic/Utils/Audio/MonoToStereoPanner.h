@@ -46,15 +46,17 @@ namespace Tonic {
     };
     
     inline void MonoToStereoPanner_::computeSynthesisBlock(const SynthesisContext_ &context){
-      input_.tick(synthesisBlock_, context);
+      
       TonicFloat *synthBlockWriteHead = &synthesisBlock_[0];
-      TonicFloat *synthBlockEnd = &synthesisBlock_[kSynthesisBlockSize * 2]; // is this safe?
+      TonicFloat *dryFramesReadHead = &dryFrames_[0];
+      
+      unsigned int nSamples = kSynthesisBlockSize;
       float panValue = panControlGen.tick(context).value;
       float leftVol = 1. - max(0., panValue);
       float rightVol = 1 + min(0., panValue);
-      while(synthBlockWriteHead < synthBlockEnd){
-          *(synthBlockWriteHead++) *= leftVol;
-          *(synthBlockWriteHead++) *= rightVol;
+      while (nSamples--){
+          *(synthBlockWriteHead++) = *dryFramesReadHead * leftVol;
+          *(synthBlockWriteHead++) = *dryFramesReadHead++ * rightVol;
       }
     }
     

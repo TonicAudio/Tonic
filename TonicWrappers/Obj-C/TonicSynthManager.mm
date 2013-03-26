@@ -59,6 +59,8 @@ using Tonic::Mixer;
 
 - (void)setupNovocaineOutput
 {
+  mixer.setLimitOutput(true);
+  
   [[Novocaine audioManager] setOutputBlock:^(float *audioToPlay, UInt32 numSamples, UInt32 numChannels) {
       mixer.fillBufferOfFloats(audioToPlay, numSamples, numChannels);
   }];

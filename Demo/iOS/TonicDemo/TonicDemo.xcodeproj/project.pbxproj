@@ -10,6 +10,9 @@
 		0116165516E2FB2900952A7F /* FlexToothWave.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0116165316E2FB2900952A7F /* FlexToothWave.cpp */; };
 		01428B3716E978CA00E67802 /* Noise.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 01428B3616E978CA00E67802 /* Noise.cpp */; };
 		017BF2C916DBAE5200FA1046 /* ControlMultiplier.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 017BF2C716DBAE5000FA1046 /* ControlMultiplier.cpp */; };
+		01C46A6116FFAEC7007EC630 /* ControlDbToLinear.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 01C46A5F16FFAEC7007EC630 /* ControlDbToLinear.cpp */; };
+		01CC91931701402A0047C4A6 /* CompressorTestSynth.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 01CC91911701402A0047C4A6 /* CompressorTestSynth.cpp */; };
+		01CC9196170155040047C4A6 /* CompressorDuckingTestSynth.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 01CC9194170155030047C4A6 /* CompressorDuckingTestSynth.cpp */; };
 		01F540C116E2EE8B00F85B98 /* RectWave.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 01F540BF16E2EE8B00F85B98 /* RectWave.cpp */; };
 		9A1589F116D7E1D200E2BC81 /* Filters.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9A1589EF16D7E1D200E2BC81 /* Filters.cpp */; };
 		A82437C916CA7470000677C7 /* ControlValue.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A82437C716CA7470000677C7 /* ControlValue.cpp */; };
@@ -47,6 +50,7 @@
 		F20FCD4B16C56EF60039832A /* SineWave.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F20FCD4916C56EF50039832A /* SineWave.cpp */; };
 		F20FCD5216C58D5B0039832A /* TonicSynthManager.mm in Sources */ = {isa = PBXBuildFile; fileRef = F20FCD5116C58D5B0039832A /* TonicSynthManager.mm */; };
 		F23E244116C6C5F10082EF65 /* BufferFiller.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F23E243F16C6C5F00082EF65 /* BufferFiller.cpp */; };
+		F24864F216FF842400305369 /* CompressorLimiter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F24864F016FF842400305369 /* CompressorLimiter.cpp */; };
 		F25317E116EBA0A100A8CFDC /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F25317E016EBA0A100A8CFDC /* SenTestingKit.framework */; };
 		F25317E216EBA0A100A8CFDC /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A86C3EC016B2B4FD002A50F0 /* UIKit.framework */; };
 		F25317E316EBA0A100A8CFDC /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A86C3EC216B2B4FD002A50F0 /* Foundation.framework */; };
@@ -70,18 +74,13 @@
 		F256C8E516C5A0BF0096574D /* SynthChooserViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = F256C8E216C5A0BF0096574D /* SynthChooserViewController.mm */; };
 		F256C8E616C5A0BF0096574D /* SynthChooserViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F256C8E316C5A0BF0096574D /* SynthChooserViewController.xib */; };
 		F256C8E816C5A6DF0096574D /* SynthTestViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F256C8E716C5A6DF0096574D /* SynthTestViewController.xib */; };
-		F2759AEC16F7E0EF00347633 /* ADSRTestSynth.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F2759ADE16F7E0EF00347633 /* ADSRTestSynth.cpp */; };
 		F2759AED16F7E0EF00347633 /* DelayTestSynth.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F2759ADF16F7E0EF00347633 /* DelayTestSynth.cpp */; };
 		F2759AEE16F7E0EF00347633 /* FilteredNoiseSynth.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F2759AE016F7E0EF00347633 /* FilteredNoiseSynth.cpp */; };
-		F2759AEF16F7E0EF00347633 /* FilterTest.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F2759AE116F7E0EF00347633 /* FilterTest.cpp */; };
 		F2759AF016F7E0EF00347633 /* FlexToothLFOTestSynth.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F2759AE216F7E0EF00347633 /* FlexToothLFOTestSynth.cpp */; };
 		F2759AF116F7E0EF00347633 /* FlexToothTestSynth.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F2759AE316F7E0EF00347633 /* FlexToothTestSynth.cpp */; };
 		F2759AF216F7E0EF00347633 /* FMDroneSynth.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F2759AE416F7E0EF00347633 /* FMDroneSynth.cpp */; };
 		F2759AF316F7E0EF00347633 /* LFNoiseTestSynth.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F2759AE516F7E0EF00347633 /* LFNoiseTestSynth.cpp */; };
-		F2759AF416F7E0EF00347633 /* MetroTestSynth.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F2759AE616F7E0EF00347633 /* MetroTestSynth.cpp */; };
-		F2759AF516F7E0EF00347633 /* PannerTest.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F2759AE716F7E0EF00347633 /* PannerTest.cpp */; };
 		F2759AF616F7E0EF00347633 /* RectWaveTestSynth.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F2759AE816F7E0EF00347633 /* RectWaveTestSynth.cpp */; };
-		F2759AF716F7E0EF00347633 /* SineAMSynth.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F2759AE916F7E0EF00347633 /* SineAMSynth.cpp */; };
 		F2759AF816F7E0EF00347633 /* SineSumSynth.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F2759AEA16F7E0EF00347633 /* SineSumSynth.cpp */; };
 		F2759AF916F7E0EF00347633 /* StereoDelayTestSynth.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F2759AEB16F7E0EF00347633 /* StereoDelayTestSynth.cpp */; };
 		F2759AFA16F7E17D00347633 /* StereoDelay.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A88DA85A16F0A82800B41662 /* StereoDelay.cpp */; };
@@ -107,6 +106,10 @@
 		017BF2C616DB24C400FA1046 /* Tonic.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Tonic.h; sourceTree = "<group>"; };
 		017BF2C716DBAE5000FA1046 /* ControlMultiplier.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ControlMultiplier.cpp; sourceTree = "<group>"; };
 		017BF2C816DBAE5100FA1046 /* ControlMultiplier.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ControlMultiplier.h; sourceTree = "<group>"; };
+		01C46A5F16FFAEC7007EC630 /* ControlDbToLinear.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ControlDbToLinear.cpp; sourceTree = "<group>"; };
+		01C46A6016FFAEC7007EC630 /* ControlDbToLinear.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ControlDbToLinear.h; sourceTree = "<group>"; };
+		01CC91911701402A0047C4A6 /* CompressorTestSynth.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CompressorTestSynth.cpp; sourceTree = "<group>"; };
+		01CC9194170155030047C4A6 /* CompressorDuckingTestSynth.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CompressorDuckingTestSynth.cpp; sourceTree = "<group>"; };
 		01F540BF16E2EE8B00F85B98 /* RectWave.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = RectWave.cpp; sourceTree = "<group>"; };
 		01F540C016E2EE8B00F85B98 /* RectWave.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RectWave.h; sourceTree = "<group>"; };
 		9A1589EF16D7E1D200E2BC81 /* Filters.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Filters.cpp; sourceTree = "<group>"; };
@@ -161,6 +164,8 @@
 		F2360A7616C4B4EC00A0AD7A /* Noise.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Noise.h; sourceTree = "<group>"; };
 		F23E243F16C6C5F00082EF65 /* BufferFiller.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = BufferFiller.cpp; sourceTree = "<group>"; };
 		F23E244016C6C5F00082EF65 /* BufferFiller.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BufferFiller.h; sourceTree = "<group>"; };
+		F24864F016FF842400305369 /* CompressorLimiter.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CompressorLimiter.cpp; sourceTree = "<group>"; };
+		F24864F116FF842400305369 /* CompressorLimiter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CompressorLimiter.h; sourceTree = "<group>"; };
 		F25317DF16EBA0A100A8CFDC /* TonicTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TonicTests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
 		F25317E016EBA0A100A8CFDC /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
 		F25317E616EBA0A100A8CFDC /* TonicTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "TonicTests-Info.plist"; sourceTree = "<group>"; };
@@ -182,18 +187,13 @@
 		F256C8E716C5A6DF0096574D /* SynthTestViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SynthTestViewController.xib; sourceTree = "<group>"; };
 		F263BD2D16D55AC2008AADA6 /* FilterUtils.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FilterUtils.h; sourceTree = "<group>"; };
 		F263BD2F16D56751008AADA6 /* Effect.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Effect.h; sourceTree = "<group>"; };
-		F2759ADE16F7E0EF00347633 /* ADSRTestSynth.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ADSRTestSynth.cpp; sourceTree = "<group>"; };
 		F2759ADF16F7E0EF00347633 /* DelayTestSynth.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = DelayTestSynth.cpp; sourceTree = "<group>"; };
 		F2759AE016F7E0EF00347633 /* FilteredNoiseSynth.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = FilteredNoiseSynth.cpp; sourceTree = "<group>"; };
-		F2759AE116F7E0EF00347633 /* FilterTest.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = FilterTest.cpp; sourceTree = "<group>"; };
 		F2759AE216F7E0EF00347633 /* FlexToothLFOTestSynth.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = FlexToothLFOTestSynth.cpp; sourceTree = "<group>"; };
 		F2759AE316F7E0EF00347633 /* FlexToothTestSynth.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = FlexToothTestSynth.cpp; sourceTree = "<group>"; };
 		F2759AE416F7E0EF00347633 /* FMDroneSynth.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = FMDroneSynth.cpp; sourceTree = "<group>"; };
 		F2759AE516F7E0EF00347633 /* LFNoiseTestSynth.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = LFNoiseTestSynth.cpp; sourceTree = "<group>"; };
-		F2759AE616F7E0EF00347633 /* MetroTestSynth.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MetroTestSynth.cpp; sourceTree = "<group>"; };
-		F2759AE716F7E0EF00347633 /* PannerTest.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = PannerTest.cpp; sourceTree = "<group>"; };
 		F2759AE816F7E0EF00347633 /* RectWaveTestSynth.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = RectWaveTestSynth.cpp; sourceTree = "<group>"; };
-		F2759AE916F7E0EF00347633 /* SineAMSynth.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SineAMSynth.cpp; sourceTree = "<group>"; };
 		F2759AEA16F7E0EF00347633 /* SineSumSynth.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SineSumSynth.cpp; sourceTree = "<group>"; };
 		F2759AEB16F7E0EF00347633 /* StereoDelayTestSynth.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = StereoDelayTestSynth.cpp; sourceTree = "<group>"; };
 		F276059716ECF431006684B2 /* ADSR.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ADSR.cpp; sourceTree = "<group>"; };
@@ -445,21 +445,18 @@
 		F2759ADD16F7E0EF00347633 /* Demo Synths */ = {
 			isa = PBXGroup;
 			children = (
-				F2759ADE16F7E0EF00347633 /* ADSRTestSynth.cpp */,
+				A8742F3B16FF694300056E1C /* ControlOctaveSnapTestSynth.cpp */,
 				F2759ADF16F7E0EF00347633 /* DelayTestSynth.cpp */,
 				F2759AE016F7E0EF00347633 /* FilteredNoiseSynth.cpp */,
-				F2759AE116F7E0EF00347633 /* FilterTest.cpp */,
 				F2759AE216F7E0EF00347633 /* FlexToothLFOTestSynth.cpp */,
 				F2759AE316F7E0EF00347633 /* FlexToothTestSynth.cpp */,
 				F2759AE416F7E0EF00347633 /* FMDroneSynth.cpp */,
 				F2759AE516F7E0EF00347633 /* LFNoiseTestSynth.cpp */,
-				F2759AE616F7E0EF00347633 /* MetroTestSynth.cpp */,
-				F2759AE716F7E0EF00347633 /* PannerTest.cpp */,
 				F2759AE816F7E0EF00347633 /* RectWaveTestSynth.cpp */,
-				F2759AE916F7E0EF00347633 /* SineAMSynth.cpp */,
 				F2759AEA16F7E0EF00347633 /* SineSumSynth.cpp */,
 				F2759AEB16F7E0EF00347633 /* StereoDelayTestSynth.cpp */,
-				A8742F3B16FF694300056E1C /* ControlOctaveSnapTestSynth.cpp */,
+				01CC91911701402A0047C4A6 /* CompressorTestSynth.cpp */,
+				01CC9194170155030047C4A6 /* CompressorDuckingTestSynth.cpp */,
 			);
 			path = "Demo Synths";
 			sourceTree = "<group>";
@@ -469,6 +466,8 @@
 			children = (
 				F276059716ECF431006684B2 /* ADSR.cpp */,
 				F276059816ECF431006684B2 /* ADSR.h */,
+				F24864F016FF842400305369 /* CompressorLimiter.cpp */,
+				F24864F116FF842400305369 /* CompressorLimiter.h */,
 				F276059916ECF431006684B2 /* LFNoise.cpp */,
 				F276059A16ECF431006684B2 /* LFNoise.h */,
 				F276059B16ECF431006684B2 /* MonoToStereoPanner.cpp */,
@@ -503,6 +502,8 @@
 				F2B2B5C416ECFBE900BBECC0 /* ControlPulse.h */,
 				A88DA87716F1F62100B41662 /* ControlRandom.cpp */,
 				A88DA87816F1F62200B41662 /* ControlRandom.h */,
+				01C46A5F16FFAEC7007EC630 /* ControlDbToLinear.cpp */,
+				01C46A6016FFAEC7007EC630 /* ControlDbToLinear.h */,
 			);
 			path = Control;
 			sourceTree = "<group>";
@@ -713,18 +714,13 @@
 				A88DA87016F0AA9900B41662 /* DelayUtils.cpp in Sources */,
 				A88DA87216F0AA9D00B41662 /* MonoDelay.cpp in Sources */,
 				A88DA87916F1F62300B41662 /* ControlRandom.cpp in Sources */,
-				F2759AEC16F7E0EF00347633 /* ADSRTestSynth.cpp in Sources */,
 				F2759AED16F7E0EF00347633 /* DelayTestSynth.cpp in Sources */,
 				F2759AEE16F7E0EF00347633 /* FilteredNoiseSynth.cpp in Sources */,
-				F2759AEF16F7E0EF00347633 /* FilterTest.cpp in Sources */,
 				F2759AF016F7E0EF00347633 /* FlexToothLFOTestSynth.cpp in Sources */,
 				F2759AF116F7E0EF00347633 /* FlexToothTestSynth.cpp in Sources */,
 				F2759AF216F7E0EF00347633 /* FMDroneSynth.cpp in Sources */,
 				F2759AF316F7E0EF00347633 /* LFNoiseTestSynth.cpp in Sources */,
-				F2759AF416F7E0EF00347633 /* MetroTestSynth.cpp in Sources */,
-				F2759AF516F7E0EF00347633 /* PannerTest.cpp in Sources */,
 				F2759AF616F7E0EF00347633 /* RectWaveTestSynth.cpp in Sources */,
-				F2759AF716F7E0EF00347633 /* SineAMSynth.cpp in Sources */,
 				F2759AF816F7E0EF00347633 /* SineSumSynth.cpp in Sources */,
 				F2759AF916F7E0EF00347633 /* StereoDelayTestSynth.cpp in Sources */,
 				F2759AFA16F7E17D00347633 /* StereoDelay.cpp in Sources */,
@@ -734,6 +730,10 @@
 				F2759AFF16F7E19900347633 /* ControlPulse.cpp in Sources */,
 				A8742F3916FF666700056E1C /* ControlSnapToScale.cpp in Sources */,
 				A8742F3C16FF694300056E1C /* ControlOctaveSnapTestSynth.cpp in Sources */,
+				F24864F216FF842400305369 /* CompressorLimiter.cpp in Sources */,
+				01C46A6116FFAEC7007EC630 /* ControlDbToLinear.cpp in Sources */,
+				01CC91931701402A0047C4A6 /* CompressorTestSynth.cpp in Sources */,
+				01CC9196170155040047C4A6 /* CompressorDuckingTestSynth.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

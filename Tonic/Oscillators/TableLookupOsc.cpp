@@ -27,9 +27,7 @@ namespace Tonic { namespace Tonic_{
   inline void TableLookupOsc_::computeSynthesisBlock( const SynthesisContext_ & context ){
     
     // Update the frequency data
-    lockMutex();
     frequencyGenerator_.tick(modFrames_, context);
-    unlockMutex();
     
     const TonicFloat rateConstant = (TonicFloat)TABLE_SIZE / Tonic::sampleRate();
     
