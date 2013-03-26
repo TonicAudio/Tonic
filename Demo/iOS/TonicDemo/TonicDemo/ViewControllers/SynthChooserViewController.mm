@@ -177,6 +177,18 @@ using namespace Tonic;
           synth->setParameter("compGain", 1.5 - 0.5*touchPointNorm.y*touchPointNorm.y);
         };
       }
+      
+      {
+        SynthDemoDef* def = [[SynthDemoDef alloc] init];
+        [synthDefinitions addObject:def];
+        def.synthClassName = @"CompressorDuckingTestSynth";
+        def.synthDisplayName = @"Ducking Compression";
+        def.synthDescription = @"Compress a bass line in time";
+        def.synthInstructions = @"Y axis is release time";
+        def.synthAction = ^(Tonic::Synth* synth, CGPoint touchPointNorm){
+          synth->setParameter("compRelease", Tonic::map(touchPointNorm.y*touchPointNorm.y, 0, 1, 0.04, 0.1, true));
+        };
+      }
 
     }
     return self;

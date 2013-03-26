@@ -12,6 +12,7 @@
 		017BF2C916DBAE5200FA1046 /* ControlMultiplier.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 017BF2C716DBAE5000FA1046 /* ControlMultiplier.cpp */; };
 		01C46A6116FFAEC7007EC630 /* ControlDbToLinear.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 01C46A5F16FFAEC7007EC630 /* ControlDbToLinear.cpp */; };
 		01CC91931701402A0047C4A6 /* CompressorTestSynth.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 01CC91911701402A0047C4A6 /* CompressorTestSynth.cpp */; };
+		01CC9196170155040047C4A6 /* CompressorDuckingTestSynth.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 01CC9194170155030047C4A6 /* CompressorDuckingTestSynth.cpp */; };
 		01F540C116E2EE8B00F85B98 /* RectWave.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 01F540BF16E2EE8B00F85B98 /* RectWave.cpp */; };
 		9A1589F116D7E1D200E2BC81 /* Filters.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9A1589EF16D7E1D200E2BC81 /* Filters.cpp */; };
 		A82437C916CA7470000677C7 /* ControlValue.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A82437C716CA7470000677C7 /* ControlValue.cpp */; };
@@ -108,6 +109,7 @@
 		01C46A5F16FFAEC7007EC630 /* ControlDbToLinear.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ControlDbToLinear.cpp; sourceTree = "<group>"; };
 		01C46A6016FFAEC7007EC630 /* ControlDbToLinear.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ControlDbToLinear.h; sourceTree = "<group>"; };
 		01CC91911701402A0047C4A6 /* CompressorTestSynth.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CompressorTestSynth.cpp; sourceTree = "<group>"; };
+		01CC9194170155030047C4A6 /* CompressorDuckingTestSynth.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CompressorDuckingTestSynth.cpp; sourceTree = "<group>"; };
 		01F540BF16E2EE8B00F85B98 /* RectWave.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = RectWave.cpp; sourceTree = "<group>"; };
 		01F540C016E2EE8B00F85B98 /* RectWave.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RectWave.h; sourceTree = "<group>"; };
 		9A1589EF16D7E1D200E2BC81 /* Filters.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Filters.cpp; sourceTree = "<group>"; };
@@ -454,6 +456,7 @@
 				F2759AEA16F7E0EF00347633 /* SineSumSynth.cpp */,
 				F2759AEB16F7E0EF00347633 /* StereoDelayTestSynth.cpp */,
 				01CC91911701402A0047C4A6 /* CompressorTestSynth.cpp */,
+				01CC9194170155030047C4A6 /* CompressorDuckingTestSynth.cpp */,
 			);
 			path = "Demo Synths";
 			sourceTree = "<group>";
@@ -730,6 +733,7 @@
 				F24864F216FF842400305369 /* CompressorLimiter.cpp in Sources */,
 				01C46A6116FFAEC7007EC630 /* ControlDbToLinear.cpp in Sources */,
 				01CC91931701402A0047C4A6 /* CompressorTestSynth.cpp in Sources */,
+				01CC9196170155040047C4A6 /* CompressorDuckingTestSynth.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
