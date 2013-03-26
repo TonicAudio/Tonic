@@ -41,10 +41,6 @@ namespace Tonic {
     //! Return one interpolated, delayed sample. Does not advance read/write head.
     inline TonicFloat tickOut(unsigned int channel = 0) {
       
-      if (!isInitialized_){
-        error("Delay Line is not initialized!", true);
-      }
-      
       if (interpolates_){
         // Fractional and integral part of read head
         float fidx;
@@ -58,26 +54,18 @@ namespace Tonic {
       }
       else{
         
-        return (data_[(int)floorf(readHead_)*nChannels_ + channel]);
+        return (data_[((int)(readHead_))*nChannels_ + channel]);
       }
     }
     
     //! Tick one sample in (write at write head). Does not advance read/write head.
     inline void tickIn(TonicFloat sample, unsigned int channel = 0){
       
-      if (!isInitialized_){
-        error("Delay Line is not initialized!", true);
-      }
-      
       data_[writeHead_*nChannels_+channel] = sample;
     }
     
     //! Advance read/write heads based on passed-in delay time.
     inline void advance(float delayTime){
-      
-      if (!isInitialized_){
-        error("Delay Line is not initialized!", true);
-      }
       
       if (++writeHead_ >= nFrames_)
         writeHead_ = 0;

@@ -51,9 +51,9 @@ public:
     
     Generator baseFreq = ((30 + (ControlRandom().min(0).max(2).trigger(metro) >> ControlFloor()) * 3) >> ControlMidiToFreq()).ramped();
     
-    Generator bass = (RectWave().freq( baseFreq ) * 0.5) >> LPF24().cutoff( 300 * (1 + ((SineWave().freq(0.5) + 1) * 0.5)) * 4).Q(1.5);
+    Generator randomBass = (RectWave().freq( baseFreq ) * 0.5) >> LPF24().cutoff( 300 * (1 + ((SineWave().freq(0.1) + 1) * 0.5))).Q(1.5);
         
-    outputGen = (duckingComp.audioInput(bass).sidechainInput(snare) + snare) * 0.3;
+    outputGen = (duckingComp.audioInput(randomBass).sidechainInput(snare) + snare) * 0.5;
   }
   
 };
