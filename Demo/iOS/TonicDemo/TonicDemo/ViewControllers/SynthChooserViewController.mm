@@ -165,6 +165,19 @@ using namespace Tonic;
         };
       }
       
+      {
+        SynthDemoDef* def = [[SynthDemoDef alloc] init];
+        [synthDefinitions addObject:def];
+        def.synthClassName = @"CompressorTestSynth";
+        def.synthDisplayName = @"Dynamic Compressor";
+        def.synthDescription = @"Compress an 808-esque snare";
+        def.synthInstructions = @"Y axis is compression threshold. Ratio is 8:1";
+        def.synthAction = ^(Tonic::Synth* synth, CGPoint touchPointNorm){
+          synth->setParameter("compThresh", 0.5 + touchPointNorm.y*touchPointNorm.y);
+          synth->setParameter("compGain", 1.5 - 0.5*touchPointNorm.y*touchPointNorm.y);
+        };
+      }
+
     }
     return self;
 }

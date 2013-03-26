@@ -20,6 +20,24 @@ namespace Tonic { namespace Tonic_{
     
   }
   
+  // Default inherited input method sets both audio signal and amplitude signal as input
+  // so incoming signal is compressed based on its own amplitude
+  void Compressor_::setInput(Generator input){
+    setAmplitudeInput(input);
+    setAudioInput(input);
+  }
+  
+  void Compressor_::setAudioInput( Generator gen ) {
+    input_ = gen;
+    setIsStereoInput(gen.isStereoOutput());
+    setIsStereoOutput(gen.isStereoOutput());
+  }
+  
+  void Compressor_::setAmplitudeInput( Generator gen ) {
+    amplitudeInput_ = gen;
+    ampInputFrames_.resize(kSynthesisBlockSize, amplitudeInput_.isStereoOutput() ? 2 : 1, 0);
+  }
+  
   void Compressor_::setIsStereo(bool isStereo){
     setIsStereoInput(isStereo);
     setIsStereoOutput(isStereo);

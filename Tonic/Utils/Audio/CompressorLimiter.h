@@ -59,17 +59,14 @@ namespace Tonic {
       ~Compressor_();
 
       // Overridden here for specialized input behavior
+      void setInput( Generator input );
       void tick(TonicFrames &frames, const SynthesisContext_ &context );
-      void tickThrough(TonicFrames &frames);
-      
+      void tickThrough(TonicFrames &frames);      
       void computeSynthesisBlock( const SynthesisContext_ &context );
       
       // setters
-      void setAmplitudeInput( Generator gen ) {
-        amplitudeInput_ = gen;
-        ampInputFrames_.resize(kSynthesisBlockSize, amplitudeInput_.isStereoOutput() ? 2 : 1, 0);
-      };
-      
+      void setAudioInput( Generator gen );
+      void setAmplitudeInput( Generator gen );
       
       void setAttack( ControlGenerator gen ) { attackGen_ = gen; };
       void setRelease( ControlGenerator gen ) { releaseGen_ = gen; };
@@ -122,9 +119,9 @@ namespace Tonic {
       // Tick all scalar parameters
       float attackCoef = t60ToTau(min(0,attackGen_.tick(context).value));
       float releaseCoef = t60ToTau(max(0, releaseGen_.tick(context).value));
-      float threshold = threshGen_.tick(context).value;
-      float ratio = ratioGen_.tick(context).value;
-      float lookaheadTime = lookaheadGen_.tick(context).value;
+      float threshold = max(0,threshGen_.tick(context).value);
+      float ratio = max(0,ratioGen_.tick(context).value);
+      float lookaheadTime = max(0,lookaheadGen_.tick(context).value);
       
       // Absolute value of amplitude frames in prep for amp envelope
       TonicFloat * ampData = &ampInputFrames_[0];
@@ -214,20 +211,7 @@ namespace Tonic {
   class Compressor : public TemplatedEffect<Compressor, Tonic_::Compressor_>{
     
   public:
-    
-    
-    //! default input method sets both audio signal and amplitude signal as input
-    //! so incoming signal is compressed based on its own amplitude
-    Compressor & input( Generator input ){
-      this->gen()->lockMutex();
-      this->gen()->setInput( input );
-      this->gen()->setAmplitudeInput( input );
-      this->gen()->setIsStereoOutput( input.isStereoOutput() ); // stereo determined by audio being compressed
-      this->gen()->setIsStereoInput( input.isStereoOutput() );
-      this->gen()->unlockMutex();
-      return *this;
-    }
-    
+
     //! Input for audio to be compressed
     Compressor & audioInput( Generator input ){
       this->gen()->lockMutex();
