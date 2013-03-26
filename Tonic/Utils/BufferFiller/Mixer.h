@@ -26,6 +26,7 @@ https://ccrma.stanford.edu/software/stk/
 #define __Tonic__Mixer__
 
 #include "BufferFiller.h"
+#include "CompressorLimiter.h"
 
 using std::vector;
 
@@ -36,6 +37,9 @@ namespace Tonic {
   private:
     TonicFrames workSpace_;
     vector<BufferFiller*> inputs_;
+    Limiter limiter_;
+    
+    bool limitOutput_;
     
   public:
     
@@ -43,6 +47,8 @@ namespace Tonic {
     
     void addInput(BufferFiller* input);
     void removeInput(BufferFiller* input);
+    
+    void setLimitOutput(bool shouldLimit) { limitOutput_ = shouldLimit; };
     
     void tick( TonicFrames& frames, const Tonic_::SynthesisContext_ & context );
   };

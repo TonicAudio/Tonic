@@ -10,8 +10,9 @@
 
 namespace Tonic {
   
-  Mixer::Mixer(){
+  Mixer::Mixer() : limitOutput_(false) {
     workSpace_.resize(kSynthesisBlockSize, 2, 0);
+    limiter_.setIsStereo(true);
   }
   
   void Mixer::addInput(BufferFiller* input)
@@ -39,6 +40,10 @@ namespace Tonic {
       // Tick each bufferFiller every time, with our context (for now).
       inputs_[i]->tick(workSpace_, context);
       frames += workSpace_;
+    }
+    
+    if (limitOutput_){
+      limiter_.tickThrough(frames);
     }
   }
 

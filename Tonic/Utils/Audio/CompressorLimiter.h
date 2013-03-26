@@ -51,42 +51,86 @@ namespace Tonic {
       TonicFloat ampEnvValue_;
       TonicFloat gainEnvValue_;
       
+      bool isLimiter_;
+      
     public:
       
       Compressor_();
       ~Compressor_();
+
+      // Overridden here for specialized input behavior
+      void tick(TonicFrames &frames, const SynthesisContext_ &context );
+      void tickThrough(TonicFrames &frames);
       
       void computeSynthesisBlock( const SynthesisContext_ &context );
       
       // setters
-      void setAmplitudeInput( Generator gen ) { amplitudeInput_ = gen; };
+      void setAmplitudeInput( Generator gen ) {
+        amplitudeInput_ = gen;
+        ampInputFrames_.resize(kSynthesisBlockSize, amplitudeInput_.isStereoOutput() ? 2 : 1, 0);
+      };
+      
+      
       void setAttack( ControlGenerator gen ) { attackGen_ = gen; };
       void setRelease( ControlGenerator gen ) { releaseGen_ = gen; };
       void setThreshold( ControlGenerator gen ) { threshGen_ = gen; };
       void setRatio( ControlGenerator gen ) { ratioGen_ = gen; };
       void setLookahead( ControlGenerator gen ) { lookaheadGen_ = gen; };
       
+      //! Set whether is a limiter - limiters will hard clip to threshold in worst case
+      void setIsLimiter( bool isLimiter ) { isLimiter_ = isLimiter; };
+      
+      //! Externally set whether operates on one or two channels
+      void setIsStereo( bool isStereo );
+      
     };
+    
+    inline void Compressor_::tick(TonicFrames &frames, const SynthesisContext_ &context ){
+      
+      // check context to see if we need new frames
+      if (context.elapsedFrames == 0 || lastFrameIndex_ != context.elapsedFrames){
+        lockMutex();
+        input_.tick(dryFrames_, context); // get input frames
+        amplitudeInput_.tick(ampInputFrames_, context); // get amp input frames
+        computeSynthesisBlock(context);
+        unlockMutex();
+        lastFrameIndex_ = context.elapsedFrames;
+      }
+      
+      // copy synthesis block to frames passed in
+      frames.copy(synthesisBlock_);
+      
+#ifdef TONIC_DEBUG
+      if(frames(0,0) != frames(0,0)){
+        Tonic::error("Effect_::tick NaN detected.");
+      }
+#endif
+      
+    }
+    
+    inline void Compressor_::tickThrough(TonicFrames &frames){
+      dryFrames_.copy(frames);
+      ampInputFrames_.copy(frames);
+      computeSynthesisBlock(SynthesisContext_());
+      frames.copy(synthesisBlock_);
+    }
     
     inline void Compressor_::computeSynthesisBlock(const SynthesisContext_ &context){
       
       // Tick all scalar parameters
-      float attackCoef = msToTc(min(0,attackGen_.tick(context).value));
-      float releaseCoef = msToTc(max(0, releaseGen_.tick(context).value));
+      float attackCoef = t60ToTau(min(0,attackGen_.tick(context).value));
+      float releaseCoef = t60ToTau(max(0, releaseGen_.tick(context).value));
       float threshold = threshGen_.tick(context).value;
       float ratio = ratioGen_.tick(context).value;
       float lookaheadTime = lookaheadGen_.tick(context).value;
-      
-      // Tick in amplitude frames
-      amplitudeInput_.tick(ampInputFrames_, context);
       
       // Absolute value of amplitude frames in prep for amp envelope
       TonicFloat * ampData = &ampInputFrames_[0];
       
       #ifdef USE_APPLE_ACCELERATE
-      vDSP_vabs(ampData, 1, ampData, 1, kSynthesisBlockSize*2);
+      vDSP_vabs(ampData, 1, ampData, 1, ampInputFrames_.size());
       #else
-      for (unsigned int i=0; i<kSynthesisBlockSize*2; i++, ampData++){
+      for (unsigned int i=0; i<ampInputFrames_.size(); i++, ampData++){
         *ampData = fabsf(*ampData);
       }
       #endif
@@ -102,13 +146,14 @@ namespace Tonic {
         
         // Tick input into lookahead delay
         for (unsigned int i=0; i<nChannels; i++){
-          lookaheadDelayLine_.tickIn(*(dryptr+i), i);
+          lookaheadDelayLine_.tickIn(*dryptr++, i);
         }
         
-        // Take average of L+R amplitude input
-        ampInputValue = *ampData++;
-        ampInputValue += *ampData++;
-        ampInputValue /= 2.0f;
+        // Get amplitude input value - max of left/right
+        ampInputValue = 0;
+        for (unsigned int i=0; i<nChannels; i++){
+          ampInputValue = max(ampInputValue,*ampData++);
+        }
         
         // Smooth amplitude input
         if (ampInputValue >= ampEnvValue_){
@@ -130,7 +175,7 @@ namespace Tonic {
         }
         
         // Smooth gain value
-        if (gainValue >= gainEnvValue_){
+        if (gainValue < gainEnvValue_){
           onePoleTick(gainValue, gainEnvValue_, attackCoef);
         }
         else {
@@ -145,6 +190,21 @@ namespace Tonic {
         lookaheadDelayLine_.advance(lookaheadTime);
       }
       
+      if (isLimiter_){
+        
+        // clip to threshold in worst case (minor distortion introduced but much preferable to wrapping distortion)
+        #ifdef USE_APPLE_ACCELERATE
+        float negThresh = -threshold;
+        vDSP_vclip(&synthesisBlock_[0], 1, &negThresh, &threshold, &synthesisBlock_[0], 1, synthesisBlock_.size());
+        #else
+        outptr = &synthesisBlock_[0];
+        for (unsigned int i=0; i<synthesisBlock_.size(); i++, outptr++){
+          *outptr = clamp(*outptr, -threshold, threshold);
+        }
+        #endif
+        
+      }
+      
     }
     
   }
@@ -152,6 +212,7 @@ namespace Tonic {
   class Compressor : public TemplatedEffect<Compressor, Tonic_::Compressor_>{
     
   public:
+    
     
     //! default input method sets both audio signal and amplitude signal as input
     //! so incoming signal is compressed based on its own amplitude
@@ -180,7 +241,7 @@ namespace Tonic {
     createControlGeneratorSetters(Compressor, ratio, setRatio);
     createControlGeneratorSetters(Compressor, lookahead, setLookahead);
 
-    // TODO: RMS
+    // TODO: option for RMS
     
   };
   
@@ -190,21 +251,23 @@ namespace Tonic {
     
   public:
     
-    Limiter() {
-      gen()->setAttack(ControlValue(0.0001));
-      gen()->setLookahead(ControlValue(0.001));
-      gen()->setRelease(ControlValue(0.030));
-      gen()->setThreshold(ControlValue(dBToLin(-1.0)));
-      gen()->setRatio(ControlValue(std::numeric_limits<float>::max()));
+    Limiter();
+    
+    void setIsStereo( bool isStereo ){
+      this->gen()->lockMutex();
+      this->gen()->setIsStereo(isStereo);
+      this->gen()->unlockMutex();
     }
     
     //! default input method sets both audio signal and amplitude signal as input
     //! so incoming signal is compressed based on its own amplitude
     Limiter & input( Generator input ){
+      this->gen()->lockMutex();
       this->gen()->setInput( input );
       this->gen()->setAmplitudeInput( input );
       this->gen()->setIsStereoOutput( input.isStereoOutput() );
       this->gen()->setIsStereoInput( input.isStereoOutput() );
+      this->gen()->unlockMutex();
       return *this;
     }
     

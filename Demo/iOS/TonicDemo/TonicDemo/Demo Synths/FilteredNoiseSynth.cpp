@@ -52,7 +52,8 @@ public:
     }
     
     // add a bit of gain for higher Q
-    outputGen = sumOfFilters * (1 + q_v * 0.02);
+    // Using this to test output limiter as well - this will probably clip/wrap if limiter is not working
+    outputGen = sumOfFilters * (1 + q_v * 0.05);
     
   }
 };

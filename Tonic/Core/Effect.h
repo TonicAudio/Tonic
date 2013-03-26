@@ -32,12 +32,9 @@ namespace Tonic {
     
     class Effect_ : public Generator_{
       
-    private:
-      
-      // Keep private - subclasses don't need to access.
-      Generator input_;
-      
     protected:
+      
+      Generator input_;
       
       TonicFrames dryFrames_;
       
@@ -119,6 +116,10 @@ namespace Tonic {
       return static_cast<EffectType&>(*this);
     }
     
+    void tickThrough(TonicFrames & frames){
+      this->gen()->tickThrough(frames);
+    }
+  
   };
   
   // signal flow operator - sets lhs as input to rhs
