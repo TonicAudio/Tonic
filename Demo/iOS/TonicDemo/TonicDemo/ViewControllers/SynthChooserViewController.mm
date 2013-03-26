@@ -95,19 +95,6 @@ using namespace Tonic;
           synth->setParameter("noiseFreq", 0.1 + 1000 * touchPointNorm.y * touchPointNorm.y);
         };
       }
-            
-      {
-        SynthDemoDef* def = [[SynthDemoDef alloc] init];
-        [synthDefinitions addObject:def];
-        def.synthClassName = @"ADSRTestSynth";
-        def.synthDisplayName = @"ADSR";
-        def.synthDescription = @"ADSR";
-        def.synthInstructions = @"Touch movement in top half of screen is keydown. Touch movement in bottom is keyup.";
-        def.synthAction = ^(Tonic::Synth* synth, CGPoint touchPointNorm){
-          float val = touchPointNorm.y > 0.5?  touchPointNorm.y : 0;
-          synth->setParameter("trigger", val);
-        };
-      }
       
       {
         SynthDemoDef* def = [[SynthDemoDef alloc] init];
@@ -138,30 +125,6 @@ using namespace Tonic;
       {
         SynthDemoDef* def = [[SynthDemoDef alloc] init];
         [synthDefinitions addObject:def];
-        def.synthClassName = @"PannerTest";
-        def.synthDisplayName = @"Panner";
-        def.synthDescription = @"Panner";
-        def.synthInstructions = @"X-Axis controls pan";
-        def.synthAction = ^(Tonic::Synth* synth, CGPoint touchPointNorm){
-          synth->setParameter("pan", touchPointNorm.x * 2 - 1);
-        };
-      }
-      
-      {
-        SynthDemoDef* def = [[SynthDemoDef alloc] init];
-        [synthDefinitions addObject:def];
-        def.synthClassName = @"MetroTestSynth";
-        def.synthDisplayName = @"Metronome to pulse as gate";
-        def.synthDescription = @"Metronome fed to a pulse generator driving ADSR * Noise";
-        def.synthInstructions = @"Y-Axis controls BPM";
-        def.synthAction = ^(Tonic::Synth* synth, CGPoint touchPointNorm){
-          synth->setParameter("bpm", touchPointNorm.y * 1500);
-        };
-      }
-      
-      {
-        SynthDemoDef* def = [[SynthDemoDef alloc] init];
-        [synthDefinitions addObject:def];
         def.synthClassName = @"DelayTestSynth";
         def.synthDisplayName = @"Mono Delay";
         def.synthDescription = @"Repeating note with mono delay effect";
@@ -171,7 +134,6 @@ using namespace Tonic;
           synth->setParameter("delayTime", touchPointNorm.y);
         };
       }
-      
       
       
       {
@@ -191,8 +153,6 @@ using namespace Tonic;
         };
       }
       
-      
-      
       {
         SynthDemoDef* def = [[SynthDemoDef alloc] init];
         [synthDefinitions addObject:def];
@@ -204,9 +164,6 @@ using namespace Tonic;
           synth->setParameter("pitch", touchPointNorm.y);
         };
       }
-      
-      
-      
       
     }
     return self;
