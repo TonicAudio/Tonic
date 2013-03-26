@@ -16,8 +16,8 @@
 #include "ControlMetro.h"
 #include "ControlPulse.h"
 #include "ControlRandom.h"
+#include "ControlSnapToScale.h"
 #include "ControlMidiToFreq.h"
-#include "ControlFloor.h"
 
 using namespace Tonic;
 
@@ -40,16 +40,19 @@ public:
     // TODO: Exponential ADSR
     Generator noiseEnv = noiseADSR * noiseADSR;
     
+    // duck the crap out of it
     Compressor duckingComp = Compressor()
-    .attack(0.0001)
+    .attack(0.001)
     .release( addParameter("compRelease", 0.05) )
-    .threshold( dBToLin(-40) )
-    .ratio(32)
+    .threshold( dBToLin(-48) )
+    .ratio(64)
     .lookahead(0.001);
     
     Generator snare =  ( tones * toneADSR ) + ( hpNoise * noiseEnv );
     
-    Generator baseFreq = ((30 + (ControlRandom().min(0).max(2).trigger(metro) >> ControlFloor()) * 3) >> ControlMidiToFreq()).ramped();
+    vector<float> bassScale = {0,7,10,12};
+    
+    Generator baseFreq = ( (30 + (ControlRandom().min(0).max(12).trigger(metro) >> ControlSnapToScale().setScale(bassScale)) ) >> ControlMidiToFreq()).ramped();
     
     Generator randomBass = (RectWave().freq( baseFreq ) * 0.5) >> LPF24().cutoff( 300 * (1 + ((SineWave().freq(0.1) + 1) * 0.5))).Q(1.5);
         
