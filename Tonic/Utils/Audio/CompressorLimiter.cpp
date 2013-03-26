@@ -45,6 +45,16 @@ namespace Tonic { namespace Tonic_{
   }
   
 } // Namespace Tonic_
+  
+  Compressor::Compressor(float threshold, float ratio, float attack, float release, float lookahead)
+  {
+    gen()->setThreshold(ControlValue(threshold));
+    gen()->setRatio(ControlValue(ratio));
+    gen()->setAttack(ControlValue(attack));
+    gen()->setRelease(ControlValue(release));
+    gen()->setLookahead(ControlValue(lookahead));
+  }
+
 
 #pragma mark - Limiter
   
@@ -54,7 +64,7 @@ namespace Tonic { namespace Tonic_{
     gen()->setLookahead(ControlValue(0.003));
     gen()->setRelease(ControlValue(0.080));
     gen()->setThreshold(ControlValue(dBToLin(-0.1)));
-    gen()->setRatio(ControlValue(std::numeric_limits<float>::max()));
+    gen()->setRatio(ControlValue(std::numeric_limits<float>::infinity()));
   }
   
   

@@ -211,6 +211,8 @@ namespace Tonic {
   class Compressor : public TemplatedEffect<Compressor, Tonic_::Compressor_>{
     
   public:
+    
+    Compressor(float threshold = 0.5, float ratio = 2, float attack = 0.001, float release = 0.05, float lookahead = 0.001);
 
     //! Input for audio to be compressed
     Compressor & audioInput( Generator input ){
