@@ -66,7 +66,9 @@ namespace Tonic {
       
       // check context to see if we need new frames
       if (context.elapsedFrames == 0 || lastFrameIndex_ != context.elapsedFrames){
+        lockMutex();
         computeSynthesisBlock(context);
+        unlockMutex();
         lastFrameIndex_ = context.elapsedFrames;
       }
     

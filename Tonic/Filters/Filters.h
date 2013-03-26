@@ -84,9 +84,7 @@ namespace Tonic {
           
         TonicFloat cCutoff;
         TonicFloat cQ;
-        
-        lockMutex();
-        
+                
         // get cutoff and Q inputs
         // For now only using first frame of output. Setting coefficients each frame is very inefficient.
         // Updates every 64-samples is typically fast enough to avoid artifacts when sweeping filters.
@@ -96,9 +94,7 @@ namespace Tonic {
         
         Q_.tick(workspace_, context);
         cQ = max(workspace_(0,0), 0.7071); // clamp to reasonable range
-        
-        unlockMutex();
-        
+                
         applyFilter(cCutoff, cQ, dryFrames_, context);
         
         // copy to block

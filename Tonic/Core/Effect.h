@@ -51,8 +51,12 @@ namespace Tonic {
       virtual void setInput( Generator input ) { input_ = input; };
 
       //! set stereo/mono - changes number of channels in dryFrames_
-      //! subclasses should call in constructor to determine input channel layout
+      /*!
+          subclasses should call in constructor to determine input channel layout
+      */
       virtual void setIsStereoInput( bool stereo );
+      
+    
       bool isStereoInput(){ return isStereoInput_; };
       
       //! Apply effect directly to passed in frames (output in-place)
@@ -95,8 +99,10 @@ namespace Tonic {
     }
     
     inline void Effect_::tickThrough(TonicFrames &frames){
+      lockMutex();
       dryFrames_.copy(frames);
       computeSynthesisBlock(SynthesisContext_());
+      unlockMutex();
       frames.copy(synthesisBlock_);
     }
   }

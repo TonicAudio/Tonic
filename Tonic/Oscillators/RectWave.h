@@ -62,10 +62,8 @@ namespace Tonic {
     inline void RectWave_::computeSynthesisBlock(const SynthesisContext_ &context){
       
       // tick freq and pwm
-      lockMutex();
       freqGen_.tick(freqFrames_, context);
       pwmGen_.tick(pwmFrames_, context);
-      unlockMutex();
       
       const TonicFloat rateConstant =  TONIC_RECT_RES / Tonic::sampleRate();
 

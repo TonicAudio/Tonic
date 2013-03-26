@@ -62,10 +62,8 @@ namespace Tonic {
     inline void FlexToothWave_::computeSynthesisBlock(const SynthesisContext_ &context){
       
       // tick freq and slope inputs
-      lockMutex();
       freqGen_.tick(freqFrames_, context);
       slopeGen_.tick(slopeFrames_, context);
-      unlockMutex();
       
       // calculate the output wave
       TonicFloat const rateConstant = TONIC_FLEXTOOTH_RES/Tonic::sampleRate();

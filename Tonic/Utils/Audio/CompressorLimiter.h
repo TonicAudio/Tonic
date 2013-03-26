@@ -111,7 +111,9 @@ namespace Tonic {
     inline void Compressor_::tickThrough(TonicFrames &frames){
       dryFrames_.copy(frames);
       ampInputFrames_.copy(frames);
+      lockMutex();
       computeSynthesisBlock(SynthesisContext_());
+      unlockMutex();
       frames.copy(synthesisBlock_);
     }
     
@@ -217,21 +219,28 @@ namespace Tonic {
     //! default input method sets both audio signal and amplitude signal as input
     //! so incoming signal is compressed based on its own amplitude
     Compressor & input( Generator input ){
+      this->gen()->lockMutex();
       this->gen()->setInput( input );
       this->gen()->setAmplitudeInput( input );
       this->gen()->setIsStereoOutput( input.isStereoOutput() ); // stereo determined by audio being compressed
       this->gen()->setIsStereoInput( input.isStereoOutput() );
+      this->gen()->unlockMutex();
       return *this;
     }
     
     //! Input for audio to be compressed
     Compressor & audioInput( Generator input ){
+      this->gen()->lockMutex();
       this->gen()->setInput( input );
+      this->gen()->unlockMutex();
       return *this;
     }
     
+    //! Input for audio for compression amplitude envelope
     Compressor & sidechainInput( Generator input ){
+      this->gen()->lockMutex();
       this->gen()->setAmplitudeInput(input);
+      this->gen()->unlockMutex();
       return *this;
     }
 
