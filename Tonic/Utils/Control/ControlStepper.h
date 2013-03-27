@@ -52,6 +52,9 @@ namespace Tonic {
     
   }
   
+  //! On trigger, outputs a value beginning at start, and incrementing by step toward end, then back again.
+  // Currently it steps up and down. In the future an option may be added to snap back to the beginning.
+  
   class ControlStepper : public TemplatedControlGenerator<Tonic_::ControlStepper_>{
     
   public:
