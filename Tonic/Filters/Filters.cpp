@@ -22,11 +22,6 @@ namespace Tonic { namespace Tonic_{
     workspace_.resize(kSynthesisBlockSize, 1, 0);
   }
   
-  // pretty sure this can be removed. It looks like a duplicate of what happens in Generator_::setIsStereo
-  void Filter_::setIsStereo(bool stereo){
-    Generator_::setIsStereo(stereo);
-    workspace_.resize(kSynthesisBlockSize, stereo ? 2 : 1, 0);
-  }
   
 } // Namespace Tonic_
   

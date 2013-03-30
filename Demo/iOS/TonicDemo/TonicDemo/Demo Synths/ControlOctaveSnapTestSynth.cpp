@@ -32,9 +32,9 @@ class ControlSnapToScaleTestSynth : public Synth{
       .doesSustain(false)
       .legato(true);
   
-    outputGen = SineWave().freq(
+    outputGen = (SineWave().freq(
       ControlMidiToFreq().in(scaleSnapper)
-    ) * 0.3 * env >> StereoDelay(0.1,0.11).feedback(0.3);
+    ) * 0.3 * env) >> StereoDelay(0.1,0.11).feedback(0.3);
   }
 };
 

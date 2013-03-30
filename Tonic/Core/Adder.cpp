@@ -33,8 +33,8 @@ namespace Tonic{ namespace Tonic_ {
   
   void Adder_::in(Generator generator){
     inputs.push_back( generator );
-    if ( generator.isStereo() && !this->isStereo() ){
-      this->setIsStereo(true);
+    if ( generator.isStereoOutput() && !this->isStereoOutput() ){
+      this->setIsStereoOutput(true);
       workSpace.resize(kSynthesisBlockSize, 2, 0);
     }
   }

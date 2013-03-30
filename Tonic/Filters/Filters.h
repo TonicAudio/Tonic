@@ -66,7 +66,12 @@ namespace Tonic {
       
       Filter_();
       
-      void setIsStereo(bool stereo);
+      // Overridden so output channel layout follows input channel layout
+      virtual void setInput( Generator input ){
+        Effect_::setInput(input);
+        setIsStereoInput(input.isStereoOutput());
+        setIsStereoOutput(input.isStereoOutput());
+      }
       
       inline void setCutoff( Generator cutoff ){ cutoff_ = cutoff; };
       inline void setQ( Generator Q ){ Q_ = Q; }
@@ -79,9 +84,7 @@ namespace Tonic {
           
         TonicFloat cCutoff;
         TonicFloat cQ;
-        
-        lockMutex();
-        
+                
         // get cutoff and Q inputs
         // For now only using first frame of output. Setting coefficients each frame is very inefficient.
         // Updates every 64-samples is typically fast enough to avoid artifacts when sweeping filters.
@@ -91,13 +94,11 @@ namespace Tonic {
         
         Q_.tick(workspace_, context);
         cQ = max(workspace_(0,0), 0.7071); // clamp to reasonable range
+                
+        applyFilter(cCutoff, cQ, dryFrames_, context);
         
-        // get input frames
-        input_.tick(synthesisBlock_, context);
-        
-        unlockMutex();
-        
-        applyFilter(cCutoff, cQ, synthesisBlock_, context);
+        // copy to block
+        synthesisBlock_.copy(dryFrames_);
 
       }
       

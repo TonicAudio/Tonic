@@ -39,7 +39,7 @@ public:
       .feedback( addParameter("feedback", 0.0f, 0.0f, 0.8f).ramped() )
       .mix( 0.35 );
     
-    outputGen = (((osc >> filt) * aEnv * 0.25f) >> delay);
+    outputGen = (((osc >> filt) * aEnv * 0.5) >> delay);
   }
   
 };

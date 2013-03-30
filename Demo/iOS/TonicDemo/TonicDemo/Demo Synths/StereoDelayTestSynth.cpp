@@ -52,9 +52,6 @@ public:
   }
   
   
-  
-  
-  
 };
 
 registerSynth(StereoDelayTestSynth)

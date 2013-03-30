@@ -36,16 +36,75 @@ namespace Tonic {
       
       Generator input_;
       
+      TonicFrames dryFrames_;
+      
+      bool isStereoInput_;
+      
     public:
       
-      virtual inline void setInput( Generator input ) {
-        input_ = input;
-        if(input.isStereo() && !isStereo()){
-          setIsStereo(input.isStereo());
-        }
-      };
+      Effect_(){
+        dryFrames_.resize(kSynthesisBlockSize, 1, 0);
+      }
       
+      virtual void tick(TonicFrames &frames, const SynthesisContext_ &context );
+      
+      virtual void setInput( Generator input ) { input_ = input; };
+
+      //! set stereo/mono - changes number of channels in dryFrames_
+      /*!
+          subclasses should call in constructor to determine input channel layout
+      */
+      virtual void setIsStereoInput( bool stereo );
+      
+    
+      bool isStereoInput(){ return isStereoInput_; };
+      
+      //! Apply effect directly to passed in frames (output in-place)
+      /*!
+          DO NOT mix calls to tick() with calls to tickThrough(). Result is undefined.
+      */
+      virtual void tickThrough( TonicFrames & frames );
+
     };
+    
+    
+    inline void Effect_::setIsStereoInput(bool stereo)
+    {
+      if (stereo != isStereoInput_){
+        dryFrames_.resize(kSynthesisBlockSize, stereo ? 2 : 1, 0);
+      }
+      isStereoInput_ = stereo;
+    }
+    
+    // Overridden tick - pre-ticks input to fill dryFrames_.
+    // subclasses don't need to tick input - dryFrames_ contains "dry" input
+    inline void Effect_::tick(TonicFrames &frames, const SynthesisContext_ &context ){
+      
+      // check context to see if we need new frames
+      if (context.elapsedFrames == 0 || lastFrameIndex_ != context.elapsedFrames){
+        input_.tick(dryFrames_, context); // get input frames
+        computeSynthesisBlock(context);
+        lastFrameIndex_ = context.elapsedFrames;
+      }
+      
+      // copy synthesis block to frames passed in
+      frames.copy(synthesisBlock_);
+      
+#ifdef TONIC_DEBUG
+      if(frames(0,0) != frames(0,0)){
+        Tonic::error("Effect_::tick NaN detected.");
+      }
+#endif
+      
+    }
+    
+    inline void Effect_::tickThrough(TonicFrames &frames){
+      lockMutex();
+      dryFrames_.copy(frames);
+      computeSynthesisBlock(SynthesisContext_());
+      unlockMutex();
+      frames.copy(synthesisBlock_);
+    }
   }
   
   template<class EffectType, class EffectType_>
@@ -58,11 +117,15 @@ namespace Tonic {
   public:
         
     // This cast is not safe - up to implementation to ensure that templated EffectType_ is actually an Effect_ subclass
-    inline EffectType & input( Generator input ){
+    virtual EffectType & input( Generator input ){
       this->gen()->setInput( input );
       return static_cast<EffectType&>(*this);
     }
     
+    void tickThrough(TonicFrames & frames){
+      this->gen()->tickThrough(frames);
+    }
+  
   };
   
   // signal flow operator - sets lhs as input to rhs
