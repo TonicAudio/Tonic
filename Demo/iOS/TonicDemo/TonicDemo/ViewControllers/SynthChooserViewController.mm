@@ -176,9 +176,6 @@ using namespace Tonic;
           synth->setParameter("freq", touchPointNorm.x * 500);
           synth->setParameter("frequencyRandomAmount", touchPointNorm.y);
           synth->setParameter("decay", touchPointNorm.y * 0.5);
-          
-          
-          
         };
       }
       
@@ -195,10 +192,7 @@ using namespace Tonic;
           synth->setParameter("pitch", touchPointNorm.y);
         };
         def.accellerometerAction = ^(Tonic::Synth* synth, CMAccelerometerData *accelerometerData){
-          NSLog(@"X = %.04f, Y = %.04f, Z = %.04f",
-          accelerometerData.acceleration.x,
-          accelerometerData.acceleration.y,
-          accelerometerData.acceleration.z);
+          
         };
       }
       

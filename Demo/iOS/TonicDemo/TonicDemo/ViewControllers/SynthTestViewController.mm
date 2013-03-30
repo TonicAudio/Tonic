@@ -25,28 +25,10 @@
 -(id)initWithSynthDemoDef: (SynthDemoDef*) def{
   self = [super initWithNibName:@"SynthTestViewController" bundle:nil];
   if (self){
+    self.synthDemoDef = def;
     self.synthName = def.synthClassName;
     self.description = def.synthInstructions;
     self.panAction = def.synthAction;
-    
-    self.motionManager = [[CMMotionManager alloc] init];
-
-     if ([self.motionManager isAccelerometerAvailable]){
-       NSOperationQueue *queue = [[NSOperationQueue alloc] init];
-       [self.motionManager
-        startAccelerometerUpdatesToQueue:queue
-        withHandler:^(CMAccelerometerData *accelerometerData, NSError *error) {
-          Tonic::Synth *synthInstance = [[TonicSynthManager sharedManager] synthForKey:@"testsynth"];
-          if (synthInstance == NULL) return;
-          if (self.panAction){
-            //self.panAction(synthInstance, touchPoint);
-          }
-      
-        }];
-     } else {
-      
-     }
-     
   }
   return self;
 }
@@ -65,6 +47,24 @@
   
   self.navigationItem.title = self.synthName;
   self.descLabel.text = self.description;
+  
+  self.motionManager = [[CMMotionManager alloc] init];
+
+   if ([self.motionManager isAccelerometerAvailable]){
+     NSOperationQueue *queue = [[NSOperationQueue alloc] init];
+     [self.motionManager
+      startAccelerometerUpdatesToQueue:queue
+      withHandler:^(CMAccelerometerData *accelerometerData, NSError *error) {
+        Tonic::Synth *synthInstance = [[TonicSynthManager sharedManager] synthForKey:@"testsynth"];
+        if (synthInstance == NULL) return;
+        if (self.synthDemoDef){
+          self.synthDemoDef.accellerometerAction(synthInstance, accelerometerData);
+        }
+    
+      }];
+   } else {
+    
+   }
 }
 
 - (void)addSynthIfNecessary
