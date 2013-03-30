@@ -13,6 +13,7 @@
 @property (nonatomic, strong) NSString *synthName;
 @property (nonatomic, strong) NSString *description;
 @property (nonatomic, copy)   SynthTestPanAction panAction;
+@property (nonatomic, copy) SynthTestAccellerometerAction accelAction;
 
 - (void)addSynthIfNecessary;
 - (void)handlePan:(UIPanGestureRecognizer*)pan;
@@ -21,13 +22,31 @@
 
 @implementation SynthTestViewController
 
-- (id)initWithSynthName:(NSString *)synthName description:(NSString *)description panAction:(SynthTestPanAction)action
-{
+-(id)initWithSynthDemoDef: (SynthDemoDef*) def{
   self = [super initWithNibName:@"SynthTestViewController" bundle:nil];
   if (self){
-    self.synthName = synthName;
-    self.description = description;
-    self.panAction = action;
+    self.synthName = def.synthClassName;
+    self.description = def.synthInstructions;
+    self.panAction = def.synthAction;
+    
+    self.motionManager = [[CMMotionManager alloc] init];
+
+     if ([self.motionManager isAccelerometerAvailable]){
+       NSOperationQueue *queue = [[NSOperationQueue alloc] init];
+       [self.motionManager
+        startAccelerometerUpdatesToQueue:queue
+        withHandler:^(CMAccelerometerData *accelerometerData, NSError *error) {
+          Tonic::Synth *synthInstance = [[TonicSynthManager sharedManager] synthForKey:@"testsynth"];
+          if (synthInstance == NULL) return;
+          if (self.panAction){
+            //self.panAction(synthInstance, touchPoint);
+          }
+      
+        }];
+     } else {
+      
+     }
+     
   }
   return self;
 }
@@ -56,7 +75,7 @@
       [[TonicSynthManager sharedManager] addSynthWithName:self.synthName forKey:@"testsynth"];
     }
   }
-}
+} 
 
 - (void)handlePan:(UIPanGestureRecognizer *)pan{
   

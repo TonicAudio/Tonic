@@ -13,17 +13,6 @@
 
 using namespace Tonic;
 
-@interface SynthDemoDef : NSObject
-  @property NSString* synthClassName;
-  @property NSString* synthDisplayName;
-  @property NSString* synthDescription;
-  @property NSString* synthInstructions;
-  @property (nonatomic, copy) SynthTestPanAction synthAction;
-@end
-
-@implementation SynthDemoDef
-@end
-
 @interface SynthChooserViewController (){
   NSMutableArray* synthDefinitions;
 }
@@ -31,12 +20,14 @@ using namespace Tonic;
 
 @end
 
+
 @implementation SynthChooserViewController
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
+    
       
       // Add synths here in order to have them displayed in the demo app.
       // Note -- the synth header must be imported somewhere or you'll get mysterious
@@ -203,6 +194,12 @@ using namespace Tonic;
         def.synthAction = ^(Tonic::Synth* synth, CGPoint touchPointNorm){
           synth->setParameter("pitch", touchPointNorm.y);
         };
+        def.accellerometerAction = ^(Tonic::Synth* synth, CMAccelerometerData *accelerometerData){
+          NSLog(@"X = %.04f, Y = %.04f, Z = %.04f",
+          accelerometerData.acceleration.x,
+          accelerometerData.acceleration.y,
+          accelerometerData.acceleration.z);
+        };
       }
       
       
@@ -247,21 +244,12 @@ using namespace Tonic;
 {
   [tableView deselectRowAtIndexPath:indexPath animated:YES];
   
-  NSString *synthName = nil;
-  NSString *description = nil;
-  SynthTestPanAction action = nil;
-  
   if (indexPath.row < [synthDefinitions count]) {
-      SynthDemoDef* def = [synthDefinitions objectAtIndex:indexPath.row];
-      synthName = def.synthClassName;
-      action = def.synthAction;
-      description = def.synthInstructions;
-  }
-  
-
-  if (synthName){
-    SynthTestViewController *stVC = [[SynthTestViewController alloc] initWithSynthName:synthName description:description panAction:action];
-    [self.navigationController pushViewController:stVC animated:YES];
+    SynthDemoDef* def = [synthDefinitions objectAtIndex:indexPath.row];
+    if (def){
+      SynthTestViewController *stVC = [[SynthTestViewController alloc] initWithSynthDemoDef:def];
+      [self.navigationController pushViewController:stVC animated:YES];
+    }
   }
 }
 
