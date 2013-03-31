@@ -3,7 +3,7 @@
 //  Tonic 
 //
 //  Created by Nick Donaldson on 2/25/13.
-//  Copyright (c) 2013 Morgan Packard. All rights reserved.
+
 //
 // See LICENSE.txt for license and usage information.
 //

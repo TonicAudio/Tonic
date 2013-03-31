@@ -3,7 +3,7 @@
 //  Tonic
 //
 //  Created by Morgan Packard on 3/25/13.
-//  Copyright (c) 2013 Morgan Packard. All rights reserved.
+
 //
 
 #include "ControlStepper.h"
