@@ -28,7 +28,7 @@ class ControlSnapToScaleTestSynth : public Synth{
    
     vector<float> scale = {0,2,3,7,10};
     
-    ControlGenerator speed = addParameter("speed", 1);
+    ControlGenerator speed = addParameter("speed", 0.85);
     
     ControlMetro switchIt = ControlMetro().bpm(30 * speed);
     
