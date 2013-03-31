@@ -1,0 +1,5 @@
+We haven't decided on a "for real" license yet. But the basic gist is this: you should feel to use Tonic, without restriction, for whatever purposes you want. You have our blessing to use it, free of charge, and free of attribution, in whatever project you want, be it open source, closed source, commercial, non-profit, whatever. We'd be very happy to have code contributed to the library, and to have a mention in whatever project you use it for, but if either of these aren't appropriate, you're under no obligation whatsoever to provide them.
+
+We make no guarantees whatsoever about Tonic's reliability or suitability for any purpose. We're doing the best we can to make it rock-solid, but if you choose to use it, you need to accept the possibility that you may be entirely on your own, with no guarantee of support or recourse if it doesn't work out the way you thought it would.
+
+With all that said, HAVE FUN, MAKE GREAT STUFF!!!
