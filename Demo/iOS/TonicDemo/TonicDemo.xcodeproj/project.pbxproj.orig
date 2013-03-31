@@ -506,10 +506,13 @@
 				F2B2B5C416ECFBE900BBECC0 /* ControlPulse.h */,
 				A88DA87716F1F62100B41662 /* ControlRandom.cpp */,
 				A88DA87816F1F62200B41662 /* ControlRandom.h */,
+<<<<<<< HEAD
 				01C46A5F16FFAEC7007EC630 /* ControlDbToLinear.cpp */,
 				01C46A6016FFAEC7007EC630 /* ControlDbToLinear.h */,
+=======
 				A8CF87EE1700823200D8F5E1 /* ControlStepper.cpp */,
 				A8CF87EF1700823200D8F5E1 /* ControlStepper.h */,
+>>>>>>> Stepper ControlGenerator.
 			);
 			path = Control;
 			sourceTree = "<group>";
@@ -736,11 +739,14 @@
 				F2759AFF16F7E19900347633 /* ControlPulse.cpp in Sources */,
 				A8742F3916FF666700056E1C /* ControlSnapToScale.cpp in Sources */,
 				A8742F3C16FF694300056E1C /* ControlOctaveSnapTestSynth.cpp in Sources */,
+<<<<<<< HEAD
 				F24864F216FF842400305369 /* CompressorLimiter.cpp in Sources */,
 				01C46A6116FFAEC7007EC630 /* ControlDbToLinear.cpp in Sources */,
 				01CC91931701402A0047C4A6 /* CompressorTestSynth.cpp in Sources */,
 				01CC9196170155040047C4A6 /* CompressorDuckingTestSynth.cpp in Sources */,
+=======
 				A8CF87F01700823200D8F5E1 /* ControlStepper.cpp in Sources */,
+>>>>>>> Stepper ControlGenerator.
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
