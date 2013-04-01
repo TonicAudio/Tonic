@@ -10,6 +10,10 @@
 
 #include "Tonic.h"
 #include "StereoFixedTestGen.h"
+#include "ADSR.h"
+#include "ControlMetro.h"
+#include "ControlStepper.h"
+#include "ControlTrigger.h"
 
 #define kTestOutputBlockSize kSynthesisBlockSize*4
 
@@ -141,7 +145,7 @@ public:
   
   StereoFixedTestGen stereoVal = StereoFixedTestGen(0.5, 1.0); // 0.5 in left channel, 1.0 in right
   
-  STAssertTrue(stereoVal.isStereo(), @"StereoFixedTestGen should output stereo");
+  STAssertTrue(stereoVal.isStereoOutput(), @"StereoFixedTestGen should output stereo");
   
   stereoVal.tick(testFrames, testContext);
   
@@ -157,7 +161,7 @@ public:
   
   Adder monoAdder = FixedValue(0.5) + FixedValue(0.5);
   
-  STAssertFalse(monoAdder.isStereo(), @"Adder should be mono");
+  STAssertFalse(monoAdder.isStereoOutput(), @"Adder should be mono");
   
   monoAdder.tick(testFrames, testContext);
   
@@ -173,7 +177,7 @@ public:
   
   Adder stereoAdder = FixedValue(0.5) + StereoFixedTestGen(0.0, 1.0);
   
-  STAssertTrue(stereoAdder.isStereo(), @"Adder should be stereo");
+  STAssertTrue(stereoAdder.isStereoOutput(), @"Adder should be stereo");
   
   stereoAdder.tick(testFrames, testContext);
   
@@ -187,7 +191,7 @@ public:
   
   Adder stereoAdder = StereoFixedTestGen(1.0, 0.0) + StereoFixedTestGen(0.0, 1.0);
   
-  STAssertTrue(stereoAdder.isStereo(), @"Adder should be stereo");
+  STAssertTrue(stereoAdder.isStereoOutput(), @"Adder should be stereo");
   
   stereoAdder.tick(testFrames, testContext);
   
@@ -203,7 +207,7 @@ public:
   
   Multiplier monoMult = FixedValue(0.5) * FixedValue(0.5);
   
-  STAssertFalse(monoMult.isStereo(), @"Multiplier should be mono");
+  STAssertFalse(monoMult.isStereoOutput(), @"Multiplier should be mono");
   
   monoMult.tick(testFrames, testContext);
   
@@ -219,7 +223,7 @@ public:
   
   Multiplier stereoMult = FixedValue(0.5) * StereoFixedTestGen(0.0, 1.0);
   
-  STAssertTrue(stereoMult.isStereo(), @"Multiplier should be stereo");
+  STAssertTrue(stereoMult.isStereoOutput(), @"Multiplier should be stereo");
   
   stereoMult.tick(testFrames, testContext);
   
@@ -233,7 +237,7 @@ public:
   
   Multiplier stereoMult = StereoFixedTestGen(1.0, 0.0) * StereoFixedTestGen(0.0, 1.0);
   
-  STAssertTrue(stereoMult.isStereo(), @"Multiplier should be stereo");
+  STAssertTrue(stereoMult.isStereoOutput(), @"Multiplier should be stereo");
   
   stereoMult.tick(testFrames, testContext);
   
@@ -262,7 +266,57 @@ public:
 
 #pragma mark - Control Generator Tests
 
-// TODO
+- (void)test200ControlStepperSharedMetro
+{
+  // there's a bug involving ControlStepper where it appears to output zeros when it shares an metro with another controlgenerator
+  
+//  {
+//    ControlValue trigger(0);
+//    ControlStepper stepper;
+//    stepper = ControlStepper().start(1).end(2).step(1).trigger(trigger);
+//    Tonic_::SynthesisContext_ context;
+//    ControlGeneratorOutput result = stepper.tick(context);
+//    STAssertEquals(result.value, 1.0f, @"ControlStepper did not produce expected output");
+//  }
+//  
+//    {
+//    //setup
+//    ControlValue trigger(0);
+//    ControlStepper stepper;
+//    stepper = ControlStepper().start(1).end(5).step(1).trigger(trigger);
+//    Tonic_::SynthesisContext_ context;
+//    
+//    // initial tick to trigger to setup didChange status
+//    trigger.tick(context);
+//    trigger.setValue(1);
+//    
+//    // advance the context to force new calculation
+//    context.tick();
+//    
+//    ControlGeneratorOutput result = stepper.tick(context);
+//    context.tick();
+//    result = stepper.tick(context);
+//    context.tick();
+//    result = stepper.tick(context);
+//    
+//    STAssertEquals(result.value, 1.0f, @"ControlStepper did not produce expected output");
+//  }
+  
+  
+}
+
+- (void)test201ControlTrigger{
+  ControlTrigger trig;
+  Tonic_::SynthesisContext_ context;
+  STAssertEquals(trig.tick(context).status, ControlGeneratorStatusHasNotChanged, @"ControlGenerator did not produce expected output");
+  
+  trig.trigger();
+  context.tick();
+  STAssertEquals(trig.tick(context).status, ControlGeneratorStatusHasChanged, @"ControlGenerator did not produce expected output");
+  
+  
+}
+
 
 #pragma mark - Buffer filler tests
 

@@ -27,14 +27,14 @@ namespace Tonic { namespace Tonic_{
     float stepVal = step.tick(context).value;
     lastOutput_.status = trigger.tick(context).status;
     if(lastOutput_.status == ControlGeneratorStatusHasChanged){
-      lastOutput_.value += stepVal * direction;
-      if (lastOutput_.value < startVal) {
-        lastOutput_.value = startVal;
+      if (lastOutput_.value <= startVal) {
+        lastOutput_.value = startVal - stepVal * direction;
         direction = 1;
-      }else if(lastOutput_.value > endVal){
+      }else if(lastOutput_.value >= endVal){
         lastOutput_.value = endVal;
         direction = -1;
       }
+      lastOutput_.value += stepVal * direction;
     }
   }
   

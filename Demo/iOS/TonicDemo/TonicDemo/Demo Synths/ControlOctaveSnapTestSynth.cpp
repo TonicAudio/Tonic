@@ -41,7 +41,6 @@ class ControlSnapToScaleTestSynth : public Synth{
         * speed
       );
     
-    ControlMetro metro2 = ControlMetro().bpm(30 * speed);
     
     ADSR env = ADSR(0.01, 0.5, 0, 0)
       .trigger(metro)
@@ -52,7 +51,7 @@ class ControlSnapToScaleTestSynth : public Synth{
         .start(0.1)
         .end(10)
         .step(10.9)
-        .trigger(metro2)
+        .trigger(metro)
       );
     
     ControlGenerator stepperStart = addParameter("stepperStart") * 30 + 43;
