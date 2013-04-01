@@ -48,9 +48,9 @@ class ControlSnapToScaleTestSynth : public Synth{
       .legato(true)
       .decay(
         ControlStepper()
-        .start(0.1)
-        .end(10)
-        .step(10.9)
+        .start(0.05)
+        .end(0.5)
+        .step(0.01)
         .trigger(metro)
       );
     

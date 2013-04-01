@@ -10,7 +10,7 @@
 
 namespace Tonic { namespace Tonic_{
   
-  ControlStepper_::ControlStepper_():hasBeenTriggered(false){
+  ControlStepper_::ControlStepper_() {
       start = ControlValue(0);
       end = ControlValue(1);
       step = ControlValue(1);
@@ -27,20 +27,15 @@ namespace Tonic { namespace Tonic_{
     float stepVal = step.tick(context).value;
     
     lastOutput_.status = trigger.tick(context).status;
-    if(hasBeenTriggered){
-      if(lastOutput_.status == ControlGeneratorStatusHasChanged){
-        lastOutput_.value += stepVal * direction;
-        if (lastOutput_.value <= startVal) {
-          lastOutput_.value = startVal;
-          direction = 1;
-        }else if(lastOutput_.value >= endVal){
-          lastOutput_.value = endVal;
-          direction = -1;
-        }
+    if(lastOutput_.status == ControlGeneratorStatusHasChanged){
+      lastOutput_.value += stepVal * direction;
+      if (lastOutput_.value <= startVal) {
+        lastOutput_.value = startVal;
+        direction = 1;
+      }else if(lastOutput_.value >= endVal){
+        lastOutput_.value = endVal;
+        direction = -1;
       }
-    }else{
-      lastOutput_.value = startVal;
-      hasBeenTriggered = true;
     }
   }
   
