@@ -266,43 +266,81 @@ public:
 
 #pragma mark - Control Generator Tests
 
-- (void)test200ControlStepperSharedMetro
+- (void)test200ControlStepper
 {
   // there's a bug involving ControlStepper where it appears to output zeros when it shares an metro with another controlgenerator
   
-//  {
-//    ControlValue trigger(0);
-//    ControlStepper stepper;
-//    stepper = ControlStepper().start(1).end(2).step(1).trigger(trigger);
-//    Tonic_::SynthesisContext_ context;
-//    ControlGeneratorOutput result = stepper.tick(context);
-//    STAssertEquals(result.value, 1.0f, @"ControlStepper did not produce expected output");
-//  }
-//  
-//    {
-//    //setup
-//    ControlValue trigger(0);
-//    ControlStepper stepper;
-//    stepper = ControlStepper().start(1).end(5).step(1).trigger(trigger);
-//    Tonic_::SynthesisContext_ context;
-//    
-//    // initial tick to trigger to setup didChange status
-//    trigger.tick(context);
-//    trigger.setValue(1);
-//    
-//    // advance the context to force new calculation
-//    context.tick();
-//    
-//    ControlGeneratorOutput result = stepper.tick(context);
-//    context.tick();
-//    result = stepper.tick(context);
-//    context.tick();
-//    result = stepper.tick(context);
-//    
-//    STAssertEquals(result.value, 1.0f, @"ControlStepper did not produce expected output");
-//  }
+  {
+    ControlTrigger trig;
+    ControlStepper stepper;
+    stepper = ControlStepper().start(1).end(2).step(1).trigger(trig);
+    Tonic_::SynthesisContext_ context;
+    ControlGeneratorOutput result = stepper.tick(context);
+    STAssertEquals(result.value, 1.0f, @"ControlStepper did not produce expected output");
+  }
   
+    {
+    //setup
+    ControlTrigger trig;
+    ControlStepper stepper;
+    stepper = ControlStepper().start(1).end(3).step(1).trigger(trig);
+
+    Tonic_::SynthesisContext_ context;
+    ControlGeneratorOutput result = stepper.tick(context);
+    STAssertEquals(result.value, 1.0f, @"ControlStepper did not produce expected output");
+    
+    trig.trigger();
+    context.tick();
+    result = stepper.tick(context);
+    STAssertEquals(result.value, 2.0f, @"ControlStepper did not produce expected output");
+    
+    trig.trigger();
+    context.tick();
+    result = stepper.tick(context);
+    STAssertEquals(result.value, 3.0f, @"ControlStepper did not produce expected output");
+    
+    trig.trigger();
+    context.tick();
+    result = stepper.tick(context);
+    STAssertEquals(result.value, 2.0f, @"ControlStepper did not produce expected output");
+    
+    trig.trigger();
+    context.tick();
+    result = stepper.tick(context);
+    STAssertEquals(result.value, 1.0f, @"ControlStepper did not produce expected output");
+    
+    trig.trigger();
+    context.tick();
+    result = stepper.tick(context);
+    STAssertEquals(result.value, 2.0f, @"ControlStepper did not produce expected output");
+  }
+
   
+}
+
+- (void)test200ControlStepperSharedTrigger
+{
+  {
+    ControlTrigger trig;
+    ControlStepper stepper;
+    stepper = ControlStepper().start(1).end(3).step(1).trigger(trig);
+    ADSR env = ADSR(1,1,1,1).trigger(trig);
+    Tonic_::SynthesisContext_ context;
+    
+    env.tick(testFrames, context);
+    ControlGeneratorOutput result = stepper.tick(context);
+    STAssertEquals(result.value, 1.0f, @"ControlStepper did not produce expected output");
+    
+    trig.trigger();
+    context.tick();
+    env.tick(testFrames, context);
+    result = stepper.tick(context);
+    STAssertEquals(result.value, 2.0f, @"ControlStepper did not produce expected output");
+    
+    
+    
+    
+  }
 }
 
 - (void)test201ControlTrigger{
