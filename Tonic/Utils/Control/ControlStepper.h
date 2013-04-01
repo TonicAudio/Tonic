@@ -38,7 +38,6 @@ namespace Tonic {
       ControlGenerator step;
       ControlGenerator trigger;
       int direction;
-      bool hasBeenTriggered;
       
       void computeOutput(const SynthesisContext_ & context);
       
