@@ -318,7 +318,7 @@ public:
   
 }
 
-- (void)test200ControlStepperSharedTrigger
+- (void)test201ControlStepperSharedTrigger
 {
   {
     ControlTrigger trig;
@@ -343,7 +343,7 @@ public:
   }
 }
 
-- (void)test201ControlTrigger{
+- (void)test202ControlTrigger{
   ControlTrigger trig;
   Tonic_::SynthesisContext_ context;
   STAssertEquals(trig.tick(context).status, ControlGeneratorStatusHasNotChanged, @"ControlGenerator did not produce expected output");
