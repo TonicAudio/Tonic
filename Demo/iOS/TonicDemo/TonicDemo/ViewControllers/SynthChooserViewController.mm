@@ -186,7 +186,7 @@ using namespace Tonic;
         def.synthDescription = @"Compress a bass line in time";
         def.synthInstructions = @"Y axis is release time";
         def.synthAction = ^(Tonic::Synth* synth, CGPoint touchPointNorm){
-          synth->setParameter("compRelease", Tonic::map(touchPointNorm.y*touchPointNorm.y, 0, 1, 0.04, 0.1, true));
+          synth->setParameter("compRelease", Tonic::map(touchPointNorm.y*touchPointNorm.y, 0, 1, 0.04, 0.15, true));
         };
       }
 
