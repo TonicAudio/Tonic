@@ -46,6 +46,13 @@ namespace Tonic {
       ControlGenerator sustains;
       ControlGenerator isLegato;
       
+      TonicFloat attackTime;
+      TonicFloat decayTime;
+      TonicFloat sustainLevelVal;
+      TonicFloat releaseTime;
+      bool       legatoVal;
+      bool       sustainsVal;
+      
       enum State{
         ATTACK,
         SUSTAIN,
@@ -54,7 +61,7 @@ namespace Tonic {
       };
       
       State state;
-      void switchState(State newState, const SynthesisContext_ &context);
+      void switchState(State newState);
             
     public:
       ADSR_();
@@ -73,28 +80,39 @@ namespace Tonic {
     };
     
     inline void ADSR_::computeSynthesisBlock(const SynthesisContext_ &context){
+      
       ControlGeneratorOutput triggerOutput = mTrigger.tick(context);
+      
+      // Tick ALL inputs every time to keep everything in sync
+      attackTime = attack.tick(context).value;
+      decayTime = decay.tick(context).value;
+      sustainLevelVal = sustain.tick(context).value;
+      releaseTime = release.tick(context).value;
+      sustainsVal = (bool)sustain.tick(context).value;
+      legatoVal = (bool)isLegato.tick(context).value;
       
       // did a trigger message happen?
       if(triggerOutput.status == ControlGeneratorStatusHasChanged){
+        
         if(triggerOutput.value != 0){
-          switchState(ATTACK, context);
-        }else if(sustains.tick(context).value != 0){
-          switchState(RELEASE, context);
+          switchState(ATTACK);
+        }else if(sustainsVal != 0){
+          switchState(RELEASE);
         }
         
-      }else{
+      }
+      else{
       
         switch (state) {
           case ATTACK:
             if(ramp.isFinished()){
-              switchState(DECAY, context);
+              switchState(DECAY);
             }
             break;
             
           case DECAY:
             if(ramp.isFinished()){
-              switchState(sustains.tick(context).value != 0 ? SUSTAIN : RELEASE, context);
+              switchState(sustainsVal != 0 ? SUSTAIN : RELEASE);
             }
             break;
 
