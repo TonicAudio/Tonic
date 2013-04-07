@@ -50,7 +50,8 @@ public:
     
     Generator snare =  ( tones * toneADSR ) + ( hpNoise * noiseEnv );
     
-    vector<float> bassScale = {0,7,10,12};
+    float bassScaleArr[4] = {0,7,10,12};
+    vector<float> bassScale(bassScaleArr, bassScaleArr + sizeof bassScaleArr / sizeof bassScaleArr[0]);
     
     Generator baseFreq = ( (30 + (ControlRandom().min(0).max(12).trigger(metro) >> ControlSnapToScale().setScale(bassScale)) ) >> ControlMidiToFreq()).ramped();
     

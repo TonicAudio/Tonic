@@ -23,8 +23,11 @@ class ControlSnapToScaleTestSynth : public Synth{
   public:
   ControlSnapToScaleTestSynth(){
   
+    float scaleArr[6] = {0,2,3,7,10};
+    vector<float> scale(scaleArr, scaleArr + sizeof scaleArr / sizeof scaleArr[0]);
+  
     ControlSnapToScale scaleSnapper =  ControlSnapToScale()
-      .setScale({0,2,3,7,10})
+      .setScale(scale)
       .in( addParameter("pitch") * 80 + 10 );
    
     ADSR env = ADSR(0.01, 0.1, 0, 0)
