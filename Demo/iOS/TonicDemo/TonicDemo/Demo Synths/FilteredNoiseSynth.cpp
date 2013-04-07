@@ -38,7 +38,7 @@ public:
     
     PinkNoise noise = PinkNoise();
     
-    ControlGenerator cutoffCtrl = addParameter("cutoff");
+    ControlGenerator cutoffCtrl = addParameter("cutoff", 0.5);
     
     Generator q_v = addParameter("Q", 5).ramped();
     

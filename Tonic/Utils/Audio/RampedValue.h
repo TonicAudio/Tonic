@@ -171,6 +171,12 @@ namespace Tonic {
         }
       }
       
+      #ifdef TONIC_DEBUG
+      if(*fdata != *fdata){
+        Tonic::error("RampedValue_::computeSynthesisBlock NaN detected.\n");
+      }
+      #endif
+      
       // mono source, so need to fill out channels if necessary
       synthesisBlock_.fillChannels();
       
