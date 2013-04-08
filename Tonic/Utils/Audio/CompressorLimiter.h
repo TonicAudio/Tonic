@@ -58,7 +58,7 @@ namespace Tonic {
       Compressor_();
       ~Compressor_();
 
-      // Overridden here for specialized input behavior
+      // Base class methods overridden here for specialized input behavior
       void setInput( Generator input );
       void tick(TonicFrames &frames, const SynthesisContext_ &context );
       void tickThrough(TonicFrames &frames);      
@@ -229,7 +229,13 @@ namespace Tonic {
       this->gen()->unlockMutex();
       return *this;
     }
-
+    
+    void setIsStereo( bool isStereo ){
+      this->gen()->lockMutex();
+      this->gen()->setIsStereo(isStereo);
+      this->gen()->unlockMutex();
+    }
+    
     createControlGeneratorSetters(Compressor, attack, setAttack);
     createControlGeneratorSetters(Compressor, release, setRelease);
     createControlGeneratorSetters(Compressor, threshold, setThreshold); // LINEAR - use dBToLin to convert from dB
@@ -252,18 +258,6 @@ namespace Tonic {
       this->gen()->lockMutex();
       this->gen()->setIsStereo(isStereo);
       this->gen()->unlockMutex();
-    }
-    
-    //! default input method sets both audio signal and amplitude signal as input
-    //! so incoming signal is compressed based on its own amplitude
-    Limiter & input( Generator input ){
-      this->gen()->lockMutex();
-      this->gen()->setInput( input );
-      this->gen()->setAmplitudeInput( input );
-      this->gen()->setIsStereoOutput( input.isStereoOutput() );
-      this->gen()->setIsStereoInput( input.isStereoOutput() );
-      this->gen()->unlockMutex();
-      return *this;
     }
     
     createControlGeneratorSetters(Limiter, release, setRelease);
