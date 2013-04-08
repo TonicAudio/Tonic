@@ -159,9 +159,10 @@ using namespace Tonic;
         def.synthClassName = @"ControlSnapToScaleTestSynth";
         def.synthDisplayName = @"Octave Snap";
         def.synthDescription = @"Snap notes to a scale";
-        def.synthInstructions = @"Y axis is pitch.";
+        def.synthInstructions = @"Y axis is pitch -- sort of . X axis is range.";
         def.synthAction = ^(Tonic::Synth* synth, CGPoint touchPointNorm){
-          synth->setParameter("pitch", touchPointNorm.y);
+          synth->setParameter("stepperStart", touchPointNorm.y);
+          synth->setParameter("stepperSpread", touchPointNorm.x);
         };
       }
       
@@ -186,7 +187,7 @@ using namespace Tonic;
         def.synthDescription = @"Compress a bass line in time";
         def.synthInstructions = @"Y axis is release time";
         def.synthAction = ^(Tonic::Synth* synth, CGPoint touchPointNorm){
-          synth->setParameter("compRelease", Tonic::map(touchPointNorm.y*touchPointNorm.y, 0, 1, 0.04, 0.1, true));
+          synth->setParameter("compRelease", Tonic::map(touchPointNorm.y*touchPointNorm.y, 0, 1, 0.04, 0.15, true));
         };
       }
 
