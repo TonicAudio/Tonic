@@ -69,6 +69,10 @@
 		A88F5A7416E5729200C187E7 /* ControlConditioner.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A88F5A7216E5729200C187E7 /* ControlConditioner.cpp */; };
 		A8CF87F01700823200D8F5E1 /* ControlStepper.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A8CF87EE1700823200D8F5E1 /* ControlStepper.cpp */; };
 		A8CF87F11700823200D8F5E1 /* ControlStepper.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A8CF87EE1700823200D8F5E1 /* ControlStepper.cpp */; };
+		A8DFAC131713AE2B004545CE /* ControlXYSpeed.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A8DFAC111713AE2B004545CE /* ControlXYSpeed.cpp */; };
+		A8DFAC141713AE2B004545CE /* ControlXYSpeed.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A8DFAC111713AE2B004545CE /* ControlXYSpeed.cpp */; };
+		A8DFAC161713B0C7004545CE /* XYSpeed.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A8DFAC151713B0C7004545CE /* XYSpeed.cpp */; };
+		A8DFAC171713B0C7004545CE /* XYSpeed.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A8DFAC151713B0C7004545CE /* XYSpeed.cpp */; };
 		F20FCD4816C566F60039832A /* TableLookupOsc.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F20FCD4616C566F60039832A /* TableLookupOsc.cpp */; };
 		F20FCD4B16C56EF60039832A /* SineWave.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F20FCD4916C56EF50039832A /* SineWave.cpp */; };
 		F20FCD5216C58D5B0039832A /* TonicSynthManager.mm in Sources */ = {isa = PBXBuildFile; fileRef = F20FCD5116C58D5B0039832A /* TonicSynthManager.mm */; };
@@ -180,6 +184,9 @@
 		A88F5A7316E5729200C187E7 /* ControlConditioner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ControlConditioner.h; sourceTree = "<group>"; };
 		A8CF87EE1700823200D8F5E1 /* ControlStepper.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ControlStepper.cpp; sourceTree = "<group>"; };
 		A8CF87EF1700823200D8F5E1 /* ControlStepper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ControlStepper.h; sourceTree = "<group>"; };
+		A8DFAC111713AE2B004545CE /* ControlXYSpeed.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ControlXYSpeed.cpp; sourceTree = "<group>"; };
+		A8DFAC121713AE2B004545CE /* ControlXYSpeed.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ControlXYSpeed.h; sourceTree = "<group>"; };
+		A8DFAC151713B0C7004545CE /* XYSpeed.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = XYSpeed.cpp; sourceTree = "<group>"; };
 		F20FCD4616C566F60039832A /* TableLookupOsc.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TableLookupOsc.cpp; sourceTree = "<group>"; };
 		F20FCD4716C566F60039832A /* TableLookupOsc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TableLookupOsc.h; sourceTree = "<group>"; };
 		F20FCD4916C56EF50039832A /* SineWave.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SineWave.cpp; sourceTree = "<group>"; };
@@ -484,6 +491,7 @@
 				F2759AEB16F7E0EF00347633 /* StereoDelayTestSynth.cpp */,
 				01CC91911701402A0047C4A6 /* CompressorTestSynth.cpp */,
 				01CC9194170155030047C4A6 /* CompressorDuckingTestSynth.cpp */,
+				A8DFAC151713B0C7004545CE /* XYSpeed.cpp */,
 			);
 			path = "Demo Synths";
 			sourceTree = "<group>";
@@ -535,6 +543,8 @@
 				A8CF87EF1700823200D8F5E1 /* ControlStepper.h */,
 				A861149B17090CAB00C65987 /* ControlTrigger.cpp */,
 				A861149C17090CAC00C65987 /* ControlTrigger.h */,
+				A8DFAC111713AE2B004545CE /* ControlXYSpeed.cpp */,
+				A8DFAC121713AE2B004545CE /* ControlXYSpeed.h */,
 			);
 			path = Control;
 			sourceTree = "<group>";
@@ -767,6 +777,8 @@
 				01CC9196170155040047C4A6 /* CompressorDuckingTestSynth.cpp in Sources */,
 				A8CF87F01700823200D8F5E1 /* ControlStepper.cpp in Sources */,
 				A861149D17090CAD00C65987 /* ControlTrigger.cpp in Sources */,
+				A8DFAC131713AE2B004545CE /* ControlXYSpeed.cpp in Sources */,
+				A8DFAC161713B0C7004545CE /* XYSpeed.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -813,6 +825,8 @@
 				A86114991709074C00C65987 /* ControlRandom.cpp in Sources */,
 				A861149A1709075000C65987 /* ControlDbToLinear.cpp in Sources */,
 				A861149E17090CAD00C65987 /* ControlTrigger.cpp in Sources */,
+				A8DFAC141713AE2B004545CE /* ControlXYSpeed.cpp in Sources */,
+				A8DFAC171713B0C7004545CE /* XYSpeed.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

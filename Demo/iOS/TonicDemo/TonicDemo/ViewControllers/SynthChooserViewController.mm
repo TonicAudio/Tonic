@@ -190,6 +190,22 @@ using namespace Tonic;
           synth->setParameter("compRelease", Tonic::map(touchPointNorm.y*touchPointNorm.y, 0, 1, 0.04, 0.15, true));
         };
       }
+      
+      
+      {
+        SynthDemoDef* def = [[SynthDemoDef alloc] init];
+        [synthDefinitions addObject:def];
+        def.synthClassName = @"XYSpeed";
+        def.synthDisplayName = @"XY Speed Reactive";
+        def.synthDescription = @"Move fast to make it sound cool!";
+        def.synthInstructions = @"Move fast to make it sound cool!";
+        def.synthAction = ^(Tonic::Synth* synth, CGPoint touchPointNorm){
+          synth->setParameter("x", touchPointNorm.x);
+          synth->setParameter("y", touchPointNorm.y);
+        };
+      }
+      
+      
 
     }
     return self;
