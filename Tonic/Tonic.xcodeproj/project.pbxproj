@@ -694,12 +694,14 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
-				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_CXX_LIBRARY = "libstdc++";
 				EXECUTABLE_PREFIX = lib;
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_NAME = Tonic;
-				SDKROOT = macosx;
+				SDKROOT = "";
 				SUPPORTED_PLATFORMS = macosx;
+				SYMROOT = build/OSX;
 			};
 			name = Debug;
 		};
@@ -707,12 +709,14 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
-				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_CXX_LIBRARY = "libstdc++";
 				EXECUTABLE_PREFIX = lib;
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_NAME = Tonic;
-				SDKROOT = macosx;
+				SDKROOT = "";
 				SUPPORTED_PLATFORMS = macosx;
+				SYMROOT = build/OSX;
 			};
 			name = Release;
 		};
@@ -724,6 +728,7 @@
 				PRODUCT_NAME = Tonic;
 				SDKROOT = iphoneos;
 				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos";
+				SYMROOT = build/iOS;
 			};
 			name = Debug;
 		};
@@ -735,6 +740,7 @@
 				PRODUCT_NAME = Tonic;
 				SDKROOT = iphoneos;
 				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos";
+				SYMROOT = build/iOS;
 			};
 			name = Release;
 		};
@@ -766,6 +772,7 @@
 				01F72784171525FD00EBB4BB /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
