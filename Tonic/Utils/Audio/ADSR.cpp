@@ -23,26 +23,26 @@ namespace Tonic { namespace Tonic_{
     
   }
   
-  void ADSR_::switchState(State newState, const SynthesisContext_ &context){
+  void ADSR_::switchState(State newState){
     state = newState;
     switch(state){
       case ATTACK:{
-        float rampStart = isLegato.tick(context).value == 0 ? 0 : synthesisBlock_[synthesisBlock_.frames() - 1];
+        float rampStart = legatoVal ? synthesisBlock_[synthesisBlock_.frames() - 1] : 0;
         ramp.value(rampStart);
         ramp.target(1);
-        ramp.length(attack.tick(context).value);
+        ramp.length(attackTime);
       }
       break;
       case DECAY:
-        ramp.target(sustain.tick(context).value);
-        ramp.length(decay.tick(context).value);
+        ramp.target(sustainLevelVal);
+        ramp.length(decayTime);
       break;
       case SUSTAIN:
-        ramp.value(sustain.tick(context).value);
+        ramp.value(sustainLevelVal);
       break;
       case RELEASE:
         ramp.target(0);
-        ramp.length(release.tick(context).value);
+        ramp.length(releaseTime);
       break;
       
       default:

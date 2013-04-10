@@ -28,7 +28,7 @@ class ControlSnapToScaleTestSynth : public Synth{
    
     vector<float> scale = {0,2,3,7,10};
     
-    ControlGenerator speed = addParameter("speed", 1);
+    ControlGenerator speed = addParameter("speed", 0.85);
     
     ControlMetro switchIt = ControlMetro().bpm(30 * speed);
     
@@ -41,7 +41,6 @@ class ControlSnapToScaleTestSynth : public Synth{
         * speed
       );
     
-    ControlMetro metro2 = ControlMetro().bpm(30 * speed);
     
     ADSR env = ADSR(0.01, 0.5, 0, 0)
       .trigger(metro)
@@ -49,10 +48,10 @@ class ControlSnapToScaleTestSynth : public Synth{
       .legato(true)
       .decay(
         ControlStepper()
-        .start(0.1)
-        .end(10)
-        .step(10.9)
-        .trigger(metro2)
+        .start(0.05)
+        .end(0.5)
+        .step(0.01)
+        .trigger(metro)
       );
     
     ControlGenerator stepperStart = addParameter("stepperStart") * 30 + 43;

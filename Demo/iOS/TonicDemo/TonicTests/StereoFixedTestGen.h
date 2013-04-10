@@ -67,7 +67,7 @@ namespace Tonic {
     {
       gen()->setLVal(left);
       gen()->setRVal(right);
-      gen()->setIsStereo(true);
+      gen()->setIsStereoOutput(true);
     }
 
   };

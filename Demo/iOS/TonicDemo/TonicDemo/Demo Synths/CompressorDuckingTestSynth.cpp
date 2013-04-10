@@ -11,6 +11,7 @@
 #include "SineWave.h"
 #include "RectWave.h"
 #include "ADSR.h"
+#include "StereoDelay.h"
 #include "Filters.h"
 #include "CompressorLimiter.h"
 #include "ControlMetro.h"
@@ -44,8 +45,8 @@ public:
     Compressor duckingComp = Compressor()
     .attack(0.001)
     .release( addParameter("compRelease", 0.05) )
-    .threshold( dBToLin(-48) )
-    .ratio(64)
+    .threshold( dBToLin(-52) )
+    .ratio(16)
     .lookahead(0.001);
     
     Generator snare =  ( tones * toneADSR ) + ( hpNoise * noiseEnv );
@@ -54,9 +55,13 @@ public:
     
     Generator baseFreq = ( (30 + (ControlRandom().min(0).max(12).trigger(metro) >> ControlSnapToScale().setScale(bassScale)) ) >> ControlMidiToFreq()).ramped();
     
-    Generator randomBass = (RectWave().freq( baseFreq ) * 0.5) >> LPF24().cutoff( 300 * (1 + ((SineWave().freq(0.1) + 1) * 0.5))).Q(1.5);
-        
-    outputGen = (duckingComp.audioInput(randomBass).sidechainInput(snare) + snare) * 0.5;
+    ADSR bassFiltADSR = ADSR(0.005, 0.1, 0, 0.05).doesSustain(false).legato(true).trigger(metro);
+    
+    Generator randomBass = (RectWave().freq( baseFreq ) * 0.5) >> LPF24().cutoff( 300 * (1 + bassFiltADSR * 2) * (1 + ((SineWave().freq(0.1) + 1) * 0.5))).Q(1.5);
+    
+    StereoDelay delay = StereoDelay(0.37, 0.38).feedback(0.4).mix(0.2 );
+    
+    outputGen = (duckingComp.audioInput(randomBass >> delay).sidechainInput(snare)  + snare * 0.5) * 0.5;
   }
   
 };
