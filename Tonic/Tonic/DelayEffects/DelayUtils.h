@@ -44,7 +44,7 @@ namespace Tonic {
       if (interpolates_){
         // Fractional and integral part of read head
         float fidx;
-        float frac = modf(readHead_, &fidx);
+        float frac = modff(readHead_, &fidx);
         int idx_a = ((int)fidx * nChannels_ + channel);
         int idx_b = idx_a + nChannels_;
         if (idx_b >= nFrames_) idx_b -= nFrames_;
