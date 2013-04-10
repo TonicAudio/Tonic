@@ -3,7 +3,7 @@
 //  TonicDemo
 //
 //  Created by Morgan Packard on 2/12/13.
-//  Copyright (c) 2013 Morgan Packard. All rights reserved.
+
 //
 
 #include "ControlValue.h"
