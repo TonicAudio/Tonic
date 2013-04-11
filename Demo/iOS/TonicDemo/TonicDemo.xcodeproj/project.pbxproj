@@ -9,7 +9,7 @@
 /* Begin PBXBuildFile section */
 		01CC91931701402A0047C4A6 /* CompressorTestSynth.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 01CC91911701402A0047C4A6 /* CompressorTestSynth.cpp */; };
 		01CC9196170155040047C4A6 /* CompressorDuckingTestSynth.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 01CC9194170155030047C4A6 /* CompressorDuckingTestSynth.cpp */; };
-		01F727B21715274D00EBB4BB /* libTonic.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 01F72745171523CA00EBB4BB /* libTonic.a */; };
+		01F727FF1716436A00EBB4BB /* libTonic-iOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 01F727AC1715261A00EBB4BB /* libTonic-iOS.a */; };
 		A86C3EC116B2B4FD002A50F0 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A86C3EC016B2B4FD002A50F0 /* UIKit.framework */; };
 		A86C3EC316B2B4FD002A50F0 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A86C3EC216B2B4FD002A50F0 /* Foundation.framework */; };
 		A86C3EC516B2B4FD002A50F0 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A86C3EC416B2B4FD002A50F0 /* CoreGraphics.framework */; };
@@ -141,7 +141,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				01F727B21715274D00EBB4BB /* libTonic.a in Frameworks */,
+				01F727FF1716436A00EBB4BB /* libTonic-iOS.a in Frameworks */,
 				A86C3F2316B2B834002A50F0 /* Accelerate.framework in Frameworks */,
 				A86C3F1F16B2B7B8002A50F0 /* AudioToolbox.framework in Frameworks */,
 				A86C3F2116B2B7B8002A50F0 /* CoreAudio.framework in Frameworks */,

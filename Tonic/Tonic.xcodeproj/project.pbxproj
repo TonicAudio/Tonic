@@ -126,7 +126,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		01F72690171520F900EBB4BB /* libTonic.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libTonic.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		01F72690171520F900EBB4BB /* libTonic-OSX.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libTonic-OSX.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		01F726981715222000EBB4BB /* Adder.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Adder.cpp; sourceTree = "<group>"; };
 		01F726991715222000EBB4BB /* ADSR.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ADSR.cpp; sourceTree = "<group>"; };
 		01F7269A1715222000EBB4BB /* BufferFiller.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = BufferFiller.cpp; sourceTree = "<group>"; };
@@ -206,7 +206,7 @@
 		01F726ED1715222000EBB4BB /* ControlTrigger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ControlTrigger.h; sourceTree = "<group>"; };
 		01F726EE1715222000EBB4BB /* ControlXYSpeed.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ControlXYSpeed.h; sourceTree = "<group>"; };
 		01F7273D1715225500EBB4BB /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.7.sdk/System/Library/Frameworks/Accelerate.framework; sourceTree = DEVELOPER_DIR; };
-		01F72781171525FD00EBB4BB /* libTonic.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libTonic.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		01F72781171525FD00EBB4BB /* libTonic-iOS.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libTonic-iOS.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -241,8 +241,8 @@
 		01F72691171520F900EBB4BB /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				01F72690171520F900EBB4BB /* libTonic.a */,
-				01F72781171525FD00EBB4BB /* libTonic.a */,
+				01F72690171520F900EBB4BB /* libTonic-OSX.a */,
+				01F72781171525FD00EBB4BB /* libTonic-iOS.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -486,7 +486,7 @@
 			);
 			name = "Tonic-OSX";
 			productName = Tonic;
-			productReference = 01F72690171520F900EBB4BB /* libTonic.a */;
+			productReference = 01F72690171520F900EBB4BB /* libTonic-OSX.a */;
 			productType = "com.apple.product-type.library.static";
 		};
 		01F72780171525FD00EBB4BB /* Tonic-iOS */ = {
@@ -503,7 +503,7 @@
 			);
 			name = "Tonic-iOS";
 			productName = "Tonic-iOS";
-			productReference = 01F72781171525FD00EBB4BB /* libTonic.a */;
+			productReference = 01F72781171525FD00EBB4BB /* libTonic-iOS.a */;
 			productType = "com.apple.product-type.library.static";
 		};
 /* End PBXNativeTarget section */
@@ -700,7 +700,7 @@
 				GCC_C_LANGUAGE_STANDARD = "compiler-default";
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
 				ONLY_ACTIVE_ARCH = YES;
-				PRODUCT_NAME = Tonic;
+				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = "";
 				SUPPORTED_PLATFORMS = macosx;
 				SYMROOT = build/OSX;
@@ -717,7 +717,7 @@
 				GCC_C_LANGUAGE_STANDARD = "compiler-default";
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
 				ONLY_ACTIVE_ARCH = NO;
-				PRODUCT_NAME = Tonic;
+				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = "";
 				SUPPORTED_PLATFORMS = macosx;
 				SYMROOT = build/OSX;
@@ -729,7 +729,7 @@
 			buildSettings = {
 				EXECUTABLE_PREFIX = lib;
 				GCC_VERSION = "";
-				PRODUCT_NAME = Tonic;
+				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
 				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos";
 				SYMROOT = build/iOS;
@@ -741,7 +741,7 @@
 			buildSettings = {
 				EXECUTABLE_PREFIX = lib;
 				GCC_VERSION = "";
-				PRODUCT_NAME = Tonic;
+				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
 				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos";
 				SYMROOT = build/iOS;
