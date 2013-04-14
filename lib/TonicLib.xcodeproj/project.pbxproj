@@ -6,184 +6,145 @@
 	objectVersion = 46;
 	objects = {
 
-/* Begin PBXAggregateTarget section */
-		F25D4D35171B2271002EEB85 /* Tonic-iOS-Universal */ = {
-			isa = PBXAggregateTarget;
-			buildConfigurationList = F25D4D36171B2271002EEB85 /* Build configuration list for PBXAggregateTarget "Tonic-iOS-Universal" */;
-			buildPhases = (
-				F25D4D39171B227A002EEB85 /* ShellScript */,
-			);
-			dependencies = (
-			);
-			name = "Tonic-iOS-Universal";
-			productName = "Tonic-iOS-Universa";
-		};
-/* End PBXAggregateTarget section */
-
 /* Begin PBXBuildFile section */
 		01F7273E1715225500EBB4BB /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 01F7273D1715225500EBB4BB /* Accelerate.framework */; };
+		F23A7CF3171B3D2E00AE8353 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F23A7CF2171B3D2E00AE8353 /* Foundation.framework */; };
+		F23A7D6E171B3E0100AE8353 /* Adder.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F2947122171B14C30068FD52 /* Adder.cpp */; };
+		F23A7D6F171B3E0200AE8353 /* BufferFiller.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F2947124171B14C30068FD52 /* BufferFiller.cpp */; };
+		F23A7D70171B3E0E00AE8353 /* ControlAdder.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F2947126171B14C30068FD52 /* ControlAdder.cpp */; };
+		F23A7D71171B3E0E00AE8353 /* ControlConditioner.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F2947128171B14C30068FD52 /* ControlConditioner.cpp */; };
+		F23A7D72171B3E0E00AE8353 /* ControlGenerator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F294712A171B14C30068FD52 /* ControlGenerator.cpp */; };
+		F23A7D73171B3E0E00AE8353 /* ControlMultiplier.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F294712C171B14C30068FD52 /* ControlMultiplier.cpp */; };
+		F23A7D74171B3E0E00AE8353 /* ControlValue.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F294712E171B14C30068FD52 /* ControlValue.cpp */; };
+		F23A7D75171B3E0E00AE8353 /* FixedValue.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F2947131171B14C30068FD52 /* FixedValue.cpp */; };
+		F23A7D76171B3E0E00AE8353 /* Generator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F2947133171B14C30068FD52 /* Generator.cpp */; };
+		F23A7D77171B3E0E00AE8353 /* Multiplier.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F2947135171B14C30068FD52 /* Multiplier.cpp */; };
+		F23A7D78171B3E0E00AE8353 /* Synth.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F2947137171B14C30068FD52 /* Synth.cpp */; };
+		F23A7D79171B3E0E00AE8353 /* TonicFrames.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F294713A171B14C30068FD52 /* TonicFrames.cpp */; };
+		F23A7D7A171B3E1B00AE8353 /* DelayUtils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F294713D171B14C30068FD52 /* DelayUtils.cpp */; };
+		F23A7D7B171B3E1B00AE8353 /* MonoDelay.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F294713F171B14C30068FD52 /* MonoDelay.cpp */; };
+		F23A7D7C171B3E1B00AE8353 /* StereoDelay.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F2947141171B14C30068FD52 /* StereoDelay.cpp */; };
+		F23A7D7D171B3E1D00AE8353 /* Filters.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F2947144171B14C30068FD52 /* Filters.cpp */; };
+		F23A7D7E171B3E2600AE8353 /* FlexToothWave.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F2947148171B14C30068FD52 /* FlexToothWave.cpp */; };
+		F23A7D7F171B3E2600AE8353 /* Noise.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F294714A171B14C30068FD52 /* Noise.cpp */; };
+		F23A7D80171B3E2600AE8353 /* RectWave.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F294714C171B14C30068FD52 /* RectWave.cpp */; };
+		F23A7D81171B3E2600AE8353 /* SineWave.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F294714E171B14C30068FD52 /* SineWave.cpp */; };
+		F23A7D82171B3E2600AE8353 /* TableLookupOsc.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F2947150171B14C30068FD52 /* TableLookupOsc.cpp */; };
+		F23A7D83171B3E2F00AE8353 /* ADSR.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F2947155171B14C30068FD52 /* ADSR.cpp */; };
+		F23A7D84171B3E2F00AE8353 /* CompressorLimiter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F2947157171B14C30068FD52 /* CompressorLimiter.cpp */; };
+		F23A7D85171B3E2F00AE8353 /* LFNoise.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F2947159171B14C30068FD52 /* LFNoise.cpp */; };
+		F23A7D86171B3E2F00AE8353 /* MonoToStereoPanner.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F294715B171B14C30068FD52 /* MonoToStereoPanner.cpp */; };
+		F23A7D87171B3E2F00AE8353 /* RampedValue.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F294715D171B14C30068FD52 /* RampedValue.cpp */; };
+		F23A7D88171B3E4100AE8353 /* Mixer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F2947160171B14C30068FD52 /* Mixer.cpp */; };
+		F23A7D89171B3E4100AE8353 /* ControlDbToLinear.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F2947163171B14C30068FD52 /* ControlDbToLinear.cpp */; };
+		F23A7D8A171B3E4100AE8353 /* ControlFloor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F2947165171B14C30068FD52 /* ControlFloor.cpp */; };
+		F23A7D8B171B3E4100AE8353 /* ControlMetro.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F2947167171B14C30068FD52 /* ControlMetro.cpp */; };
+		F23A7D8C171B3E4100AE8353 /* ControlMidiToFreq.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F2947169171B14C30068FD52 /* ControlMidiToFreq.cpp */; };
+		F23A7D8D171B3E4100AE8353 /* ControlPulse.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F294716B171B14C30068FD52 /* ControlPulse.cpp */; };
+		F23A7D8E171B3E4100AE8353 /* ControlRandom.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F294716D171B14C30068FD52 /* ControlRandom.cpp */; };
+		F23A7D8F171B3E4100AE8353 /* ControlSnapToScale.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F294716F171B14C30068FD52 /* ControlSnapToScale.cpp */; };
+		F23A7D90171B3E4100AE8353 /* ControlStepper.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F2947171171B14C30068FD52 /* ControlStepper.cpp */; };
+		F23A7D91171B3E4100AE8353 /* ControlTrigger.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F2947173171B14C30068FD52 /* ControlTrigger.cpp */; };
+		F23A7D92171B3E4100AE8353 /* ControlXYSpeed.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F2947175171B14C30068FD52 /* ControlXYSpeed.cpp */; };
 		F2947177171B14C30068FD52 /* Adder.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F2947122171B14C30068FD52 /* Adder.cpp */; };
-		F2947178171B14C30068FD52 /* Adder.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F2947122171B14C30068FD52 /* Adder.cpp */; };
 		F2947179171B14C30068FD52 /* Adder.h in Headers */ = {isa = PBXBuildFile; fileRef = F2947123171B14C30068FD52 /* Adder.h */; };
-		F294717A171B14C30068FD52 /* Adder.h in Headers */ = {isa = PBXBuildFile; fileRef = F2947123171B14C30068FD52 /* Adder.h */; };
 		F294717B171B14C30068FD52 /* BufferFiller.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F2947124171B14C30068FD52 /* BufferFiller.cpp */; };
-		F294717C171B14C30068FD52 /* BufferFiller.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F2947124171B14C30068FD52 /* BufferFiller.cpp */; };
 		F294717D171B14C30068FD52 /* BufferFiller.h in Headers */ = {isa = PBXBuildFile; fileRef = F2947125171B14C30068FD52 /* BufferFiller.h */; };
-		F294717E171B14C30068FD52 /* BufferFiller.h in Headers */ = {isa = PBXBuildFile; fileRef = F2947125171B14C30068FD52 /* BufferFiller.h */; };
 		F294717F171B14C30068FD52 /* ControlAdder.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F2947126171B14C30068FD52 /* ControlAdder.cpp */; };
-		F2947180171B14C30068FD52 /* ControlAdder.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F2947126171B14C30068FD52 /* ControlAdder.cpp */; };
 		F2947181171B14C30068FD52 /* ControlAdder.h in Headers */ = {isa = PBXBuildFile; fileRef = F2947127171B14C30068FD52 /* ControlAdder.h */; };
-		F2947182171B14C30068FD52 /* ControlAdder.h in Headers */ = {isa = PBXBuildFile; fileRef = F2947127171B14C30068FD52 /* ControlAdder.h */; };
 		F2947183171B14C30068FD52 /* ControlConditioner.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F2947128171B14C30068FD52 /* ControlConditioner.cpp */; };
-		F2947184171B14C30068FD52 /* ControlConditioner.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F2947128171B14C30068FD52 /* ControlConditioner.cpp */; };
 		F2947185171B14C30068FD52 /* ControlConditioner.h in Headers */ = {isa = PBXBuildFile; fileRef = F2947129171B14C30068FD52 /* ControlConditioner.h */; };
-		F2947186171B14C30068FD52 /* ControlConditioner.h in Headers */ = {isa = PBXBuildFile; fileRef = F2947129171B14C30068FD52 /* ControlConditioner.h */; };
 		F2947187171B14C30068FD52 /* ControlGenerator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F294712A171B14C30068FD52 /* ControlGenerator.cpp */; };
-		F2947188171B14C30068FD52 /* ControlGenerator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F294712A171B14C30068FD52 /* ControlGenerator.cpp */; };
 		F2947189171B14C30068FD52 /* ControlGenerator.h in Headers */ = {isa = PBXBuildFile; fileRef = F294712B171B14C30068FD52 /* ControlGenerator.h */; };
-		F294718A171B14C30068FD52 /* ControlGenerator.h in Headers */ = {isa = PBXBuildFile; fileRef = F294712B171B14C30068FD52 /* ControlGenerator.h */; };
 		F294718B171B14C30068FD52 /* ControlMultiplier.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F294712C171B14C30068FD52 /* ControlMultiplier.cpp */; };
-		F294718C171B14C30068FD52 /* ControlMultiplier.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F294712C171B14C30068FD52 /* ControlMultiplier.cpp */; };
 		F294718D171B14C30068FD52 /* ControlMultiplier.h in Headers */ = {isa = PBXBuildFile; fileRef = F294712D171B14C30068FD52 /* ControlMultiplier.h */; };
-		F294718E171B14C30068FD52 /* ControlMultiplier.h in Headers */ = {isa = PBXBuildFile; fileRef = F294712D171B14C30068FD52 /* ControlMultiplier.h */; };
 		F294718F171B14C30068FD52 /* ControlValue.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F294712E171B14C30068FD52 /* ControlValue.cpp */; };
-		F2947190171B14C30068FD52 /* ControlValue.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F294712E171B14C30068FD52 /* ControlValue.cpp */; };
 		F2947191171B14C30068FD52 /* ControlValue.h in Headers */ = {isa = PBXBuildFile; fileRef = F294712F171B14C30068FD52 /* ControlValue.h */; };
-		F2947192171B14C30068FD52 /* ControlValue.h in Headers */ = {isa = PBXBuildFile; fileRef = F294712F171B14C30068FD52 /* ControlValue.h */; };
 		F2947193171B14C30068FD52 /* Effect.h in Headers */ = {isa = PBXBuildFile; fileRef = F2947130171B14C30068FD52 /* Effect.h */; };
-		F2947194171B14C30068FD52 /* Effect.h in Headers */ = {isa = PBXBuildFile; fileRef = F2947130171B14C30068FD52 /* Effect.h */; };
 		F2947195171B14C30068FD52 /* FixedValue.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F2947131171B14C30068FD52 /* FixedValue.cpp */; };
-		F2947196171B14C30068FD52 /* FixedValue.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F2947131171B14C30068FD52 /* FixedValue.cpp */; };
 		F2947197171B14C30068FD52 /* FixedValue.h in Headers */ = {isa = PBXBuildFile; fileRef = F2947132171B14C30068FD52 /* FixedValue.h */; };
-		F2947198171B14C30068FD52 /* FixedValue.h in Headers */ = {isa = PBXBuildFile; fileRef = F2947132171B14C30068FD52 /* FixedValue.h */; };
 		F2947199171B14C30068FD52 /* Generator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F2947133171B14C30068FD52 /* Generator.cpp */; };
-		F294719A171B14C30068FD52 /* Generator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F2947133171B14C30068FD52 /* Generator.cpp */; };
 		F294719B171B14C30068FD52 /* Generator.h in Headers */ = {isa = PBXBuildFile; fileRef = F2947134171B14C30068FD52 /* Generator.h */; };
-		F294719C171B14C30068FD52 /* Generator.h in Headers */ = {isa = PBXBuildFile; fileRef = F2947134171B14C30068FD52 /* Generator.h */; };
 		F294719D171B14C30068FD52 /* Multiplier.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F2947135171B14C30068FD52 /* Multiplier.cpp */; };
-		F294719E171B14C30068FD52 /* Multiplier.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F2947135171B14C30068FD52 /* Multiplier.cpp */; };
 		F294719F171B14C30068FD52 /* Multiplier.h in Headers */ = {isa = PBXBuildFile; fileRef = F2947136171B14C30068FD52 /* Multiplier.h */; };
-		F29471A0171B14C30068FD52 /* Multiplier.h in Headers */ = {isa = PBXBuildFile; fileRef = F2947136171B14C30068FD52 /* Multiplier.h */; };
 		F29471A1171B14C30068FD52 /* Synth.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F2947137171B14C30068FD52 /* Synth.cpp */; };
-		F29471A2171B14C30068FD52 /* Synth.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F2947137171B14C30068FD52 /* Synth.cpp */; };
 		F29471A3171B14C30068FD52 /* Synth.h in Headers */ = {isa = PBXBuildFile; fileRef = F2947138171B14C30068FD52 /* Synth.h */; };
-		F29471A4171B14C30068FD52 /* Synth.h in Headers */ = {isa = PBXBuildFile; fileRef = F2947138171B14C30068FD52 /* Synth.h */; };
 		F29471A5171B14C30068FD52 /* TonicCore.h in Headers */ = {isa = PBXBuildFile; fileRef = F2947139171B14C30068FD52 /* TonicCore.h */; };
-		F29471A6171B14C30068FD52 /* TonicCore.h in Headers */ = {isa = PBXBuildFile; fileRef = F2947139171B14C30068FD52 /* TonicCore.h */; };
 		F29471A7171B14C30068FD52 /* TonicFrames.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F294713A171B14C30068FD52 /* TonicFrames.cpp */; };
-		F29471A8171B14C30068FD52 /* TonicFrames.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F294713A171B14C30068FD52 /* TonicFrames.cpp */; };
 		F29471A9171B14C30068FD52 /* TonicFrames.h in Headers */ = {isa = PBXBuildFile; fileRef = F294713B171B14C30068FD52 /* TonicFrames.h */; };
-		F29471AA171B14C30068FD52 /* TonicFrames.h in Headers */ = {isa = PBXBuildFile; fileRef = F294713B171B14C30068FD52 /* TonicFrames.h */; };
 		F29471AB171B14C30068FD52 /* DelayUtils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F294713D171B14C30068FD52 /* DelayUtils.cpp */; };
-		F29471AC171B14C30068FD52 /* DelayUtils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F294713D171B14C30068FD52 /* DelayUtils.cpp */; };
 		F29471AD171B14C30068FD52 /* DelayUtils.h in Headers */ = {isa = PBXBuildFile; fileRef = F294713E171B14C30068FD52 /* DelayUtils.h */; };
-		F29471AE171B14C30068FD52 /* DelayUtils.h in Headers */ = {isa = PBXBuildFile; fileRef = F294713E171B14C30068FD52 /* DelayUtils.h */; };
 		F29471AF171B14C30068FD52 /* MonoDelay.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F294713F171B14C30068FD52 /* MonoDelay.cpp */; };
-		F29471B0171B14C30068FD52 /* MonoDelay.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F294713F171B14C30068FD52 /* MonoDelay.cpp */; };
 		F29471B1171B14C30068FD52 /* MonoDelay.h in Headers */ = {isa = PBXBuildFile; fileRef = F2947140171B14C30068FD52 /* MonoDelay.h */; };
-		F29471B2171B14C30068FD52 /* MonoDelay.h in Headers */ = {isa = PBXBuildFile; fileRef = F2947140171B14C30068FD52 /* MonoDelay.h */; };
 		F29471B3171B14C30068FD52 /* StereoDelay.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F2947141171B14C30068FD52 /* StereoDelay.cpp */; };
-		F29471B4171B14C30068FD52 /* StereoDelay.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F2947141171B14C30068FD52 /* StereoDelay.cpp */; };
 		F29471B5171B14C30068FD52 /* StereoDelay.h in Headers */ = {isa = PBXBuildFile; fileRef = F2947142171B14C30068FD52 /* StereoDelay.h */; };
-		F29471B6171B14C30068FD52 /* StereoDelay.h in Headers */ = {isa = PBXBuildFile; fileRef = F2947142171B14C30068FD52 /* StereoDelay.h */; };
 		F29471B7171B14C30068FD52 /* Filters.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F2947144171B14C30068FD52 /* Filters.cpp */; };
-		F29471B8171B14C30068FD52 /* Filters.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F2947144171B14C30068FD52 /* Filters.cpp */; };
 		F29471B9171B14C30068FD52 /* Filters.h in Headers */ = {isa = PBXBuildFile; fileRef = F2947145171B14C30068FD52 /* Filters.h */; };
-		F29471BA171B14C30068FD52 /* Filters.h in Headers */ = {isa = PBXBuildFile; fileRef = F2947145171B14C30068FD52 /* Filters.h */; };
 		F29471BB171B14C30068FD52 /* FilterUtils.h in Headers */ = {isa = PBXBuildFile; fileRef = F2947146171B14C30068FD52 /* FilterUtils.h */; };
-		F29471BC171B14C30068FD52 /* FilterUtils.h in Headers */ = {isa = PBXBuildFile; fileRef = F2947146171B14C30068FD52 /* FilterUtils.h */; };
 		F29471BD171B14C30068FD52 /* FlexToothWave.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F2947148171B14C30068FD52 /* FlexToothWave.cpp */; };
-		F29471BE171B14C30068FD52 /* FlexToothWave.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F2947148171B14C30068FD52 /* FlexToothWave.cpp */; };
 		F29471BF171B14C30068FD52 /* FlexToothWave.h in Headers */ = {isa = PBXBuildFile; fileRef = F2947149171B14C30068FD52 /* FlexToothWave.h */; };
-		F29471C0171B14C30068FD52 /* FlexToothWave.h in Headers */ = {isa = PBXBuildFile; fileRef = F2947149171B14C30068FD52 /* FlexToothWave.h */; };
 		F29471C1171B14C30068FD52 /* Noise.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F294714A171B14C30068FD52 /* Noise.cpp */; };
-		F29471C2171B14C30068FD52 /* Noise.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F294714A171B14C30068FD52 /* Noise.cpp */; };
 		F29471C3171B14C30068FD52 /* Noise.h in Headers */ = {isa = PBXBuildFile; fileRef = F294714B171B14C30068FD52 /* Noise.h */; };
-		F29471C4171B14C30068FD52 /* Noise.h in Headers */ = {isa = PBXBuildFile; fileRef = F294714B171B14C30068FD52 /* Noise.h */; };
 		F29471C5171B14C30068FD52 /* RectWave.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F294714C171B14C30068FD52 /* RectWave.cpp */; };
-		F29471C6171B14C30068FD52 /* RectWave.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F294714C171B14C30068FD52 /* RectWave.cpp */; };
 		F29471C7171B14C30068FD52 /* RectWave.h in Headers */ = {isa = PBXBuildFile; fileRef = F294714D171B14C30068FD52 /* RectWave.h */; };
-		F29471C8171B14C30068FD52 /* RectWave.h in Headers */ = {isa = PBXBuildFile; fileRef = F294714D171B14C30068FD52 /* RectWave.h */; };
 		F29471C9171B14C30068FD52 /* SineWave.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F294714E171B14C30068FD52 /* SineWave.cpp */; };
-		F29471CA171B14C30068FD52 /* SineWave.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F294714E171B14C30068FD52 /* SineWave.cpp */; };
 		F29471CB171B14C30068FD52 /* SineWave.h in Headers */ = {isa = PBXBuildFile; fileRef = F294714F171B14C30068FD52 /* SineWave.h */; };
-		F29471CC171B14C30068FD52 /* SineWave.h in Headers */ = {isa = PBXBuildFile; fileRef = F294714F171B14C30068FD52 /* SineWave.h */; };
 		F29471CD171B14C30068FD52 /* TableLookupOsc.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F2947150171B14C30068FD52 /* TableLookupOsc.cpp */; };
-		F29471CE171B14C30068FD52 /* TableLookupOsc.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F2947150171B14C30068FD52 /* TableLookupOsc.cpp */; };
 		F29471CF171B14C30068FD52 /* TableLookupOsc.h in Headers */ = {isa = PBXBuildFile; fileRef = F2947151171B14C30068FD52 /* TableLookupOsc.h */; };
-		F29471D0171B14C30068FD52 /* TableLookupOsc.h in Headers */ = {isa = PBXBuildFile; fileRef = F2947151171B14C30068FD52 /* TableLookupOsc.h */; };
-		F29471D1171B14C30068FD52 /* Tonic.h in Headers */ = {isa = PBXBuildFile; fileRef = F2947152171B14C30068FD52 /* Tonic.h */; };
-		F29471D2171B14C30068FD52 /* Tonic.h in Headers */ = {isa = PBXBuildFile; fileRef = F2947152171B14C30068FD52 /* Tonic.h */; };
+		F29471D1171B14C30068FD52 /* Tonic.h in Headers */ = {isa = PBXBuildFile; fileRef = F2947152171B14C30068FD52 /* Tonic.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		F29471D3171B14C30068FD52 /* ADSR.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F2947155171B14C30068FD52 /* ADSR.cpp */; };
-		F29471D4171B14C30068FD52 /* ADSR.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F2947155171B14C30068FD52 /* ADSR.cpp */; };
 		F29471D5171B14C30068FD52 /* ADSR.h in Headers */ = {isa = PBXBuildFile; fileRef = F2947156171B14C30068FD52 /* ADSR.h */; };
-		F29471D6171B14C30068FD52 /* ADSR.h in Headers */ = {isa = PBXBuildFile; fileRef = F2947156171B14C30068FD52 /* ADSR.h */; };
 		F29471D7171B14C30068FD52 /* CompressorLimiter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F2947157171B14C30068FD52 /* CompressorLimiter.cpp */; };
-		F29471D8171B14C30068FD52 /* CompressorLimiter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F2947157171B14C30068FD52 /* CompressorLimiter.cpp */; };
 		F29471D9171B14C30068FD52 /* CompressorLimiter.h in Headers */ = {isa = PBXBuildFile; fileRef = F2947158171B14C30068FD52 /* CompressorLimiter.h */; };
-		F29471DA171B14C30068FD52 /* CompressorLimiter.h in Headers */ = {isa = PBXBuildFile; fileRef = F2947158171B14C30068FD52 /* CompressorLimiter.h */; };
 		F29471DB171B14C30068FD52 /* LFNoise.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F2947159171B14C30068FD52 /* LFNoise.cpp */; };
-		F29471DC171B14C30068FD52 /* LFNoise.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F2947159171B14C30068FD52 /* LFNoise.cpp */; };
 		F29471DD171B14C30068FD52 /* LFNoise.h in Headers */ = {isa = PBXBuildFile; fileRef = F294715A171B14C30068FD52 /* LFNoise.h */; };
-		F29471DE171B14C30068FD52 /* LFNoise.h in Headers */ = {isa = PBXBuildFile; fileRef = F294715A171B14C30068FD52 /* LFNoise.h */; };
 		F29471DF171B14C30068FD52 /* MonoToStereoPanner.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F294715B171B14C30068FD52 /* MonoToStereoPanner.cpp */; };
-		F29471E0171B14C30068FD52 /* MonoToStereoPanner.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F294715B171B14C30068FD52 /* MonoToStereoPanner.cpp */; };
 		F29471E1171B14C30068FD52 /* MonoToStereoPanner.h in Headers */ = {isa = PBXBuildFile; fileRef = F294715C171B14C30068FD52 /* MonoToStereoPanner.h */; };
-		F29471E2171B14C30068FD52 /* MonoToStereoPanner.h in Headers */ = {isa = PBXBuildFile; fileRef = F294715C171B14C30068FD52 /* MonoToStereoPanner.h */; };
 		F29471E3171B14C30068FD52 /* RampedValue.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F294715D171B14C30068FD52 /* RampedValue.cpp */; };
-		F29471E4171B14C30068FD52 /* RampedValue.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F294715D171B14C30068FD52 /* RampedValue.cpp */; };
 		F29471E5171B14C30068FD52 /* RampedValue.h in Headers */ = {isa = PBXBuildFile; fileRef = F294715E171B14C30068FD52 /* RampedValue.h */; };
-		F29471E6171B14C30068FD52 /* RampedValue.h in Headers */ = {isa = PBXBuildFile; fileRef = F294715E171B14C30068FD52 /* RampedValue.h */; };
 		F29471E7171B14C30068FD52 /* Mixer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F2947160171B14C30068FD52 /* Mixer.cpp */; };
-		F29471E8171B14C30068FD52 /* Mixer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F2947160171B14C30068FD52 /* Mixer.cpp */; };
 		F29471E9171B14C30068FD52 /* Mixer.h in Headers */ = {isa = PBXBuildFile; fileRef = F2947161171B14C30068FD52 /* Mixer.h */; };
-		F29471EA171B14C30068FD52 /* Mixer.h in Headers */ = {isa = PBXBuildFile; fileRef = F2947161171B14C30068FD52 /* Mixer.h */; };
 		F29471EB171B14C30068FD52 /* ControlDbToLinear.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F2947163171B14C30068FD52 /* ControlDbToLinear.cpp */; };
-		F29471EC171B14C30068FD52 /* ControlDbToLinear.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F2947163171B14C30068FD52 /* ControlDbToLinear.cpp */; };
 		F29471ED171B14C30068FD52 /* ControlDbToLinear.h in Headers */ = {isa = PBXBuildFile; fileRef = F2947164171B14C30068FD52 /* ControlDbToLinear.h */; };
-		F29471EE171B14C30068FD52 /* ControlDbToLinear.h in Headers */ = {isa = PBXBuildFile; fileRef = F2947164171B14C30068FD52 /* ControlDbToLinear.h */; };
 		F29471EF171B14C30068FD52 /* ControlFloor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F2947165171B14C30068FD52 /* ControlFloor.cpp */; };
-		F29471F0171B14C30068FD52 /* ControlFloor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F2947165171B14C30068FD52 /* ControlFloor.cpp */; };
 		F29471F1171B14C30068FD52 /* ControlFloor.h in Headers */ = {isa = PBXBuildFile; fileRef = F2947166171B14C30068FD52 /* ControlFloor.h */; };
-		F29471F2171B14C30068FD52 /* ControlFloor.h in Headers */ = {isa = PBXBuildFile; fileRef = F2947166171B14C30068FD52 /* ControlFloor.h */; };
 		F29471F3171B14C30068FD52 /* ControlMetro.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F2947167171B14C30068FD52 /* ControlMetro.cpp */; };
-		F29471F4171B14C30068FD52 /* ControlMetro.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F2947167171B14C30068FD52 /* ControlMetro.cpp */; };
 		F29471F5171B14C30068FD52 /* ControlMetro.h in Headers */ = {isa = PBXBuildFile; fileRef = F2947168171B14C30068FD52 /* ControlMetro.h */; };
-		F29471F6171B14C30068FD52 /* ControlMetro.h in Headers */ = {isa = PBXBuildFile; fileRef = F2947168171B14C30068FD52 /* ControlMetro.h */; };
 		F29471F7171B14C30068FD52 /* ControlMidiToFreq.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F2947169171B14C30068FD52 /* ControlMidiToFreq.cpp */; };
-		F29471F8171B14C30068FD52 /* ControlMidiToFreq.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F2947169171B14C30068FD52 /* ControlMidiToFreq.cpp */; };
 		F29471F9171B14C30068FD52 /* ControlMidiToFreq.h in Headers */ = {isa = PBXBuildFile; fileRef = F294716A171B14C30068FD52 /* ControlMidiToFreq.h */; };
-		F29471FA171B14C30068FD52 /* ControlMidiToFreq.h in Headers */ = {isa = PBXBuildFile; fileRef = F294716A171B14C30068FD52 /* ControlMidiToFreq.h */; };
 		F29471FB171B14C30068FD52 /* ControlPulse.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F294716B171B14C30068FD52 /* ControlPulse.cpp */; };
-		F29471FC171B14C30068FD52 /* ControlPulse.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F294716B171B14C30068FD52 /* ControlPulse.cpp */; };
 		F29471FD171B14C30068FD52 /* ControlPulse.h in Headers */ = {isa = PBXBuildFile; fileRef = F294716C171B14C30068FD52 /* ControlPulse.h */; };
-		F29471FE171B14C30068FD52 /* ControlPulse.h in Headers */ = {isa = PBXBuildFile; fileRef = F294716C171B14C30068FD52 /* ControlPulse.h */; };
 		F29471FF171B14C30068FD52 /* ControlRandom.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F294716D171B14C30068FD52 /* ControlRandom.cpp */; };
-		F2947200171B14C30068FD52 /* ControlRandom.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F294716D171B14C30068FD52 /* ControlRandom.cpp */; };
 		F2947201171B14C30068FD52 /* ControlRandom.h in Headers */ = {isa = PBXBuildFile; fileRef = F294716E171B14C30068FD52 /* ControlRandom.h */; };
-		F2947202171B14C30068FD52 /* ControlRandom.h in Headers */ = {isa = PBXBuildFile; fileRef = F294716E171B14C30068FD52 /* ControlRandom.h */; };
 		F2947203171B14C30068FD52 /* ControlSnapToScale.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F294716F171B14C30068FD52 /* ControlSnapToScale.cpp */; };
-		F2947204171B14C30068FD52 /* ControlSnapToScale.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F294716F171B14C30068FD52 /* ControlSnapToScale.cpp */; };
 		F2947205171B14C30068FD52 /* ControlSnapToScale.h in Headers */ = {isa = PBXBuildFile; fileRef = F2947170171B14C30068FD52 /* ControlSnapToScale.h */; };
-		F2947206171B14C30068FD52 /* ControlSnapToScale.h in Headers */ = {isa = PBXBuildFile; fileRef = F2947170171B14C30068FD52 /* ControlSnapToScale.h */; };
 		F2947207171B14C30068FD52 /* ControlStepper.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F2947171171B14C30068FD52 /* ControlStepper.cpp */; };
-		F2947208171B14C30068FD52 /* ControlStepper.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F2947171171B14C30068FD52 /* ControlStepper.cpp */; };
 		F2947209171B14C30068FD52 /* ControlStepper.h in Headers */ = {isa = PBXBuildFile; fileRef = F2947172171B14C30068FD52 /* ControlStepper.h */; };
-		F294720A171B14C30068FD52 /* ControlStepper.h in Headers */ = {isa = PBXBuildFile; fileRef = F2947172171B14C30068FD52 /* ControlStepper.h */; };
 		F294720B171B14C30068FD52 /* ControlTrigger.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F2947173171B14C30068FD52 /* ControlTrigger.cpp */; };
-		F294720C171B14C30068FD52 /* ControlTrigger.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F2947173171B14C30068FD52 /* ControlTrigger.cpp */; };
 		F294720D171B14C30068FD52 /* ControlTrigger.h in Headers */ = {isa = PBXBuildFile; fileRef = F2947174171B14C30068FD52 /* ControlTrigger.h */; };
-		F294720E171B14C30068FD52 /* ControlTrigger.h in Headers */ = {isa = PBXBuildFile; fileRef = F2947174171B14C30068FD52 /* ControlTrigger.h */; };
 		F294720F171B14C30068FD52 /* ControlXYSpeed.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F2947175171B14C30068FD52 /* ControlXYSpeed.cpp */; };
-		F2947210171B14C30068FD52 /* ControlXYSpeed.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F2947175171B14C30068FD52 /* ControlXYSpeed.cpp */; };
 		F2947211171B14C30068FD52 /* ControlXYSpeed.h in Headers */ = {isa = PBXBuildFile; fileRef = F2947176171B14C30068FD52 /* ControlXYSpeed.h */; };
-		F2947212171B14C30068FD52 /* ControlXYSpeed.h in Headers */ = {isa = PBXBuildFile; fileRef = F2947176171B14C30068FD52 /* ControlXYSpeed.h */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		F23A7CEF171B3D2D00AE8353 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "include/${PRODUCT_NAME}";
+			dstSubfolderSpec = 16;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		01F72690171520F900EBB4BB /* libTonic-OSX.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libTonic-OSX.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		01F7273D1715225500EBB4BB /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.7.sdk/System/Library/Frameworks/Accelerate.framework; sourceTree = DEVELOPER_DIR; };
-		01F72781171525FD00EBB4BB /* libTonic-iOS.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libTonic-iOS.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		F23A7CF1171B3D2E00AE8353 /* libTonic-iOS.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libTonic-iOS.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		F23A7CF2171B3D2E00AE8353 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		F23A7D01171B3D2E00AE8353 /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
+		F23A7D03171B3D2E00AE8353 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = Library/Frameworks/UIKit.framework; sourceTree = DEVELOPER_DIR; };
 		F2947122171B14C30068FD52 /* Adder.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Adder.cpp; sourceTree = "<group>"; };
 		F2947123171B14C30068FD52 /* Adder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Adder.h; sourceTree = "<group>"; };
 		F2947124171B14C30068FD52 /* BufferFiller.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = BufferFiller.cpp; sourceTree = "<group>"; };
@@ -273,10 +234,11 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		01F7277E171525FD00EBB4BB /* Frameworks */ = {
+		F23A7CEE171B3D2D00AE8353 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F23A7CF3171B3D2E00AE8353 /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -296,7 +258,7 @@
 			isa = PBXGroup;
 			children = (
 				01F72690171520F900EBB4BB /* libTonic-OSX.a */,
-				01F72781171525FD00EBB4BB /* libTonic-iOS.a */,
+				F23A7CF1171B3D2E00AE8353 /* libTonic-iOS.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -305,6 +267,9 @@
 			isa = PBXGroup;
 			children = (
 				01F7273D1715225500EBB4BB /* Accelerate.framework */,
+				F23A7CF2171B3D2E00AE8353 /* Foundation.framework */,
+				F23A7D01171B3D2E00AE8353 /* SenTestingKit.framework */,
+				F23A7D03171B3D2E00AE8353 /* UIKit.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -466,6 +431,7 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F29471D1171B14C30068FD52 /* Tonic.h in Headers */,
 				F2947179171B14C30068FD52 /* Adder.h in Headers */,
 				F294717D171B14C30068FD52 /* BufferFiller.h in Headers */,
 				F2947181171B14C30068FD52 /* ControlAdder.h in Headers */,
@@ -490,7 +456,6 @@
 				F29471C7171B14C30068FD52 /* RectWave.h in Headers */,
 				F29471CB171B14C30068FD52 /* SineWave.h in Headers */,
 				F29471CF171B14C30068FD52 /* TableLookupOsc.h in Headers */,
-				F29471D1171B14C30068FD52 /* Tonic.h in Headers */,
 				F29471D5171B14C30068FD52 /* ADSR.h in Headers */,
 				F29471D9171B14C30068FD52 /* CompressorLimiter.h in Headers */,
 				F29471DD171B14C30068FD52 /* LFNoise.h in Headers */,
@@ -507,54 +472,6 @@
 				F2947209171B14C30068FD52 /* ControlStepper.h in Headers */,
 				F294720D171B14C30068FD52 /* ControlTrigger.h in Headers */,
 				F2947211171B14C30068FD52 /* ControlXYSpeed.h in Headers */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		01F7277F171525FD00EBB4BB /* Headers */ = {
-			isa = PBXHeadersBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				F294717A171B14C30068FD52 /* Adder.h in Headers */,
-				F294717E171B14C30068FD52 /* BufferFiller.h in Headers */,
-				F2947182171B14C30068FD52 /* ControlAdder.h in Headers */,
-				F2947186171B14C30068FD52 /* ControlConditioner.h in Headers */,
-				F294718A171B14C30068FD52 /* ControlGenerator.h in Headers */,
-				F294718E171B14C30068FD52 /* ControlMultiplier.h in Headers */,
-				F2947192171B14C30068FD52 /* ControlValue.h in Headers */,
-				F2947194171B14C30068FD52 /* Effect.h in Headers */,
-				F2947198171B14C30068FD52 /* FixedValue.h in Headers */,
-				F294719C171B14C30068FD52 /* Generator.h in Headers */,
-				F29471A0171B14C30068FD52 /* Multiplier.h in Headers */,
-				F29471A4171B14C30068FD52 /* Synth.h in Headers */,
-				F29471A6171B14C30068FD52 /* TonicCore.h in Headers */,
-				F29471AA171B14C30068FD52 /* TonicFrames.h in Headers */,
-				F29471AE171B14C30068FD52 /* DelayUtils.h in Headers */,
-				F29471B2171B14C30068FD52 /* MonoDelay.h in Headers */,
-				F29471B6171B14C30068FD52 /* StereoDelay.h in Headers */,
-				F29471BA171B14C30068FD52 /* Filters.h in Headers */,
-				F29471BC171B14C30068FD52 /* FilterUtils.h in Headers */,
-				F29471C0171B14C30068FD52 /* FlexToothWave.h in Headers */,
-				F29471C4171B14C30068FD52 /* Noise.h in Headers */,
-				F29471C8171B14C30068FD52 /* RectWave.h in Headers */,
-				F29471CC171B14C30068FD52 /* SineWave.h in Headers */,
-				F29471D0171B14C30068FD52 /* TableLookupOsc.h in Headers */,
-				F29471D2171B14C30068FD52 /* Tonic.h in Headers */,
-				F29471D6171B14C30068FD52 /* ADSR.h in Headers */,
-				F29471DA171B14C30068FD52 /* CompressorLimiter.h in Headers */,
-				F29471DE171B14C30068FD52 /* LFNoise.h in Headers */,
-				F29471E2171B14C30068FD52 /* MonoToStereoPanner.h in Headers */,
-				F29471E6171B14C30068FD52 /* RampedValue.h in Headers */,
-				F29471EA171B14C30068FD52 /* Mixer.h in Headers */,
-				F29471EE171B14C30068FD52 /* ControlDbToLinear.h in Headers */,
-				F29471F2171B14C30068FD52 /* ControlFloor.h in Headers */,
-				F29471F6171B14C30068FD52 /* ControlMetro.h in Headers */,
-				F29471FA171B14C30068FD52 /* ControlMidiToFreq.h in Headers */,
-				F29471FE171B14C30068FD52 /* ControlPulse.h in Headers */,
-				F2947202171B14C30068FD52 /* ControlRandom.h in Headers */,
-				F2947206171B14C30068FD52 /* ControlSnapToScale.h in Headers */,
-				F294720A171B14C30068FD52 /* ControlStepper.h in Headers */,
-				F294720E171B14C30068FD52 /* ControlTrigger.h in Headers */,
-				F2947212171B14C30068FD52 /* ControlXYSpeed.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -578,21 +495,21 @@
 			productReference = 01F72690171520F900EBB4BB /* libTonic-OSX.a */;
 			productType = "com.apple.product-type.library.static";
 		};
-		01F72780171525FD00EBB4BB /* Tonic-iOS */ = {
+		F23A7CF0171B3D2D00AE8353 /* Tonic-iOS */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 01F72782171525FD00EBB4BB /* Build configuration list for PBXNativeTarget "Tonic-iOS" */;
+			buildConfigurationList = F23A7D16171B3D2E00AE8353 /* Build configuration list for PBXNativeTarget "Tonic-iOS" */;
 			buildPhases = (
-				01F7277D171525FD00EBB4BB /* Sources */,
-				01F7277E171525FD00EBB4BB /* Frameworks */,
-				01F7277F171525FD00EBB4BB /* Headers */,
+				F23A7CED171B3D2D00AE8353 /* Sources */,
+				F23A7CEE171B3D2D00AE8353 /* Frameworks */,
+				F23A7CEF171B3D2D00AE8353 /* CopyFiles */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
 			name = "Tonic-iOS";
-			productName = "Tonic-iOS";
-			productReference = 01F72781171525FD00EBB4BB /* libTonic-iOS.a */;
+			productName = "Tonic-iOS-Lib";
+			productReference = F23A7CF1171B3D2E00AE8353 /* libTonic-iOS.a */;
 			productType = "com.apple.product-type.library.static";
 		};
 /* End PBXNativeTarget section */
@@ -617,27 +534,10 @@
 			projectRoot = "";
 			targets = (
 				01F7268F171520F900EBB4BB /* Tonic-OSX */,
-				01F72780171525FD00EBB4BB /* Tonic-iOS */,
-				F25D4D35171B2271002EEB85 /* Tonic-iOS-Universal */,
+				F23A7CF0171B3D2D00AE8353 /* Tonic-iOS */,
 			);
 		};
 /* End PBXProject section */
-
-/* Begin PBXShellScriptBuildPhase section */
-		F25D4D39171B227A002EEB85 /* ShellScript */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "# NOTE: This target is for building a universal static library file for both iOS devices and the iOS simulator\n\nXCODEBUILD_PATH=/Applications/Xcode.app/Contents/Developer/usr/bin\nXCODEBUILD=$XCODEBUILD_PATH/xcodebuild\n\n$XCODEBUILD -project TonicLib.xcodeproj -target \"Tonic-iOS\" -sdk \"iphonesimulator\" -configuration \"${CONFIGURATION}\" build\n$XCODEBUILD -project TonicLib.xcodeproj -target \"Tonic-iOS\" -sdk \"iphoneos\" -configuration \"${CONFIGURATION}\" build\n\nlipo -create -output \"build/libTonic-iOS-Universal.a\" \"build/${CONFIGURATION}-iphoneos/libTonic-iOS.a\" \"build/${CONFIGURATION}-iphonesimulator/libTonic-iOS.a\"";
-		};
-/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		01F7268C171520F900EBB4BB /* Sources */ = {
@@ -684,47 +584,47 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		01F7277D171525FD00EBB4BB /* Sources */ = {
+		F23A7CED171B3D2D00AE8353 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F2947178171B14C30068FD52 /* Adder.cpp in Sources */,
-				F294717C171B14C30068FD52 /* BufferFiller.cpp in Sources */,
-				F2947180171B14C30068FD52 /* ControlAdder.cpp in Sources */,
-				F2947184171B14C30068FD52 /* ControlConditioner.cpp in Sources */,
-				F2947188171B14C30068FD52 /* ControlGenerator.cpp in Sources */,
-				F294718C171B14C30068FD52 /* ControlMultiplier.cpp in Sources */,
-				F2947190171B14C30068FD52 /* ControlValue.cpp in Sources */,
-				F2947196171B14C30068FD52 /* FixedValue.cpp in Sources */,
-				F294719A171B14C30068FD52 /* Generator.cpp in Sources */,
-				F294719E171B14C30068FD52 /* Multiplier.cpp in Sources */,
-				F29471A2171B14C30068FD52 /* Synth.cpp in Sources */,
-				F29471A8171B14C30068FD52 /* TonicFrames.cpp in Sources */,
-				F29471AC171B14C30068FD52 /* DelayUtils.cpp in Sources */,
-				F29471B0171B14C30068FD52 /* MonoDelay.cpp in Sources */,
-				F29471B4171B14C30068FD52 /* StereoDelay.cpp in Sources */,
-				F29471B8171B14C30068FD52 /* Filters.cpp in Sources */,
-				F29471BE171B14C30068FD52 /* FlexToothWave.cpp in Sources */,
-				F29471C2171B14C30068FD52 /* Noise.cpp in Sources */,
-				F29471C6171B14C30068FD52 /* RectWave.cpp in Sources */,
-				F29471CA171B14C30068FD52 /* SineWave.cpp in Sources */,
-				F29471CE171B14C30068FD52 /* TableLookupOsc.cpp in Sources */,
-				F29471D4171B14C30068FD52 /* ADSR.cpp in Sources */,
-				F29471D8171B14C30068FD52 /* CompressorLimiter.cpp in Sources */,
-				F29471DC171B14C30068FD52 /* LFNoise.cpp in Sources */,
-				F29471E0171B14C30068FD52 /* MonoToStereoPanner.cpp in Sources */,
-				F29471E4171B14C30068FD52 /* RampedValue.cpp in Sources */,
-				F29471E8171B14C30068FD52 /* Mixer.cpp in Sources */,
-				F29471EC171B14C30068FD52 /* ControlDbToLinear.cpp in Sources */,
-				F29471F0171B14C30068FD52 /* ControlFloor.cpp in Sources */,
-				F29471F4171B14C30068FD52 /* ControlMetro.cpp in Sources */,
-				F29471F8171B14C30068FD52 /* ControlMidiToFreq.cpp in Sources */,
-				F29471FC171B14C30068FD52 /* ControlPulse.cpp in Sources */,
-				F2947200171B14C30068FD52 /* ControlRandom.cpp in Sources */,
-				F2947204171B14C30068FD52 /* ControlSnapToScale.cpp in Sources */,
-				F2947208171B14C30068FD52 /* ControlStepper.cpp in Sources */,
-				F294720C171B14C30068FD52 /* ControlTrigger.cpp in Sources */,
-				F2947210171B14C30068FD52 /* ControlXYSpeed.cpp in Sources */,
+				F23A7D6E171B3E0100AE8353 /* Adder.cpp in Sources */,
+				F23A7D6F171B3E0200AE8353 /* BufferFiller.cpp in Sources */,
+				F23A7D70171B3E0E00AE8353 /* ControlAdder.cpp in Sources */,
+				F23A7D71171B3E0E00AE8353 /* ControlConditioner.cpp in Sources */,
+				F23A7D72171B3E0E00AE8353 /* ControlGenerator.cpp in Sources */,
+				F23A7D73171B3E0E00AE8353 /* ControlMultiplier.cpp in Sources */,
+				F23A7D74171B3E0E00AE8353 /* ControlValue.cpp in Sources */,
+				F23A7D75171B3E0E00AE8353 /* FixedValue.cpp in Sources */,
+				F23A7D76171B3E0E00AE8353 /* Generator.cpp in Sources */,
+				F23A7D77171B3E0E00AE8353 /* Multiplier.cpp in Sources */,
+				F23A7D78171B3E0E00AE8353 /* Synth.cpp in Sources */,
+				F23A7D7D171B3E1D00AE8353 /* Filters.cpp in Sources */,
+				F23A7D79171B3E0E00AE8353 /* TonicFrames.cpp in Sources */,
+				F23A7D7A171B3E1B00AE8353 /* DelayUtils.cpp in Sources */,
+				F23A7D7B171B3E1B00AE8353 /* MonoDelay.cpp in Sources */,
+				F23A7D7C171B3E1B00AE8353 /* StereoDelay.cpp in Sources */,
+				F23A7D7E171B3E2600AE8353 /* FlexToothWave.cpp in Sources */,
+				F23A7D7F171B3E2600AE8353 /* Noise.cpp in Sources */,
+				F23A7D80171B3E2600AE8353 /* RectWave.cpp in Sources */,
+				F23A7D81171B3E2600AE8353 /* SineWave.cpp in Sources */,
+				F23A7D82171B3E2600AE8353 /* TableLookupOsc.cpp in Sources */,
+				F23A7D83171B3E2F00AE8353 /* ADSR.cpp in Sources */,
+				F23A7D88171B3E4100AE8353 /* Mixer.cpp in Sources */,
+				F23A7D89171B3E4100AE8353 /* ControlDbToLinear.cpp in Sources */,
+				F23A7D8A171B3E4100AE8353 /* ControlFloor.cpp in Sources */,
+				F23A7D8B171B3E4100AE8353 /* ControlMetro.cpp in Sources */,
+				F23A7D8C171B3E4100AE8353 /* ControlMidiToFreq.cpp in Sources */,
+				F23A7D8D171B3E4100AE8353 /* ControlPulse.cpp in Sources */,
+				F23A7D8E171B3E4100AE8353 /* ControlRandom.cpp in Sources */,
+				F23A7D8F171B3E4100AE8353 /* ControlSnapToScale.cpp in Sources */,
+				F23A7D90171B3E4100AE8353 /* ControlStepper.cpp in Sources */,
+				F23A7D91171B3E4100AE8353 /* ControlTrigger.cpp in Sources */,
+				F23A7D92171B3E4100AE8353 /* ControlXYSpeed.cpp in Sources */,
+				F23A7D84171B3E2F00AE8353 /* CompressorLimiter.cpp in Sources */,
+				F23A7D85171B3E2F00AE8353 /* LFNoise.cpp in Sources */,
+				F23A7D86171B3E2F00AE8353 /* MonoToStereoPanner.cpp in Sources */,
+				F23A7D87171B3E2F00AE8353 /* RampedValue.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -799,26 +699,27 @@
 		01F72695171520F900EBB4BB /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				CLANG_CXX_LANGUAGE_STANDARD = "compiler-default";
 				CLANG_CXX_LIBRARY = "compiler-default";
 				EXECUTABLE_PREFIX = lib;
 				GCC_C_LANGUAGE_STANDARD = "compiler-default";
 				GCC_INLINES_ARE_PRIVATE_EXTERN = YES;
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
-				ONLY_ACTIVE_ARCH = YES;
+				ONLY_ACTIVE_ARCH = NO;
 				OTHER_CPLUSPLUSFLAGS = "$(OTHER_CFLAGS)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = "";
+				SDKROOT = macosx;
 				SUPPORTED_PLATFORMS = macosx;
 				SYMROOT = build;
+				VALID_ARCHS = i386;
 			};
 			name = Debug;
 		};
 		01F72696171520F900EBB4BB /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				CLANG_CXX_LANGUAGE_STANDARD = "compiler-default";
 				CLANG_CXX_LIBRARY = "compiler-default";
 				EXECUTABLE_PREFIX = lib;
@@ -828,60 +729,50 @@
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_CPLUSPLUSFLAGS = "$(OTHER_CFLAGS)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = "";
+				SDKROOT = macosx;
 				SUPPORTED_PLATFORMS = macosx;
 				SYMROOT = build;
+				VALID_ARCHS = i386;
 			};
 			name = Release;
 		};
-		01F72783171525FD00EBB4BB /* Debug */ = {
+		F23A7D12171B3D2E00AE8353 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
-				EXECUTABLE_PREFIX = lib;
+				CODE_SIGN_IDENTITY = "";
+				DSTROOT = /tmp/Tonic_iOS_Lib.dst;
 				GCC_INLINES_ARE_PRIVATE_EXTERN = YES;
-				GCC_VERSION = "";
-				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
-				ONLY_ACTIVE_ARCH = YES;
-				OTHER_CPLUSPLUSFLAGS = "$(OTHER_CFLAGS)";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = iphoneos;
-				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos";
-				SYMROOT = build;
-				VALID_ARCHS = "armv7 armv7s i386";
-			};
-			name = Debug;
-		};
-		01F72784171525FD00EBB4BB /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
-				EXECUTABLE_PREFIX = lib;
-				GCC_INLINES_ARE_PRIVATE_EXTERN = YES;
-				GCC_SYMBOLS_PRIVATE_EXTERN = YES;
-				GCC_VERSION = "";
+				GCC_PRECOMPILE_PREFIX_HEADER = NO;
+				GCC_PREFIX_HEADER = "";
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_CPLUSPLUSFLAGS = "$(OTHER_CFLAGS)";
+				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
-				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos";
-				SYMROOT = build;
-				VALID_ARCHS = "armv7 armv7s i386";
-			};
-			name = Release;
-		};
-		F25D4D37171B2271002EEB85 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
 			};
 			name = Debug;
 		};
-		F25D4D38171B2271002EEB85 /* Release */ = {
+		F23A7D13171B3D2E00AE8353 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				CODE_SIGN_IDENTITY = "";
+				DSTROOT = /tmp/Tonic_iOS_Lib.dst;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = NO;
+				GCC_PREFIX_HEADER = "";
+				GCC_SYMBOLS_PRIVATE_EXTERN = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				ONLY_ACTIVE_ARCH = NO;
+				OTHER_CPLUSPLUSFLAGS = "$(OTHER_CFLAGS)";
+				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
 		};
@@ -906,22 +797,14 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		01F72782171525FD00EBB4BB /* Build configuration list for PBXNativeTarget "Tonic-iOS" */ = {
+		F23A7D16171B3D2E00AE8353 /* Build configuration list for PBXNativeTarget "Tonic-iOS" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				01F72783171525FD00EBB4BB /* Debug */,
-				01F72784171525FD00EBB4BB /* Release */,
+				F23A7D12171B3D2E00AE8353 /* Debug */,
+				F23A7D13171B3D2E00AE8353 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
-		};
-		F25D4D36171B2271002EEB85 /* Build configuration list for PBXAggregateTarget "Tonic-iOS-Universal" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				F25D4D37171B2271002EEB85 /* Debug */,
-				F25D4D38171B2271002EEB85 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
 		};
 /* End XCConfigurationList section */
 	};
