@@ -40,9 +40,11 @@ public:
       .doesSustain(false)
       .trigger(metro);
     
-    StereoDelay delay = StereoDelay(3,3)
+    StereoDelay delay = StereoDelay(3.0f,3.0f)
     .delayTimeLeft( 0.5 + SineWave().freq(0.2) * 0.01)
-    .delayTimeRight(0.55 + SineWave().freq(0.23) * 0.01);
+    .delayTimeRight(0.55 + SineWave().freq(0.23) * 0.01)
+    .feedback(0.3)
+    .mix(0.2);
     
     Generator filterFreq = (SineWave().freq(0.01) + 1) * 200 + 225;
     

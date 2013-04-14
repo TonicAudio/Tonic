@@ -23,7 +23,6 @@
 		F23A7D79171B3E0E00AE8353 /* TonicFrames.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F294713A171B14C30068FD52 /* TonicFrames.cpp */; };
 		F23A7D7A171B3E1B00AE8353 /* DelayUtils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F294713D171B14C30068FD52 /* DelayUtils.cpp */; };
 		F23A7D7B171B3E1B00AE8353 /* BasicDelay.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F294713F171B14C30068FD52 /* BasicDelay.cpp */; };
-		F23A7D7C171B3E1B00AE8353 /* StereoDelay.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F2947141171B14C30068FD52 /* StereoDelay.cpp */; };
 		F23A7D7D171B3E1D00AE8353 /* Filters.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F2947144171B14C30068FD52 /* Filters.cpp */; };
 		F23A7D7E171B3E2600AE8353 /* FlexToothWave.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F2947148171B14C30068FD52 /* FlexToothWave.cpp */; };
 		F23A7D7F171B3E2600AE8353 /* Noise.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F294714A171B14C30068FD52 /* Noise.cpp */; };
@@ -76,8 +75,6 @@
 		F29471AD171B14C30068FD52 /* DelayUtils.h in Headers */ = {isa = PBXBuildFile; fileRef = F294713E171B14C30068FD52 /* DelayUtils.h */; };
 		F29471AF171B14C30068FD52 /* BasicDelay.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F294713F171B14C30068FD52 /* BasicDelay.cpp */; };
 		F29471B1171B14C30068FD52 /* BasicDelay.h in Headers */ = {isa = PBXBuildFile; fileRef = F2947140171B14C30068FD52 /* BasicDelay.h */; };
-		F29471B3171B14C30068FD52 /* StereoDelay.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F2947141171B14C30068FD52 /* StereoDelay.cpp */; };
-		F29471B5171B14C30068FD52 /* StereoDelay.h in Headers */ = {isa = PBXBuildFile; fileRef = F2947142171B14C30068FD52 /* StereoDelay.h */; };
 		F29471B7171B14C30068FD52 /* Filters.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F2947144171B14C30068FD52 /* Filters.cpp */; };
 		F29471B9171B14C30068FD52 /* Filters.h in Headers */ = {isa = PBXBuildFile; fileRef = F2947145171B14C30068FD52 /* Filters.h */; };
 		F29471BB171B14C30068FD52 /* FilterUtils.h in Headers */ = {isa = PBXBuildFile; fileRef = F2947146171B14C30068FD52 /* FilterUtils.h */; };
@@ -124,6 +121,9 @@
 		F294720D171B14C30068FD52 /* ControlTrigger.h in Headers */ = {isa = PBXBuildFile; fileRef = F2947174171B14C30068FD52 /* ControlTrigger.h */; };
 		F294720F171B14C30068FD52 /* ControlXYSpeed.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F2947175171B14C30068FD52 /* ControlXYSpeed.cpp */; };
 		F2947211171B14C30068FD52 /* ControlXYSpeed.h in Headers */ = {isa = PBXBuildFile; fileRef = F2947176171B14C30068FD52 /* ControlXYSpeed.h */; };
+		F2BFC7D6171B720600BF6332 /* StereoDelay.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F2BFC7D4171B720600BF6332 /* StereoDelay.cpp */; };
+		F2BFC7D7171B720600BF6332 /* StereoDelay.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F2BFC7D4171B720600BF6332 /* StereoDelay.cpp */; };
+		F2BFC7D8171B720600BF6332 /* StereoDelay.h in Headers */ = {isa = PBXBuildFile; fileRef = F2BFC7D5171B720600BF6332 /* StereoDelay.h */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -175,8 +175,6 @@
 		F294713E171B14C30068FD52 /* DelayUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DelayUtils.h; sourceTree = "<group>"; };
 		F294713F171B14C30068FD52 /* BasicDelay.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = BasicDelay.cpp; sourceTree = "<group>"; };
 		F2947140171B14C30068FD52 /* BasicDelay.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BasicDelay.h; sourceTree = "<group>"; };
-		F2947141171B14C30068FD52 /* StereoDelay.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = StereoDelay.cpp; sourceTree = "<group>"; };
-		F2947142171B14C30068FD52 /* StereoDelay.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StereoDelay.h; sourceTree = "<group>"; };
 		F2947144171B14C30068FD52 /* Filters.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Filters.cpp; sourceTree = "<group>"; };
 		F2947145171B14C30068FD52 /* Filters.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Filters.h; sourceTree = "<group>"; };
 		F2947146171B14C30068FD52 /* FilterUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FilterUtils.h; sourceTree = "<group>"; };
@@ -223,6 +221,8 @@
 		F2947174171B14C30068FD52 /* ControlTrigger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ControlTrigger.h; sourceTree = "<group>"; };
 		F2947175171B14C30068FD52 /* ControlXYSpeed.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ControlXYSpeed.cpp; sourceTree = "<group>"; };
 		F2947176171B14C30068FD52 /* ControlXYSpeed.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ControlXYSpeed.h; sourceTree = "<group>"; };
+		F2BFC7D4171B720600BF6332 /* StereoDelay.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = StereoDelay.cpp; sourceTree = "<group>"; };
+		F2BFC7D5171B720600BF6332 /* StereoDelay.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StereoDelay.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -328,8 +328,8 @@
 				F294713E171B14C30068FD52 /* DelayUtils.h */,
 				F294713F171B14C30068FD52 /* BasicDelay.cpp */,
 				F2947140171B14C30068FD52 /* BasicDelay.h */,
-				F2947141171B14C30068FD52 /* StereoDelay.cpp */,
-				F2947142171B14C30068FD52 /* StereoDelay.h */,
+				F2BFC7D4171B720600BF6332 /* StereoDelay.cpp */,
+				F2BFC7D5171B720600BF6332 /* StereoDelay.h */,
 			);
 			path = DelayEffects;
 			sourceTree = "<group>";
@@ -448,7 +448,6 @@
 				F29471A9171B14C30068FD52 /* TonicFrames.h in Headers */,
 				F29471AD171B14C30068FD52 /* DelayUtils.h in Headers */,
 				F29471B1171B14C30068FD52 /* BasicDelay.h in Headers */,
-				F29471B5171B14C30068FD52 /* StereoDelay.h in Headers */,
 				F29471B9171B14C30068FD52 /* Filters.h in Headers */,
 				F29471BB171B14C30068FD52 /* FilterUtils.h in Headers */,
 				F29471BF171B14C30068FD52 /* FlexToothWave.h in Headers */,
@@ -472,6 +471,7 @@
 				F2947209171B14C30068FD52 /* ControlStepper.h in Headers */,
 				F294720D171B14C30068FD52 /* ControlTrigger.h in Headers */,
 				F2947211171B14C30068FD52 /* ControlXYSpeed.h in Headers */,
+				F2BFC7D8171B720600BF6332 /* StereoDelay.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -558,7 +558,6 @@
 				F29471A7171B14C30068FD52 /* TonicFrames.cpp in Sources */,
 				F29471AB171B14C30068FD52 /* DelayUtils.cpp in Sources */,
 				F29471AF171B14C30068FD52 /* BasicDelay.cpp in Sources */,
-				F29471B3171B14C30068FD52 /* StereoDelay.cpp in Sources */,
 				F29471B7171B14C30068FD52 /* Filters.cpp in Sources */,
 				F29471BD171B14C30068FD52 /* FlexToothWave.cpp in Sources */,
 				F29471C1171B14C30068FD52 /* Noise.cpp in Sources */,
@@ -581,6 +580,7 @@
 				F2947207171B14C30068FD52 /* ControlStepper.cpp in Sources */,
 				F294720B171B14C30068FD52 /* ControlTrigger.cpp in Sources */,
 				F294720F171B14C30068FD52 /* ControlXYSpeed.cpp in Sources */,
+				F2BFC7D6171B720600BF6332 /* StereoDelay.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -603,7 +603,6 @@
 				F23A7D79171B3E0E00AE8353 /* TonicFrames.cpp in Sources */,
 				F23A7D7A171B3E1B00AE8353 /* DelayUtils.cpp in Sources */,
 				F23A7D7B171B3E1B00AE8353 /* BasicDelay.cpp in Sources */,
-				F23A7D7C171B3E1B00AE8353 /* StereoDelay.cpp in Sources */,
 				F23A7D7E171B3E2600AE8353 /* FlexToothWave.cpp in Sources */,
 				F23A7D7F171B3E2600AE8353 /* Noise.cpp in Sources */,
 				F23A7D80171B3E2600AE8353 /* RectWave.cpp in Sources */,
@@ -625,6 +624,7 @@
 				F23A7D85171B3E2F00AE8353 /* LFNoise.cpp in Sources */,
 				F23A7D86171B3E2F00AE8353 /* MonoToStereoPanner.cpp in Sources */,
 				F23A7D87171B3E2F00AE8353 /* RampedValue.cpp in Sources */,
+				F2BFC7D7171B720600BF6332 /* StereoDelay.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

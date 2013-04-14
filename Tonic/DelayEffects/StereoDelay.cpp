@@ -12,44 +12,35 @@ namespace Tonic { namespace Tonic_{
   
   StereoDelay_::StereoDelay_(){
     setIsStereoOutput(true);
+    setIsStereoInput(true);
+    delayTimeFrames_[0].resize(kSynthesisBlockSize, 1, 0);
+    delayTimeFrames_[1].resize(kSynthesisBlockSize, 1, 0);
+    fbkFrames_.resize(kSynthesisBlockSize, 1, 0);
+    mixFrames_.resize(kSynthesisBlockSize, 1, 0);
   }
   
   void StereoDelay_::initialize(float leftDelayArg, float rightDelayArg, float maxDelayLeft, float maxDelayRight){
-    maxDelayLeft = maxDelayLeft > 0? maxDelayLeft : 2 * leftDelayArg;
-    maxDelayRight = maxDelayRight > 0? maxDelayRight : 2 * rightDelayArg;
-    leftDelay = BasicDelay(maxDelayLeft).delayTime(leftDelayArg).mix(0.5).feedback(0.5);
-    rightDelay = BasicDelay(maxDelayRight).delayTime(rightDelayArg).mix(0.5).feedback(0.5);
-    outputGen = leftPanner.pan(-1).input(leftDelay) + rightPanner.input(rightDelay).pan(1);
+    
+    if (maxDelayLeft < 0) maxDelayLeft = leftDelayArg * 1.5;
+    if (maxDelayRight < 0) maxDelayRight = rightDelayArg * 1.5;
+    
+    if (maxDelayLeft < leftDelayArg || maxDelayRight < rightDelayArg){
+      error("StereoDelay_ - initial delay time is greater than max delay time", true);
+    }
+    else if (leftDelayArg <= 0 || rightDelayArg <= 0){
+      error("StereoDelay_ - initial delay time must be greater than zero");
+    }
+    
+    delayLine_[0].initialize(leftDelayArg, maxDelayLeft);
+    delayLine_[1].initialize(rightDelayArg, maxDelayRight);
   }
   
   StereoDelay_::~StereoDelay_(){
     
   }
-  
-  void StereoDelay_::setInput(Generator inputArg){
-    leftDelay.input(inputArg);
-    rightDelay.input(inputArg);
-  }
-  
-  
-  void StereoDelay_::setMix(Generator arg){
-    leftDelay.mix(arg);
-    rightDelay.mix(arg);
-  };
-  void StereoDelay_::setFeedback(Generator arg){
-    leftDelay.feedback(arg);
-    rightDelay.feedback(arg);
-  };
-  void StereoDelay_::setDelayTimeLeft(Generator arg){
-    leftDelay.delayTime(arg);
-  };
-  void StereoDelay_::setDelayTimeRight(Generator arg){
-    rightDelay.delayTime(arg);
-  };
-  
+
   
 } // Namespace Tonic_
-  
   
   StereoDelay:: StereoDelay(float leftDelay, float rightDelay, float maxDelayLeft, float maxDelayRight){
     gen()->initialize(leftDelay, rightDelay, maxDelayLeft, maxDelayRight);
