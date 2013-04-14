@@ -36,7 +36,7 @@ namespace Tonic { namespace Tonic_{
         total += *it;
       }
       lastOutput_.value = total / vals.size();
-      printf("vals.size: %i, vals.at(0): %f\n", vals.size(), vals.front());
+      printf("vals.size: %i, vals.at(0): %f\n", (int)vals.size(), vals.front());
       lastXVal = xOut.value;
       lastYVal = yOut.value;
     }else{

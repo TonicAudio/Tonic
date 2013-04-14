@@ -10,6 +10,7 @@
 
 
 #include "Synth.h"
+#include <sstream>
 
 namespace Tonic {
   

@@ -28,11 +28,14 @@ namespace Tonic {
     vector<BufferFiller*> inputs_;
     Limiter limiter_;
     
+    pthread_mutex_t input_mutex_;
+    
     bool limitOutput_;
     
   public:
     
     Mixer();
+    ~Mixer();
     
     void addInput(BufferFiller* input);
     void removeInput(BufferFiller* input);
