@@ -39,6 +39,10 @@ namespace Tonic {
     // delay structures such as comb filters, etc.
     
     //! Return one interpolated, delayed sample. Does not advance read/write head.
+    /*!
+        NOTE: No bounds checking on channel index. Improper use will result in access outside array bounds.
+    */
+    
     inline TonicFloat tickOut(unsigned int channel = 0) {
       
       if (interpolates_){
@@ -47,9 +51,9 @@ namespace Tonic {
         float frac = modff(readHead_, &fidx);
         int idx_a = ((int)fidx * nChannels_ + channel);
         int idx_b = idx_a + nChannels_;
-        if (idx_b >= nFrames_) idx_b -= nFrames_;
+        if (idx_b >= size_) idx_b -= size_;
         
-        // Linear interpolation, for now. Would like to use allpass - better in general for delay lines.
+        // Linear interpolation
         return (data_[idx_a] + frac * (data_[idx_b] - data_[idx_a]));
       }
       else{
@@ -59,6 +63,9 @@ namespace Tonic {
     }
     
     //! Tick one sample in (write at write head). Does not advance read/write head.
+    /*!
+     NOTE: No bounds checking on channel index. Improper use will result in access outside array bounds.
+    */
     inline void tickIn(TonicFloat sample, unsigned int channel = 0){
       
       data_[writeHead_*nChannels_+channel] = sample;

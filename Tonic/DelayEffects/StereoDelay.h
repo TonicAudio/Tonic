@@ -15,7 +15,7 @@
 #include "Generator.h"
 #include "FixedValue.h"
 #include "MonoToStereoPanner.h"
-#include "MonoDelay.h"
+#include "BasicDelay.h"
 #include "Adder.h"
 #include "Effect.h"
 
@@ -27,8 +27,8 @@ namespace Tonic {
       
     protected:
     
-      MonoDelay leftDelay;
-      MonoDelay rightDelay;
+      BasicDelay leftDelay;
+      BasicDelay rightDelay;
       MonoToStereoPanner leftPanner;
       MonoToStereoPanner rightPanner;
       Generator outputGen;

@@ -25,7 +25,7 @@ public:
   CompressorTestSynth(){
     
     // Emulation of 808 snare with long, quiet noise decay
-    Generator hpNoise = (Noise() * dBToLin(-48.0)) >> HPF24().cutoff(2000.0) >> LPF12().cutoff(8000);
+    Generator hpNoise = (Noise() * dBToLin(-18.0)) >> HPF24().cutoff(2000.0) >> LPF12().cutoff(8000);
     Generator tones = SineWave().freq(180) * dBToLin(-6.0) + SineWave().freq(332) * dBToLin(-18.0);
 
     ControlGenerator snareGate = ControlMetro(80) >> ControlPulse(60.0*0.8/80.0);
