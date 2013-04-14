@@ -30,7 +30,6 @@
 		A8DFAC161713B0C7004545CE /* XYSpeed.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A8DFAC151713B0C7004545CE /* XYSpeed.cpp */; };
 		A8DFAC171713B0C7004545CE /* XYSpeed.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A8DFAC151713B0C7004545CE /* XYSpeed.cpp */; };
 		F20FCD5216C58D5B0039832A /* TonicSynthManager.mm in Sources */ = {isa = PBXBuildFile; fileRef = F20FCD5116C58D5B0039832A /* TonicSynthManager.mm */; };
-		F23A7D9D171B3F6000AE8353 /* libTonic-iOS-Lib.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F23A7D9C171B3F5B00AE8353 /* libTonic-iOS-Lib.a */; };
 		F25317E116EBA0A100A8CFDC /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F25317E016EBA0A100A8CFDC /* SenTestingKit.framework */; };
 		F25317E216EBA0A100A8CFDC /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A86C3EC016B2B4FD002A50F0 /* UIKit.framework */; };
 		F25317E316EBA0A100A8CFDC /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A86C3EC216B2B4FD002A50F0 /* Foundation.framework */; };
@@ -51,6 +50,8 @@
 		F2759AF616F7E0EF00347633 /* RectWaveTestSynth.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F2759AE816F7E0EF00347633 /* RectWaveTestSynth.cpp */; };
 		F2759AF816F7E0EF00347633 /* SineSumSynth.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F2759AEA16F7E0EF00347633 /* SineSumSynth.cpp */; };
 		F2759AF916F7E0EF00347633 /* StereoDelayTestSynth.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F2759AEB16F7E0EF00347633 /* StereoDelayTestSynth.cpp */; };
+		F2B664C1171B457D00238559 /* libTonic-iOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F23A7CEC171B3D1300AE8353 /* libTonic-iOS.a */; };
+		F2B664C2171B458300238559 /* libTonic-iOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F23A7CEC171B3D1300AE8353 /* libTonic-iOS.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -75,12 +76,12 @@
 			remoteGlobalIDString = F23A7CF0171B3D2D00AE8353;
 			remoteInfo = "Tonic-iOS-Lib";
 		};
-		F23A7D9B171B3F5B00AE8353 /* PBXContainerItemProxy */ = {
+		F2B664BE171B457800238559 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = F23A7CE3171B3D1300AE8353 /* TonicLib.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = F23A7CF1171B3D2E00AE8353;
-			remoteInfo = "Tonic-iOS-Lib";
+			proxyType = 1;
+			remoteGlobalIDString = F23A7CF0171B3D2D00AE8353;
+			remoteInfo = "Tonic-iOS";
 		};
 /* End PBXContainerItemProxy section */
 
@@ -148,7 +149,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F23A7D9D171B3F6000AE8353 /* libTonic-iOS-Lib.a in Frameworks */,
+				F2B664C2171B458300238559 /* libTonic-iOS.a in Frameworks */,
 				A86C3F2316B2B834002A50F0 /* Accelerate.framework in Frameworks */,
 				A86C3F1F16B2B7B8002A50F0 /* AudioToolbox.framework in Frameworks */,
 				A86C3F2116B2B7B8002A50F0 /* CoreAudio.framework in Frameworks */,
@@ -162,6 +163,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F2B664C1171B457D00238559 /* libTonic-iOS.a in Frameworks */,
 				F253182616EBA34500A8CFDC /* Accelerate.framework in Frameworks */,
 				F25317E116EBA0A100A8CFDC /* SenTestingKit.framework in Frameworks */,
 				F25317E216EBA0A100A8CFDC /* UIKit.framework in Frameworks */,
@@ -281,7 +283,6 @@
 			children = (
 				F23A7CEA171B3D1300AE8353 /* libTonic-OSX.a */,
 				F23A7CEC171B3D1300AE8353 /* libTonic-iOS.a */,
-				F23A7D9C171B3F5B00AE8353 /* libTonic-iOS-Lib.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -383,6 +384,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				F2B664BF171B457800238559 /* PBXTargetDependency */,
 			);
 			name = TonicTests;
 			productName = TonicTests;
@@ -436,13 +438,6 @@
 			fileType = archive.ar;
 			path = "libTonic-iOS.a";
 			remoteRef = F23A7CEB171B3D1300AE8353 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		F23A7D9C171B3F5B00AE8353 /* libTonic-iOS-Lib.a */ = {
-			isa = PBXReferenceProxy;
-			fileType = archive.ar;
-			path = "libTonic-iOS-Lib.a";
-			remoteRef = F23A7D9B171B3F5B00AE8353 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 /* End PBXReferenceProxy section */
@@ -535,6 +530,11 @@
 			isa = PBXTargetDependency;
 			name = "Tonic-iOS-Lib";
 			targetProxy = F23A7D95171B3F5B00AE8353 /* PBXContainerItemProxy */;
+		};
+		F2B664BF171B457800238559 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = "Tonic-iOS";
+			targetProxy = F2B664BE171B457800238559 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -653,6 +653,7 @@
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "TonicTests/TonicTests-Prefix.pch";
+				HEADER_SEARCH_PATHS = "../../../Tonic/**";
 				INFOPLIST_FILE = "TonicTests/TonicTests-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -673,6 +674,7 @@
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "TonicTests/TonicTests-Prefix.pch";
+				HEADER_SEARCH_PATHS = "../../../Tonic/**";
 				INFOPLIST_FILE = "TonicTests/TonicTests-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
