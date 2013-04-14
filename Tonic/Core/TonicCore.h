@@ -139,11 +139,11 @@ namespace Tonic {
     Working with 0 dB representing 1.0
   */
   inline static TonicFloat linTodB(TonicFloat lv){
-    return 20.0f*log(max(0, lv));
+    return 20.0f*log10f(max(0, lv));
   }
   
   inline static TonicFloat dBToLin(TonicFloat dBv){
-    return exp(dBv/20.0f);
+    return powf(10,(dBv/20.0f));
   }
   
   // -- Misc --
