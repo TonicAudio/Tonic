@@ -2,6 +2,6 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "self:Tonic.xcodeproj">
+      location = "self:TonicLib.xcodeproj">
    </FileRef>
 </Workspace>
