@@ -13,3 +13,8 @@ Here look. With Tonic you can create an awesome synthesizer with just a couple l
 
 This code creates a rectangle wave oscillator, modulates that oscillator by a sine wave, adds some slow tremelo, and sends it through a filter. 
 On top of all that, it maps mouse speed to the cutoff frequency. 
+
+You can browse more synth examples here https://github.com/TonicAudio/Tonic/tree/master/Demo/iOS/TonicDemo/TonicDemo/Demo%20Synths
+
+Currently, Tonic comes with a demo iOS project. We plan to add demo projects for Windows and Linux in the future.
+
