@@ -33,8 +33,8 @@ namespace Tonic{
       }
       
       #ifdef TONIC_DEBUG
-      if(!isfinite(lastOutput_.value)){
-        Tonic::error("ControlGenerator_::tick NaN or inf detected.", true);
+      if(lastOutput_.value != lastOutput_.value){
+        Tonic::error("ControlGenerator_::tick NaN detected.", true);
       }
       #endif
       
