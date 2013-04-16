@@ -200,10 +200,10 @@ using namespace Tonic;
       {
         SynthDemoDef* def = [[SynthDemoDef alloc] init];
         [synthDefinitions addObject:def];
-        def.synthClassName = @"ControlInputListTestSynth";
-        def.synthDisplayName = @"Input list test";
-        def.synthDescription = @"Input list test";
-        def.synthInstructions = @"Input list test";
+        def.synthClassName = @"ControlSwitcherTestSynth";
+        def.synthDisplayName = @"Control switcher test";
+        def.synthDescription = @"Control switcher test";
+        def.synthInstructions = @"x and y modulate the parameters of the steps in random ways";
         def.synthAction = ^(Tonic::Synth* synth, CGPoint touchPointNorm){
           synth->setParameter("x", touchPointNorm.x);
           synth->setParameter("y", touchPointNorm.y);

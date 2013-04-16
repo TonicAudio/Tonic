@@ -1,33 +1,33 @@
 //
-//  ControlInputList.cpp
+//  ControlSwitcher.cpp
 //  Tonic
 //
 //  Created by Morgan Packard on 4/11/13.
 //
 //
 
-#include "ControlInputList.h"
+#include "ControlSwitcher.h"
 
 namespace Tonic { namespace Tonic_{
   
-  ControlInputList_::ControlInputList_() : inputIndex(ControlValue(0)){
+  ControlSwitcher_::ControlSwitcher_() : inputIndex(ControlValue(0)){
     
   }
   
-  ControlInputList_::~ControlInputList_(){
+  ControlSwitcher_::~ControlSwitcher_(){
     
   }
   
-  void ControlInputList_::addInput(ControlGenerator input){
+  void ControlSwitcher_::addInput(ControlGenerator input){
     inputs.push_back(input);
   }
   
-  void ControlInputList_::setInputIndex(ControlGenerator inputIndexArg){
+  void ControlSwitcher_::setInputIndex(ControlGenerator inputIndexArg){
     inputIndex = inputIndexArg;
   }
   
   
-  void ControlInputList_::computeOutput(const SynthesisContext_ & context){
+  void ControlSwitcher_::computeOutput(const SynthesisContext_ & context){
     int index = inputIndex.tick(context).value;
     for(vector<ControlGenerator>::iterator it = inputs.begin(); it != inputs.end(); it++){
       it->tick(context);

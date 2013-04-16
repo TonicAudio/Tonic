@@ -17,14 +17,14 @@
 #include "StereoDelay.h"
 #include "ControlMetro.h"
 #include "ADSR.h"
-#include "ControlInputList.h"
+#include "ControlSwitcher.h"
 #include "ControlCounter.h"
 
 using namespace Tonic;
 
-class ControlInputListTestSynth : public Synth{
+class ControlSwitcherTestSynth : public Synth{
 public:
-  ControlInputListTestSynth(){
+  ControlSwitcherTestSynth(){
   
     ControlMetro metro = ControlMetro().bpm(80 * 4);
     
@@ -33,8 +33,8 @@ public:
       .trigger(metro)
       .end(numSteps - 1);
     
-    ControlInputList fmAmount = ControlInputList().inputIndex(step);
-    ControlInputList sustain = ControlInputList().inputIndex(step);
+    ControlSwitcher fmAmount = ControlSwitcher().inputIndex(step);
+    ControlSwitcher sustain = ControlSwitcher().inputIndex(step);
     
     for(int i = 0; i < numSteps; i++){
       
@@ -48,6 +48,6 @@ public:
   }
 };
 
-registerSynth(ControlInputListTestSynth)
+registerSynth(ControlSwitcherTestSynth)
 
 #endif
