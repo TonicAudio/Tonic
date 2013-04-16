@@ -35,6 +35,10 @@ namespace Tonic {
     
   }
   
+  /*!
+      ControlInputList allows you to switch between an unlimited number of inputs (added via addInput). The "active" input is controlled by the value of inputIndex.
+  */
+  
   class ControlInputList : public TemplatedControlGenerator<Tonic_::ControlInputList_>{
     
   public:

@@ -38,6 +38,14 @@
 		A861149A1709075000C65987 /* ControlDbToLinear.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 01C46A5F16FFAEC7007EC630 /* ControlDbToLinear.cpp */; };
 		A861149D17090CAD00C65987 /* ControlTrigger.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A861149B17090CAB00C65987 /* ControlTrigger.cpp */; };
 		A861149E17090CAD00C65987 /* ControlTrigger.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A861149B17090CAB00C65987 /* ControlTrigger.cpp */; };
+		A865EEAF171CCD28008813A7 /* ControlInputList.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A865EEAB171CCD28008813A7 /* ControlInputList.cpp */; };
+		A865EEB0171CCD28008813A7 /* ControlInputList.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A865EEAB171CCD28008813A7 /* ControlInputList.cpp */; };
+		A865EEB1171CCD28008813A7 /* ControlRecorder.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A865EEAD171CCD28008813A7 /* ControlRecorder.cpp */; };
+		A865EEB2171CCD28008813A7 /* ControlRecorder.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A865EEAD171CCD28008813A7 /* ControlRecorder.cpp */; };
+		A865EEB4171CCECD008813A7 /* ControlInputListTestSynth.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A865EEB3171CCECD008813A7 /* ControlInputListTestSynth.cpp */; };
+		A865EEB5171CCECD008813A7 /* ControlInputListTestSynth.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A865EEB3171CCECD008813A7 /* ControlInputListTestSynth.cpp */; };
+		A865EEBC171CD9E6008813A7 /* ControlCounter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A865EEBA171CD9E5008813A7 /* ControlCounter.cpp */; };
+		A865EEBD171CD9E6008813A7 /* ControlCounter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A865EEBA171CD9E5008813A7 /* ControlCounter.cpp */; };
 		A86C3EC116B2B4FD002A50F0 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A86C3EC016B2B4FD002A50F0 /* UIKit.framework */; };
 		A86C3EC316B2B4FD002A50F0 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A86C3EC216B2B4FD002A50F0 /* Foundation.framework */; };
 		A86C3EC516B2B4FD002A50F0 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A86C3EC416B2B4FD002A50F0 /* CoreGraphics.framework */; };
@@ -69,9 +77,9 @@
 		A88F5A7416E5729200C187E7 /* ControlConditioner.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A88F5A7216E5729200C187E7 /* ControlConditioner.cpp */; };
 		A89356D817052CAD00C184BE /* SynthDemoDef.mm in Sources */ = {isa = PBXBuildFile; fileRef = A89356D617052CAD00C184BE /* SynthDemoDef.mm */; };
 		A89356D917052CAD00C184BE /* SynthDemoDef.mm in Sources */ = {isa = PBXBuildFile; fileRef = A89356D617052CAD00C184BE /* SynthDemoDef.mm */; };
-		A8CF87F31703D71800D8F5E1 /* CoreMotion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A8CF87F21703D71800D8F5E1 /* CoreMotion.framework */; };
 		A8CF87F01700823200D8F5E1 /* ControlStepper.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A8CF87EE1700823200D8F5E1 /* ControlStepper.cpp */; };
 		A8CF87F11700823200D8F5E1 /* ControlStepper.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A8CF87EE1700823200D8F5E1 /* ControlStepper.cpp */; };
+		A8CF87F31703D71800D8F5E1 /* CoreMotion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A8CF87F21703D71800D8F5E1 /* CoreMotion.framework */; };
 		A8DFAC131713AE2B004545CE /* ControlXYSpeed.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A8DFAC111713AE2B004545CE /* ControlXYSpeed.cpp */; };
 		A8DFAC141713AE2B004545CE /* ControlXYSpeed.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A8DFAC111713AE2B004545CE /* ControlXYSpeed.cpp */; };
 		A8DFAC161713B0C7004545CE /* XYSpeed.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A8DFAC151713B0C7004545CE /* XYSpeed.cpp */; };
@@ -151,6 +159,13 @@
 		A82437DA16CB36A8000677C7 /* ControlGenerator.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = ControlGenerator.cpp; sourceTree = "<group>"; };
 		A861149B17090CAB00C65987 /* ControlTrigger.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ControlTrigger.cpp; sourceTree = "<group>"; };
 		A861149C17090CAC00C65987 /* ControlTrigger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ControlTrigger.h; sourceTree = "<group>"; };
+		A865EEAB171CCD28008813A7 /* ControlInputList.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ControlInputList.cpp; sourceTree = "<group>"; };
+		A865EEAC171CCD28008813A7 /* ControlInputList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ControlInputList.h; sourceTree = "<group>"; };
+		A865EEAD171CCD28008813A7 /* ControlRecorder.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ControlRecorder.cpp; sourceTree = "<group>"; };
+		A865EEAE171CCD28008813A7 /* ControlRecorder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ControlRecorder.h; sourceTree = "<group>"; };
+		A865EEB3171CCECD008813A7 /* ControlInputListTestSynth.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ControlInputListTestSynth.cpp; sourceTree = "<group>"; };
+		A865EEBA171CD9E5008813A7 /* ControlCounter.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ControlCounter.cpp; sourceTree = "<group>"; };
+		A865EEBB171CD9E5008813A7 /* ControlCounter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ControlCounter.h; sourceTree = "<group>"; };
 		A86C3EBC16B2B4FD002A50F0 /* TonicDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TonicDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A86C3EC016B2B4FD002A50F0 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		A86C3EC216B2B4FD002A50F0 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -187,9 +202,9 @@
 		A88F5A7316E5729200C187E7 /* ControlConditioner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ControlConditioner.h; sourceTree = "<group>"; };
 		A89356D517052CAD00C184BE /* SynthDemoDef.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SynthDemoDef.h; sourceTree = "<group>"; };
 		A89356D617052CAD00C184BE /* SynthDemoDef.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = SynthDemoDef.mm; sourceTree = "<group>"; };
-		A8CF87F21703D71800D8F5E1 /* CoreMotion.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMotion.framework; path = System/Library/Frameworks/CoreMotion.framework; sourceTree = SDKROOT; };
 		A8CF87EE1700823200D8F5E1 /* ControlStepper.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ControlStepper.cpp; sourceTree = "<group>"; };
 		A8CF87EF1700823200D8F5E1 /* ControlStepper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ControlStepper.h; sourceTree = "<group>"; };
+		A8CF87F21703D71800D8F5E1 /* CoreMotion.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMotion.framework; path = System/Library/Frameworks/CoreMotion.framework; sourceTree = SDKROOT; };
 		A8DFAC111713AE2B004545CE /* ControlXYSpeed.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ControlXYSpeed.cpp; sourceTree = "<group>"; };
 		A8DFAC121713AE2B004545CE /* ControlXYSpeed.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ControlXYSpeed.h; sourceTree = "<group>"; };
 		A8DFAC151713B0C7004545CE /* XYSpeed.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = XYSpeed.cpp; sourceTree = "<group>"; };
@@ -502,6 +517,7 @@
 				01CC91911701402A0047C4A6 /* CompressorTestSynth.cpp */,
 				01CC9194170155030047C4A6 /* CompressorDuckingTestSynth.cpp */,
 				A8DFAC151713B0C7004545CE /* XYSpeed.cpp */,
+				A865EEB3171CCECD008813A7 /* ControlInputListTestSynth.cpp */,
 			);
 			path = "Demo Synths";
 			sourceTree = "<group>";
@@ -535,6 +551,10 @@
 		F27605A216ECF431006684B2 /* Control */ = {
 			isa = PBXGroup;
 			children = (
+				A865EEAB171CCD28008813A7 /* ControlInputList.cpp */,
+				A865EEAC171CCD28008813A7 /* ControlInputList.h */,
+				A865EEAD171CCD28008813A7 /* ControlRecorder.cpp */,
+				A865EEAE171CCD28008813A7 /* ControlRecorder.h */,
 				A8742F3716FF666700056E1C /* ControlSnapToScale.cpp */,
 				A8742F3816FF666700056E1C /* ControlSnapToScale.h */,
 				F27605A316ECF431006684B2 /* ControlFloor.cpp */,
@@ -555,6 +575,8 @@
 				A861149C17090CAC00C65987 /* ControlTrigger.h */,
 				A8DFAC111713AE2B004545CE /* ControlXYSpeed.cpp */,
 				A8DFAC121713AE2B004545CE /* ControlXYSpeed.h */,
+				A865EEBA171CD9E5008813A7 /* ControlCounter.cpp */,
+				A865EEBB171CD9E5008813A7 /* ControlCounter.h */,
 			);
 			path = Control;
 			sourceTree = "<group>";
@@ -790,6 +812,10 @@
 				A861149D17090CAD00C65987 /* ControlTrigger.cpp in Sources */,
 				A8DFAC131713AE2B004545CE /* ControlXYSpeed.cpp in Sources */,
 				A8DFAC161713B0C7004545CE /* XYSpeed.cpp in Sources */,
+				A865EEAF171CCD28008813A7 /* ControlInputList.cpp in Sources */,
+				A865EEB1171CCD28008813A7 /* ControlRecorder.cpp in Sources */,
+				A865EEB4171CCECD008813A7 /* ControlInputListTestSynth.cpp in Sources */,
+				A865EEBC171CD9E6008813A7 /* ControlCounter.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -839,6 +865,10 @@
 				A861149E17090CAD00C65987 /* ControlTrigger.cpp in Sources */,
 				A8DFAC141713AE2B004545CE /* ControlXYSpeed.cpp in Sources */,
 				A8DFAC171713B0C7004545CE /* XYSpeed.cpp in Sources */,
+				A865EEB0171CCD28008813A7 /* ControlInputList.cpp in Sources */,
+				A865EEB2171CCD28008813A7 /* ControlRecorder.cpp in Sources */,
+				A865EEB5171CCECD008813A7 /* ControlInputListTestSynth.cpp in Sources */,
+				A865EEBD171CD9E6008813A7 /* ControlCounter.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
