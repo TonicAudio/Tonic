@@ -153,7 +153,7 @@ using namespace Tonic;
           synth->setParameter("stepperSpread", touchPointNorm.x);
         };
         def.accellerometerAction = ^(Tonic::Synth* synth, CMAccelerometerData *accelerometerData){
-          
+//          synth->setParameter("speed", accelerometerData.acceleration.x + 1);
         };
       }
       

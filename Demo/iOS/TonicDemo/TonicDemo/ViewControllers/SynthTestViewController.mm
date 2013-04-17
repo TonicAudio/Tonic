@@ -14,6 +14,7 @@
 @property (nonatomic, strong) NSString *description;
 @property (nonatomic, copy)   SynthTestPanAction panAction;
 @property (nonatomic, copy) SynthTestAccellerometerAction accelAction;
+@property (strong, nonatomic) NSOperationQueue* operationQueue;
 
 - (void)addSynthIfNecessary;
 - (void)handlePan:(UIPanGestureRecognizer*)pan;
@@ -51,9 +52,9 @@
   self.motionManager = [[CMMotionManager alloc] init];
 
    if ([self.motionManager isAccelerometerAvailable]){
-     NSOperationQueue *queue = [[NSOperationQueue alloc] init];
+     self.operationQueue = [[NSOperationQueue alloc] init];
      [self.motionManager
-      startAccelerometerUpdatesToQueue:queue
+      startAccelerometerUpdatesToQueue:self.operationQueue
       withHandler:^(CMAccelerometerData *accelerometerData, NSError *error) {
         Tonic::Synth *synthInstance = [[TonicSynthManager sharedManager] synthForKey:@"testsynth"];
         if (synthInstance == NULL) return;
