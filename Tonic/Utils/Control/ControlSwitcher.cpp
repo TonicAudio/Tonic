@@ -32,7 +32,7 @@ namespace Tonic { namespace Tonic_{
     for(vector<ControlGenerator>::iterator it = inputs.begin(); it != inputs.end(); it++){
       it->tick(context);
     }
-    ControlGeneratorOutput output = inputs.at(index).tick(context);
+    ControlGeneratorOutput output = inputs.at(clamp(index, 0, inputs.size() -1 )).tick(context);
     if (output.value != lastOutput_.value) {
       lastOutput_.status = ControlGeneratorStatusHasChanged;
       lastOutput_.value = output.value;
