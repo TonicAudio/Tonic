@@ -324,7 +324,6 @@
 		A86C3EB116B2B4FC002A50F0 = {
 			isa = PBXGroup;
 			children = (
-				A8CF87F21703D71800D8F5E1 /* CoreMotion.framework */,
 				A86C3EC616B2B4FD002A50F0 /* TonicDemo */,
 				F25317E416EBA0A100A8CFDC /* TonicTests */,
 				A86C3EBF16B2B4FD002A50F0 /* Frameworks */,
@@ -344,6 +343,7 @@
 		A86C3EBF16B2B4FD002A50F0 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				A8CF87F21703D71800D8F5E1 /* CoreMotion.framework */,
 				A86C3F2216B2B834002A50F0 /* Accelerate.framework */,
 				A86C3F1C16B2B7B8002A50F0 /* AudioToolbox.framework */,
 				A86C3F1D16B2B7B8002A50F0 /* AudioUnit.framework */,
