@@ -53,13 +53,14 @@
 
    if ([self.motionManager isAccelerometerAvailable]){
      self.operationQueue = [[NSOperationQueue alloc] init];
+        __weak typeof(self) wself = self;
      [self.motionManager
       startAccelerometerUpdatesToQueue:self.operationQueue
       withHandler:^(CMAccelerometerData *accelerometerData, NSError *error) {
         Tonic::Synth *synthInstance = [[TonicSynthManager sharedManager] synthForKey:@"testsynth"];
         if (synthInstance == NULL) return;
-        if (self.synthDemoDef){
-          self.synthDemoDef.accellerometerAction(synthInstance, accelerometerData);
+        if (wself.synthDemoDef && wself.synthDemoDef.accellerometerAction){
+          wself.synthDemoDef.accellerometerAction(synthInstance, accelerometerData);
         }
     
       }];
