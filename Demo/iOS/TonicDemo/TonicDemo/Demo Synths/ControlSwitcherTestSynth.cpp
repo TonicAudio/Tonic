@@ -42,8 +42,8 @@ public:
       sustain.addInput(randomFloat(0, 0.7) + randomFloat(-0.5, 0.3) * addParameter("y"));
     }
     
-    ControlGenerator freq = ControlValue(50);
-    outputGen = SineWave().freq(freq.ramped() + freq.ramped() * SineWave().freq(freq * 2) * fmAmount.ramped());
+    Generator freq = ControlValue(50).ramped();
+    outputGen = SineWave().freq(freq + freq * SineWave().freq(freq * 2) * fmAmount.ramped());
     outputGen = outputGen * ADSR(0.001, 0.1,0,0).legato(true).sustain(sustain).trigger(metro);
   }
 };
