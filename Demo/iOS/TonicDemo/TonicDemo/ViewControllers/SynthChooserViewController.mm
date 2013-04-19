@@ -117,12 +117,12 @@ using namespace Tonic;
         SynthDemoDef* def = [[SynthDemoDef alloc] init];
         [synthDefinitions addObject:def];
         def.synthClassName = @"DelayTestSynth";
-        def.synthDisplayName = @"Mono Delay";
-        def.synthDescription = @"Repeating note with mono delay effect";
-        def.synthInstructions = @"X-Axis controls feedback\nY-Axis controls delay time";
+        def.synthDisplayName = @"Basic Delay";
+        def.synthDescription = @"Basic Delay effect, mono or stereo input";
+        def.synthInstructions = @"Popcorn in SPAAAAACE!";
         def.synthAction = ^(Tonic::Synth* synth, CGPoint touchPointNorm){
           synth->setParameter("feedback", touchPointNorm.x);
-          synth->setParameter("delayTime", touchPointNorm.y);
+          synth->setParameter("delayTime", touchPointNorm.y * touchPointNorm.y);
         };
       }
       
@@ -132,7 +132,7 @@ using namespace Tonic;
         [synthDefinitions addObject:def];
         def.synthClassName = @"StereoDelayTestSynth";
         def.synthDisplayName = @"Stereo Delay";
-        def.synthDescription = @"Repeating note with stereo delay effect";
+        def.synthDescription = @"Stereo delay effect, mono or stereo input";
         def.synthInstructions = @"";
         def.synthAction = ^(Tonic::Synth* synth, CGPoint touchPointNorm){
           synth->setParameter("freq", touchPointNorm.x * 500);
@@ -178,7 +178,7 @@ using namespace Tonic;
         def.synthDescription = @"Compress a bass line in time";
         def.synthInstructions = @"Y axis is release time";
         def.synthAction = ^(Tonic::Synth* synth, CGPoint touchPointNorm){
-          synth->setParameter("compRelease", Tonic::map(touchPointNorm.y*touchPointNorm.y, 0, 1, 0.04, 0.15, true));
+          synth->setParameter("compRelease", Tonic::map(touchPointNorm.y*touchPointNorm.y, 0, 1, 0.025, 0.08, true));
         };
       }
       

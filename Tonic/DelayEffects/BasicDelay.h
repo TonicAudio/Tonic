@@ -1,5 +1,5 @@
 //
-//  MonoDelay.h
+//  BasicDelay.h
 //  Tonic 
 //
 //  Created by Nick Donaldson on 3/10/13.
@@ -9,8 +9,8 @@
 //
 
 
-#ifndef __Tonic__MonoDelay__
-#define __Tonic__MonoDelay__
+#ifndef __Tonic__BasicDelay__
+#define __Tonic__BasicDelay__
 
 #include "Effect.h"
 #include "DelayUtils.h"
@@ -19,7 +19,7 @@ namespace Tonic {
   
   namespace Tonic_ {
 
-    class MonoDelay_ : public Effect_{
+    class BasicDelay_ : public Effect_{
       
     protected:
       
@@ -33,11 +33,14 @@ namespace Tonic {
       TonicFrames fbkFrames_;
 
       DelayLine delayLine_;
-      
+            
     public:
       
-      MonoDelay_();
-      ~MonoDelay_();
+      BasicDelay_();
+      ~BasicDelay_();
+      
+      // Overridden so output channel layout follows input channel layout
+      void setInput( Generator input );
       
       void initialize(float delayTime, float maxDelayTime);
       
@@ -51,14 +54,16 @@ namespace Tonic {
       
     };
     
-    inline void MonoDelay_::computeSynthesisBlock(const SynthesisContext_ &context){
+    inline void BasicDelay_::computeSynthesisBlock(const SynthesisContext_ &context){
       
       delayTimeGen_.tick(delayTimeFrames_, context);
       mixGen_.tick(mixFrames_, context);
       fbkGen_.tick(fbkFrames_, context);
       
+      // input->output always has same channel layout
+      unsigned int nChannels = isStereoInput() ? 2 : 1;
       
-      TonicFloat inSamp, outSamp, mix;
+      TonicFloat outSamp, mix, fbk;
       TonicFloat *dryptr = &dryFrames_[0];
       TonicFloat *outptr = &synthesisBlock_[0];
       TonicFloat *mptr = &mixFrames_[0];
@@ -67,13 +72,16 @@ namespace Tonic {
       
       for (unsigned int i=0; i<kSynthesisBlockSize; i++){
         
-        inSamp = *dryptr++;
-        mix = clamp(*mptr++, 0.0f, 1.0f);
-        outSamp = delayLine_.tickOut();
-        *outptr++ = (inSamp * (1.0f - mix)) + (outSamp * mix);;
-        
         // Don't clamp feeback - be careful! Negative feedback could be interesting.
-        delayLine_.tickIn(inSamp + outSamp * (*fbkptr++));
+        fbk = *fbkptr++;
+        mix = clamp(*mptr++, 0.0f, 1.0f);
+        
+        for (unsigned int c=0; c<nChannels; c++){
+          outSamp = delayLine_.tickOut(c);
+          *outptr++ = (*dryptr * (1.0f - mix)) + (outSamp * mix);
+          delayLine_.tickIn(*dryptr++ + outSamp * fbk, c);
+        }
+        
         delayLine_.advance(*delptr++);
       }
     }
@@ -81,23 +89,23 @@ namespace Tonic {
   }
   
   
-  class MonoDelay : public TemplatedEffect<MonoDelay, Tonic_::MonoDelay_>{
+  class BasicDelay : public TemplatedEffect<BasicDelay, Tonic_::BasicDelay_>{
     
   public:
     //! Allocating only with time argument will default max delay time to 1.5 * delayTime
-    MonoDelay(float delayTime = 0.5f, float maxDelayTime = -1){
+    BasicDelay(float delayTime = 0.5f, float maxDelayTime = -1){
       gen()->initialize(delayTime, maxDelayTime);
     }
     
-    createGeneratorSetters(MonoDelay, delayTime, setDelayTimeGen);
+    createGeneratorSetters(BasicDelay, delayTime, setDelayTimeGen);
     
     //! Warning: Feedback input is NOT clamped! Beware of feedback values greater than 1 !!!
-    createGeneratorSetters(MonoDelay, feedback, setFeedbackGen);
+    createGeneratorSetters(BasicDelay, feedback, setFeedbackGen);
 
-    createGeneratorSetters(MonoDelay, mix, setMixGen);
+    createGeneratorSetters(BasicDelay, mix, setMixGen);
   };
 }
 
-#endif /* defined(__Tonic__MonoDelay__) */
+#endif /* defined(__Tonic__BasicDelay__) */
 
 

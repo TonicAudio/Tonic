@@ -22,6 +22,11 @@ namespace Tonic { namespace Tonic_{
     workspace_.resize(kSynthesisBlockSize, 1, 0);
   }
   
+  void Filter_::setInput(Generator input){
+    Effect_::setInput(input);
+    setIsStereoInput(input.isStereoOutput());
+    setIsStereoOutput(input.isStereoOutput());
+  }
   
 } // Namespace Tonic_
   

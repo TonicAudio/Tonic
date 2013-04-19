@@ -12,7 +12,6 @@
 #ifndef __Tonic__Multiplier__
 #define __Tonic__Multiplier__
 
-#include <vector>
 #include "Generator.h"
 
 namespace Tonic{
