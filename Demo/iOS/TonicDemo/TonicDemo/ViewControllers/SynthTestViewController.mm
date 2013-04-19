@@ -13,6 +13,8 @@
 @property (nonatomic, strong) NSString *synthName;
 @property (nonatomic, strong) NSString *description;
 @property (nonatomic, copy)   SynthTestPanAction panAction;
+@property (nonatomic, copy) SynthTestAccellerometerAction accelAction;
+@property (strong, nonatomic) NSOperationQueue* operationQueue;
 
 - (void)addSynthIfNecessary;
 - (void)handlePan:(UIPanGestureRecognizer*)pan;
@@ -21,13 +23,13 @@
 
 @implementation SynthTestViewController
 
-- (id)initWithSynthName:(NSString *)synthName description:(NSString *)description panAction:(SynthTestPanAction)action
-{
+-(id)initWithSynthDemoDef: (SynthDemoDef*) def{
   self = [super initWithNibName:@"SynthTestViewController" bundle:nil];
   if (self){
-    self.synthName = synthName;
-    self.description = description;
-    self.panAction = action;
+    self.synthDemoDef = def;
+    self.synthName = def.synthClassName;
+    self.description = def.synthInstructions;
+    self.panAction = def.synthAction;
   }
   return self;
 }
@@ -46,6 +48,25 @@
   
   self.navigationItem.title = self.synthName;
   self.descLabel.text = self.description;
+  
+  self.motionManager = [[CMMotionManager alloc] init];
+
+   if ([self.motionManager isAccelerometerAvailable]){
+     self.operationQueue = [[NSOperationQueue alloc] init];
+        __weak typeof(self) wself = self;
+     [self.motionManager
+      startAccelerometerUpdatesToQueue:self.operationQueue
+      withHandler:^(CMAccelerometerData *accelerometerData, NSError *error) {
+        Tonic::Synth *synthInstance = [[TonicSynthManager sharedManager] synthForKey:@"testsynth"];
+        if (synthInstance == NULL) return;
+        if (wself.synthDemoDef && wself.synthDemoDef.accellerometerAction){
+          wself.synthDemoDef.accellerometerAction(synthInstance, accelerometerData);
+        }
+    
+      }];
+   } else {
+    
+   }
 }
 
 - (void)addSynthIfNecessary
@@ -56,7 +77,7 @@
       [[TonicSynthManager sharedManager] addSynthWithName:self.synthName forKey:@"testsynth"];
     }
   }
-}
+} 
 
 - (void)handlePan:(UIPanGestureRecognizer *)pan{
   

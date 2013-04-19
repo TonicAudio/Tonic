@@ -11,6 +11,7 @@
 
 #include "ControlGenerator.h"
 #include "RampedValue.h"
+#include <cmath>
 
 namespace Tonic{
   namespace Tonic_{
@@ -30,6 +31,13 @@ namespace Tonic{
         lastFrameIndex_ = context.elapsedFrames;
         computeOutput(context);
       }
+      
+      #ifdef TONIC_DEBUG
+      if(lastOutput_.value != lastOutput_.value){
+        Tonic::error("ControlGenerator_::tick NaN detected.", true);
+      }
+      #endif
+      
       return lastOutput_;
     }
     

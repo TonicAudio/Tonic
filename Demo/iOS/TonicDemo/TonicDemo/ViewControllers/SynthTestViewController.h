@@ -8,13 +8,15 @@
 
 #import <UIKit/UIKit.h>
 #import "TonicSynthManager.h"
-
-typedef void (^SynthTestPanAction)(Tonic::Synth* synth, CGPoint touchPointNorm);
+#import <CoreMotion/CoreMotion.h>
+#import "SynthDemoDef.h" 
 
 @interface SynthTestViewController : UIViewController
 
 @property (nonatomic, weak) IBOutlet UILabel *descLabel;
+@property (strong, nonatomic) CMMotionManager* motionManager;
+@property (strong, nonatomic) SynthDemoDef* synthDemoDef;
 
-- (id)initWithSynthName:(NSString*)synthName description:(NSString*)description panAction:(SynthTestPanAction)action;
+-(id)initWithSynthDemoDef: (SynthDemoDef*) def;
 
 @end
