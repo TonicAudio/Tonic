@@ -29,7 +29,7 @@ public:
   CompressorDuckingTestSynth(){
     
     // Emulation of 808 snare with long, quiet noise decay
-    Generator hpNoise = (Noise() * dBToLin(-48.0)) >> HPF24().cutoff(2000.0) >> LPF12().cutoff(8000);
+    Generator hpNoise = (Noise() * dBToLin(-18.0)) >> HPF24().cutoff(2000.0) >> LPF12().cutoff(8000);
     Generator tones = SineWave().freq(180) * dBToLin(-6.0) + SineWave().freq(332) * dBToLin(-18.0);
     
     ControlMetro metro = ControlMetro(120);
@@ -44,7 +44,7 @@ public:
     // duck the crap out of it
     Compressor duckingComp = Compressor()
     .attack(0.001)
-    .release( addParameter("compRelease", 0.05) )
+    .release( addParameter("compRelease", 0.025) )
     .threshold( dBToLin(-52) )
     .ratio(16)
     .lookahead(0.001);

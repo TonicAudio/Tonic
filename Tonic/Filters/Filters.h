@@ -56,12 +56,7 @@ namespace Tonic {
       Filter_();
       
       // Overridden so output channel layout follows input channel layout
-      virtual void setInput( Generator input ){
-        Effect_::setInput(input);
-        setIsStereoInput(input.isStereoOutput());
-        setIsStereoOutput(input.isStereoOutput());
-      }
-      
+      void setInput( Generator input );
       inline void setCutoff( Generator cutoff ){ cutoff_ = cutoff; };
       inline void setQ( Generator Q ){ Q_ = Q; }
       inline void setBypass( ControlGenerator bypass ){ bypass_ = bypass; };

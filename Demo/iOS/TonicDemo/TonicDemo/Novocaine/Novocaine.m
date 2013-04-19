@@ -235,8 +235,12 @@ static Novocaine *audioManager = nil;
 #if !TARGET_IPHONE_SIMULATOR
     Float32 preferredBufferSize = 0.0232;
     CheckError( AudioSessionSetProperty(kAudioSessionProperty_PreferredHardwareIOBufferDuration, sizeof(preferredBufferSize), &preferredBufferSize), "Couldn't set the preferred buffer duration");
+  
+    UInt32 overrideFlag = 1;
+  AudioSessionSetProperty(kAudioSessionProperty_OverrideCategoryDefaultToSpeaker, sizeof(UInt32), &overrideFlag);
 #endif
-    
+  
+  
     
     // Set the audio session active
     CheckError( AudioSessionSetActive(YES), "Couldn't activate the audio session");

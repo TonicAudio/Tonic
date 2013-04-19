@@ -57,6 +57,7 @@ using Tonic::Mixer;
   return self;
 }
 
+
 - (void)setupNovocaineOutput
 {
   mixer.setLimitOutput(true);
