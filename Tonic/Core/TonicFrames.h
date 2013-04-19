@@ -64,6 +64,9 @@ namespace Tonic {
       defined.
     */
     void operator+= ( TonicFrames& f );
+    
+    
+    void operator-= ( TonicFrames& f );
 
     //! Assignment by product operator into self.
     /*!
@@ -316,6 +319,29 @@ namespace Tonic {
   #endif
 
   }
+  
+  
+  inline void TonicFrames :: operator -= ( TonicFrames& f )
+  {
+  #if defined(_STK_DEBUG_)
+    if ( f.frames() != nFrames_ || f.channels() != nChannels_ ) {
+      std::ostringstream error;
+      error << "TonicFrames::operator+=: frames argument must be of equal dimensions!";
+      Stk::handleError( error.str(), StkError::MEMORY_ACCESS );
+    }
+  #endif
+
+    TonicFloat *fptr = &f[0];
+    TonicFloat *dptr = data_;
+  #ifdef USE_APPLE_ACCELERATE
+    vDSP_vsub(dptr, 1, fptr, 1, dptr, 1, size_);
+  #else
+    for ( unsigned int i=0; i<size_; i++ )
+      *dptr++ -= *fptr++;
+  #endif
+
+  }
+  
 
   inline void TonicFrames :: operator*= ( TonicFrames& f )
   {

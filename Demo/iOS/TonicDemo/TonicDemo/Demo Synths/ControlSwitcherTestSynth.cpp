@@ -46,7 +46,6 @@ public:
          -1)
        -1);
     
-    
     ControlGenerator clickVol = addParameter("clickVol");
     ADSR clickEnv =  ADSR(0, 0.01, 0, 0).trigger(metro);
     Generator clickIntensity = (1 + clickVol).ramped();

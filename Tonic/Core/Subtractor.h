@@ -1,0 +1,85 @@
+//
+//  Subtractor.h
+//  Tonic 
+//
+//  Created by Morgan Packard on 4/19/13.
+//  Copyright (c) 2013 Nick Donaldson. All rights reserved.
+//
+// See LICENSE.txt for license and usage information.
+//
+
+
+#ifndef __Tonic__Subtractor__
+#define __Tonic__Subtractor__
+
+#include "Generator.h"
+#include "FixedValue.h"
+
+namespace Tonic {
+  
+  namespace Tonic_ {
+
+    class Subtractor_ : public Generator_{
+      
+    protected:
+    
+      Generator left;
+      Generator right;
+      TonicFrames workSpace;
+      
+    public:
+      Subtractor_();
+      ~Subtractor_();
+      void computeSynthesisBlock( const SynthesisContext_ &context );
+      void setLeft(Generator arg){
+        left = arg;
+      }
+      void setRight(Generator arg){
+        right = arg;
+      }
+      
+    };
+    
+    inline void Subtractor_::computeSynthesisBlock(const SynthesisContext_ &context){
+      left.tick(synthesisBlock_, context);
+      right.tick(workSpace, context);
+      synthesisBlock_ -= workSpace;
+    }
+    
+  }
+  
+  class Subtractor : public TemplatedGenerator<Tonic_::Subtractor_>{
+    
+  public:
+  
+    createGeneratorSetters(Subtractor, left, setLeft);
+    createGeneratorSetters(Subtractor, right, setRight);
+
+  };
+  
+  static Subtractor operator - (Generator a, Generator b){
+    Subtractor sub;
+    sub.left(a);
+    sub.right(b);
+    return sub;
+  }
+  
+  static Subtractor operator - (float a, Generator b){
+    Subtractor sub;
+    sub.left(FixedValue(a));
+    sub.right(b);
+    return sub;
+  }
+  
+  static Subtractor operator - (Generator a, float b){
+    Subtractor sub;
+    sub.left(a);
+    sub.right(FixedValue(b));
+    return sub;
+  }
+  
+}
+
+#endif /* defined(__Tonic__Subtractor__) */
+
+

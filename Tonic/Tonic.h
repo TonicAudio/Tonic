@@ -22,6 +22,7 @@
 #include "FixedValue.h"
 #include "RampedValue.h"
 #include "Adder.h"
+#include "Subtractor.h"
 #include "Multiplier.h"
 #include "ControlAdder.h"
 #include "ControlSubtractor.h"
