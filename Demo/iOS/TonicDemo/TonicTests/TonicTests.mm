@@ -247,6 +247,50 @@ public:
   
 }
 
+
+- (void)test1081DivMonoMono
+{
+  [self configureStereo:NO];
+  
+  Divider divMono = FixedValue(1) / FixedValue(2);
+  
+  STAssertFalse(divMono.isStereoOutput(), @"Divider should be mono");
+  
+  divMono.tick(testFrames, testContext);
+  
+  [self verifyFixedOutputEquals:0.5f];
+  
+}
+
+- (void)test1081DivGenControlGenCombos
+{
+
+  {
+    [self configureStereo:NO];
+    
+    Divider divMono = FixedValue(1) / ControlValue(2);
+    
+    STAssertFalse(divMono.isStereoOutput(), @"Divider should be mono");
+    
+    divMono.tick(testFrames, testContext);
+    
+    [self verifyFixedOutputEquals:0.5f];
+  }
+
+  {
+    [self configureStereo:NO];
+    
+    Divider divMono = ControlValue(1) / FixedValue(2);
+    
+    STAssertFalse(divMono.isStereoOutput(), @"Divider should be mono");
+    
+    divMono.tick(testFrames, testContext);
+    
+    [self verifyFixedOutputEquals:0.5f];
+  }
+    
+}
+
 - (void)test109PannerMonoToStereo{
   
   [self configureStereo:YES];

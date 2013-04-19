@@ -298,7 +298,7 @@ namespace Tonic {
       
     }
     else{
-      error("Trying to fill frames from a source with a different number of frames", true);
+      error("TonicFrames. Trying to fill frames from a source with a different number of frames", true);
     }
   }
 

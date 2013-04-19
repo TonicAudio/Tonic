@@ -30,5 +30,6 @@
 #include "ControlMultiplier.h"
 #include "ControlDivider.h"
 #include "Synth.h"
+#include "MonoToStereoPanner.h"
 
 #endif

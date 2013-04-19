@@ -11,7 +11,7 @@
 namespace Tonic { namespace Tonic_{
   
   Divider_::Divider_(){
-    
+    workSpace.resize(kSynthesisBlockSize, 1, 0);
   }
   
   Divider_::~Divider_(){

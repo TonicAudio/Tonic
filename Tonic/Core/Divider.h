@@ -57,6 +57,42 @@ namespace Tonic {
     createGeneratorSetters(Divider, right, setRight);
 
   };
+  
+    
+  
+  static Divider operator / (Generator a, Generator b){
+    Divider div;
+    div.left(a);
+    div.right(b);
+    return div;
+  }
+  
+  static Divider operator / (float a, Generator b){
+    Divider div;
+    div.left(FixedValue(a));
+    div.right(b);
+    return div;
+  }
+  
+  static Divider operator / (Generator a, float b){
+    Divider div;
+    div.left(a);
+    div.right(FixedValue(b));
+    return div;
+  }
+  
+  // Subtract a Generatator and a ControlGenerator
+  
+  static Divider operator / (Generator a, ControlGenerator b){
+    return a / FixedValue().setValue(b);
+  }
+  
+  static Divider operator / (ControlGenerator a, Generator b){
+    return FixedValue().setValue(a) / b;
+  }
+  
+  
+  
 }
 
 #endif /* defined(__Tonic__Divider__) */
