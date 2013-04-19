@@ -58,11 +58,11 @@ namespace Tonic {
           break;
       }
       
-      
-      std::stringstream ss;
-      ss << "message: " << name << " value: " << param.value.getValue();
-      
-      debug(ss.str());
+//MP -- this was giving me compiler errors, and I think it doesn't really need to be in here anyway. Delete?
+//      std::stringstream ss;
+//      ss << "message: " << name << " value: " << param.value.getValue();
+//      
+//      debug(ss.str());
       
     }
     else{

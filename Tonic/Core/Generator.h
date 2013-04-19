@@ -13,7 +13,7 @@
 #define __Tonic__Generator__
 
 #include "TonicFrames.h"
-
+#include <cmath>
 namespace Tonic {
 
   namespace Tonic_{
@@ -64,11 +64,12 @@ namespace Tonic {
       // copy synthesis block to frames passed in
       frames.copy(synthesisBlock_);
       
-      #ifdef TONIC_DEBUG
-      if(frames(0,0) != frames(0,0)){
-        Tonic::error("Generator_::tick NaN detected.");
+#ifdef TONIC_DEBUG
+      if(!isfinite(frames(0,0))){
+        Tonic::error("Generator_::tick NaN or inf detected.", true);
       }
-      #endif
+#endif
+      
       
     }
     
