@@ -359,10 +359,10 @@ public:
 -(void)test203ControlSubtractor{
 
   Tonic_::SynthesisContext_ context;
-  ControlSubr
   
   
-  ControlGeneratorOutput result = stepper.tick(context);
+  
+ // ControlGeneratorOutput result = stepper.tick(context);
 }
 
 #pragma mark - Buffer filler tests
