@@ -22,7 +22,7 @@
 
 #ifdef __APPLE__
   #import <Accelerate/Accelerate.h>
-  #define USE_APPLE_ACCELERATE
+  #define USE_APPLE_ACCELERATE_disabled
   #define ARC4RAND_MAX 0x100000000
 #endif
 

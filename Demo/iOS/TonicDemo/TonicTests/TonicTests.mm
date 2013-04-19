@@ -422,7 +422,7 @@ public:
 
 #pragma mark operator tests
 
--(void)test400GeneratorPlusControlGenerator{
+-(void)test400CombineGeneratorControlGenerator{
 
   {
 
@@ -442,6 +442,43 @@ public:
   testFiller.fillBufferOfFloats(stereoOutBuffer, kTestOutputBlockSize, 2);
   STAssertEquals((float)2, *stereoOutBuffer, @"FixedValue(1) + ControlValue(1) failed");
   
+  }
+  
+  {
+  
+    TestBufferFiller testFiller;
+    Generator gen =   FixedValue(3) - ControlValue(2);
+    testFiller.setOutputGen(gen);
+    testFiller.fillBufferOfFloats(stereoOutBuffer, kTestOutputBlockSize, 2);
+    STAssertEquals((float)1, *stereoOutBuffer, @"FixedValue(1) + ControlValue(1) failed");
+
+  }
+  
+  {
+  
+    TestBufferFiller testFiller;
+    Generator gen =   ControlValue(3) - FixedValue(2);
+    testFiller.setOutputGen(gen);
+    testFiller.fillBufferOfFloats(stereoOutBuffer, kTestOutputBlockSize, 2);
+    STAssertEquals((float)1, *stereoOutBuffer, @"ControlValue(3) - FixedValue(2) failed");
+  }
+  
+  {
+  
+    TestBufferFiller testFiller;
+    Generator gen =   ControlValue(3) * FixedValue(2);
+    testFiller.setOutputGen(gen);
+    testFiller.fillBufferOfFloats(stereoOutBuffer, kTestOutputBlockSize, 2);
+    STAssertEquals((float)6, *stereoOutBuffer, @"ControlValue(3) * FixedValue(2) failed");
+  }
+  
+  {
+  
+    TestBufferFiller testFiller;
+    Generator gen =  FixedValue(3) * ControlValue(2);
+    testFiller.setOutputGen(gen);
+    testFiller.fillBufferOfFloats(stereoOutBuffer, kTestOutputBlockSize, 2);
+    STAssertEquals((float)6, *stereoOutBuffer, @" FixedValue(3) * ControlValue(2) failed");
   }
   
 }

@@ -79,7 +79,7 @@ namespace Tonic {
     return sub;
   }
   
-  // Add a Generatator and a ControlGenerator
+  // Subtract a Generatator and a ControlGenerator
   
   static Subtractor operator - (Generator a, ControlGenerator b){
     return a - FixedValue().setValue(b);

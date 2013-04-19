@@ -108,6 +108,27 @@ namespace Tonic{
     }
     return a;
   }
+  
+  
+  // Multiply a Generatator and a ControlGenerator
+  
+  static Multiplier operator * (Generator a, ControlGenerator b){
+    return a * FixedValue().setValue(b);
+  }
+  
+  static Multiplier operator * (ControlGenerator a, Generator b){
+    return FixedValue().setValue(a) * b;
+  }
+  
+  // Multiply an Multiplier and a ControlGenerator
+  
+  static Multiplier operator * (Multiplier a, ControlGenerator b){
+    return a * FixedValue().setValue(b);
+  }
+  
+  static Multiplier operator * (ControlGenerator a, Multiplier b){
+    return FixedValue().setValue(a) * b;
+  }
 }
 
 #endif /* defined(__TonicDemo__Multiplier__) */

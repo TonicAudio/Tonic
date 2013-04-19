@@ -24,6 +24,7 @@
 #include "Adder.h"
 #include "Subtractor.h"
 #include "Multiplier.h"
+#include "Divider.h"
 #include "ControlAdder.h"
 #include "ControlSubtractor.h"
 #include "ControlMultiplier.h"
