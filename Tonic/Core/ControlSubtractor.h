@@ -46,6 +46,30 @@ namespace Tonic {
     createControlGeneratorSetters(ControlSubtractor, right, setRight);
 
   };
+
+  static ControlSubtractor operator-(ControlGenerator a, ControlGenerator b){
+    ControlSubtractor subtractor;
+    subtractor.left(a);
+    subtractor.right(b);
+    return subtractor;
+  }
+  
+  static ControlSubtractor operator-(ControlGenerator a, float b){
+    ControlSubtractor subtractor;
+    subtractor.left(a);
+    subtractor.right(ControlValue(b));
+    return subtractor;
+  }
+  
+  static ControlSubtractor operator-(float a, ControlGenerator b){
+    ControlSubtractor subtractor;
+    subtractor.left(ControlValue(a));
+    subtractor.right(ControlGenerator(b));
+    return subtractor;
+  }
+  
+
+
 }
 
 #endif /* defined(__Tonic__ControlSubtractor__) */

@@ -31,7 +31,8 @@
 		A8742F3D16FF694300056E1C /* ControlOctaveSnapTestSynth.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A8742F3B16FF694300056E1C /* ControlOctaveSnapTestSynth.cpp */; };
 		A89356D817052CAD00C184BE /* SynthDemoDef.mm in Sources */ = {isa = PBXBuildFile; fileRef = A89356D617052CAD00C184BE /* SynthDemoDef.mm */; };
 		A89356D917052CAD00C184BE /* SynthDemoDef.mm in Sources */ = {isa = PBXBuildFile; fileRef = A89356D617052CAD00C184BE /* SynthDemoDef.mm */; };
-		A8A6AF3317219DFD00447E35 /* libTonic-iOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F2DC166F17219736006DB2CB /* libTonic-iOS.a */; };
+		A8A6AF431721A0D500447E35 /* libTonic-iOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A8A6AF3E1721A0B000447E35 /* libTonic-iOS.a */; };
+		A8A6AF441721A0E000447E35 /* libTonic-iOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A8A6AF3E1721A0B000447E35 /* libTonic-iOS.a */; };
 		A8CF87F31703D71800D8F5E1 /* CoreMotion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A8CF87F21703D71800D8F5E1 /* CoreMotion.framework */; };
 		A8DFAC161713B0C7004545CE /* XYSpeed.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A8DFAC151713B0C7004545CE /* XYSpeed.cpp */; };
 		A8DFAC171713B0C7004545CE /* XYSpeed.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A8DFAC151713B0C7004545CE /* XYSpeed.cpp */; };
@@ -56,27 +57,33 @@
 		F2759AF616F7E0EF00347633 /* RectWaveTestSynth.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F2759AE816F7E0EF00347633 /* RectWaveTestSynth.cpp */; };
 		F2759AF816F7E0EF00347633 /* SineSumSynth.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F2759AEA16F7E0EF00347633 /* SineSumSynth.cpp */; };
 		F2759AF916F7E0EF00347633 /* StereoDelayTestSynth.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F2759AEB16F7E0EF00347633 /* StereoDelayTestSynth.cpp */; };
-		F2DC167217219744006DB2CB /* libTonic-iOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F2DC166F17219736006DB2CB /* libTonic-iOS.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		F2DC166C17219736006DB2CB /* PBXContainerItemProxy */ = {
+		A8A6AF3B1721A0B000447E35 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = F2DC166717219736006DB2CB /* TonicLib.xcodeproj */;
+			containerPortal = A8A6AF361721A0B000447E35 /* TonicLib.xcodeproj */;
 			proxyType = 2;
 			remoteGlobalIDString = 01F72690171520F900EBB4BB;
 			remoteInfo = "Tonic-OSX";
 		};
-		F2DC166E17219736006DB2CB /* PBXContainerItemProxy */ = {
+		A8A6AF3D1721A0B000447E35 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = F2DC166717219736006DB2CB /* TonicLib.xcodeproj */;
+			containerPortal = A8A6AF361721A0B000447E35 /* TonicLib.xcodeproj */;
 			proxyType = 2;
 			remoteGlobalIDString = F23A7CF1171B3D2E00AE8353;
 			remoteInfo = "Tonic-iOS";
 		};
-		F2DC16701721973F006DB2CB /* PBXContainerItemProxy */ = {
+		A8A6AF3F1721A0C200447E35 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = F2DC166717219736006DB2CB /* TonicLib.xcodeproj */;
+			containerPortal = A8A6AF361721A0B000447E35 /* TonicLib.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = F23A7CF0171B3D2D00AE8353;
+			remoteInfo = "Tonic-iOS";
+		};
+		A8A6AF411721A0C900447E35 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A8A6AF361721A0B000447E35 /* TonicLib.xcodeproj */;
 			proxyType = 1;
 			remoteGlobalIDString = F23A7CF0171B3D2D00AE8353;
 			remoteInfo = "Tonic-iOS";
@@ -115,6 +122,7 @@
 		A8742F3B16FF694300056E1C /* ControlOctaveSnapTestSynth.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ControlOctaveSnapTestSynth.cpp; sourceTree = "<group>"; };
 		A89356D517052CAD00C184BE /* SynthDemoDef.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SynthDemoDef.h; sourceTree = "<group>"; };
 		A89356D617052CAD00C184BE /* SynthDemoDef.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = SynthDemoDef.mm; sourceTree = "<group>"; };
+		A8A6AF361721A0B000447E35 /* TonicLib.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = TonicLib.xcodeproj; path = ../../../../lib/TonicLib.xcodeproj; sourceTree = "<group>"; };
 		A8CF87F21703D71800D8F5E1 /* CoreMotion.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMotion.framework; path = System/Library/Frameworks/CoreMotion.framework; sourceTree = SDKROOT; };
 		A8DFAC151713B0C7004545CE /* XYSpeed.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = XYSpeed.cpp; sourceTree = "<group>"; };
 		F20FCD5016C58D5B0039832A /* TonicSynthManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TonicSynthManager.h; sourceTree = "<group>"; };
@@ -143,7 +151,6 @@
 		F2759AE816F7E0EF00347633 /* RectWaveTestSynth.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = RectWaveTestSynth.cpp; sourceTree = "<group>"; };
 		F2759AEA16F7E0EF00347633 /* SineSumSynth.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SineSumSynth.cpp; sourceTree = "<group>"; };
 		F2759AEB16F7E0EF00347633 /* StereoDelayTestSynth.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = StereoDelayTestSynth.cpp; sourceTree = "<group>"; };
-		F2DC166717219736006DB2CB /* TonicLib.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = TonicLib.xcodeproj; path = ../../../../lib/TonicLib.xcodeproj; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -151,7 +158,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F2DC167217219744006DB2CB /* libTonic-iOS.a in Frameworks */,
+				A8A6AF431721A0D500447E35 /* libTonic-iOS.a in Frameworks */,
 				A8CF87F31703D71800D8F5E1 /* CoreMotion.framework in Frameworks */,
 				A86C3F2316B2B834002A50F0 /* Accelerate.framework in Frameworks */,
 				A86C3F1F16B2B7B8002A50F0 /* AudioToolbox.framework in Frameworks */,
@@ -166,7 +173,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A8A6AF3317219DFD00447E35 /* libTonic-iOS.a in Frameworks */,
+				A8A6AF441721A0E000447E35 /* libTonic-iOS.a in Frameworks */,
 				F253182616EBA34500A8CFDC /* Accelerate.framework in Frameworks */,
 				F25317E116EBA0A100A8CFDC /* SenTestingKit.framework in Frameworks */,
 				F25317E216EBA0A100A8CFDC /* UIKit.framework in Frameworks */,
@@ -243,7 +250,7 @@
 		A86C3EE616B2B508002A50F0 /* Audio */ = {
 			isa = PBXGroup;
 			children = (
-				F2DC166717219736006DB2CB /* TonicLib.xcodeproj */,
+				A8A6AF361721A0B000447E35 /* TonicLib.xcodeproj */,
 				F2759ADD16F7E0EF00347633 /* Demo Synths */,
 				A86C3F0F16B2B5BE002A50F0 /* Novocaine */,
 				F20FCD4E16C58D3E0039832A /* TonicWrappers */,
@@ -264,6 +271,15 @@
 				A86C3F1716B2B5BE002A50F0 /* RingBuffer.mm */,
 			);
 			path = Novocaine;
+			sourceTree = "<group>";
+		};
+		A8A6AF371721A0B000447E35 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				A8A6AF3C1721A0B000447E35 /* libTonic-OSX.a */,
+				A8A6AF3E1721A0B000447E35 /* libTonic-iOS.a */,
+			);
+			name = Products;
 			sourceTree = "<group>";
 		};
 		F20FCD4E16C58D3E0039832A /* TonicWrappers */ = {
@@ -340,15 +356,6 @@
 			path = "Demo Synths";
 			sourceTree = "<group>";
 		};
-		F2DC166817219736006DB2CB /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				F2DC166D17219736006DB2CB /* libTonic-OSX.a */,
-				F2DC166F17219736006DB2CB /* libTonic-iOS.a */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -363,7 +370,7 @@
 			buildRules = (
 			);
 			dependencies = (
-				F2DC16711721973F006DB2CB /* PBXTargetDependency */,
+				A8A6AF401721A0C200447E35 /* PBXTargetDependency */,
 			);
 			name = TonicDemo;
 			productName = TonicDemo;
@@ -382,6 +389,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				A8A6AF421721A0C900447E35 /* PBXTargetDependency */,
 			);
 			name = TonicTests;
 			productName = TonicTests;
@@ -410,8 +418,8 @@
 			projectDirPath = "";
 			projectReferences = (
 				{
-					ProductGroup = F2DC166817219736006DB2CB /* Products */;
-					ProjectRef = F2DC166717219736006DB2CB /* TonicLib.xcodeproj */;
+					ProductGroup = A8A6AF371721A0B000447E35 /* Products */;
+					ProjectRef = A8A6AF361721A0B000447E35 /* TonicLib.xcodeproj */;
 				},
 			);
 			projectRoot = "";
@@ -423,18 +431,18 @@
 /* End PBXProject section */
 
 /* Begin PBXReferenceProxy section */
-		F2DC166D17219736006DB2CB /* libTonic-OSX.a */ = {
+		A8A6AF3C1721A0B000447E35 /* libTonic-OSX.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
 			path = "libTonic-OSX.a";
-			remoteRef = F2DC166C17219736006DB2CB /* PBXContainerItemProxy */;
+			remoteRef = A8A6AF3B1721A0B000447E35 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		F2DC166F17219736006DB2CB /* libTonic-iOS.a */ = {
+		A8A6AF3E1721A0B000447E35 /* libTonic-iOS.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
 			path = "libTonic-iOS.a";
-			remoteRef = F2DC166E17219736006DB2CB /* PBXContainerItemProxy */;
+			remoteRef = A8A6AF3D1721A0B000447E35 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 /* End PBXReferenceProxy section */
@@ -527,10 +535,15 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		F2DC16711721973F006DB2CB /* PBXTargetDependency */ = {
+		A8A6AF401721A0C200447E35 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = "Tonic-iOS";
-			targetProxy = F2DC16701721973F006DB2CB /* PBXContainerItemProxy */;
+			targetProxy = A8A6AF3F1721A0C200447E35 /* PBXContainerItemProxy */;
+		};
+		A8A6AF421721A0C900447E35 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = "Tonic-iOS";
+			targetProxy = A8A6AF411721A0C900447E35 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 

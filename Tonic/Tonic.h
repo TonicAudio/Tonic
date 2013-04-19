@@ -24,6 +24,7 @@
 #include "Adder.h"
 #include "Multiplier.h"
 #include "ControlAdder.h"
+#include "ControlSubtractor.h"
 #include "ControlMultiplier.h"
 #include "Synth.h"
 
