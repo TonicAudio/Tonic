@@ -80,8 +80,8 @@ namespace Tonic {
       frames.copy(synthesisBlock_);
       
 #ifdef TONIC_DEBUG
-      if(frames(0,0) != frames(0,0)){
-        Tonic::error("Effect_::tick NaN detected.");
+      if(!isfinite(frames(0,0))){
+        Tonic::error("Effect_::tick NaN or inf detected.");
       }
 #endif
       
