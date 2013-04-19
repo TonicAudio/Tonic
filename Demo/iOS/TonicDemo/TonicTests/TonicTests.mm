@@ -470,5 +470,26 @@ public:
   
 }
 
+-(void)test402ControlGeneratorDivide{
+  {
+    ControlGenerator gen = ControlValue(10) / ControlValue(5);
+    Tonic_::SynthesisContext_ context;
+    STAssertEquals(gen.tick(context).value, (float)2, @"ControlValue(10) / ControlValue(5) failed.");
+  }
+
+  {
+    ControlGenerator gen = 10 / ControlValue(5);
+    Tonic_::SynthesisContext_ context;
+    STAssertEquals(gen.tick(context).value, (float)2, @"10 / ControlValue(5) failed.");
+  }
+
+  {
+    ControlGenerator gen = ControlValue(10) / 5;
+    Tonic_::SynthesisContext_ context;
+    STAssertEquals(gen.tick(context).value, (float)2, @"ControlValue(10) / 5 failed.");
+  }
+
+}
+
 
 @end

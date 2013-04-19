@@ -27,6 +27,7 @@
 #include "ControlAdder.h"
 #include "ControlSubtractor.h"
 #include "ControlMultiplier.h"
+#include "ControlDivider.h"
 #include "Synth.h"
 
 #endif
