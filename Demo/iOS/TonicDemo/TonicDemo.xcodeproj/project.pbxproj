@@ -31,6 +31,7 @@
 		A8742F3D16FF694300056E1C /* ControlOctaveSnapTestSynth.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A8742F3B16FF694300056E1C /* ControlOctaveSnapTestSynth.cpp */; };
 		A89356D817052CAD00C184BE /* SynthDemoDef.mm in Sources */ = {isa = PBXBuildFile; fileRef = A89356D617052CAD00C184BE /* SynthDemoDef.mm */; };
 		A89356D917052CAD00C184BE /* SynthDemoDef.mm in Sources */ = {isa = PBXBuildFile; fileRef = A89356D617052CAD00C184BE /* SynthDemoDef.mm */; };
+		A8A6AF3317219DFD00447E35 /* libTonic-iOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F2DC166F17219736006DB2CB /* libTonic-iOS.a */; };
 		A8CF87F31703D71800D8F5E1 /* CoreMotion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A8CF87F21703D71800D8F5E1 /* CoreMotion.framework */; };
 		A8DFAC161713B0C7004545CE /* XYSpeed.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A8DFAC151713B0C7004545CE /* XYSpeed.cpp */; };
 		A8DFAC171713B0C7004545CE /* XYSpeed.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A8DFAC151713B0C7004545CE /* XYSpeed.cpp */; };
@@ -165,6 +166,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A8A6AF3317219DFD00447E35 /* libTonic-iOS.a in Frameworks */,
 				F253182616EBA34500A8CFDC /* Accelerate.framework in Frameworks */,
 				F25317E116EBA0A100A8CFDC /* SenTestingKit.framework in Frameworks */,
 				F25317E216EBA0A100A8CFDC /* UIKit.framework in Frameworks */,
@@ -647,6 +649,7 @@
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "TonicTests/TonicTests-Prefix.pch";
+				HEADER_SEARCH_PATHS = ../../../Tonic;
 				INFOPLIST_FILE = "TonicTests/TonicTests-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -667,6 +670,7 @@
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "TonicTests/TonicTests-Prefix.pch";
+				HEADER_SEARCH_PATHS = ../../../Tonic;
 				INFOPLIST_FILE = "TonicTests/TonicTests-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
 				PRODUCT_NAME = "$(TARGET_NAME)";

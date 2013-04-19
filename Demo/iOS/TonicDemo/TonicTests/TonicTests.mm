@@ -14,6 +14,7 @@
 #include "ControlMetro.h"
 #include "ControlStepper.h"
 #include "ControlTrigger.h"
+#include "ControlSubtractor.h"
 
 #define kTestOutputBlockSize kSynthesisBlockSize*4
 
@@ -355,6 +356,14 @@ public:
   
 }
 
+-(void)test203ControlSubtractor{
+
+  Tonic_::SynthesisContext_ context;
+  ControlSubr
+  
+  
+  ControlGeneratorOutput result = stepper.tick(context);
+}
 
 #pragma mark - Buffer filler tests
 
