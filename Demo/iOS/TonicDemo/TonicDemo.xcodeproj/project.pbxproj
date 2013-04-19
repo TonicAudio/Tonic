@@ -10,7 +10,6 @@
 		01CC91931701402A0047C4A6 /* CompressorTestSynth.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 01CC91911701402A0047C4A6 /* CompressorTestSynth.cpp */; };
 		01CC9196170155040047C4A6 /* CompressorDuckingTestSynth.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 01CC9194170155030047C4A6 /* CompressorDuckingTestSynth.cpp */; };
 		A865EEB4171CCECD008813A7 /* ControlSwitcherTestSynth.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A865EEB3171CCECD008813A7 /* ControlSwitcherTestSynth.cpp */; };
-		A865EEB5171CCECD008813A7 /* ControlSwitcherTestSynth.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A865EEB3171CCECD008813A7 /* ControlSwitcherTestSynth.cpp */; };
 		A86C3EC116B2B4FD002A50F0 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A86C3EC016B2B4FD002A50F0 /* UIKit.framework */; };
 		A86C3EC316B2B4FD002A50F0 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A86C3EC216B2B4FD002A50F0 /* Foundation.framework */; };
 		A86C3EC516B2B4FD002A50F0 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A86C3EC416B2B4FD002A50F0 /* CoreGraphics.framework */; };
@@ -28,20 +27,10 @@
 		A86C3F2116B2B7B8002A50F0 /* CoreAudio.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A86C3F1E16B2B7B8002A50F0 /* CoreAudio.framework */; };
 		A86C3F2316B2B834002A50F0 /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A86C3F2216B2B834002A50F0 /* Accelerate.framework */; };
 		A8742F3C16FF694300056E1C /* ControlOctaveSnapTestSynth.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A8742F3B16FF694300056E1C /* ControlOctaveSnapTestSynth.cpp */; };
-		A8742F3D16FF694300056E1C /* ControlOctaveSnapTestSynth.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A8742F3B16FF694300056E1C /* ControlOctaveSnapTestSynth.cpp */; };
 		A89356D817052CAD00C184BE /* SynthDemoDef.mm in Sources */ = {isa = PBXBuildFile; fileRef = A89356D617052CAD00C184BE /* SynthDemoDef.mm */; };
-		A89356D917052CAD00C184BE /* SynthDemoDef.mm in Sources */ = {isa = PBXBuildFile; fileRef = A89356D617052CAD00C184BE /* SynthDemoDef.mm */; };
 		A8CF87F31703D71800D8F5E1 /* CoreMotion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A8CF87F21703D71800D8F5E1 /* CoreMotion.framework */; };
 		A8DFAC161713B0C7004545CE /* XYSpeed.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A8DFAC151713B0C7004545CE /* XYSpeed.cpp */; };
-		A8DFAC171713B0C7004545CE /* XYSpeed.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A8DFAC151713B0C7004545CE /* XYSpeed.cpp */; };
 		F20FCD5216C58D5B0039832A /* TonicSynthManager.mm in Sources */ = {isa = PBXBuildFile; fileRef = F20FCD5116C58D5B0039832A /* TonicSynthManager.mm */; };
-		F25317E116EBA0A100A8CFDC /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F25317E016EBA0A100A8CFDC /* SenTestingKit.framework */; };
-		F25317E216EBA0A100A8CFDC /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A86C3EC016B2B4FD002A50F0 /* UIKit.framework */; };
-		F25317E316EBA0A100A8CFDC /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A86C3EC216B2B4FD002A50F0 /* Foundation.framework */; };
-		F25317E916EBA0A100A8CFDC /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = F25317E716EBA0A100A8CFDC /* InfoPlist.strings */; };
-		F25317EC16EBA0A100A8CFDC /* TonicTests.mm in Sources */ = {isa = PBXBuildFile; fileRef = F25317EB16EBA0A100A8CFDC /* TonicTests.mm */; };
-		F253182616EBA34500A8CFDC /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A86C3F2216B2B834002A50F0 /* Accelerate.framework */; };
-		F253182916EBA73200A8CFDC /* StereoFixedTestGen.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F253182716EBA73200A8CFDC /* StereoFixedTestGen.cpp */; };
 		F256C8E416C5A0BF0096574D /* SynthTestViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = F256C8E016C5A0BF0096574D /* SynthTestViewController.mm */; };
 		F256C8E516C5A0BF0096574D /* SynthChooserViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = F256C8E216C5A0BF0096574D /* SynthChooserViewController.mm */; };
 		F256C8E616C5A0BF0096574D /* SynthChooserViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F256C8E316C5A0BF0096574D /* SynthChooserViewController.xib */; };
@@ -55,10 +44,24 @@
 		F2759AF616F7E0EF00347633 /* RectWaveTestSynth.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F2759AE816F7E0EF00347633 /* RectWaveTestSynth.cpp */; };
 		F2759AF816F7E0EF00347633 /* SineSumSynth.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F2759AEA16F7E0EF00347633 /* SineSumSynth.cpp */; };
 		F2759AF916F7E0EF00347633 /* StereoDelayTestSynth.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F2759AEB16F7E0EF00347633 /* StereoDelayTestSynth.cpp */; };
+		F2B853191721AAE000C3921A /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F25317E016EBA0A100A8CFDC /* SenTestingKit.framework */; };
+		F2B8531A1721AAE000C3921A /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A86C3EC016B2B4FD002A50F0 /* UIKit.framework */; };
+		F2B8531B1721AAE000C3921A /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A86C3EC216B2B4FD002A50F0 /* Foundation.framework */; };
+		F2B853291721AB1E00C3921A /* TonicTests.mm in Sources */ = {isa = PBXBuildFile; fileRef = F25317EB16EBA0A100A8CFDC /* TonicTests.mm */; };
+		F2B8532A1721AB2000C3921A /* StereoFixedTestGen.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F253182716EBA73200A8CFDC /* StereoFixedTestGen.cpp */; };
+		F2B8532D1721ACDE00C3921A /* libTonic-iOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F2DC166F17219736006DB2CB /* libTonic-iOS.a */; };
+		F2B8532E1721ACE100C3921A /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A86C3F2216B2B834002A50F0 /* Accelerate.framework */; };
 		F2DC167217219744006DB2CB /* libTonic-iOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F2DC166F17219736006DB2CB /* libTonic-iOS.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		F2B8532B1721AB3C00C3921A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A86C3EB316B2B4FC002A50F0 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = A86C3EBB16B2B4FC002A50F0;
+			remoteInfo = TonicDemo;
+		};
 		F2DC166C17219736006DB2CB /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = F2DC166717219736006DB2CB /* TonicLib.xcodeproj */;
@@ -118,7 +121,6 @@
 		A8DFAC151713B0C7004545CE /* XYSpeed.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = XYSpeed.cpp; sourceTree = "<group>"; };
 		F20FCD5016C58D5B0039832A /* TonicSynthManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TonicSynthManager.h; sourceTree = "<group>"; };
 		F20FCD5116C58D5B0039832A /* TonicSynthManager.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = TonicSynthManager.mm; sourceTree = "<group>"; };
-		F25317DF16EBA0A100A8CFDC /* TonicTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TonicTests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
 		F25317E016EBA0A100A8CFDC /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
 		F25317E616EBA0A100A8CFDC /* TonicTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "TonicTests-Info.plist"; sourceTree = "<group>"; };
 		F25317E816EBA0A100A8CFDC /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
@@ -142,6 +144,7 @@
 		F2759AE816F7E0EF00347633 /* RectWaveTestSynth.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = RectWaveTestSynth.cpp; sourceTree = "<group>"; };
 		F2759AEA16F7E0EF00347633 /* SineSumSynth.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SineSumSynth.cpp; sourceTree = "<group>"; };
 		F2759AEB16F7E0EF00347633 /* StereoDelayTestSynth.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = StereoDelayTestSynth.cpp; sourceTree = "<group>"; };
+		F2B853181721AAE000C3921A /* TonicTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TonicTests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
 		F2DC166717219736006DB2CB /* TonicLib.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = TonicLib.xcodeproj; path = ../../../../lib/TonicLib.xcodeproj; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -161,14 +164,15 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		F25317DB16EBA0A100A8CFDC /* Frameworks */ = {
+		F2B853141721AAE000C3921A /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F253182616EBA34500A8CFDC /* Accelerate.framework in Frameworks */,
-				F25317E116EBA0A100A8CFDC /* SenTestingKit.framework in Frameworks */,
-				F25317E216EBA0A100A8CFDC /* UIKit.framework in Frameworks */,
-				F25317E316EBA0A100A8CFDC /* Foundation.framework in Frameworks */,
+				F2B8532E1721ACE100C3921A /* Accelerate.framework in Frameworks */,
+				F2B8532D1721ACDE00C3921A /* libTonic-iOS.a in Frameworks */,
+				F2B853191721AAE000C3921A /* SenTestingKit.framework in Frameworks */,
+				F2B8531A1721AAE000C3921A /* UIKit.framework in Frameworks */,
+				F2B8531B1721AAE000C3921A /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -183,13 +187,15 @@
 				A86C3EBF16B2B4FD002A50F0 /* Frameworks */,
 				A86C3EBD16B2B4FD002A50F0 /* Products */,
 			);
+			indentWidth = 2;
 			sourceTree = "<group>";
+			tabWidth = 2;
 		};
 		A86C3EBD16B2B4FD002A50F0 /* Products */ = {
 			isa = PBXGroup;
 			children = (
 				A86C3EBC16B2B4FD002A50F0 /* TonicDemo.app */,
-				F25317DF16EBA0A100A8CFDC /* TonicTests.octest */,
+				F2B853181721AAE000C3921A /* TonicTests.octest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -368,22 +374,23 @@
 			productReference = A86C3EBC16B2B4FD002A50F0 /* TonicDemo.app */;
 			productType = "com.apple.product-type.application";
 		};
-		F25317DE16EBA0A100A8CFDC /* TonicTests */ = {
+		F2B853171721AAE000C3921A /* TonicTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = F25317F016EBA0A100A8CFDC /* Build configuration list for PBXNativeTarget "TonicTests" */;
+			buildConfigurationList = F2B853261721AAE000C3921A /* Build configuration list for PBXNativeTarget "TonicTests" */;
 			buildPhases = (
-				F25317DA16EBA0A100A8CFDC /* Sources */,
-				F25317DB16EBA0A100A8CFDC /* Frameworks */,
-				F25317DC16EBA0A100A8CFDC /* Resources */,
-				F25317DD16EBA0A100A8CFDC /* ShellScript */,
+				F2B853131721AAE000C3921A /* Sources */,
+				F2B853141721AAE000C3921A /* Frameworks */,
+				F2B853151721AAE000C3921A /* Resources */,
+				F2B853161721AAE000C3921A /* ShellScript */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				F2B8532C1721AB3C00C3921A /* PBXTargetDependency */,
 			);
 			name = TonicTests;
 			productName = TonicTests;
-			productReference = F25317DF16EBA0A100A8CFDC /* TonicTests.octest */;
+			productReference = F2B853181721AAE000C3921A /* TonicTests.octest */;
 			productType = "com.apple.product-type.bundle";
 		};
 /* End PBXNativeTarget section */
@@ -415,7 +422,7 @@
 			projectRoot = "";
 			targets = (
 				A86C3EBB16B2B4FC002A50F0 /* TonicDemo */,
-				F25317DE16EBA0A100A8CFDC /* TonicTests */,
+				F2B853171721AAE000C3921A /* TonicTests */,
 			);
 		};
 /* End PBXProject section */
@@ -451,18 +458,17 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		F25317DC16EBA0A100A8CFDC /* Resources */ = {
+		F2B853151721AAE000C3921A /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F25317E916EBA0A100A8CFDC /* InfoPlist.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		F25317DD16EBA0A100A8CFDC /* ShellScript */ = {
+		F2B853161721AAE000C3921A /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -509,22 +515,23 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		F25317DA16EBA0A100A8CFDC /* Sources */ = {
+		F2B853131721AAE000C3921A /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F25317EC16EBA0A100A8CFDC /* TonicTests.mm in Sources */,
-				F253182916EBA73200A8CFDC /* StereoFixedTestGen.cpp in Sources */,
-				A8742F3D16FF694300056E1C /* ControlOctaveSnapTestSynth.cpp in Sources */,
-				A89356D917052CAD00C184BE /* SynthDemoDef.mm in Sources */,
-				A8DFAC171713B0C7004545CE /* XYSpeed.cpp in Sources */,
-				A865EEB5171CCECD008813A7 /* ControlSwitcherTestSynth.cpp in Sources */,
+				F2B853291721AB1E00C3921A /* TonicTests.mm in Sources */,
+				F2B8532A1721AB2000C3921A /* StereoFixedTestGen.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		F2B8532C1721AB3C00C3921A /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = A86C3EBB16B2B4FC002A50F0 /* TonicDemo */;
+			targetProxy = F2B8532B1721AB3C00C3921A /* PBXContainerItemProxy */;
+		};
 		F2DC16711721973F006DB2CB /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = "Tonic-iOS";
@@ -609,8 +616,10 @@
 			buildSettings = {
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_OBJC_ARC = YES;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "TonicDemo/TonicDemo-Prefix.pch";
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				HEADER_SEARCH_PATHS = "../../../Tonic/**";
 				INFOPLIST_FILE = "TonicDemo/TonicDemo-Info.plist";
@@ -624,8 +633,10 @@
 			buildSettings = {
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_OBJC_ARC = YES;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "TonicDemo/TonicDemo-Prefix.pch";
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				HEADER_SEARCH_PATHS = "../../../Tonic/**";
 				INFOPLIST_FILE = "TonicDemo/TonicDemo-Info.plist";
@@ -634,9 +645,12 @@
 			};
 			name = Release;
 		};
-		F25317EE16EBA0A100A8CFDC /* Debug */ = {
+		F2B853271721AAE000C3921A /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/TonicDemo.app/TonicDemo";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
@@ -645,18 +659,24 @@
 					"\"$(SDKROOT)/Developer/Library/Frameworks\"",
 					"\"$(DEVELOPER_LIBRARY_DIR)/Frameworks\"",
 				);
+				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "TonicTests/TonicTests-Prefix.pch";
+				HEADER_SEARCH_PATHS = "../../../Tonic/**";
 				INFOPLIST_FILE = "TonicTests/TonicTests-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
 				WRAPPER_EXTENSION = octest;
 			};
 			name = Debug;
 		};
-		F25317EF16EBA0A100A8CFDC /* Release */ = {
+		F2B853281721AAE000C3921A /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/TonicDemo.app/TonicDemo";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
@@ -665,11 +685,14 @@
 					"\"$(SDKROOT)/Developer/Library/Frameworks\"",
 					"\"$(DEVELOPER_LIBRARY_DIR)/Frameworks\"",
 				);
+				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "TonicTests/TonicTests-Prefix.pch";
+				HEADER_SEARCH_PATHS = "../../../Tonic/**";
 				INFOPLIST_FILE = "TonicTests/TonicTests-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
 				WRAPPER_EXTENSION = octest;
 			};
 			name = Release;
@@ -695,14 +718,13 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		F25317F016EBA0A100A8CFDC /* Build configuration list for PBXNativeTarget "TonicTests" */ = {
+		F2B853261721AAE000C3921A /* Build configuration list for PBXNativeTarget "TonicTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				F25317EE16EBA0A100A8CFDC /* Debug */,
-				F25317EF16EBA0A100A8CFDC /* Release */,
+				F2B853271721AAE000C3921A /* Debug */,
+				F2B853281721AAE000C3921A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
