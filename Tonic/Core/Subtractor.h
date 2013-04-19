@@ -57,6 +57,7 @@ namespace Tonic {
 
   };
   
+  
   static Subtractor operator - (Generator a, Generator b){
     Subtractor sub;
     sub.left(a);
@@ -76,6 +77,16 @@ namespace Tonic {
     sub.left(a);
     sub.right(FixedValue(b));
     return sub;
+  }
+  
+  // Add a Generatator and a ControlGenerator
+  
+  static Subtractor operator - (Generator a, ControlGenerator b){
+    return a - FixedValue().setValue(b);
+  }
+  
+  static Subtractor operator - (ControlGenerator a, Generator b){
+    return FixedValue().setValue(a) - b;
   }
   
 }

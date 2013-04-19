@@ -725,6 +725,7 @@
 				F2B853281721AAE000C3921A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

@@ -69,6 +69,8 @@ namespace Tonic {
     
   };
   
+  // add a Generator to another thing
+  
   static Adder operator + (Generator a, Generator b){
     Adder add;
     add.in(a);
@@ -91,6 +93,8 @@ namespace Tonic {
     add.in(FixedValue(b));
     return add;
   }
+  
+  // add an adder to another thing
 
   static Adder operator + (Adder a, Generator b){
     a.in(b);
@@ -117,6 +121,26 @@ namespace Tonic {
       a.in(b[i]);
     }
     return a;
+  }
+  
+  // Add a Generatator and a ControlGenerator
+  
+  static Adder operator + (Generator a, ControlGenerator b){
+    return a + FixedValue().setValue(b);
+  }
+  
+  static Adder operator + (ControlGenerator a, Generator b){
+    return FixedValue().setValue(1) + b;
+  }
+  
+  // Add an Adder and a ControlGenerator
+  
+    static Adder operator + (Adder a, ControlGenerator b){
+    return a + FixedValue().setValue(b);
+  }
+  
+  static Adder operator + (ControlGenerator a, Adder b){
+    return FixedValue().setValue(a) + b;
   }
   
 }
