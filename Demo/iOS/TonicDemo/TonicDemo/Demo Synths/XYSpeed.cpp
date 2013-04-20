@@ -21,7 +21,7 @@ class XYSpeed : public Synth{
 
   public:
   XYSpeed(){
-    Generator speed = ControlXYSpeed().x(addParameter("x")).y(addParameter("y")).ramped();
+    Generator speed = ControlXYSpeed().x(addParameter("x")).y(addParameter("y")).smoothed();
     outputGen = RectWave()
       .freq(100 + 20 * speed)
       .pwm( 0.05 + (SineWave().freq(0.1) + 1) * 0.2)

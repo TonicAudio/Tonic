@@ -27,7 +27,7 @@ class RectWaveTestSynth : public Synth {
 public:
   RectWaveTestSynth(){
     
-    Generator rectWave = RectWave().freq( addParameter("freq", 400).ramped() ).pwm( addParameter("pwm", 0.5).ramped() );
+    Generator rectWave = RectWave().freq( addParameter("freq", 400).smoothed() ).pwm( addParameter("pwm", 0.5).smoothed() );
     LPF24 lfoFilter = LPF24().cutoff( SineWave().freq( 3.0 ) * 1800 + 2000 ).Q(1.5);
     outputGen = (rectWave >> lfoFilter) * 0.25;
   }
