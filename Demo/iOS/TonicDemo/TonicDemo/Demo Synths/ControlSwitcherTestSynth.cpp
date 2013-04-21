@@ -43,9 +43,8 @@ public:
         ControlCounter()
         .end(2)
         .trigger(modeSwitch)
-        + -1)
-      + -1);
-    
+         -1)
+       -1);
     
     ControlGenerator clickVol = addParameter("clickVol");
     ADSR clickEnv =  ADSR(0, 0.01, 0, 0).trigger(metro);
