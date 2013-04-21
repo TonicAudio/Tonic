@@ -71,7 +71,7 @@ namespace Tonic { namespace Tonic_{
         pole = t60ToTau(decayTime);
         
         if (segLength == 0){
-          switchState(SUSTAIN);
+          switchState(bDoesSustain ? SUSTAIN : RELEASE);
         }
         else{
           targetValue = sustainLevelVal;
@@ -83,6 +83,7 @@ namespace Tonic { namespace Tonic_{
         
       case SUSTAIN:
       {
+        targetValue = sustainLevelVal;
         lastValue = sustainLevelVal;
         increment = 0.f;
       }

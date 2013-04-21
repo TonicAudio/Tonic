@@ -102,23 +102,12 @@ namespace Tonic {
       
       TonicFloat * fdata = &synthesisBlock_[0];
       
-      // did a trigger message happen?
       if(triggerOutput.status == ControlGeneratorStatusHasChanged){
         
-        // if not in sustain mode, any non-zero message will trigger another attack, regardless of state
-        if (!bDoesSustain){
-          if (triggerOutput.value != 0){
-            switchState(ATTACK);
-          }
-        }
-        else{
-          // if in sustain mode ("gated" operation) need to be in release or neutral for a re-trigger to be valid
-          if (triggerOutput.value != 0 && (state == RELEASE || state == NEUTRAL)){
-            switchState(ATTACK);
-          }
-          else if (triggerOutput.value == 0){
-            switchState(RELEASE);
-          }
+        if(triggerOutput.value != 0){
+          switchState(ATTACK);
+        }else if(bDoesSustain){
+          switchState(RELEASE);
         }
         
       }
