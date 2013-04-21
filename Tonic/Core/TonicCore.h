@@ -44,7 +44,8 @@ const TonicFloat TWO_PI       = 2 * PI;
 // Allowing some efficient shortcuts for table lookup using power-of-two tables
 #define BIT32DECPT 1572864.0
 
-#define TONIC_DEBUG
+// Uncomment or define in your build configuration to log debug messages and perform extra debug checks
+// #define TONIC_DEBUG
 
 namespace Tonic {
   
@@ -188,7 +189,9 @@ namespace Tonic {
   }
   
   static void debug(string message){
+#ifdef TONIC_DEBUG
     printf("Tonic::debug: %s\n", message.c_str());
+#endif
   }
 
 
