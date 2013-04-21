@@ -65,8 +65,12 @@ namespace Tonic {
       frames.copy(synthesisBlock_);
       
 #ifdef TONIC_DEBUG
-      if(!isfinite(frames(0,0))){
-        Tonic::error("Generator_::tick NaN or inf detected.", true);
+      for(int i = 0; i < frames.frames(); i++){
+        for(int j = 0; j < frames.channels(); j++){
+          if(!isfinite(frames(i,j))){
+            Tonic::error("Generator_::tick NaN or inf detected.", true);
+          }
+        }
       }
 #endif
       

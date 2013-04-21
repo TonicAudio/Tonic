@@ -17,6 +17,8 @@ SynthFactory::createInstance(SYNTH_NAME), where SYNTH_NAME is the name supplied 
 
 #include "Synth.h"
 #include "SineWave.h"
+#include "ADSR.h"
+#include "ControlMetro.h"
 
 using namespace Tonic;
 
@@ -29,13 +31,14 @@ public:
       Generator rCarrierFreq = (addParameter("carrierFreq", 0) * 2 + 30).smoothed();
       Generator rModFreq     = rCarrierFreq * addParameter("mcRatio", 2).smoothed();
       
-      outputGen = SineWave().freq(
-                                  rCarrierFreq  + (
-                                                   SineWave().freq( rModFreq ) *
-                                                   rModFreq *
-                                                   (addParameter("modIndex", 0) * 10.0f).smoothed()
-                                                   )
-                                  ) * 0.5f;
+      outputGen = SineWave()
+        .freq( rCarrierFreq
+          + (
+            SineWave().freq( rModFreq ) *
+            rModFreq *
+            (addParameter("modIndex", 0) * 10.0f).smoothed()
+          )
+        ) * 0.5f;
   }
   
 };
