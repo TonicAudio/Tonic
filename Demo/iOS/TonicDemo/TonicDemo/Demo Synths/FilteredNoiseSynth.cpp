@@ -40,13 +40,13 @@ public:
     
     ControlGenerator cutoffCtrl = addParameter("cutoff", 0.5);
     
-    Generator q_v = addParameter("Q", 5).ramped();
+    Generator q_v = addParameter("Q", 5).smoothed();
     
     Adder sumOfFilters;
     
     for(int i = 0; i < midiNums.size(); i++){
       Generator tremelo = (SineWave().freq( randomFloat(0.1, 0.3) ) + 1.5) * 0.3;
-      Generator cutoff = ControlMidiToFreq().in( ControlFloor().in( midiNums.at(i) + cutoffCtrl * 100  )).ramped().length(0.01);
+      Generator cutoff = ControlMidiToFreq().in( ControlFloor().in( midiNums.at(i) + cutoffCtrl * 100  )).smoothed().length(0.01);
       BPF24 filter = BPF24().Q( q_v ).cutoff( cutoff );
       sumOfFilters = sumOfFilters + (noise >> filter) * tremelo;
     }

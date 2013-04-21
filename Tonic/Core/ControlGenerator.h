@@ -44,7 +44,7 @@ namespace Tonic {
       // Pass in a pointer to a TonicFloat to return a value. Some generators may not care about value.
       virtual ControlGeneratorOutput tick( const SynthesisContext_ & context );
       
-      // Used for initializing other generators (see ramped() method for example)
+      // Used for initializing other generators (see smoothed() method for example)
       virtual ControlGeneratorOutput initialOutput();
       
     protected:
@@ -107,7 +107,7 @@ namespace Tonic {
     }
     
     // shortcut for creating ramped value
-    RampedValue ramped(float length = 0.05);
+    RampedValue smoothed(float length = 0.05);
     
   };
   

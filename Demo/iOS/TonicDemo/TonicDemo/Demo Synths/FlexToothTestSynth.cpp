@@ -27,7 +27,7 @@ public:
   
   FlexToothTestSynth(){
     
-    FlexToothWave flexTooth = FlexToothWave().freq( addParameter("freq", 0.5).ramped() ).slope( addParameter("slope", 0).ramped() );
+    FlexToothWave flexTooth = FlexToothWave().freq( addParameter("freq", 0.5).smoothed() ).slope( addParameter("slope", 0).smoothed() );
     outputGen = flexTooth * 0.2;
     
   }

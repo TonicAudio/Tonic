@@ -27,7 +27,7 @@ public:
   
   FlexToothLFOTestSynth(){
     
-    FlexToothWave lfo = FlexToothWave().freq( addParameter("freq", 0.5).ramped() ).slope( addParameter("slope", 0).ramped() );
+    FlexToothWave lfo = FlexToothWave().freq( addParameter("freq", 0.5).smoothed() ).slope( addParameter("slope", 0).smoothed() );
     outputGen = SineWave().freq( 300 + ((lfo * 0.5 + 1) * 200) ) * 0.2;
     
   }

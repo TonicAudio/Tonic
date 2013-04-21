@@ -43,7 +43,7 @@ public:
                             .ratio(8)
                             .lookahead(0.001);
         
-    outputGen = ( ( ( tones * toneADSR ) + ( hpNoise * noiseEnv ) ) >> compressor ) * addParameter("compGain", 1.0).ramped() * 0.5;
+    outputGen = ( ( ( tones * toneADSR ) + ( hpNoise * noiseEnv ) ) >> compressor ) * addParameter("compGain", 1.0).smoothed() * 0.5;
   }
   
 };
