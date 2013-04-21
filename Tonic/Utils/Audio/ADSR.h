@@ -42,6 +42,12 @@ namespace Tonic {
       bool       legatoVal;
       bool       sustainsVal;
       
+      // state variables
+      unsigned long segCounter;
+      unsigned long segLength;
+      TonicFloat targetValue;
+      TonicFloat lastValue;
+      
       enum State{
         ATTACK,
         SUSTAIN,
@@ -71,6 +77,8 @@ namespace Tonic {
     inline void ADSR_::computeSynthesisBlock(const SynthesisContext_ &context){
       
       ControlGeneratorOutput triggerOutput = mTrigger.tick(context);
+      
+      // frames to go in this block
       
       // Tick ALL inputs every time to keep everything in sync
       attackTime = attack.tick(context).value;
