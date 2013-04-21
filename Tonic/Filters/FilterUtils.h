@@ -13,9 +13,9 @@
 
 namespace Tonic {
   
-  //! Calculate coefficient for a pole with given time constant in milliseconds (t60ms)
+  //! Calculate coefficient for a pole with given time constant to reach -60dB delta in t60s seconds
   inline static TonicFloat t60ToTau( TonicFloat t60s ){
-    return t60s > 0.0f ? expf(-1.0f/(t60s * Tonic::sampleRate())) : 0.0f;
+    return t60s > 0.0f ? expf(-1.0f/((t60s/6.91) * Tonic::sampleRate())) : 0.0f;
   }
   
   //! Tick one sample through one-pole filter

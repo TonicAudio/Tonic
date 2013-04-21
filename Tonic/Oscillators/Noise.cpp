@@ -9,7 +9,7 @@
 //
 
 
-#import "Noise.h"
+#include "Noise.h"
 
 namespace Tonic {
   namespace Tonic_ {
