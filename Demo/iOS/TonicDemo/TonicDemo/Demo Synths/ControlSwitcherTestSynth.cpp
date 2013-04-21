@@ -48,7 +48,7 @@ public:
     
     
     ControlGenerator clickVol = addParameter("clickVol");
-    ADSR clickEnv =  ADSR(0, 0.01, 0, 0).trigger(metro);
+    ADSR clickEnv =  ADSR(0.0005, 0.01, 0, 0).trigger(metro);
     Generator clickIntensity = (1 + clickVol).smoothed();
     Generator click = SineWave().freq(300 + 1000 * clickEnv ) * clickEnv * 0.03 ;
     

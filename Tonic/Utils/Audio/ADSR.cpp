@@ -7,12 +7,11 @@
 //
 
 #include "ADSR.h"
-#include "FilterUtils.h"
 
 namespace Tonic { namespace Tonic_{
   
   ADSR_::ADSR_() :
-    state(ATTACK),
+    state(NEUTRAL),
     lastValue(0),
     targetValue(0),
     increment(0),
@@ -55,6 +54,7 @@ namespace Tonic { namespace Tonic_{
         pole = t60ToTau(attackTime);
         
         if (segLength == 0){
+          lastValue = 1.0f;
           switchState(DECAY);
         }
         else{
@@ -94,6 +94,7 @@ namespace Tonic { namespace Tonic_{
         pole = t60ToTau(releaseTime);
         
         if (segLength == 0){
+          lastValue = 0.f;
           switchState(NEUTRAL);
         }
         else{

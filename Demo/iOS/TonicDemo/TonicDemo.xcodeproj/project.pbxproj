@@ -51,6 +51,7 @@
 		F2B8532A1721AB2000C3921A /* StereoFixedTestGen.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F253182716EBA73200A8CFDC /* StereoFixedTestGen.cpp */; };
 		F2B8532D1721ACDE00C3921A /* libTonic-iOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F2DC166F17219736006DB2CB /* libTonic-iOS.a */; };
 		F2B8532E1721ACE100C3921A /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A86C3F2216B2B834002A50F0 /* Accelerate.framework */; };
+		F2C6D3E517245C7F006455E7 /* TonicLoggingTests.mm in Sources */ = {isa = PBXBuildFile; fileRef = F2C6D3E417245C7F006455E7 /* TonicLoggingTests.mm */; };
 		F2DC167217219744006DB2CB /* libTonic-iOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F2DC166F17219736006DB2CB /* libTonic-iOS.a */; };
 /* End PBXBuildFile section */
 
@@ -145,6 +146,9 @@
 		F2759AEA16F7E0EF00347633 /* SineSumSynth.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SineSumSynth.cpp; sourceTree = "<group>"; };
 		F2759AEB16F7E0EF00347633 /* StereoDelayTestSynth.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = StereoDelayTestSynth.cpp; sourceTree = "<group>"; };
 		F2B853181721AAE000C3921A /* TonicTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TonicTests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
+		F2C6D3E317245C7F006455E7 /* TonicLoggingTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TonicLoggingTests.h; sourceTree = "<group>"; };
+		F2C6D3E417245C7F006455E7 /* TonicLoggingTests.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = TonicLoggingTests.mm; sourceTree = "<group>"; };
+		F2C6D3EB17245CF7006455E7 /* TestBufferFiller.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestBufferFiller.h; sourceTree = "<group>"; };
 		F2DC166717219736006DB2CB /* TonicLib.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = TonicLib.xcodeproj; path = ../../../../lib/TonicLib.xcodeproj; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -293,8 +297,11 @@
 			children = (
 				F25317EA16EBA0A100A8CFDC /* TonicTests.h */,
 				F25317EB16EBA0A100A8CFDC /* TonicTests.mm */,
+				F2C6D3E317245C7F006455E7 /* TonicLoggingTests.h */,
+				F2C6D3E417245C7F006455E7 /* TonicLoggingTests.mm */,
 				F253182716EBA73200A8CFDC /* StereoFixedTestGen.cpp */,
 				F253182816EBA73200A8CFDC /* StereoFixedTestGen.h */,
+				F2C6D3EB17245CF7006455E7 /* TestBufferFiller.h */,
 				F25317E516EBA0A100A8CFDC /* Supporting Files */,
 			);
 			path = TonicTests;
@@ -521,6 +528,7 @@
 			files = (
 				F2B853291721AB1E00C3921A /* TonicTests.mm in Sources */,
 				F2B8532A1721AB2000C3921A /* StereoFixedTestGen.cpp in Sources */,
+				F2C6D3E517245C7F006455E7 /* TonicLoggingTests.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

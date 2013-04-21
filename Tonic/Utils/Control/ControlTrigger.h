@@ -25,7 +25,7 @@ namespace Tonic {
     public:
       ControlTrigger_();
       ~ControlTrigger_();
-      void trigger();
+      void trigger(float value);
       
     };
     
@@ -40,7 +40,7 @@ namespace Tonic {
     
   public:
   
-  void trigger();
+  void trigger(float value = 1);
 
   };
 }

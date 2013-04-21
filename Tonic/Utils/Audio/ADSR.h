@@ -12,10 +12,9 @@
 #ifndef __Tonic__ADSR__
 #define __Tonic__ADSR__
 
-#include <iostream>
 #include "Generator.h"
 #include "ControlGenerator.h"
-#include "RampedValue.h"
+#include "FilterUtils.h"
 
 namespace Tonic {
   
@@ -152,11 +151,19 @@ namespace Tonic {
             unsigned long remainder = (segCounter > segLength) ? 0 : segLength - segCounter;
             if (remainder < samplesRemaining){
               
+              // fill up part of the ramp then switch segment
+
               if (bIsExponential){
+
+                // one pole filter
+                for (unsigned long i=0; i<remainder; i++){
+                  onePoleTick(targetValue, lastValue, pole);
+                  *fdata++ = lastValue;
+                }
                 
               }
               else{
-                // fill up part of the ramp then switch segment
+                
                 #ifdef USE_APPLE_ACCELERATE
                 // starting point
                 lastValue += increment;
@@ -193,6 +200,12 @@ namespace Tonic {
             else{
               
               if (bIsExponential){
+                
+                // one pole filter
+                for (int i=0; i<samplesRemaining; i++){
+                  onePoleTick(targetValue, lastValue, pole);
+                  *fdata++ = lastValue;
+                }
                 
               }
               else{
