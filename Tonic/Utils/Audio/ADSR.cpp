@@ -70,11 +70,13 @@ namespace Tonic { namespace Tonic_{
         segLength = decayTime * sampleRate();
         pole = t60ToTau(decayTime);
         
+        targetValue = sustainLevelVal;
+        
         if (segLength == 0){
+          lastValue = sustainLevelVal;
           switchState(bDoesSustain ? SUSTAIN : RELEASE);
         }
         else{
-          targetValue = sustainLevelVal;
           increment = (TonicFloat)(sustainLevelVal - lastValue)/segLength;
         }
         
@@ -94,12 +96,13 @@ namespace Tonic { namespace Tonic_{
         segLength = releaseTime * sampleRate();
         pole = t60ToTau(releaseTime);
         
+        targetValue = 0.f;
+        
         if (segLength == 0){
           lastValue = 0.f;
           switchState(NEUTRAL);
         }
         else{
-          targetValue = 0.f;
           increment = (TonicFloat)(-lastValue)/segLength;
         }
       }

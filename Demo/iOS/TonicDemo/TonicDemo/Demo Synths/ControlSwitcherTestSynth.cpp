@@ -63,7 +63,7 @@ public:
     }
     
     Generator freq = ControlValue(50).smoothed();
-    Generator tremelo =  1 + ( SineWave().freq(15) *  ADSR(0.001, 0.5, 0, 0.002).trigger(modeSwitch) );
+    Generator tremelo =  1 + ( SineWave().freq(15) *  ADSR(0.001, 0.5, 0, 0.002).doesSustain(false).trigger(modeSwitch) );
     Generator bassEnv = ADSR(0.002, 0.1 ,0, 0.02).decay(decay).legato(true).sustain(sustain * sustain).trigger(metro);
     Generator bass =
       SineWave()
@@ -79,7 +79,7 @@ public:
             ).smoothed()
       ) >> HPF12().cutoff(addParameter("hpf") * 1000) ;
     Generator bassWithAmp = bass * bassEnv * tremelo;
-    outputGen = bassWithAmp;// + click;
+    outputGen = bassWithAmp + click;
   }
 };
 

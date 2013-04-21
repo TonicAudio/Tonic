@@ -28,7 +28,8 @@
 
 using namespace std;
 
-typedef unsigned long         UInt32;
+typedef unsigned long         TonicUInt32;
+typedef long                  TonicInt32;
 typedef float                 TonicFloat;
 
 #ifndef PI
@@ -62,7 +63,7 @@ namespace Tonic {
   // inspired by the pd implementation
   union ShiftedDouble {
     double d;
-    uint32_t i[2];
+    TonicUInt32 i[2];
   };
   
   
