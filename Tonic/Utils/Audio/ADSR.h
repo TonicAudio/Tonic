@@ -32,32 +32,34 @@ namespace Tonic {
       ControlGenerator decay;
       ControlGenerator sustain;
       ControlGenerator release;
-      ControlGenerator sustains;
+      ControlGenerator doesSustain;
       ControlGenerator isLegato;
       
       TonicFloat attackTime;
       TonicFloat decayTime;
       TonicFloat sustainLevelVal;
       TonicFloat releaseTime;
-      bool       legatoVal;
-      bool       sustainsVal;
+      bool       bIsLegato;
+      bool       bDoesSustain;
       
       // state variables
       unsigned long segCounter;
       unsigned long segLength;
       TonicFloat targetValue;
       TonicFloat lastValue;
+      TonicFloat increment;
       
-      enum State{
+      enum ADSRState {
+        NEUTRAL,
         ATTACK,
         SUSTAIN,
         DECAY,
         RELEASE
       };
       
-      State state;
-      void switchState(State newState);
-            
+      ADSRState state;
+      void switchState(ADSRState newState);
+      
     public:
       ADSR_();
       ~ADSR_();
@@ -70,7 +72,7 @@ namespace Tonic {
       void setIsLegato(ControlGenerator gen){isLegato = gen;}
       
       //! Controls whether or not the envelope pauses on the SUSTAIN stage
-      void setSustains(ControlGenerator gen){sustains = gen;};
+      void setDoesSustain(ControlGenerator gen){doesSustain = gen;};
       
     };
     
@@ -85,39 +87,116 @@ namespace Tonic {
       decayTime = decay.tick(context).value;
       sustainLevelVal = sustain.tick(context).value;
       releaseTime = release.tick(context).value;
-      sustainsVal = (bool)sustain.tick(context).value;
-      legatoVal = (bool)isLegato.tick(context).value;
+      bDoesSustain = (bool)sustain.tick(context).value;
+      bIsLegato = (bool)isLegato.tick(context).value;
+      
+      TonicFloat * fdata = &synthesisBlock_[0];
       
       // did a trigger message happen?
       if(triggerOutput.status == ControlGeneratorStatusHasChanged){
         
         if(triggerOutput.value != 0){
           switchState(ATTACK);
-        }else if(sustainsVal != 0){
+        }else if(bDoesSustain){
           switchState(RELEASE);
         }
         
       }
-      else{
       
+      unsigned long samplesRemaining = kSynthesisBlockSize;
+      while (samplesRemaining > 0)
+      {
         switch (state) {
-          case ATTACK:
-            if(ramp.isFinished()){
-              switchState(DECAY);
-            }
+          
+          // Both of these cases just fill the synthesis block the rest of the way up
+          case NEUTRAL:
+          case SUSTAIN:
+          {
+            #ifdef USE_APPLE_ACCELERATE
+            vDSP_vfill(&lastValue, fdata, 1, samplesRemaining);
+            #else
+            std::fill(fdata, fdata + kSynthesisBlockSize, lastValue);
+            #endif
+            
+            samplesRemaining = 0;
+          }
             break;
             
+          case ATTACK:
           case DECAY:
-            if(ramp.isFinished()){
-              switchState(sustainsVal != 0 ? SUSTAIN : RELEASE);
+          case RELEASE:
+          {
+            
+            // how many samples remain in current segment
+            unsigned long remainder = (segCounter > segLength) ? 0 : segLength - segCounter;
+            if (remainder < samplesRemaining){
+              
+              // fill up part of the ramp then switch segment
+              #ifdef USE_APPLE_ACCELERATE
+              // starting point
+              lastValue += increment;
+              
+              // vector calculation
+              vDSP_vramp(&lastValue, &increment, fdata + kSynthesisBlockSize - samplesRemaining, 1, remainder);
+              
+              // end point
+              lastValue += increment*(remainder-1);
+              
+              #else
+              for (unsigned int i=0; i<remainder; i++){
+                lastValue += increment;
+                *fdata++ = lastValue;
+              }
+              #endif
+              
+              segCounter += remainder;
+              samplesRemaining -= remainder;
+              
+              // switch segment
+              if (state == ATTACK){
+                switchState(DECAY);
+              }
+              else if (state == DECAY){
+                switchState(bDoesSustain ? SUSTAIN : RELEASE);
+              }
+              else{
+                switchState(NEUTRAL);
+              }
+              
             }
-            break;
+            else{
+              
+              // fill the rest of the ramp up
+              #ifdef USE_APPLE_ACCELERATE
+              // starting point
+              lastValue += increment;
+              
+              // vector calculation
+              vDSP_vramp(&lastValue, &increment, fdata + kSynthesisBlockSize - samplesRemaining, 1, samplesRemaining);
+              
+              // end point
+              lastValue += increment*(samplesRemaining-1);
+              
+              #else
+              for (unsigned int i=0; i<remainder; i++){
+                lastValue += increment;
+                *fdata++ = lastValue;
+              }
+              #endif
 
+              segCounter += samplesRemaining;
+              samplesRemaining = 0;
+            }
+          }
+            break;
+            
           default:
             break;
         }
+        
+        
       }
-      ramp.tick(synthesisBlock_, context);
+      
     }
     
   }
@@ -132,14 +211,15 @@ namespace Tonic {
   class ADSR : public TemplatedGenerator<Tonic_::ADSR_>{
     
     public:
-      ADSR();
-      ADSR(float attack, float decay, float sustain, float release);
+    
+      ADSR(float attack = 0.001f, float decay = 0.03f, float sustain = 1.0f, float release = 0.05f);
+    
       createControlGeneratorSetters(ADSR, trigger, setTrigger);
       createControlGeneratorSetters(ADSR, attack, setAttack);
       createControlGeneratorSetters(ADSR, decay, setDecay);
       createControlGeneratorSetters(ADSR, sustain, setSustain);
       createControlGeneratorSetters(ADSR, release, setRelease);
-      createControlGeneratorSetters(ADSR, doesSustain, setSustains);
+      createControlGeneratorSetters(ADSR, doesSustain, setDoesSustain);
       createControlGeneratorSetters(ADSR, legato, setIsLegato);
 
   };
