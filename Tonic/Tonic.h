@@ -22,9 +22,14 @@
 #include "FixedValue.h"
 #include "RampedValue.h"
 #include "Adder.h"
+#include "Subtractor.h"
 #include "Multiplier.h"
+#include "Divider.h"
 #include "ControlAdder.h"
+#include "ControlSubtractor.h"
 #include "ControlMultiplier.h"
+#include "ControlDivider.h"
 #include "Synth.h"
+#include "MonoToStereoPanner.h"
 
 #endif

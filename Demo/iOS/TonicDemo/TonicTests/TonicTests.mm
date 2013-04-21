@@ -14,6 +14,7 @@
 #include "ControlMetro.h"
 #include "ControlStepper.h"
 #include "ControlTrigger.h"
+#include "ControlSubtractor.h"
 
 #define kTestOutputBlockSize kSynthesisBlockSize*4
 
@@ -246,6 +247,50 @@ public:
   
 }
 
+
+- (void)test1081DivMonoMono
+{
+  [self configureStereo:NO];
+  
+  Divider divMono = FixedValue(1) / FixedValue(2);
+  
+  STAssertFalse(divMono.isStereoOutput(), @"Divider should be mono");
+  
+  divMono.tick(testFrames, testContext);
+  
+  [self verifyFixedOutputEquals:0.5f];
+  
+}
+
+- (void)test1081DivGenControlGenCombos
+{
+
+  {
+    [self configureStereo:NO];
+    
+    Divider divMono = FixedValue(1) / ControlValue(2);
+    
+    STAssertFalse(divMono.isStereoOutput(), @"Divider should be mono");
+    
+    divMono.tick(testFrames, testContext);
+    
+    [self verifyFixedOutputEquals:0.5f];
+  }
+
+  {
+    [self configureStereo:NO];
+    
+    Divider divMono = ControlValue(1) / FixedValue(2);
+    
+    STAssertFalse(divMono.isStereoOutput(), @"Divider should be mono");
+    
+    divMono.tick(testFrames, testContext);
+    
+    [self verifyFixedOutputEquals:0.5f];
+  }
+    
+}
+
 - (void)test109PannerMonoToStereo{
   
   [self configureStereo:YES];
@@ -262,6 +307,14 @@ public:
   panner.tick(testFrames, testContext);
   [self verifyStereoFixedOutputEqualsLeft:0 right:1];
   
+}
+
+-(void)test110SubtractorTest{
+  Generator gen = FixedValue(2) - FixedValue(1);
+  TestBufferFiller testFiller;
+  testFiller.setOutputGen(gen);
+  testFiller.fillBufferOfFloats(stereoOutBuffer, kTestOutputBlockSize, 1);
+  STAssertEquals((float)1, *stereoOutBuffer, @"FixedValue(2) - FixedValue(1) failed");
 }
 
 #pragma mark - Control Generator Tests
@@ -352,7 +405,6 @@ public:
   context.tick();
   STAssertEquals(trig.tick(context).status, ControlGeneratorStatusHasChanged, @"ControlGenerator did not produce expected output");
   
-  
 }
 
 
@@ -411,5 +463,124 @@ public:
   [self verifyBufferFillerStereoFixedOutputEqualsLeft:0.5 right:1.0];
   
 }
+
+#pragma mark operator tests
+
+-(void)test400CombineGeneratorControlGenerator{
+
+  {
+
+  TestBufferFiller testFiller;
+  Generator gen =  ControlValue(1) + FixedValue(1);
+  testFiller.setOutputGen(gen);
+  testFiller.fillBufferOfFloats(stereoOutBuffer, kTestOutputBlockSize, 2);
+  STAssertEquals((float)2, *stereoOutBuffer, @"ControlValue(1) + FixedValue(1) failed");
+  
+  }
+  
+  {
+
+  TestBufferFiller testFiller;
+  Generator gen =   FixedValue(1) + ControlValue(1);
+  testFiller.setOutputGen(gen);
+  testFiller.fillBufferOfFloats(stereoOutBuffer, kTestOutputBlockSize, 2);
+  STAssertEquals((float)2, *stereoOutBuffer, @"FixedValue(1) + ControlValue(1) failed");
+  
+  }
+  
+  {
+  
+    TestBufferFiller testFiller;
+    Generator gen =   FixedValue(3) - ControlValue(2);
+    testFiller.setOutputGen(gen);
+    testFiller.fillBufferOfFloats(stereoOutBuffer, kTestOutputBlockSize, 2);
+    STAssertEquals((float)1, *stereoOutBuffer, @"FixedValue(1) + ControlValue(1) failed");
+
+  }
+  
+  {
+  
+    TestBufferFiller testFiller;
+    Generator gen =   ControlValue(3) - FixedValue(2);
+    testFiller.setOutputGen(gen);
+    testFiller.fillBufferOfFloats(stereoOutBuffer, kTestOutputBlockSize, 2);
+    STAssertEquals((float)1, *stereoOutBuffer, @"ControlValue(3) - FixedValue(2) failed");
+  }
+  
+  {
+  
+    TestBufferFiller testFiller;
+    Generator gen =   ControlValue(3) * FixedValue(2);
+    testFiller.setOutputGen(gen);
+    testFiller.fillBufferOfFloats(stereoOutBuffer, kTestOutputBlockSize, 2);
+    STAssertEquals((float)6, *stereoOutBuffer, @"ControlValue(3) * FixedValue(2) failed");
+  }
+  
+  {
+  
+    TestBufferFiller testFiller;
+    Generator gen =  FixedValue(3) * ControlValue(2);
+    testFiller.setOutputGen(gen);
+    testFiller.fillBufferOfFloats(stereoOutBuffer, kTestOutputBlockSize, 2);
+    STAssertEquals((float)6, *stereoOutBuffer, @" FixedValue(3) * ControlValue(2) failed");
+  }
+  
+}
+
+-(void)test401GeneratorMinusControlGenerator{
+
+  {
+
+  TestBufferFiller testFiller;
+  Generator gen =  ControlValue(2) - FixedValue(1);
+  testFiller.setOutputGen(gen);
+  testFiller.fillBufferOfFloats(stereoOutBuffer, kTestOutputBlockSize, 2);
+  STAssertEquals((float)1, *stereoOutBuffer, @"ControlValue(2) - FixedValue(1) failed");
+  
+  }
+  
+  {
+
+  TestBufferFiller testFiller;
+  Generator gen =   FixedValue(2) - ControlValue(1);
+  testFiller.setOutputGen(gen);
+  testFiller.fillBufferOfFloats(stereoOutBuffer, kTestOutputBlockSize, 2);
+  STAssertEquals((float)1, *stereoOutBuffer, @"FixedValue(1) - ControlValue(1) failed");
+  
+  }
+  
+}
+
+-(void)test402ControlGeneratorDivide{
+  {
+    ControlGenerator gen = ControlValue(10) / ControlValue(5);
+    Tonic_::SynthesisContext_ context;
+    STAssertEquals(gen.tick(context).value, (float)2, @"ControlValue(10) / ControlValue(5) failed.");
+  }
+
+  {
+    ControlGenerator gen = 10 / ControlValue(5);
+    Tonic_::SynthesisContext_ context;
+    STAssertEquals(gen.tick(context).value, (float)2, @"10 / ControlValue(5) failed.");
+  }
+
+  {
+    ControlGenerator gen = ControlValue(10) / 5;
+    Tonic_::SynthesisContext_ context;
+    STAssertEquals(gen.tick(context).value, (float)2, @"ControlValue(10) / 5 failed.");
+  }
+
+}
+
+-(void)test403ControlGenDivideByZero{
+  ControlValue right = ControlValue(5);
+  ControlGenerator gen = ControlValue(10) / right;
+  Tonic_::SynthesisContext_ context;
+  gen.tick(context);
+  right.setValue(0);
+  
+  STAssertEquals(gen.tick(context).value, (float)2, @"Divide by zero should return the last valid value.");
+}
+
 
 @end

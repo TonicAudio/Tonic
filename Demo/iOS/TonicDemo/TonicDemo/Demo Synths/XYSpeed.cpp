@@ -28,7 +28,8 @@ class XYSpeed : public Synth{
     * SineWave()
         .freq(1 + 20 * speed)
     >> LPF12().cutoff(100 + 6000 * speed)
-    >> StereoDelay(0.1, 0.15).mix(0.05);
+    >> StereoDelay(0.1, 0.15).mix(0.05)
+    ;
   }
 
 };
