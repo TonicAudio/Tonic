@@ -47,9 +47,9 @@ public:
        -1);
     
     ControlGenerator clickVol = addParameter("clickVol");
-    ADSR clickEnv =  ADSR(0, 0.01, 0, 0).trigger(metro);
+    ADSR clickEnv =  ADSR(0.0005, 0.01, 0, 0).trigger(metro).doesSustain(false);
     Generator clickIntensity = (1 + clickVol).smoothed();
-    Generator click = SineWave().freq(300 + 1000 * clickEnv ) * clickEnv * 0.03 ;
+    Generator click = SineWave().freq(300 + 1000 * clickEnv ) * clickEnv * 0.01;
     
     ControlSwitcher fmAmount = ControlSwitcher().inputIndex(step);
     ControlSwitcher sustain = ControlSwitcher().inputIndex(step);
@@ -62,8 +62,8 @@ public:
     }
     
     Generator freq = ControlValue(50).smoothed();
-    Generator tremelo =  1 + ( SineWave().freq(15) *  ADSR(0, 0.5, 0,0).trigger(modeSwitch) );
-    Generator bassEnv = ADSR(0.001, 0.1 ,0,0).decay(decay).legato(true).sustain(sustain * sustain).trigger(metro);
+    Generator tremelo =  1 + ( SineWave().freq(15) *  ADSR(0.001, 0.5, 0, 0.002).doesSustain(false).trigger(modeSwitch) );
+    Generator bassEnv = ADSR(0.002, 0.1 ,0, 0.02).decay(decay).legato(true).sustain(sustain * sustain).trigger(metro);
     Generator bass =
       SineWave()
       .freq(
@@ -78,7 +78,7 @@ public:
             ).smoothed()
       ) >> HPF12().cutoff(addParameter("hpf") * 1000) ;
     Generator bassWithAmp = bass * bassEnv * tremelo;
-    outputGen = bassWithAmp  + click;
+    outputGen = bassWithAmp + click;
   }
 };
 

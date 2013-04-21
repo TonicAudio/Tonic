@@ -10,39 +10,103 @@
 
 namespace Tonic { namespace Tonic_{
   
-  ADSR_::ADSR_() : state(ATTACK){
-    ramp.length(1.0);
-    ramp.target(0);
-    ramp.value(0);
-    isLegato = ControlValue(0);
-    sustains = ControlValue(true);
-    
+  ADSR_::ADSR_() :
+    state(NEUTRAL),
+    lastValue(0),
+    targetValue(0),
+    increment(0),
+    segCounter(0),
+    segLength(0),
+    pole(0)
+  {
+    mTrigger = ControlValue(0); // empty trigger by default
+    isLegato = ControlValue(false);
+    doesSustain = ControlValue(true);
+    isExponential = ControlValue(false);
   }
   
   ADSR_::~ADSR_(){
     
   }
   
-  void ADSR_::switchState(State newState){
+  void ADSR_::switchState(ADSRState newState){
+
     state = newState;
+    segCounter = 0;
+
     switch(state){
-      case ATTACK:{
-        float rampStart = legatoVal ? synthesisBlock_[synthesisBlock_.frames() - 1] : 0;
-        ramp.value(rampStart);
-        ramp.target(1);
-        ramp.length(attackTime);
+        
+      case NEUTRAL:{  
+      
+        lastValue = 0.f;
+        increment = 0.f;
+        
       }
       break;
-      case DECAY:
-        ramp.target(sustainLevelVal);
-        ramp.length(decayTime);
+        
+      case ATTACK:{
+        
+        
+        if (!bIsLegato){
+          lastValue = 0.f;
+        }
+        
+        segLength = attackTime * sampleRate();
+        pole = t60ToTau(attackTime);
+        
+        if (segLength == 0){
+          lastValue = 1.0f;
+          switchState(DECAY);
+        }
+        else{
+          targetValue = 1.0f;
+          increment = (TonicFloat)(1.0f - lastValue)/segLength;
+        }
+
+      }
       break;
+        
+      case DECAY:{
+        
+        segLength = decayTime * sampleRate();
+        pole = t60ToTau(decayTime);
+        
+        targetValue = sustainLevelVal;
+        
+        if (segLength == 0){
+          lastValue = sustainLevelVal;
+          switchState(bDoesSustain ? SUSTAIN : RELEASE);
+        }
+        else{
+          increment = (TonicFloat)(sustainLevelVal - lastValue)/segLength;
+        }
+        
+      }
+      break;
+        
       case SUSTAIN:
-        ramp.value(sustainLevelVal);
+      {
+        targetValue = sustainLevelVal;
+        lastValue = sustainLevelVal;
+        increment = 0.f;
+      }
       break;
-      case RELEASE:
-        ramp.target(0);
-        ramp.length(releaseTime);
+        
+      case RELEASE:{
+        
+        segLength = releaseTime * sampleRate();
+        pole = t60ToTau(releaseTime);
+        
+        targetValue = 0.f;
+        
+        if (segLength == 0){
+          lastValue = 0.f;
+          switchState(NEUTRAL);
+        }
+        else{
+          increment = (TonicFloat)(-lastValue)/segLength;
+        }
+      }
       break;
       
       default:
@@ -53,8 +117,6 @@ namespace Tonic { namespace Tonic_{
   
 } // Namespace Tonic_
 
-
-  ADSR::ADSR(){}  
   
   ADSR::ADSR(float attackArg, float decayArg, float sustainArg, float releaseArg){
     attack(attackArg);

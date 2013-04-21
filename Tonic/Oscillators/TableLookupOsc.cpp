@@ -48,7 +48,7 @@ namespace Tonic { namespace Tonic_{
 #endif
     
     sd.d = BIT32DECPT;
-    int32_t offs, msbi = sd.i[1];
+    TonicInt32 offs, msbi = sd.i[1];
     double ps = phase_ + BIT32DECPT;
     
     TonicFloat *tAddr, f1, f2, frac;

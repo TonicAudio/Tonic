@@ -20,12 +20,12 @@ namespace Tonic { namespace Tonic_{
   
   void ControlTrigger_::computeOutput(const SynthesisContext_ & context){
     lastOutput_.status = doTrigger ? ControlGeneratorStatusHasChanged : ControlGeneratorStatusHasNotChanged;
-    lastOutput_.value = 0;
     doTrigger = false;
   }
   
-  void  ControlTrigger_::trigger(){
+  void  ControlTrigger_::trigger(float value){
       doTrigger = true;
+      lastOutput_.value = value;
   }
   
   
@@ -33,8 +33,8 @@ namespace Tonic { namespace Tonic_{
 } // Namespace Tonic_
   
   
-  void  ControlTrigger::trigger(){
-    gen()->trigger();
+  void  ControlTrigger::trigger(float value){
+    gen()->trigger(value);
   }
   
 } // Namespace Tonic
