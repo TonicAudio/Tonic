@@ -7,6 +7,7 @@
 //
 
 #include "ADSR.h"
+#include "FilterUtils.h"
 
 namespace Tonic { namespace Tonic_{
   
@@ -16,13 +17,13 @@ namespace Tonic { namespace Tonic_{
     targetValue(0),
     increment(0),
     segCounter(0),
-    segLength(0)
+    segLength(0),
+    pole(0)
   {
-    ramp.length(1.0);
-    ramp.target(0);
-    ramp.value(0);
+    mTrigger = ControlValue(0); // empty trigger by default
     isLegato = ControlValue(false);
     doesSustain = ControlValue(true);
+    isExponential = ControlValue(false);
   }
   
   ADSR_::~ADSR_(){
@@ -46,12 +47,13 @@ namespace Tonic { namespace Tonic_{
         
       case ATTACK:{
         
-        
         if (!bIsLegato){
           lastValue = 0.f;
         }
         
         segLength = attackTime * sampleRate();
+        pole = t60ToTau(attackTime);
+        
         if (segLength == 0){
           switchState(DECAY);
         }
@@ -66,6 +68,8 @@ namespace Tonic { namespace Tonic_{
       case DECAY:{
         
         segLength = decayTime * sampleRate();
+        pole = t60ToTau(decayTime);
+        
         if (segLength == 0){
           switchState(SUSTAIN);
         }
@@ -87,6 +91,7 @@ namespace Tonic { namespace Tonic_{
       case RELEASE:{
         
         segLength = releaseTime * sampleRate();
+        pole = t60ToTau(releaseTime);
         
         if (segLength == 0){
           switchState(NEUTRAL);

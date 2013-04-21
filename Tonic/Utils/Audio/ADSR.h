@@ -26,7 +26,6 @@ namespace Tonic {
     protected:
     
     
-      RampedValue ramp;
       ControlGenerator mTrigger;
       ControlGenerator attack;
       ControlGenerator decay;
@@ -34,6 +33,7 @@ namespace Tonic {
       ControlGenerator release;
       ControlGenerator doesSustain;
       ControlGenerator isLegato;
+      ControlGenerator isExponential;
       
       TonicFloat attackTime;
       TonicFloat decayTime;
@@ -41,6 +41,7 @@ namespace Tonic {
       TonicFloat releaseTime;
       bool       bIsLegato;
       bool       bDoesSustain;
+      bool       bIsExponential;
       
       // state variables
       unsigned long segCounter;
@@ -48,6 +49,7 @@ namespace Tonic {
       TonicFloat targetValue;
       TonicFloat lastValue;
       TonicFloat increment;
+      TonicFloat pole;
       
       enum ADSRState {
         NEUTRAL,
@@ -61,14 +63,22 @@ namespace Tonic {
       void switchState(ADSRState newState);
       
     public:
+      
       ADSR_();
       ~ADSR_();
+      
       void computeSynthesisBlock( const SynthesisContext_ &context );
+      
       void setTrigger(ControlGenerator trig){mTrigger = trig;}
       void setAttack(ControlGenerator gen){attack = gen;}
       void setDecay(ControlGenerator gen){decay = gen;}
       void setSustain(ControlGenerator gen){sustain = gen;}
       void setRelease(ControlGenerator gen){release = gen;}
+      
+      //! Exponential or linear ramp
+      void setIsExponential(ControlGenerator gen){isExponential = gen;}
+      
+      //! Controls whether the envelope picks up from current position or zero when re-triggered while still releasing
       void setIsLegato(ControlGenerator gen){isLegato = gen;}
       
       //! Controls whether or not the envelope pauses on the SUSTAIN stage
@@ -87,6 +97,7 @@ namespace Tonic {
       decayTime = decay.tick(context).value;
       sustainLevelVal = sustain.tick(context).value;
       releaseTime = release.tick(context).value;
+      bIsExponential = (bool)isExponential.tick(context).value;
       bDoesSustain = (bool)sustain.tick(context).value;
       bIsLegato = (bool)isLegato.tick(context).value;
       
@@ -95,15 +106,25 @@ namespace Tonic {
       // did a trigger message happen?
       if(triggerOutput.status == ControlGeneratorStatusHasChanged){
         
-        if(triggerOutput.value != 0){
-          switchState(ATTACK);
-        }else if(bDoesSustain){
-          switchState(RELEASE);
+        // if not in sustain mode, any non-zero message will trigger another attack, regardless of state
+        if (!bDoesSustain){
+          if (triggerOutput.value != 0){
+            switchState(ATTACK);
+          }
+        }
+        else{
+          // if in sustain mode ("gated" operation) need to be in release or neutral for a re-trigger to be valid
+          if (triggerOutput.value != 0 && (state == RELEASE || state == NEUTRAL)){
+            switchState(ATTACK);
+          }
+          else if (triggerOutput.value == 0){
+            switchState(RELEASE);
+          }
         }
         
       }
       
-      unsigned long samplesRemaining = kSynthesisBlockSize;
+      int samplesRemaining = kSynthesisBlockSize;
       while (samplesRemaining > 0)
       {
         switch (state) {
@@ -115,7 +136,7 @@ namespace Tonic {
             #ifdef USE_APPLE_ACCELERATE
             vDSP_vfill(&lastValue, fdata, 1, samplesRemaining);
             #else
-            std::fill(fdata, fdata + kSynthesisBlockSize, lastValue);
+            std::fill(fdata, fdata + samplesRemaining, lastValue);
             #endif
             
             samplesRemaining = 0;
@@ -131,23 +152,28 @@ namespace Tonic {
             unsigned long remainder = (segCounter > segLength) ? 0 : segLength - segCounter;
             if (remainder < samplesRemaining){
               
-              // fill up part of the ramp then switch segment
-              #ifdef USE_APPLE_ACCELERATE
-              // starting point
-              lastValue += increment;
-              
-              // vector calculation
-              vDSP_vramp(&lastValue, &increment, fdata + kSynthesisBlockSize - samplesRemaining, 1, remainder);
-              
-              // end point
-              lastValue += increment*(remainder-1);
-              
-              #else
-              for (unsigned int i=0; i<remainder; i++){
-                lastValue += increment;
-                *fdata++ = lastValue;
+              if (bIsExponential){
+                
               }
-              #endif
+              else{
+                // fill up part of the ramp then switch segment
+                #ifdef USE_APPLE_ACCELERATE
+                // starting point
+                lastValue += increment;
+                
+                // vector calculation
+                vDSP_vramp(&lastValue, &increment, fdata + kSynthesisBlockSize - samplesRemaining, 1, remainder);
+                
+                // end point
+                lastValue += increment*(remainder-1);
+                
+                #else
+                for (unsigned long i=0; i<remainder; i++){
+                  lastValue += increment;
+                  *fdata++ = lastValue;
+                }
+                #endif
+              }
               
               segCounter += remainder;
               samplesRemaining -= remainder;
@@ -166,24 +192,30 @@ namespace Tonic {
             }
             else{
               
-              // fill the rest of the ramp up
-              #ifdef USE_APPLE_ACCELERATE
-              // starting point
-              lastValue += increment;
-              
-              // vector calculation
-              vDSP_vramp(&lastValue, &increment, fdata + kSynthesisBlockSize - samplesRemaining, 1, samplesRemaining);
-              
-              // end point
-              lastValue += increment*(samplesRemaining-1);
-              
-              #else
-              for (unsigned int i=0; i<remainder; i++){
-                lastValue += increment;
-                *fdata++ = lastValue;
+              if (bIsExponential){
+                
               }
-              #endif
-
+              else{
+                // fill the rest of the ramp up
+                #ifdef USE_APPLE_ACCELERATE
+                // starting point
+                lastValue += increment;
+                
+                // vector calculation
+                vDSP_vramp(&lastValue, &increment, fdata + kSynthesisBlockSize - samplesRemaining, 1, samplesRemaining);
+                
+                // end point
+                lastValue += increment*(samplesRemaining-1);
+                
+                #else
+                for (int i=0; i<samplesRemaining; i++){
+                  lastValue += increment;
+                  *fdata++ = lastValue;
+                }
+                #endif
+                
+              }
+              
               segCounter += samplesRemaining;
               samplesRemaining = 0;
             }
@@ -219,6 +251,7 @@ namespace Tonic {
       createControlGeneratorSetters(ADSR, decay, setDecay);
       createControlGeneratorSetters(ADSR, sustain, setSustain);
       createControlGeneratorSetters(ADSR, release, setRelease);
+      createControlGeneratorSetters(ADSR, exponential, setIsExponential);
       createControlGeneratorSetters(ADSR, doesSustain, setDoesSustain);
       createControlGeneratorSetters(ADSR, legato, setIsLegato);
 
