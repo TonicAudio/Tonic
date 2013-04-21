@@ -173,7 +173,6 @@ namespace Tonic {
 
   };
   
-  
   // -- Logging --
   
   static void error(string message, bool fatal = false){
@@ -188,7 +187,7 @@ namespace Tonic {
     printf("Tonic::warning: %s\n", message.c_str());
   }
   
-  static void debug(std::string message){
+  static void debug(string message){
     printf("Tonic::debug: %s\n", message.c_str());
   }
 
