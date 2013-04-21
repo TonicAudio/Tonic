@@ -572,5 +572,15 @@ public:
 
 }
 
+-(void)test403ControlGenDivideByZero{
+  ControlValue right = ControlValue(5);
+  ControlGenerator gen = ControlValue(10) / right;
+  Tonic_::SynthesisContext_ context;
+  gen.tick(context);
+  right.setValue(0);
+  
+  STAssertEquals(gen.tick(context).value, (float)2, @"Divide by zero should return the last valid value.");
+}
+
 
 @end

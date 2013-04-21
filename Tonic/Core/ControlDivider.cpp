@@ -21,7 +21,13 @@ namespace Tonic { namespace Tonic_{
   void ControlDivider_::computeOutput(const SynthesisContext_ & context){
     ControlGeneratorOutput leftOut = left.tick(context);
     ControlGeneratorOutput rightOut = right.tick(context);
-    if(leftOut.status == ControlGeneratorStatusHasNotChanged && rightOut.status == ControlGeneratorStatusHasNotChanged){
+    
+    bool rightIsZero = rightOut.value == 0;
+    if(rightIsZero){
+      error("ControlGenerator divide by zero encountered. Returning last valid value");
+    }
+    bool noChange = leftOut.status == ControlGeneratorStatusHasNotChanged && rightOut.status == ControlGeneratorStatusHasNotChanged;
+    if(rightIsZero || noChange){
       lastOutput_.status = ControlGeneratorStatusHasNotChanged;
     }else{
       lastOutput_.status = ControlGeneratorStatusHasChanged;
