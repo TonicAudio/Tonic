@@ -69,4 +69,16 @@ using namespace Tonic;
   [self logTestFrames];
 }
 
+
+- (void)test101ADSRLinear
+{
+  ControlTrigger trigger;
+  ADSR adsr = ADSR(0.0005,0.0005,0.001,0).doesSustain(false).trigger(trigger);
+  
+  trigger.trigger();
+  adsr.tick(testFrames, testContext);
+  
+  [self logTestFrames];
+}
+
 @end

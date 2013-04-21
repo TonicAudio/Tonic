@@ -46,6 +46,7 @@ namespace Tonic { namespace Tonic_{
         
       case ATTACK:{
         
+        
         if (!bIsLegato){
           lastValue = 0.f;
         }
