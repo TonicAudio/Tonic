@@ -97,7 +97,7 @@ namespace Tonic {
       sustainLevelVal = sustain.tick(context).value;
       releaseTime = release.tick(context).value;
       bIsExponential = (bool)isExponential.tick(context).value;
-      bDoesSustain = (bool)sustain.tick(context).value;
+      bDoesSustain = (bool)doesSustain.tick(context).value;
       bIsLegato = (bool)isLegato.tick(context).value;
       
       TonicFloat * fdata = &synthesisBlock_[0];

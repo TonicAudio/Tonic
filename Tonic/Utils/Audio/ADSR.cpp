@@ -75,7 +75,7 @@ namespace Tonic { namespace Tonic_{
         }
         else{
           targetValue = sustainLevelVal;
-          increment = (TonicFloat)(sustainLevelVal - 1.0f)/segLength;
+          increment = (TonicFloat)(sustainLevelVal - lastValue)/segLength;
         }
         
       }
