@@ -22,10 +22,12 @@
 #include "ControlStepper.h"
 #include "ControlRandom.h"
 #include "Filters.h"
+#include "RectWave.h"
 
 using namespace Tonic;
 
 class ControlSwitcherTestSynth : public Synth{
+
 public:
   ControlSwitcherTestSynth(){
   
@@ -54,18 +56,24 @@ public:
     ControlSwitcher fmAmount = ControlSwitcher().inputIndex(step);
     ControlSwitcher sustain = ControlSwitcher().inputIndex(step);
     ControlSwitcher decay = ControlSwitcher().inputIndex(step);
+    ControlSwitcher spreadSeq = ControlSwitcher().inputIndex(step);
     
     for(int i = 0; i < numSteps; i++){
       fmAmount.addInput(randomFloat(1, 10));
       sustain.addInput(randomFloat(0, 0.7));
       decay.addInput(randomFloat(0.03, 0.1));
+      spreadSeq.addInput(randomFloat(0, 0.5));
     }
     
     Generator freq = ControlValue(50).ramped();
     Generator tremelo =  1 + ( SineWave().freq(15) *  ADSR(0, 0.5, 0,0).trigger(modeSwitch) );
     Generator bassEnv = ADSR(0.001, 0.1 ,0,0).decay(decay).legato(true).sustain(sustain * sustain).trigger(metro);
+    ControlGenerator spread = ControlRandom().min(0).max(0.5).trigger(modeSwitch);// * spreadSeq;
     Generator bass =
-      SineWave()
+    
+    (
+      RectWave()
+      .pwm(0.5 + 0.02 * bassEnv)
       .freq(
         freq
         + freq
@@ -76,7 +84,32 @@ public:
             * 0.5
             + addParameter("addtlFM")
             ).ramped()
-      ) >> HPF12().cutoff(addParameter("hpf") * 1000) ;
+      )
+      >> MonoToStereoPanner().pan(-1 * spread)
+     )
+    
+      +
+    
+    (
+      RectWave()
+      .pwm(0.5 + 0.02 * bassEnv)
+      .freq(
+        freq * 1.02
+        + freq
+          * SineWave()
+            .freq(freq * 2)
+          * (
+            fmAmount
+            * 0.5
+            + addParameter("addtlFM")
+            ).ramped()
+      )
+      >> MonoToStereoPanner().pan(spread)
+     )
+    
+    
+      >> HPF12().cutoff(addParameter("hpf") * 1000)
+      >> LPF12().cutoff(5500) ;
     Generator bassWithAmp = bass * bassEnv * tremelo;
     outputGen = bassWithAmp  + click;
   }
