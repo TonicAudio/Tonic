@@ -123,7 +123,7 @@ namespace Tonic {
           case SUSTAIN:
           {
             #ifdef USE_APPLE_ACCELERATE
-            vDSP_vfill(&lastValue, fdata + (int)kSynthesisBlockSize - samplesRemaining, 1, samplesRemaining);
+            vDSP_vfill(&lastValue, fdata, 1, samplesRemaining);
             #else
             std::fill(fdata, fdata + samplesRemaining, lastValue);
             #endif
@@ -159,10 +159,11 @@ namespace Tonic {
                 lastValue += increment;
                 
                 // vector calculation
-                vDSP_vramp(&lastValue, &increment, fdata + (int)kSynthesisBlockSize - samplesRemaining, 1, remainder);
+                vDSP_vramp(&lastValue, &increment, fdata, 1, remainder);
                 
                 // end point
                 lastValue += increment*(remainder-1);
+                fdata += remainder;
                 
                 #else
                 for (unsigned long i=0; i<remainder; i++){
@@ -205,7 +206,7 @@ namespace Tonic {
                 lastValue += increment;
                 
                 // vector calculation
-                vDSP_vramp(&lastValue, &increment, fdata + kSynthesisBlockSize - samplesRemaining, 1, samplesRemaining);
+                vDSP_vramp(&lastValue, &increment, fdata, 1, samplesRemaining);
                 
                 // end point
                 lastValue += increment*(samplesRemaining-1);
