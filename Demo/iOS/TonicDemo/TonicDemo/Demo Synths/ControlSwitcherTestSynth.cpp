@@ -59,7 +59,7 @@ public:
     ControlSwitcher spreadSeq = ControlSwitcher().inputIndex(step);
     
     for(int i = 0; i < numSteps; i++){
-      fmAmount.addInput(randomFloat(1, 10));
+      fmAmount.addInput(randomFloat(0, 10));
       sustain.addInput(randomFloat(0, 0.7));
       decay.addInput(randomFloat(0.03, 0.1));
       spreadSeq.addInput(randomFloat(0, 0.5));
@@ -69,11 +69,12 @@ public:
     Generator tremelo =  1 + ( SineWave().freq(15) *  ADSR(0, 0.5, 0,0).trigger(modeSwitch) );
     Generator bassEnv = ADSR(0.001, 0.1 ,0,0).decay(decay).legato(true).sustain(sustain * sustain).trigger(metro);
     ControlGenerator spread = ControlRandom().min(0).max(0.5).trigger(modeSwitch);// * spreadSeq;
+    ControlGenerator wave = ControlRandom().min(0.4).max(0.9).trigger(modeSwitch);
     Generator bass =
     
     (
       RectWave()
-      .pwm(0.5 + 0.02 * bassEnv)
+      .pwm(wave + 0.04 * bassEnv)
       .freq(
         freq
         + freq
@@ -81,7 +82,7 @@ public:
             .freq(freq * 2)
           * (
             fmAmount
-            * 0.5
+            * 0.7
             + addParameter("addtlFM")
             ).ramped()
       )
@@ -92,7 +93,7 @@ public:
     
     (
       RectWave()
-      .pwm(0.5 + 0.02 * bassEnv)
+      .pwm(wave + 0.04 * bassEnv)
       .freq(
         freq * 1.02
         + freq
@@ -100,7 +101,7 @@ public:
             .freq(freq * 2)
           * (
             fmAmount
-            * 0.5
+            * 0.7
             + addParameter("addtlFM")
             ).ramped()
       )
@@ -109,7 +110,8 @@ public:
     
     
       >> HPF12().cutoff(addParameter("hpf") * 1000)
-      >> LPF12().cutoff(5500) ;
+      >> LPF12().cutoff(5500)
+      >> StereoDelay(1.1, 1.2).mix(0.1) ;
     Generator bassWithAmp = bass * bassEnv * tremelo;
     outputGen = bassWithAmp  + click;
   }
