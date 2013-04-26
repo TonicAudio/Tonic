@@ -14,6 +14,9 @@ namespace Tonic { namespace Tonic_{
     delayTimeFrames_.resize(kSynthesisBlockSize, 1, 0);
     fbkFrames_.resize(kSynthesisBlockSize, 1, 0);
     mixFrames_.resize(kSynthesisBlockSize, 1, 0);
+    delayTimeGen_ = FixedValue(0);
+    fbkGen_ = FixedValue(0);
+    mixGen_ = FixedValue(0);
   }
   
   BasicDelay_::~BasicDelay_(){
@@ -45,6 +48,10 @@ namespace Tonic { namespace Tonic_{
   
 } // Namespace Tonic_
   
+  BasicDelay::BasicDelay(float initialDelayTime, float maxDelayTime){
+    gen()->initialize(initialDelayTime, maxDelayTime);
+    delayTime(FixedValue(initialDelayTime));
+  }
   
   
 } // Namespace Tonic

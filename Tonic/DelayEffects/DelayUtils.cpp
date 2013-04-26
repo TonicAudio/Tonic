@@ -17,7 +17,7 @@ namespace Tonic {
     isInitialized_(false),
     interpolates_(true)
   {
-
+    resize(kSynthesisBlockSize, 1, 0);
   }
   
   void DelayLine::initialize(float initialDelay, float maxDelay, unsigned int channels)

@@ -41,19 +41,19 @@ namespace Tonic {
       
       void initialize(float leftDelayArg, float rightDelayArg, float maxDelayLeft, float maxDelayRight);
       
-      void setMix(Generator arg){
+      void setMix(Generator & arg){
         mixGen_ = arg;
       };
       
-      void setFeedback(Generator arg){
+      void setFeedback(Generator & arg){
         fbkGen_ = arg;
       };
       
-      void setDelayTimeLeft(Generator arg){
+      void setDelayTimeLeft(Generator & arg){
         delayTimeGen_[0] = arg;
       };
       
-      void setDelayTimeRight(Generator arg){
+      void setDelayTimeRight(Generator & arg){
         delayTimeGen_[1] = arg;
       };
       
