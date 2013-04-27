@@ -614,6 +614,7 @@
 		A86C3EE416B2B4FD002A50F0 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_OBJC_ARC = YES;
 				GCC_INLINES_ARE_PRIVATE_EXTERN = YES;
@@ -631,6 +632,7 @@
 		A86C3EE516B2B4FD002A50F0 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_OBJC_ARC = YES;
 				GCC_INLINES_ARE_PRIVATE_EXTERN = YES;
