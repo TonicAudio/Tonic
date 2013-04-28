@@ -35,20 +35,31 @@ public:
     ControlMetro metro = ControlMetro().bpm(80 * 4);
     ControlGenerator modeSwitch =  ControlMetro().bpm(4);
     
+//    const int numSteps = 16;
+//    ControlGenerator phraseLen = ControlRandom().min(2).max(10).trigger(modeSwitch);
+//    ControlGenerator phraseStart = ControlRandom().min(0).max(10).trigger(modeSwitch);
+//    ControlCounter step = ControlCounter()
+//      .trigger(metro)
+//      .end(
+//        ControlSwitcher()
+//        .addInput(numSteps)
+//        .addInput( ControlRandom().min(2).max(10).trigger(modeSwitch) )
+//        .inputIndex(
+//          ControlCounter()
+//          .end(2)
+//          .trigger(modeSwitch)
+//          -1
+//          )
+//       -1);
+    
+    
     const int numSteps = 16;
-    ControlCounter step = ControlCounter()
-      .trigger(metro)
-      .end(
-        ControlSwitcher()
-        .addInput(numSteps)
-        .addInput( ControlRandom().min(2).max(10).trigger(modeSwitch) )
-        .inputIndex(
-          ControlCounter()
-          .end(2)
-          .trigger(modeSwitch)
-          -1
-          )
-       -1);
+    ControlGenerator phraseLen = ControlRandom().min(9).max(10).trigger(modeSwitch);
+    ControlGenerator phraseStart = ControlRandom().min(0).max(5).trigger(modeSwitch);
+    ControlStepper step = ControlStepper()
+      .start(phraseStart)
+      .end(phraseStart + phraseLen)
+      .trigger(metro);
     
     ControlGenerator clickVol = addParameter("clickVol");
     ADSR clickEnv =  ADSR(0, 0.01, 0, 0).trigger(metro);

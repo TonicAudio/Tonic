@@ -15,6 +15,7 @@
 #include "ControlStepper.h"
 #include "ControlTrigger.h"
 #include "ControlSubtractor.h"
+#include "ControlRandom.h"
 
 #define kTestOutputBlockSize kSynthesisBlockSize*4
 
@@ -404,6 +405,17 @@ public:
   trig.trigger();
   context.tick();
   STAssertEquals(trig.tick(context).status, ControlGeneratorStatusHasChanged, @"ControlGenerator did not produce expected output");
+  
+}
+
+-(void)test203ControlRandom{
+
+  ControlRandom random = ControlRandom().min(10).max(20).trigger(ControlTrigger());
+  Tonic_::SynthesisContext_ context;  
+  STAssertTrue(random.tick(context).value > 0, @"ControlRandom should start out with a value inside its range.");
+  
+  random.min(1).max(2);
+  STAssertTrue(random.tick(context).value <= 2, @"ControlRandom should start out with a value inside its range.");
   
 }
 
