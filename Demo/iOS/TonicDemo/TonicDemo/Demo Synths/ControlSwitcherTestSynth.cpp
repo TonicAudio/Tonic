@@ -53,8 +53,8 @@ public:
 //       -1);
     
     
-    const int numSteps = 16;
-    ControlGenerator phraseLen = ControlRandom().min(9).max(10).trigger(modeSwitch);
+    const int numSteps = 20;
+    ControlGenerator phraseLen = ControlRandom().min(3).max(4).trigger(modeSwitch);
     ControlGenerator phraseStart = ControlRandom().min(0).max(5).trigger(modeSwitch);
     ControlStepper step = ControlStepper()
       .start(phraseStart)
@@ -84,7 +84,7 @@ public:
     ControlGenerator spread = ControlRandom().min(0).max(0.5).trigger(modeSwitch);// * spreadSeq;
     ControlGenerator wave = ControlRandom().min(0.4).max(0.9).trigger(modeSwitch);
     
-    function<Generator(Generator)> makeBass = [&](Generator bassFreq){
+    auto makeBass = [&](Generator bassFreq){
       return RectWave()
       .pwm(wave + 0.04 * bassEnv)
       .freq(
