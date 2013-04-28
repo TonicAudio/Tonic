@@ -337,7 +337,7 @@ public:
     //setup
     ControlTrigger trig;
     ControlStepper stepper;
-    stepper = ControlStepper().start(1).end(3).step(1).trigger(trig);
+    stepper = ControlStepper().start(1).end(3).step(1).bidirectional(1).trigger(trig);
 
     Tonic_::SynthesisContext_ context;
     ControlGeneratorOutput result = stepper.tick(context);
@@ -367,6 +367,10 @@ public:
     context.tick();
     result = stepper.tick(context);
     STAssertEquals(result.value, 2.0f, @"ControlStepper did not produce expected output");
+    
+    
+    stepper = ControlStepper();
+    
   }
 
   
