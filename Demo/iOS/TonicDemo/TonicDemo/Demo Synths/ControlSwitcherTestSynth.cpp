@@ -9,20 +9,7 @@
 #ifndef TonicDemo_ControlInputTestSynth_cpp
 #define TonicDemo_ControlInputTestSynth_cpp
 
-#include "Synth.h"
-#include "RectWave.h"
-#include "Filters.h"
-#include "SineWave.h"
-#include "ControlXYSpeed.h"
-#include "StereoDelay.h"
-#include "ControlMetro.h"
-#include "ADSR.h"
-#include "ControlSwitcher.h"
-#include "ControlCounter.h"
-#include "ControlStepper.h"
-#include "ControlRandom.h"
-#include "Filters.h"
-#include "RectWave.h"
+#include "Tonic.h"
 #include <functional>
 
 using namespace Tonic;
@@ -34,15 +21,12 @@ public:
   
     ControlMetro metro = ControlMetro().bpm(80 * 4);
     ControlGenerator modeSwitch =  ControlMetro().bpm(4);
-    modeSwitch = modeSwitch >> ControlPrinter().message("\nmodeSwitch: %f");
     
     const int numSteps = 20;
     
     ControlGenerator phraseStart = ControlRandom().min(0).max(5).trigger(modeSwitch);
-    phraseStart = phraseStart >> ControlPrinter().message("phraseStart: %f");
     
     ControlGenerator phraseLen = ControlRandom().min(3).max(11).trigger(modeSwitch);
-    phraseLen = phraseLen >> ControlPrinter().message("phraseLen: %f");
     
     ControlStepper step = ControlStepper()
       .start(phraseStart)
