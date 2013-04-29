@@ -34,31 +34,19 @@ public:
   
     ControlMetro metro = ControlMetro().bpm(80 * 4);
     ControlGenerator modeSwitch =  ControlMetro().bpm(4);
-    
-//    const int numSteps = 16;
-//    ControlGenerator phraseLen = ControlRandom().min(2).max(10).trigger(modeSwitch);
-//    ControlGenerator phraseStart = ControlRandom().min(0).max(10).trigger(modeSwitch);
-//    ControlCounter step = ControlCounter()
-//      .trigger(metro)
-//      .end(
-//        ControlSwitcher()
-//        .addInput(numSteps)
-//        .addInput( ControlRandom().min(2).max(10).trigger(modeSwitch) )
-//        .inputIndex(
-//          ControlCounter()
-//          .end(2)
-//          .trigger(modeSwitch)
-//          -1
-//          )
-//       -1);
-    
+    modeSwitch = modeSwitch >> ControlPrinter().message("\nmodeSwitch: %f");
     
     const int numSteps = 20;
-    ControlGenerator phraseLen = ControlRandom().min(3).max(4).trigger(modeSwitch);
+    
     ControlGenerator phraseStart = ControlRandom().min(0).max(5).trigger(modeSwitch);
+    phraseStart = phraseStart >> ControlPrinter().message("phraseStart: %f");
+    
+    ControlGenerator phraseLen = ControlRandom().min(3).max(11).trigger(modeSwitch);
+    phraseLen = phraseLen >> ControlPrinter().message("phraseLen: %f");
+    
     ControlStepper step = ControlStepper()
       .start(phraseStart)
-      .end(phraseStart + phraseLen)
+      .end(phraseStart + phraseLen - 1)
       .trigger(metro);
     
     ControlGenerator clickVol = addParameter("clickVol");

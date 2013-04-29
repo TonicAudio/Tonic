@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		01F7273E1715225500EBB4BB /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 01F7273D1715225500EBB4BB /* Accelerate.framework */; };
+		A83AB328172DDC630038153C /* ControlPrinter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A83AB326172DDC630038153C /* ControlPrinter.cpp */; };
+		A83AB329172DDC630038153C /* ControlPrinter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A83AB326172DDC630038153C /* ControlPrinter.cpp */; };
+		A83AB32A172DDC630038153C /* ControlPrinter.h in Headers */ = {isa = PBXBuildFile; fileRef = A83AB327172DDC630038153C /* ControlPrinter.h */; };
 		A8A6AF2F172199AF00447E35 /* ControlSubtractor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A8A6AF2D172199AF00447E35 /* ControlSubtractor.cpp */; };
 		A8A6AF30172199AF00447E35 /* ControlSubtractor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A8A6AF2D172199AF00447E35 /* ControlSubtractor.cpp */; };
 		A8A6AF31172199AF00447E35 /* ControlSubtractor.h in Headers */ = {isa = PBXBuildFile; fileRef = A8A6AF2E172199AF00447E35 /* ControlSubtractor.h */; };
@@ -162,6 +165,8 @@
 /* Begin PBXFileReference section */
 		01F72690171520F900EBB4BB /* libTonic-OSX.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libTonic-OSX.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		01F7273D1715225500EBB4BB /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.7.sdk/System/Library/Frameworks/Accelerate.framework; sourceTree = DEVELOPER_DIR; };
+		A83AB326172DDC630038153C /* ControlPrinter.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ControlPrinter.cpp; sourceTree = "<group>"; };
+		A83AB327172DDC630038153C /* ControlPrinter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ControlPrinter.h; sourceTree = "<group>"; };
 		A8A6AF2D172199AF00447E35 /* ControlSubtractor.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ControlSubtractor.cpp; sourceTree = "<group>"; };
 		A8A6AF2E172199AF00447E35 /* ControlSubtractor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ControlSubtractor.h; sourceTree = "<group>"; };
 		A8A6AF451721A6AD00447E35 /* Subtractor.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Subtractor.cpp; sourceTree = "<group>"; };
@@ -469,6 +474,8 @@
 				F2DC1694172197DD006DB2CB /* ControlTrigger.h */,
 				F2DC1695172197DD006DB2CB /* ControlXYSpeed.cpp */,
 				F2DC1696172197DD006DB2CB /* ControlXYSpeed.h */,
+				A83AB326172DDC630038153C /* ControlPrinter.cpp */,
+				A83AB327172DDC630038153C /* ControlPrinter.h */,
 			);
 			path = Control;
 			sourceTree = "<group>";
@@ -528,6 +535,7 @@
 				A8A6AF491721A6AE00447E35 /* Subtractor.h in Headers */,
 				A8A6AF5F1721D11400447E35 /* ControlDivider.h in Headers */,
 				A8A6AF641721DC7E00447E35 /* Divider.h in Headers */,
+				A83AB32A172DDC630038153C /* ControlPrinter.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -644,6 +652,7 @@
 				A8A6AF471721A6AE00447E35 /* Subtractor.cpp in Sources */,
 				A8A6AF5D1721D11400447E35 /* ControlDivider.cpp in Sources */,
 				A8A6AF621721DC7E00447E35 /* Divider.cpp in Sources */,
+				A83AB328172DDC630038153C /* ControlPrinter.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -695,6 +704,7 @@
 				A8A6AF481721A6AE00447E35 /* Subtractor.cpp in Sources */,
 				A8A6AF5E1721D11400447E35 /* ControlDivider.cpp in Sources */,
 				A8A6AF631721DC7E00447E35 /* Divider.cpp in Sources */,
+				A83AB329172DDC630038153C /* ControlPrinter.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

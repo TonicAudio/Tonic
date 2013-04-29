@@ -23,14 +23,13 @@ namespace Tonic { namespace Tonic_{
         lastOutput_.status = ControlGeneratorStatusHasChanged;
         break;
       }
-      
-      TonicFloat sum = 0.0f;
-      for (unsigned int i=0; i<inputs.size(); i++){
-        sum += inputs[i].tick(context).value;
-      }
-      lastOutput_.value = sum;
-      
     }
+    
+    TonicFloat sum = 0.0f;
+    for (unsigned int i=0; i<inputs.size(); i++){
+      sum += inputs[i].tick(context).value;
+    }
+    lastOutput_.value = sum;
   }
   
 } // Namespace Tonic_
