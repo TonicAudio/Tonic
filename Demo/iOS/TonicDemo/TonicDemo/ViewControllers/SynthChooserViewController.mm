@@ -8,8 +8,7 @@
 
 #import "SynthChooserViewController.h"
 #import "SynthTestViewController.h"
-#import "TonicCore.h"
-#import "Synth.h"
+#include "Tonic.h"
 
 using namespace Tonic;
 

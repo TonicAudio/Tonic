@@ -9,10 +9,6 @@
 #import "TonicLoggingTests.h"
 
 #include "Tonic.h"
-#include "TestBufferFiller.h"
-#include "StereoFixedTestGen.h"
-#include "ADSR.h"
-#include "ControlTrigger.h"
 
 #define kTestOutputBlockSize kSynthesisBlockSize*4
 
