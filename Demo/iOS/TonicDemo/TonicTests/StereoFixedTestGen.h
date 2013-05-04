@@ -12,7 +12,7 @@
 #ifndef __Tonic__StereoFixedTestGen__
 #define __Tonic__StereoFixedTestGen__
 
-#include "Generator.h"
+#include "Tonic.h"
 
 namespace Tonic {
   

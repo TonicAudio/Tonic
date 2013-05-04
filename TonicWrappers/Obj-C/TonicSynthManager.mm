@@ -8,8 +8,6 @@
 
 #import "TonicSynthManager.h"
 #import "Novocaine.h"
-
-#include "Mixer.h"
 #include <vector>
 
 using std::vector;
