@@ -15,6 +15,7 @@ namespace Tonic { namespace Tonic_{
       end = ControlValue(1);
       step = ControlValue(1);
       direction = 1;
+      bidirectional = ControlValue(0);
    }
   
   ControlStepper_::~ControlStepper_(){
@@ -25,6 +26,7 @@ namespace Tonic { namespace Tonic_{
     float startVal = start.tick(context).value;
     float endVal = end.tick(context).value;
     float stepVal = step.tick(context).value;
+    bool bi = bidirectional.tick(context).value;
     
     lastOutput_.status = trigger.tick(context).status;
     if(hasBeenTriggered){
@@ -34,8 +36,11 @@ namespace Tonic { namespace Tonic_{
           lastOutput_.value = startVal;
           direction = 1;
         }else if(lastOutput_.value >= endVal){
-          lastOutput_.value = endVal;
-          direction = -1;
+            if(bi){
+              direction = -1;
+            }else{
+              lastOutput_.value = startVal;
+            }
         }
       }
     } else{

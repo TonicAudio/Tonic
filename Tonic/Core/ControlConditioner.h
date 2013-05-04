@@ -34,6 +34,9 @@ namespace Tonic {
     
   }
   
+  // The Tonic:: component of the controlconditioner (the smart pointer wrapper) must subclass the
+  // following template, in the form <class Wrapper, class PrivateControlGenerator>
+  
   template<class ControlConditionerType, class ControlConditionerType_>
   class TemplatedControlConditioner : public TemplatedControlGenerator<ControlConditionerType_>{
     

@@ -26,6 +26,7 @@ namespace Tonic {
       ControlGenerator end;
       ControlGenerator step;
       ControlGenerator trigger;
+      ControlGenerator bidirectional;
       int direction;
       bool hasBeenTriggered;
       
@@ -38,6 +39,7 @@ namespace Tonic {
       void setEnd(ControlGenerator arg){end = arg;}
       void setStep(ControlGenerator arg){step = arg;}
       void setTigger(ControlGenerator arg){trigger = arg;}
+      void setBidirectional(ControlGenerator arg){bidirectional = arg;}
     };
     
   }
@@ -53,6 +55,7 @@ namespace Tonic {
   createControlGeneratorSetters(ControlStepper, end, setEnd);
   createControlGeneratorSetters(ControlStepper, step, setStep);
   createControlGeneratorSetters(ControlStepper, trigger, setTigger);
+  createControlGeneratorSetters(ControlStepper, bidirectional, setBidirectional);
 
   };
 }

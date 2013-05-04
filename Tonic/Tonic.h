@@ -18,6 +18,7 @@
 #ifndef __Tonic_TonicHeader__
 #define __Tonic_TonicHeader__
 
+// basic stuff
 #include "MonoToStereoPanner.h"
 #include "FixedValue.h"
 #include "RampedValue.h"
@@ -31,5 +32,23 @@
 #include "ControlDivider.h"
 #include "Synth.h"
 #include "MonoToStereoPanner.h"
+
+// Generators
+#include "Filters.h"
+#include "RectWave.h"
+#include "SineWave.h"
+
+// ControlGenerators
+#include "ControlPrinter.h"
+#include "ControlXYSpeed.h"
+#include "StereoDelay.h"
+#include "ControlMetro.h"
+#include "ADSR.h"
+#include "ControlSwitcher.h"
+#include "ControlCounter.h"
+#include "ControlStepper.h"
+#include "ControlRandom.h"
+
+
 
 #endif
