@@ -11,12 +11,6 @@
 #include "Tonic.h"
 #include "TestBufferFiller.h"
 #include "StereoFixedTestGen.h"
-#include "ADSR.h"
-#include "ControlMetro.h"
-#include "ControlStepper.h"
-#include "ControlTrigger.h"
-#include "ControlSubtractor.h"
-#include "ControlRandom.h"
 
 #define kTestOutputBlockSize kSynthesisBlockSize*4
 

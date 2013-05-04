@@ -7,7 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-#include "Synth.h"
+#include "Tonic.h"
 
 @interface TonicSynthManager : NSObject
 
