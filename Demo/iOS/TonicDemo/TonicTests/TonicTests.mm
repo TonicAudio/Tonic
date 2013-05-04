@@ -16,6 +16,7 @@
 #include "ControlStepper.h"
 #include "ControlTrigger.h"
 #include "ControlSubtractor.h"
+#include "ControlRandom.h"
 
 #define kTestOutputBlockSize kSynthesisBlockSize*4
 
@@ -328,7 +329,7 @@ using namespace Tonic;
     //setup
     ControlTrigger trig;
     ControlStepper stepper;
-    stepper = ControlStepper().start(1).end(3).step(1).trigger(trig);
+    stepper = ControlStepper().start(1).end(3).step(1).bidirectional(1).trigger(trig);
 
     Tonic_::SynthesisContext_ context;
     ControlGeneratorOutput result = stepper.tick(context);
@@ -358,6 +359,10 @@ using namespace Tonic;
     context.tick();
     result = stepper.tick(context);
     STAssertEquals(result.value, 2.0f, @"ControlStepper did not produce expected output");
+    
+    
+    stepper = ControlStepper();
+    
   }
 
   
@@ -396,6 +401,47 @@ using namespace Tonic;
   trig.trigger();
   context.tick();
   STAssertEquals(trig.tick(context).status, ControlGeneratorStatusHasChanged, @"ControlGenerator did not produce expected output");
+  
+}
+
+-(void)test203ControlRandom{
+
+  ControlTrigger trig = ControlTrigger();
+  ControlRandom random = ControlRandom().min(10).max(20).trigger(trig);
+  Tonic_::SynthesisContext_ context;  
+  STAssertTrue(random.tick(context).value > 0, @"ControlRandom should start out with a value inside its range.");
+  
+  random.min(1).max(2);
+  STAssertTrue(random.tick(context).value <= 2, @"ControlRandom should start out with a value inside its range.");
+  
+  STAssertTrue(random.tick(context).status == ControlGeneratorStatusHasNotChanged, @"ControlRandom should not change unless triggered.");
+  
+  float randVal = random.tick(context).value;
+  trig.trigger();
+  STAssertTrue(random.tick(context).status == ControlGeneratorStatusHasChanged, @"ControlRandom should report change if triggered");
+  STAssertTrue(random.tick(context).value != randVal, @"ControlRandom should not have the same value after trigger.");
+  
+}
+
+-(void)test204ControlMetro{
+  ControlMetro metro = ControlMetro().bpm(0.001);
+  Tonic_::SynthesisContext_ context;
+  context.tick();
+  metro.tick(context);
+  context.tick();
+  metro.tick(context);
+  context.tick();
+  metro.tick(context);
+  context.tick();
+  STAssertEquals( metro.tick(context).status, ControlGeneratorStatusHasNotChanged, @"Metro shouldn't report status changed.");
+  
+}
+
+-(void)test205ControlAdder{
+  ControlValue left = ControlValue(2);
+  ControlValue right = ControlValue(3);
+  ControlAdder adder = left + right;
+  STAssertEquals(adder.tick(testContext).value, 5.0f, @"Adder isn't adding correctly");
   
 }
 

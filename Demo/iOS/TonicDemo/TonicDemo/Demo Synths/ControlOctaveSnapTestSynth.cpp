@@ -35,6 +35,7 @@ class ControlSnapToScaleTestSynth : public Synth{
     
     ControlMetro metro = ControlMetro().bpm(
         ControlStepper()
+          .bidirectional(1)
           .start(550)
           .end(650)
           .step(100)
@@ -58,10 +59,12 @@ class ControlSnapToScaleTestSynth : public Synth{
     ControlGenerator stepperStart = addParameter("stepperStart") * 30 + 43;
     
     ControlStepper stepper1 = ControlStepper()
+    .bidirectional(1)
     .start( stepperStart )
     .end(stepperStart + 50 *  addParameter("stepperSpread"))
     .step(
       ControlStepper()
+      .bidirectional(1)
       .start(4)
       .end(
         ControlRandom()
