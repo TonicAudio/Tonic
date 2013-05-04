@@ -36,6 +36,8 @@ public:
     midiNums.push_back(7);
     midiNums.push_back(10);
     
+    const float cutoffMult = 100;
+    
     PinkNoise noise = PinkNoise();
     
     ControlGenerator cutoffCtrl = addParameter("cutoff", 0.5);
@@ -44,16 +46,43 @@ public:
     
     Adder sumOfFilters;
     
+    ControlGenerator lowBasFreq =   ControlFloor().in( midiNums.at(0) + 12 + cutoffCtrl * cutoffMult ) >> ControlMidiToFreq();
+    ControlGenerator fmAmt = ControlValue(0.1);
+    Generator cutoffSlowSwell = (SineWave().freq(0.1) + 1.0f) * 500;
+    cutoffSlowSwell = FixedValue(500);
+    Generator lpfCutoff = 100 + (cutoffSlowSwell + 0.5 * SineWave().freq(10) * cutoffSlowSwell);
+    LPF12 filter = LPF12().cutoff(lpfCutoff);
+    ControlGenerator toothyBassRandomAmp = ControlRandom()
+        .min(-0.1)
+        .max(1)
+        .trigger(
+            ControlMetro().bpm( ControlRandom().min(10).max(30) )
+        );
+    Generator toothyBassSwell = ( (toothyBassRandomAmp * toothyBassRandomAmp * toothyBassRandomAmp * 5) >> ControlPrinter().message("toothyBassSwell %f") ).ramped(10);
+    
+    Generator lowToothyBass =
+      RectWave()
+      .freq(  lowBasFreq )
+      .pwm(  0.5 + 0.2 * (SineWave().freq(0.013) + 1)  );
+    
+    lowToothyBass = filter.input( lowToothyBass );
+    lowToothyBass = lowToothyBass * toothyBassSwell;
+    
     for(int i = 0; i < midiNums.size(); i++){
       Generator tremelo = (SineWave().freq( randomFloat(0.1, 0.3) ) + 1.5) * 0.3;
-      Generator cutoff = ControlMidiToFreq().in( ControlFloor().in( midiNums.at(i) + cutoffCtrl * 100  )).ramped().length(0.01);
+      Generator cutoff = ControlMidiToFreq().in( ControlFloor().in( midiNums.at(i) + cutoffCtrl * cutoffMult  )).ramped().length(0.01);
       BPF24 filter = BPF24().Q( q_v ).cutoff( cutoff );
       sumOfFilters = sumOfFilters + (noise >> filter) * tremelo;
     }
     
     // add a bit of gain for higher Q
     // Using this to test output limiter as well - this will probably clip/wrap if limiter is not working
-    outputGen = sumOfFilters * (1 + q_v * 0.05);
+    outputGen =
+      sumOfFilters * (1 + q_v * 0.05)
+      +
+      lowToothyBass * 0.05;
+    
+    
     
   }
 };
