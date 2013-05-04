@@ -18,7 +18,7 @@ using namespace Tonic;
 
 // ======================================================
 
-@interface TonicTests ()
+@interface TonicTests ()  
 {
   TonicFrames testFrames;
   Tonic_::SynthesisContext_ testContext;
