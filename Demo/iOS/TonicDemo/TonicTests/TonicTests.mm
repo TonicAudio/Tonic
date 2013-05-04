@@ -9,6 +9,7 @@
 #import "TonicTests.h"
 
 #include "Tonic.h"
+#include "TestBufferFiller.h"
 #include "StereoFixedTestGen.h"
 #include "ADSR.h"
 #include "ControlMetro.h"
@@ -20,15 +21,6 @@
 #define kTestOutputBlockSize kSynthesisBlockSize*4
 
 using namespace Tonic;
-
-// BufferFiller with publicly settable output generator for testing
-
-class TestBufferFiller : public BufferFiller
-{
-  
-public:
-  void setOutputGen(Generator & gen) { outputGen = gen; };
-};
 
 // ======================================================
 

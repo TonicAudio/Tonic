@@ -17,6 +17,15 @@ namespace Tonic {
   //! Tonicframes subclass with ability to tick in and out. Allows random-access/multi-tap/etc.
   class DelayLine : public TonicFrames {
     
+  private:
+    
+    bool  isInitialized_;
+    bool  interpolates_;
+    
+    long  writeHead_;
+    float readHead_;
+    float lastDelayTime_;
+    
   public:
     
     //! Allocation parameters are binding. No post-allocation resizing or modifying channel layout (for now anyway).
@@ -93,15 +102,6 @@ namespace Tonic {
         }
       }
     }
-    
-  private:
-    
-    bool  isInitialized_;
-    bool  interpolates_;
-    
-    long  writeHead_;
-    float readHead_;
-    float lastDelayTime_;
                      
   };
 }

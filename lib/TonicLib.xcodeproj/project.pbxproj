@@ -47,8 +47,6 @@
 		F23A7D83171B3E2F00AE8353 /* ADSR.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F2947155171B14C30068FD52 /* ADSR.cpp */; };
 		F23A7D84171B3E2F00AE8353 /* CompressorLimiter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F2947157171B14C30068FD52 /* CompressorLimiter.cpp */; };
 		F23A7D85171B3E2F00AE8353 /* LFNoise.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F2947159171B14C30068FD52 /* LFNoise.cpp */; };
-		F23A7D86171B3E2F00AE8353 /* MonoToStereoPanner.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F294715B171B14C30068FD52 /* MonoToStereoPanner.cpp */; };
-		F23A7D87171B3E2F00AE8353 /* RampedValue.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F294715D171B14C30068FD52 /* RampedValue.cpp */; };
 		F23A7D88171B3E4100AE8353 /* Mixer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F2947160171B14C30068FD52 /* Mixer.cpp */; };
 		F2947177171B14C30068FD52 /* Adder.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F2947122171B14C30068FD52 /* Adder.cpp */; };
 		F2947179171B14C30068FD52 /* Adder.h in Headers */ = {isa = PBXBuildFile; fileRef = F2947123171B14C30068FD52 /* Adder.h */; };
@@ -100,12 +98,14 @@
 		F29471D9171B14C30068FD52 /* CompressorLimiter.h in Headers */ = {isa = PBXBuildFile; fileRef = F2947158171B14C30068FD52 /* CompressorLimiter.h */; };
 		F29471DB171B14C30068FD52 /* LFNoise.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F2947159171B14C30068FD52 /* LFNoise.cpp */; };
 		F29471DD171B14C30068FD52 /* LFNoise.h in Headers */ = {isa = PBXBuildFile; fileRef = F294715A171B14C30068FD52 /* LFNoise.h */; };
-		F29471DF171B14C30068FD52 /* MonoToStereoPanner.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F294715B171B14C30068FD52 /* MonoToStereoPanner.cpp */; };
-		F29471E1171B14C30068FD52 /* MonoToStereoPanner.h in Headers */ = {isa = PBXBuildFile; fileRef = F294715C171B14C30068FD52 /* MonoToStereoPanner.h */; };
-		F29471E3171B14C30068FD52 /* RampedValue.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F294715D171B14C30068FD52 /* RampedValue.cpp */; };
-		F29471E5171B14C30068FD52 /* RampedValue.h in Headers */ = {isa = PBXBuildFile; fileRef = F294715E171B14C30068FD52 /* RampedValue.h */; };
 		F29471E7171B14C30068FD52 /* Mixer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F2947160171B14C30068FD52 /* Mixer.cpp */; };
 		F29471E9171B14C30068FD52 /* Mixer.h in Headers */ = {isa = PBXBuildFile; fileRef = F2947161171B14C30068FD52 /* Mixer.h */; };
+		F2A9A625172342E80038126D /* MonoToStereoPanner.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F2A9A621172342E80038126D /* MonoToStereoPanner.cpp */; };
+		F2A9A626172342E80038126D /* MonoToStereoPanner.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F2A9A621172342E80038126D /* MonoToStereoPanner.cpp */; };
+		F2A9A627172342E80038126D /* MonoToStereoPanner.h in Headers */ = {isa = PBXBuildFile; fileRef = F2A9A622172342E80038126D /* MonoToStereoPanner.h */; };
+		F2A9A628172342E80038126D /* RampedValue.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F2A9A623172342E80038126D /* RampedValue.cpp */; };
+		F2A9A629172342E80038126D /* RampedValue.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F2A9A623172342E80038126D /* RampedValue.cpp */; };
+		F2A9A62A172342E80038126D /* RampedValue.h in Headers */ = {isa = PBXBuildFile; fileRef = F2A9A624172342E80038126D /* RampedValue.h */; };
 		F2BFC7D6171B720600BF6332 /* StereoDelay.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F2BFC7D4171B720600BF6332 /* StereoDelay.cpp */; };
 		F2BFC7D7171B720600BF6332 /* StereoDelay.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F2BFC7D4171B720600BF6332 /* StereoDelay.cpp */; };
 		F2BFC7D8171B720600BF6332 /* StereoDelay.h in Headers */ = {isa = PBXBuildFile; fileRef = F2BFC7D5171B720600BF6332 /* StereoDelay.h */; };
@@ -229,12 +229,12 @@
 		F2947158171B14C30068FD52 /* CompressorLimiter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CompressorLimiter.h; sourceTree = "<group>"; };
 		F2947159171B14C30068FD52 /* LFNoise.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = LFNoise.cpp; sourceTree = "<group>"; };
 		F294715A171B14C30068FD52 /* LFNoise.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LFNoise.h; sourceTree = "<group>"; };
-		F294715B171B14C30068FD52 /* MonoToStereoPanner.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MonoToStereoPanner.cpp; sourceTree = "<group>"; };
-		F294715C171B14C30068FD52 /* MonoToStereoPanner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MonoToStereoPanner.h; sourceTree = "<group>"; };
-		F294715D171B14C30068FD52 /* RampedValue.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = RampedValue.cpp; sourceTree = "<group>"; };
-		F294715E171B14C30068FD52 /* RampedValue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RampedValue.h; sourceTree = "<group>"; };
 		F2947160171B14C30068FD52 /* Mixer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Mixer.cpp; sourceTree = "<group>"; };
 		F2947161171B14C30068FD52 /* Mixer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Mixer.h; sourceTree = "<group>"; };
+		F2A9A621172342E80038126D /* MonoToStereoPanner.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MonoToStereoPanner.cpp; sourceTree = "<group>"; };
+		F2A9A622172342E80038126D /* MonoToStereoPanner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MonoToStereoPanner.h; sourceTree = "<group>"; };
+		F2A9A623172342E80038126D /* RampedValue.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = RampedValue.cpp; sourceTree = "<group>"; };
+		F2A9A624172342E80038126D /* RampedValue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RampedValue.h; sourceTree = "<group>"; };
 		F2BFC7D4171B720600BF6332 /* StereoDelay.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = StereoDelay.cpp; sourceTree = "<group>"; };
 		F2BFC7D5171B720600BF6332 /* StereoDelay.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StereoDelay.h; sourceTree = "<group>"; };
 		F2DC167D172197DD006DB2CB /* ControlCounter.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ControlCounter.cpp; sourceTree = "<group>"; };
@@ -343,6 +343,10 @@
 				F294712B171B14C30068FD52 /* ControlGenerator.h */,
 				F294712C171B14C30068FD52 /* ControlMultiplier.cpp */,
 				F294712D171B14C30068FD52 /* ControlMultiplier.h */,
+				F2A9A621172342E80038126D /* MonoToStereoPanner.cpp */,
+				F2A9A622172342E80038126D /* MonoToStereoPanner.h */,
+				F2A9A623172342E80038126D /* RampedValue.cpp */,
+				F2A9A624172342E80038126D /* RampedValue.h */,
 				F294712E171B14C30068FD52 /* ControlValue.cpp */,
 				F294712F171B14C30068FD52 /* ControlValue.h */,
 				F2947130171B14C30068FD52 /* Effect.h */,
@@ -428,10 +432,6 @@
 				F2947158171B14C30068FD52 /* CompressorLimiter.h */,
 				F2947159171B14C30068FD52 /* LFNoise.cpp */,
 				F294715A171B14C30068FD52 /* LFNoise.h */,
-				F294715B171B14C30068FD52 /* MonoToStereoPanner.cpp */,
-				F294715C171B14C30068FD52 /* MonoToStereoPanner.h */,
-				F294715D171B14C30068FD52 /* RampedValue.cpp */,
-				F294715E171B14C30068FD52 /* RampedValue.h */,
 			);
 			path = Audio;
 			sourceTree = "<group>";
@@ -514,8 +514,6 @@
 				F29471D5171B14C30068FD52 /* ADSR.h in Headers */,
 				F29471D9171B14C30068FD52 /* CompressorLimiter.h in Headers */,
 				F29471DD171B14C30068FD52 /* LFNoise.h in Headers */,
-				F29471E1171B14C30068FD52 /* MonoToStereoPanner.h in Headers */,
-				F29471E5171B14C30068FD52 /* RampedValue.h in Headers */,
 				F29471E9171B14C30068FD52 /* Mixer.h in Headers */,
 				F2BFC7D8171B720600BF6332 /* StereoDelay.h in Headers */,
 				F2DC1699172197DD006DB2CB /* ControlCounter.h in Headers */,
@@ -531,6 +529,8 @@
 				F2DC16B7172197DD006DB2CB /* ControlSwitcher.h in Headers */,
 				F2DC16BA172197DD006DB2CB /* ControlTrigger.h in Headers */,
 				F2DC16BD172197DD006DB2CB /* ControlXYSpeed.h in Headers */,
+				F2A9A627172342E80038126D /* MonoToStereoPanner.h in Headers */,
+				F2A9A62A172342E80038126D /* RampedValue.h in Headers */,
 				A8A6AF31172199AF00447E35 /* ControlSubtractor.h in Headers */,
 				A8A6AF491721A6AE00447E35 /* Subtractor.h in Headers */,
 				A8A6AF5F1721D11400447E35 /* ControlDivider.h in Headers */,
@@ -631,8 +631,6 @@
 				F29471D3171B14C30068FD52 /* ADSR.cpp in Sources */,
 				F29471D7171B14C30068FD52 /* CompressorLimiter.cpp in Sources */,
 				F29471DB171B14C30068FD52 /* LFNoise.cpp in Sources */,
-				F29471DF171B14C30068FD52 /* MonoToStereoPanner.cpp in Sources */,
-				F29471E3171B14C30068FD52 /* RampedValue.cpp in Sources */,
 				F29471E7171B14C30068FD52 /* Mixer.cpp in Sources */,
 				F2BFC7D6171B720600BF6332 /* StereoDelay.cpp in Sources */,
 				F2DC1697172197DD006DB2CB /* ControlCounter.cpp in Sources */,
@@ -648,6 +646,8 @@
 				F2DC16B5172197DD006DB2CB /* ControlSwitcher.cpp in Sources */,
 				F2DC16B8172197DD006DB2CB /* ControlTrigger.cpp in Sources */,
 				F2DC16BB172197DD006DB2CB /* ControlXYSpeed.cpp in Sources */,
+				F2A9A625172342E80038126D /* MonoToStereoPanner.cpp in Sources */,
+				F2A9A628172342E80038126D /* RampedValue.cpp in Sources */,
 				A8A6AF2F172199AF00447E35 /* ControlSubtractor.cpp in Sources */,
 				A8A6AF471721A6AE00447E35 /* Subtractor.cpp in Sources */,
 				A8A6AF5D1721D11400447E35 /* ControlDivider.cpp in Sources */,
@@ -684,8 +684,6 @@
 				F23A7D88171B3E4100AE8353 /* Mixer.cpp in Sources */,
 				F23A7D84171B3E2F00AE8353 /* CompressorLimiter.cpp in Sources */,
 				F23A7D85171B3E2F00AE8353 /* LFNoise.cpp in Sources */,
-				F23A7D86171B3E2F00AE8353 /* MonoToStereoPanner.cpp in Sources */,
-				F23A7D87171B3E2F00AE8353 /* RampedValue.cpp in Sources */,
 				F2BFC7D7171B720600BF6332 /* StereoDelay.cpp in Sources */,
 				F2DC1698172197DD006DB2CB /* ControlCounter.cpp in Sources */,
 				F2DC169B172197DD006DB2CB /* ControlDbToLinear.cpp in Sources */,
@@ -700,6 +698,8 @@
 				F2DC16B6172197DD006DB2CB /* ControlSwitcher.cpp in Sources */,
 				F2DC16B9172197DD006DB2CB /* ControlTrigger.cpp in Sources */,
 				F2DC16BC172197DD006DB2CB /* ControlXYSpeed.cpp in Sources */,
+				F2A9A626172342E80038126D /* MonoToStereoPanner.cpp in Sources */,
+				F2A9A629172342E80038126D /* RampedValue.cpp in Sources */,
 				A8A6AF30172199AF00447E35 /* ControlSubtractor.cpp in Sources */,
 				A8A6AF481721A6AE00447E35 /* Subtractor.cpp in Sources */,
 				A8A6AF5E1721D11400447E35 /* ControlDivider.cpp in Sources */,

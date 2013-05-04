@@ -73,7 +73,7 @@ namespace Tonic {
 #endif
       
       sd.d = BIT32DECPT;
-      int32_t offs, msbi = sd.i[1];
+      TonicInt32 offs, msbi = sd.i[1];
       double ps = phaseAccum_ + BIT32DECPT;
       for ( unsigned int i=0; i<synthesisBlock_.frames(); i++ ) {
         

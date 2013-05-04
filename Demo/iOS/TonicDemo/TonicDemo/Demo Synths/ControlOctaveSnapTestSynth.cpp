@@ -86,7 +86,7 @@ class ControlSnapToScaleTestSynth : public Synth{
     outputGen = (
     
       SineWave().freq(
-        ControlMidiToFreq().in(scaleSnapper1 + -12).ramped().length(
+        ControlMidiToFreq().in(scaleSnapper1 + -12).smoothed().length(
           ControlRandom().min(0).max(0.03).trigger(switchIt)
         )
       ) 
@@ -100,7 +100,7 @@ class ControlSnapToScaleTestSynth : public Synth{
     )
     
     * 0.3 * env >> StereoDelay(0.3,0.33).feedback(0.3).mix(
-      ControlRandom().min(0).max(0.1).trigger(switchIt).ramped()
+      ControlRandom().min(0).max(0.1).trigger(switchIt).smoothed()
     );
     
     

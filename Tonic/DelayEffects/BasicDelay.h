@@ -93,9 +93,7 @@ namespace Tonic {
     
   public:
     //! Allocating only with time argument will default max delay time to 1.5 * delayTime
-    BasicDelay(float delayTime = 0.5f, float maxDelayTime = -1){
-      gen()->initialize(delayTime, maxDelayTime);
-    }
+    BasicDelay(float initialDelayTime = 0.5f, float maxDelayTime = -1);
     
     createGeneratorSetters(BasicDelay, delayTime, setDelayTimeGen);
     

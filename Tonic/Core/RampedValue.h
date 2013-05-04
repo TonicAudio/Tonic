@@ -68,8 +68,13 @@ namespace Tonic {
       }
       
       TonicFloat *fdata = &synthesisBlock_[0];
-      unsigned int nFrames = synthesisBlock_.frames();
+      unsigned int nFrames = kSynthesisBlockSize;
       unsigned int stride = synthesisBlock_.channels();
+      
+      // edge case
+      if (count_ == len_){
+        finished_ = true;
+      }
             
       if (finished_){
         #ifdef USE_APPLE_ACCELERATE
@@ -86,48 +91,37 @@ namespace Tonic {
         // figure out if we will finish the ramp in this tick
         unsigned long remainder = count_ > len_ ? 0 : len_ - count_;
         
-        if (remainder < synthesisBlock_.frames()){
+        if (remainder < nFrames){
           
-          // vDSP_vgen fails (NaN) if size is 1
-          if(remainder == 1){
-            *fdata = target_;
-          }
-          else {
-            // fill part of the ramp
-            #ifdef USE_APPLE_ACCELERATE
-            vDSP_vgen(&last_, &target_, fdata, stride, remainder);
-            
-              #ifdef TONIC_DEBUG
-              if(*fdata != *fdata){
-                Tonic::error("RampedValue_::computeSynthesisBlock NaN detected.\n");
-              }
-              #endif
-            
-            #else
-            TonicFloat val = last_ + inc_;
-            for (unsigned int i=0; i<remainder; i++){
-              *fdata = val;
-              fdata += stride;
-              val += inc_;
+          // fill part of the ramp - no need to check if remainder is 1 when using vramp
+          // uses algorithm out[n] = start + n * increment;
+          #ifdef USE_APPLE_ACCELERATE
+          // starting point
+          last_ += inc_;
+          vDSP_vramp(&last_, &inc_, fdata, stride, remainder);
+          
+            #ifdef TONIC_DEBUG
+            if(*fdata != *fdata){
+              Tonic::error("RampedValue_::computeSynthesisBlock NaN detected.\n");
             }
             #endif
-          }
           
-          // fill the rest of the ramp
-          if (nFrames - remainder == 1){
+          #else
+          for (unsigned int i=0; i<remainder; i++){
+            last_ += inc_;
+            *fdata = last_;
+            fdata += stride;
+          }
+          #endif
+        
+          #ifdef USE_APPLE_ACCELERATE
+          vDSP_vfill(&target_, fdata + remainder, stride, nFrames - remainder);
+          #else
+          for (unsigned int i=remainder; i<nFrames; i++){
             *fdata = target_;
+            fdata += stride;
           }
-          else{
-            #ifdef USE_APPLE_ACCELERATE
-            vDSP_vfill(&target_, fdata + remainder, stride, nFrames - remainder);
-            #else
-            for (unsigned int i=remainder; i<nFrames; i++){
-              *fdata = target_;
-              fdata += stride;
-            }
-            #endif
-            
-          }
+          #endif
 
           count_ = len_;
           last_ = target_;
@@ -137,8 +131,8 @@ namespace Tonic {
           
           // fill the whole ramp
           #ifdef USE_APPLE_ACCELERATE
-          TonicFloat segTarget = last_ + synthesisBlock_.frames()*inc_;
-          vDSP_vgen(&last_, &segTarget, fdata, stride, nFrames);
+          last_ += inc_;
+          vDSP_vramp(&last_, &inc_, fdata, stride, nFrames);
           
             #ifdef TONIC_DEBUG
             if(*fdata != *fdata){
@@ -147,11 +141,10 @@ namespace Tonic {
             #endif
           
           #else
-          TonicFloat val = last_ + inc_;
           for (unsigned int i=0; i<nFrames; i++){
-            *fdata = val;
+            last_ += inc_;
+            *fdata = last_;
             fdata += stride;
-            val += inc_;
           }
           #endif
           

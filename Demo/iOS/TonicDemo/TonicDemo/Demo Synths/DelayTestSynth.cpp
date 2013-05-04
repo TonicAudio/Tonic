@@ -17,8 +17,9 @@
 #include "BasicDelay.h"
 #include "ControlMetro.h"
 #include "ControlPulse.h"
-#include "ControlStepper.h"
 #include "ControlMidiToFreq.h"
+#include "ControlRandom.h"
+#include "ControlSnapToScale.h"
 
 using namespace Tonic;
 
@@ -31,36 +32,40 @@ public:
     ControlMetro metro = ControlMetro().bpm(120 * 4);
     ControlPulse pulseGate = ControlPulse().in(metro).length(0.05f);
     
-    ADSR aEnv = ADSR().attack(0.001f).decay(0.05f).sustain(0.0f).release(0.02f).trigger(pulseGate);
-    ADSR fEnv = ADSR().attack(0.001f).decay(0.1f).sustain(0.0f).release(0.01f).trigger(pulseGate);
+    ADSR aEnv = ADSR().attack(0.005f).decay(0.08f).sustain(0.0f).release(0.01f).trigger(pulseGate).doesSustain(false).exponential(true);
+    ADSR fEnv = ADSR().attack(0.005f).decay(0.08f).sustain(0.0f).release(0.01f).trigger(pulseGate).doesSustain(false).exponential(true);
     
-    ControlStepper step = ControlStepper().start(48).end(84).step(5).trigger(metro);
-    ControlMidiToFreq freq = ControlMidiToFreq().in(step);
+    float scalenums[5] = {0,3,5,7,10};
+    std::vector<float> scale(scalenums, scalenums + 5);
+    
+    ControlRandom rand = ControlRandom().min(0).max(36).trigger(metro);
+    ControlSnapToScale snap = ControlSnapToScale().setScale(scale).in(rand);
+    ControlMidiToFreq freq = ControlMidiToFreq().in(48 + snap);
     
     Generator osc = (
                       (
                         (
-                          RectWave().freq( freq.ramped(0.02) * 0.99 ).pwm(0.5f) * aEnv * 0.5
+                          RectWave().freq( freq * 0.99 ).pwm(0.5f) * aEnv * 0.5
                         )
-                        >> MonoToStereoPanner().pan(-1)
+                        >> MonoToStereoPanner().pan(-0.5)
                       )
                       +
                       (
                         (
-                          RectWave().freq(freq.ramped(0.02) * 1.01).pwm(0.5f) * aEnv * 0.5
+                          RectWave().freq(freq * 1.01).pwm(0.5f) * aEnv * 0.5
                         )
-                        >> MonoToStereoPanner().pan(1)
+                        >> MonoToStereoPanner().pan(0.5)
                       )
                     );
     
-    LPF12 filt = LPF12().cutoff(400.0f * (1.0f + fEnv*9.0f)).Q(1.5f);
+    LPF12 filt = LPF12().cutoff(400.0f * (1.0f + fEnv*9.0f)).Q(1.1f);
     
     BasicDelay delay = BasicDelay(0.5f, 1.0f)
-      .delayTime( addParameter("delayTime", 0.5f, 0.01f, 1.0f).ramped(0.5f) )
-      .feedback( addParameter("feedback", 0.0f, 0.0f, 0.8f).ramped() )
+      .delayTime( addParameter("delayTime", 0.4f, 0.01f, 1.0f).smoothed(0.5f) )
+      .feedback( addParameter("feedback", 0.0f, 0.0f, 0.8f).smoothed() )
       .mix( dBToLin(-10) );
     
-    outputGen = ((osc >> filt) >> delay) * 0.8;
+    outputGen = (osc >> filt >> delay) * 0.8;
   }
   
 };

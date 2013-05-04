@@ -28,7 +28,8 @@
 
 using namespace std;
 
-typedef unsigned long         UInt32;
+typedef unsigned long         TonicUInt32;
+typedef long                  TonicInt32;
 typedef float                 TonicFloat;
 
 #ifndef PI
@@ -43,7 +44,8 @@ const TonicFloat TWO_PI       = 2 * PI;
 // Allowing some efficient shortcuts for table lookup using power-of-two tables
 #define BIT32DECPT 1572864.0
 
-#define TONIC_DEBUG
+// Uncomment or define in your build configuration to log debug messages and perform extra debug checks
+// #define TONIC_DEBUG
 
 namespace Tonic {
   
@@ -62,7 +64,7 @@ namespace Tonic {
   // inspired by the pd implementation
   union ShiftedDouble {
     double d;
-    uint32_t i[2];
+    TonicUInt32 i[2];
   };
   
   
@@ -172,7 +174,6 @@ namespace Tonic {
 
   };
   
-  
   // -- Logging --
   
   static void error(string message, bool fatal = false){
@@ -187,8 +188,10 @@ namespace Tonic {
     printf("Tonic::warning: %s\n", message.c_str());
   }
   
-  static void debug(std::string message){
+  static void debug(string message){
+#ifdef TONIC_DEBUG
     printf("Tonic::debug: %s\n", message.c_str());
+#endif
   }
 
 
