@@ -155,6 +155,8 @@
 		01C65FEE17371C45003B2661 /* ControlDelay.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 01C65FEC17371C45003B2661 /* ControlDelay.cpp */; };
 		01C65FEF17371C45003B2661 /* ControlDelay.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 01C65FEC17371C45003B2661 /* ControlDelay.cpp */; };
 		01C65FF017371C45003B2661 /* ControlDelay.h in Headers */ = {isa = PBXBuildFile; fileRef = 01C65FED17371C45003B2661 /* ControlDelay.h */; };
+		01C65FF2173723C6003B2661 /* Effect.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 01C65FF1173723C6003B2661 /* Effect.cpp */; };
+		01C65FF417372407003B2661 /* FilterUtils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 01C65FF317372407003B2661 /* FilterUtils.cpp */; };
 		01F7273E1715225500EBB4BB /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 01F7273D1715225500EBB4BB /* Accelerate.framework */; };
 /* End PBXBuildFile section */
 
@@ -271,6 +273,8 @@
 		0183D1101735DCB0004638EB /* CombFilter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CombFilter.h; sourceTree = "<group>"; };
 		01C65FEC17371C45003B2661 /* ControlDelay.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ControlDelay.cpp; sourceTree = "<group>"; };
 		01C65FED17371C45003B2661 /* ControlDelay.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ControlDelay.h; sourceTree = "<group>"; };
+		01C65FF1173723C6003B2661 /* Effect.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Effect.cpp; sourceTree = "<group>"; };
+		01C65FF317372407003B2661 /* FilterUtils.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = FilterUtils.cpp; sourceTree = "<group>"; };
 		01F72690171520F900EBB4BB /* libTonic-OSX.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libTonic-OSX.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		01F7273D1715225500EBB4BB /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.7.sdk/System/Library/Frameworks/Accelerate.framework; sourceTree = DEVELOPER_DIR; };
 		F23A7CF1171B3D2E00AE8353 /* libTonic-iOS.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libTonic-iOS.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -368,9 +372,11 @@
 				0183D0351735D0E6004638EB /* DelayUtils.h */,
 				0183D0361735D0E6004638EB /* Divider.cpp */,
 				0183D0371735D0E6004638EB /* Divider.h */,
+				01C65FF1173723C6003B2661 /* Effect.cpp */,
 				0183D0381735D0E6004638EB /* Effect.h */,
 				0183D0391735D0E6004638EB /* Filters.cpp */,
 				0183D03A1735D0E6004638EB /* Filters.h */,
+				01C65FF317372407003B2661 /* FilterUtils.cpp */,
 				0183D03B1735D0E6004638EB /* FilterUtils.h */,
 				0183D03C1735D0E6004638EB /* FixedValue.cpp */,
 				0183D03D1735D0E6004638EB /* FixedValue.h */,
@@ -616,6 +622,8 @@
 				0183D10D1735D835004638EB /* Reverb.cpp in Sources */,
 				0183D1111735DCB0004638EB /* CombFilter.cpp in Sources */,
 				01C65FEE17371C45003B2661 /* ControlDelay.cpp in Sources */,
+				01C65FF2173723C6003B2661 /* Effect.cpp in Sources */,
+				01C65FF417372407003B2661 /* FilterUtils.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

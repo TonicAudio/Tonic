@@ -31,9 +31,7 @@ namespace Tonic {
       
     public:
       
-      Effect_(){
-        dryFrames_.resize(kSynthesisBlockSize, 1, 0);
-      }
+      Effect_();
       
       virtual void tick(TonicFrames &frames, const SynthesisContext_ &context );
       

@@ -68,11 +68,7 @@ namespace Tonic {
     
   public:
     
-    Biquad(){
-      memset(coef_, 0, 5 * sizeof(TonicFloat));
-      inputVec_.resize(kSynthesisBlockSize + 2, 2, 0);
-      outputVec_.resize(kSynthesisBlockSize + 2, 2, 0);
-    }
+    Biquad();
     
     void setIsStereo(bool stereo){
       // resize vectors to match number of channels

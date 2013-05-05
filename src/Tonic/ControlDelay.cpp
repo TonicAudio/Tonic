@@ -16,6 +16,4 @@ namespace Tonic { namespace Tonic_{
   
 } // Namespace Tonic_
   
-  
-  
 } // Namespace Tonic
