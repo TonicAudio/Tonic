@@ -30,8 +30,8 @@ namespace Tonic { namespace Tonic_{
   
   StereoDelay:: StereoDelay(float leftDelay, float rightDelay, float maxDelayLeft, float maxDelayRight){
     gen()->initialize(leftDelay, rightDelay, maxDelayLeft, maxDelayRight);
-    delayTimeLeft(FixedValue(leftDelay));
-    delayTimeRight(FixedValue(rightDelay));
+    delayTimeLeft(leftDelay);
+    delayTimeRight(rightDelay);
   }
   
 } // Namespace Tonic

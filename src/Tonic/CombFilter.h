@@ -38,10 +38,10 @@ namespace Tonic {
       
       DelayLine   delayLine_;
       Generator   delayTimeGen_;
-      Generator   ffAmountGen_;
+      Generator   scaleFactorGen_;
       
       TonicFrames delayTimeFrames_;
-      TonicFrames ffAmountFrames_;
+      TonicFrames scaleFactorFrames_;
       
       // Does nothing by default, override to process post-delay, pre-sum
       virtual TonicFloat processFFSample(TonicFloat sample);
@@ -49,13 +49,12 @@ namespace Tonic {
     public:
       
       FFCombFilter_();
-      ~FFCombFilter_();
       
       void initialize(float initialDelayTime, float maxDelayTime);
       
       void setDelayTimeGen(Generator & gen){ delayTimeGen_ = gen; };
       
-      void setFFAmountGen(Generator & gen){ ffAmountGen_ = gen; };
+      void setScaleFactorGen(Generator & gen){ scaleFactorGen_ = gen; };
       
       void computeSynthesisBlock( const SynthesisContext_ &context );
             
@@ -63,11 +62,25 @@ namespace Tonic {
     
     inline void FFCombFilter_::computeSynthesisBlock(const SynthesisContext_ &context){
       
+      // tick modulations
+      delayTimeGen_.tick(delayTimeFrames_, context);
+      scaleFactorGen_.tick(scaleFactorFrames_, context);
+      
+      TonicFloat * inptr = &dryFrames_[0];
+      TonicFloat * outptr = &synthesisBlock_[0];
+      TonicFloat * dtptr = &delayTimeFrames_[0];
+      TonicFloat * scptr = &scaleFactorFrames_[0];  
+      
+      for (unsigned int i=0; i<kSynthesisBlockSize; i++){
+        delayLine_.tickIn(*inptr);
+        *outptr++ = processFFSample(delayLine_.tickOut() * *scptr) * (1.0f/(1.0f + *scptr++));
+        delayLine_.advance(*dtptr++);
+      }
       
     }
     
     inline TonicFloat FFCombFilter_::processFFSample(TonicFloat sample){
-      return sample;
+      return sample; // by default does nothing
     }
 
   }
@@ -77,7 +90,8 @@ namespace Tonic {
   public:
     
     FFCombFilter(float initialDelayTime = 0.1f, float maxDelayTime = -1);
-
+    createGeneratorSetters(FFCombFilter, delayTime, setDelayTimeGen);
+    createGeneratorSetters(FFCombFilter, scaleFactor, setScaleFactorGen);
   };
 }
 

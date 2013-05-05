@@ -41,7 +41,7 @@ namespace Tonic { namespace Tonic_{
   
   BasicDelay::BasicDelay(float initialDelayTime, float maxDelayTime){
     gen()->initialize(initialDelayTime, maxDelayTime);
-    delayTime(FixedValue(initialDelayTime));
+    delayTime(initialDelayTime);
   }
   
   

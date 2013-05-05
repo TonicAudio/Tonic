@@ -11,11 +11,8 @@
 namespace Tonic { namespace Tonic_{
   
   FFCombFilter_::FFCombFilter_(){
-
-  }
-  
-  FFCombFilter_::~FFCombFilter_(){
-    
+    delayTimeFrames_.resize(kSynthesisBlockSize, 1, 0);
+    scaleFactorFrames_.resize(kSynthesisBlockSize, 1, 0);
   }
   
   void FFCombFilter_::initialize(float initialDelayTime, float maxDelayTime){
@@ -24,6 +21,12 @@ namespace Tonic { namespace Tonic_{
   
 } // Namespace Tonic_
   
-  
+  FFCombFilter::FFCombFilter(float initialDelayTime, float maxDelayTime)
+  {
+    gen()->initialize(initialDelayTime, maxDelayTime);
+    delayTime(initialDelayTime);
+    scaleFactor(0.5f);
+  }
+
   
 } // Namespace Tonic
