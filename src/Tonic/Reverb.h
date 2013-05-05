@@ -25,6 +25,7 @@ https://ccrma.stanford.edu/software/stk/
 
 #include "Effect.h"
 #include "DelayUtils.h"
+#include "CombFilter.h"
 
 // Number of FF comb filters
 #define  TONIC_REVERB_N_COMBS 8
@@ -38,15 +39,19 @@ namespace Tonic {
     {
       protected:
       
+      // Filters and delay lines
+      DelayLine     preDelayLine_;
+      DelayLine     reflectDelayLine_;
+      
       public:
       
-        Reverb_();
-        ~Reverb_();
-      
-        // Overridden so output channel layout follows input channel layout
-        void setInput( Generator input );
-      
-        void computeSynthesisBlock( const SynthesisContext_ &context );
+      Reverb_();
+      ~Reverb_();
+    
+      // Overridden so output channel layout follows input channel layout
+      void setInput( Generator input );
+    
+      void computeSynthesisBlock( const SynthesisContext_ &context );
       
     };
     

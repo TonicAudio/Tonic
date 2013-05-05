@@ -216,7 +216,7 @@ using namespace Tonic;
         def.synthDescription = @"";
         def.synthInstructions = @"";
         def.synthAction = ^(Tonic::Synth* synth, CGPoint touchPointNorm){
-          synth->setParameter("delayTime", Tonic::map(touchPointNorm.y, 0, 1, 0.0001, 0.015));
+          synth->setParameter("delayTime", Tonic::map(touchPointNorm.y, 0, 1, 0.0001, 0.005));
         };
       }
 

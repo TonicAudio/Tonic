@@ -17,7 +17,7 @@ public:
   
   CombFilterTestSynth() {
     
-    outputGen = (Noise() >> FFCombFilter(0.1,0.5).delayTime(addParameter("delayTime").smoothed())).scaleFactor(0.8) * 0.2;
+    outputGen = (Noise() >> FBCombFilter(0.01,0.1).delayTime(addParameter("delayTime").smoothed())).scaleFactor(0.8) * 0.2;
     
   }
   
