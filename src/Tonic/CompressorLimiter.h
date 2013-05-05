@@ -106,8 +106,8 @@ namespace Tonic {
     inline void Compressor_::computeSynthesisBlock(const SynthesisContext_ &context){
       
       // Tick all scalar parameters
-      float attackCoef = t60ToTau(max(0,attackGen_.tick(context).value));
-      float releaseCoef = t60ToTau(max(0, releaseGen_.tick(context).value));
+      float attackCoef = t60ToOnePoleCoef(max(0,attackGen_.tick(context).value));
+      float releaseCoef = t60ToOnePoleCoef(max(0, releaseGen_.tick(context).value));
       float threshold = max(0,threshGen_.tick(context).value);
       float ratio = max(0,ratioGen_.tick(context).value);
       float lookaheadTime = max(0,lookaheadGen_.tick(context).value);

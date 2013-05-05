@@ -52,7 +52,7 @@ namespace Tonic { namespace Tonic_{
         }
         
         segLength = attackTime * sampleRate();
-        pole = t60ToTau(attackTime);
+        pole = t60ToOnePoleCoef(attackTime);
         
         if (segLength == 0){
           lastValue = 1.0f;
@@ -69,7 +69,7 @@ namespace Tonic { namespace Tonic_{
       case DECAY:{
         
         segLength = decayTime * sampleRate();
-        pole = t60ToTau(decayTime);
+        pole = t60ToOnePoleCoef(decayTime);
         
         targetValue = sustainLevelVal;
         
@@ -95,7 +95,7 @@ namespace Tonic { namespace Tonic_{
       case RELEASE:{
         
         segLength = releaseTime * sampleRate();
-        pole = t60ToTau(releaseTime);
+        pole = t60ToOnePoleCoef(releaseTime);
         
         targetValue = 0.f;
         

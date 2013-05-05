@@ -14,8 +14,13 @@
 namespace Tonic {
   
   //! Calculate coefficient for a pole with given time constant to reach -60dB delta in t60s seconds
-  inline static TonicFloat t60ToTau( TonicFloat t60s ){
-    return t60s > 0.001f ? expf(-1.0f/((t60s/6.91) * Tonic::sampleRate())) : 0.0f;
+  inline static TonicFloat t60ToOnePoleCoef( TonicFloat t60s ){
+    return t60s > 0.001f ? expf(-1.0f/((t60s/6.91) * sampleRate())) : 0.0f;
+  }
+  
+  //! Calculate coefficient for a pole with a given desired cutoff in hz
+  inline static TonicFloat cutoffToOnePoleCoef( TonicFloat cutoffHz ){
+    return clamp(expf(-TWO_PI*cutoffHz/sampleRate()), 0.f, 1.f);
   }
   
   //! Tick one sample through one-pole filter
@@ -69,6 +74,12 @@ namespace Tonic {
       outputVec_.resize(kSynthesisBlockSize + 2, 2, 0);
     }
     
+    void setIsStereo(bool stereo){
+      // resize vectors to match number of channels
+      inputVec_.resize(kSynthesisBlockSize + 2, stereo ? 2 : 1, 0);
+      outputVec_.resize(kSynthesisBlockSize + 2, stereo ? 2 : 1, 0);
+    }
+    
     //! Set the coefficients for the filtering operation.
     /*
              b0 + b1*z^-1 + b2*z^-2
@@ -94,15 +105,6 @@ namespace Tonic {
   }
   
   inline void Biquad::filter( TonicFrames &frames ){
-    
-    // resize vectors to match number of channels (if necessary)
-    if (inputVec_.channels() != frames.channels()){
-      inputVec_.resize(kSynthesisBlockSize + 2, frames.channels(), 0);
-    }
-    
-    if (outputVec_.channels() != frames.channels()){
-      outputVec_.resize(kSynthesisBlockSize + 2, frames.channels(), 0);
-    }
     
     // initialize vectors
     memcpy(&inputVec_[0], &inputVec_(kSynthesisBlockSize, 0), 2 * inputVec_.channels() * sizeof(TonicFloat));

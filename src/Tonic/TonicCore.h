@@ -33,11 +33,11 @@ typedef long                  TonicInt32;
 typedef float                 TonicFloat;
 
 #ifndef PI
-const TonicFloat PI           = 3.14159265358979;
+const TonicFloat PI           = 3.14159265358979f;
 #endif
 
 #ifndef TWO_PI
-const TonicFloat TWO_PI       = 2 * PI;
+const TonicFloat TWO_PI       = 2.f * PI;
 #endif
 
 // Causes 32nd bit in double to have fractional value 1 (decimal point on 32-bit word boundary)
