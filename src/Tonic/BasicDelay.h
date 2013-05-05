@@ -77,12 +77,13 @@ namespace Tonic {
         mix = clamp(*mptr++, 0.0f, 1.0f);
         
         for (unsigned int c=0; c<nChannels; c++){
-          outSamp = delayLine_.tickOut(c);
+          outSamp = delayLine_.tickOut(*delptr, c);
           *outptr++ = (*dryptr * (1.0f - mix)) + (outSamp * mix);
           delayLine_.tickIn(*dryptr++ + outSamp * fbk, c);
         }
         
-        delayLine_.advance(*delptr++);
+        delptr++;
+        delayLine_.advance();
       }
     }
     

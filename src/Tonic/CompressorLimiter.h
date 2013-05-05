@@ -172,10 +172,10 @@ namespace Tonic {
         
         // apply gain
         for (unsigned int i=0; i<nChannels; i++){
-          *outptr++ = lookaheadDelayLine_.tickOut(i) * gainEnvValue_;
+          *outptr++ = lookaheadDelayLine_.tickOut(lookaheadTime,i) * gainEnvValue_;
         }
         
-        lookaheadDelayLine_.advance(lookaheadTime);
+        lookaheadDelayLine_.advance();
       }
       
       if (isLimiter_){

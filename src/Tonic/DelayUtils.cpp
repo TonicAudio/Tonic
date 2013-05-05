@@ -34,7 +34,6 @@ namespace Tonic {
     unsigned int nFrames = max(2, maxDelay * Tonic::sampleRate());
     resize(nFrames, channels, 0);
     isInitialized_ = true;
-    advance(initialDelay);
   }
   
   void DelayLine::clear()

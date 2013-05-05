@@ -81,8 +81,8 @@ namespace Tonic {
         fbk = *fbkptr++;
         mix = clamp(*mptr++, 0.0f, 1.0f);
 
-        outSamp[0] = delayLine_[0].tickOut();
-        outSamp[1] = delayLine_[1].tickOut();
+        outSamp[0] = delayLine_[0].tickOut(*delptr_l++);
+        outSamp[1] = delayLine_[1].tickOut(*delptr_r++);
         
         // output left sample
         *outptr++ = (*dryptr * (1.0f - mix)) + (outSamp[0] * mix);
@@ -93,8 +93,8 @@ namespace Tonic {
         delayLine_[1].tickIn(*dryptr++ + outSamp[1] * fbk);
         
         // advance delay lines
-        delayLine_[0].advance(*delptr_l++);
-        delayLine_[1].advance(*delptr_r++);
+        delayLine_[0].advance();
+        delayLine_[1].advance();
       }
     }
     
