@@ -12,7 +12,6 @@ namespace Tonic { namespace Tonic_{
   
   CombFilter_::CombFilter_(){
     delayTimeFrames_.resize(kSynthesisBlockSize, 1, 0);
-    scaleFactorFrames_.resize(kSynthesisBlockSize, 1, 0);
   }
   
   void CombFilter_::initialize(float initialDelayTime, float maxDelayTime){

@@ -36,12 +36,11 @@ namespace Tonic {
     
     protected:
       
-      DelayLine   delayLine_;
-      Generator   delayTimeGen_;
-      Generator   scaleFactorGen_;
+      DelayLine           delayLine_;
+      Generator           delayTimeGen_;
+      ControlGenerator    scaleFactorCtrlGen_;
       
       TonicFrames delayTimeFrames_;
-      TonicFrames scaleFactorFrames_;
       
     public:
       
@@ -51,7 +50,7 @@ namespace Tonic {
       
       void setDelayTimeGen(Generator & gen){ delayTimeGen_ = gen; };
       
-      void setScaleFactorGen(Generator & gen){ scaleFactorGen_ = gen; };
+      void setScaleFactorGen(ControlGenerator & gen){ scaleFactorCtrlGen_ = gen; };
                   
     };
     
@@ -64,16 +63,16 @@ namespace Tonic {
         
         // tick modulations
         delayTimeGen_.tick(delayTimeFrames_, context);
-        scaleFactorGen_.tick(scaleFactorFrames_, context);
         
         TonicFloat * inptr = &dryFrames_[0];
         TonicFloat * outptr = &synthesisBlock_[0];
         TonicFloat * dtptr = &delayTimeFrames_[0];
-        TonicFloat * scptr = &scaleFactorFrames_[0];
+        TonicFloat sf = scaleFactorCtrlGen_.tick(context).value;
+        TonicFloat norm = (1.0f/(1.0f + sf));
         
         for (unsigned int i=0; i<kSynthesisBlockSize; i++){
           delayLine_.tickIn(*inptr);
-          *outptr++ = (*inptr++ + delayLine_.tickOut(*dtptr++) * (*scptr)) * (1.0f/(1.0f + *scptr++));
+          *outptr++ = (*inptr++ + delayLine_.tickOut(*dtptr++) * sf) * norm;
           delayLine_.advance();
         }
       }
@@ -84,28 +83,22 @@ namespace Tonic {
     //! Basic mono feedback comb filter with hook for aditional processing pre-feedback
     class FBCombFilter_ : public CombFilter_{
       
-    protected:
-      
-      // Does nothing by default, override to process post-delay, pre-sum
-      virtual TonicFloat processFBSample(TonicFloat sample);
-      
     public:
 
       inline void computeSynthesisBlock( const SynthesisContext_ &context ){
         
         // tick modulations
         delayTimeGen_.tick(delayTimeFrames_, context);
-        scaleFactorGen_.tick(scaleFactorFrames_, context);
         
         TonicFloat y = 0;
         TonicFloat * inptr = &dryFrames_[0];
         TonicFloat * outptr = &synthesisBlock_[0];
         TonicFloat * dtptr = &delayTimeFrames_[0];
-        TonicFloat * scptr = &scaleFactorFrames_[0];
-        
+        TonicFloat sf = scaleFactorCtrlGen_.tick(context).value;
+        TonicFloat norm = (1.0f/(1.0f + sf));
         
         for (unsigned int i=0; i<kSynthesisBlockSize; i++){
-          y = (processFBSample(delayLine_.tickOut(*dtptr++) * (*scptr)) + *inptr++) * (1.0f/(1.0f + *scptr++));
+          y = ((delayLine_.tickOut(*dtptr++) * sf) + *inptr++) * norm;
           delayLine_.tickIn(y);
           *outptr++ = y;
           delayLine_.advance();
@@ -114,11 +107,56 @@ namespace Tonic {
       }
       
     };
+  
+    
+    // ------------------------
+    
+    //! Feedback comb filter with 6dB/oct (one-pole) lpf and hpf, optimized for reverb
+    class FBFiltCombFilter6_ : public CombFilter_{
+      
+    protected:
+      
+      TonicFloat lastOutLow_;
+      TonicFloat lastOutHigh_;
+      
+      ControlGenerator lowCutoffGen_;
+      ControlGenerator highCutoffGen_;
+      
+      ControlGenerator scaleFactorGen_;
+      
+    public:
+      
+      FBFiltCombFilter6_() : lastOutLow_(0), lastOutHigh_(0) {};
+      
+      void setLowCutoff( ControlGenerator & gen ) { lowCutoffGen_ = gen; };
+      void setHighCutoff( ControlGenerator & gen ) { highCutoffGen_ = gen; };
+            
+      inline void computeSynthesisBlock( const SynthesisContext_ &context ){
         
-    inline TonicFloat FBCombFilter_::processFBSample(TonicFloat sample)
-    {
-      return sample;
-    }
+        // tick modulations
+        delayTimeGen_.tick(delayTimeFrames_, context);
+        
+        TonicFloat y = 0;
+        TonicFloat * inptr = &dryFrames_[0];
+        TonicFloat * outptr = &synthesisBlock_[0];
+        TonicFloat * dtptr = &delayTimeFrames_[0];
+        TonicFloat sf = scaleFactorCtrlGen_.tick(context).value;
+        TonicFloat norm = (1.0f/(1.0f + sf));
+        
+        TonicFloat lowCoef = cutoffToOnePoleCoef(highCutoffGen_.tick(context).value);
+        TonicFloat hiCoef = cutoffToOnePoleCoef(highCutoffGen_.tick(context).value);
+        
+        for (unsigned int i=0; i<kSynthesisBlockSize; i++){
+          y = ((delayLine_.tickOut(*dtptr++) * sf) + *inptr++) * norm;
+          //lastOutLow_ = onePoleTick(<#TonicFloat input#>, <#TonicFloat &output#>, <#TonicFloat coef#>)
+          delayLine_.tickIn(y);
+          *outptr++ = y;
+          delayLine_.advance();
+        }
+        
+      }
+      
+    };
 
   }
   
@@ -130,7 +168,7 @@ namespace Tonic {
     
     FFCombFilter(float initialDelayTime = 0.1f, float maxDelayTime = -1);
     createGeneratorSetters(FFCombFilter, delayTime, setDelayTimeGen);
-    createGeneratorSetters(FFCombFilter, scaleFactor, setScaleFactorGen);
+    createControlGeneratorSetters(FFCombFilter, scaleFactor, setScaleFactorGen);
   };
   
   // -----
@@ -141,7 +179,7 @@ namespace Tonic {
     
     FBCombFilter(float initialDelayTime = 0.1f, float maxDelayTime = -1);
     createGeneratorSetters(FBCombFilter, delayTime, setDelayTimeGen);
-    createGeneratorSetters(FBCombFilter, scaleFactor, setScaleFactorGen);
+    createControlGeneratorSetters(FBCombFilter, scaleFactor, setScaleFactorGen);
   };
   
   // ------

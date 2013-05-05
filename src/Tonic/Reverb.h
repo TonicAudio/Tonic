@@ -34,24 +34,38 @@ namespace Tonic {
   
   namespace Tonic_ {
     
-
+    //! Moorer-Schroeder style Artificial Reverb effect
+    /*!
+        - [ ] Pre-delay
+        - [ ] Input filter
+        - [ ] Early reflection taps
+        - [ ] Decay time and decay filtering
+        - [ ] Variable "Room size"
+        - [ ] Variable stereo width
+     */
+    
     class Reverb_ : public Effect_
     {
       protected:
       
-      // Filters and delay lines
-      DelayLine     preDelayLine_;
-      DelayLine     reflectDelayLine_;
+        // Filters and delay lines
+        DelayLine     preDelayLine_;
+        DelayLine     reflectDelayLine_;
+      
+        ControlGenerator preDelayTimeCtrlGen_;
+        ControlGenerator roomSizeCtrlGen_;
+        ControlGenerator densityCtrlGen_; // affects number of early reflection taps
+      
       
       public:
       
-      Reverb_();
-      ~Reverb_();
+        Reverb_();
+        ~Reverb_();
     
-      // Overridden so output channel layout follows input channel layout
-      void setInput( Generator input );
-    
-      void computeSynthesisBlock( const SynthesisContext_ &context );
+        // Overridden so output channel layout follows input channel layout
+        void setInput( Generator input );
+        
+        void computeSynthesisBlock( const SynthesisContext_ &context );
       
     };
     
@@ -60,7 +74,7 @@ namespace Tonic {
       
       
     }
-    
+        
   }
   
   class Reverb : public TemplatedEffect<Reverb, Tonic_::Reverb_>
@@ -68,8 +82,9 @@ namespace Tonic {
 
     public:
     
+      Reverb();
       
-
+    
   };
 }
 
