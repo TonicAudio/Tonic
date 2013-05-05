@@ -23,12 +23,13 @@ namespace Tonic{
     protected:
       TonicFrames workSpace;
       vector<Generator> inputs;
+      
+      void computeSynthesisBlock( const SynthesisContext_ & context );
 
     public:
       Multiplier_();
       ~Multiplier_();
       void in(Generator& generator);
-      void computeSynthesisBlock( const SynthesisContext_ & context );
       
       Generator & getInput(unsigned int index) { return inputs[index]; };
       unsigned int numInputs() { return inputs.size(); };

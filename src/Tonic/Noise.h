@@ -20,7 +20,7 @@ namespace Tonic {
     
     class Noise_ : public Generator_{
       
-    public:
+    protected:
       
       void computeSynthesisBlock( const SynthesisContext_ & context );
       
@@ -42,12 +42,6 @@ namespace Tonic {
     
     class PinkNoise_ : public Generator_{
       
-    public:
-      
-      PinkNoise_();
-      
-      void computeSynthesisBlock( const SynthesisContext_ & context);
-      
     private:
       
       unsigned long countTrailingZeros(unsigned long n);
@@ -56,6 +50,12 @@ namespace Tonic {
       TonicFloat    pinkBins_[kNumPinkNoiseBins];
       unsigned long pinkCount_;
       
+      void computeSynthesisBlock( const SynthesisContext_ & context);
+      
+    public:
+      
+      PinkNoise_();      
+
     };
     
     inline void PinkNoise_::computeSynthesisBlock( const SynthesisContext_ & context)

@@ -34,12 +34,12 @@ namespace Tonic {
       ControlGenerator lengthGen_;
       ControlGenerator valueGen_;
       
+      void computeSynthesisBlock( const SynthesisContext_ & context );
+      
     public:
       RampedValue_();
       ~RampedValue_();
-      
-      void computeSynthesisBlock( const SynthesisContext_ & context );
-      
+            
       void setValueGen( ControlGenerator value );
       void setTargetGen( ControlGenerator target );
       void setLengthGen( ControlGenerator length );

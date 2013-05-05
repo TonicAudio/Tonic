@@ -23,7 +23,8 @@ namespace Tonic {
     class RectWave_ : public Generator_
     {
       
-      protected:  
+      protected:
+      
         Generator freqGen_;
         Generator pwmGen_;
         
@@ -31,8 +32,11 @@ namespace Tonic {
         TonicFrames pwmFrames_;
         
         double phaseAccum_;
-        
+      
+        void computeSynthesisBlock( const SynthesisContext_ &context );
+      
       public:
+      
         RectWave_();
         ~RectWave_();
         
@@ -44,7 +48,6 @@ namespace Tonic {
           pwmGen_ = gen;
         }
         
-        void computeSynthesisBlock( const SynthesisContext_ &context );
         
     };
       

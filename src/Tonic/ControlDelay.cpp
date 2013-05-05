@@ -1,17 +1,17 @@
 //
-//  Subtractor.cpp
+//  ControlDelay.cpp
 //  Tonic
 //
-//  Created by Morgan Packard on 4/19/13.
+//  Created by Nick Donaldson on 5/5/13.
 //  Copyright (c) 2013 Nick Donaldson. All rights reserved.
 //
 
-#include "Subtractor.h"
+#include "ControlDelay.h"
 
 namespace Tonic { namespace Tonic_{
   
-  Subtractor_::Subtractor_(){
-    workSpace.resize(kSynthesisBlockSize, 1, 0);
+  void ControlDelay_::computeOutput(const SynthesisContext_ & context){
+  
   }
   
 } // Namespace Tonic_

@@ -89,32 +89,6 @@ using namespace Tonic;
       {
         SynthDemoDef* def = [[SynthDemoDef alloc] init];
         [synthDefinitions addObject:def];
-        def.synthClassName = @"RectWaveTestSynth";
-        def.synthDisplayName = @"Rectangular Wave";
-        def.synthDescription = @"Aliasing rectangular waveform oscillator";
-        def.synthInstructions = @"X-Axis: pulse width\nY-Axis: frequency";
-        def.synthAction = ^(Tonic::Synth* synth, CGPoint touchPointNorm){
-          synth->setParameter("freq", mtof(touchPointNorm.y * 24 + 48));
-          synth->setParameter("pwm", touchPointNorm.x);
-        };
-      }
-      
-      {
-        SynthDemoDef* def = [[SynthDemoDef alloc] init];
-        [synthDefinitions addObject:def];
-        def.synthClassName = @"FlexToothLFOTestSynth";
-        def.synthDisplayName = @"Flexible Sawtooth LFO demo";
-        def.synthDescription = @"Aliasing sawtooth oscillator as morphable LFO";
-        def.synthInstructions = @"X-Axis: slope of sawtooth\nY-Axis: frequency";
-        def.synthAction = ^(Tonic::Synth* synth, CGPoint touchPointNorm){
-          synth->setParameter("freq", touchPointNorm.y * touchPointNorm.y * 20 + 0.1);
-          synth->setParameter("slope", touchPointNorm.x);
-        };
-      }
-      
-      {
-        SynthDemoDef* def = [[SynthDemoDef alloc] init];
-        [synthDefinitions addObject:def];
         def.synthClassName = @"DelayTestSynth";
         def.synthDisplayName = @"Basic Delay";
         def.synthDescription = @"Basic Delay effect, mono or stereo input";
@@ -151,22 +125,9 @@ using namespace Tonic;
           synth->setParameter("stepperStart", touchPointNorm.y);
           synth->setParameter("stepperSpread", touchPointNorm.x);
         };
-        def.accellerometerAction = ^(Tonic::Synth* synth, CMAccelerometerData *accelerometerData){
+//        def.accellerometerAction = ^(Tonic::Synth* synth, CMAccelerometerData *accelerometerData){
 //          synth->setParameter("speed", accelerometerData.acceleration.x + 1);
-        };
-      }
-      
-      {
-        SynthDemoDef* def = [[SynthDemoDef alloc] init];
-        [synthDefinitions addObject:def];
-        def.synthClassName = @"CompressorTestSynth";
-        def.synthDisplayName = @"Dynamic Compressor";
-        def.synthDescription = @"Compress an 808-esque snare";
-        def.synthInstructions = @"Y axis is compression threshold. Ratio is 8:1";
-        def.synthAction = ^(Tonic::Synth* synth, CGPoint touchPointNorm){
-          synth->setParameter("compThresh", 0.5 + touchPointNorm.y*touchPointNorm.y);
-          synth->setParameter("compGain", 1.5 - 0.5*touchPointNorm.y*touchPointNorm.y);
-        };
+//        };
       }
       
       {
@@ -205,18 +166,6 @@ using namespace Tonic;
         def.synthAction = ^(Tonic::Synth* synth, CGPoint touchPointNorm){
           synth->setParameter("x", touchPointNorm.x);
           synth->setParameter("y", touchPointNorm.y);
-        };
-      }
-      
-      {
-        SynthDemoDef* def = [[SynthDemoDef alloc] init];
-        [synthDefinitions addObject:def];
-        def.synthClassName = @"CombFilterTestSynth";
-        def.synthDisplayName = @"Comb Filter Test";
-        def.synthDescription = @"";
-        def.synthInstructions = @"";
-        def.synthAction = ^(Tonic::Synth* synth, CGPoint touchPointNorm){
-          synth->setParameter("delayTime", Tonic::map(touchPointNorm.y, 0, 1, 0.0001, 0.005));
         };
       }
 

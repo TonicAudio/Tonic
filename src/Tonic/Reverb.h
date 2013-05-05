@@ -52,11 +52,13 @@ namespace Tonic {
         DelayLine     preDelayLine_;
         DelayLine     reflectDelayLine_;
       
+        // Input generators
         ControlGenerator preDelayTimeCtrlGen_;
         ControlGenerator roomSizeCtrlGen_;
         ControlGenerator densityCtrlGen_; // affects number of early reflection taps
       
-      
+        void computeSynthesisBlock( const SynthesisContext_ &context );
+
       public:
       
         Reverb_();
@@ -65,7 +67,6 @@ namespace Tonic {
         // Overridden so output channel layout follows input channel layout
         void setInput( Generator input );
         
-        void computeSynthesisBlock( const SynthesisContext_ &context );
       
     };
     

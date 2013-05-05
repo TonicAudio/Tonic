@@ -57,7 +57,7 @@ namespace Tonic {
     //! Basic mono feed-forward comb filter
     class FFCombFilter_ : public CombFilter_{
 
-    public:
+    protected:
       
       inline void computeSynthesisBlock( const SynthesisContext_ &context ){
         
@@ -83,7 +83,7 @@ namespace Tonic {
     //! Basic mono feedback comb filter with hook for aditional processing pre-feedback
     class FBCombFilter_ : public CombFilter_{
       
-    public:
+    protected:
 
       inline void computeSynthesisBlock( const SynthesisContext_ &context ){
         

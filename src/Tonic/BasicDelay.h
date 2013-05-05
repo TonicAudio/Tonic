@@ -33,7 +33,9 @@ namespace Tonic {
       TonicFrames fbkFrames_;
 
       DelayLine delayLine_;
-            
+      
+      void computeSynthesisBlock( const SynthesisContext_ &context );
+      
     public:
       
       BasicDelay_();
@@ -49,9 +51,7 @@ namespace Tonic {
       void setMixGen( Generator & gen ) { mixGen_ = gen; };
       
       void setFeedbackGen( Generator & gen ) { fbkGen_ = gen; };
-      
-      void computeSynthesisBlock( const SynthesisContext_ &context );
-      
+            
     };
     
     inline void BasicDelay_::computeSynthesisBlock(const SynthesisContext_ &context){

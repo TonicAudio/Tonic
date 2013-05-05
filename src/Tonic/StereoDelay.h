@@ -33,7 +33,9 @@ namespace Tonic {
       TonicFrames fbkFrames_;
       
       DelayLine delayLine_[2];
-            
+      
+      void computeSynthesisBlock( const SynthesisContext_ &context );
+      
     public:
       
       StereoDelay_();
@@ -56,7 +58,6 @@ namespace Tonic {
         delayTimeGen_[1] = arg;
       };
       
-      void computeSynthesisBlock( const SynthesisContext_ &context );
       
     };
     

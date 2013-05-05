@@ -26,10 +26,11 @@ namespace Tonic {
       Generator right;
       TonicFrames workSpace;
       
+      void computeSynthesisBlock( const SynthesisContext_ &context );
+      
     public:
       Divider_();
       ~Divider_();
-      void computeSynthesisBlock( const SynthesisContext_ &context );
       
       void setLeft(Generator arg){
         left = arg;

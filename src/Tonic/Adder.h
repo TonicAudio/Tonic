@@ -19,8 +19,10 @@ namespace Tonic {
       
     class Adder_ : public Generator_ {
     protected:
+      
       std::vector<Generator> inputs;
       TonicFrames workSpace;
+      void computeSynthesisBlock( const SynthesisContext_ &context );
 
     public:
       
@@ -31,9 +33,7 @@ namespace Tonic {
       
       Generator & getInput(unsigned int index) { return inputs[index]; };
       unsigned int numInputs() { return inputs.size(); };
-      
-      void computeSynthesisBlock( const SynthesisContext_ &context );
-      
+            
     };
     
     inline void Adder_::computeSynthesisBlock( const SynthesisContext_ &context ){

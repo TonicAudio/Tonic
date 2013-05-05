@@ -61,13 +61,13 @@ namespace Tonic {
       ADSRState state;
       void switchState(ADSRState newState);
       
+      void computeSynthesisBlock( const SynthesisContext_ &context );
+      
     public:
       
       ADSR_();
       ~ADSR_();
-      
-      void computeSynthesisBlock( const SynthesisContext_ &context );
-      
+            
       void setTrigger(ControlGenerator trig){mTrigger = trig;}
       void setAttack(ControlGenerator gen){attack = gen;}
       void setDecay(ControlGenerator gen){decay = gen;}

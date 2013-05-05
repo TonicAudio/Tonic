@@ -32,6 +32,8 @@ namespace Tonic {
       
       double phaseAccum_;
       
+      void computeSynthesisBlock( const SynthesisContext_ &context );
+      
     public:
       FlexToothWave_();
       ~FlexToothWave_();
@@ -44,7 +46,6 @@ namespace Tonic {
         slopeGen_ = gen;
       }
       
-      void computeSynthesisBlock( const SynthesisContext_ &context );
       
     };
     

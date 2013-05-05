@@ -42,6 +42,8 @@ namespace Tonic {
       
       bool isLimiter_;
       
+      void computeSynthesisBlock( const SynthesisContext_ &context );
+      
     public:
       
       Compressor_();
@@ -51,7 +53,6 @@ namespace Tonic {
       void setInput( Generator input );
       void tick(TonicFrames &frames, const SynthesisContext_ &context );
       void tickThrough(TonicFrames &frames);      
-      void computeSynthesisBlock( const SynthesisContext_ &context );
       
       // setters
       void setAudioInput( Generator gen );
