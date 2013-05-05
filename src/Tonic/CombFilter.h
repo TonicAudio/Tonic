@@ -73,7 +73,7 @@ namespace Tonic {
       
       for (unsigned int i=0; i<kSynthesisBlockSize; i++){
         delayLine_.tickIn(*inptr);
-        *outptr++ = processFFSample(delayLine_.tickOut() * *scptr) * (1.0f/(1.0f + *scptr++));
+        *outptr++ = (*inptr++ + processFFSample(delayLine_.tickOut() * *scptr)) * (1.0f/(1.0f + *scptr++));
         delayLine_.advance(*dtptr++);
       }
       

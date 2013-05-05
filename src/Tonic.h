@@ -48,6 +48,7 @@
 #include "Tonic/Noise.h"
 
 // Effects
+#include "Tonic/CombFilter.h"
 #include "Tonic/Filters.h"
 #include "Tonic/StereoDelay.h"
 #include "Tonic/BasicDelay.h"
