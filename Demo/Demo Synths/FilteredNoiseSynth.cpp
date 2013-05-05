@@ -66,7 +66,7 @@ public:
     for(int i = 0; i < midiNums.size(); i++){
       Generator tremelo = (SineWave().freq( randomFloat(0.1, 0.3) ) + 1.5) * 0.3;
       Generator cutoff = ControlMidiToFreq().in( ControlFloor().in( midiNums.at(i) + cutoffCtrl * cutoffMult  )).smoothed().length(0.01);
-      BPF24 filter = BPF24().Q( q_v ).cutoff( cutoff );
+      BPF24 filter = BPF24().Q( q_v ).cutoff( cutoff ).normalizesGain(true);
       sumOfFilters = sumOfFilters + (noise >> filter) * tremelo;
     }
     

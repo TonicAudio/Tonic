@@ -51,15 +51,19 @@ namespace Tonic {
       Generator Q_;
       ControlGenerator bypass_;
       
+      bool bNormalizeGain_;
+      
     public:
       
       Filter_();
       
       // Overridden so output channel layout follows input channel layout
       void setInput( Generator input );
-      inline void setCutoff( Generator cutoff ){ cutoff_ = cutoff; };
-      inline void setQ( Generator Q ){ Q_ = Q; }
-      inline void setBypass( ControlGenerator bypass ){ bypass_ = bypass; };
+      
+      void setNormalizesGain( bool norm ) { bNormalizeGain_ = norm; };
+      void setCutoff( Generator cutoff ){ cutoff_ = cutoff; };
+      void setQ( Generator Q ){ Q_ = Q; }
+      void setBypass( ControlGenerator bypass ){ bypass_ = bypass; };
       
       // subclasses override to compute new coefficients and apply filter to passed-in frames
       virtual void applyFilter( TonicFloat cutoff, TonicFloat Q, TonicFrames & frames, const SynthesisContext_ & context ) = 0;
@@ -104,7 +108,7 @@ namespace Tonic {
       inline void applyFilter( TonicFloat cutoff, TonicFloat Q, TonicFrames & frames, const SynthesisContext_ & context ){
           // set coefficients
           TonicFloat newCoef[5];
-          bltCoef(0, 0, 1.0f/Q, 1.0f/Q, 1, cutoff, newCoef);
+          bltCoef(0, 0, bNormalizeGain_ ? 1.0f/Q : 1.0f, 1.0f/Q, 1, cutoff, newCoef);
           biquad_.setCoefficients(newCoef);
 
           // compute
@@ -132,11 +136,11 @@ namespace Tonic {
         TonicFloat newCoef[5];
         
         // stage 1
-        bltCoef(0, 0, 1.0f/Q, 0.5412f/Q, 1, cutoff, newCoef);
+        bltCoef(0, 0, bNormalizeGain_ ? 1.0f/Q : 1.0f, 0.5412f/Q, 1, cutoff, newCoef);
         biquad1_.setCoefficients(newCoef);
         
         // stage 2
-        bltCoef(0, 0, 1.0f/Q, 1.3066f/Q, 1, cutoff, newCoef);
+        bltCoef(0, 0, bNormalizeGain_ ? 1.0f/Q : 1.0f, 1.3066f/Q, 1, cutoff, newCoef);
         biquad2_.setCoefficients(newCoef);
         
         // compute
@@ -163,7 +167,7 @@ namespace Tonic {
         
         // set coefficients
         TonicFloat newCoef[5];
-        bltCoef(1.0f/Q, 0, 0, 1.0f/Q, 1, cutoff, newCoef);
+        bltCoef(bNormalizeGain_ ? 1.0f/Q : 1.0f, 0, 0, 1.0f/Q, 1, cutoff, newCoef);
         biquad_.setCoefficients(newCoef);
         
         // compute
@@ -191,11 +195,11 @@ namespace Tonic {
         TonicFloat newCoef[5];
         
         // stage 1
-        bltCoef(1.0f/Q, 0, 0, 0.5412f/Q, 1, cutoff, newCoef);
+        bltCoef(bNormalizeGain_ ? 1.0f/Q : 1.0f, 0, 0, 0.5412f/Q, 1, cutoff, newCoef);
         biquad1_.setCoefficients(newCoef);
         
         // stage 2
-        bltCoef(1.0f/Q, 0, 0, 1.3066f/Q, 1, cutoff, newCoef);
+        bltCoef(bNormalizeGain_ ? 1.0f/Q : 1.0f, 0, 0, 1.3066f/Q, 1, cutoff, newCoef);
         biquad2_.setCoefficients(newCoef);
         
         // compute
@@ -222,7 +226,7 @@ namespace Tonic {
         
         // set coefficients
         TonicFloat newCoef[5];
-        bltCoef(0, 1.0f/Q, 0, 1.0f/Q, 1, cutoff, newCoef);
+        bltCoef(0, bNormalizeGain_ ? 1.0f/Q : 1.0f, 0, 1.0f/Q, 1, cutoff, newCoef);
         biquad_.setCoefficients(newCoef);
         
         // compute
@@ -250,11 +254,11 @@ namespace Tonic {
         TonicFloat newCoef[5];
         
         // stage 1
-        bltCoef(0, 1.0f/Q, 0, 0.5412f/Q, 1, cutoff, newCoef);
+        bltCoef(0, bNormalizeGain_ ? 1.0f/Q : 1.0f, 0, 0.5412f/Q, 1, cutoff, newCoef);
         biquad1_.setCoefficients(newCoef);
         
         // stage 2
-        bltCoef(0, 1.0f/Q, 0, 1.3066f/Q, 1, cutoff, newCoef);
+        bltCoef(0, bNormalizeGain_ ? 1.0f/Q : 1.0f, 0, 1.3066f/Q, 1, cutoff, newCoef);
         biquad2_.setCoefficients(newCoef);
         
         // compute
@@ -273,6 +277,10 @@ namespace Tonic {
     
     createGeneratorSetters(FilterType, cutoff, setCutoff);
     createGeneratorSetters(FilterType, Q, setQ);
+    FilterType & normalizesGain(bool norm){
+      this->gen()->setNormalizesGain(norm);
+      return static_cast<FilterType&>(*this);
+    }
 
   };
   
