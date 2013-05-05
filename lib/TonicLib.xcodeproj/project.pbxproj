@@ -146,6 +146,12 @@
 		0183D0E61735D0E6004638EB /* TonicFrames.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0183D05B1735D0E6004638EB /* TonicFrames.cpp */; };
 		0183D0E71735D0E6004638EB /* TonicFrames.h in Headers */ = {isa = PBXBuildFile; fileRef = 0183D05C1735D0E6004638EB /* TonicFrames.h */; };
 		0183D1091735D1AD004638EB /* Tonic.h in Headers */ = {isa = PBXBuildFile; fileRef = 0183D1081735D1AD004638EB /* Tonic.h */; };
+		0183D10D1735D835004638EB /* Reverb.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0183D10B1735D835004638EB /* Reverb.cpp */; };
+		0183D10E1735D835004638EB /* Reverb.h in Headers */ = {isa = PBXBuildFile; fileRef = 0183D10C1735D835004638EB /* Reverb.h */; };
+		0183D1111735DCB0004638EB /* CombFilter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0183D10F1735DCAF004638EB /* CombFilter.cpp */; };
+		0183D1121735DCB0004638EB /* CombFilter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0183D10F1735DCAF004638EB /* CombFilter.cpp */; };
+		0183D1131735DCB0004638EB /* CombFilter.h in Headers */ = {isa = PBXBuildFile; fileRef = 0183D1101735DCB0004638EB /* CombFilter.h */; };
+		0183D1141735DCBF004638EB /* Reverb.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0183D10B1735D835004638EB /* Reverb.cpp */; };
 		01F7273E1715225500EBB4BB /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 01F7273D1715225500EBB4BB /* Accelerate.framework */; };
 /* End PBXBuildFile section */
 
@@ -256,6 +262,10 @@
 		0183D05B1735D0E6004638EB /* TonicFrames.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TonicFrames.cpp; sourceTree = "<group>"; };
 		0183D05C1735D0E6004638EB /* TonicFrames.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TonicFrames.h; sourceTree = "<group>"; };
 		0183D1081735D1AD004638EB /* Tonic.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Tonic.h; sourceTree = "<group>"; };
+		0183D10B1735D835004638EB /* Reverb.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Reverb.cpp; sourceTree = "<group>"; };
+		0183D10C1735D835004638EB /* Reverb.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reverb.h; sourceTree = "<group>"; };
+		0183D10F1735DCAF004638EB /* CombFilter.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CombFilter.cpp; sourceTree = "<group>"; };
+		0183D1101735DCB0004638EB /* CombFilter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CombFilter.h; sourceTree = "<group>"; };
 		01F72690171520F900EBB4BB /* libTonic-OSX.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libTonic-OSX.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		01F7273D1715225500EBB4BB /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.7.sdk/System/Library/Frameworks/Accelerate.framework; sourceTree = DEVELOPER_DIR; };
 		F23A7CF1171B3D2E00AE8353 /* libTonic-iOS.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libTonic-iOS.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -301,6 +311,8 @@
 				0183D0051735D0E6004638EB /* BasicDelay.h */,
 				0183D0061735D0E6004638EB /* BufferFiller.cpp */,
 				0183D0071735D0E6004638EB /* BufferFiller.h */,
+				0183D10F1735DCAF004638EB /* CombFilter.cpp */,
+				0183D1101735DCB0004638EB /* CombFilter.h */,
 				0183D0081735D0E6004638EB /* CompressorLimiter.cpp */,
 				0183D0091735D0E6004638EB /* CompressorLimiter.h */,
 				0183D00A1735D0E6004638EB /* ControlAdder.cpp */,
@@ -373,6 +385,8 @@
 				0183D04D1735D0E6004638EB /* RampedValue.h */,
 				0183D04E1735D0E6004638EB /* RectWave.cpp */,
 				0183D04F1735D0E6004638EB /* RectWave.h */,
+				0183D10B1735D835004638EB /* Reverb.cpp */,
+				0183D10C1735D835004638EB /* Reverb.h */,
 				0183D0501735D0E6004638EB /* SineWave.cpp */,
 				0183D0511735D0E6004638EB /* SineWave.h */,
 				0183D0521735D0E6004638EB /* StereoDelay.cpp */,
@@ -472,6 +486,8 @@
 				0183D0E41735D0E6004638EB /* TonicCore.h in Headers */,
 				0183D0E71735D0E6004638EB /* TonicFrames.h in Headers */,
 				0183D1091735D1AD004638EB /* Tonic.h in Headers */,
+				0183D10E1735D835004638EB /* Reverb.h in Headers */,
+				0183D1131735DCB0004638EB /* CombFilter.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -589,6 +605,8 @@
 				0183D0DE1735D0E6004638EB /* Synth.cpp in Sources */,
 				0183D0E11735D0E6004638EB /* TableLookupOsc.cpp in Sources */,
 				0183D0E51735D0E6004638EB /* TonicFrames.cpp in Sources */,
+				0183D10D1735D835004638EB /* Reverb.cpp in Sources */,
+				0183D1111735DCB0004638EB /* CombFilter.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -641,6 +659,8 @@
 				0183D0DF1735D0E6004638EB /* Synth.cpp in Sources */,
 				0183D0E21735D0E6004638EB /* TableLookupOsc.cpp in Sources */,
 				0183D0E61735D0E6004638EB /* TonicFrames.cpp in Sources */,
+				0183D1121735DCB0004638EB /* CombFilter.cpp in Sources */,
+				0183D1141735DCBF004638EB /* Reverb.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

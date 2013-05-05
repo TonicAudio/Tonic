@@ -20,23 +20,9 @@ namespace Tonic { namespace Tonic_{
   }
   
   void StereoDelay_::initialize(float leftDelayArg, float rightDelayArg, float maxDelayLeft, float maxDelayRight){
-    
-    if (maxDelayLeft < 0) maxDelayLeft = leftDelayArg * 1.5;
-    if (maxDelayRight < 0) maxDelayRight = rightDelayArg * 1.5;
-    
-    if (maxDelayLeft < leftDelayArg || maxDelayRight < rightDelayArg){
-      error("StereoDelay_ - initial delay time is greater than max delay time", true);
-    }
-    else if (leftDelayArg <= 0 || rightDelayArg <= 0){
-      error("StereoDelay_ - initial delay time must be greater than zero");
-    }
-    
+
     delayLine_[0].initialize(leftDelayArg, maxDelayLeft);
     delayLine_[1].initialize(rightDelayArg, maxDelayRight);
-  }
-  
-  StereoDelay_::~StereoDelay_(){
-    
   }
 
   

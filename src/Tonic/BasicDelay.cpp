@@ -34,15 +34,6 @@ namespace Tonic { namespace Tonic_{
   
   void BasicDelay_::initialize(float delayTime, float maxDelayTime)
   {
-    if (maxDelayTime < 0) maxDelayTime = delayTime * 1.5;
-       
-    if (maxDelayTime < delayTime){
-      error("BasicDelay_ - initial delay time is greater than max delay time", true);
-    }
-    else if (delayTime <= 0){
-      error("BasicDelay_ - initial delay time must be greater than zero");
-    }
-    
     delayLine_.initialize(delayTime, maxDelayTime, 1);
   }
   

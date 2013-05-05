@@ -37,7 +37,6 @@ namespace Tonic {
     public:
       
       StereoDelay_();
-      ~StereoDelay_();
       
       void initialize(float leftDelayArg, float rightDelayArg, float maxDelayLeft, float maxDelayRight);
       

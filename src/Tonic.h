@@ -51,6 +51,7 @@
 #include "Tonic/Filters.h"
 #include "Tonic/StereoDelay.h"
 #include "Tonic/BasicDelay.h"
+#include "Tonic/Reverb.h"
 #include "Tonic/FilterUtils.h"
 #include "Tonic/DelayUtils.h"
 

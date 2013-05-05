@@ -35,7 +35,7 @@ namespace Tonic {
     DelayLine();
     
     //! MUST be called prior to usage
-    void initialize(float initialDelay = 0.5f, float maxDelay = 1.0f, unsigned int channels = 1);
+    void initialize(float initialDelay = 0.5f, float maxDelay = 1.0f, unsigned int channels = 1);    
     
     //! Set whether interpolates or not
     void setInterpolates( bool doesInterpolate ) { interpolates_ = doesInterpolate; };
@@ -104,6 +104,7 @@ namespace Tonic {
     }
                      
   };
+  
 }
 
 #endif
