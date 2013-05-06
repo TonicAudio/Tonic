@@ -24,7 +24,7 @@ public:
     
     Generator tone = RectWave().pwm(0.5f).freq(Tonic::mtof(60)) * ADSR(0.001f, 0.08f, 0, 0.01f).doesSustain(false).exponential(true).trigger(offbeat);
     
-    outputGen = (click + tone) * 0.8f;
+    outputGen = ((click + tone)) * 0.8f;
   }
   
 };

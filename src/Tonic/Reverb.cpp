@@ -16,7 +16,8 @@ namespace Tonic { namespace Tonic_{
     preDelayLine_.initialize(0.f, 0.25f);
     reflectDelayLine_.initialize(0.f, 0.25f);
     
-    workSpace_.resize(kSynthesisBlockSize, 1, 0);
+    workSpace_[0].resize(kSynthesisBlockSize, 1, 0);
+    workSpace_[1].resize(kSynthesisBlockSize, 1, 0);
   }
   
   void Reverb_::setInput(Generator input){

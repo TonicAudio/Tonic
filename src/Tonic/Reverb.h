@@ -59,7 +59,7 @@ namespace Tonic {
         vector<float> reflectTapTimes_;
       
         // Signal vector workspaces
-        TonicFrames   workSpace_;
+        TonicFrames   workSpace_[2];
       
         // Input generators
         ControlGenerator  preDelayTimeCtrlGen_;
@@ -93,9 +93,9 @@ namespace Tonic {
       // TODO: update early reflection tap times here
 
       // Send dry input to output, apply mix level
-      dryLevelGen_.tick(workSpace_, context);
+      dryLevelGen_.tick(workSpace_[0], context);
       synthesisBlock_.copy(dryFrames_);
-      synthesisBlock_ *= workSpace_;
+      synthesisBlock_ *= workSpace_[0];
       
       // pass thru input filters
       if (inputFiltBypasCtrlGen_.tick(context).value == 0.f){
@@ -106,7 +106,8 @@ namespace Tonic {
       }
       
       TonicFloat *inptr = &dryFrames_[0];
-      TonicFloat *wkptr = &workSpace_[0];
+      TonicFloat *wkptr0 = &(workSpace_[0])[0];
+      TonicFloat *wkptr1 = &(workSpace_[1])[0];
       TonicFloat *outptr = &synthesisBlock_[0];
       
       // pass thru pre-delay, input filters, and sum the early reflections
@@ -118,17 +119,17 @@ namespace Tonic {
         
         // pre-delay
         preDelayLine_.tickIn(*inptr);
-        *wkptr = preDelayLine_.tickOut(preDelayTime);
+        *wkptr0 = preDelayLine_.tickOut(preDelayTime);
         preDelayLine_.advance();
         
         // taps
-        reflectDelayLine_.tickIn(*wkptr);
+        reflectDelayLine_.tickIn(*wkptr0);
         for (unsigned int t=0; t<reflectTapTimes_.size(); t++){
-          *wkptr += reflectDelayLine_.tickOut(reflectTapTimes_[t]);
+          *wkptr0 += reflectDelayLine_.tickOut(reflectTapTimes_[t]);
         }
         
         reflectDelayLine_.advance();
-        wkptr++;
+        wkptr0++;
         
       }
       
@@ -137,7 +138,11 @@ namespace Tonic {
       
       // TODO: allpass
       
-      // Final output is in workSpace_
+      // Final output is in workSpace_[0]
+      wetLevelGen_.tick(workSpace_[1], context);
+      workSpace_[0] *= workSpace_[1];
+      synthesisBlock_ += workSpace_[0];
+      
     }
         
   }
