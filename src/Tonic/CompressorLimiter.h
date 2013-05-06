@@ -52,7 +52,7 @@ namespace Tonic {
       // Base class methods overridden here for specialized input behavior
       void setInput( Generator input );
       void tick(TonicFrames &frames, const SynthesisContext_ &context );
-      void tickThrough(TonicFrames &frames);      
+      void tickThrough(TonicFrames & inFrames, TonicFrames & outFrames);
       
       // setters
       void setAudioInput( Generator gen );
@@ -95,13 +95,13 @@ namespace Tonic {
       
     }
     
-    inline void Compressor_::tickThrough(TonicFrames &frames){
-      dryFrames_.copy(frames);
-      ampInputFrames_.copy(frames);
+    inline void Compressor_::tickThrough(TonicFrames & inFrames, TonicFrames & outFrames){
+      dryFrames_.copy(inFrames);
+      ampInputFrames_.copy(inFrames);
       lockMutex();
       computeSynthesisBlock(SynthesisContext_());
       unlockMutex();
-      frames.copy(synthesisBlock_);
+      outFrames.copy(synthesisBlock_);
     }
     
     inline void Compressor_::computeSynthesisBlock(const SynthesisContext_ &context){

@@ -26,6 +26,7 @@ https://ccrma.stanford.edu/software/stk/
 #include "Effect.h"
 #include "DelayUtils.h"
 #include "CombFilter.h"
+#include "Filters.h"
 
 // Number of FF comb filters
 #define  TONIC_REVERB_N_COMBS 8
@@ -52,27 +53,91 @@ namespace Tonic {
         DelayLine     preDelayLine_;
         DelayLine     reflectDelayLine_;
       
+        LPF6          inputLPF_;
+        HPF6          inputHPF_;
+      
+        vector<float> reflectTapTimes_;
+      
+        // Signal vector workspaces
+        TonicFrames   workSpace_;
+      
         // Input generators
-        ControlGenerator preDelayTimeCtrlGen_;
-        ControlGenerator roomSizeCtrlGen_;
-        ControlGenerator densityCtrlGen_; // affects number of early reflection taps
+        ControlGenerator  preDelayTimeCtrlGen_;
+        ControlGenerator  roomSizeCtrlGen_;
+        //ControlGenerator  densityCtrlGen_; // affects number of early reflection taps
+      
+        ControlGenerator  inputFiltBypasCtrlGen_;
+      
+        // audio-rate to avoid zipper-noise when changing mix amt
+        Generator         dryLevelGen_;
+        Generator         wetLevelGen_;
       
         void computeSynthesisBlock( const SynthesisContext_ &context );
 
       public:
       
         Reverb_();
-        ~Reverb_();
     
         // Overridden so output channel layout follows input channel layout
         void setInput( Generator input );
       
+        void setPreDelayTimeCtrlGen( ControlGenerator gen ) { preDelayTimeCtrlGen_ = gen; }
+        void setRoomSizeCtrlGen( ControlGenerator gen ) { roomSizeCtrlGen_ = roomSizeCtrlGen_; }
+        void setInputLPFCutoffCtrlGen( ControlGenerator gen ) { inputLPF_.cutoff(gen); }
+        void setInputHPFCutoffCtrlGen( ControlGenerator gen ) { inputHPF_.cutoff(gen); }
+        
     };
     
     inline void Reverb_::computeSynthesisBlock(const SynthesisContext_ &context){
       
+      // TODO: update early reflection tap times here
+
+      // Send dry input to output, apply mix level
+      dryLevelGen_.tick(workSpace_, context);
+      synthesisBlock_.copy(dryFrames_);
+      synthesisBlock_ *= workSpace_;
+      
+      // pass thru input filters
+      if (inputFiltBypasCtrlGen_.tick(context).value == 0.f){
+        
+        inputLPF_.tickThrough(dryFrames_);
+        inputHPF_.tickThrough(dryFrames_);
+        
+      }
+      
+      TonicFloat *inptr = &dryFrames_[0];
+      TonicFloat *wkptr = &workSpace_[0];
+      TonicFloat *outptr = &synthesisBlock_[0];
+      
+      // pass thru pre-delay, input filters, and sum the early reflections
+      TonicFloat preDelayTime = preDelayTimeCtrlGen_.tick(context).value;
+      
+      for (unsigned int i=0; i<kSynthesisBlockSize; i++){
+        
+        // dry input to output
+        
+        // pre-delay
+        preDelayLine_.tickIn(*inptr);
+        *wkptr = preDelayLine_.tickOut(preDelayTime);
+        preDelayLine_.advance();
+        
+        // taps
+        reflectDelayLine_.tickIn(*wkptr);
+        for (unsigned int t=0; t<reflectTapTimes_.size(); t++){
+          *wkptr += reflectDelayLine_.tickOut(reflectTapTimes_[t]);
+        }
+        
+        reflectDelayLine_.advance();
+        wkptr++;
+        
+      }
       
       
+      // TODO: combs
+      
+      // TODO: allpass
+      
+      // Final output is in workSpace_
     }
         
   }
@@ -83,7 +148,9 @@ namespace Tonic {
     public:
     
       Reverb();
-      
+    
+      createControlGeneratorSetters(Reverb, preDelayTime, setPreDelayTimeCtrlGen);
+      createControlGeneratorSetters(Reverb, roomSize, setRoomSizeCtrlGen);
     
   };
 }

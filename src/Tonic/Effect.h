@@ -35,7 +35,9 @@ namespace Tonic {
       
       virtual void tick(TonicFrames &frames, const SynthesisContext_ &context );
       
-      virtual void setInput( Generator input ) { input_ = input; };
+      virtual void setInput( Generator input ) {
+        input_ = input;
+      };
 
       //! set stereo/mono - changes number of channels in dryFrames_
       /*!
@@ -50,7 +52,7 @@ namespace Tonic {
       /*!
           DO NOT mix calls to tick() with calls to tickThrough(). Result is undefined.
       */
-      virtual void tickThrough( TonicFrames & frames );
+      virtual void tickThrough( TonicFrames & inFrames, TonicFrames & outFrames );
 
     };
     
@@ -85,12 +87,12 @@ namespace Tonic {
       
     }
     
-    inline void Effect_::tickThrough(TonicFrames &frames){
+    inline void Effect_::tickThrough(TonicFrames & inFrames, TonicFrames & outFrames){
       lockMutex();
-      dryFrames_.copy(frames);
+      dryFrames_.copy(inFrames);
       computeSynthesisBlock(SynthesisContext_());
       unlockMutex();
-      frames.copy(synthesisBlock_);
+      outFrames.copy(synthesisBlock_);
     }
   }
   
@@ -109,8 +111,13 @@ namespace Tonic {
       return static_cast<EffectType&>(*this);
     }
     
-    void tickThrough(TonicFrames & frames){
-      this->gen()->tickThrough(frames);
+    void tickThrough( TonicFrames & inFrames){ // ticks in-place
+      this->gen()->tickThrough(inFrames, inFrames);
+    }
+
+    
+    void tickThrough(TonicFrames & inFrames, TonicFrames & outFrames){
+      this->gen()->tickThrough(inFrames, outFrames);
     }
   
   };

@@ -18,7 +18,7 @@ namespace Tonic { namespace Tonic_{
     cutoff_(FixedValue(20000)),
     Q_(FixedValue(0.7071)),
     bypass_(ControlValue(0)),
-    bNormalizeGain_(false)
+    bNormalizeGain_(true)
   {
     workspace_.resize(kSynthesisBlockSize, 1, 0);
   }

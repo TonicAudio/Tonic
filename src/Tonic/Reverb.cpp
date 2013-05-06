@@ -12,6 +12,11 @@ namespace Tonic { namespace Tonic_{
   
   Reverb_::Reverb_(){
     setIsStereoOutput(true);
+    
+    preDelayLine_.initialize(0.f, 0.25f);
+    reflectDelayLine_.initialize(0.f, 0.25f);
+    
+    workSpace_.resize(kSynthesisBlockSize, 1, 0);
   }
   
   void Reverb_::setInput(Generator input){
