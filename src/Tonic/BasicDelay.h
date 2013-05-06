@@ -46,11 +46,11 @@ namespace Tonic {
       
       void initialize(float delayTime, float maxDelayTime);
       
-      void setDelayTimeGen( Generator & gen ) { delayTimeGen_ = gen; };
+      void setDelayTimeGen( Generator gen ) { delayTimeGen_ = gen; };
       
-      void setMixGen( Generator & gen ) { mixGen_ = gen; };
+      void setMixGen( Generator gen ) { mixGen_ = gen; };
       
-      void setFeedbackGen( Generator & gen ) { fbkGen_ = gen; };
+      void setFeedbackGen( Generator gen ) { fbkGen_ = gen; };
             
     };
     

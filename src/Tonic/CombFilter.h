@@ -48,9 +48,9 @@ namespace Tonic {
       
       void initialize(float initialDelayTime, float maxDelayTime);
       
-      void setDelayTimeGen(Generator & gen){ delayTimeGen_ = gen; };
+      void setDelayTimeGen(Generator gen){ delayTimeGen_ = gen; };
       
-      void setScaleFactorGen(ControlGenerator & gen){ scaleFactorCtrlGen_ = gen; };
+      void setScaleFactorGen(ControlGenerator gen){ scaleFactorCtrlGen_ = gen; };
                   
     };
     
@@ -128,8 +128,8 @@ namespace Tonic {
       
       FBFiltCombFilter6_() : lastOutLow_(0), lastOutHigh_(0) {};
       
-      void setLowCutoff( ControlGenerator & gen ) { lowCutoffGen_ = gen; };
-      void setHighCutoff( ControlGenerator & gen ) { highCutoffGen_ = gen; };
+      void setLowCutoff( ControlGenerator gen ) { lowCutoffGen_ = gen; };
+      void setHighCutoff( ControlGenerator gen ) { highCutoffGen_ = gen; };
             
       inline void computeSynthesisBlock( const SynthesisContext_ &context ){
         

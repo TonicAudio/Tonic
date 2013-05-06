@@ -50,7 +50,7 @@ namespace Tonic {
       
       void initialize(float maxDelayTime);
       
-      void setDelayTimeGen( ControlGenerator & gen ){ delayTimeCtrlGen_ = gen; };
+      void setDelayTimeGen( ControlGenerator gen ){ delayTimeCtrlGen_ = gen; };
       
     };
     

@@ -14,10 +14,6 @@ namespace Tonic { namespace Tonic_{
     setIsStereoOutput(true);
   }
   
-  Reverb_::~Reverb_(){
-    
-  }
-  
   void Reverb_::setInput(Generator input){
     Effect_::setInput(input);
     setIsStereoInput(input.isStereoOutput());

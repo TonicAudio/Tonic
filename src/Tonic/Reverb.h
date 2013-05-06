@@ -66,7 +66,6 @@ namespace Tonic {
     
         // Overridden so output channel layout follows input channel layout
         void setInput( Generator input );
-        
       
     };
     

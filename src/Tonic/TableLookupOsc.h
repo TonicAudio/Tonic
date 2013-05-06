@@ -70,7 +70,7 @@ namespace Tonic {
       void reset( void );
       
       //! Set frequency generator input
-      void setFrequency( Generator & genArg){
+      void setFrequency( Generator genArg){
         frequencyGenerator_ = genArg;
       };
 

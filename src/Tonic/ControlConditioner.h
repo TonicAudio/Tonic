@@ -28,7 +28,7 @@ namespace Tonic {
       
     public:
       
-      void in( ControlGenerator & input );
+      void in( ControlGenerator input );
       
     };
     
