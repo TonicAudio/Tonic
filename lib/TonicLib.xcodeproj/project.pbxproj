@@ -157,6 +157,8 @@
 		01C65FF017371C45003B2661 /* ControlDelay.h in Headers */ = {isa = PBXBuildFile; fileRef = 01C65FED17371C45003B2661 /* ControlDelay.h */; };
 		01C65FF2173723C6003B2661 /* Effect.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 01C65FF1173723C6003B2661 /* Effect.cpp */; };
 		01C65FF417372407003B2661 /* FilterUtils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 01C65FF317372407003B2661 /* FilterUtils.cpp */; };
+		01C65FF517372A5F003B2661 /* Effect.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 01C65FF1173723C6003B2661 /* Effect.cpp */; };
+		01C65FF617372CD3003B2661 /* FilterUtils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 01C65FF317372407003B2661 /* FilterUtils.cpp */; };
 		01F7273E1715225500EBB4BB /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 01F7273D1715225500EBB4BB /* Accelerate.framework */; };
 /* End PBXBuildFile section */
 
@@ -679,6 +681,8 @@
 				0183D1121735DCB0004638EB /* CombFilter.cpp in Sources */,
 				0183D1141735DCBF004638EB /* Reverb.cpp in Sources */,
 				01C65FEF17371C45003B2661 /* ControlDelay.cpp in Sources */,
+				01C65FF517372A5F003B2661 /* Effect.cpp in Sources */,
+				01C65FF617372CD3003B2661 /* FilterUtils.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

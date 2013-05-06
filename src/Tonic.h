@@ -61,6 +61,7 @@
 
 // ------ Control Generators --------
 
+#include "Tonic/ControlDelay.h"
 #include "Tonic/ControlTrigger.h"
 #include "Tonic/ControlFloor.h"
 #include "Tonic/ControlPulse.h"

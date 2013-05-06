@@ -10,10 +10,40 @@
 
 namespace Tonic { namespace Tonic_{
   
-  void ControlDelay_::computeOutput(const SynthesisContext_ & context){
+  ControlDelay_::ControlDelay_() :
+    readHead_(0),
+    writeHead_(0),
+    maxDelay_(0)
+  {}
   
+  void ControlDelay_::initialize(float maxDelayTime){
+    maxDelay_ = max(maxDelayTime * sampleRate() / kSynthesisBlockSize, 1);
+    delayLine_.resize(maxDelay_);
+  }
+  
+  void ControlDelay_::computeOutput(const SynthesisContext_ & context){
+    
+    delayLine_[writeHead_] = input_.tick(context);
+    
+    ControlGeneratorOutput delayTimeOutput = delayTimeCtrlGen_.tick(context);
+    if (delayTimeOutput.status == ControlGeneratorStatusHasChanged){
+      
+      unsigned delayBlocks = max(delayTimeOutput.value * sampleRate() / kSynthesisBlockSize, 1);
+      readHead_ = writeHead_ - delayBlocks;
+      if (readHead_ < 0) readHead_ += maxDelay_;
+      
+    }
+    
+    lastOutput_ = delayLine_[readHead_];
+    
+    if (++writeHead_ >= maxDelay_) writeHead_ = 0;
+    if (++readHead_ >= maxDelay_) readHead_ = 0;
   }
   
 } // Namespace Tonic_
+  
+  ControlDelay::ControlDelay(float maxDelayTime){
+    this->gen()->initialize(maxDelayTime);
+  }
   
 } // Namespace Tonic

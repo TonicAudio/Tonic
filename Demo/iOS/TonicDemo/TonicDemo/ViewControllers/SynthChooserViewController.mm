@@ -29,7 +29,7 @@ using namespace Tonic;
     
       
       // Add synths here in order to have them displayed in the demo app.
-      // Note -- the synth header must be imported somewhere or you'll get mysterious
+      // Note -- add the "registerSynth" macro to your synth file or you'll get mysterious
       // synth not found errors at runtime.
       
       synthDefinitions = [NSMutableArray array];
@@ -166,6 +166,18 @@ using namespace Tonic;
         def.synthAction = ^(Tonic::Synth* synth, CGPoint touchPointNorm){
           synth->setParameter("x", touchPointNorm.x);
           synth->setParameter("y", touchPointNorm.y);
+        };
+      }
+      
+      {
+        SynthDemoDef* def = [[SynthDemoDef alloc] init];
+        [synthDefinitions addObject:def];
+        def.synthClassName = @"ReverbTestSynth";
+        def.synthDisplayName = @"Reverb";
+        def.synthDescription = @"Artificial Reverb";
+        def.synthInstructions = @"Yeeeeah";
+        def.synthAction = ^(Tonic::Synth* synth, CGPoint touchPointNorm){
+
         };
       }
 

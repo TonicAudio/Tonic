@@ -31,7 +31,14 @@ namespace Tonic {
 
     class ControlDelay_ : public ControlConditioner_{
       
-    protected:
+    private:
+
+      long readHead_;
+      long writeHead_;
+          
+      long maxDelay_; // # synthesis blocks of delay
+      
+      std::vector<ControlGeneratorOutput> delayLine_;
       
       ControlGenerator delayTimeCtrlGen_;
       
@@ -39,17 +46,22 @@ namespace Tonic {
       
     public:
       
+      ControlDelay_();
+      
+      void initialize(float maxDelayTime);
+      
       void setDelayTimeGen( ControlGenerator & gen ){ delayTimeCtrlGen_ = gen; };
       
     };
     
   }
   
-  class ControlDelay : public TemplatedControlGenerator<Tonic_::ControlDelay_>{
+  class ControlDelay : public TemplatedControlConditioner<ControlDelay, Tonic_::ControlDelay_>{
     
   public:
     
-    createControlGeneratorSetters(ControlDelay, delay, setDelayTimeGen);
+    ControlDelay(float maxDelayTime = 1.0f);
+    createControlGeneratorSetters(ControlDelay, delayTime, setDelayTimeGen);
     
   };
 }

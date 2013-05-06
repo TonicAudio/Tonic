@@ -9,15 +9,7 @@
 #include "ControlDbToLinear.h"
 
 namespace Tonic { namespace Tonic_{
-  
-  ControlDbToLinear_::ControlDbToLinear_(){
-    
-  }
-  
-  ControlDbToLinear_::~ControlDbToLinear_(){
-    
-  }
-  
+
   void ControlDbToLinear_::computeOutput(const SynthesisContext_ & context){
     
     ControlGeneratorOutput inputOutput = input_.tick(context);
