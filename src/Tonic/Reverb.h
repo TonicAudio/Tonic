@@ -133,7 +133,6 @@ namespace Tonic {
         
       }
       
-      
       // TODO: combs
       
       // TODO: allpass
@@ -141,7 +140,7 @@ namespace Tonic {
       // Final output is in workSpace_[0]
       wetLevelGen_.tick(workSpace_[1], context);
       workSpace_[0] *= workSpace_[1];
-      synthesisBlock_ += workSpace_[0];
+      synthesisBlock_.copy(workSpace_[0]);
       
     }
         
