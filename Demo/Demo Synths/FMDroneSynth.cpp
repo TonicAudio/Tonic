@@ -2,7 +2,7 @@
 //  FMDrone.h
 //  TonicDemo
 //
-//  Created by Morgan Packard on 2/15/13.
+//  Created by Nick Donaldson on 2/15/13.
 
 //
 
@@ -25,17 +25,22 @@ class FMDroneSynth : public Synth {
 public:
   FMDroneSynth(){
     
-      Generator rCarrierFreq = (addParameter("carrierFreq", 0) * 2 + 30).smoothed();
-      Generator rModFreq     = rCarrierFreq * addParameter("mcRatio", 2).smoothed();
+    ControlValue volume = addParameter("volume", "Volume (dbFS)", -12.f, -60.f, 0.f);
+    ControlValue carrierPitch = addParameter("carrierPitch", "Carrier Pitch", 28.f, 20.f, 32.f);
+    ControlValue modIndex = addParameter("modIndex", "FM Amount", 0.25f, 0.f, 1.0f);
+    ControlValue lfoAmt = addParameter("lfoAmt", "LFO Amount", 0.5f, 0.f, 1.f);
+    
+    Generator rCarrierFreq = ControlMidiToFreq().in(carrierPitch).smoothed();
+    Generator rModFreq     = rCarrierFreq * 2.0f;
       
       outputGen = SineWave()
         .freq( rCarrierFreq
           + (
             SineWave().freq( rModFreq ) *
             rModFreq *
-            (addParameter("modIndex", 0) * 10.0f).smoothed()
+             ((modIndex * 5.0f).smoothed() * (1.0f + SineWave().freq((LFNoise().setFreq(0.5f) + 1.f) * 5.f + 0.2f) * (lfoAmt * 0.5f).smoothed()))
           )
-        ) * 0.5f;
+        ) * ControlDbToLinear().in(volume).smoothed() * ((SineWave().freq(0.15f) + 1.f) * 0.75f + 0.25);
   }
   
 };

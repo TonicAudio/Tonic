@@ -8,6 +8,7 @@
 
 #import "SynthAutoUIViewController.h"
 #import "TonicSynthManager.h"
+#import "SynthParameterCell.h"
 #include "Tonic.h"
 
 #import <QuartzCore/QuartzCore.h>
@@ -15,14 +16,16 @@
 using Tonic::Synth;
 using Tonic::SynthFactory;
 
-#define kSynthKey @"DemoSynth"
+#define kSynthKey       @"DemoSynth"
+#define kCellIdentifier @"ParamCell"
 
-@interface SynthAutoUIViewController ()
+@interface SynthAutoUIViewController () <SynthParameterCellDelegate>
 {
   Synth *_synth;
   vector<Synth::SynthParameter> _synthParameters;
 }
 
+@property (nonatomic, strong) NSArray *cellColors;
 @property (nonatomic, strong) SynthDemoDef *demoDef;
 
 @end
@@ -51,11 +54,29 @@ using Tonic::SynthFactory;
 
 - (void)viewDidLoad
 {
-    [super viewDidLoad];
+  [super viewDidLoad];
   
-    self.descLabel.text = self.demoDef.synthInstructions;
+  self.navigationItem.title = self.demoDef.synthDisplayName;
+  self.descLabel.text = self.demoDef.synthDescription;
+ 
+  [self.controlTableView registerClass:[SynthParameterCell class] forCellReuseIdentifier:kCellIdentifier];
   
-    // shadow for label
+  NSMutableArray *cellColors = [NSMutableArray array];
+  [cellColors addObject:[UIColor colorWithRed:1 green:0.349 blue:0 alpha:1]];
+  [cellColors addObject:[UIColor colorWithRed:1 green:0.6 blue:0 alpha:1]];
+  [cellColors addObject:[UIColor colorWithRed:0.988 green:0 blue:0.192 alpha:1]];
+  [cellColors addObject:[UIColor colorWithRed:0 green:0.941 blue:0.655 alpha:1]];
+  self.cellColors = cellColors;
+  
+  // shadow for label
+  CALayer* cl = self.descContainer.layer;
+  cl.masksToBounds = NO;
+  cl.shadowColor = [UIColor blackColor].CGColor;
+  cl.shadowOpacity = 0.4f;
+  cl.shadowRadius = 3.0f;
+  cl.shadowOffset = CGSizeMake(0, 1);
+  cl.shadowPath = [UIBezierPath bezierPathWithRect:cl.bounds].CGPath;
+  
 }
 #pragma mark - Table Delegate
 
@@ -73,7 +94,21 @@ using Tonic::SynthFactory;
 
 - (UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-  return [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"useme"];
+  Synth::SynthParameter param = _synthParameters[indexPath.row];
+  SynthParameterCell *cell = [tableView dequeueReusableCellWithIdentifier:kCellIdentifier forIndexPath:indexPath];
+  cell.delegate = self;
+  [cell setSynthParameter:param];
+  
+  NSInteger colorIndex = indexPath.row % self.cellColors.count;
+  [cell setColor:[self.cellColors objectAtIndex:colorIndex]];
+  
+  return cell;
 }
 
+#pragma mark - Param cell delegate
+
+- (void)synthParameterCellChangedValue:(float)value forParameterName:(std::string)parameterName
+{
+  _synth->setParameter(parameterName, value);
+}
 @end

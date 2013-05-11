@@ -8,6 +8,7 @@
 
 #import "SynthChooserViewController.h"
 #import "SynthTestViewController.h"
+#import "SynthAutoUIViewController.h"
 #include "Tonic.h"
 
 using namespace Tonic;
@@ -53,11 +54,7 @@ using namespace Tonic;
         def.synthClassName = @"FMDroneSynth";
         def.synthDisplayName = @"FM Drone";
         def.synthDescription = @"Basic FM synth with sinusoidal carrier and modulator";
-        def.synthInstructions = @"Swipe up and down to change modulation amount. Swipe L/R to change modulator and carrier freqs.";
-        def.synthAction = ^(Tonic::Synth* synth, CGPoint touchPointNorm){
-          synth->setParameter("carrierFreq", touchPointNorm.x * 30);
-          synth->setParameter("modIndex", touchPointNorm.y*touchPointNorm.y );
-        };
+        def.shouldAutoGenUI = YES;
       }
       
       {
@@ -207,8 +204,6 @@ using namespace Tonic;
           synth->setParameter("y", touchPointNorm.y);
         };
       }
-      
-      
 
     }
     return self;
@@ -252,7 +247,7 @@ using namespace Tonic;
   if (indexPath.row < [synthDefinitions count]) {
     SynthDemoDef* def = [synthDefinitions objectAtIndex:indexPath.row];
     if (def){
-      SynthTestViewController *stVC = [[SynthTestViewController alloc] initWithSynthDemoDef:def];
+      UIViewController *stVC = def.shouldAutoGenUI ? [[SynthAutoUIViewController alloc] initWithSynthDemoDef:def] : [[SynthTestViewController alloc] initWithSynthDemoDef:def];
       [self.navigationController pushViewController:stVC animated:YES];
     }
   }

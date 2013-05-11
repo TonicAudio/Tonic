@@ -48,7 +48,8 @@ namespace Tonic{
     
     // It's quite conceivable that we'll want to move the messaging stuff up into Source
     ControlValue  & addParameter(string name, float value=0, float min=0, float max=1.f);
-    ControlValue  & addParameter(string name, string displayName, SynthParameterType type, float value=0, float min=0, float max=1.f);
+    ControlValue  & addParameter(string name, string displayName, float value=0, float min=0, float max=1.f);
+    ControlValue  & addParameter(SynthParameterType type, string name, string displayName, float value=0, float min=0, float max=1.f);
     
     void            setParameter(string name, float value=1);
     
