@@ -56,7 +56,9 @@ namespace Tonic{
     
   protected:
 
-    std::map<string, SynthParameter> parameters;
+    // set to true in constructor to clamp incoming parameters to defined min/max
+    bool  clampsParameters_; 
+    std::map<string, SynthParameter> parameters_;
     
   };
   

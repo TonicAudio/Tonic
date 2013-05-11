@@ -14,8 +14,6 @@
 @interface SynthTestViewController : UIViewController
 
 @property (nonatomic, weak) IBOutlet UILabel *descLabel;
-@property (strong, nonatomic) CMMotionManager* motionManager;
-@property (strong, nonatomic) SynthDemoDef* synthDemoDef;
 
 -(id)initWithSynthDemoDef: (SynthDemoDef*) def;
 

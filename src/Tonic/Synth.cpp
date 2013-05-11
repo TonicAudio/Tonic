@@ -19,18 +19,18 @@ namespace Tonic {
     type(SynthParameterTypeContinuous),
     min(-FLT_MIN),
     max(FLT_MAX)
-  {};
+  {}
 
-  Synth::Synth(){
-    
-  }
+  Synth::Synth() :
+    clampsParameters_(false)
+  {}
 
   ControlValue & Synth::addParameter(string name, float value, float min, float max){
     return addParameter(name, name, SynthParameterTypeContinuous, value, min, max);
   }
   
   ControlValue & Synth::addParameter(string name, string displayName, SynthParameterType type, float value, float min, float max){
-    if (parameters.find(name)==parameters.end()) {
+    if (parameters_.find(name)==parameters_.end()) {
       
       SynthParameter newParam;
       newParam.name = name;
@@ -40,31 +40,30 @@ namespace Tonic {
       newParam.min = min;
       newParam.max = max;
       
-      parameters[name] = newParam;
+      parameters_[name] = newParam;
     }
-    return parameters[name].value;
+    return parameters_[name].value;
   }
   
   void Synth::setParameter(string name, float value){
-    if (parameters.find(name)!=parameters.end()) {
+    if (parameters_.find(name)!=parameters_.end()) {
       
-      Synth::SynthParameter & param = parameters[name];
+      Synth::SynthParameter & param = parameters_[name];
       
-      switch (param.type) {
-              
-        case SynthParameterTypeContinuous:
-          param.value.setValue(clamp(value, param.min, param.max));
-          break;
-          
-        default:
-          break;
+      if (clampsParameters_){
+        switch (param.type) {
+                
+          case SynthParameterTypeContinuous:
+            param.value.setValue(clamp(value, param.max, param.min));
+            break;
+            
+          default:
+            break;
+        }
       }
-      
-//MP -- this was giving me compiler errors, and I think it doesn't really need to be in here anyway. Delete?
-//      std::stringstream ss;
-//      ss << "message: " << name << " value: " << param.value.getValue();
-//      
-//      debug(ss.str());
+      else{
+        param.value.setValue(value);
+      }
       
     }
     else{
@@ -75,7 +74,7 @@ namespace Tonic {
   
   vector<Synth::SynthParameter> Synth::getParameters(){
     vector<Synth::SynthParameter> returnParams;
-    for (std::map<string, SynthParameter>::iterator it = parameters.begin(); it != parameters.end(); it++){
+    for (std::map<string, SynthParameter>::iterator it = parameters_.begin(); it != parameters_.end(); it++){
       returnParams.push_back(it->second);
     }
     return returnParams;

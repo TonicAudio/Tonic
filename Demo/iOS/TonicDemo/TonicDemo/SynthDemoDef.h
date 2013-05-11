@@ -21,6 +21,4 @@ typedef void (^SynthTestAccellerometerAction)(Tonic::Synth* synth, CMAcceleromet
   @property (nonatomic, assign) BOOL shouldAutoGenUI; // If TRUE the below blocks are ignored
   @property (nonatomic, copy) SynthTestPanAction synthAction;
   @property (nonatomic, copy) SynthTestAccellerometerAction accellerometerAction;
-
 @end
-
