@@ -114,12 +114,8 @@ using namespace Tonic;
         [synthDefinitions addObject:def];
         def.synthClassName = @"DelayTestSynth";
         def.synthDisplayName = @"Basic Delay";
-        def.synthDescription = @"Basic Delay effect, mono or stereo input";
-        def.synthInstructions = @"Popcorn in SPAAAAACE!";
-        def.synthAction = ^(Tonic::Synth* synth, CGPoint touchPointNorm){
-          synth->setParameter("feedback", touchPointNorm.x);
-          synth->setParameter("delayTime", touchPointNorm.y * touchPointNorm.y);
-        };
+        def.synthDescription = @"Popcorn in SPAAAACE";
+        def.shouldAutoGenUI = YES;
       }
       
       

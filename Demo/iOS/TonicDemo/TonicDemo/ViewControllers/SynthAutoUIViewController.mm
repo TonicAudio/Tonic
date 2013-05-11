@@ -66,6 +66,8 @@ using Tonic::SynthFactory;
   [cellColors addObject:[UIColor colorWithRed:1 green:0.6 blue:0 alpha:1]];
   [cellColors addObject:[UIColor colorWithRed:0.988 green:0 blue:0.192 alpha:1]];
   [cellColors addObject:[UIColor colorWithRed:0 green:0.941 blue:0.655 alpha:1]];
+  [cellColors addObject:[UIColor colorWithRed:69.f/255.f green:172.f/255.f blue:1.0f alpha:1.0f]];
+  
   self.cellColors = cellColors;
   
   // shadow for label
