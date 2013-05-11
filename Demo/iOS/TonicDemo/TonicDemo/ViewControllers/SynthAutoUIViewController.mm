@@ -19,7 +19,7 @@ using Tonic::SynthFactory;
 #define kSynthKey       @"DemoSynth"
 #define kCellIdentifier @"ParamCell"
 
-@interface SynthAutoUIViewController () <SynthParameterCellDelegate>
+@interface SynthAutoUIViewController ()
 {
   Synth *_synth;
   vector<Synth::SynthParameter> _synthParameters;
@@ -96,7 +96,7 @@ using Tonic::SynthFactory;
 {
   Synth::SynthParameter param = _synthParameters[indexPath.row];
   SynthParameterCell *cell = [tableView dequeueReusableCellWithIdentifier:kCellIdentifier forIndexPath:indexPath];
-  cell.delegate = self;
+
   [cell setSynthParameter:param];
   
   NSInteger colorIndex = indexPath.row % self.cellColors.count;
@@ -105,10 +105,5 @@ using Tonic::SynthFactory;
   return cell;
 }
 
-#pragma mark - Param cell delegate
 
-- (void)synthParameterCellChangedValue:(float)value forParameterName:(std::string)parameterName
-{
-  _synth->setParameter(parameterName, value);
-}
 @end

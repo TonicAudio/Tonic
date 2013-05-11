@@ -104,7 +104,7 @@
     // set synth parameter
     float paramValue = Tonic::map(normPosition, 0.0f, 1.0f, _synthParameter.min, _synthParameter.max, true);
     [self updateValueLabel:paramValue];
-    [self.delegate synthParameterCellChangedValue:paramValue forParameterName:_synthParameter.name];
+    _synthParameter.value.setValue(paramValue);
   }
 }
 
