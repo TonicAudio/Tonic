@@ -147,7 +147,6 @@
 		0183D0E71735D0E6004638EB /* TonicFrames.h in Headers */ = {isa = PBXBuildFile; fileRef = 0183D05C1735D0E6004638EB /* TonicFrames.h */; };
 		0183D1091735D1AD004638EB /* Tonic.h in Headers */ = {isa = PBXBuildFile; fileRef = 0183D1081735D1AD004638EB /* Tonic.h */; };
 		01F7273E1715225500EBB4BB /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 01F7273D1715225500EBB4BB /* Accelerate.framework */; };
-		F23A7CF3171B3D2E00AE8353 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F23A7CF2171B3D2E00AE8353 /* Foundation.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -260,7 +259,6 @@
 		01F72690171520F900EBB4BB /* libTonic-OSX.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libTonic-OSX.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		01F7273D1715225500EBB4BB /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.7.sdk/System/Library/Frameworks/Accelerate.framework; sourceTree = DEVELOPER_DIR; };
 		F23A7CF1171B3D2E00AE8353 /* libTonic-iOS.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libTonic-iOS.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		F23A7CF2171B3D2E00AE8353 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		F23A7D01171B3D2E00AE8353 /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
 		F23A7D03171B3D2E00AE8353 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = Library/Frameworks/UIKit.framework; sourceTree = DEVELOPER_DIR; };
 /* End PBXFileReference section */
@@ -278,7 +276,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F23A7CF3171B3D2E00AE8353 /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -417,7 +414,6 @@
 			isa = PBXGroup;
 			children = (
 				01F7273D1715225500EBB4BB /* Accelerate.framework */,
-				F23A7CF2171B3D2E00AE8353 /* Foundation.framework */,
 				F23A7D01171B3D2E00AE8353 /* SenTestingKit.framework */,
 				F23A7D03171B3D2E00AE8353 /* UIKit.framework */,
 			);

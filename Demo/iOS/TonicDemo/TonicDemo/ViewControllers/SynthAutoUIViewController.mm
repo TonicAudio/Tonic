@@ -10,15 +10,20 @@
 #import "TonicSynthManager.h"
 #include "Tonic.h"
 
+#import <QuartzCore/QuartzCore.h>
+
 using Tonic::Synth;
 using Tonic::SynthFactory;
 
 #define kSynthKey @"DemoSynth"
 
 @interface SynthAutoUIViewController ()
+{
+  Synth *_synth;
+  vector<Synth::SynthParameter> _synthParameters;
+}
 
 @property (nonatomic, strong) SynthDemoDef *demoDef;
-@property (nonatomic, assign) Synth* synth;
 
 @end
 
@@ -29,7 +34,12 @@ using Tonic::SynthFactory;
     self = [super initWithNibName:nil bundle:nil];
     if (self) {
       self.demoDef = demoDef;
-      self.synth = [[TonicSynthManager sharedManager] addSynthWithName:demoDef.synthClassName forKey:kSynthKey];
+      _synth = [[TonicSynthManager sharedManager] addSynthWithName:demoDef.synthClassName forKey:kSynthKey];
+      
+      if (_synth){
+        _synthParameters = _synth->getParameters();
+      }
+      
     }
     return self;
 }
@@ -42,8 +52,28 @@ using Tonic::SynthFactory;
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    // Do any additional setup after loading the view from its nib.
+  
+    self.descLabel.text = self.demoDef.synthInstructions;
+  
+    // shadow for label
+}
+#pragma mark - Table Delegate
+
+- (BOOL)tableView:(UITableView *)tableView shouldHighlightRowAtIndexPath:(NSIndexPath *)indexPath
+{
+  return NO;
 }
 
+#pragma mark - Table Data Source
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+  return _synthParameters.size();
+}
+
+- (UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+  return [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"useme"];
+}
 
 @end
