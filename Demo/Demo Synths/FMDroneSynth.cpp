@@ -31,14 +31,14 @@ public:
     ControlValue lfoAmt = addParameter("lfoAmt", "LFO Amount", 0.5f, 0.f, 1.f);
     
     Generator rCarrierFreq = ControlMidiToFreq().in(carrierPitch).smoothed();
-    Generator rModFreq     = rCarrierFreq * 2.0f;
+    Generator rModFreq     = rCarrierFreq * 4.0f;
       
       outputGen = SineWave()
         .freq( rCarrierFreq
           + (
             SineWave().freq( rModFreq ) *
             rModFreq *
-             ((modIndex * 5.0f).smoothed() * (1.0f + SineWave().freq((LFNoise().setFreq(0.5f) + 1.f) * 5.f + 0.2f) * (lfoAmt * 0.5f).smoothed()))
+             (modIndex.smoothed() * (1.0f + SineWave().freq((LFNoise().setFreq(0.5f) + 1.f) * 5.f + 0.2f) * (lfoAmt * 0.5f).smoothed()))
           )
         ) * ControlDbToLinear().in(volume).smoothed() * ((SineWave().freq(0.15f) + 1.f) * 0.75f + 0.25);
   }

@@ -97,6 +97,7 @@
   
     // normalized position
     float normPosition = MAX(0, MIN(1.f,[pan locationInView:pan.view].x/pan.view.bounds.size.width));
+    normPosition = Tonic::map(normPosition, 0.02f, 0.98f, 0.0f, 1.0f, true); // apply a bit of wiggle room for edges so we can reach min/max
     
     [self setSliderForNormPosition:normPosition];
     
