@@ -25,18 +25,17 @@ namespace Tonic{
     
     typedef enum{
       
-      SynthParameterTypeContinuous = 0,
-        
-//      TODO: other types
-//      SynthParameterTypeToggle
-//      SynthParameterTypeMomentary,
-//      SynthParameterTypeTrigger
+      SynthParameterTypeContinuous = 0,        
+      SynthParameterTypeToggle,
+      SynthParameterTypeMomentary,
+      SynthParameterTypeTrigger
       
     } SynthParameterType;
     
     
     struct SynthParameter{
       string              name;
+      string              displayName;
       ControlValue        value;
       SynthParameterType  type;
       float               min;
@@ -48,10 +47,10 @@ namespace Tonic{
     Synth();
     
     // It's quite conceivable that we'll want to move the messaging stuff up into Source
-    ControlValue  & addParameter(string name, float value=0, float min=-FLT_MAX, float max=FLT_MAX);
-    ControlValue  & addParameter(string name, SynthParameterType type, float value=0, float min=-FLT_MAX, float max=FLT_MAX);
+    ControlValue  & addParameter(string name, float value=0, float min=0, float max=1.f);
+    ControlValue  & addParameter(string name, string displayName, SynthParameterType type, float value=0, float min=0, float max=1.f);
     
-    void              setParameter(string name, float value=1);
+    void            setParameter(string name, float value=1);
     
     vector<SynthParameter> getParameters();
     

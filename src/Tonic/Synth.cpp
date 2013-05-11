@@ -26,14 +26,15 @@ namespace Tonic {
   }
 
   ControlValue & Synth::addParameter(string name, float value, float min, float max){
-    return addParameter(name, SynthParameterTypeContinuous, value, min, max);
+    return addParameter(name, name, SynthParameterTypeContinuous, value, min, max);
   }
   
-  ControlValue & Synth::addParameter(string name, SynthParameterType type, float value, float min, float max){
+  ControlValue & Synth::addParameter(string name, string displayName, SynthParameterType type, float value, float min, float max){
     if (parameters.find(name)==parameters.end()) {
       
       SynthParameter newParam;
       newParam.name = name;
+      newParam.displayName = displayName;
       newParam.value.setValue(value);
       newParam.type = type;
       newParam.min = min;
