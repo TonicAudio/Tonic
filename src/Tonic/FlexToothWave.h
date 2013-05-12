@@ -58,7 +58,7 @@ namespace Tonic {
       TonicFloat const rateConstant = TONIC_FLEXTOOTH_RES/Tonic::sampleRate();
       
       TonicFloat slope, frac, phase;
-      TonicFloat *outptr = &synthesisBlock_[0];
+      TonicFloat *outptr = &outputFrames_[0];
       TonicFloat *freqptr = &freqFrames_[0];
       TonicFloat *slopeptr = &slopeFrames_[0];
       
@@ -77,7 +77,7 @@ namespace Tonic {
       sd.d = BIT32DECPT;
       TonicInt32 offs, msbi = sd.i[1];
       double ps = phaseAccum_ + BIT32DECPT;
-      for ( unsigned int i=0; i<synthesisBlock_.frames(); i++ ) {
+      for ( unsigned int i=0; i<outputFrames_.frames(); i++ ) {
         
         // update the slope
         slope = clamp(*slopeptr++, 0.0f, 1.0f) * TONIC_FLEXTOOTH_RES;

@@ -38,13 +38,13 @@ namespace Tonic {
     
     inline void Adder_::computeSynthesisBlock( const SynthesisContext_ &context ){
       
-      TonicFloat *framesData =  &synthesisBlock_[0];
+      TonicFloat *framesData =  &outputFrames_[0];
       
-      memset(framesData, 0, sizeof(TonicFloat) * synthesisBlock_.size());
+      memset(framesData, 0, sizeof(TonicFloat) * outputFrames_.size());
       
       for (int j =0; j < inputs.size(); j++) {
         inputs[j].tick(workSpace, context);
-        synthesisBlock_ += workSpace; // add each sample in frames to each sample in workspace
+        outputFrames_ += workSpace; // add each sample in frames to each sample in workspace
       }
       
     }

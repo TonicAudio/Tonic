@@ -84,7 +84,7 @@ namespace Tonic {
         // bypass processing
         bool bypass = bypassGen_.tick(context).value != 0.f;
         if (bypass){
-          synthesisBlock_.copy(dryFrames_);
+          outputFrames_.copy(dryFrames_);
         }
 
         unlockMutex();
@@ -92,7 +92,7 @@ namespace Tonic {
       }
       
       // copy synthesis block to frames passed in
-      frames.copy(synthesisBlock_);
+      frames.copy(outputFrames_);
       
 #ifdef TONIC_DEBUG
       if(frames(0,0) != frames(0,0)){
@@ -111,11 +111,11 @@ namespace Tonic {
       // bypass processing
       bool bypass = bypassGen_.tick(SynthesisContext_()).value != 0.f;
       if (bypass){
-        synthesisBlock_.copy(dryFrames_);
+        outputFrames_.copy(dryFrames_);
       }
       
       unlockMutex();
-      frames.copy(synthesisBlock_);
+      frames.copy(outputFrames_);
     }
     
     inline void Compressor_::computeSynthesisBlock(const SynthesisContext_ &context){
@@ -139,9 +139,9 @@ namespace Tonic {
       #endif
       
       // Iterate through samples
-      unsigned int nChannels = synthesisBlock_.channels();
+      unsigned int nChannels = outputFrames_.channels();
       TonicFloat ampInputValue, gainValue, gainTarget;
-      TonicFloat * outptr = &synthesisBlock_[0];
+      TonicFloat * outptr = &outputFrames_[0];
       TonicFloat * dryptr = &dryFrames_[0];
       ampData = &ampInputFrames_[0];
       
@@ -190,12 +190,12 @@ namespace Tonic {
       }
       
       TonicFloat makeupGain = max(0.f, makeupGainGen_.tick(context).value);
-      outptr = &synthesisBlock_[0];
+      outptr = &outputFrames_[0];
       
       #ifdef USE_APPLE_ACCELERATE
-      vDSP_vsmul(outptr, 1, &makeupGain, outptr, 1, synthesisBlock_.size());
+      vDSP_vsmul(outptr, 1, &makeupGain, outptr, 1, outputFrames_.size());
       #else
-      for (unsigned int i=0; i<synthesisBlock_.size(); i++){
+      for (unsigned int i=0; i<outputFrames_.size(); i++){
         *outptr++ *= makeupGain;
       }
       #endif
@@ -205,10 +205,10 @@ namespace Tonic {
         // clip to threshold in worst case (minor distortion introduced but much preferable to wrapping distortion)
         #ifdef USE_APPLE_ACCELERATE
         float negThresh = -threshold;
-        vDSP_vclip(&synthesisBlock_[0], 1, &negThresh, &threshold, &synthesisBlock_[0], 1, synthesisBlock_.size());
+        vDSP_vclip(&outputFrames_[0], 1, &negThresh, &threshold, &outputFrames_[0], 1, outputFrames_.size());
         #else
-        outptr = &synthesisBlock_[0];
-        for (unsigned int i=0; i<synthesisBlock_.size(); i++, outptr++){
+        outptr = &outputFrames_[0];
+        for (unsigned int i=0; i<outputFrames_.size(); i++, outptr++){
           *outptr = clamp(*outptr, -threshold, threshold);
         }
         #endif

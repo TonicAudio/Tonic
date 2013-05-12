@@ -56,7 +56,7 @@ namespace Tonic {
       
       const TonicFloat rateConstant =  TONIC_RECT_RES / Tonic::sampleRate();
 
-      TonicFloat *outptr = &synthesisBlock_[0];
+      TonicFloat *outptr = &outputFrames_[0];
       TonicFloat *freqptr = &freqFrames_[0];
       TonicFloat *pwmptr = &pwmFrames_[0];
       
@@ -75,7 +75,7 @@ namespace Tonic {
       sd.d = BIT32DECPT;
       TonicInt32 offs, msbi = sd.i[1];
       double ps = phaseAccum_ + BIT32DECPT;
-      for ( unsigned int i=0; i<synthesisBlock_.frames(); i++ ) {
+      for ( unsigned int i=0; i<outputFrames_.frames(); i++ ) {
         
         sd.d = ps;
         ps += *freqptr++;

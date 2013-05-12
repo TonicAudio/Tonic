@@ -82,7 +82,7 @@ namespace Tonic {
         applyFilter(cCutoff, cQ, dryFrames_, context);
         
         // copy to block
-        synthesisBlock_.copy(dryFrames_);
+        outputFrames_.copy(dryFrames_);
 
       }
       

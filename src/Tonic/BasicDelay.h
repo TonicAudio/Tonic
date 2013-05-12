@@ -65,7 +65,7 @@ namespace Tonic {
       
       TonicFloat outSamp, mix, fbk;
       TonicFloat *dryptr = &dryFrames_[0];
-      TonicFloat *outptr = &synthesisBlock_[0];
+      TonicFloat *outptr = &outputFrames_[0];
       TonicFloat *mptr = &mixFrames_[0];
       TonicFloat *fbkptr = &fbkFrames_[0];
       TonicFloat *delptr = &delayTimeFrames_[0];

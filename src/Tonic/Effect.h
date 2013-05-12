@@ -84,14 +84,14 @@ namespace Tonic {
         // bypass processing - still need to compute block so all generators stay in sync
         bool bypass = bypassGen_.tick(context).value != 0.f;
         if (bypass){
-          synthesisBlock_.copy(dryFrames_);
+          outputFrames_.copy(dryFrames_);
         }
         
         lastFrameIndex_ = context.elapsedFrames;
       }
       
       // copy synthesis block to frames passed in
-      frames.copy(synthesisBlock_);
+      frames.copy(outputFrames_);
       
 #ifdef TONIC_DEBUG
       if(!isfinite(frames(0,0))){
@@ -110,11 +110,11 @@ namespace Tonic {
       // bypass processing - still need to compute block so all generators stay in sync
       bool bypass = bypassGen_.tick(SynthesisContext_()).value != 0.f;
       if (bypass){
-        synthesisBlock_.copy(dryFrames_);
+        outputFrames_.copy(dryFrames_);
       }
 
       unlockMutex();
-      frames.copy(synthesisBlock_);
+      frames.copy(outputFrames_);
     }
   }
   

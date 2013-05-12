@@ -31,7 +31,7 @@ namespace Tonic { namespace Tonic_{
     
     const TonicFloat rateConstant = (TonicFloat)TABLE_SIZE / Tonic::sampleRate();
     
-    TonicFloat *samples = &synthesisBlock_[0];
+    TonicFloat *samples = &outputFrames_[0];
     TonicFloat *rateBuffer = &modFrames_[0];
     TonicFloat *tableData = &(tableReference())[0];
     
