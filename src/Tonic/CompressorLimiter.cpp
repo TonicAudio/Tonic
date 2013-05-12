@@ -14,12 +14,9 @@ namespace Tonic { namespace Tonic_{
     ampInputFrames_.resize(kSynthesisBlockSize, 1, 0);
     lookaheadDelayLine_.initialize(0.001, 0.01, 2);
     lookaheadDelayLine_.setInterpolates(false); // No real need to interpolate here for lookahead
+    makeupGainGen_ = ControlValue().setValue(1.f);
   }
-  
-  Compressor_::~Compressor_(){
-    
-  }
-  
+
   // Default inherited input method sets both audio signal and amplitude signal as input
   // so incoming signal is compressed based on its own amplitude
   void Compressor_::setInput(Generator input){

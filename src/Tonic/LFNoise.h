@@ -38,8 +38,8 @@ namespace Tonic{
     };
     
     inline void LFNoise_::computeSynthesisBlock( const SynthesisContext_ &context ){
-      int remain = synthesisBlock_.frames();
-      TonicFloat* out = &synthesisBlock_[0];
+      int remain = outputFrames_.frames();
+      TonicFloat* out = &outputFrames_[0];
       do{
         if (mCounter<=0) {
           mCounter = sampleRate() / std::max<float>(mFreq.tick(context).value, .001f);

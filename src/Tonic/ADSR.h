@@ -100,7 +100,7 @@ namespace Tonic {
       bDoesSustain = (bool)doesSustain.tick(context).value;
       bIsLegato = (bool)isLegato.tick(context).value;
       
-      TonicFloat * fdata = &synthesisBlock_[0];
+      TonicFloat * fdata = &outputFrames_[0];
       
       if(triggerOutput.status == ControlGeneratorStatusHasChanged){
         

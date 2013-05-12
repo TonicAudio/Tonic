@@ -94,8 +94,8 @@ namespace Tonic {
 
       // Send dry input to output, apply mix level
       dryLevelGen_.tick(workSpace_[0], context);
-      synthesisBlock_.copy(dryFrames_);
-      synthesisBlock_ *= workSpace_[0];
+      outputFrames_.copy(dryFrames_);
+      outputFrames_ *= workSpace_[0];
       
       // pass thru input filters
       if (inputFiltBypasCtrlGen_.tick(context).value == 0.f){
@@ -108,7 +108,7 @@ namespace Tonic {
       TonicFloat *inptr = &dryFrames_[0];
       TonicFloat *wkptr0 = &(workSpace_[0])[0];
       TonicFloat *wkptr1 = &(workSpace_[1])[0];
-      TonicFloat *outptr = &synthesisBlock_[0];
+      TonicFloat *outptr = &outputFrames_[0];
       
       // pass thru pre-delay, input filters, and sum the early reflections
       TonicFloat preDelayTime = preDelayTimeCtrlGen_.tick(context).value;
@@ -140,7 +140,7 @@ namespace Tonic {
       // Final output is in workSpace_[0]
       wetLevelGen_.tick(workSpace_[1], context);
       workSpace_[0] *= workSpace_[1];
-      synthesisBlock_.copy(workSpace_[0]);
+      outputFrames_.copy(workSpace_[0]);
       
     }
         

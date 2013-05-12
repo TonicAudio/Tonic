@@ -38,15 +38,15 @@ namespace Tonic{
     
     inline void Multiplier_::computeSynthesisBlock( const SynthesisContext_ & context ){
       
-      memset(&synthesisBlock_[0], 0, sizeof(TonicFloat) * synthesisBlock_.size());
+      memset(&outputFrames_[0], 0, sizeof(TonicFloat) * outputFrames_.size());
       
       // for the first generator, store the value in the block
-      inputs[0].tick(synthesisBlock_, context);
+      inputs[0].tick(outputFrames_, context);
       
       // for additional generators, use the workspace stkframes for tick, and multiply it into the frames argument
       for(int i = 1; i < inputs.size(); i++) {
         inputs[i].tick(workSpace, context);
-        synthesisBlock_ *= workSpace;
+        outputFrames_ *= workSpace;
       }
       
     }

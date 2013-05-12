@@ -8,6 +8,7 @@
 
 #import "SynthChooserViewController.h"
 #import "SynthTestViewController.h"
+#import "SynthAutoUIViewController.h"
 #include "Tonic.h"
 
 using namespace Tonic;
@@ -53,11 +54,7 @@ using namespace Tonic;
         def.synthClassName = @"FMDroneSynth";
         def.synthDisplayName = @"FM Drone";
         def.synthDescription = @"Basic FM synth with sinusoidal carrier and modulator";
-        def.synthInstructions = @"Swipe up and down to change modulation amount. Swipe L/R to change modulator and carrier freqs.";
-        def.synthAction = ^(Tonic::Synth* synth, CGPoint touchPointNorm){
-          synth->setParameter("carrierFreq", touchPointNorm.x * 30);
-          synth->setParameter("modIndex", touchPointNorm.y*touchPointNorm.y );
-        };
+        def.shouldAutoGenUI = YES;
       }
       
       {
@@ -91,12 +88,8 @@ using namespace Tonic;
         [synthDefinitions addObject:def];
         def.synthClassName = @"DelayTestSynth";
         def.synthDisplayName = @"Basic Delay";
-        def.synthDescription = @"Basic Delay effect, mono or stereo input";
-        def.synthInstructions = @"Popcorn in SPAAAAACE!";
-        def.synthAction = ^(Tonic::Synth* synth, CGPoint touchPointNorm){
-          synth->setParameter("feedback", touchPointNorm.x);
-          synth->setParameter("delayTime", touchPointNorm.y * touchPointNorm.y);
-        };
+        def.synthDescription = @"Popcorn in SPAAAACE";
+        def.shouldAutoGenUI = YES;
       }
       
       
@@ -124,10 +117,21 @@ using namespace Tonic;
         def.synthAction = ^(Tonic::Synth* synth, CGPoint touchPointNorm){
           synth->setParameter("stepperStart", touchPointNorm.y);
           synth->setParameter("stepperSpread", touchPointNorm.x);
-        };
 //        def.accellerometerAction = ^(Tonic::Synth* synth, CMAccelerometerData *accelerometerData){
 //          synth->setParameter("speed", accelerometerData.acceleration.x + 1);
 //        };
+
+        };
+      }
+      
+      {
+        SynthDemoDef* def = [[SynthDemoDef alloc] init];
+        [synthDefinitions addObject:def];
+        def.synthClassName = @"CompressorTestSynth";
+        def.synthDisplayName = @"Dynamic Compressor";
+        def.synthDescription = @"Compress an 808-esque snare";
+        def.synthInstructions = @"Y axis is compression threshold. Ratio is 8:1";
+        def.shouldAutoGenUI = YES;
       }
       
       {
@@ -223,7 +227,7 @@ using namespace Tonic;
   if (indexPath.row < [synthDefinitions count]) {
     SynthDemoDef* def = [synthDefinitions objectAtIndex:indexPath.row];
     if (def){
-      SynthTestViewController *stVC = [[SynthTestViewController alloc] initWithSynthDemoDef:def];
+      UIViewController *stVC = def.shouldAutoGenUI ? [[SynthAutoUIViewController alloc] initWithSynthDemoDef:def] : [[SynthTestViewController alloc] initWithSynthDemoDef:def];
       [self.navigationController pushViewController:stVC animated:YES];
     }
   }

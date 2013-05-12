@@ -23,6 +23,7 @@ LFNoise_::LFNoise_() : mCounter(0){
 void  LFNoise_::setFreq(ControlGenerator freq){
   mFreq = freq;
 }
+
   
 }
 

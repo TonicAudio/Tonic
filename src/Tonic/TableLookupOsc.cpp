@@ -20,7 +20,6 @@ namespace Tonic { namespace Tonic_{
     phase_ = 0.0f;
   }
 
-
 } // Namespace Tonic_
   
   

@@ -14,12 +14,11 @@ typedef void (^SynthTestPanAction)(Tonic::Synth* synth, CGPoint touchPointNorm);
 typedef void (^SynthTestAccellerometerAction)(Tonic::Synth* synth, CMAccelerometerData *accelerometerData);
 
 @interface SynthDemoDef : NSObject
-  @property NSString* synthClassName;
-  @property NSString* synthDisplayName;
-  @property NSString* synthDescription;
-  @property NSString* synthInstructions;
+  @property (nonatomic, strong) NSString* synthClassName;
+  @property (nonatomic, strong) NSString* synthDisplayName;
+  @property (nonatomic, strong) NSString* synthDescription;
+  @property (nonatomic, strong) NSString* synthInstructions;
+  @property (nonatomic, assign) BOOL shouldAutoGenUI; // If TRUE the below blocks are ignored
   @property (nonatomic, copy) SynthTestPanAction synthAction;
   @property (nonatomic, copy) SynthTestAccellerometerAction accellerometerAction;
-
 @end
-

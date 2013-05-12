@@ -91,7 +91,7 @@ namespace Tonic {
       applyFilter(cCutoff, cQ, context);
       
       // copy frames to block
-      synthesisBlock_.copy(dryFrames_);
+      outputFrames_.copy(dryFrames_);
       
     }
     
@@ -159,6 +159,7 @@ namespace Tonic {
             *outptr++ = lastOut_[c];
           }
         }
+
       }
       
     public:

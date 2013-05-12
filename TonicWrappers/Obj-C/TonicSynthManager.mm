@@ -77,13 +77,20 @@ using Tonic::Mixer;
   [[Novocaine audioManager] pause];
 }
 
-- (void)addSynthWithName:(NSString *)synthName forKey:(NSString *)key
+- (Tonic::Synth*)addSynthWithName:(NSString *)synthName forKey:(NSString *)key
 {
+  Synth *newSynth = nil;
     if (key){
-      Synth *newSynth = synthFactory.createInstance(synthName.UTF8String);
+      newSynth = synthFactory.createInstance(synthName.UTF8String);
       if (newSynth){
+        
+        Synth *oldSynth = (Synth*)[[self.synthDict valueForKey:key] pointerValue];
+        if (oldSynth){
+          mixer.removeInput(oldSynth);
+        }
         mixer.addInput(newSynth);
         [self.synthDict setValue:[NSValue valueWithPointer:newSynth] forKey:key];
+        
       }else{
         NSLog(@"Error in TonicSynthManager: Failed to add source. Source named %@ not found.", key);
       }
@@ -91,7 +98,7 @@ using Tonic::Mixer;
     else{
       [NSException raise:NSInvalidArgumentException format:@"Argument \"key\" cannot be nil"];
     }
-  
+  return newSynth;
 }
 
 - (void)removeSynthForKey:(NSString *)key

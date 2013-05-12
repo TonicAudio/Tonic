@@ -65,7 +65,7 @@ namespace Tonic {
         delayTimeGen_.tick(delayTimeFrames_, context);
         
         TonicFloat * inptr = &dryFrames_[0];
-        TonicFloat * outptr = &synthesisBlock_[0];
+        TonicFloat * outptr = &outputFrames_[0];
         TonicFloat * dtptr = &delayTimeFrames_[0];
         TonicFloat sf = scaleFactorCtrlGen_.tick(context).value;
         TonicFloat norm = (1.0f/(1.0f + sf));
@@ -92,7 +92,7 @@ namespace Tonic {
         
         TonicFloat y = 0;
         TonicFloat * inptr = &dryFrames_[0];
-        TonicFloat * outptr = &synthesisBlock_[0];
+        TonicFloat * outptr = &outputFrames_[0];
         TonicFloat * dtptr = &delayTimeFrames_[0];
         TonicFloat sf = scaleFactorCtrlGen_.tick(context).value;
         TonicFloat norm = (1.0f/(1.0f + sf));
@@ -138,7 +138,7 @@ namespace Tonic {
         
         TonicFloat y = 0;
         TonicFloat * inptr = &dryFrames_[0];
-        TonicFloat * outptr = &synthesisBlock_[0];
+        TonicFloat * outptr = &outputFrames_[0];
         TonicFloat * dtptr = &delayTimeFrames_[0];
         TonicFloat sf = scaleFactorCtrlGen_.tick(context).value;
         TonicFloat norm = (1.0f/(1.0f + sf));

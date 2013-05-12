@@ -16,6 +16,7 @@ namespace Tonic {
    
     Effect_::Effect_(){
       dryFrames_.resize(kSynthesisBlockSize, 1, 0);
+      bypassGen_ = ControlValue(0);
     }
     
   }
