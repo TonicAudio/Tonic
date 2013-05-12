@@ -14,6 +14,9 @@
 
 namespace Tonic {
   
+  // Synth Factory
+  SynthFactory::map_type * SynthFactory::map;
+  
   Synth::SynthParameter::SynthParameter() :
     name(""),
     type(SynthParameterTypeContinuous),
@@ -26,27 +29,19 @@ namespace Tonic {
   {}
 
   ControlValue & Synth::addParameter(string name, float value, float min, float max){
-    return addParameter(SynthParameterTypeContinuous, name, name, value, min, max);
+    return createParameter(SynthParameterTypeContinuous, name, name, value, min, max);
   }
   
   ControlValue & Synth::addParameter(string name, string displayName, float value, float min, float max){
-    return addParameter(SynthParameterTypeContinuous, name, displayName, value, min, max);
+    return createParameter(SynthParameterTypeContinuous, name, displayName, value, min, max);
   }
   
-  ControlValue & Synth::addParameter(SynthParameterType type, string name, string displayName, float value, float min, float max){
-    if (parameters_.find(name)==parameters_.end()) {
-      
-      SynthParameter newParam;
-      newParam.name = name;
-      newParam.displayName = displayName;
-      newParam.value.setValue(value);
-      newParam.type = type;
-      newParam.min = min;
-      newParam.max = max;
-      
-      parameters_[name] = newParam;
-    }
-    return parameters_[name].value;
+  ControlValue  & Synth::addBinaryParameter(string name){
+    return addBinaryParameter(name, name);
+  }
+  
+  ControlValue  & Synth::addBinaryParameter(string name, string displayName, bool isMomentary){
+    return createParameter(isMomentary ? SynthParameterTypeMomentary : SynthParameterTypeToggle, name, displayName, 0, 0, 1);
   }
   
   void Synth::setParameter(string name, float value){
@@ -84,7 +79,21 @@ namespace Tonic {
     return returnParams;
   }
   
-  // Synth Factory
-  SynthFactory::map_type * SynthFactory::map;
+  
+  ControlValue & Synth::createParameter(SynthParameterType type, string name, string displayName, float value, float min, float max){
+    if (parameters_.find(name)==parameters_.end()) {
+      
+      SynthParameter newParam;
+      newParam.name = name;
+      newParam.displayName = displayName;
+      newParam.value.setValue(value);
+      newParam.type = type;
+      newParam.min = min;
+      newParam.max = max;
+      
+      parameters_[name] = newParam;
+    }
+    return parameters_[name].value;
+  }
   
 }

@@ -25,10 +25,11 @@ namespace Tonic{
     
     typedef enum{
       
-      SynthParameterTypeContinuous = 0,        
+      SynthParameterTypeContinuous = 0,
+      
+      // TODO: Support these for auto-UI
       SynthParameterTypeToggle,
-      SynthParameterTypeMomentary,
-      SynthParameterTypeTrigger
+      SynthParameterTypeMomentary
       
     } SynthParameterType;
     
@@ -46,16 +47,24 @@ namespace Tonic{
     
     Synth();
     
-    // It's quite conceivable that we'll want to move the messaging stuff up into Source
+    //! Add a continuous parameter with value, min, and max. DisplayName will be equal to name
     ControlValue  & addParameter(string name, float value=0, float min=0, float max=1.f);
+    
+    //! Add a continuous parameter with a custom display name
     ControlValue  & addParameter(string name, string displayName, float value=0, float min=0, float max=1.f);
-    ControlValue  & addParameter(SynthParameterType type, string name, string displayName, float value=0, float min=0, float max=1.f);
+    
+    //! Add a binary parameter (on/off). Type defaults to Toggle, but can also be set to Momentary
+    ControlValue  & addBinaryParameter(string name);
+    ControlValue  & addBinaryParameter(string name, string displayName, bool isMomentary = false);
     
     void            setParameter(string name, float value=1);
     
     vector<SynthParameter> getParameters();
     
   protected:
+
+    //! Helper to insert new parameters to map
+    ControlValue & createParameter(SynthParameterType type, string name, string displayName, float value, float min, float max);
 
     // set to true in constructor to clamp incoming parameters to defined min/max
     bool  clampsParameters_; 
