@@ -41,6 +41,7 @@ namespace Tonic{
       SynthParameterType  type;
       float               min;
       float               max;
+      bool                isLogarithmic;
       
       SynthParameter();
     };
@@ -48,10 +49,10 @@ namespace Tonic{
     Synth();
     
     //! Add a continuous parameter with value, min, and max. DisplayName will be equal to name
-    ControlValue  & addParameter(string name, float value=0, float min=0, float max=1.f);
+    ControlValue  & addParameter(string name, float value=0, float min=0, float max=1.f, bool isLogarithmic=false);
     
     //! Add a continuous parameter with a custom display name
-    ControlValue  & addParameter(string name, string displayName, float value=0, float min=0, float max=1.f);
+    ControlValue  & addParameter(string name, string displayName, float value=0, float min=0, float max=1.f, bool isLogarithmic=false);
     
     //! Add a binary parameter (on/off). Type defaults to Toggle, but can also be set to Momentary
     ControlValue  & addBinaryParameter(string name);
@@ -64,7 +65,7 @@ namespace Tonic{
   protected:
 
     //! Helper to insert new parameters to map
-    ControlValue & createParameter(SynthParameterType type, string name, string displayName, float value, float min, float max);
+    ControlValue & createParameter(SynthParameterType type, string name, string displayName, float value, float min, float max, bool isLogarithmic);
 
     // set to true in constructor to clamp incoming parameters to defined min/max
     bool  clampsParameters_; 

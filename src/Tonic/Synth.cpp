@@ -21,19 +21,20 @@ namespace Tonic {
     name(""),
     type(SynthParameterTypeContinuous),
     min(-FLT_MIN),
-    max(FLT_MAX)
+    max(FLT_MAX),
+    isLogarithmic(false)
   {}
 
   Synth::Synth() :
     clampsParameters_(false)
   {}
 
-  ControlValue & Synth::addParameter(string name, float value, float min, float max){
-    return createParameter(SynthParameterTypeContinuous, name, name, value, min, max);
+  ControlValue & Synth::addParameter(string name, float value, float min, float max, bool isLogarithmic){
+    return createParameter(SynthParameterTypeContinuous, name, name, value, min, max, isLogarithmic);
   }
   
-  ControlValue & Synth::addParameter(string name, string displayName, float value, float min, float max){
-    return createParameter(SynthParameterTypeContinuous, name, displayName, value, min, max);
+  ControlValue & Synth::addParameter(string name, string displayName, float value, float min, float max, bool isLogarithmic){
+    return createParameter(SynthParameterTypeContinuous, name, displayName, value, min, max, isLogarithmic);
   }
   
   ControlValue  & Synth::addBinaryParameter(string name){
@@ -41,7 +42,7 @@ namespace Tonic {
   }
   
   ControlValue  & Synth::addBinaryParameter(string name, string displayName, bool isMomentary){
-    return createParameter(isMomentary ? SynthParameterTypeMomentary : SynthParameterTypeToggle, name, displayName, 0, 0, 1);
+    return createParameter(isMomentary ? SynthParameterTypeMomentary : SynthParameterTypeToggle, name, displayName, 0, 0, 1, false);
   }
   
   void Synth::setParameter(string name, float value){
@@ -54,6 +55,11 @@ namespace Tonic {
                 
           case SynthParameterTypeContinuous:
             param.value.setValue(clamp(value, param.max, param.min));
+            break;
+            
+          case SynthParameterTypeToggle:
+          case SynthParameterTypeMomentary:
+            param.value.setValue(value <= 0 ? 0 : 1.0f);
             break;
             
           default:
@@ -80,7 +86,7 @@ namespace Tonic {
   }
   
   
-  ControlValue & Synth::createParameter(SynthParameterType type, string name, string displayName, float value, float min, float max){
+  ControlValue & Synth::createParameter(SynthParameterType type, string name, string displayName, float value, float min, float max, bool isLogarithmic){
     if (parameters_.find(name)==parameters_.end()) {
       
       SynthParameter newParam;
@@ -90,6 +96,7 @@ namespace Tonic {
       newParam.type = type;
       newParam.min = min;
       newParam.max = max;
+      newParam.isLogarithmic = isLogarithmic;
       
       parameters_[name] = newParam;
     }

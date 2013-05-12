@@ -102,7 +102,7 @@
     [self setSliderForNormPosition:normPosition];
     
     // set synth parameter
-    float paramValue = Tonic::map(normPosition, 0.0f, 1.0f, _synthParameter.min, _synthParameter.max, true);
+    float paramValue = _synthParameter.isLogarithmic ? Tonic::mapLinToLog(normPosition, _synthParameter.min, _synthParameter.max) : Tonic::map(normPosition, 0.0f, 1.0f, _synthParameter.min, _synthParameter.max, true);
     [self updateValueLabel:paramValue];
     _synthParameter.value.setValue(paramValue);
   }
@@ -121,6 +121,7 @@
   self.paramValueLabel.text = [NSString stringWithFormat:@"%.3f", value];
 }
 
+
 #pragma mark - Property overrides
 
 - (void)setSynthParameter:(Tonic::Synth::SynthParameter)parameter
@@ -131,7 +132,7 @@
   float paramValue = parameter.value.getValue();
   [self updateValueLabel:paramValue];
   
-  float normValue = Tonic::map(paramValue, _synthParameter.min, _synthParameter.max, 0.f, 1.f, true);
+  float normValue = _synthParameter.isLogarithmic ? Tonic::mapLogToLin(paramValue, _synthParameter.min, _synthParameter.max) : Tonic::map(paramValue, _synthParameter.min, _synthParameter.max, 0.f, 1.f, true);
   [self setSliderForNormPosition:normValue];
 }
 
