@@ -15,6 +15,7 @@ public:
   
   ReverbTestSynth(){
     
+    ControlValue preDelay = addParameter("preDelay", "Pre-delay", 0.001f, 0.001f, 0.2f, true);
     ControlValue density = addParameter("density", "Density", 0.5f, 0.f, 1.f);
     ControlValue shape = addParameter("shape", "Shape", 0.5f, 0.f, 1.f);
     ControlValue size = addParameter("size", "Size", 0.5f, 0.f, 1.f);
@@ -30,7 +31,13 @@ public:
     
     Generator tone = RectWave().pwm(0.5f).freq(Tonic::mtof(60)) * ADSR(0.001f, 0.08f, 0, 0.01f).doesSustain(false).exponential(true).trigger(offbeat);
     
-    Reverb reverb = Reverb().density(density).roomShape(shape).roomSize(size).dryLevel(ControlDbToLinear().in(dry)).wetLevel(ControlDbToLinear().in(wet));
+    Reverb reverb = Reverb()
+      .preDelayTime(preDelay)
+      .density(density)
+      .roomShape(shape)
+      .roomSize(size)
+      .dryLevel(ControlDbToLinear().in(dry))
+      .wetLevel(ControlDbToLinear().in(wet));
     
     outputGen = ((click + tone) >> reverb) * 0.8f;
   }
