@@ -77,9 +77,14 @@ using Tonic::SynthFactory;
   cl.shadowOpacity = 0.4f;
   cl.shadowRadius = 3.0f;
   cl.shadowOffset = CGSizeMake(0, 1);
-  cl.shadowPath = [UIBezierPath bezierPathWithRect:cl.bounds].CGPath;
   
 }
+
+- (void)viewWillLayoutSubviews
+{
+  self.descContainer.layer.shadowPath = [UIBezierPath bezierPathWithRect:self.descContainer.bounds].CGPath;
+}
+
 #pragma mark - Table Delegate
 
 - (BOOL)tableView:(UITableView *)tableView shouldHighlightRowAtIndexPath:(NSIndexPath *)indexPath
