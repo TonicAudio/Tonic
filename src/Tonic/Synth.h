@@ -70,6 +70,7 @@ namespace Tonic{
     // set to true in constructor to clamp incoming parameters to defined min/max
     bool  clampsParameters_; 
     std::map<string, SynthParameter> parameters_;
+    std::vector<string> orderedParameterNames_;
     
   };
   

@@ -77,14 +77,6 @@ namespace Tonic {
 
   }
   
-  vector<Synth::SynthParameter> Synth::getParameters(){
-    vector<Synth::SynthParameter> returnParams;
-    for (std::map<string, SynthParameter>::iterator it = parameters_.begin(); it != parameters_.end(); it++){
-      returnParams.push_back(it->second);
-    }
-    return returnParams;
-  }
-  
   
   ControlValue & Synth::createParameter(SynthParameterType type, string name, string displayName, float value, float min, float max, bool isLogarithmic){
     if (parameters_.find(name)==parameters_.end()) {
@@ -99,8 +91,21 @@ namespace Tonic {
       newParam.isLogarithmic = isLogarithmic;
       
       parameters_[name] = newParam;
+      orderedParameterNames_.push_back(name);
     }
+    
     return parameters_[name].value;
+  }
+  
+  vector<Synth::SynthParameter> Synth::getParameters(){
+    vector<Synth::SynthParameter> returnParams;
+    for (std::vector<string>::iterator it = orderedParameterNames_.begin(); it != orderedParameterNames_.end(); it++){
+      std::map<string, SynthParameter>::iterator paramIt = parameters_.find(*it);
+      if (paramIt != parameters_.end()){
+        returnParams.push_back(paramIt->second);
+      }
+    }
+    return returnParams;
   }
   
 }
