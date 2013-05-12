@@ -147,14 +147,10 @@ namespace Tonic {
       
       for (unsigned int i=0; i<kSynthesisBlockSize; i++){
         
-        // Tick input into lookahead delay
-        for (unsigned int i=0; i<nChannels; i++){
-          lookaheadDelayLine_.tickIn(*dryptr++, i);
-        }
-        
-        // Get amplitude input value - max of left/right
+        // Tick input into lookahead delay and get amplitude input value - max of left/right
         ampInputValue = 0;
         for (unsigned int i=0; i<nChannels; i++){
+          lookaheadDelayLine_.tickIn(*dryptr++, i);
           ampInputValue = max(ampInputValue,*ampData++);
         }
         
