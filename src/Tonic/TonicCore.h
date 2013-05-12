@@ -124,8 +124,8 @@ namespace Tonic {
     return result;
   }
   
-  
-  #define _TONIC_LOG_MIN_EXP -13.f
+  // 2^-13.2877 ~= 0.0001
+  #define _TONIC_LOG_MIN_EXP -13.2877f
   
   //! Takes value 0-1, maps to logarithmic value scaled to min-max. Useful for making faders.
   inline static TonicFloat mapLinToLog(float linValue, float min, float max){
