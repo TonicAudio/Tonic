@@ -92,16 +92,16 @@ namespace Tonic {
       updateTapTimes(context);
       
       // pass thru input filters
-      if (inputFiltBypasCtrlGen_.tick(context).value != 0.f){
+      if (inputFiltBypasCtrlGen_.tick(context).value == 0.f){
         
-        inputLPF_.tickThrough(dryFrames_, context);
-        inputHPF_.tickThrough(dryFrames_, context);
+        inputLPF_.tickThrough(dryFrames_, workSpace_[0], context);
+        inputHPF_.tickThrough(workSpace_[0], workSpace_[0], context);
         
       }
-
-      outputFrames_.copy(dryFrames_);
+      else{
+        workSpace_[0].copy(dryFrames_);
+      }
       
-      TonicFloat *inptr = &dryFrames_[0];
       TonicFloat *wkptr0 = &(workSpace_[0])[0];
       TonicFloat *wkptr1 = &(workSpace_[1])[0];
       TonicFloat *outptr = &outputFrames_[0];
@@ -110,21 +110,24 @@ namespace Tonic {
       TonicFloat preDelayTime = preDelayTimeCtrlGen_.tick(context).value;
       
       for (unsigned int i=0; i<kSynthesisBlockSize; i++){
-                
+      
+        // filtered input is in w0
+        // predelay output is in w1
+        
         // pre-delay
-        preDelayLine_.tickIn(*inptr++);
-        *wkptr0 = preDelayLine_.tickOut(preDelayTime);
+        preDelayLine_.tickIn(*wkptr0);
+        *wkptr1 = preDelayLine_.tickOut(preDelayTime);
         preDelayLine_.advance();
         
-        // taps
-        reflectDelayLine_.tickIn(*wkptr0);
+        // taps - write back to w0
+        reflectDelayLine_.tickIn(*wkptr1++);
+        *wkptr0 = 0;
         for (unsigned int t=0; t<reflectTapTimes_.size(); t++){
           *wkptr0 += reflectDelayLine_.tickOut(reflectTapTimes_[t]) * reflectTapScale_[t];
         }
         
         reflectDelayLine_.advance();
         wkptr0++;
-        
       }
       
       // TODO: combs

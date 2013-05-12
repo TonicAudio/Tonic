@@ -16,6 +16,8 @@ public:
   ReverbTestSynth(){
     
     ControlValue preDelay = addParameter("preDelay", "Pre-delay", 0.001f, 0.001f, 0.2f, true);
+    ControlValue inputLPF = addParameter("inputLPF", "Input LPF cutoff (Hz)", 20.f, 20.f, 400.f);
+    ControlValue inputHPF = addParameter("inputHPF", "Input HPF cutoff (Hz)", 12000.0f, 4000.f, 18000.f);
     ControlValue density = addParameter("density", "Density", 0.5f, 0.f, 1.f);
     ControlValue shape = addParameter("shape", "Shape", 0.5f, 0.f, 1.f);
     ControlValue size = addParameter("size", "Size", 0.5f, 0.f, 1.f);
@@ -33,6 +35,8 @@ public:
     
     Reverb reverb = Reverb()
       .preDelayTime(preDelay)
+      .inputLPFCutoff(inputHPF)
+      .inputHPFCutoff(inputHPF)
       .density(density)
       .roomShape(shape)
       .roomSize(size)

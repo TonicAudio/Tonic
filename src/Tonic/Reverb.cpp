@@ -57,7 +57,7 @@ namespace Tonic { namespace Tonic_{
       
       // compute base round-trip times from listener to wall, based on shape and size values
       TonicFloat shape = clamp(shapeOutput.value, 0.f, 1.f);
-      TonicFloat size = clamp(shapeOutput.value, 0.f, 1.f);
+      TonicFloat size = clamp(sizeOutput.value, 0.f, 1.f);
 
       TonicFloat wDist1 = map(size, 0.f, 1.f, TONIC_REVERB_MIN_WALL_DIST, TONIC_REVERB_MAX_WALL_DIST, true);
       TonicFloat wDist2 = map(size * (1.1f - shape), 0.f, 1.f, TONIC_REVERB_MIN_WALL_DIST, TONIC_REVERB_MAX_WALL_DIST, true);
