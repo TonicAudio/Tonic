@@ -16,7 +16,10 @@ namespace Tonic {
    
     Effect_::Effect_(){
       dryFrames_.resize(kSynthesisBlockSize, 1, 0);
+      mixWorkspace_.resize(kSynthesisBlockSize, 1, 0);
       bypassGen_ = ControlValue(0);
+      dryLevelGen_ = FixedValue(0.0);
+      wetLevelGen_ = FixedValue(1.0);
     }
     
   }

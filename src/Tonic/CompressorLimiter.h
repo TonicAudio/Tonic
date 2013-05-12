@@ -51,8 +51,8 @@ namespace Tonic {
 
       // Base class methods overridden here for specialized input behavior
       void setInput( Generator input );
-      void tick(TonicFrames &frames, const SynthesisContext_ &context );
-      void tickThrough(TonicFrames & inFrames, TonicFrames & outFrames);
+      void tick(TonicFrames &frames, const SynthesisContext_ & context );
+      void tickThrough(TonicFrames & inFrames, TonicFrames & outFrames, const SynthesisContext_ & context);
       
       // setters
       void setAudioInput( Generator gen );
@@ -75,51 +75,16 @@ namespace Tonic {
     
     inline void Compressor_::tick(TonicFrames &frames, const SynthesisContext_ &context ){
       
-      // check context to see if we need new frames
       if (context.elapsedFrames == 0 || lastFrameIndex_ != context.elapsedFrames){
-        lockMutex();
-        input_.tick(dryFrames_, context); // get input frames
         amplitudeInput_.tick(ampInputFrames_, context); // get amp input frames
-        computeSynthesisBlock(context);
-
-        // bypass processing
-        bool bypass = bypassGen_.tick(context).value != 0.f;
-        if (bypass){
-          outputFrames_.copy(dryFrames_);
-        }
-
-        unlockMutex();
-        lastFrameIndex_ = context.elapsedFrames;
       }
-      
-      // copy synthesis block to frames passed in
-      frames.copy(outputFrames_);
-      
-#ifdef TONIC_DEBUG
-      if(frames(0,0) != frames(0,0)){
-        Tonic::error("Effect_::tick NaN detected.");
-      }
-#endif
+      Effect_::tick(frames, context);
       
     }
     
-    inline void Compressor_::tickThrough(TonicFrames & inFrames, TonicFrames & outFrames){
-      dryFrames_.copy(inFrames);
+    inline void Compressor_::tickThrough(TonicFrames & inFrames, TonicFrames & outFrames, const SynthesisContext_ & context){
       ampInputFrames_.copy(inFrames);
-      lockMutex();
-      computeSynthesisBlock(SynthesisContext_());
-      
-      // bypass processing
-      bool bypass = bypassGen_.tick(SynthesisContext_()).value != 0.f;
-      if (bypass){
-        outFrames.copy(dryFrames_);
-      }
-      else{
-        outFrames.copy(outputFrames_);
-      }
-      
-      unlockMutex();
-
+      Effect_::tickThrough(inFrames, outFrames, context);
     }
     
     inline void Compressor_::computeSynthesisBlock(const SynthesisContext_ &context){

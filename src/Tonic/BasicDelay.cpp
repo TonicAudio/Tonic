@@ -13,10 +13,10 @@ namespace Tonic { namespace Tonic_{
   BasicDelay_::BasicDelay_() {
     delayTimeFrames_.resize(kSynthesisBlockSize, 1, 0);
     fbkFrames_.resize(kSynthesisBlockSize, 1, 0);
-    mixFrames_.resize(kSynthesisBlockSize, 1, 0);
     delayTimeGen_ = FixedValue(0);
     fbkGen_ = FixedValue(0);
-    mixGen_ = FixedValue(0);
+    dryLevelGen_ = FixedValue(0.5);
+    wetLevelGen_ = FixedValue(0.5);
   }
   
   BasicDelay_::~BasicDelay_(){

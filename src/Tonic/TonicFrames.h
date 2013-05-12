@@ -46,21 +46,21 @@ namespace Tonic {
       The result can be used as an lvalue. This reference is valid
       until the resize function is called or the array is destroyed. The
       index \c n must be between 0 and size less one.  No range checking
-      is performed unless _STK_DEBUG_ is defined.
+      is performed unless TONIC_DEBUG is defined.
     */
     TonicFloat& operator[] ( size_t n );
 
     //! Subscript operator that returns the value at element \c n of self.
     /*!
       The index \c n must be between 0 and size less one.  No range
-      checking is performed unless _STK_DEBUG_ is defined.
+      checking is performed unless TONIC_DEBUG is defined.
     */
     TonicFloat operator[] ( size_t n ) const;
 
     //! Assignment by sum operator into self.
     /*!
       The dimensions of the argument are expected to be the same as
-      self.  No range checking is performed unless _STK_DEBUG_ is
+      self.  No range checking is performed unless TONIC_DEBUG is
       defined.
     */
     void operator+= ( TonicFrames& f );
@@ -71,7 +71,7 @@ namespace Tonic {
     //! Assignment by product operator into self.
     /*!
       The dimensions of the argument are expected to be the same as
-      self.  No range checking is performed unless _STK_DEBUG_ is
+      self.  No range checking is performed unless TONIC_DEBUG is
       defined.
     */
     void operator*= ( TonicFrames& f );
@@ -85,7 +85,7 @@ namespace Tonic {
       until the resize function is called or the array is destroyed. The
       \c frame index must be between 0 and frames() - 1.  The \c channel
       index must be between 0 and channels() - 1.  No range checking is
-      performed unless _STK_DEBUG_ is defined.
+      performed unless TONIC_DEBUG is defined.
     */
     TonicFloat& operator() ( size_t frame, unsigned int channel );
 
@@ -93,7 +93,7 @@ namespace Tonic {
     /*!
       The \c frame index must be between 0 and frames() - 1.  The \c
       channel index must be between 0 and channels() - 1.  No range checking
-      is performed unless _STK_DEBUG_ is defined.
+      is performed unless TONIC_DEBUG is defined.
     */
     TonicFloat operator() ( size_t frame, unsigned int channel ) const;
       
@@ -121,7 +121,7 @@ namespace Tonic {
       This function performs linear interpolation.  The \c frame
       index must be between 0.0 and frames() - 1.  The \c channel index
       must be between 0 and channels() - 1.  No range checking is
-      performed unless _STK_DEBUG_ is defined.
+      performed unless TONIC_DEBUG is defined.
     */
     TonicFloat interpolate( TonicFloat frame, unsigned int channel = 0 ) const;
 
@@ -190,7 +190,7 @@ namespace Tonic {
 
   inline TonicFloat& TonicFrames :: operator[] ( size_t n )
   {
-  #if defined(_STK_DEBUG_)
+  #if defined(TONIC_DEBUG)
     if ( n >= size_ ) {
       std::ostringstream error;
       error << "TonicFrames::operator[]: invalid index (" << n << ") value!";
@@ -203,7 +203,7 @@ namespace Tonic {
 
   inline TonicFloat TonicFrames :: operator[] ( size_t n ) const
   {
-  #if defined(_STK_DEBUG_)
+  #if defined(TONIC_DEBUG)
     if ( n >= size_ ) {
       std::ostringstream error;
       error << "TonicFrames::operator[]: invalid index (" << n << ") value!";
@@ -216,7 +216,7 @@ namespace Tonic {
 
   inline TonicFloat& TonicFrames :: operator() ( size_t frame, unsigned int channel )
   {
-  #if defined(_STK_DEBUG_)
+  #if defined(TONIC_DEBUG)
     if ( frame >= nFrames_ || channel >= nChannels_ ) {
       std::ostringstream error;
       error << "TonicFrames::operator(): invalid frame (" << frame << ") or channel (" << channel << ") value!";
@@ -229,7 +229,7 @@ namespace Tonic {
 
   inline TonicFloat TonicFrames :: operator() ( size_t frame, unsigned int channel ) const
   {
-  #if defined(_STK_DEBUG_)
+  #if defined(TONIC_DEBUG)
     if ( frame >= nFrames_ || channel >= nChannels_ ) {
       std::ostringstream error;
       error << "TonicFrames::operator(): invalid frame (" << frame << ") or channel (" << channel << ") value!";
@@ -260,51 +260,53 @@ namespace Tonic {
   
   inline void TonicFrames::copy( TonicFrames &f ){
     
-    if (nFrames_ == f.frames()){
+#if defined(TONIC_DEBUG)
+    if ( f.frames() != nFrames_) {
+      std::ostringstream error;
+      error << "TonicFrames::operator+=: frames argument must be of equal dimensions!";
+      Stk::handleError( error.str(), StkError::MEMORY_ACCESS );
+    }
+#endif
+    
+    unsigned int fChannels = f.channels();
+    TonicFloat *dptr = data_;
+    TonicFloat *fptr = &f[0];
+    
+    if (nChannels_ == fChannels){
+      memcpy(dptr, fptr, size_ * sizeof(TonicFloat));
+    }
+    else if (nChannels_ < fChannels){
       
-      unsigned int fChannels = f.channels();
-      TonicFloat *dptr = data_;
-      TonicFloat *fptr = &f[0];
-      
-      if (nChannels_ == fChannels){
-        memcpy(dptr, fptr, size_ * sizeof(TonicFloat));
-      }
-      else if (nChannels_ < fChannels){
-        
-        // sum channels
-        memset(dptr, 0, size_ * sizeof(TonicFloat));
-        for (unsigned int c=0; c<fChannels; c++){
-          dptr = data_;
-          fptr = &f(0,c);
-          for (unsigned int i=0; i<nFrames_; i++, dptr+=nChannels_, fptr+=fChannels){
-            *dptr += *fptr;
-          }
-        }
-        
-        // apply scaling (average of channels)
-        TonicFloat s = 1.0f/fChannels;
+      // sum channels
+      memset(dptr, 0, size_ * sizeof(TonicFloat));
+      for (unsigned int c=0; c<fChannels; c++){
         dptr = data_;
-        for (unsigned int i=0; i<nFrames_; i++, dptr+=nChannels_){
-          *dptr *= s;
+        fptr = &f(0,c);
+        for (unsigned int i=0; i<nFrames_; i++, dptr+=nChannels_, fptr+=fChannels){
+          *dptr += *fptr;
         }
       }
-      else{
-        // just copy one channel, then fill
-        vcopy(dptr, nChannels_, fptr, fChannels, nFrames_);
-        
-        // fill all channels if necessary
-        fillChannels();
-      }
       
+      // apply scaling (average of channels)
+      TonicFloat s = 1.0f/fChannels;
+      dptr = data_;
+      for (unsigned int i=0; i<nFrames_; i++, dptr+=nChannels_){
+        *dptr *= s;
+      }
     }
     else{
-      error("TonicFrames. Trying to fill frames from a source with a different number of frames", true);
+      // just copy one channel, then fill
+      vcopy(dptr, nChannels_, fptr, fChannels, nFrames_);
+      
+      // fill all channels if necessary
+      fillChannels();
     }
+      
   }
 
   inline void TonicFrames :: operator+= ( TonicFrames& f )
   {
-  #if defined(_STK_DEBUG_)
+  #if defined(TONIC_DEBUG)
     if ( f.frames() != nFrames_ || f.channels() != nChannels_ ) {
       std::ostringstream error;
       error << "TonicFrames::operator+=: frames argument must be of equal dimensions!";
@@ -326,7 +328,7 @@ namespace Tonic {
   
   inline void TonicFrames :: operator -= ( TonicFrames& f )
   {
-  #if defined(_STK_DEBUG_)
+  #if defined(TONIC_DEBUG)
     if ( f.frames() != nFrames_ || f.channels() != nChannels_ ) {
       std::ostringstream error;
       error << "TonicFrames::operator+=: frames argument must be of equal dimensions!";
@@ -348,29 +350,58 @@ namespace Tonic {
 
   inline void TonicFrames :: operator*= ( TonicFrames& f )
   {
-  #if defined(_STK_DEBUG_)
-    if ( f.frames() != nFrames_ || f.channels() != nChannels_ ) {
+    
+#if defined(TONIC_DEBUG)
+    if ( f.frames() != nFrames_) {
       std::ostringstream error;
-      error << "TonicFrames::operator*=: frames argument must be of equal dimensions!";
+      error << "TonicFrames::operator+=: frames argument must be of equal dimensions!";
       Stk::handleError( error.str(), StkError::MEMORY_ACCESS );
     }
-  #endif
-
+#endif
+    
     TonicFloat *fptr = &f[0];
     TonicFloat *dptr = data_;
+
+    unsigned int fChannels = f.channels();
     
-  #ifdef USE_APPLE_ACCELERATE
-    vDSP_vmul(dptr, 1, fptr, 1, dptr, 1, size_);
-  #else
-    for ( unsigned int i=0; i<size_; i++ )
-      *dptr++ *= *fptr++;
-  #endif
+    if (nChannels_ == fChannels){
+      
+#ifdef USE_APPLE_ACCELERATE
+      vDSP_vmul(dptr, 1, fptr, 1, dptr, 1, size_);
+#else
+      for ( unsigned int i=0; i<size_; i++ )
+        *dptr++ *= *fptr++;
+#endif
+      
+    }
+    else if (nChannels_ < fChannels){
+      
+      //  just multiply by first channel of rhs
+#ifdef USE_APPLE_ACCELERATE
+      vDSP_vmul(dptr, 1, fptr, fChannels, dptr, 1, nFrames_);
+#else
+      for ( unsigned int i=0; i<size_; i++ )
+        *dptr++ *= *fptr++;
+#endif
+      
+    }
+    else{
+      //  multiply both channels by rhs
+#ifdef USE_APPLE_ACCELERATE
+      vDSP_vmul(dptr, 2, fptr, 1, dptr, 2, nFrames_);
+      vDSP_vmul(dptr+1, 2, fptr, 1, dptr+1, 2, nFrames_);
+#else
+      for ( unsigned int i=0; i<frames_; i++ )
+        *dptr++ *= *fptr;
+        *dptr++ *= *fptr++;
+#endif
+    }
   }
 
 
   inline void TonicFrames :: operator /= ( TonicFrames& f )
   {
-  #if defined(_STK_DEBUG_)
+  #if defined(TONIC_DEBUG)
     if ( f.frames() != nFrames_ || f.channels() != nChannels_ ) {
       std::ostringstream error;
       error << "TonicFrames::operator*=: frames argument must be of equal dimensions!";

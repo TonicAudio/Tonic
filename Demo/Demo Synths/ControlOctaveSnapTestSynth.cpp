@@ -74,6 +74,8 @@ class ControlSnapToScaleTestSynth : public Synth{
       .setScale(scale)
       .in( stepper1 );
     
+    Generator delayMix = ControlRandom().min(0).max(0.1).trigger(switchIt).smoothed();
+    
     outputGen = (
     
       SineWave().freq(
@@ -90,9 +92,7 @@ class ControlSnapToScaleTestSynth : public Synth{
       
     )
     
-    * 0.3 * env >> StereoDelay(0.3,0.33).feedback(0.3).mix(
-      ControlRandom().min(0).max(0.1).trigger(switchIt).smoothed()
-    );
+    * 0.3 * env >> StereoDelay(0.3,0.33).feedback(0.3).dryLevel(1.0 - delayMix).wetLevel(delayMix);
     
     
   }

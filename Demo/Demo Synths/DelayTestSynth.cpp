@@ -56,10 +56,13 @@ public:
     
     LPF12 filt = LPF12().cutoff(400.0f * (1.0f + fEnv*9.0f)).Q(1.1f);
     
+    Generator smoothMix = delayMix.smoothed();
+    
     BasicDelay delay = BasicDelay(0.5f, 1.0f)
       .delayTime( delayTime.smoothed(0.5f) )
       .feedback( feedBack.smoothed() )
-      .mix( delayMix );
+      .dryLevel( 1.0f - smoothMix )
+      .wetLevel( smoothMix );
     
     outputGen = (osc >> filt >> delay) * ControlDbToLinear().in(volume).smoothed();
   }

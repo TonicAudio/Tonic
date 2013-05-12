@@ -48,7 +48,7 @@ public:
     
     Generator randomBass = (RectWave().freq( baseFreq ) * 0.5) >> LPF24().cutoff( 300 * (1 + bassFiltADSR * 2) * (1 + ((SineWave().freq(0.1) + 1) * 0.5))).Q(1.5);
     
-    StereoDelay delay = StereoDelay(0.37, 0.38).feedback(0.4).mix(0.2 );
+    StereoDelay delay = StereoDelay(0.37, 0.38).feedback(0.4).dryLevel(0.8).wetLevel(0.2);
     
     outputGen = (duckingComp.audioInput(randomBass >> delay).sidechainInput(snare)  + snare * 0.5);
   }

@@ -63,14 +63,10 @@ namespace Tonic {
       
         // Input generators
         ControlGenerator  preDelayTimeCtrlGen_;
+        ControlGenerator  inputFiltBypasCtrlGen_;
         ControlGenerator  roomSizeCtrlGen_;
         //ControlGenerator  densityCtrlGen_; // affects number of early reflection taps
       
-        ControlGenerator  inputFiltBypasCtrlGen_;
-      
-        // audio-rate to avoid zipper-noise when changing mix amt
-        Generator         dryLevelGen_;
-        Generator         wetLevelGen_;
       
         void computeSynthesisBlock( const SynthesisContext_ &context );
 
@@ -82,6 +78,7 @@ namespace Tonic {
         void setInput( Generator input );
       
         void setPreDelayTimeCtrlGen( ControlGenerator gen ) { preDelayTimeCtrlGen_ = gen; }
+        void setInputFiltBypassCtrlGen( ControlGenerator gen ) { inputFiltBypasCtrlGen_ = gen; }
         void setRoomSizeCtrlGen( ControlGenerator gen ) { roomSizeCtrlGen_ = roomSizeCtrlGen_; }
         void setInputLPFCutoffCtrlGen( ControlGenerator gen ) { inputLPF_.cutoff(gen); }
         void setInputHPFCutoffCtrlGen( ControlGenerator gen ) { inputHPF_.cutoff(gen); }
@@ -93,15 +90,15 @@ namespace Tonic {
       // TODO: update early reflection tap times here
 
       // Send dry input to output, apply mix level
-      dryLevelGen_.tick(workSpace_[0], context);
-      outputFrames_.copy(dryFrames_);
-      outputFrames_ *= workSpace_[0];
+//      dryLevelGen_.tick(workSpace_[0], context);
+//      outputFrames_.copy(dryFrames_);
+//      outputFrames_ *= workSpace_[0];
       
       // pass thru input filters
       if (inputFiltBypasCtrlGen_.tick(context).value == 0.f){
         
-        inputLPF_.tickThrough(dryFrames_);
-        inputHPF_.tickThrough(dryFrames_);
+        inputLPF_.tickThrough(dryFrames_, context);
+        inputHPF_.tickThrough(dryFrames_, context);
         
       }
       
@@ -138,9 +135,9 @@ namespace Tonic {
       // TODO: allpass
       
       // Final output is in workSpace_[0]
-      wetLevelGen_.tick(workSpace_[1], context);
-      workSpace_[0] *= workSpace_[1];
-      outputFrames_.copy(workSpace_[0]);
+//      wetLevelGen_.tick(workSpace_[1], context);
+//      workSpace_[0] *= workSpace_[1];
+//      outputFrames_.copy(workSpace_[0]);
       
     }
         
@@ -154,6 +151,7 @@ namespace Tonic {
       Reverb();
     
       createControlGeneratorSetters(Reverb, preDelayTime, setPreDelayTimeCtrlGen);
+      createControlGeneratorSetters(Reverb, bypassInputFilter, setInputFiltBypassCtrlGen);
       createControlGeneratorSetters(Reverb, roomSize, setRoomSizeCtrlGen);
     
   };
