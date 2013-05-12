@@ -48,6 +48,15 @@ namespace Tonic{
     
     Synth();
     
+    void                   setParameter(string name, float value=1);
+    
+    vector<SynthParameter> getParameters();
+    
+  protected:
+    
+    // ND: I moved these to protected because only subclasses should call them.
+    // No reason to make them publicly available since you can't change the signal chain dynamically.
+    
     //! Add a continuous parameter with value, min, and max. DisplayName will be equal to name
     ControlValue  & addParameter(string name, float value=0, float min=0, float max=1.f, bool isLogarithmic=false);
     
@@ -57,12 +66,6 @@ namespace Tonic{
     //! Add a binary parameter (on/off). Type defaults to Toggle, but can also be set to Momentary
     ControlValue  & addBinaryParameter(string name);
     ControlValue  & addBinaryParameter(string name, string displayName, bool isMomentary = false);
-    
-    void            setParameter(string name, float value=1);
-    
-    vector<SynthParameter> getParameters();
-    
-  protected:
 
     //! Helper to insert new parameters to map
     ControlValue & createParameter(SynthParameterType type, string name, string displayName, float value, float min, float max, bool isLogarithmic);
