@@ -13,6 +13,7 @@
 
 @property (nonatomic, readonly, weak) UIPanGestureRecognizer *panGesture;
 
++ (CGFloat)height;
 - (void)setColor:(UIColor*)color;
 - (void)setSynthParameter:(Tonic::Synth::SynthParameter)parameter;
 

@@ -59,6 +59,7 @@ using Tonic::SynthFactory;
   self.navigationItem.title = self.demoDef.synthDisplayName;
   self.descLabel.text = self.demoDef.synthDescription;
  
+  self.controlTableView.rowHeight = [SynthParameterCell height];
   [self.controlTableView registerClass:[SynthParameterCell class] forCellReuseIdentifier:kCellIdentifier];
   
   NSMutableArray *cellColors = [NSMutableArray array];

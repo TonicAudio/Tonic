@@ -25,6 +25,8 @@ namespace Tonic {
       
       Generator input_;
       
+      ControlGenerator bypassGen_;
+      
       TonicFrames dryFrames_;
       
       bool isStereoInput_;
@@ -32,8 +34,13 @@ namespace Tonic {
     public:
       
       Effect_(){
+        bypassGen_ = ControlValue(0);
         dryFrames_.resize(kSynthesisBlockSize, 1, 0);
       }
+      
+      void setBypassGenerator( ControlGenerator gen ){
+        bypassGen_ = gen;
+      };
       
       virtual void tick(TonicFrames &frames, const SynthesisContext_ &context );
       
@@ -45,7 +52,6 @@ namespace Tonic {
       */
       virtual void setIsStereoInput( bool stereo );
       
-    
       bool isStereoInput(){ return isStereoInput_; };
       
       //! Apply effect directly to passed in frames (output in-place)
@@ -71,8 +77,16 @@ namespace Tonic {
       
       // check context to see if we need new frames
       if (context.elapsedFrames == 0 || lastFrameIndex_ != context.elapsedFrames){
+        
         input_.tick(dryFrames_, context); // get input frames
         computeSynthesisBlock(context);
+
+        // bypass processing - still need to compute block so all generators stay in sync
+        bool bypass = bypassGen_.tick(context).value != 0.f;
+        if (bypass){
+          synthesisBlock_.copy(dryFrames_);
+        }
+        
         lastFrameIndex_ = context.elapsedFrames;
       }
       
@@ -88,9 +102,17 @@ namespace Tonic {
     }
     
     inline void Effect_::tickThrough(TonicFrames &frames){
+
       lockMutex();
       dryFrames_.copy(frames);
       computeSynthesisBlock(SynthesisContext_());
+      
+      // bypass processing - still need to compute block so all generators stay in sync
+      bool bypass = bypassGen_.tick(SynthesisContext_()).value != 0.f;
+      if (bypass){
+        synthesisBlock_.copy(dryFrames_);
+      }
+
       unlockMutex();
       frames.copy(synthesisBlock_);
     }
@@ -114,6 +136,8 @@ namespace Tonic {
     void tickThrough(TonicFrames & frames){
       this->gen()->tickThrough(frames);
     }
+    
+    createControlGeneratorSetters(EffectType, bypass, setBypassGenerator);
   
   };
   

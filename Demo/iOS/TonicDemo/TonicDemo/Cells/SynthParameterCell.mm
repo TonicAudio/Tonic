@@ -7,8 +7,10 @@
 //
 
 #import "SynthParameterCell.h"
+#import <QuartzCore/QuartzCore.h>
 
 #define kCellMargin 10.0f
+#define kCellHeight 60.f
 
 @interface SynthParameterCell () <UIGestureRecognizerDelegate>
 {
@@ -18,16 +20,24 @@
 @property (nonatomic, weak) UILabel *paramNameLabel;
 @property (nonatomic, weak) UILabel *paramValueLabel;
 @property (nonatomic, weak) UIView *paramSliderView;
+@property (nonatomic, weak) UIButton *toggleButton;
 @property (nonatomic, readwrite, weak) UIPanGestureRecognizer *panGesture;
 
 - (void)createUI;
 - (void)updateValueLabel:(float)value;
 - (void)setSliderForNormPosition:(float)normPos;
 - (void)handleCellPan:(UIPanGestureRecognizer*)pan;
+- (void)toggleButtonTouchDown;
+- (void)toggleButtonTouchUpInside;
+- (void)toggleButtonCancel;
 
 @end
 
 @implementation SynthParameterCell
+
++ (CGFloat)height{
+  return 60.f;
+}
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {
@@ -87,7 +97,21 @@
   valueLabel.shadowOffset = CGSizeMake(0, 1);  valueLabel.autoresizingMask = UIViewAutoresizingFlexibleBottomMargin | UIViewAutoresizingFlexibleWidth;
   [self.contentView addSubview:valueLabel];
   self.paramValueLabel = valueLabel;
-
+  
+  UIButton *toggleButton =  [UIButton buttonWithType:UIButtonTypeCustom];
+  toggleButton.frame = CGRectMake(self.contentView.bounds.size.width - kCellMargin - 70.f, kCellMargin, 70.f, 44.f);
+  toggleButton.backgroundColor = [UIColor clearColor];
+  toggleButton.opaque = NO;
+  toggleButton.hidden = YES;
+  toggleButton.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleBottomMargin;
+  toggleButton.layer.borderColor = [UIColor blackColor].CGColor;
+  toggleButton.layer.borderWidth = 2.0f;
+  [self.contentView addSubview:toggleButton];
+  self.toggleButton = toggleButton;
+  
+  [toggleButton addTarget:self action:@selector(toggleButtonTouchDown) forControlEvents:UIControlEventTouchDown];
+  [toggleButton addTarget:self action:@selector(toggleButtonTouchUpInside) forControlEvents:UIControlEventTouchUpInside];
+  [toggleButton addTarget:self action:@selector(toggleButtonCancel) forControlEvents:UIControlEventTouchUpOutside | UIControlEventTouchDragExit | UIControlEventTouchCancel];
 }
 
 - (void)handleCellPan:(UIPanGestureRecognizer *)pan
@@ -107,6 +131,37 @@
     _synthParameter.value.setValue(paramValue);
   }
 }
+
+- (void)toggleButtonTouchUpInside
+{
+  if (_synthParameter.type == Tonic::Synth::SynthParameterTypeToggle){
+    BOOL isOn = _synthParameter.value.getValue() != 0.f;
+    _synthParameter.value.setValue(isOn ? 0.f : 1.f);
+    self.toggleButton.backgroundColor = isOn ? [UIColor clearColor] : self.paramSliderView.backgroundColor;
+  }
+  else{ // momentary
+    self.toggleButton.backgroundColor = [UIColor clearColor];
+    _synthParameter.value.setValue(0);
+  }
+  
+}
+
+- (void)toggleButtonTouchDown
+{
+  self.toggleButton.backgroundColor = [UIColor colorWithWhite:0 alpha:0.5];
+  if (_synthParameter.type == Tonic::Synth::SynthParameterTypeMomentary){
+    _synthParameter.value.setValue(1.f);
+  }
+}
+
+- (void)toggleButtonCancel
+{
+  self.toggleButton.backgroundColor = [UIColor clearColor];
+  if (_synthParameter.type == Tonic::Synth::SynthParameterTypeMomentary){
+    _synthParameter.value.setValue(0.f);
+  }
+}
+
 
 - (void)setSliderForNormPosition:(float)normPos
 {
@@ -130,10 +185,26 @@
   self.paramNameLabel.text = [NSString stringWithUTF8String:parameter.displayName.c_str()];
 
   float paramValue = parameter.value.getValue();
-  [self updateValueLabel:paramValue];
   
-  float normValue = _synthParameter.isLogarithmic ? Tonic::mapLogToLin(paramValue, _synthParameter.min, _synthParameter.max) : Tonic::map(paramValue, _synthParameter.min, _synthParameter.max, 0.f, 1.f, true);
-  [self setSliderForNormPosition:normValue];
+  if (_synthParameter.type == Tonic::Synth::SynthParameterTypeContinuous){
+    self.panGesture.enabled = YES;
+    self.toggleButton.hidden = YES;
+    self.paramValueLabel.hidden = NO;
+    self.paramSliderView.hidden = NO;
+    [self updateValueLabel:paramValue];
+    float normValue = _synthParameter.isLogarithmic ? Tonic::mapLogToLin(paramValue, _synthParameter.min, _synthParameter.max) : Tonic::map(paramValue, _synthParameter.min, _synthParameter.max, 0.f, 1.f, true);
+    [self setSliderForNormPosition:normValue];
+  }
+  else{
+    self.panGesture.enabled = NO;
+    self.toggleButton.hidden = NO;
+    self.paramSliderView.hidden = YES;
+    self.paramValueLabel.hidden = YES;
+    if (_synthParameter.type == Tonic::Synth::SynthParameterTypeToggle){
+      self.toggleButton.backgroundColor = paramValue == 0.f ? [UIColor clearColor] : [self.paramSliderView backgroundColor];
+    }
+  }
+  
 }
 
 - (void)setColor:(UIColor*)color
