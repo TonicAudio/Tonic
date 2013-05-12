@@ -85,7 +85,7 @@ namespace Tonic {
     void setCoefficients( TonicFloat b0, TonicFloat b1, TonicFloat b2, TonicFloat a1, TonicFloat a2 );
     void setCoefficients( TonicFloat *newCoef );
     
-    void filter( TonicFrames &frames );
+    void filter( TonicFrames &inFrames, TonicFrames &outFrames );
   };
   
   inline void Biquad::setCoefficients(TonicFloat b0, TonicFloat b1, TonicFloat b2, TonicFloat a1, TonicFloat a2){
@@ -100,16 +100,16 @@ namespace Tonic {
     memcpy(coef_, newCoef, 5 * sizeof(TonicFloat));
   }
   
-  inline void Biquad::filter( TonicFrames &frames ){
+  inline void Biquad::filter( TonicFrames &inFrames, TonicFrames &outFrames ){
     
     // initialize vectors
     memcpy(&inputVec_[0], &inputVec_(kSynthesisBlockSize, 0), 2 * inputVec_.channels() * sizeof(TonicFloat));
-    memcpy(&inputVec_(2, 0), &frames[0], frames.size() * sizeof(TonicFloat));
+    memcpy(&inputVec_(2, 0), &inFrames[0], inFrames.size() * sizeof(TonicFloat));
     memcpy(&outputVec_[0], &outputVec_(kSynthesisBlockSize, 0), 2 * outputVec_.channels() * sizeof(TonicFloat));
     
     // perform IIR filter
     
-    unsigned int stride = frames.channels();
+    unsigned int stride = inFrames.channels();
     
 #ifdef USE_APPLE_ACCELERATE
     for (unsigned int c=0; c<stride; c++){
@@ -138,7 +138,7 @@ namespace Tonic {
 #endif
     
     // copy to synthesis block
-    memcpy(&frames[0], &outputVec_(2,0), kSynthesisBlockSize * stride * sizeof(TonicFloat));
+    memcpy(&outFrames[0], &outputVec_(2,0), kSynthesisBlockSize * stride * sizeof(TonicFloat));
   }
   
   

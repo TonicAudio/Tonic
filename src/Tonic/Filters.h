@@ -55,7 +55,7 @@ namespace Tonic {
       
       void computeSynthesisBlock( const SynthesisContext_ & context );
       
-      // subclasses override to compute new coefficients and apply filter to dryFrames, in-place
+      // subclasses override to compute new coefficients and apply filter
       virtual void applyFilter( TonicFloat cutoff, TonicFloat Q,  const SynthesisContext_ & context ) = 0;
       
     public:
@@ -90,9 +90,6 @@ namespace Tonic {
       
       applyFilter(cCutoff, cQ, context);
       
-      // copy frames to block
-      outputFrames_.copy(dryFrames_);
-      
     }
     
     // ===============================
@@ -110,14 +107,15 @@ namespace Tonic {
       inline void applyFilter( TonicFloat cutoff, TonicFloat Q, const SynthesisContext_ & context )
       {
         
-        TonicFloat *outptr = &dryFrames_[0];
+        TonicFloat *inptr = &dryFrames_[0];
+        TonicFloat *outptr = &outputFrames_[0];
         TonicFloat coef = cutoffToOnePoleCoef(cutoff);
         TonicFloat norm = bNormalizeGain_ ? 1.0f - coef : 1.0f;
         unsigned int nChannels = dryFrames_.channels();
         
         for (unsigned int i=0; i<kSynthesisBlockSize; i++){
           for (unsigned int c=0; c<nChannels; c++){
-            lastOut_[c] = (norm * (*outptr)) + (coef * lastOut_[c]);
+            lastOut_[c] = (norm * (*inptr++)) + (coef * lastOut_[c]);
             *outptr++ = lastOut_[c];
           }
         }
@@ -148,14 +146,15 @@ namespace Tonic {
       inline void applyFilter( TonicFloat cutoff, TonicFloat Q, const SynthesisContext_ & context )
       {
         
-        TonicFloat *outptr = &dryFrames_[0];
+        TonicFloat *inptr = &dryFrames_[0];
+        TonicFloat *outptr = &outputFrames_[0];
         TonicFloat coef = cutoffToOnePoleCoef(cutoff);
         TonicFloat norm = bNormalizeGain_ ? 1.0f - coef : 1.0f;
         unsigned int nChannels = dryFrames_.channels();
         
         for (unsigned int i=0; i<kSynthesisBlockSize; i++){
           for (unsigned int c=0; c<nChannels; c++){
-            lastOut_[c] = (norm * (*outptr)) - (coef * lastOut_[c]);
+            lastOut_[c] = (norm * (*inptr++)) - (coef * lastOut_[c]);
             *outptr++ = lastOut_[c];
           }
         }
@@ -192,7 +191,7 @@ namespace Tonic {
         biquad_.setCoefficients(newCoef);
         
         // compute
-        biquad_.filter(dryFrames_);
+        biquad_.filter(dryFrames_, outputFrames_);
       }
       
     public:
@@ -231,8 +230,8 @@ namespace Tonic {
         biquads_[1].setCoefficients(newCoef);
         
         // compute
-        biquads_[0].filter(dryFrames_);
-        biquads_[1].filter(dryFrames_);
+        biquads_[0].filter(dryFrames_, outputFrames_);
+        biquads_[1].filter(outputFrames_, outputFrames_);
       }
       
     public:
@@ -268,7 +267,7 @@ namespace Tonic {
         biquad_.setCoefficients(newCoef);
         
         // compute
-        biquad_.filter(dryFrames_);
+        biquad_.filter(dryFrames_, outputFrames_);
       }
       
     public:
@@ -307,8 +306,8 @@ namespace Tonic {
         biquads_[1].setCoefficients(newCoef);
         
         // compute
-        biquads_[0].filter(dryFrames_);
-        biquads_[1].filter(dryFrames_);
+        biquads_[0].filter(dryFrames_, outputFrames_);
+        biquads_[1].filter(outputFrames_, outputFrames_);
       }
       
     public:
@@ -344,7 +343,7 @@ namespace Tonic {
         biquad_.setCoefficients(newCoef);
         
         // compute
-        biquad_.filter(dryFrames_);
+        biquad_.filter(dryFrames_, outputFrames_);
       }
       
     public:
@@ -383,8 +382,8 @@ namespace Tonic {
         biquads_[1].setCoefficients(newCoef);
         
         // compute
-        biquads_[0].filter(dryFrames_);
-        biquads_[1].filter(dryFrames_);
+        biquads_[0].filter(dryFrames_, outputFrames_);
+        biquads_[1].filter(outputFrames_, outputFrames_);
       }
       
     public:
