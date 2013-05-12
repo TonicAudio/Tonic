@@ -55,6 +55,7 @@
 #include "Tonic/Reverb.h"
 #include "Tonic/FilterUtils.h"
 #include "Tonic/DelayUtils.h"
+#include "Tonic/Reverb.h"
 
 // Utilities
 #include "Tonic/LFNoise.h"

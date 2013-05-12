@@ -180,9 +180,7 @@ using namespace Tonic;
         def.synthDisplayName = @"Reverb";
         def.synthDescription = @"Artificial Reverb";
         def.synthInstructions = @"Yeeeeah";
-        def.synthAction = ^(Tonic::Synth* synth, CGPoint touchPointNorm){
-
-        };
+        def.shouldAutoGenUI = YES;
       }
 
     }

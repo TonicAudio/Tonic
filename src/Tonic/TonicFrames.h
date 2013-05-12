@@ -307,43 +307,108 @@ namespace Tonic {
   inline void TonicFrames :: operator+= ( TonicFrames& f )
   {
   #if defined(TONIC_DEBUG)
-    if ( f.frames() != nFrames_ || f.channels() != nChannels_ ) {
+    if ( f.frames() != nFrames_ ) {
       std::ostringstream error;
       error << "TonicFrames::operator+=: frames argument must be of equal dimensions!";
       Stk::handleError( error.str(), StkError::MEMORY_ACCESS );
     }
   #endif
-
+    
     TonicFloat *fptr = &f[0];
     TonicFloat *dptr = data_;
-  #ifdef USE_APPLE_ACCELERATE
-    vDSP_vadd(dptr, 1, fptr, 1, dptr, 1, size_);
-  #else
-    for ( unsigned int i=0; i<size_; i++ )
-      *dptr++ += *fptr++;
-  #endif
-
+    
+    unsigned int fChannels = f.channels();
+    
+    if (nChannels_ == fChannels){
+      
+#ifdef USE_APPLE_ACCELERATE
+      vDSP_vadd(dptr, 1, fptr, 1, dptr, 1, size_);
+#else
+      for ( unsigned int i=0; i<size_; i++ )
+        *dptr++ += *fptr++;
+#endif
+      
+    }
+    else if (nChannels_ < fChannels){
+      
+      //  just add first channel of rhs
+#ifdef USE_APPLE_ACCELERATE
+      vDSP_vadd(dptr, 1, fptr, fChannels, dptr, 1, nFrames_);
+#else
+      for ( unsigned int i=0; i<nFrames_; i++ ){
+        *dptr++ -= *fptr++;
+        fptr++;
+      }
+#endif
+      
+    }
+    else{
+      //  add rhs to both channels
+#ifdef USE_APPLE_ACCELERATE
+      vDSP_vadd(dptr, 2, fptr, 1, dptr, 2, nFrames_);
+      vDSP_vadd(dptr+1, 2, fptr, 1, dptr+1, 2, nFrames_);
+#else
+      for ( unsigned int i=0; i<frames_; i++ ){
+        *dptr++ += *fptr;
+        *dptr++ += *fptr++;
+      }
+#endif
+    }
+    
   }
   
   
   inline void TonicFrames :: operator -= ( TonicFrames& f )
   {
   #if defined(TONIC_DEBUG)
-    if ( f.frames() != nFrames_ || f.channels() != nChannels_ ) {
+    if ( f.frames() != nFrames_ ) {
       std::ostringstream error;
       error << "TonicFrames::operator+=: frames argument must be of equal dimensions!";
       Stk::handleError( error.str(), StkError::MEMORY_ACCESS );
     }
   #endif
 
+    
     TonicFloat *fptr = &f[0];
     TonicFloat *dptr = data_;
-  #ifdef USE_APPLE_ACCELERATE
-    vDSP_vsub(fptr, 1, dptr, 1, dptr, 1, size_);
-  #else
-    for ( unsigned int i=0; i<size_; i++ )
-      *dptr++ -= *fptr++;
-  #endif
+
+    unsigned int fChannels = f.channels();
+    
+    if (nChannels_ == fChannels){
+      
+#ifdef USE_APPLE_ACCELERATE
+      vDSP_vsub(fptr, 1, dptr, 1, dptr, 1, size_);
+#else
+      for ( unsigned int i=0; i<size_; i++ )
+        *dptr++ -= *fptr++;
+#endif
+    }
+    else if (nChannels_ < fChannels){
+      
+      //  just subtract first channel of rhs
+#ifdef USE_APPLE_ACCELERATE
+      vDSP_vsub(dptr, 1, fptr, fChannels, dptr, 1, nFrames_);
+#else
+      for ( unsigned int i=0; i<nFrames_; i++ ){
+        *dptr++ -= *fptr++;
+        fptr++;
+      }
+#endif
+      
+    }
+    else{
+      //  subtract both channels by rhs
+#ifdef USE_APPLE_ACCELERATE
+      vDSP_vsub(dptr, 2, fptr, 1, dptr, 2, nFrames_);
+      vDSP_vsub(dptr+1, 2, fptr, 1, dptr+1, 2, nFrames_);
+#else
+      for ( unsigned int i=0; i<frames_; i++ ){
+        *dptr++ -= *fptr;
+        *dptr++ -= *fptr++;
+      }
+#endif
+    }
+
 
   }
   
@@ -369,8 +434,9 @@ namespace Tonic {
 #ifdef USE_APPLE_ACCELERATE
       vDSP_vmul(dptr, 1, fptr, 1, dptr, 1, size_);
 #else
-      for ( unsigned int i=0; i<size_; i++ )
+      for ( unsigned int i=0; i<size_; i++ ){
         *dptr++ *= *fptr++;
+      }
 #endif
       
     }
@@ -380,10 +446,12 @@ namespace Tonic {
 #ifdef USE_APPLE_ACCELERATE
       vDSP_vmul(dptr, 1, fptr, fChannels, dptr, 1, nFrames_);
 #else
-      for ( unsigned int i=0; i<size_; i++ )
+      for ( unsigned int i=0; i<frames_; i++ ){
         *dptr++ *= *fptr++;
+        fptr++;
+      }
 #endif
-      
+
     }
     else{
       //  multiply both channels by rhs
@@ -391,9 +459,10 @@ namespace Tonic {
       vDSP_vmul(dptr, 2, fptr, 1, dptr, 2, nFrames_);
       vDSP_vmul(dptr+1, 2, fptr, 1, dptr+1, 2, nFrames_);
 #else
-      for ( unsigned int i=0; i<frames_; i++ )
+      for ( unsigned int i=0; i<frames_; i++ ){
         *dptr++ *= *fptr;
         *dptr++ *= *fptr++;
+      }
 #endif
     }
   }
@@ -402,22 +471,54 @@ namespace Tonic {
   inline void TonicFrames :: operator /= ( TonicFrames& f )
   {
   #if defined(TONIC_DEBUG)
-    if ( f.frames() != nFrames_ || f.channels() != nChannels_ ) {
+    if ( f.frames() != nFrames_ ) {
       std::ostringstream error;
       error << "TonicFrames::operator*=: frames argument must be of equal dimensions!";
       Stk::handleError( error.str(), StkError::MEMORY_ACCESS );
     }
   #endif
-
+    
     TonicFloat *fptr = &f[0];
     TonicFloat *dptr = data_;
     
-  #ifdef USE_APPLE_ACCELERATE
-    vDSP_vdiv(fptr, 1, dptr, 1, dptr, 1, size_);
-  #else
-    for ( unsigned int i=0; i<size_; i++ )
-      *dptr++ /= *fptr++;
-  #endif
+    unsigned int fChannels = f.channels();
+    
+    if (nChannels_ == fChannels){
+      
+#ifdef USE_APPLE_ACCELERATE
+      vDSP_vdiv(dptr, 1, fptr, 1, dptr, 1, size_);
+#else
+      for ( unsigned int i=0; i<size_; i++ ){
+        *dptr++ /= *fptr++;
+      }
+#endif
+      
+    }
+    else if (nChannels_ < fChannels){
+      
+      //  just multiply by first channel of rhs
+#ifdef USE_APPLE_ACCELERATE
+      vDSP_vdiv(dptr, 1, fptr, fChannels, dptr, 1, nFrames_);
+#else
+      for ( unsigned int i=0; i<frames_; i++ ){
+        *dptr++ /= *fptr++;
+        fptr++;
+      }
+#endif
+      
+    }
+    else{
+      //  multiply both channels by rhs
+#ifdef USE_APPLE_ACCELERATE
+      vDSP_vdiv(dptr, 2, fptr, 1, dptr, 2, nFrames_);
+      vDSP_vdiv(dptr+1, 2, fptr, 1, dptr+1, 2, nFrames_);
+#else
+      for ( unsigned int i=0; i<frames_; i++ ){
+        *dptr++ /= *fptr;
+        *dptr++ /= *fptr++;
+      }
+#endif
+    }
   }
   
 }

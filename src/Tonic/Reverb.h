@@ -57,6 +57,8 @@ namespace Tonic {
         HPF6          inputHPF_;
       
         vector<float> reflectTapTimes_;
+        vector<float> reflectTapScale_;
+
       
         // Signal vector workspaces
         TonicFrames   workSpace_[2];
@@ -65,42 +67,39 @@ namespace Tonic {
         ControlGenerator  preDelayTimeCtrlGen_;
         ControlGenerator  inputFiltBypasCtrlGen_;
         ControlGenerator  roomSizeCtrlGen_;
-        //ControlGenerator  densityCtrlGen_; // affects number of early reflection taps
+        ControlGenerator  roomShapeCtrlGen_;
+        ControlGenerator  densityCtrlGen_; // affects number of early reflection taps
       
+        void updateTapTimes(const SynthesisContext_ & context);
       
         void computeSynthesisBlock( const SynthesisContext_ &context );
 
       public:
       
         Reverb_();
-    
-        // Overridden so output channel layout follows input channel layout
-        void setInput( Generator input );
       
         void setPreDelayTimeCtrlGen( ControlGenerator gen ) { preDelayTimeCtrlGen_ = gen; }
         void setInputFiltBypassCtrlGen( ControlGenerator gen ) { inputFiltBypasCtrlGen_ = gen; }
-        void setRoomSizeCtrlGen( ControlGenerator gen ) { roomSizeCtrlGen_ = roomSizeCtrlGen_; }
         void setInputLPFCutoffCtrlGen( ControlGenerator gen ) { inputLPF_.cutoff(gen); }
         void setInputHPFCutoffCtrlGen( ControlGenerator gen ) { inputHPF_.cutoff(gen); }
-        
+        void setRoomSizeCtrlGen( ControlGenerator gen ) { roomSizeCtrlGen_ = gen; }
+        void setRoomShapeCtrlGen( ControlGenerator gen ) { roomShapeCtrlGen_ = gen; }
+        void setDensityCtrlGen( ControlGenerator gen ) { densityCtrlGen_ = gen; }
     };
     
     inline void Reverb_::computeSynthesisBlock(const SynthesisContext_ &context){
       
-      // TODO: update early reflection tap times here
-
-      // Send dry input to output, apply mix level
-//      dryLevelGen_.tick(workSpace_[0], context);
-//      outputFrames_.copy(dryFrames_);
-//      outputFrames_ *= workSpace_[0];
+      updateTapTimes(context);
       
       // pass thru input filters
-      if (inputFiltBypasCtrlGen_.tick(context).value == 0.f){
+      if (inputFiltBypasCtrlGen_.tick(context).value != 0.f){
         
         inputLPF_.tickThrough(dryFrames_, context);
         inputHPF_.tickThrough(dryFrames_, context);
         
       }
+
+      outputFrames_.copy(dryFrames_);
       
       TonicFloat *inptr = &dryFrames_[0];
       TonicFloat *wkptr0 = &(workSpace_[0])[0];
@@ -111,18 +110,16 @@ namespace Tonic {
       TonicFloat preDelayTime = preDelayTimeCtrlGen_.tick(context).value;
       
       for (unsigned int i=0; i<kSynthesisBlockSize; i++){
-        
-        // dry input to output
-        
+                
         // pre-delay
-        preDelayLine_.tickIn(*inptr);
+        preDelayLine_.tickIn(*inptr++);
         *wkptr0 = preDelayLine_.tickOut(preDelayTime);
         preDelayLine_.advance();
         
         // taps
         reflectDelayLine_.tickIn(*wkptr0);
         for (unsigned int t=0; t<reflectTapTimes_.size(); t++){
-          *wkptr0 += reflectDelayLine_.tickOut(reflectTapTimes_[t]);
+          *wkptr0 += reflectDelayLine_.tickOut(reflectTapTimes_[t]) * reflectTapScale_[t];
         }
         
         reflectDelayLine_.advance();
@@ -134,11 +131,8 @@ namespace Tonic {
       
       // TODO: allpass
       
-      // Final output is in workSpace_[0]
-//      wetLevelGen_.tick(workSpace_[1], context);
-//      workSpace_[0] *= workSpace_[1];
-//      outputFrames_.copy(workSpace_[0]);
-      
+      outputFrames_.copy(workSpace_[0]);
+
     }
         
   }
@@ -147,11 +141,30 @@ namespace Tonic {
   {
 
     public:
-    
-      Reverb();
-    
+        
+      //! Initial delay before passing through reverb
       createControlGeneratorSetters(Reverb, preDelayTime, setPreDelayTimeCtrlGen);
+    
+      //! Non-zero value will disable input filtering
       createControlGeneratorSetters(Reverb, bypassInputFilter, setInputFiltBypassCtrlGen);
+    
+      //! Value in Hz of cutoff for input LPF
+      createControlGeneratorSetters(Reverb, inputLPFCutoff, setInputLPFCutoffCtrlGen);
+    
+      //! Value in Hz of cutoff for input HPF
+      createControlGeneratorSetters(Reverb, inputHPFCutoff, setInputHPFCutoffCtrlGen);
+    
+      //! Value 0-1, affects number of early reflections
+      createControlGeneratorSetters(Reverb, density, setDensityCtrlGen);
+    
+      //! Value 0-1, affects distribution of early reflections.
+      /*!
+          0 is perfectly square room
+          1 is long, narrow room
+      */
+      createControlGeneratorSetters(Reverb, roomShape, setRoomShapeCtrlGen);
+    
+      //! Value 0-1, affects spacing of early reflections
       createControlGeneratorSetters(Reverb, roomSize, setRoomSizeCtrlGen);
     
   };

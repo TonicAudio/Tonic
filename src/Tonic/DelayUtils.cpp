@@ -27,9 +27,6 @@ namespace Tonic {
     if (maxDelay < initialDelay){
       error("DelayLine - initial delay time is greater than max delay time", true);
     }
-    else if (initialDelay <= 0){
-      error("DelayLine - initial delay time must be greater than zero");
-    }
     
     unsigned int nFrames = max(2, maxDelay * Tonic::sampleRate());
     resize(nFrames, channels, 0);

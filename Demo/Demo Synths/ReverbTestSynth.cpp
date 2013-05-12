@@ -15,6 +15,12 @@ public:
   
   ReverbTestSynth(){
     
+    ControlValue density = addParameter("density", "Density", 0.5f, 0.f, 1.f);
+    ControlValue shape = addParameter("shape", "Shape", 0.5f, 0.f, 1.f);
+    ControlValue size = addParameter("size", "Size", 0.5f, 0.f, 1.f);
+    ControlValue dry = addParameter("dry", "Dry Level (dbFS)", -12.f, -60.f, 0.f);
+    ControlValue wet = addParameter("wet", "Wet Level (dbFS)", -60.f, -60.f, 0.f);
+    
     float bpm = 30.f;
     
     ControlMetro beat = ControlMetro().bpm(bpm);
@@ -24,7 +30,9 @@ public:
     
     Generator tone = RectWave().pwm(0.5f).freq(Tonic::mtof(60)) * ADSR(0.001f, 0.08f, 0, 0.01f).doesSustain(false).exponential(true).trigger(offbeat);
     
-    outputGen = ((click + tone)) * 0.8f;
+    Reverb reverb = Reverb().density(density).roomShape(shape).roomSize(size).dryLevel(ControlDbToLinear().in(dry)).wetLevel(ControlDbToLinear().in(wet));
+    
+    outputGen = ((click + tone) >> reverb) * 0.8f;
   }
   
 };
