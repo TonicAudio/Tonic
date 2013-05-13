@@ -20,7 +20,7 @@ public:
     ControlValue time = addParameter("decayTime", "Decay Time (s)", 1.0f, 0.1f, 10.f);
     ControlValue lowDecay = addParameter("lowDecay", "Decay Lowpass Cutoff (Hz)", 16000.0f, 4000.0f, 20000.0f);
     ControlValue hiDecay = addParameter("hiDecay", "Decay Highpass Cutoff (Hz)", 20.f, 20.f, 400.f);
-    ControlValue preDelay = addParameter("preDelay", "Pre-delay", 0.001f, 0.001f, 0.2f, true);
+    ControlValue preDelay = addParameter("preDelay", "Pre-delay", 0.001f, 0.001f, 0.05f, true);
     ControlValue inputLPF = addParameter("inputLPF", "Input LPF cutoff (Hz)", 16000.0f, 4000.0f, 20000.0f);
     ControlValue inputHPF = addParameter("inputHPF", "Input HPF cutoff (Hz)", 20.f, 20.f, 120.f);
     ControlValue density = addParameter("density", "Density", 0.5f, 0.f, 1.f);
@@ -28,7 +28,6 @@ public:
     ControlValue size = addParameter("size", "Size", 0.5f, 0.f, 1.f);
     ControlValue stereo = addParameter("stereo", "Stereo Width", 0.5f, 0.0f, 1.0f);
 
-    
     float bpm = 30.f;
     
     ControlMetro beat = ControlMetro().bpm(bpm);

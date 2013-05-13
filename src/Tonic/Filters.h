@@ -196,10 +196,10 @@ namespace Tonic {
       
     public:
       
-      void setInput( Generator input )
+      void setIsStereoInput( bool isStereoInput )
       {
-        Filter_::setInput(input);
-        biquad_.setIsStereo(input.isStereoOutput());
+        Filter_::setIsStereoInput(isStereoInput);
+        biquad_.setIsStereo(isStereoInput);
       }
 
     };
@@ -236,11 +236,11 @@ namespace Tonic {
       
     public:
       
-      void setInput( Generator input )
+      void setIsStereoInput( bool isStereoInput )
       {
-        Filter_::setInput(input);
-        biquads_[0].setIsStereo(input.isStereoOutput());
-        biquads_[1].setIsStereo(input.isStereoOutput());
+        Filter_::setIsStereoInput(isStereoInput);
+        biquads_[0].setIsStereo(isStereoInput);
+        biquads_[1].setIsStereo(isStereoInput);
       }
 
       
@@ -272,10 +272,10 @@ namespace Tonic {
       
     public:
       
-      void setInput( Generator input )
+      void setIsStereoInput( bool isStereoInput )
       {
-        Filter_::setInput(input);
-        biquad_.setIsStereo(input.isStereoOutput());
+        Filter_::setIsStereoInput(isStereoInput);
+        biquad_.setIsStereo(isStereoInput);
       }
       
     };
@@ -312,11 +312,11 @@ namespace Tonic {
       
     public:
       
-      void setInput( Generator input )
+      void setIsStereoInput( bool isStereoInput )
       {
-        Filter_::setInput(input);
-        biquads_[0].setIsStereo(input.isStereoOutput());
-        biquads_[1].setIsStereo(input.isStereoOutput());
+        Filter_::setIsStereoInput(isStereoInput);
+        biquads_[0].setIsStereo(isStereoInput);
+        biquads_[1].setIsStereo(isStereoInput);
       }
       
     };
@@ -348,10 +348,10 @@ namespace Tonic {
       
     public:
       
-      void setInput( Generator input )
+      virtual void setIsStereoInput( bool isStereoInput )
       {
-        Filter_::setInput(input);
-        biquad_.setIsStereo(input.isStereoOutput());
+        Filter_::setIsStereoInput(isStereoInput);
+        biquad_.setIsStereo(isStereoInput);
       }
       
     };
@@ -388,11 +388,11 @@ namespace Tonic {
       
     public:
       
-      void setInput( Generator input )
+      void setIsStereoInput( bool isStereoInput )
       {
-        Filter_::setInput(input);
-        biquads_[0].setIsStereo(input.isStereoOutput());
-        biquads_[1].setIsStereo(input.isStereoOutput());
+        Filter_::setIsStereoInput(isStereoInput);
+        biquads_[0].setIsStereo(isStereoInput);
+        biquads_[1].setIsStereo(isStereoInput);
       }
       
     };

@@ -61,17 +61,19 @@ namespace Tonic { namespace Tonic_{
     
     setIsStereoOutput(true);
     
-    preDelayLine_.initialize(0.25f, 1);
-    reflectDelayLine_.initialize(0.1f, 1);
-    
-    inputLPF_.Q(0.717);
-    inputHPF_.Q(0.717);
-    
     workspaceFrames_[0].resize(kSynthesisBlockSize, 1, 0);
     workspaceFrames_[1].resize(kSynthesisBlockSize, 1, 0);
     preOutputFrames_[0].resize(kSynthesisBlockSize, 1, 0);
     preOutputFrames_[1].resize(kSynthesisBlockSize, 1, 0);
     
+    preDelayLine_.initialize(0.1f, 1);
+    reflectDelayLine_.initialize(0.1f, 1);
+    
+    inputLPF_.setIsStereoInput(false);
+    inputLPF_.setIsStereoInput(false);
+    inputLPF_.Q(0.707);
+    inputHPF_.Q(0.707);
+  
     preDelayTimeCtrlGen_ = ControlValue(0.01f);
     inputFiltBypasCtrlGen_ = ControlValue(false);
     densityCtrlGen_ = ControlValue(0.5);
@@ -80,7 +82,7 @@ namespace Tonic { namespace Tonic_{
     decayTimeCtrlGen_ = ControlValue(1.0f);
     stereoWidthCtrlGen_ = ControlValue(0.5f);
     
-    setInputLPFCutoffCtrlGen(ControlValue(12000.f));
+    setInputLPFCutoffCtrlGen(ControlValue(10000.0f));
     setInputHPFCutoffCtrlGen(ControlValue(20.f));
     
     for (unsigned int i=0; i<TONIC_REVERB_N_COMBS; i++){
@@ -103,7 +105,7 @@ namespace Tonic { namespace Tonic_{
     }
     
     setDecayLPFCtrlGen(ControlValue(12000.f));
-    setDecayHPFCtrlGen(ControlValue(20.f));
+    setDecayHPFCtrlGen(ControlValue(60.f));
     
   }
   
@@ -130,13 +132,13 @@ namespace Tonic { namespace Tonic_{
       TonicFloat wDist2 = map(size * (1.1f - shape), 0.f, 1.f, TONIC_REVERB_MIN_WALL_DIST, TONIC_REVERB_MAX_WALL_DIST, true);
 
       unsigned int nTaps = (unsigned int)map(densityOutput.value, 0.f, 1.f, TONIC_REVERB_MIN_TAPS, TONIC_REVERB_MAX_TAPS, true);
-      
+      TonicFloat tapScale = 1.0f/max(2.f, sqrtf(nTaps));
       for (unsigned int i=0; i<nTaps; i++){
         
         TonicFloat dist = (i % 2 == 0 ? wDist1 : wDist2) * (1.0f + randomFloat(-TONIC_REVERB_FUDGE_AMT, TONIC_REVERB_FUDGE_AMT));
         
         reflectTapTimes_.push_back( dist/TONIC_REVERB_SOS );
-        reflectTapScale_.push_back( dBToLin(dist * TONIC_REVERB_AIRDECAY)/(float)nTaps );
+        reflectTapScale_.push_back( dBToLin(dist * TONIC_REVERB_AIRDECAY)*tapScale );
       }
       
     }

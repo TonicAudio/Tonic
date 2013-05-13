@@ -38,15 +38,15 @@ namespace Tonic {
     public:
       
       Effect_();
-      
-      virtual void setInput( Generator input ) { input_ = input; };
-      
+            
       void setBypassCtrlGen( ControlGenerator gen ){ bypassGen_ = gen; };
       void setDryLevelGen( Generator gen ){ dryLevelGen_ = gen; };
       void setWetLevelGen( Generator gen ){ wetLevelGen_ = gen; };
 
+      virtual void setInput( Generator input ) { input_ = input; };
+      
       //! set to true to disable dry/wet (always fully wet)
-      void setIsAlwaysWet( bool isAlwaysWet) { isAlwaysWet_ = isAlwaysWet; };
+      void setIsAlwaysWet( bool isAlwaysWet ) { isAlwaysWet_ = isAlwaysWet; };
       
       //! set stereo/mono - changes number of channels in dryFrames_
       /*!
@@ -129,12 +129,14 @@ namespace Tonic {
         if (bypass){
           outFrames.copy(dryFrames_);
         }
-        else{
+        else if (!isAlwaysWet_){
           wetLevelGen_.tick(mixWorkspace_, context);
           outputFrames_ *= mixWorkspace_;
           dryLevelGen_.tick(mixWorkspace_, context);
           dryFrames_ *= mixWorkspace_;
           outputFrames_ += dryFrames_;
+        }
+        else{
           outFrames.copy(outputFrames_);
         }
 
@@ -164,6 +166,12 @@ namespace Tonic {
     
     void tickThrough(TonicFrames & inFrames, TonicFrames & outFrames, const Tonic_::SynthesisContext_ & context){
       this->gen()->tickThrough(inFrames, outFrames, context);
+    }
+    
+    void setIsStereoInput( bool isStereoInput ){
+      this->gen()->lockMutex();
+      this->gen()->setIsStereoInput(isStereoInput);
+      this->gen()->unlockMutex();
     }
     
     createControlGeneratorSetters(EffectType, bypass, setBypassCtrlGen);

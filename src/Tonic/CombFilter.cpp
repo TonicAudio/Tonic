@@ -48,7 +48,7 @@ namespace Tonic { namespace Tonic_{
     gen()->initialize(initialDelayTime, maxDelayTime);
     delayTime(initialDelayTime);
     scaleFactor(0.5f);
-    lowpassCutoff(18000.0f);
+    lowpassCutoff(12000.0f);
     highpassCutoff(20.0f);
   }
 
