@@ -20,14 +20,8 @@ namespace Tonic {
     resize(kSynthesisBlockSize, 1, 0);
   }
   
-  void DelayLine::initialize(float initialDelay, float maxDelay, unsigned int channels)
+  void DelayLine::initialize(float maxDelay, unsigned int channels)
   {
-    if (maxDelay < 0) maxDelay = initialDelay * 1.5;
-    
-    if (maxDelay < initialDelay){
-      error("DelayLine - initial delay time is greater than max delay time", true);
-    }
-    
     unsigned int nFrames = max(2, maxDelay * Tonic::sampleRate());
     resize(nFrames, channels, 0);
     isInitialized_ = true;

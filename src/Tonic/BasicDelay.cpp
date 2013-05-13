@@ -34,7 +34,9 @@ namespace Tonic { namespace Tonic_{
   
   void BasicDelay_::initialize(float delayTime, float maxDelayTime)
   {
-    delayLine_.initialize(delayTime, maxDelayTime, 1);
+    if (maxDelayTime <= 0) maxDelayTime = delayTime * 1.5;
+    delayLine_.initialize(maxDelayTime, 1);
+    delayTimeGen_ = FixedValue(delayTime);
   }
   
 } // Namespace Tonic_
