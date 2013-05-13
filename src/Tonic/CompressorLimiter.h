@@ -125,10 +125,10 @@ namespace Tonic {
         
         // Smooth amplitude input
         if (ampInputValue >= ampEnvValue_){
-          onePoleTick(ampInputValue, ampEnvValue_, attackCoef);
+          onePoleLPFTick(ampInputValue, ampEnvValue_, attackCoef);
         }
         else {
-          onePoleTick(ampInputValue, ampEnvValue_, releaseCoef);
+          onePoleLPFTick(ampInputValue, ampEnvValue_, releaseCoef);
         }
         
         // Calculate gain value
@@ -144,10 +144,10 @@ namespace Tonic {
         
         // Smooth gain value
         if (gainValue <= gainEnvValue_){
-          onePoleTick(gainValue, gainEnvValue_, attackCoef);
+          onePoleLPFTick(gainValue, gainEnvValue_, attackCoef);
         }
         else {
-          onePoleTick(gainValue, gainEnvValue_, releaseCoef);
+          onePoleLPFTick(gainValue, gainEnvValue_, releaseCoef);
         }
         
         // apply gain

@@ -148,7 +148,7 @@ namespace Tonic {
         
         TonicFloat *inptr = &dryFrames_[0];
         TonicFloat *outptr = &outputFrames_[0];
-        TonicFloat coef = cutoffToOnePoleCoef(cutoff);
+        TonicFloat coef = 1.0f - cutoffToOnePoleCoef(cutoff);
         TonicFloat norm = bNormalizeGain_ ? 1.0f - coef : 1.0f;
         unsigned int nChannels = dryFrames_.channels();
         

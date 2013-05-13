@@ -27,9 +27,8 @@ https://ccrma.stanford.edu/software/stk/
 #include "DelayUtils.h"
 #include "CombFilter.h"
 #include "Filters.h"
+#include "MonoToStereoPanner.h"
 
-// Number of FF comb filters
-#define  TONIC_REVERB_N_COMBS 8
 
 namespace Tonic {
   
@@ -37,11 +36,11 @@ namespace Tonic {
     
     //! Moorer-Schroeder style Artificial Reverb effect
     /*!
-        - [ ] Pre-delay
-        - [ ] Input filter
-        - [ ] Early reflection taps
+        - [x] Pre-delay
+        - [x] Input filter
+        - [x] Early reflection taps
         - [ ] Decay time and decay filtering
-        - [ ] Variable "Room size"
+        - [x] Variable "Room size"
         - [ ] Variable stereo width
      */
     
@@ -56,12 +55,17 @@ namespace Tonic {
         LPF6          inputLPF_;
         HPF6          inputHPF_;
       
-        vector<float> reflectTapTimes_;
-        vector<float> reflectTapScale_;
+        vector<TonicFloat> reflectTapTimes_;
+        vector<TonicFloat> reflectTapScale_;
 
+        // Comb filters
+        vector<FilteredFBCombFilter6> combFilters_[2];
+        vector<ControlValue>          combFilterDelayTimes_[2];
+        vector<ControlValue>          combFilterScaleFactors_[2];
       
         // Signal vector workspaces
-        TonicFrames   workSpace_[2];
+        TonicFrames   workspaceFrames_[2];
+        TonicFrames   preOutputFrames_[2];
       
         // Input generators
         ControlGenerator  preDelayTimeCtrlGen_;
@@ -70,8 +74,11 @@ namespace Tonic {
         ControlGenerator  roomShapeCtrlGen_;
         ControlGenerator  densityCtrlGen_; // affects number of early reflection taps
       
-        void updateTapTimes(const SynthesisContext_ & context);
+        ControlGenerator decayTimeCtrlGen_;
+        ControlGenerator stereoWidthCtrlGen_;
       
+        void updateDelayTimes(const SynthesisContext_ & context);
+            
         void computeSynthesisBlock( const SynthesisContext_ &context );
 
       public:
@@ -85,28 +92,35 @@ namespace Tonic {
         void setRoomSizeCtrlGen( ControlGenerator gen ) { roomSizeCtrlGen_ = gen; }
         void setRoomShapeCtrlGen( ControlGenerator gen ) { roomShapeCtrlGen_ = gen; }
         void setDensityCtrlGen( ControlGenerator gen ) { densityCtrlGen_ = gen; }
+        void setDecayTimeCtrlGen( ControlGenerator gen ) { decayTimeCtrlGen_ = gen; }
+        void setStereoWidthCtrlGen( ControlGenerator gen ) { stereoWidthCtrlGen_ = gen; }
+      
+        // These are special setters, they will be passed to all the comb filters
+        void setDecayLPFCtrlGen( ControlGenerator gen );
+        void setDecayHPFCtrlGen( ControlGenerator gen );
+      
     };
     
     inline void Reverb_::computeSynthesisBlock(const SynthesisContext_ &context){
       
-      updateTapTimes(context);
+      updateDelayTimes(context);
       
       // pass thru input filters
       if (inputFiltBypasCtrlGen_.tick(context).value == 0.f){
         
-        inputLPF_.tickThrough(dryFrames_, workSpace_[0], context);
-        inputHPF_.tickThrough(workSpace_[0], workSpace_[0], context);
+        inputLPF_.tickThrough(dryFrames_, workspaceFrames_[0], context);
+        inputHPF_.tickThrough(workspaceFrames_[0], workspaceFrames_[0], context);
         
       }
       else{
-        workSpace_[0].copy(dryFrames_);
+        workspaceFrames_[0].copy(dryFrames_);
       }
       
-      TonicFloat *wkptr0 = &(workSpace_[0])[0];
-      TonicFloat *wkptr1 = &(workSpace_[1])[0];
-      TonicFloat *outptr = &outputFrames_[0];
+      TonicFloat *wkptr0 = &(workspaceFrames_[0])[0];
+      TonicFloat *wkptr1 = &(workspaceFrames_[1])[0];
       
       // pass thru pre-delay, input filters, and sum the early reflections
+      
       TonicFloat preDelayTime = preDelayTimeCtrlGen_.tick(context).value;
       
       for (unsigned int i=0; i<kSynthesisBlockSize; i++){
@@ -130,11 +144,28 @@ namespace Tonic {
         wkptr0++;
       }
       
-      // TODO: combs
+      // Comb filers
+      
+      for (unsigned int i=0; i<combFilters_[TONIC_LEFT].size(); i++){
+        combFilters_[TONIC_LEFT][i].tickThrough(workspaceFrames_[0], preOutputFrames_[TONIC_LEFT], context);
+        combFilters_[TONIC_RIGHT][i].tickThrough(workspaceFrames_[0], preOutputFrames_[TONIC_RIGHT], context);
+      }
       
       // TODO: allpass
       
-      outputFrames_.copy(workSpace_[0]);
+      // interleave pre-output frames into output frames
+      TonicFloat *outptr = &outputFrames_[0];
+      TonicFloat *preoutptrL = &preOutputFrames_[TONIC_LEFT][0];
+      TonicFloat *preoutptrR = &preOutputFrames_[TONIC_LEFT][0];
+      
+      TonicFloat spreadValue = clamp(1.0f - stereoWidthCtrlGen_.tick(context).value, 0.f, 1.f);
+      TonicFloat normValue = (1.0f/(1.0f+spreadValue));
+      
+      for (unsigned int i=0; i<kSynthesisBlockSize; i++){
+        *outptr++ = (*preoutptrL + (spreadValue * (*preoutptrR)))*normValue;
+        *outptr++ = (*preoutptrR++ + (spreadValue * (*preoutptrL++)))*normValue;
+      }
+
 
     }
         
@@ -169,6 +200,18 @@ namespace Tonic {
     
       //! Value 0-1, affects spacing of early reflections
       createControlGeneratorSetters(Reverb, roomSize, setRoomSizeCtrlGen);
+    
+      //! Value in seconds of overall decay time
+      createControlGeneratorSetters(Reverb, decayTime, setDecayTimeCtrlGen);
+    
+      //! Value in Hz of cutoff of decay LPF
+      createControlGeneratorSetters(Reverb, decayLPFCutoff, setDecayLPFCtrlGen);
+    
+      //! Value in Hz of cutoff of decay HPF
+      createControlGeneratorSetters(Reverb, decayHPFCutoff, setDecayHPFCtrlGen);
+
+      //! Value 0-1 for stereo width
+      createControlGeneratorSetters(Reverb, stereoWidth, setStereoWidthCtrlGen);
     
   };
 }

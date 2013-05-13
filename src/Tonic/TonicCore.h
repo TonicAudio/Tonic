@@ -40,6 +40,10 @@ const TonicFloat PI           = 3.14159265358979f;
 const TonicFloat TWO_PI       = 2.f * PI;
 #endif
 
+// channel indices
+#define TONIC_LEFT            0
+#define TONIC_RIGHT           1
+
 // Causes 32nd bit in double to have fractional value 1 (decimal point on 32-bit word boundary)
 // Allowing some efficient shortcuts for table lookup using power-of-two tables
 #define BIT32DECPT 1572864.0

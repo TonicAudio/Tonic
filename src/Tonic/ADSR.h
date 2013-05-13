@@ -147,7 +147,7 @@ namespace Tonic {
 
                 // one pole filter
                 for (unsigned long i=0; i<remainder; i++){
-                  onePoleTick(targetValue, lastValue, pole);
+                  onePoleLPFTick(targetValue, lastValue, pole);
                   *fdata++ = lastValue;
                 }
                 
@@ -194,7 +194,7 @@ namespace Tonic {
                 
                 // one pole filter
                 for (int i=0; i<samplesRemaining; i++){
-                  onePoleTick(targetValue, lastValue, pole);
+                  onePoleLPFTick(targetValue, lastValue, pole);
                   *fdata++ = lastValue;
                 }
                 

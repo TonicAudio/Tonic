@@ -11,11 +11,18 @@
 namespace Tonic { namespace Tonic_{
   
   CombFilter_::CombFilter_(){
+    setIsAlwaysWet(true);
     delayTimeFrames_.resize(kSynthesisBlockSize, 1, 0);
   }
   
   void CombFilter_::initialize(float initialDelayTime, float maxDelayTime){
     delayLine_.initialize(initialDelayTime, maxDelayTime);
+  }
+  
+  FilteredFBCombFilter6_::FilteredFBCombFilter6_() : lastOutLow_(0), lastOutHigh_(0)
+  {
+    // don't care about interpolation here, since this is optimized for reverb (faster)
+    delayLine_.setInterpolates(false);
   }
   
 } // Namespace Tonic_
@@ -32,6 +39,15 @@ namespace Tonic { namespace Tonic_{
     gen()->initialize(initialDelayTime, maxDelayTime);
     delayTime(initialDelayTime);
     scaleFactor(0.5f);
+  }
+  
+  FilteredFBCombFilter6::FilteredFBCombFilter6(float initialDelayTime, float maxDelayTime)
+  {
+    gen()->initialize(initialDelayTime, maxDelayTime);
+    delayTime(initialDelayTime);
+    scaleFactor(0.5f);
+    lowpassCutoff(18000.0f);
+    highpassCutoff(20.0f);
   }
 
   

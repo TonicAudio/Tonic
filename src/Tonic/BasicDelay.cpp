@@ -15,8 +15,8 @@ namespace Tonic { namespace Tonic_{
     fbkFrames_.resize(kSynthesisBlockSize, 1, 0);
     delayTimeGen_ = FixedValue(0);
     fbkGen_ = FixedValue(0);
-    dryLevelGen_ = FixedValue(0.5);
-    wetLevelGen_ = FixedValue(0.5);
+    setDryLevelGen(FixedValue(0.5));
+    setWetLevelGen(FixedValue(0.5));
   }
   
   BasicDelay_::~BasicDelay_(){

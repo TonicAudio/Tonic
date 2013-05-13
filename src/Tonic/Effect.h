@@ -21,18 +21,19 @@ namespace Tonic {
     
     class Effect_ : public Generator_{
       
-    protected:
-      
-      Generator input_;
+    private:
       
       ControlGenerator bypassGen_;
       Generator  dryLevelGen_;
       Generator  wetLevelGen_;
-      
-      TonicFrames dryFrames_;
       TonicFrames mixWorkspace_;
-      
+      bool isAlwaysWet_;
       bool isStereoInput_;
+      
+    protected:
+      
+      Generator input_;
+      TonicFrames dryFrames_;
       
     public:
       
@@ -43,22 +44,22 @@ namespace Tonic {
       void setBypassCtrlGen( ControlGenerator gen ){ bypassGen_ = gen; };
       void setDryLevelGen( Generator gen ){ dryLevelGen_ = gen; };
       void setWetLevelGen( Generator gen ){ wetLevelGen_ = gen; };
-      
-      virtual void tick(TonicFrames &frames, const SynthesisContext_ &context );
-      
 
+      //! set to true to disable dry/wet (always fully wet)
+      void setIsAlwaysWet( bool isAlwaysWet) { isAlwaysWet_ = isAlwaysWet; };
+      
       //! set stereo/mono - changes number of channels in dryFrames_
       /*!
           subclasses should call in constructor to determine input channel layout
       */
       virtual void setIsStereoInput( bool stereo );
-      
       bool isStereoInput(){ return isStereoInput_; };
       
       //! Apply effect directly to passed in frames (output in-place)
       /*!
           DO NOT mix calls to tick() with calls to tickThrough(). Result is undefined.
       */
+      virtual void tick(TonicFrames &frames, const SynthesisContext_ &context );
       virtual void tickThrough( TonicFrames & inFrames, TonicFrames & outFrames, const SynthesisContext_ & context );
 
     };
@@ -90,7 +91,7 @@ namespace Tonic {
         if (bypass){
           outputFrames_.copy(dryFrames_);
         }
-        else{
+        else if (!isAlwaysWet_){
           wetLevelGen_.tick(mixWorkspace_, context);
           outputFrames_ *= mixWorkspace_;
           dryLevelGen_.tick(mixWorkspace_, context);

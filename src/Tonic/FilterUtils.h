@@ -23,9 +23,14 @@ namespace Tonic {
     return clamp(expf(-TWO_PI*cutoffHz/sampleRate()), 0.f, 1.f);
   }
   
-  //! Tick one sample through one-pole filter
-  inline void onePoleTick( TonicFloat input, TonicFloat & output, TonicFloat coef){
+  //! Tick one sample through one-pole lowpass filter
+  inline void onePoleLPFTick( TonicFloat input, TonicFloat & output, TonicFloat coef){
     output = ((1.0f-coef) * input) + (coef * output);
+  }
+  
+  //! Tick one sample through one-pole highpass filter
+  inline void onePoleHPFTick( TonicFloat input, TonicFloat & output, TonicFloat coef){
+    output = ((1.0-coef) * input) - (coef * output);
   }
 
   //! Compute coefficients from analog prototype using bilinear transform

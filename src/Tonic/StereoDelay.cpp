@@ -16,8 +16,8 @@ namespace Tonic { namespace Tonic_{
     delayTimeFrames_[0].resize(kSynthesisBlockSize, 1, 0);
     delayTimeFrames_[1].resize(kSynthesisBlockSize, 1, 0);
     fbkFrames_.resize(kSynthesisBlockSize, 1, 0);
-    dryLevelGen_ = FixedValue(0.5);
-    wetLevelGen_ = FixedValue(0.5);
+    setDryLevelGen(FixedValue(0.5));
+    setWetLevelGen(FixedValue(0.5));
   }
   
   void StereoDelay_::initialize(float leftDelayArg, float rightDelayArg, float maxDelayLeft, float maxDelayRight){

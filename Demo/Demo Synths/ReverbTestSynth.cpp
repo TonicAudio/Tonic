@@ -15,14 +15,19 @@ public:
   
   ReverbTestSynth(){
     
+    ControlValue dry = addParameter("dry", "Dry Level (dbFS)", -12.f, -60.f, 0.f);
+    ControlValue wet = addParameter("wet", "Wet Level (dbFS)", -60.f, -60.f, 0.f);
+    ControlValue time = addParameter("decayTime", "Decay Time (s)", 1.0f, 0.1f, 10.f);
+    ControlValue lowDecay = addParameter("lowDecay", "Decay Lowpass Cutoff (Hz)", 16000.0f, 4000.0f, 18000.f);
+    ControlValue hiDecay = addParameter("hiDecay", "Decay Highpass Cutoff (Hz)", 20.f, 20.f, 400.f);
     ControlValue preDelay = addParameter("preDelay", "Pre-delay", 0.001f, 0.001f, 0.2f, true);
-    ControlValue inputLPF = addParameter("inputLPF", "Input LPF cutoff (Hz)", 20.f, 20.f, 400.f);
-    ControlValue inputHPF = addParameter("inputHPF", "Input HPF cutoff (Hz)", 12000.0f, 4000.f, 18000.f);
+    ControlValue inputLPF = addParameter("inputLPF", "Input LPF cutoff (Hz)", 16000.0f, 4000.0f, 18000.f);
+    ControlValue inputHPF = addParameter("inputHPF", "Input HPF cutoff (Hz)", 20.f, 20.f, 400.f);
     ControlValue density = addParameter("density", "Density", 0.5f, 0.f, 1.f);
     ControlValue shape = addParameter("shape", "Shape", 0.5f, 0.f, 1.f);
     ControlValue size = addParameter("size", "Size", 0.5f, 0.f, 1.f);
-    ControlValue dry = addParameter("dry", "Dry Level (dbFS)", -12.f, -60.f, 0.f);
-    ControlValue wet = addParameter("wet", "Wet Level (dbFS)", -60.f, -60.f, 0.f);
+    ControlValue stereo = addParameter("stereo", "Stereo Width", 0.5f, 0.0f, 1.0f);
+
     
     float bpm = 30.f;
     
@@ -35,14 +40,18 @@ public:
     
     Reverb reverb = Reverb()
       .preDelayTime(preDelay)
-      .inputLPFCutoff(inputHPF)
+      .inputLPFCutoff(inputLPF)
       .inputHPFCutoff(inputHPF)
+      .decayTime(time)
+      .decayLPFCutoff(lowDecay)
+      .decayHPFCutoff(hiDecay)
+      .stereoWidth(stereo)
       .density(density)
       .roomShape(shape)
       .roomSize(size)
       .dryLevel(ControlDbToLinear().in(dry))
       .wetLevel(ControlDbToLinear().in(wet));
-    
+        
     outputGen = ((click + tone) >> reverb) * 0.8f;
   }
   
