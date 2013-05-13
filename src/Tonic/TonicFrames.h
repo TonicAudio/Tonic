@@ -108,6 +108,9 @@ namespace Tonic {
     //! Fill all channels with contents of channel 0
     void fillChannels();
     
+    //! clear the frames data
+    void clear();
+    
     //! Fill frames from other source.
     /*! 
       Copies channels from one object to another. Frame count must match.
@@ -256,6 +259,10 @@ namespace Tonic {
     for (unsigned int i=1; i<nChannels_; i++){
       this->copyChannel(0, i);
     }
+  }
+  
+  inline void TonicFrames::clear(){
+    memset(data_, 0, size_ * sizeof(TonicFloat));
   }
   
   inline void TonicFrames::copy( TonicFrames &f ){

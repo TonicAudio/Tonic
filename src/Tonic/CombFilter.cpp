@@ -16,7 +16,9 @@ namespace Tonic { namespace Tonic_{
   }
   
   void CombFilter_::initialize(float initialDelayTime, float maxDelayTime){
-    delayLine_.initialize(initialDelayTime, maxDelayTime);
+    if (maxDelayTime < 0) maxDelayTime = initialDelayTime * 1.5;
+    delayLine_.initialize(maxDelayTime, 1);
+    delayTimeGen_ = FixedValue(initialDelayTime);
   }
   
   FilteredFBCombFilter6_::FilteredFBCombFilter6_() : lastOutLow_(0), lastOutHigh_(0)

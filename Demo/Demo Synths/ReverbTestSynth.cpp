@@ -18,11 +18,11 @@ public:
     ControlValue dry = addParameter("dry", "Dry Level (dbFS)", -12.f, -60.f, 0.f);
     ControlValue wet = addParameter("wet", "Wet Level (dbFS)", -60.f, -60.f, 0.f);
     ControlValue time = addParameter("decayTime", "Decay Time (s)", 1.0f, 0.1f, 10.f);
-    ControlValue lowDecay = addParameter("lowDecay", "Decay Lowpass Cutoff (Hz)", 16000.0f, 4000.0f, 18000.f);
+    ControlValue lowDecay = addParameter("lowDecay", "Decay Lowpass Cutoff (Hz)", 16000.0f, 4000.0f, 20000.0f);
     ControlValue hiDecay = addParameter("hiDecay", "Decay Highpass Cutoff (Hz)", 20.f, 20.f, 400.f);
     ControlValue preDelay = addParameter("preDelay", "Pre-delay", 0.001f, 0.001f, 0.2f, true);
-    ControlValue inputLPF = addParameter("inputLPF", "Input LPF cutoff (Hz)", 16000.0f, 4000.0f, 18000.f);
-    ControlValue inputHPF = addParameter("inputHPF", "Input HPF cutoff (Hz)", 20.f, 20.f, 400.f);
+    ControlValue inputLPF = addParameter("inputLPF", "Input LPF cutoff (Hz)", 16000.0f, 4000.0f, 20000.0f);
+    ControlValue inputHPF = addParameter("inputHPF", "Input HPF cutoff (Hz)", 20.f, 20.f, 120.f);
     ControlValue density = addParameter("density", "Density", 0.5f, 0.f, 1.f);
     ControlValue shape = addParameter("shape", "Shape", 0.5f, 0.f, 1.f);
     ControlValue size = addParameter("size", "Size", 0.5f, 0.f, 1.f);

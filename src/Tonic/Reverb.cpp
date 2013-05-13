@@ -18,23 +18,54 @@
 
 #define TONIC_REVERB_FUDGE_AMT  0.05f // amount of randomization introduced to reflection times
 
-// Number of FF comb filters
+// Number of FF comb filters per channel
 #define  TONIC_REVERB_N_COMBS 8
-#define  TONIC_REVERB_MIN_COMB_TIME  0.01f
-#define  TONIC_REVERB_MAX_COMB_TIME  0.1f
+#define  TONIC_REVERB_MIN_COMB_TIME  0.015f
+#define  TONIC_REVERB_MAX_COMB_TIME  0.035f
 #define  TONIC_REVERB_STEREO_SPREAD 0.001f
+
+// Number of allpass filters per channel
+#define  TONIC_REVERB_N_ALLPASS 4
+#define  TONIC_REVERB_ALLPASS_COEF 0.5f
 
 namespace Tonic { namespace Tonic_{
   
-  // Changing these will change the character of the late-stage reverb. Tune as you wish.
-  static const TonicFloat reverbCombTimeScales_[TONIC_REVERB_N_COMBS] = {1.17, 1.12, 1.02, 0.97, 0.95, 0.88, 0.84, 0.82};
+  
+  ImpulseDiffuserAllpass::ImpulseDiffuserAllpass(TonicFloat delay, TonicFloat coef)
+  {
+    delay_ = delay;
+    coef_ = coef;
+    delayBack_.initialize(delay, 1);
+    delayForward_.initialize(delay, 1);
+    delayBack_.setInterpolates(false);
+    delayForward_.setInterpolates(false);
+  }
+  
+  ImpulseDiffuserAllpass::ImpulseDiffuserAllpass( const ImpulseDiffuserAllpass & other)
+  {
+    delay_ = other.delay_;
+    coef_ = other.coef_;
+    delayBack_.initialize(delay_,1);
+    delayForward_.initialize(delay_,1);
+    delayBack_.setInterpolates(false);
+    delayForward_.setInterpolates(false);
+  }
+  
+  // ==============
+  
+  // Changing these will change the character of the late-stage reverb.
+  static const TonicFloat combTimeScales_[TONIC_REVERB_N_COMBS] = {1.17, 1.12, 1.02, 0.97, 0.95, 0.88, 0.84, 0.82};
+  static const TonicFloat allpassTimes_[TONIC_REVERB_N_ALLPASS] = {0.0051, 0.010, 0.012, 0.00833};
   
   Reverb_::Reverb_(){
     
     setIsStereoOutput(true);
     
-    preDelayLine_.initialize(0.0f, 0.25f);
-    reflectDelayLine_.initialize(0.0f, 0.1f);
+    preDelayLine_.initialize(0.25f, 1);
+    reflectDelayLine_.initialize(0.1f, 1);
+    
+    inputLPF_.Q(0.717);
+    inputHPF_.Q(0.717);
     
     workspaceFrames_[0].resize(kSynthesisBlockSize, 1, 0);
     workspaceFrames_[1].resize(kSynthesisBlockSize, 1, 0);
@@ -64,6 +95,11 @@ namespace Tonic { namespace Tonic_{
       combFilterScaleFactors_[TONIC_RIGHT].push_back(scaleR);
       combFilters_[TONIC_LEFT].push_back(FilteredFBCombFilter6(0.01f, 0.125f).delayTime(delayL).scaleFactor(scaleL));
       combFilters_[TONIC_RIGHT].push_back(FilteredFBCombFilter6(0.01f, 0.125f).delayTime(delayR).scaleFactor(scaleR));
+    }
+    
+    for (unsigned int i=0; i<TONIC_REVERB_N_ALLPASS; i++){
+      allpassFilters_[TONIC_LEFT].push_back(ImpulseDiffuserAllpass(allpassTimes_[i], TONIC_REVERB_ALLPASS_COEF));
+      allpassFilters_[TONIC_RIGHT].push_back(ImpulseDiffuserAllpass(allpassTimes_[i] + TONIC_REVERB_STEREO_SPREAD, TONIC_REVERB_ALLPASS_COEF));
     }
     
     setDecayLPFCtrlGen(ControlValue(12000.f));
@@ -100,7 +136,7 @@ namespace Tonic { namespace Tonic_{
         TonicFloat dist = (i % 2 == 0 ? wDist1 : wDist2) * (1.0f + randomFloat(-TONIC_REVERB_FUDGE_AMT, TONIC_REVERB_FUDGE_AMT));
         
         reflectTapTimes_.push_back( dist/TONIC_REVERB_SOS );
-        reflectTapScale_.push_back( dBToLin(dist * TONIC_REVERB_AIRDECAY) );
+        reflectTapScale_.push_back( dBToLin(dist * TONIC_REVERB_AIRDECAY)/(float)nTaps );
       }
       
     }
@@ -115,7 +151,7 @@ namespace Tonic { namespace Tonic_{
       
       for (unsigned int i=0; i<TONIC_REVERB_N_COMBS; i++){
         
-        TonicFloat scaledDelayTime = reverbCombTimeScales_[i % TONIC_REVERB_N_COMBS] * baseCombDelayTime;
+        TonicFloat scaledDelayTime = combTimeScales_[i % TONIC_REVERB_N_COMBS] * baseCombDelayTime;
         combFilterDelayTimes_[TONIC_LEFT][i].setValue(scaledDelayTime);
         combFilterDelayTimes_[TONIC_RIGHT][i].setValue(scaledDelayTime+TONIC_REVERB_STEREO_SPREAD);
         combFilterScaleFactors_[TONIC_LEFT][i].setValue( powf(10.f, (-3.0f * scaledDelayTime / decayTime)) );

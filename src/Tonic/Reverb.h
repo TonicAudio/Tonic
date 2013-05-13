@@ -34,14 +34,50 @@ namespace Tonic {
   
   namespace Tonic_ {
     
+    //! Allpass filter for use with reverb
+    class ImpulseDiffuserAllpass {
+      
+    protected:
+      
+      DelayLine delayForward_;
+      DelayLine delayBack_;
+      TonicFloat delay_;
+      TonicFloat coef_;
+      
+    public:
+      
+      ImpulseDiffuserAllpass(TonicFloat delay, TonicFloat coef);
+      ImpulseDiffuserAllpass( const ImpulseDiffuserAllpass & other);
+      void tickThrough(TonicFrames & frames);
+      
+    };
+    
+    inline void ImpulseDiffuserAllpass::tickThrough(Tonic::TonicFrames &frames)
+    {
+      TonicFloat *dptr = &frames[0];
+      TonicFloat y;
+      for (int i=0; i<kSynthesisBlockSize; i++){
+        
+        // feedback stage
+        y = *dptr + delayBack_.tickOut(delay_) * coef_;
+        delayBack_.tickIn(y);
+        delayBack_.advance();
+        
+        // feed forward stage
+        *dptr++ = (1.f+coef_)*delayForward_.tickOut(delay_) - y;
+        delayForward_.tickIn(y);
+        delayForward_.advance();
+      }
+    }
+    
     //! Moorer-Schroeder style Artificial Reverb effect
     /*!
         - [x] Pre-delay
         - [x] Input filter
         - [x] Early reflection taps
-        - [ ] Decay time and decay filtering
+        - [x] Decay time and decay filtering
         - [x] Variable "Room size"
-        - [ ] Variable stereo width
+        - [x] Variable stereo width
      */
     
     class Reverb_ : public Effect_
@@ -52,8 +88,8 @@ namespace Tonic {
         DelayLine     preDelayLine_;
         DelayLine     reflectDelayLine_;
       
-        LPF6          inputLPF_;
-        HPF6          inputHPF_;
+        LPF12           inputLPF_;
+        HPF12           inputHPF_;
       
         vector<TonicFloat> reflectTapTimes_;
         vector<TonicFloat> reflectTapScale_;
@@ -62,6 +98,9 @@ namespace Tonic {
         vector<FilteredFBCombFilter6> combFilters_[2];
         vector<ControlValue>          combFilterDelayTimes_[2];
         vector<ControlValue>          combFilterScaleFactors_[2];
+      
+        // Allpass filters
+        vector<ImpulseDiffuserAllpass> allpassFilters_[2];
       
         // Signal vector workspaces
         TonicFrames   workspaceFrames_[2];
@@ -145,21 +184,28 @@ namespace Tonic {
       }
       
       // Comb filers
-      
+      preOutputFrames_[TONIC_LEFT].clear();
+      preOutputFrames_[TONIC_RIGHT].clear();
       for (unsigned int i=0; i<combFilters_[TONIC_LEFT].size(); i++){
-        combFilters_[TONIC_LEFT][i].tickThrough(workspaceFrames_[0], preOutputFrames_[TONIC_LEFT], context);
-        combFilters_[TONIC_RIGHT][i].tickThrough(workspaceFrames_[0], preOutputFrames_[TONIC_RIGHT], context);
+        combFilters_[TONIC_LEFT][i].tickThrough(workspaceFrames_[0], workspaceFrames_[1], context);
+        preOutputFrames_[TONIC_LEFT] += workspaceFrames_[1];
+        combFilters_[TONIC_RIGHT][i].tickThrough(workspaceFrames_[0], workspaceFrames_[1], context);
+        preOutputFrames_[TONIC_RIGHT] += workspaceFrames_[1];
       }
       
-      // TODO: allpass
+      // Allpass filters
+      for (unsigned int i=0; i<allpassFilters_[TONIC_LEFT].size(); i++){
+        allpassFilters_[TONIC_LEFT][i].tickThrough(preOutputFrames_[TONIC_LEFT]);
+        allpassFilters_[TONIC_RIGHT][i].tickThrough(preOutputFrames_[TONIC_RIGHT]);
+      }
       
       // interleave pre-output frames into output frames
       TonicFloat *outptr = &outputFrames_[0];
       TonicFloat *preoutptrL = &preOutputFrames_[TONIC_LEFT][0];
-      TonicFloat *preoutptrR = &preOutputFrames_[TONIC_LEFT][0];
+      TonicFloat *preoutptrR = &preOutputFrames_[TONIC_RIGHT][0];
       
       TonicFloat spreadValue = clamp(1.0f - stereoWidthCtrlGen_.tick(context).value, 0.f, 1.f);
-      TonicFloat normValue = (1.0f/(1.0f+spreadValue));
+      TonicFloat normValue = (1.0f/(1.0f+spreadValue))*0.125;
       
       for (unsigned int i=0; i<kSynthesisBlockSize; i++){
         *outptr++ = (*preoutptrL + (spreadValue * (*preoutptrR)))*normValue;
