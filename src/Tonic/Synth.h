@@ -34,7 +34,7 @@ namespace Tonic{
     // No reason to make them publicly available since you can't change the signal chain dynamically.
     
     //! Add a ControlParameter with name "name"
-    ControlParameter & addParameter(string name);
+    ControlParameter & addParameter(string name, TonicFloat initialValue = 0.f);
 
     // set to true in constructor to clamp incoming parameters to defined min/max
     std::map<string, ControlParameter> parameters_;

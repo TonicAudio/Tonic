@@ -103,7 +103,7 @@ namespace Tonic {
     ControlParameter &  logBase(TonicFloat logBase);
     
     TonicFloat          getNormalizedValue();
-    ControlParameter &  
+    ControlParameter &  setNormalizedValue(TonicFloat value);
   };
 }
 
