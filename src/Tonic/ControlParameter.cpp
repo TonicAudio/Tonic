@@ -24,7 +24,7 @@ namespace Tonic { namespace Tonic_{
   
   void ControlParameter_::setNormalizedValue(TonicFloat normVal){
     if (isLogarithmic_){
-      setValue(mapLinToLog(normVal, min_, max_, logBase_));
+      setValue(mapLinToLog(normVal, min_, max_));
     }
     else{
       setValue(map(normVal, 0.f, 1.f, min_, max_, true));
@@ -33,7 +33,7 @@ namespace Tonic { namespace Tonic_{
   
   TonicFloat ControlParameter_::getNormalizedValue(){
     if (isLogarithmic_){
-      return mapLogToLin(value_, min_, max_, logBase_);
+      return mapLogToLin(value_, min_, max_);
     }
     else{
       return map(value_, min_, max_, 0.f, 1.f, true);
@@ -108,15 +108,6 @@ namespace Tonic { namespace Tonic_{
   
   bool ControlParameter::getIsLogarithmic(){
     return gen()->getIsLogarithmic();
-  }
-  
-  ControlParameter &  ControlParameter::logBase(TonicFloat logBase){
-    gen()->setLogBase(logBase);
-    return *this;
-  }
-  
-  TonicFloat ControlParameter::getLogBase(){
-    return gen()->getLogBase();
   }
   
   ControlParameter & ControlParameter::setNormalizedValue(TonicFloat value){

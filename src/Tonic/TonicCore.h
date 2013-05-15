@@ -128,17 +128,17 @@ namespace Tonic {
     return result;
   }
   
+  #define TONIC_LOG_MAP_BASEVAL -4
+  
   //! Takes linear value 0-1, maps to logarithmic value (base logBase) scaled to min-max. Useful for making faders.
-  inline static TonicFloat mapLinToLog(float linValue, float min, float max, float logBase = 1.4142){
-    float baseValue = logf(0.0001f)/logf(logBase);
-    float expValue = map(linValue, 0.f, 1.f, baseValue, 0.f, true);
-    return map(powf(logBase,expValue), 0.0001f, 1.0f, min, max, true);
+  inline static TonicFloat mapLinToLog(float linValue, float min, float max){
+    float expValue = map(linValue, 0.f, 1.f, TONIC_LOG_MAP_BASEVAL, 0.f, true);
+    return map(powf(10.f,expValue), 0.0001f, 1.0f, min, max, true);
   }
   
   //! Takes logarithmic value between min-max, maps to linear value 0-1. Useful for making faders.
-  inline static TonicFloat mapLogToLin(float logValue, float min, float max, float logBase = 1.4142){
-    float baseValue = logf(0.0001f)/logf(logBase);
-    return map(logf(map(logValue, min, max, 0.0001f, 1.f,true))/logf(logBase), baseValue, 0.f, 0.f, 1.f, true);
+  inline static TonicFloat mapLogToLin(float logValue, float min, float max){
+    return map(log10f(map(logValue, min, max, 0.0001f, 1.f,true)), TONIC_LOG_MAP_BASEVAL, 0.f, 0.f, 1.f, true);
   }
   
   //-- Freq/MIDI --

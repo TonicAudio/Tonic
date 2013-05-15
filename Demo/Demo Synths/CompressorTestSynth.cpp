@@ -20,7 +20,7 @@ public:
     ControlParameter threshold = addParameter("threshold", -12.f).displayName("Threshold (dbFS)").min(-60.f).max(0.f);
     ControlParameter ratio = addParameter("ratio", 2.0f).displayName("Ratio").min(1.0f).max(64.f).logarithmic(true);
     ControlParameter attack = addParameter("attackTime", 0.001).displayName("Attack Time (s)").min(0.001).max(0.1).logarithmic(true);
-    ControlParameter release = addParameter("releaseTime", 0.05).displayName("Release Time (s)").min(0.01).max(0.08).logarithmic(true); //logarithmic
+    ControlParameter release = addParameter("releaseTime", 0.05).displayName("Release Time (s)").min(0.01).max(0.08).logarithmic(true);
     ControlParameter gain = addParameter("gain", 0.f).displayName( "Makeup Gain (dbFS)").min(0.f).max(36.0f);
     ControlParameter bypass = addParameter("bypass",false).parameterType(ControlParameterTypeToggle);
     
