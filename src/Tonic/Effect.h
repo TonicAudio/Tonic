@@ -129,16 +129,19 @@ namespace Tonic {
         if (bypass){
           outFrames.copy(dryFrames_);
         }
-        else if (!isAlwaysWet_){
-          wetLevelGen_.tick(mixWorkspace_, context);
-          outputFrames_ *= mixWorkspace_;
-          dryLevelGen_.tick(mixWorkspace_, context);
-          dryFrames_ *= mixWorkspace_;
-          outputFrames_ += dryFrames_;
-        }
         else{
+          
+          if (!isAlwaysWet_){
+            wetLevelGen_.tick(mixWorkspace_, context);
+            outputFrames_ *= mixWorkspace_;
+            dryLevelGen_.tick(mixWorkspace_, context);
+            dryFrames_ *= mixWorkspace_;
+            outputFrames_ += dryFrames_;
+          }
+          
           outFrames.copy(outputFrames_);
         }
+
 
         unlockMutex();
       
