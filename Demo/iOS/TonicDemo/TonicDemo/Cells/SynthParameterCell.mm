@@ -129,9 +129,8 @@ using Tonic::ControlParameterType;
     [self setSliderForNormPosition:normPosition];
     
     // set synth parameter
-    float paramValue = _synthParameter.getIsLogarithmic() ? Tonic::mapLinToLog(normPosition, _synthParameter.getMin(), _synthParameter.getMax()) : Tonic::map(normPosition, 0.0f, 1.0f, _synthParameter.getMin(), _synthParameter.getMax(), true);
-    [self updateValueLabel:paramValue];
-    _synthParameter.value(paramValue);
+    _synthParameter.setNormalizedValue(normPosition);
+    [self updateValueLabel:_synthParameter.getValue()];
   }
 }
 
@@ -195,7 +194,7 @@ using Tonic::ControlParameterType;
     self.paramValueLabel.hidden = NO;
     self.paramSliderView.hidden = NO;
     [self updateValueLabel:paramValue];
-    float normValue = _synthParameter.getIsLogarithmic() ? Tonic::mapLogToLin(paramValue, _synthParameter.getMin(), _synthParameter.getMax()) : Tonic::map(paramValue, _synthParameter.getMin(), _synthParameter.getMax(), 0.f, 1.f, true);
+    float normValue = _synthParameter.getNormalizedValue();
     [self setSliderForNormPosition:normValue];
   }
   else{
