@@ -61,6 +61,10 @@ namespace Tonic { namespace Tonic_{
     
     setIsStereoOutput(true);
     
+    // Default to 50% wet
+    setDryLevelGen(FixedValue(0.5f));
+    setWetLevelGen(FixedValue(0.5f));
+    
     workspaceFrames_[0].resize(kSynthesisBlockSize, 1, 0);
     workspaceFrames_[1].resize(kSynthesisBlockSize, 1, 0);
     preOutputFrames_[0].resize(kSynthesisBlockSize, 1, 0);

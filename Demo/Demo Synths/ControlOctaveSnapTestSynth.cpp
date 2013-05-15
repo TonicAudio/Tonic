@@ -76,7 +76,7 @@ class ControlSnapToScaleTestSynth : public Synth{
     
     Generator delayMix = ControlRandom().min(0).max(0.1).trigger(switchIt).smoothed();
     
-    Reverb verb = Reverb().inputHPFCutoff(100.f).decayTime(0.8).roomSize(0.25).density(0.8).stereoWidth(0.3).wetLevel(dBToLin(-14)).dryLevel(1.0);
+    Reverb verb = Reverb().inputHPFCutoff(100.f).decayTime(0.8).roomSize(0.1).density(0.8).stereoWidth(0.3).wetLevel(dBToLin(-20.f));
     
     outputGen = ((
     
