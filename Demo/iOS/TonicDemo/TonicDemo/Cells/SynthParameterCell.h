@@ -15,6 +15,6 @@
 
 + (CGFloat)height;
 - (void)setColor:(UIColor*)color;
-- (void)setSynthParameter:(Tonic::Synth::SynthParameter)parameter;
+- (void)setSynthParameter:(Tonic::ControlParameter)parameter;
 
 @end

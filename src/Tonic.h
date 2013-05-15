@@ -18,11 +18,13 @@
 #ifndef __Tonic_TonicHeader__
 #define __Tonic_TonicHeader__
 
-// basic stuff
+// ---- Core Objects ----
 #include "Tonic/TonicCore.h"
 #include "Tonic/TonicFrames.h"
-#include "Tonic/MonoToStereoPanner.h"
 #include "Tonic/FixedValue.h"
+#include "Tonic/ControlValue.h"
+#include "Tonic/ControlParameter.h"
+#include "Tonic/MonoToStereoPanner.h"
 #include "Tonic/RampedValue.h"
 #include "Tonic/Adder.h"
 #include "Tonic/Subtractor.h"

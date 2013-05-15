@@ -35,10 +35,11 @@ namespace Tonic {
   
   ControlParameter & Synth::addParameter(string name, TonicFloat initialValue)
   {
-    if (parameters_.find(name) != parameters_.end())
+    if (parameters_.find(name) == parameters_.end())
     {
-      ControlParameter param = ControlParameter(name).value(initialValue);
+      ControlParameter param = ControlParameter(name).value(initialValue).displayName(name);
       parameters_[name] = param;
+      orderedParameterNames_.push_back(name);
     }
     return parameters_[name];
   }

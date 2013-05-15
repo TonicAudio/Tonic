@@ -11,7 +11,7 @@
 namespace Tonic { namespace Tonic_{
   
   Compressor_::Compressor_() : isLimiter_(false), gainEnvValue_(0), ampEnvValue_(0) {
-    //setIsAlwaysWet(true);
+    setIsAlwaysWet(true);
     ampInputFrames_.resize(kSynthesisBlockSize, 1, 0);
     lookaheadDelayLine_.initialize(0.01, 2);
     lookaheadDelayLine_.setInterpolates(false); // No real need to interpolate here for lookahead

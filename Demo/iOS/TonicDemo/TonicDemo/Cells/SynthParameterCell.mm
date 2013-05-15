@@ -12,9 +12,12 @@
 #define kCellMargin 10.0f
 #define kCellHeight 60.f
 
+using Tonic::ControlParameter;
+using Tonic::ControlParameterType;
+
 @interface SynthParameterCell () <UIGestureRecognizerDelegate>
 {
-  Tonic::Synth::SynthParameter _synthParameter;
+  ControlParameter _synthParameter;
 }
 
 @property (nonatomic, weak) UILabel *paramNameLabel;
@@ -126,22 +129,22 @@
     [self setSliderForNormPosition:normPosition];
     
     // set synth parameter
-    float paramValue = _synthParameter.isLogarithmic ? Tonic::mapLinToLog(normPosition, _synthParameter.min, _synthParameter.max) : Tonic::map(normPosition, 0.0f, 1.0f, _synthParameter.min, _synthParameter.max, true);
+    float paramValue = _synthParameter.getIsLogarithmic() ? Tonic::mapLinToLog(normPosition, _synthParameter.getMin(), _synthParameter.getMax()) : Tonic::map(normPosition, 0.0f, 1.0f, _synthParameter.getMin(), _synthParameter.getMax(), true);
     [self updateValueLabel:paramValue];
-    _synthParameter.value.setValue(paramValue);
+    _synthParameter.value(paramValue);
   }
 }
 
 - (void)toggleButtonTouchUpInside
 {
-  if (_synthParameter.type == Tonic::Synth::SynthParameterTypeToggle){
-    BOOL isOn = _synthParameter.value.getValue() != 0.f;
-    _synthParameter.value.setValue(isOn ? 0.f : 1.f);
+  if (_synthParameter.getParameterType() == Tonic::ControlParameterTypeToggle){
+    BOOL isOn = _synthParameter.getValue() != 0.f;
+    _synthParameter.value(isOn ? 0.f : 1.f);
     self.toggleButton.backgroundColor = isOn ? [UIColor clearColor] : self.paramSliderView.backgroundColor;
   }
   else{ // momentary
     self.toggleButton.backgroundColor = [UIColor clearColor];
-    _synthParameter.value.setValue(0);
+    _synthParameter.value(0);
   }
   
 }
@@ -149,16 +152,16 @@
 - (void)toggleButtonTouchDown
 {
   self.toggleButton.backgroundColor = [UIColor colorWithWhite:0 alpha:0.5];
-  if (_synthParameter.type == Tonic::Synth::SynthParameterTypeMomentary){
-    _synthParameter.value.setValue(1.f);
+  if (_synthParameter.getParameterType() == Tonic::ControlParameterTypeMomentary){
+    _synthParameter.value(1.f);
   }
 }
 
 - (void)toggleButtonCancel
 {
   self.toggleButton.backgroundColor = [UIColor clearColor];
-  if (_synthParameter.type == Tonic::Synth::SynthParameterTypeMomentary){
-    _synthParameter.value.setValue(0.f);
+  if (_synthParameter.getParameterType() == Tonic::ControlParameterTypeMomentary){
+    _synthParameter.value(0.f);
   }
 }
 
@@ -179,20 +182,20 @@
 
 #pragma mark - Property overrides
 
-- (void)setSynthParameter:(Tonic::Synth::SynthParameter)parameter
+- (void)setSynthParameter:(Tonic::ControlParameter)parameter
 {
   _synthParameter = parameter;
-  self.paramNameLabel.text = [NSString stringWithUTF8String:parameter.displayName.c_str()];
+  self.paramNameLabel.text = [NSString stringWithUTF8String:parameter.getDisplayName().c_str()];
 
-  float paramValue = parameter.value.getValue();
+  float paramValue = parameter.getValue();
   
-  if (_synthParameter.type == Tonic::Synth::SynthParameterTypeContinuous){
+  if (_synthParameter.getParameterType() == Tonic::ControlParameterTypeContinuous){
     self.panGesture.enabled = YES;
     self.toggleButton.hidden = YES;
     self.paramValueLabel.hidden = NO;
     self.paramSliderView.hidden = NO;
     [self updateValueLabel:paramValue];
-    float normValue = _synthParameter.isLogarithmic ? Tonic::mapLogToLin(paramValue, _synthParameter.min, _synthParameter.max) : Tonic::map(paramValue, _synthParameter.min, _synthParameter.max, 0.f, 1.f, true);
+    float normValue = _synthParameter.getIsLogarithmic() ? Tonic::mapLogToLin(paramValue, _synthParameter.getMin(), _synthParameter.getMax()) : Tonic::map(paramValue, _synthParameter.getMin(), _synthParameter.getMax(), 0.f, 1.f, true);
     [self setSliderForNormPosition:normValue];
   }
   else{
@@ -200,7 +203,7 @@
     self.toggleButton.hidden = NO;
     self.paramSliderView.hidden = YES;
     self.paramValueLabel.hidden = YES;
-    if (_synthParameter.type == Tonic::Synth::SynthParameterTypeToggle){
+    if (_synthParameter.getParameterType() == Tonic::ControlParameterTypeToggle){
       self.toggleButton.backgroundColor = paramValue == 0.f ? [UIColor clearColor] : [self.paramSliderView backgroundColor];
     }
   }

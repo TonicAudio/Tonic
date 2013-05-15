@@ -29,7 +29,9 @@ namespace Tonic{
     ControlGeneratorOutput ControlGenerator_::tick(const SynthesisContext_ & context){
       if (lastFrameIndex_ == 0 || lastFrameIndex_ != context.elapsedFrames){
         lastFrameIndex_ = context.elapsedFrames;
+        lockMutex();
         computeOutput(context);
+        unlockMutex();
       }
       
       #ifdef TONIC_DEBUG

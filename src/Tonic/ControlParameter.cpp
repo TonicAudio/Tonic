@@ -31,9 +31,14 @@ namespace Tonic { namespace Tonic_{
     }
   }
   
-  TonicFloat ControlParameter_::getNormalizedValue()
-  {
-    
+  TonicFloat ControlParameter_::getNormalizedValue(){
+    if (isLogarithmic_){
+      // TODO:
+    }
+    else{
+      return map(value_, min_, max_, 0.f, 1.f, true);
+    }
+    return 0;
   }
   
   
@@ -43,28 +48,76 @@ namespace Tonic { namespace Tonic_{
     gen()->setName(name);
   }
 
-  string              getName();
-  ControlParameter &  name(string name);
+  string ControlParameter::getName(){
+    return gen()->getName();
+  }
   
-  string              getDisplayName();
-  ControlParameter &  displayName(string displayName);
+  ControlParameter &  ControlParameter::name(string name){
+    gen()->setName(name);
+    return *this;
+  }
   
-  TonicFloat          getValue();
-  ControlParameter &  value(TonicFloat value);
+  string ControlParameter::getDisplayName(){
+    return gen()->getDisplayName();
+  }
   
-  ControlParameter &  min(TonicFloat min);
-  TonicFloat          getMin();
+  ControlParameter &  ControlParameter::displayName(string displayName){
+    gen()->setDisplayName(displayName);
+    return *this;
+  }
   
-  ControlParameter &  max();
-  TonicFloat          getMax();
+  TonicFloat ControlParameter::getValue(){
+    return gen()->getValue();
+  }
   
-  ControlParameter &    type(ControlParameterType type);
-  ControlParameterType  getType();
+  ControlParameter &  ControlParameter::value(TonicFloat value){
+    gen()->setValue(value);
+    return *this;
+  }
   
-  ControlParameter &  logarithmic(bool isLogarithmic);
-  bool                getIsLogarithmic();
+  TonicFloat ControlParameter::getMin(){
+    return gen()->getMin();
+  }
+
+  ControlParameter &  ControlParameter::min(TonicFloat min){
+    gen()->setMin(min);
+    return *this;
+  }
   
-  ControlParameter &  logBase(TonicFloat logBase);
-  TonicFloat          getLogBase();
+  ControlParameter &  ControlParameter::max(TonicFloat max){
+    gen()->setMax(max);
+    return *this;
+  }
+  
+  TonicFloat ControlParameter::getMax(){
+    return gen()->getMax();
+  }
+  
+  ControlParameter &  ControlParameter::parameterType(ControlParameterType type){
+    gen()->setType(type);
+    return *this;
+  }
+  
+  ControlParameterType  ControlParameter::getParameterType(){
+    return gen()->getType();
+  }
+  
+  ControlParameter &  ControlParameter::logarithmic(bool isLogarithmic){
+    gen()->setIsLogarithmic(isLogarithmic);
+    return *this;
+  }
+  
+  bool ControlParameter::getIsLogarithmic(){
+    return gen()->getIsLogarithmic();
+  }
+  
+  ControlParameter &  ControlParameter::logBase(TonicFloat logBase){
+    gen()->setLogBase(logBase);
+    return *this;
+  }
+  
+  TonicFloat ControlParameter::getLogBase(){
+    return gen()->getLogBase();
+  }
   
 } // Namespace Tonic

@@ -63,6 +63,12 @@ namespace Tonic {
       void                  setType( ControlParameterType type ) { type_ = type; };
       ControlParameterType  getType() { return type_; };
       
+      void        setIsLogarithmic(bool isLogarithmic) { isLogarithmic_ = isLogarithmic; };
+      bool        getIsLogarithmic() { return isLogarithmic_; };
+      
+      void        setLogBase(TonicFloat logBase) { logBase_ = logBase; };
+      TonicFloat  getLogBase() { return logBase_; };
+      
       // Convenience methods for setting/getting value normalized linearly 0-1,
       // mapped to min/max range, with log applied if necessary
       void        setNormalizedValue(TonicFloat normVal);
@@ -91,10 +97,10 @@ namespace Tonic {
     ControlParameter &  min(TonicFloat min);
     
     TonicFloat          getMax();
-    ControlParameter &  max();
+    ControlParameter &  max(TonicFloat max);
     
-    ControlParameterType  getType();
-    ControlParameter &    type(ControlParameterType type);
+    ControlParameterType  getParameterType();
+    ControlParameter &    parameterType(ControlParameterType type);
     
     bool                getIsLogarithmic();
     ControlParameter &  logarithmic(bool isLogarithmic);

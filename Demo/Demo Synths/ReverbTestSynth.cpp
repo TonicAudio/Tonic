@@ -15,18 +15,18 @@ public:
   
   ReverbTestSynth(){
     
-    ControlValue dry = addParameter("dry", "Dry Level (dbFS)", -12.f, -60.f, 0.f);
-    ControlValue wet = addParameter("wet", "Wet Level (dbFS)", -20.f, -60.f, 0.f);
-    ControlValue time = addParameter("decayTime", "Decay Time (s)", 1.0f, 0.1f, 10.f);
-    ControlValue lowDecay = addParameter("lowDecay", "Decay Lowpass Cutoff (Hz)", 16000.0f, 4000.0f, 20000.0f);
-    ControlValue hiDecay = addParameter("hiDecay", "Decay Highpass Cutoff (Hz)", 20.f, 20.f, 120.f);
-    ControlValue preDelay = addParameter("preDelay", "Pre-delay", 0.001f, 0.001f, 0.05f);
-    ControlValue inputLPF = addParameter("inputLPF", "Input LPF cutoff (Hz)", 16000.0f, 4000.0f, 20000.0f);
-    ControlValue inputHPF = addParameter("inputHPF", "Input HPF cutoff (Hz)", 20.f, 20.f, 120.f);
-    ControlValue density = addParameter("density", "Density", 0.5f, 0.f, 1.f);
-    ControlValue shape = addParameter("shape", "Shape", 0.5f, 0.f, 1.f);
-    ControlValue size = addParameter("size", "Size", 0.5f, 0.f, 1.f);
-    ControlValue stereo = addParameter("stereo", "Stereo Width", 0.5f, 0.0f, 1.0f);
+    ControlParameter dry = addParameter("dry",-6.f).displayName("Dry Level (dbFS)").min(-60.f).max(0.f);
+    ControlParameter wet = addParameter("wet",-20.f).displayName("Wet Level (dbFS)").min( -60.f).max(0.f);
+    ControlParameter time = addParameter("decayTime", 1.0f).displayName("Decay Time (s)").min(0.1f).max(10.f);
+    ControlParameter lowDecay = addParameter("lowDecay", 16000.0f).displayName("Decay Lowpass Cutoff (Hz)").min(4000.0f).max(20000.0f);
+    ControlParameter hiDecay = addParameter("hiDecay",20.0f).displayName("Decay Highpass Cutoff (Hz)").min(20.f).max(120.f);
+    ControlParameter preDelay = addParameter("preDelay", 0.001f).displayName("Pre-delay").min(0.001f).max(0.05f);
+    ControlParameter inputLPF = addParameter("inputLPF",18000.f).displayName("Input LPF cutoff (Hz)").min(4000.0f).max(20000.0f);
+    ControlParameter inputHPF = addParameter("inputHPF",20.f).displayName("Input HPF cutoff (Hz)").min(20.f).max(120.f);
+    ControlParameter density = addParameter("density",0.5f).displayName("Density");
+    ControlParameter shape = addParameter("shape",0.5f).displayName("Shape");
+    ControlParameter size = addParameter("size",0.5f).displayName("Room Size");
+    ControlParameter stereo = addParameter("stereo",0.5f).displayName("Stereo Width");
 
     float bpm = 30.f;
     
