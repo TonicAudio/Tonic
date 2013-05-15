@@ -13,9 +13,8 @@
 #define __Tonic__Synth__
 
 #include <map>
-#include <float.h>
-#include "Tonic.h"
 #include "BufferFiller.h"
+#include "ControlParameter.h"
 
 namespace Tonic{
   
@@ -23,56 +22,22 @@ namespace Tonic{
     
   public:
     
-    typedef enum{
-      
-      SynthParameterTypeContinuous = 0,
-      
-      // TODO: Support these for auto-UI
-      SynthParameterTypeToggle,
-      SynthParameterTypeMomentary
-      
-    } SynthParameterType;
-    
-    
-    struct SynthParameter{
-      string              name;
-      string              displayName;
-      ControlValue        value;
-      SynthParameterType  type;
-      float               min;
-      float               max;
-      bool                isLogarithmic;
-      
-      SynthParameter();
-    };
-    
     Synth();
     
     void                   setParameter(string name, float value=1);
     
-    vector<SynthParameter> getParameters();
+    vector<ControlParameter> getParameters();
     
   protected:
     
     // ND: I moved these to protected because only subclasses should call them.
     // No reason to make them publicly available since you can't change the signal chain dynamically.
     
-    //! Add a continuous parameter with value, min, and max. DisplayName will be equal to name
-    ControlValue  & addParameter(string name, float value=0, float min=0, float max=1.f, bool isLogarithmic=false);
-    
-    //! Add a continuous parameter with a custom display name
-    ControlValue  & addParameter(string name, string displayName, float value=0, float min=0, float max=1.f, bool isLogarithmic=false);
-    
-    //! Add a binary parameter (on/off). Type defaults to Toggle, but can also be set to Momentary
-    ControlValue  & addBinaryParameter(string name);
-    ControlValue  & addBinaryParameter(string name, string displayName, bool isMomentary = false);
-
-    //! Helper to insert new parameters to map
-    ControlValue & createParameter(SynthParameterType type, string name, string displayName, float value, float min, float max, bool isLogarithmic);
+    //! Add a ControlParameter with name "name"
+    ControlParameter & addParameter(string name);
 
     // set to true in constructor to clamp incoming parameters to defined min/max
-    bool  clampsParameters_; 
-    std::map<string, SynthParameter> parameters_;
+    std::map<string, ControlParameter> parameters_;
     std::vector<string> orderedParameterNames_;
     
   };

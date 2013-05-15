@@ -154,10 +154,10 @@ namespace Tonic { namespace Tonic_{
       for (unsigned int i=0; i<TONIC_REVERB_N_COMBS; i++){
         
         TonicFloat scaledDelayTime = combTimeScales_[i % TONIC_REVERB_N_COMBS] * baseCombDelayTime;
-        combFilterDelayTimes_[TONIC_LEFT][i].setValue(scaledDelayTime);
-        combFilterDelayTimes_[TONIC_RIGHT][i].setValue(scaledDelayTime+TONIC_REVERB_STEREO_SPREAD);
-        combFilterScaleFactors_[TONIC_LEFT][i].setValue( powf(10.f, (-3.0f * scaledDelayTime / decayTime)) );
-        combFilterScaleFactors_[TONIC_RIGHT][i].setValue( powf(10.f, (-3.0f * (scaledDelayTime+TONIC_REVERB_STEREO_SPREAD) / decayTime)) );
+        combFilterDelayTimes_[TONIC_LEFT][i].value(scaledDelayTime);
+        combFilterDelayTimes_[TONIC_RIGHT][i].value(scaledDelayTime+TONIC_REVERB_STEREO_SPREAD);
+        combFilterScaleFactors_[TONIC_LEFT][i].value( powf(10.f, (-3.0f * scaledDelayTime / decayTime)) );
+        combFilterScaleFactors_[TONIC_RIGHT][i].value( powf(10.f, (-3.0f * (scaledDelayTime+TONIC_REVERB_STEREO_SPREAD) / decayTime)) );
 
       }
     }

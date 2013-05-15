@@ -14,7 +14,7 @@ namespace Tonic { namespace Tonic_{
     ampInputFrames_.resize(kSynthesisBlockSize, 1, 0);
     lookaheadDelayLine_.initialize(0.01, 2);
     lookaheadDelayLine_.setInterpolates(false); // No real need to interpolate here for lookahead
-    makeupGainGen_ = ControlValue().setValue(1.f);
+    makeupGainGen_ = ControlValue(1.f);
   }
 
   // Default inherited input method sets both audio signal and amplitude signal as input
