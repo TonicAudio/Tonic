@@ -14,10 +14,6 @@ namespace Tonic { namespace Tonic_{
 
   }
   
-  ControlMetro_::~ControlMetro_(){
-    
-  }
-  
   void ControlMetro_::computeOutput(const SynthesisContext_ & context){
     
     double sPerBeat = 60.0/max(0.001,bpm_.tick(context).value);

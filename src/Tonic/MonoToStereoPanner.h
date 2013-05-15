@@ -26,17 +26,18 @@ namespace Tonic {
       ControlGenerator panControlGen;
       TonicFrames panFrames;
       
+      void computeSynthesisBlock( const SynthesisContext_ &context );
+      
     public:
       MonoToStereoPanner_();
       ~MonoToStereoPanner_();
-      void computeSynthesisBlock( const SynthesisContext_ &context );
       void setPan(ControlGenerator);
       
     };
     
     inline void MonoToStereoPanner_::computeSynthesisBlock(const SynthesisContext_ &context){
       
-      TonicFloat *synthBlockWriteHead = &synthesisBlock_[0];
+      TonicFloat *synthBlockWriteHead = &outputFrames_[0];
       TonicFloat *dryFramesReadHead = &dryFrames_[0];
       
       unsigned int nSamples = kSynthesisBlockSize;

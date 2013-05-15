@@ -14,13 +14,23 @@
 namespace Tonic {
   
   //! Calculate coefficient for a pole with given time constant to reach -60dB delta in t60s seconds
-  inline static TonicFloat t60ToTau( TonicFloat t60s ){
-    return t60s > 0.001f ? expf(-1.0f/((t60s/6.91) * Tonic::sampleRate())) : 0.0f;
+  inline static TonicFloat t60ToOnePoleCoef( TonicFloat t60s ){
+    return t60s > 0.001f ? expf(-1.0f/((t60s/6.91) * sampleRate())) : 0.0f;
   }
   
-  //! Tick one sample through one-pole filter
-  inline void onePoleTick( TonicFloat input, TonicFloat & output, TonicFloat coef){
+  //! Calculate coefficient for a pole with a given desired cutoff in hz
+  inline static TonicFloat cutoffToOnePoleCoef( TonicFloat cutoffHz ){
+    return clamp(expf(-TWO_PI*cutoffHz/sampleRate()), 0.f, 1.f);
+  }
+  
+  //! Tick one sample through one-pole lowpass filter
+  inline void onePoleLPFTick( TonicFloat input, TonicFloat & output, TonicFloat coef){
     output = ((1.0f-coef) * input) + (coef * output);
+  }
+  
+  //! Tick one sample through one-pole highpass filter
+  inline void onePoleHPFTick( TonicFloat input, TonicFloat & output, TonicFloat coef){
+    output = ((1.0-coef) * input) - (coef * output);
   }
 
   //! Compute coefficients from analog prototype using bilinear transform
@@ -63,10 +73,12 @@ namespace Tonic {
     
   public:
     
-    Biquad(){
-      memset(coef_, 0, 5 * sizeof(TonicFloat));
-      inputVec_.resize(kSynthesisBlockSize + 2, 2, 0);
-      outputVec_.resize(kSynthesisBlockSize + 2, 2, 0);
+    Biquad();
+    
+    void setIsStereo(bool stereo){
+      // resize vectors to match number of channels
+      inputVec_.resize(kSynthesisBlockSize + 2, stereo ? 2 : 1, 0);
+      outputVec_.resize(kSynthesisBlockSize + 2, stereo ? 2 : 1, 0);
     }
     
     //! Set the coefficients for the filtering operation.
@@ -78,7 +90,7 @@ namespace Tonic {
     void setCoefficients( TonicFloat b0, TonicFloat b1, TonicFloat b2, TonicFloat a1, TonicFloat a2 );
     void setCoefficients( TonicFloat *newCoef );
     
-    void filter( TonicFrames &frames );
+    void filter( TonicFrames &inFrames, TonicFrames &outFrames );
   };
   
   inline void Biquad::setCoefficients(TonicFloat b0, TonicFloat b1, TonicFloat b2, TonicFloat a1, TonicFloat a2){
@@ -93,25 +105,16 @@ namespace Tonic {
     memcpy(coef_, newCoef, 5 * sizeof(TonicFloat));
   }
   
-  inline void Biquad::filter( TonicFrames &frames ){
-    
-    // resize vectors to match number of channels (if necessary)
-    if (inputVec_.channels() != frames.channels()){
-      inputVec_.resize(kSynthesisBlockSize + 2, frames.channels(), 0);
-    }
-    
-    if (outputVec_.channels() != frames.channels()){
-      outputVec_.resize(kSynthesisBlockSize + 2, frames.channels(), 0);
-    }
+  inline void Biquad::filter( TonicFrames &inFrames, TonicFrames &outFrames ){
     
     // initialize vectors
     memcpy(&inputVec_[0], &inputVec_(kSynthesisBlockSize, 0), 2 * inputVec_.channels() * sizeof(TonicFloat));
-    memcpy(&inputVec_(2, 0), &frames[0], frames.size() * sizeof(TonicFloat));
+    memcpy(&inputVec_(2, 0), &inFrames[0], inFrames.size() * sizeof(TonicFloat));
     memcpy(&outputVec_[0], &outputVec_(kSynthesisBlockSize, 0), 2 * outputVec_.channels() * sizeof(TonicFloat));
     
     // perform IIR filter
     
-    unsigned int stride = frames.channels();
+    unsigned int stride = inFrames.channels();
     
 #ifdef USE_APPLE_ACCELERATE
     for (unsigned int c=0; c<stride; c++){
@@ -140,7 +143,7 @@ namespace Tonic {
 #endif
     
     // copy to synthesis block
-    memcpy(&frames[0], &outputVec_(2,0), kSynthesisBlockSize * stride * sizeof(TonicFloat));
+    memcpy(&outFrames[0], &outputVec_(2,0), kSynthesisBlockSize * stride * sizeof(TonicFloat));
   }
   
   

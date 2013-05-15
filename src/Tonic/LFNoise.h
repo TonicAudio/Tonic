@@ -20,20 +20,43 @@ namespace Tonic{
   namespace Tonic_{
 
     class LFNoise_ : public Generator_{
+      
+    protected:
       TonicFrames   mFreqFrames;
       float         mSlope;
       int           mCounter;
       float         mLevel;
       
-      public:
+      void computeSynthesisBlock( const SynthesisContext_ &context );
+      
+    public:
       
         ControlGenerator     mFreq;
         void setFreq(ControlGenerator freq);
-        void tick(TonicFrames& frames);
-        void computeSynthesisBlock( const SynthesisContext_ &context );
         LFNoise_();
     
     };
+    
+    inline void LFNoise_::computeSynthesisBlock( const SynthesisContext_ &context ){
+      int remain = outputFrames_.frames();
+      TonicFloat* out = &outputFrames_[0];
+      do{
+        if (mCounter<=0) {
+          mCounter = sampleRate() / std::max<float>(mFreq.tick(context).value, .001f);
+          mCounter = std::max<float>(1, mCounter);
+          float nextlevel = randomFloat(-1, 1);
+          mSlope = (nextlevel - mLevel) / mCounter;
+		}
+        int nsmps = std::min(remain, mCounter);
+        remain -= nsmps;
+        mCounter -= nsmps;
+        for(int i = 0; i < nsmps; i++){
+          *(out++) = mLevel;
+          mLevel += mSlope;
+        }
+      }while (remain);
+    }
+
 
   }
   

@@ -35,7 +35,7 @@ namespace Tonic {
     DelayLine();
     
     //! MUST be called prior to usage
-    void initialize(float initialDelay = 0.5f, float maxDelay = 1.0f, unsigned int channels = 1);
+    void initialize(float maxDelay = 1.0f, unsigned int channels = 1);
     
     //! Set whether interpolates or not
     void setInterpolates( bool doesInterpolate ) { interpolates_ = doesInterpolate; };
@@ -53,7 +53,16 @@ namespace Tonic {
         NOTE: No bounds checking on channel index. Improper use will result in access outside array bounds.
     */
     
-    inline TonicFloat tickOut(unsigned int channel = 0) {
+    inline TonicFloat tickOut(float delayTime, unsigned int channel = 0) {
+      
+      if (delayTime != lastDelayTime_){
+        float dSamp = clamp(delayTime * Tonic::sampleRate(), 0, nFrames_);
+        readHead_ = (float)writeHead_ - dSamp;
+        if (readHead_ < 0) {
+          readHead_ += (float)nFrames_;
+        }
+        lastDelayTime_ = delayTime;
+      }
       
       if (interpolates_){
         // Fractional and integral part of read head
@@ -81,29 +90,22 @@ namespace Tonic {
       data_[writeHead_*nChannels_+channel] = sample;
     }
     
-    //! Advance read/write heads based on passed-in delay time.
-    inline void advance(float delayTime){
+    //! Advance read/write heads
+    inline void advance(){
       
       if (++writeHead_ >= nFrames_)
         writeHead_ = 0;
       
-      if (delayTime != lastDelayTime_){
-        float dSamp = clamp(delayTime * Tonic::sampleRate(), 0, nFrames_);
-        readHead_ = (float)writeHead_ - dSamp;
-        if (readHead_ < 0) {
-          readHead_ += (float)nFrames_;
-        }
-        lastDelayTime_ = delayTime;
+      // assume read head advances by 1 for efficiency in constant-delay lines
+      readHead_ += 1.0f;
+      if (readHead_ >= nFrames_){
+        readHead_ -= (float)nFrames_;
       }
-      else{
-        readHead_ += 1.0f;
-        if (readHead_ >= nFrames_){
-          readHead_ -= (float)nFrames_;
-        }
-      }
+
     }
                      
   };
+  
 }
 
 #endif

@@ -12,7 +12,7 @@ namespace Tonic{
 
 namespace Tonic_{
 
-  void ControlConditioner_::in(ControlGenerator & input){
+  void ControlConditioner_::in(ControlGenerator input){
     input_ = input;
   }
 

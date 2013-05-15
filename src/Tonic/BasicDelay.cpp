@@ -13,10 +13,10 @@ namespace Tonic { namespace Tonic_{
   BasicDelay_::BasicDelay_() {
     delayTimeFrames_.resize(kSynthesisBlockSize, 1, 0);
     fbkFrames_.resize(kSynthesisBlockSize, 1, 0);
-    mixFrames_.resize(kSynthesisBlockSize, 1, 0);
     delayTimeGen_ = FixedValue(0);
     fbkGen_ = FixedValue(0);
-    mixGen_ = FixedValue(0);
+    setDryLevelGen(FixedValue(0.5));
+    setWetLevelGen(FixedValue(0.5));
   }
   
   BasicDelay_::~BasicDelay_(){
@@ -34,23 +34,16 @@ namespace Tonic { namespace Tonic_{
   
   void BasicDelay_::initialize(float delayTime, float maxDelayTime)
   {
-    if (maxDelayTime < 0) maxDelayTime = delayTime * 1.5;
-       
-    if (maxDelayTime < delayTime){
-      error("BasicDelay_ - initial delay time is greater than max delay time", true);
-    }
-    else if (delayTime <= 0){
-      error("BasicDelay_ - initial delay time must be greater than zero");
-    }
-    
-    delayLine_.initialize(delayTime, maxDelayTime, 1);
+    if (maxDelayTime <= 0) maxDelayTime = delayTime * 1.5;
+    delayLine_.initialize(maxDelayTime, 1);
+    delayTimeGen_ = FixedValue(delayTime);
   }
   
 } // Namespace Tonic_
   
   BasicDelay::BasicDelay(float initialDelayTime, float maxDelayTime){
     gen()->initialize(initialDelayTime, maxDelayTime);
-    delayTime(FixedValue(initialDelayTime));
+    delayTime(initialDelayTime);
   }
   
   

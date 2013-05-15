@@ -19,11 +19,17 @@ public:
   
   DelayTestSynth(){
     
-    ControlMetro metro = ControlMetro().bpm(120 * 4);
-    ControlPulse pulseGate = ControlPulse().in(metro).length(0.05f);
+    ControlParameter tempo = addParameter("tempo", 120.f).displayName("Tempo").min(60.f).max(300.f);
+    ControlParameter delayTime = addParameter("delayTime", 0.12f).displayName("Delay Time").min( 0.001f).max(1.0f).logarithmic(true); // logarithmic
+    ControlParameter feedBack = addParameter("feedback", 0.4f).displayName("Delay Feedback").min(0.0f).max(0.95f);
+    ControlParameter delayMix = addParameter("delayMix", 0.3f).displayName("Delay Dry/Wet").min(0.0f).max(1.0f);
+    ControlParameter decay = addParameter("decayTime", 0.08f).displayName("Env Decay Time").min(0.05f).max(0.25f).logarithmic(true); // logarithmic
+    ControlParameter volume = addParameter("volume", -6.f).displayName("Volume (dbFS)").min(-60.0f).max(0.f);
     
-    ADSR aEnv = ADSR().attack(0.005f).decay(0.08f).sustain(0.0f).release(0.01f).trigger(pulseGate).doesSustain(false).exponential(true);
-    ADSR fEnv = ADSR().attack(0.005f).decay(0.08f).sustain(0.0f).release(0.01f).trigger(pulseGate).doesSustain(false).exponential(true);
+    ControlMetro metro = ControlMetro().bpm(tempo * 4);
+    
+    ADSR aEnv = ADSR().attack(0.005f).decay(decay).sustain(0.0f).release(0.01f).trigger(metro).doesSustain(false).exponential(true);
+    ADSR fEnv = ADSR().attack(0.005f).decay(decay).sustain(0.0f).release(0.01f).trigger(metro).doesSustain(false).exponential(true);
     
     float scalenums[5] = {0,3,5,7,10};
     std::vector<float> scale(scalenums, scalenums + 5);
@@ -50,12 +56,15 @@ public:
     
     LPF12 filt = LPF12().cutoff(400.0f * (1.0f + fEnv*9.0f)).Q(1.1f);
     
-    BasicDelay delay = BasicDelay(0.5f, 1.0f)
-      .delayTime( addParameter("delayTime", 0.4f, 0.01f, 1.0f).smoothed(0.5f) )
-      .feedback( addParameter("feedback", 0.0f, 0.0f, 0.8f).smoothed() )
-      .mix( dBToLin(-10) );
+    Generator smoothMix = delayMix.smoothed();
     
-    outputGen = (osc >> filt >> delay) * 0.8;
+    BasicDelay delay = BasicDelay(0.5f, 1.0f)
+      .delayTime( delayTime.smoothed(0.5f) )
+      .feedback( feedBack.smoothed() )
+      .dryLevel( 1.0f - smoothMix )
+      .wetLevel( smoothMix );
+    
+    outputGen = (osc >> filt >> delay) * ControlDbToLinear().in(volume).smoothed();
   }
   
 };

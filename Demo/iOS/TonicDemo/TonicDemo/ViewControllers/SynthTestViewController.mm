@@ -15,6 +15,8 @@
 @property (nonatomic, copy)   SynthTestPanAction panAction;
 @property (nonatomic, copy) SynthTestAccellerometerAction accelAction;
 @property (strong, nonatomic) NSOperationQueue* operationQueue;
+@property (strong, nonatomic) CMMotionManager* motionManager;
+@property (strong, nonatomic) SynthDemoDef* synthDemoDef;
 
 - (void)addSynthIfNecessary;
 - (void)handlePan:(UIPanGestureRecognizer*)pan;
@@ -110,12 +112,6 @@
       break;
       
   }
-}
-
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 @end

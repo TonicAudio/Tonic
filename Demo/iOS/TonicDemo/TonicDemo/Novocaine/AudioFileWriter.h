@@ -43,8 +43,8 @@
     BOOL recording;
 }
 
-@property (getter=getDuration, readonly) float currentTime;
-@property (getter=getDuration) float duration;
+@property (getter=getDuration, nonatomic, readonly) float currentTime;
+@property (getter=getDuration, nonatomic) float duration;
 @property float samplingRate;
 @property UInt32 numChannels;
 @property float latency;

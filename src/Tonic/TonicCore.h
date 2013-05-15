@@ -33,12 +33,16 @@ typedef long                  TonicInt32;
 typedef float                 TonicFloat;
 
 #ifndef PI
-const TonicFloat PI           = 3.14159265358979;
+const TonicFloat PI           = 3.14159265358979f;
 #endif
 
 #ifndef TWO_PI
-const TonicFloat TWO_PI       = 2 * PI;
+const TonicFloat TWO_PI       = 2.f * PI;
 #endif
+
+// channel indices
+#define TONIC_LEFT            0
+#define TONIC_RIGHT           1
 
 // Causes 32nd bit in double to have fractional value 1 (decimal point on 32-bit word boundary)
 // Allowing some efficient shortcuts for table lookup using power-of-two tables
@@ -124,11 +128,24 @@ namespace Tonic {
     return result;
   }
   
+  #define TONIC_LOG_MAP_BASEVAL -4
+  
+  //! Takes linear value 0-1, maps to logarithmic value (base logBase) scaled to min-max. Useful for making faders.
+  inline static TonicFloat mapLinToLog(float linValue, float min, float max){
+    float expValue = map(linValue, 0.f, 1.f, TONIC_LOG_MAP_BASEVAL, 0.f, true);
+    return map(powf(10.f,expValue), 0.0001f, 1.0f, min, max, true);
+  }
+  
+  //! Takes logarithmic value between min-max, maps to linear value 0-1. Useful for making faders.
+  inline static TonicFloat mapLogToLin(float logValue, float min, float max){
+    return map(log10f(map(logValue, min, max, 0.0001f, 1.f,true)), TONIC_LOG_MAP_BASEVAL, 0.f, 0.f, 1.f, true);
+  }
+  
   //-- Freq/MIDI --
   
   //! Midi note number to frequency in Hz
   inline static TonicFloat mtof(TonicFloat nn){
-    return 440.0f * powf(2.0, (nn-69.0f)/12.0f);
+    return 440.0f * powf(2.0f, (nn-69.0f)/12.0f);
   }
   
   //! Frequency in Hz to midi note number
@@ -138,17 +155,18 @@ namespace Tonic {
   
   //-- Decibels --
   /*
-    Working with 0 dB representing 1.0
+    Using 0 dBFS as 1.0
   */
   inline static TonicFloat linTodB(TonicFloat lv){
     return 20.0f*log10f(max(0, lv));
   }
   
-  inline static TonicFloat dBToLin(TonicFloat dBv){
-    return powf(10,(dBv/20.0f));
+  inline static TonicFloat dBToLin(TonicFloat dBFS){
+    return powf(10.f,(dBFS/20.0f));
   }
   
   // -- Misc --
+  
   inline static TonicFloat randomSample(){
     #ifdef __APPLE__
     return ((TonicFloat)arc4random()/ARC4RAND_MAX) * 2.0f - 1.0f;

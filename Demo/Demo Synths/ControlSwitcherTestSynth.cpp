@@ -85,7 +85,7 @@ public:
       
      // >> HPF12().cutoff(addParameter("hpf") * 1000)
       >> LPF12().cutoff(5500)
-      >> StereoDelay(1.1, 1.2).mix(0.1) ;
+      >> StereoDelay(1.1, 1.2).wetLevel(0.1) ;
     Generator bassWithAmp = bass * bassEnv * tremelo;
     outputGen = bassWithAmp  + click;
   }
