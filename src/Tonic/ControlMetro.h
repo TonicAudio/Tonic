@@ -23,15 +23,16 @@ namespace Tonic {
     class ControlMetro_ : public ControlGenerator_{
       
     protected:
-    
-      void computeOutput(const SynthesisContext_ & context);
-    
-      ControlGenerator bpm_;
+      
       double lastClickTime_;
       
+      ControlGenerator bpm_;
+      
+      void computeOutput(const SynthesisContext_ & context);
+          
     public:
+
       ControlMetro_();
-      ~ControlMetro_();
       
       void setBPMGen( ControlGenerator bpmGen ){ bpm_ = bpmGen; };
       

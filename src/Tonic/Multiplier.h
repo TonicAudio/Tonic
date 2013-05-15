@@ -23,12 +23,13 @@ namespace Tonic{
     protected:
       TonicFrames workSpace;
       vector<Generator> inputs;
+      
+      void computeSynthesisBlock( const SynthesisContext_ & context );
 
     public:
       Multiplier_();
       ~Multiplier_();
       void in(Generator& generator);
-      void computeSynthesisBlock( const SynthesisContext_ & context );
       
       Generator & getInput(unsigned int index) { return inputs[index]; };
       unsigned int numInputs() { return inputs.size(); };
@@ -37,15 +38,15 @@ namespace Tonic{
     
     inline void Multiplier_::computeSynthesisBlock( const SynthesisContext_ & context ){
       
-      memset(&synthesisBlock_[0], 0, sizeof(TonicFloat) * synthesisBlock_.size());
+      memset(&outputFrames_[0], 0, sizeof(TonicFloat) * outputFrames_.size());
       
       // for the first generator, store the value in the block
-      inputs[0].tick(synthesisBlock_, context);
+      inputs[0].tick(outputFrames_, context);
       
       // for additional generators, use the workspace stkframes for tick, and multiply it into the frames argument
       for(int i = 1; i < inputs.size(); i++) {
         inputs[i].tick(workSpace, context);
-        synthesisBlock_ *= workSpace;
+        outputFrames_ *= workSpace;
       }
       
     }

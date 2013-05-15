@@ -27,13 +27,16 @@ namespace Tonic {
       Generator right;
       TonicFrames workSpace;
       
-    public:
-      Subtractor_();
-      ~Subtractor_();
       void computeSynthesisBlock( const SynthesisContext_ &context );
+      
+    public:
+      
+      Subtractor_();
+
       void setLeft(Generator arg){
         left = arg;
       }
+      
       void setRight(Generator arg){
         right = arg;
       }
@@ -41,9 +44,9 @@ namespace Tonic {
     };
     
     inline void Subtractor_::computeSynthesisBlock(const SynthesisContext_ &context){
-      left.tick(synthesisBlock_, context);
+      left.tick(outputFrames_, context);
       right.tick(workSpace, context);
-      synthesisBlock_ -= workSpace;
+      outputFrames_ -= workSpace;
     }
     
   }

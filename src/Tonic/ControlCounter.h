@@ -26,8 +26,8 @@ namespace Tonic {
       ControlGenerator end;
       
     public:
+
       ControlCounter_();
-      ~ControlCounter_();
       
       void setTrigger(ControlGenerator gen){ trigger = gen;};
       void setEnd(ControlGenerator gen){end = gen;};

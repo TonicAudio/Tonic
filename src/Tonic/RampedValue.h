@@ -34,12 +34,12 @@ namespace Tonic {
       ControlGenerator lengthGen_;
       ControlGenerator valueGen_;
       
+      void computeSynthesisBlock( const SynthesisContext_ & context );
+      
     public:
       RampedValue_();
       ~RampedValue_();
-      
-      void computeSynthesisBlock( const SynthesisContext_ & context );
-      
+            
       void setValueGen( ControlGenerator value );
       void setTargetGen( ControlGenerator target );
       void setLengthGen( ControlGenerator length );
@@ -67,9 +67,9 @@ namespace Tonic {
         updateTarget(targetOutput.value, lSamp);
       }
       
-      TonicFloat *fdata = &synthesisBlock_[0];
+      TonicFloat *fdata = &outputFrames_[0];
       unsigned int nFrames = kSynthesisBlockSize;
-      unsigned int stride = synthesisBlock_.channels();
+      unsigned int stride = outputFrames_.channels();
       
       // edge case
       if (count_ == len_){
@@ -149,7 +149,7 @@ namespace Tonic {
           #endif
           
           count_ += nFrames;
-          last_ = synthesisBlock_(nFrames - 1, 0);
+          last_ = outputFrames_(nFrames - 1, 0);
         }
       }
       
@@ -160,7 +160,7 @@ namespace Tonic {
       #endif
       
       // mono source, so need to fill out channels if necessary
-      synthesisBlock_.fillChannels();
+      outputFrames_.fillChannels();
       
     }
     

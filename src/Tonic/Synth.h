@@ -13,9 +13,8 @@
 #define __Tonic__Synth__
 
 #include <map>
-#include <float.h>
-#include "Tonic.h"
 #include "BufferFiller.h"
+#include "ControlParameter.h"
 
 namespace Tonic{
   
@@ -23,41 +22,23 @@ namespace Tonic{
     
   public:
     
-    typedef enum{
-      
-      SynthParameterTypeContinuous = 0,
-        
-//      TODO: other types
-//      SynthParameterTypeToggle
-//      SynthParameterTypeMomentary,
-//      SynthParameterTypeTrigger
-      
-    } SynthParameterType;
-    
-    
-    struct SynthParameter{
-      string              name;
-      ControlValue        value;
-      SynthParameterType  type;
-      float               min;
-      float               max;
-      
-      SynthParameter();
-    };
-    
     Synth();
     
-    // It's quite conceivable that we'll want to move the messaging stuff up into Source
-    ControlValue  & addParameter(string name, float value=0, float min=-FLT_MAX, float max=FLT_MAX);
-    ControlValue  & addParameter(string name, SynthParameterType type, float value=0, float min=-FLT_MAX, float max=FLT_MAX);
+    void                   setParameter(string name, float value=1);
     
-    void              setParameter(string name, float value=1);
-    
-    vector<SynthParameter> getParameters();
+    vector<ControlParameter> getParameters();
     
   protected:
+    
+    // ND: I moved these to protected because only subclasses should call them.
+    // No reason to make them publicly available since you can't change the signal chain dynamically.
+    
+    //! Add a ControlParameter with name "name"
+    ControlParameter & addParameter(string name, TonicFloat initialValue = 0.f);
 
-    std::map<string, SynthParameter> parameters;
+    // set to true in constructor to clamp incoming parameters to defined min/max
+    std::map<string, ControlParameter> parameters_;
+    std::vector<string> orderedParameterNames_;
     
   };
   

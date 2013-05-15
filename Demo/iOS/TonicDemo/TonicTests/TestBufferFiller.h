@@ -19,7 +19,7 @@ class TestBufferFiller : public BufferFiller
 {
   
 public:
-  void setOutputGen(Generator & gen) { outputGen = gen; };
+  void setOutputGen(Generator gen) { outputGen = gen; };
 };
 
 #endif /* defined(__TonicDemo__TestBufferFiller__) */

@@ -53,9 +53,8 @@ namespace Tonic {
     }
     pthread_mutex_unlock(&input_mutex_);
 
-    
     if (limitOutput_){
-      limiter_.tickThrough(frames);
+      limiter_.tickThrough(frames, context);
     }
   }
 

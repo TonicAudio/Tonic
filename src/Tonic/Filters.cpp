@@ -17,8 +17,10 @@ namespace Tonic { namespace Tonic_{
   Filter_::Filter_() :
     cutoff_(FixedValue(20000)),
     Q_(FixedValue(0.7071)),
-    bypass_(ControlValue(0))
+    bypass_(ControlValue(0)),
+    bNormalizeGain_(true)
   {
+    setIsAlwaysWet(true);
     workspace_.resize(kSynthesisBlockSize, 1, 0);
   }
   

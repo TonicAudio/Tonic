@@ -21,38 +21,46 @@ namespace Tonic {
     
     class Effect_ : public Generator_{
       
+    private:
+      
+      ControlGenerator bypassGen_;
+      Generator  dryLevelGen_;
+      Generator  wetLevelGen_;
+      TonicFrames mixWorkspace_;
+      bool isAlwaysWet_;
+      bool isStereoInput_;
+      
     protected:
       
       Generator input_;
-      
       TonicFrames dryFrames_;
-      
-      bool isStereoInput_;
       
     public:
       
-      Effect_(){
-        dryFrames_.resize(kSynthesisBlockSize, 1, 0);
-      }
-      
-      virtual void tick(TonicFrames &frames, const SynthesisContext_ &context );
-      
-      virtual void setInput( Generator input ) { input_ = input; };
+      Effect_();
+            
+      void setBypassCtrlGen( ControlGenerator gen ){ bypassGen_ = gen; };
+      void setDryLevelGen( Generator gen ){ dryLevelGen_ = gen; };
+      void setWetLevelGen( Generator gen ){ wetLevelGen_ = gen; };
 
+      virtual void setInput( Generator input ) { input_ = input; };
+      
+      //! set to true to disable dry/wet (always fully wet)
+      void setIsAlwaysWet( bool isAlwaysWet ) { isAlwaysWet_ = isAlwaysWet; };
+      
       //! set stereo/mono - changes number of channels in dryFrames_
       /*!
           subclasses should call in constructor to determine input channel layout
       */
       virtual void setIsStereoInput( bool stereo );
-      
-    
       bool isStereoInput(){ return isStereoInput_; };
       
       //! Apply effect directly to passed in frames (output in-place)
       /*!
           DO NOT mix calls to tick() with calls to tickThrough(). Result is undefined.
       */
-      virtual void tickThrough( TonicFrames & frames );
+      virtual void tick(TonicFrames &frames, const SynthesisContext_ &context );
+      virtual void tickThrough( TonicFrames & inFrames, TonicFrames & outFrames, const SynthesisContext_ & context );
 
     };
     
@@ -71,13 +79,33 @@ namespace Tonic {
       
       // check context to see if we need new frames
       if (context.elapsedFrames == 0 || lastFrameIndex_ != context.elapsedFrames){
+        
+        lockMutex();
+        
         input_.tick(dryFrames_, context); // get input frames
+        
         computeSynthesisBlock(context);
+
+        // bypass processing - still need to compute block so all generators stay in sync
+        bool bypass = bypassGen_.tick(context).value != 0.f;
+        if (bypass){
+          outputFrames_.copy(dryFrames_);
+        }
+        else if (!isAlwaysWet_){
+          wetLevelGen_.tick(mixWorkspace_, context);
+          outputFrames_ *= mixWorkspace_;
+          dryLevelGen_.tick(mixWorkspace_, context);
+          dryFrames_ *= mixWorkspace_;
+          outputFrames_ += dryFrames_;
+        }
+        
+        unlockMutex();
+        
         lastFrameIndex_ = context.elapsedFrames;
       }
       
       // copy synthesis block to frames passed in
-      frames.copy(synthesisBlock_);
+      frames.copy(outputFrames_);
       
 #ifdef TONIC_DEBUG
       if(!isfinite(frames(0,0))){
@@ -87,12 +115,36 @@ namespace Tonic {
       
     }
     
-    inline void Effect_::tickThrough(TonicFrames &frames){
-      lockMutex();
-      dryFrames_.copy(frames);
-      computeSynthesisBlock(SynthesisContext_());
-      unlockMutex();
-      frames.copy(synthesisBlock_);
+    inline void Effect_::tickThrough(TonicFrames & inFrames, TonicFrames & outFrames, const SynthesisContext_ & context){
+
+        // Do not check context here, assume each call should process
+      
+        lockMutex();
+
+        dryFrames_.copy(inFrames);
+        computeSynthesisBlock(context);
+        
+        // bypass processing - still need to compute block so all generators stay in sync
+        bool bypass = bypassGen_.tick(context).value != 0.f;
+        if (bypass){
+          outFrames.copy(dryFrames_);
+        }
+        else{
+          
+          if (!isAlwaysWet_){
+            wetLevelGen_.tick(mixWorkspace_, context);
+            outputFrames_ *= mixWorkspace_;
+            dryLevelGen_.tick(mixWorkspace_, context);
+            dryFrames_ *= mixWorkspace_;
+            outputFrames_ += dryFrames_;
+          }
+          
+          outFrames.copy(outputFrames_);
+        }
+
+
+        unlockMutex();
+      
     }
   }
   
@@ -111,10 +163,27 @@ namespace Tonic {
       return static_cast<EffectType&>(*this);
     }
     
-    void tickThrough(TonicFrames & frames){
-      this->gen()->tickThrough(frames);
+    void tickThrough( TonicFrames & inFrames, const Tonic_::SynthesisContext_ & context){ // ticks in-place
+      this->gen()->tickThrough(inFrames, inFrames, context);
     }
-  
+    
+    void tickThrough(TonicFrames & inFrames, TonicFrames & outFrames, const Tonic_::SynthesisContext_ & context){
+      this->gen()->tickThrough(inFrames, outFrames, context);
+    }
+    
+    void setIsStereoInput( bool isStereoInput ){
+      this->gen()->lockMutex();
+      this->gen()->setIsStereoInput(isStereoInput);
+      this->gen()->unlockMutex();
+    }
+    
+    createControlGeneratorSetters(EffectType, bypass, setBypassCtrlGen);
+    
+    // Defaults to 1.0
+    createGeneratorSetters(EffectType, wetLevel, setWetLevelGen);
+    
+    // Defaults to 0.0 (full wet)
+    createGeneratorSetters(EffectType, dryLevel, setDryLevelGen);
   };
   
   // signal flow operator - sets lhs as input to rhs

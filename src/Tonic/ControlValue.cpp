@@ -16,10 +16,8 @@ namespace Tonic {
       hasChanged_(false),
       value_(0)
     {}
-    
-    ControlValue_::~ControlValue_(){}
-    
-    void ControlValue_::setValue(float value){
+        
+    void ControlValue_::setValue(TonicFloat value){
       value_ = value;
       hasChanged_ = true;
     }

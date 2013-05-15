@@ -21,11 +21,8 @@ namespace Tonic {
     class ControlDbToLinear_ : public ControlConditioner_{
       
     protected:
-      void computeOutput(const SynthesisContext_ & context);
       
-    public:
-      ControlDbToLinear_();
-      ~ControlDbToLinear_();
+      void computeOutput(const SynthesisContext_ & context);
       
     };
     
