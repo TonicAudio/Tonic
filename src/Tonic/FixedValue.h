@@ -30,7 +30,7 @@ namespace Tonic {
       
       inline void computeSynthesisBlock( const SynthesisContext_ & context ){
         
-        float* buffStart = &synthesisBlock_[0];
+        float* buffStart = &outputFrames_[0];
         
         ControlGeneratorOutput valueOutput = valueGen.tick(context);
         
@@ -38,11 +38,11 @@ namespace Tonic {
           
           #ifdef USE_APPLE_ACCELERATE
           
-          vDSP_vfill( &valueOutput.value , buffStart, 1, synthesisBlock_.size());
+          vDSP_vfill( &valueOutput.value , buffStart, 1, outputFrames_.size());
           
           #else
           
-          std::fill(buffStart, buffStart + synthesisBlock_.size(), valueOutput.value);
+          std::fill(buffStart, buffStart + outputFrames_.size(), valueOutput.value);
           
           #endif
         }

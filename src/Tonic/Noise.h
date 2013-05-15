@@ -27,8 +27,8 @@ namespace Tonic {
     };
     
     inline void Noise_::computeSynthesisBlock( const SynthesisContext_ & context ){
-      TonicFloat* fdata = &synthesisBlock_[0];
-      for (unsigned int i=0; i<synthesisBlock_.size(); i++){
+      TonicFloat* fdata = &outputFrames_[0];
+      for (unsigned int i=0; i<outputFrames_.size(); i++){
         *fdata++ = randomSample();
       }
     }
@@ -64,7 +64,7 @@ namespace Tonic {
       TonicFloat binval, prevbinval;
       unsigned long binidx;
       
-      TonicFloat* outptr = &synthesisBlock_[0];
+      TonicFloat* outptr = &outputFrames_[0];
       
       for (unsigned int i=0; i<kSynthesisBlockSize; i++){
         

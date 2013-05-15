@@ -42,9 +42,9 @@ namespace Tonic {
     };
     
     inline void Divider_::computeSynthesisBlock(const SynthesisContext_ &context){
-      left.tick(synthesisBlock_, context);
+      left.tick(outputFrames_, context);
       right.tick(workSpace, context);
-      synthesisBlock_ /= workSpace;
+      outputFrames_ /= workSpace;
 
     }
     

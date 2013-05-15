@@ -38,17 +38,17 @@ namespace Tonic {
     
     inline void StereoFixedTestGen_::computeSynthesisBlock( const SynthesisContext_ & context)
     {
-      float* buffStart = &synthesisBlock_[0];
+      float* buffStart = &outputFrames_[0];
       
         
       #ifdef USE_APPLE_ACCELERATE
         
-      vDSP_vfill( &lVal_ , buffStart, 2, synthesisBlock_.frames());
-      vDSP_vfill( &rVal_ , buffStart+1, 2, synthesisBlock_.frames());
+      vDSP_vfill( &lVal_ , buffStart, 2, outputFrames_.frames());
+      vDSP_vfill( &rVal_ , buffStart+1, 2, outputFrames_.frames());
       
       #else
       
-      for (unsigned int i=0; i<synthesisBlock_.frames(); i++){
+      for (unsigned int i=0; i<outputFrames_.frames(); i++){
         *buffStart++ = lVal_;
         *buffStart++ = rVal_;
       }

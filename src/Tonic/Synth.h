@@ -26,38 +26,54 @@ namespace Tonic{
     typedef enum{
       
       SynthParameterTypeContinuous = 0,
-        
-//      TODO: other types
-//      SynthParameterTypeToggle
-//      SynthParameterTypeMomentary,
-//      SynthParameterTypeTrigger
+      
+      // TODO: Support these for auto-UI
+      SynthParameterTypeToggle,
+      SynthParameterTypeMomentary
       
     } SynthParameterType;
     
     
     struct SynthParameter{
       string              name;
+      string              displayName;
       ControlValue        value;
       SynthParameterType  type;
       float               min;
       float               max;
+      bool                isLogarithmic;
       
       SynthParameter();
     };
     
     Synth();
     
-    // It's quite conceivable that we'll want to move the messaging stuff up into Source
-    ControlValue  & addParameter(string name, float value=0, float min=-FLT_MAX, float max=FLT_MAX);
-    ControlValue  & addParameter(string name, SynthParameterType type, float value=0, float min=-FLT_MAX, float max=FLT_MAX);
-    
-    void              setParameter(string name, float value=1);
+    void                   setParameter(string name, float value=1);
     
     vector<SynthParameter> getParameters();
     
   protected:
+    
+    // ND: I moved these to protected because only subclasses should call them.
+    // No reason to make them publicly available since you can't change the signal chain dynamically.
+    
+    //! Add a continuous parameter with value, min, and max. DisplayName will be equal to name
+    ControlValue  & addParameter(string name, float value=0, float min=0, float max=1.f, bool isLogarithmic=false);
+    
+    //! Add a continuous parameter with a custom display name
+    ControlValue  & addParameter(string name, string displayName, float value=0, float min=0, float max=1.f, bool isLogarithmic=false);
+    
+    //! Add a binary parameter (on/off). Type defaults to Toggle, but can also be set to Momentary
+    ControlValue  & addBinaryParameter(string name);
+    ControlValue  & addBinaryParameter(string name, string displayName, bool isMomentary = false);
 
-    std::map<string, SynthParameter> parameters;
+    //! Helper to insert new parameters to map
+    ControlValue & createParameter(SynthParameterType type, string name, string displayName, float value, float min, float max, bool isLogarithmic);
+
+    // set to true in constructor to clamp incoming parameters to defined min/max
+    bool  clampsParameters_; 
+    std::map<string, SynthParameter> parameters_;
+    std::vector<string> orderedParameterNames_;
     
   };
   

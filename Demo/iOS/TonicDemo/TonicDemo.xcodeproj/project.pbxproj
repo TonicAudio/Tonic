@@ -21,6 +21,8 @@
 		0183D1051735D17D004638EB /* SineSumSynth.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0183D0F71735D17D004638EB /* SineSumSynth.cpp */; };
 		0183D1061735D17D004638EB /* StereoDelayTestSynth.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0183D0F81735D17D004638EB /* StereoDelayTestSynth.cpp */; };
 		0183D1071735D17D004638EB /* XYSpeed.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0183D0F91735D17D004638EB /* XYSpeed.cpp */; };
+		01DAA58F173E9EF8001AA383 /* SynthAutoUIViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 01DAA58D173E9EF8001AA383 /* SynthAutoUIViewController.mm */; };
+		01DAA590173E9EF8001AA383 /* SynthAutoUIViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 01DAA58E173E9EF8001AA383 /* SynthAutoUIViewController.xib */; };
 		A86C3EC116B2B4FD002A50F0 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A86C3EC016B2B4FD002A50F0 /* UIKit.framework */; };
 		A86C3EC316B2B4FD002A50F0 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A86C3EC216B2B4FD002A50F0 /* Foundation.framework */; };
 		A86C3EC516B2B4FD002A50F0 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A86C3EC416B2B4FD002A50F0 /* CoreGraphics.framework */; };
@@ -40,6 +42,8 @@
 		A89356D817052CAD00C184BE /* SynthDemoDef.mm in Sources */ = {isa = PBXBuildFile; fileRef = A89356D617052CAD00C184BE /* SynthDemoDef.mm */; };
 		A8CF87F31703D71800D8F5E1 /* CoreMotion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A8CF87F21703D71800D8F5E1 /* CoreMotion.framework */; };
 		F20FCD5216C58D5B0039832A /* TonicSynthManager.mm in Sources */ = {isa = PBXBuildFile; fileRef = F20FCD5116C58D5B0039832A /* TonicSynthManager.mm */; };
+		F24A98D1173EAB8500BE47CB /* SynthParameterCell.mm in Sources */ = {isa = PBXBuildFile; fileRef = F24A98D0173EAB8500BE47CB /* SynthParameterCell.mm */; };
+		F24A98D3173EC45700BE47CB /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F24A98D2173EC45700BE47CB /* QuartzCore.framework */; };
 		F256C8E416C5A0BF0096574D /* SynthTestViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = F256C8E016C5A0BF0096574D /* SynthTestViewController.mm */; };
 		F256C8E516C5A0BF0096574D /* SynthChooserViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = F256C8E216C5A0BF0096574D /* SynthChooserViewController.mm */; };
 		F256C8E616C5A0BF0096574D /* SynthChooserViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F256C8E316C5A0BF0096574D /* SynthChooserViewController.xib */; };
@@ -101,6 +105,9 @@
 		0183D0F71735D17D004638EB /* SineSumSynth.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SineSumSynth.cpp; sourceTree = "<group>"; };
 		0183D0F81735D17D004638EB /* StereoDelayTestSynth.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = StereoDelayTestSynth.cpp; sourceTree = "<group>"; };
 		0183D0F91735D17D004638EB /* XYSpeed.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = XYSpeed.cpp; sourceTree = "<group>"; };
+		01DAA58C173E9EF8001AA383 /* SynthAutoUIViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SynthAutoUIViewController.h; sourceTree = "<group>"; };
+		01DAA58D173E9EF8001AA383 /* SynthAutoUIViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = SynthAutoUIViewController.mm; sourceTree = "<group>"; };
+		01DAA58E173E9EF8001AA383 /* SynthAutoUIViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SynthAutoUIViewController.xib; sourceTree = "<group>"; };
 		A86C3EBC16B2B4FD002A50F0 /* TonicDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TonicDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A86C3EC016B2B4FD002A50F0 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		A86C3EC216B2B4FD002A50F0 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -131,6 +138,9 @@
 		A8CF87F21703D71800D8F5E1 /* CoreMotion.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMotion.framework; path = System/Library/Frameworks/CoreMotion.framework; sourceTree = SDKROOT; };
 		F20FCD5016C58D5B0039832A /* TonicSynthManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TonicSynthManager.h; sourceTree = "<group>"; };
 		F20FCD5116C58D5B0039832A /* TonicSynthManager.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = TonicSynthManager.mm; sourceTree = "<group>"; };
+		F24A98CF173EAB8500BE47CB /* SynthParameterCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SynthParameterCell.h; sourceTree = "<group>"; };
+		F24A98D0173EAB8500BE47CB /* SynthParameterCell.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = SynthParameterCell.mm; sourceTree = "<group>"; };
+		F24A98D2173EC45700BE47CB /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		F25317E016EBA0A100A8CFDC /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
 		F25317E616EBA0A100A8CFDC /* TonicTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "TonicTests-Info.plist"; sourceTree = "<group>"; };
 		F25317E816EBA0A100A8CFDC /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
@@ -157,6 +167,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F24A98D3173EC45700BE47CB /* QuartzCore.framework in Frameworks */,
 				F2DC167217219744006DB2CB /* libTonic-iOS.a in Frameworks */,
 				A8CF87F31703D71800D8F5E1 /* CoreMotion.framework in Frameworks */,
 				A86C3F2316B2B834002A50F0 /* Accelerate.framework in Frameworks */,
@@ -229,6 +240,7 @@
 		A86C3EBF16B2B4FD002A50F0 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				F24A98D2173EC45700BE47CB /* QuartzCore.framework */,
 				A8CF87F21703D71800D8F5E1 /* CoreMotion.framework */,
 				A86C3F2216B2B834002A50F0 /* Accelerate.framework */,
 				A86C3F1C16B2B7B8002A50F0 /* AudioToolbox.framework */,
@@ -248,6 +260,7 @@
 				A86C3EE616B2B508002A50F0 /* Audio */,
 				A86C3ECF16B2B4FD002A50F0 /* TonicAppDelegate.h */,
 				A86C3ED016B2B4FD002A50F0 /* TonicAppDelegate.mm */,
+				F24A98CD173EAB7100BE47CB /* Cells */,
 				F256C8DE16C5A0BF0096574D /* ViewControllers */,
 				A86C3EC716B2B4FD002A50F0 /* Supporting Files */,
 				A89356D517052CAD00C184BE /* SynthDemoDef.h */,
@@ -314,6 +327,15 @@
 			path = "Obj-C";
 			sourceTree = "<group>";
 		};
+		F24A98CD173EAB7100BE47CB /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				F24A98CF173EAB8500BE47CB /* SynthParameterCell.h */,
+				F24A98D0173EAB8500BE47CB /* SynthParameterCell.mm */,
+			);
+			path = Cells;
+			sourceTree = "<group>";
+		};
 		F25317E416EBA0A100A8CFDC /* TonicTests */ = {
 			isa = PBXGroup;
 			children = (
@@ -345,6 +367,9 @@
 				F256C8E116C5A0BF0096574D /* SynthChooserViewController.h */,
 				F256C8E216C5A0BF0096574D /* SynthChooserViewController.mm */,
 				F256C8E316C5A0BF0096574D /* SynthChooserViewController.xib */,
+				01DAA58C173E9EF8001AA383 /* SynthAutoUIViewController.h */,
+				01DAA58D173E9EF8001AA383 /* SynthAutoUIViewController.mm */,
+				01DAA58E173E9EF8001AA383 /* SynthAutoUIViewController.xib */,
 				F256C8DF16C5A0BF0096574D /* SynthTestViewController.h */,
 				F256C8E016C5A0BF0096574D /* SynthTestViewController.mm */,
 				F256C8E716C5A6DF0096574D /* SynthTestViewController.xib */,
@@ -463,6 +488,7 @@
 				A86C3ED716B2B4FD002A50F0 /* Default-568h@2x.png in Resources */,
 				F256C8E616C5A0BF0096574D /* SynthChooserViewController.xib in Resources */,
 				F256C8E816C5A6DF0096574D /* SynthTestViewController.xib in Resources */,
+				01DAA590173E9EF8001AA383 /* SynthAutoUIViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -520,6 +546,8 @@
 				0183D1051735D17D004638EB /* SineSumSynth.cpp in Sources */,
 				0183D1061735D17D004638EB /* StereoDelayTestSynth.cpp in Sources */,
 				0183D1071735D17D004638EB /* XYSpeed.cpp in Sources */,
+				01DAA58F173E9EF8001AA383 /* SynthAutoUIViewController.mm in Sources */,
+				F24A98D1173EAB8500BE47CB /* SynthParameterCell.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -30,7 +30,6 @@ public:
     
   }
   
-  
 };
 
 registerSynth(FlexToothTestSynth);

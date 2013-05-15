@@ -27,6 +27,7 @@ namespace Tonic {
       // Can be overridden for sidechaining
       Generator amplitudeInput_;
       
+      ControlGenerator makeupGainGen_;
       ControlGenerator attackGen_;
       ControlGenerator releaseGen_;
       ControlGenerator threshGen_;
@@ -45,7 +46,6 @@ namespace Tonic {
     public:
       
       Compressor_();
-      ~Compressor_();
 
       // Base class methods overridden here for specialized input behavior
       void setInput( Generator input );
@@ -57,6 +57,7 @@ namespace Tonic {
       void setAudioInput( Generator gen );
       void setAmplitudeInput( Generator gen );
       
+      void setMakeupGain( ControlGenerator gen ) { makeupGainGen_ = gen; };
       void setAttack( ControlGenerator gen ) { attackGen_ = gen; };
       void setRelease( ControlGenerator gen ) { releaseGen_ = gen; };
       void setThreshold( ControlGenerator gen ) { threshGen_ = gen; };
@@ -79,12 +80,19 @@ namespace Tonic {
         input_.tick(dryFrames_, context); // get input frames
         amplitudeInput_.tick(ampInputFrames_, context); // get amp input frames
         computeSynthesisBlock(context);
+
+        // bypass processing
+        bool bypass = bypassGen_.tick(context).value != 0.f;
+        if (bypass){
+          outputFrames_.copy(dryFrames_);
+        }
+
         unlockMutex();
         lastFrameIndex_ = context.elapsedFrames;
       }
       
       // copy synthesis block to frames passed in
-      frames.copy(synthesisBlock_);
+      frames.copy(outputFrames_);
       
 #ifdef TONIC_DEBUG
       if(frames(0,0) != frames(0,0)){
@@ -99,8 +107,15 @@ namespace Tonic {
       ampInputFrames_.copy(frames);
       lockMutex();
       computeSynthesisBlock(SynthesisContext_());
+      
+      // bypass processing
+      bool bypass = bypassGen_.tick(SynthesisContext_()).value != 0.f;
+      if (bypass){
+        outputFrames_.copy(dryFrames_);
+      }
+      
       unlockMutex();
-      frames.copy(synthesisBlock_);
+      frames.copy(outputFrames_);
     }
     
     inline void Compressor_::computeSynthesisBlock(const SynthesisContext_ &context){
@@ -124,22 +139,18 @@ namespace Tonic {
       #endif
       
       // Iterate through samples
-      unsigned int nChannels = synthesisBlock_.channels();
+      unsigned int nChannels = outputFrames_.channels();
       TonicFloat ampInputValue, gainValue, gainTarget;
-      TonicFloat * outptr = &synthesisBlock_[0];
+      TonicFloat * outptr = &outputFrames_[0];
       TonicFloat * dryptr = &dryFrames_[0];
       ampData = &ampInputFrames_[0];
       
       for (unsigned int i=0; i<kSynthesisBlockSize; i++){
         
-        // Tick input into lookahead delay
-        for (unsigned int i=0; i<nChannels; i++){
-          lookaheadDelayLine_.tickIn(*dryptr++, i);
-        }
-        
-        // Get amplitude input value - max of left/right
+        // Tick input into lookahead delay and get amplitude input value - max of left/right
         ampInputValue = 0;
         for (unsigned int i=0; i<nChannels; i++){
+          lookaheadDelayLine_.tickIn(*dryptr++, i);
           ampInputValue = max(ampInputValue,*ampData++);
         }
         
@@ -178,15 +189,26 @@ namespace Tonic {
         lookaheadDelayLine_.advance(lookaheadTime);
       }
       
+      TonicFloat makeupGain = max(0.f, makeupGainGen_.tick(context).value);
+      outptr = &outputFrames_[0];
+      
+      #ifdef USE_APPLE_ACCELERATE
+      vDSP_vsmul(outptr, 1, &makeupGain, outptr, 1, outputFrames_.size());
+      #else
+      for (unsigned int i=0; i<outputFrames_.size(); i++){
+        *outptr++ *= makeupGain;
+      }
+      #endif
+      
       if (isLimiter_){
         
         // clip to threshold in worst case (minor distortion introduced but much preferable to wrapping distortion)
         #ifdef USE_APPLE_ACCELERATE
         float negThresh = -threshold;
-        vDSP_vclip(&synthesisBlock_[0], 1, &negThresh, &threshold, &synthesisBlock_[0], 1, synthesisBlock_.size());
+        vDSP_vclip(&outputFrames_[0], 1, &negThresh, &threshold, &outputFrames_[0], 1, outputFrames_.size());
         #else
-        outptr = &synthesisBlock_[0];
-        for (unsigned int i=0; i<synthesisBlock_.size(); i++, outptr++){
+        outptr = &outputFrames_[0];
+        for (unsigned int i=0; i<outputFrames_.size(); i++, outptr++){
           *outptr = clamp(*outptr, -threshold, threshold);
         }
         #endif
@@ -230,6 +252,8 @@ namespace Tonic {
     createControlGeneratorSetters(Compressor, threshold, setThreshold); // LINEAR - use dBToLin to convert from dB
     createControlGeneratorSetters(Compressor, ratio, setRatio);
     createControlGeneratorSetters(Compressor, lookahead, setLookahead);
+    createControlGeneratorSetters(Compressor, makeupGain, setMakeupGain);
+
 
     // TODO: option for RMS
     
@@ -252,6 +276,7 @@ namespace Tonic {
     createControlGeneratorSetters(Limiter, release, setRelease);
     createControlGeneratorSetters(Limiter, threshold, setThreshold);
     createControlGeneratorSetters(Limiter, lookahead, setLookahead);
+    createControlGeneratorSetters(Limiter, makeupGain, setMakeupGain);
     
   };
 

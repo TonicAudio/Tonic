@@ -19,11 +19,17 @@ public:
   
   DelayTestSynth(){
     
-    ControlMetro metro = ControlMetro().bpm(120 * 4);
-    ControlPulse pulseGate = ControlPulse().in(metro).length(0.05f);
+    ControlValue tempo = addParameter("tempo", "Tempo", 120.f, 60.f, 300.f);
+    ControlValue delayTime = addParameter("delayTime", "Delay Time", 0.12f, 0.001f, 1.0f, true); // logarithmic
+    ControlValue feedBack = addParameter("feedback", "Delay Feedback", 0.4f, 0.0f, 0.95f);
+    ControlValue delayMix = addParameter("delayMix", "Delay Dry/Wet", 0.3f, 0.0f, 1.0f);
+    ControlValue decay = addParameter("decayTime", "Env Decay Time", 0.08f, 0.05f, 0.25f, true); // logarithmic
+    ControlValue volume = addParameter("volume", "Volume (dbFS)", -12.0f, -60.0f, 0.f);
     
-    ADSR aEnv = ADSR().attack(0.005f).decay(0.08f).sustain(0.0f).release(0.01f).trigger(pulseGate).doesSustain(false).exponential(true);
-    ADSR fEnv = ADSR().attack(0.005f).decay(0.08f).sustain(0.0f).release(0.01f).trigger(pulseGate).doesSustain(false).exponential(true);
+    ControlMetro metro = ControlMetro().bpm(tempo * 4);
+    
+    ADSR aEnv = ADSR().attack(0.005f).decay(decay).sustain(0.0f).release(0.01f).trigger(metro).doesSustain(false).exponential(true);
+    ADSR fEnv = ADSR().attack(0.005f).decay(decay).sustain(0.0f).release(0.01f).trigger(metro).doesSustain(false).exponential(true);
     
     float scalenums[5] = {0,3,5,7,10};
     std::vector<float> scale(scalenums, scalenums + 5);
@@ -51,11 +57,11 @@ public:
     LPF12 filt = LPF12().cutoff(400.0f * (1.0f + fEnv*9.0f)).Q(1.1f);
     
     BasicDelay delay = BasicDelay(0.5f, 1.0f)
-      .delayTime( addParameter("delayTime", 0.4f, 0.01f, 1.0f).smoothed(0.5f) )
-      .feedback( addParameter("feedback", 0.0f, 0.0f, 0.8f).smoothed() )
-      .mix( dBToLin(-10) );
+      .delayTime( delayTime.smoothed(0.5f) )
+      .feedback( feedBack.smoothed() )
+      .mix( delayMix );
     
-    outputGen = (osc >> filt >> delay) * 0.8;
+    outputGen = (osc >> filt >> delay) * ControlDbToLinear().in(volume).smoothed();
   }
   
 };
