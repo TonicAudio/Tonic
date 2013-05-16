@@ -17,12 +17,12 @@ class CompressorTestSynth : public Synth
 public:
   CompressorTestSynth(){
     
-    ControlValue threshold = addParameter("threshold", "Threshold (dbFS)", -12.f, -60.f, 0.f);
-    ControlValue ratio = addParameter("ratio", "Ratio", 2.0, 1.0, 64.f, true); //logarithmic
-    ControlValue attack = addParameter("attackTime", "Attack Time (s)", 0.001, 0.001, 0.1, true); //logarithmic
-    ControlValue release = addParameter("releaseTime", "Release Time (s)", 0.05, 0.01, 0.08, true); //logarithmic
-    ControlValue gain = addParameter("gain", "Makeup Gain (dbFS)", 0.f, 0.f, 36.0f);
-    ControlValue bypass = addBinaryParameter("bypass", "Bypass");
+    ControlParameter threshold = addParameter("threshold", -12.f).displayName("Threshold (dbFS)").min(-60.f).max(0.f);
+    ControlParameter ratio = addParameter("ratio", 2.0f).displayName("Ratio").min(1.0f).max(64.f).logarithmic(true);
+    ControlParameter attack = addParameter("attackTime", 0.001).displayName("Attack Time (s)").min(0.001).max(0.1).logarithmic(true);
+    ControlParameter release = addParameter("releaseTime", 0.05).displayName("Release Time (s)").min(0.01).max(0.08).logarithmic(true);
+    ControlParameter gain = addParameter("gain", 0.f).displayName( "Makeup Gain (dbFS)").min(0.f).max(36.0f);
+    ControlParameter bypass = addParameter("bypass",false).parameterType(ControlParameterTypeToggle);
     
     // Emulation of 808 snare with long, quiet noise decay
     Generator hpNoise = (Noise() * dBToLin(-18.0)) >> HPF24().cutoff(2000.0) >> LPF12().cutoff(8000);

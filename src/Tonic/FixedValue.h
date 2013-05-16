@@ -67,7 +67,7 @@ namespace Tonic {
       setValue(val);
     }
     FixedValue& setValue(float val){
-      gen()->setValue(ControlValue().setValue(val));
+      gen()->setValue(ControlValue(val));
       return *this;
     }
     FixedValue& setValue(ControlGenerator val){

@@ -25,10 +25,10 @@ class FMDroneSynth : public Synth {
 public:
   FMDroneSynth(){
     
-    ControlValue volume = addParameter("volume", "Volume (dbFS)", -12.f, -60.f, 0.f);
-    ControlValue carrierPitch = addParameter("carrierPitch", "Carrier Pitch", 28.f, 20.f, 32.f);
-    ControlValue modIndex = addParameter("modIndex", "FM Amount", 0.25f, 0.f, 1.0f);
-    ControlValue lfoAmt = addParameter("lfoAmt", "LFO Amount", 0.5f, 0.f, 1.f);
+    ControlParameter volume = addParameter("volume", -12.f).displayName("Volume (dbFS)").min(-60.f).max(0.f);
+    ControlParameter carrierPitch = addParameter("carrierPitch", 28.f).displayName("Carrier Pitch").min(20.f).max(32.f);
+    ControlParameter modIndex = addParameter("modIndex", 0.25f).displayName("FM Amount").min(0.f).max(1.0f);
+    ControlParameter lfoAmt = addParameter("lfoAmt", 0.5f).displayName("LFO Amount").min(0.f).max(1.f);
     
     Generator rCarrierFreq = ControlMidiToFreq().in(carrierPitch).smoothed();
     Generator rModFreq     = rCarrierFreq * 4.0f;

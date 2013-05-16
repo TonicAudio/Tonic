@@ -15,6 +15,7 @@
 
 using Tonic::Synth;
 using Tonic::SynthFactory;
+using Tonic::ControlParameter;
 
 #define kSynthKey       @"DemoSynth"
 #define kCellIdentifier @"ParamCell"
@@ -22,7 +23,7 @@ using Tonic::SynthFactory;
 @interface SynthAutoUIViewController ()
 {
   Synth *_synth;
-  vector<Synth::SynthParameter> _synthParameters;
+  vector<ControlParameter> _synthParameters;
 }
 
 @property (nonatomic, strong) NSArray *cellColors;
@@ -102,7 +103,7 @@ using Tonic::SynthFactory;
 
 - (UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-  Synth::SynthParameter param = _synthParameters[indexPath.row];
+  ControlParameter param = _synthParameters[indexPath.row];
   SynthParameterCell *cell = [tableView dequeueReusableCellWithIdentifier:kCellIdentifier forIndexPath:indexPath];
 
   [cell setSynthParameter:param];

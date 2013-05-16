@@ -19,12 +19,12 @@ public:
   
   DelayTestSynth(){
     
-    ControlValue tempo = addParameter("tempo", "Tempo", 120.f, 60.f, 300.f);
-    ControlValue delayTime = addParameter("delayTime", "Delay Time", 0.12f, 0.001f, 1.0f, true); // logarithmic
-    ControlValue feedBack = addParameter("feedback", "Delay Feedback", 0.4f, 0.0f, 0.95f);
-    ControlValue delayMix = addParameter("delayMix", "Delay Dry/Wet", 0.3f, 0.0f, 1.0f);
-    ControlValue decay = addParameter("decayTime", "Env Decay Time", 0.08f, 0.05f, 0.25f, true); // logarithmic
-    ControlValue volume = addParameter("volume", "Volume (dbFS)", -12.0f, -60.0f, 0.f);
+    ControlParameter tempo = addParameter("tempo", 120.f).displayName("Tempo").min(60.f).max(300.f);
+    ControlParameter delayTime = addParameter("delayTime", 0.12f).displayName("Delay Time").min( 0.001f).max(1.0f).logarithmic(true); // logarithmic
+    ControlParameter feedBack = addParameter("feedback", 0.4f).displayName("Delay Feedback").min(0.0f).max(0.95f);
+    ControlParameter delayMix = addParameter("delayMix", 0.3f).displayName("Delay Dry/Wet").min(0.0f).max(1.0f);
+    ControlParameter decay = addParameter("decayTime", 0.08f).displayName("Env Decay Time").min(0.05f).max(0.25f).logarithmic(true); // logarithmic
+    ControlParameter volume = addParameter("volume", -6.f).displayName("Volume (dbFS)").min(-60.0f).max(0.f);
     
     ControlMetro metro = ControlMetro().bpm(tempo * 4);
     

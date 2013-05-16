@@ -27,9 +27,9 @@ public:
   
   SineSumSynth () {
     
-    ControlValue pitch = addParameter("pitch",0,0,1);
+    ControlParameter pitch = addParameter("pitch",0);
       
-      Adder outputAdder;
+    Adder outputAdder;
     
     for (int s=0; s<NUM_SINES; s++){
       

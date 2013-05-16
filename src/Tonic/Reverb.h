@@ -205,7 +205,7 @@ namespace Tonic {
       TonicFloat *preoutptrR = &preOutputFrames_[TONIC_RIGHT][0];
       
       TonicFloat spreadValue = clamp(1.0f - stereoWidthCtrlGen_.tick(context).value, 0.f, 1.f);
-      TonicFloat normValue = (1.0f/(1.0f+spreadValue))*0.05;
+      TonicFloat normValue = (1.0f/(1.0f+spreadValue))*0.04f; // scale back levels quite a bit
       
       for (unsigned int i=0; i<kSynthesisBlockSize; i++){
         *outptr++ = (*preoutptrL + (spreadValue * (*preoutptrR)))*normValue;

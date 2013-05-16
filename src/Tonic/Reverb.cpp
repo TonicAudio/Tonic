@@ -12,7 +12,7 @@
 #define TONIC_REVERB_MAX_TAPS 20
 
 #define TONIC_REVERB_MIN_WALL_DIST 3.0f // meters
-#define TONIC_REVERB_MAX_WALL_DIST 30.0f // meters
+#define TONIC_REVERB_MAX_WALL_DIST 10.0f // meters
 #define TONIC_REVERB_SOS 340.0f // m/s, approximate
 #define TONIC_REVERB_AIRDECAY -0.159 // db/m, approximate
 
@@ -60,6 +60,10 @@ namespace Tonic { namespace Tonic_{
   Reverb_::Reverb_(){
     
     setIsStereoOutput(true);
+    
+    // Default to 50% wet
+    setDryLevelGen(FixedValue(0.5f));
+    setWetLevelGen(FixedValue(0.5f));
     
     workspaceFrames_[0].resize(kSynthesisBlockSize, 1, 0);
     workspaceFrames_[1].resize(kSynthesisBlockSize, 1, 0);
@@ -154,10 +158,10 @@ namespace Tonic { namespace Tonic_{
       for (unsigned int i=0; i<TONIC_REVERB_N_COMBS; i++){
         
         TonicFloat scaledDelayTime = combTimeScales_[i % TONIC_REVERB_N_COMBS] * baseCombDelayTime;
-        combFilterDelayTimes_[TONIC_LEFT][i].setValue(scaledDelayTime);
-        combFilterDelayTimes_[TONIC_RIGHT][i].setValue(scaledDelayTime+TONIC_REVERB_STEREO_SPREAD);
-        combFilterScaleFactors_[TONIC_LEFT][i].setValue( powf(10.f, (-3.0f * scaledDelayTime / decayTime)) );
-        combFilterScaleFactors_[TONIC_RIGHT][i].setValue( powf(10.f, (-3.0f * (scaledDelayTime+TONIC_REVERB_STEREO_SPREAD) / decayTime)) );
+        combFilterDelayTimes_[TONIC_LEFT][i].value(scaledDelayTime);
+        combFilterDelayTimes_[TONIC_RIGHT][i].value(scaledDelayTime+TONIC_REVERB_STEREO_SPREAD);
+        combFilterScaleFactors_[TONIC_LEFT][i].value( powf(10.f, (-3.0f * scaledDelayTime / decayTime)) );
+        combFilterScaleFactors_[TONIC_RIGHT][i].value( powf(10.f, (-3.0f * (scaledDelayTime+TONIC_REVERB_STEREO_SPREAD) / decayTime)) );
 
       }
     }

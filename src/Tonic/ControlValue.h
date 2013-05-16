@@ -16,9 +16,10 @@ namespace Tonic {
   namespace Tonic_{
 
     class ControlValue_ : public ControlGenerator_{
-      public:
+      
+    public:
+      
         ControlValue_();
-        ~ControlValue_();
 
         void setValue(float value);
       
@@ -40,17 +41,17 @@ namespace Tonic {
     
     public:
     
-    ControlValue(float value = 0){
+    ControlValue(TonicFloat value = 0){
       gen()->setValue(value);
     }
     
-    ControlValue & setValue(float value)
+    ControlValue & value(TonicFloat value)
     {
       gen()->setValue(value);
       return *this;
     }
     
-    // for higher-level access - no
+    // for higher-level access - doesn't affect tick state
     float getValue(){
       return gen()->getValue();
     }
