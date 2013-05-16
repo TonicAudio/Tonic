@@ -10,9 +10,8 @@
 
 namespace Tonic {
   
-  Mixer::Mixer() : limitOutput_(false) {
+  Mixer::Mixer() {
     workSpace_.resize(kSynthesisBlockSize, 2, 0);
-    limiter_.setIsStereo(true);
     pthread_mutex_init(&input_mutex_, NULL);
   }
   
@@ -52,10 +51,6 @@ namespace Tonic {
       frames += workSpace_;
     }
     pthread_mutex_unlock(&input_mutex_);
-
-    if (limitOutput_){
-      limiter_.tickThrough(frames, context);
-    }
   }
 
   

@@ -26,13 +26,9 @@ namespace Tonic {
   private:
     
     TonicFrames workSpace_;
-    vector<BufferFiller*> inputs_;
-    Limiter limiter_;
-    
+    vector<BufferFiller*> inputs_;    
     pthread_mutex_t input_mutex_;
-    
-    bool limitOutput_;
-    
+        
   public:
         
     Mixer();
@@ -40,9 +36,7 @@ namespace Tonic {
     
     void addInput(BufferFiller* input);
     void removeInput(BufferFiller* input);
-    
-    void setLimitOutput(bool shouldLimit) { limitOutput_ = shouldLimit; };
-    
+        
     void tick( TonicFrames& frames, const Tonic_::SynthesisContext_ & context );
   };
 }

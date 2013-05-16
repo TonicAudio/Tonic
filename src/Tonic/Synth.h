@@ -15,6 +15,7 @@
 #include <map>
 #include "BufferFiller.h"
 #include "ControlParameter.h"
+#include "CompressorLimiter.h"
 
 namespace Tonic{
   
@@ -23,13 +24,16 @@ namespace Tonic{
   public:
     
     Synth();
-    virtual ~Synth();
+    ~Synth();
     
     //! Set the output gen that produces audio for the Synth
     void  setOutputGen(Generator gen);
     
     //! Returns a reference to outputGen
     const Generator & getOutputGenerator() { return outputGen; };
+    
+    //! Set whether synth uses dynamic limiter to prevent clipping/wrapping. Defaults to true.
+    void setLimitOutput(bool shouldLimit) { limitOutput_ = shouldLimit; };
     
     void                      setParameter(string name, float value=1);
     vector<ControlParameter>  getParameters();
@@ -39,8 +43,10 @@ namespace Tonic{
   protected:
         
     Generator     outputGen;
-    
     pthread_mutex_t outputGenMutex_;
+    
+    Limiter limiter_;
+    bool limitOutput_;
     
     std::map<string, ControlParameter> parameters_;
     std::vector<string> orderedParameterNames_;
@@ -57,6 +63,10 @@ namespace Tonic{
     pthread_mutex_lock(&outputGenMutex_);
     outputGen.tick(frames, context);
     pthread_mutex_unlock(&outputGenMutex_);
+
+    if (limitOutput_){
+      limiter_.tickThrough(frames, context);
+    }
   }
   
   // ------------------------------

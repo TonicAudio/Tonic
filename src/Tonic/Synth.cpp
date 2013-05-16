@@ -17,9 +17,10 @@ namespace Tonic {
   // Synth Factory
   SynthFactory::map_type * SynthFactory::map;
 
-  Synth::Synth() {
+  Synth::Synth() : limitOutput_(true) {
     pthread_mutex_init(&outputGenMutex_, NULL);
     outputGen = PassThroughGenerator();
+    limiter_.setIsStereo(true);
   }
   
   Synth::~Synth() {
