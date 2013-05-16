@@ -28,7 +28,8 @@ namespace Tonic {
       
     
     //! Parameter for controlling a Synth instance
-    /*! ControlParameter acts like a ControlValue but provides an interface for exposing itself to
+    /*! 
+        ControlParameter acts like a ControlValue but provides an interface for exposing itself to
         a synth, including min, max, type, etc
      */
     class ControlParameter_ : public ControlValue_{

@@ -16,7 +16,6 @@ namespace Tonic { namespace Tonic_{
     min_(0),
     max_(1),
     type_(ControlParameterTypeContinuous),
-    logBase_(2.f),
     isLogarithmic_(false)
   {
     
