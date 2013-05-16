@@ -12,7 +12,7 @@
 #define TONIC_REVERB_MAX_TAPS 20
 
 #define TONIC_REVERB_MIN_WALL_DIST 3.0f // meters
-#define TONIC_REVERB_MAX_WALL_DIST 30.0f // meters
+#define TONIC_REVERB_MAX_WALL_DIST 10.0f // meters
 #define TONIC_REVERB_SOS 340.0f // m/s, approximate
 #define TONIC_REVERB_AIRDECAY -0.159 // db/m, approximate
 
