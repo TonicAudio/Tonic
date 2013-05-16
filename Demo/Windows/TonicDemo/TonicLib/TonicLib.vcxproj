@@ -1,0 +1,203 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{DA022B2D-D880-4BAB-9CDF-B916F7B6879E}</ProjectGuid>
+    <Keyword>Win32Proj</Keyword>
+    <RootNamespace>TonicLib</RootNamespace>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v110</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v110</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <LinkIncremental>true</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <SDLCheck>true</SDLCheck>
+      <AdditionalIncludeDirectories>$(SolutionDir)..\..\..\src;$(SolutionDir)..\..\..\src\Tonic;$(SolutionDir)pthread;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <DisableSpecificWarnings>4018;4068;4244;4305;4800</DisableSpecificWarnings>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>pthreadVC2.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(SolutionDir)pthread;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <SDLCheck>true</SDLCheck>
+      <AdditionalIncludeDirectories>$(SolutionDir)..\..\..\src;$(SolutionDir)..\..\..\src\Tonic;$(SolutionDir)pthread;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <DisableSpecificWarnings>4018;4068;4244;4305;4800</DisableSpecificWarnings>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <AdditionalDependencies>pthreadVC2.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(SolutionDir)pthread;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\..\src\Tonic.h" />
+    <ClInclude Include="..\..\..\..\src\Tonic\Adder.h" />
+    <ClInclude Include="..\..\..\..\src\Tonic\ADSR.h" />
+    <ClInclude Include="..\..\..\..\src\Tonic\BasicDelay.h" />
+    <ClInclude Include="..\..\..\..\src\Tonic\BufferFiller.h" />
+    <ClInclude Include="..\..\..\..\src\Tonic\CompressorLimiter.h" />
+    <ClInclude Include="..\..\..\..\src\Tonic\ControlAdder.h" />
+    <ClInclude Include="..\..\..\..\src\Tonic\ControlConditioner.h" />
+    <ClInclude Include="..\..\..\..\src\Tonic\ControlCounter.h" />
+    <ClInclude Include="..\..\..\..\src\Tonic\ControlDbToLinear.h" />
+    <ClInclude Include="..\..\..\..\src\Tonic\ControlDivider.h" />
+    <ClInclude Include="..\..\..\..\src\Tonic\ControlFloor.h" />
+    <ClInclude Include="..\..\..\..\src\Tonic\ControlGenerator.h" />
+    <ClInclude Include="..\..\..\..\src\Tonic\ControlMetro.h" />
+    <ClInclude Include="..\..\..\..\src\Tonic\ControlMidiToFreq.h" />
+    <ClInclude Include="..\..\..\..\src\Tonic\ControlMultiplier.h" />
+    <ClInclude Include="..\..\..\..\src\Tonic\ControlPrinter.h" />
+    <ClInclude Include="..\..\..\..\src\Tonic\ControlPulse.h" />
+    <ClInclude Include="..\..\..\..\src\Tonic\ControlRandom.h" />
+    <ClInclude Include="..\..\..\..\src\Tonic\ControlRecorder.h" />
+    <ClInclude Include="..\..\..\..\src\Tonic\ControlSnapToScale.h" />
+    <ClInclude Include="..\..\..\..\src\Tonic\ControlStepper.h" />
+    <ClInclude Include="..\..\..\..\src\Tonic\ControlSubtractor.h" />
+    <ClInclude Include="..\..\..\..\src\Tonic\ControlSwitcher.h" />
+    <ClInclude Include="..\..\..\..\src\Tonic\ControlTrigger.h" />
+    <ClInclude Include="..\..\..\..\src\Tonic\ControlValue.h" />
+    <ClInclude Include="..\..\..\..\src\Tonic\ControlXYSpeed.h" />
+    <ClInclude Include="..\..\..\..\src\Tonic\DelayUtils.h" />
+    <ClInclude Include="..\..\..\..\src\Tonic\Divider.h" />
+    <ClInclude Include="..\..\..\..\src\Tonic\Effect.h" />
+    <ClInclude Include="..\..\..\..\src\Tonic\ExportAPI.h" />
+    <ClInclude Include="..\..\..\..\src\Tonic\Filters.h" />
+    <ClInclude Include="..\..\..\..\src\Tonic\FilterUtils.h" />
+    <ClInclude Include="..\..\..\..\src\Tonic\FixedValue.h" />
+    <ClInclude Include="..\..\..\..\src\Tonic\FlexToothWave.h" />
+    <ClInclude Include="..\..\..\..\src\Tonic\Generator.h" />
+    <ClInclude Include="..\..\..\..\src\Tonic\LFNoise.h" />
+    <ClInclude Include="..\..\..\..\src\Tonic\Mixer.h" />
+    <ClInclude Include="..\..\..\..\src\Tonic\MonoToStereoPanner.h" />
+    <ClInclude Include="..\..\..\..\src\Tonic\Multiplier.h" />
+    <ClInclude Include="..\..\..\..\src\Tonic\Noise.h" />
+    <ClInclude Include="..\..\..\..\src\Tonic\RampedValue.h" />
+    <ClInclude Include="..\..\..\..\src\Tonic\RectWave.h" />
+    <ClInclude Include="..\..\..\..\src\Tonic\SineWave.h" />
+    <ClInclude Include="..\..\..\..\src\Tonic\StereoDelay.h" />
+    <ClInclude Include="..\..\..\..\src\Tonic\Subtractor.h" />
+    <ClInclude Include="..\..\..\..\src\Tonic\Synth.h" />
+    <ClInclude Include="..\..\..\..\src\Tonic\TableLookupOsc.h" />
+    <ClInclude Include="..\..\..\..\src\Tonic\TonicCore.h" />
+    <ClInclude Include="..\..\..\..\src\Tonic\TonicFrames.h" />
+    <ClInclude Include="stdafx.h" />
+    <ClInclude Include="targetver.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\..\..\src\Tonic\Adder.cpp" />
+    <ClCompile Include="..\..\..\..\src\Tonic\ADSR.cpp" />
+    <ClCompile Include="..\..\..\..\src\Tonic\BasicDelay.cpp" />
+    <ClCompile Include="..\..\..\..\src\Tonic\BufferFiller.cpp" />
+    <ClCompile Include="..\..\..\..\src\Tonic\CompressorLimiter.cpp" />
+    <ClCompile Include="..\..\..\..\src\Tonic\ControlAdder.cpp" />
+    <ClCompile Include="..\..\..\..\src\Tonic\ControlConditioner.cpp" />
+    <ClCompile Include="..\..\..\..\src\Tonic\ControlCounter.cpp" />
+    <ClCompile Include="..\..\..\..\src\Tonic\ControlDbToLinear.cpp" />
+    <ClCompile Include="..\..\..\..\src\Tonic\ControlDivider.cpp" />
+    <ClCompile Include="..\..\..\..\src\Tonic\ControlFloor.cpp" />
+    <ClCompile Include="..\..\..\..\src\Tonic\ControlGenerator.cpp" />
+    <ClCompile Include="..\..\..\..\src\Tonic\ControlMetro.cpp" />
+    <ClCompile Include="..\..\..\..\src\Tonic\ControlMidiToFreq.cpp" />
+    <ClCompile Include="..\..\..\..\src\Tonic\ControlMultiplier.cpp" />
+    <ClCompile Include="..\..\..\..\src\Tonic\ControlPrinter.cpp" />
+    <ClCompile Include="..\..\..\..\src\Tonic\ControlPulse.cpp" />
+    <ClCompile Include="..\..\..\..\src\Tonic\ControlRandom.cpp" />
+    <ClCompile Include="..\..\..\..\src\Tonic\ControlRecorder.cpp" />
+    <ClCompile Include="..\..\..\..\src\Tonic\ControlSnapToScale.cpp" />
+    <ClCompile Include="..\..\..\..\src\Tonic\ControlStepper.cpp" />
+    <ClCompile Include="..\..\..\..\src\Tonic\ControlSubtractor.cpp" />
+    <ClCompile Include="..\..\..\..\src\Tonic\ControlSwitcher.cpp" />
+    <ClCompile Include="..\..\..\..\src\Tonic\ControlTrigger.cpp" />
+    <ClCompile Include="..\..\..\..\src\Tonic\ControlValue.cpp" />
+    <ClCompile Include="..\..\..\..\src\Tonic\ControlXYSpeed.cpp" />
+    <ClCompile Include="..\..\..\..\src\Tonic\DelayUtils.cpp" />
+    <ClCompile Include="..\..\..\..\src\Tonic\Divider.cpp" />
+    <ClCompile Include="..\..\..\..\src\Tonic\Filters.cpp" />
+    <ClCompile Include="..\..\..\..\src\Tonic\FixedValue.cpp" />
+    <ClCompile Include="..\..\..\..\src\Tonic\FlexToothWave.cpp" />
+    <ClCompile Include="..\..\..\..\src\Tonic\Generator.cpp" />
+    <ClCompile Include="..\..\..\..\src\Tonic\LFNoise.cpp" />
+    <ClCompile Include="..\..\..\..\src\Tonic\Mixer.cpp" />
+    <ClCompile Include="..\..\..\..\src\Tonic\MonoToStereoPanner.cpp" />
+    <ClCompile Include="..\..\..\..\src\Tonic\Multiplier.cpp" />
+    <ClCompile Include="..\..\..\..\src\Tonic\Noise.cpp" />
+    <ClCompile Include="..\..\..\..\src\Tonic\RampedValue.cpp" />
+    <ClCompile Include="..\..\..\..\src\Tonic\RectWave.cpp" />
+    <ClCompile Include="..\..\..\..\src\Tonic\SineWave.cpp" />
+    <ClCompile Include="..\..\..\..\src\Tonic\StereoDelay.cpp" />
+    <ClCompile Include="..\..\..\..\src\Tonic\Subtractor.cpp" />
+    <ClCompile Include="..\..\..\..\src\Tonic\Synth.cpp" />
+    <ClCompile Include="..\..\..\..\src\Tonic\TableLookupOsc.cpp" />
+    <ClCompile Include="..\..\..\..\src\Tonic\TonicFrames.cpp" />
+    <ClCompile Include="dllmain.cpp">
+      <CompileAsManaged Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</CompileAsManaged>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+      </PrecompiledHeader>
+      <CompileAsManaged Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</CompileAsManaged>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+      </PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="stdafx.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="TonicLib.cpp" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

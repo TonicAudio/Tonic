@@ -123,6 +123,12 @@ namespace Tonic {
     }
     return result;
   }
+
+#ifdef _WIN32
+  inline static TonicFloat log2(TonicFloat n) {
+	return log(n) / log(2);
+  }
+#endif
   
   //-- Freq/MIDI --
   

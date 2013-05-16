@@ -110,6 +110,23 @@ xcuserdata
 
 *.moved-aside
 
+####
+# Windows
+
+####
+# Visual Studio project bookkeeping files
+*.suo
+*.sdf
+*.user
+*.opensdf
+ipch/
+
+####
+# Visual Studio build folders
+Debug/
+Release/
+
+
 
 ####
 # UNKNOWN: recommended by others, but I can't discover what these files are

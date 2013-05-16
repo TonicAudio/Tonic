@@ -10,8 +10,9 @@
 
 
 #include "LFNoise.h"
+#ifndef _WIN32
 #include "Util.h"
-
+#endif
 namespace Tonic {
 namespace Tonic_{
 
