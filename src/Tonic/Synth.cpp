@@ -17,7 +17,21 @@ namespace Tonic {
   // Synth Factory
   SynthFactory::map_type * SynthFactory::map;
 
-  Synth::Synth() {}
+  Synth::Synth() : limitOutput_(true) {
+    TONIC_MUTEX_INIT(&outputGenMutex_);
+    outputGen = PassThroughGenerator();
+    limiter_.setIsStereo(true);
+  }
+  
+  Synth::~Synth() {
+    TONIC_MUTEX_DESTROY(&outputGenMutex_);
+  }
+  
+  void Synth::setOutputGen(Tonic::Generator gen){
+    TONIC_MUTEX_LOCK(&outputGenMutex_);
+    outputGen = gen;
+    TONIC_MUTEX_UNLOCK(&outputGenMutex_);
+  }
 
   void Synth::setParameter(string name, float value){
     

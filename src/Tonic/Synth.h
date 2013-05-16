@@ -15,6 +15,7 @@
 #include <map>
 #include "BufferFiller.h"
 #include "ControlParameter.h"
+#include "CompressorLimiter.h"
 
 namespace Tonic{
   
@@ -23,24 +24,47 @@ namespace Tonic{
   public:
     
     Synth();
+    ~Synth();
     
-    void                   setParameter(string name, float value=1);
+    //! Set the output gen that produces audio for the Synth
+    void  setOutputGen(Generator gen);
     
-    vector<ControlParameter> getParameters();
+    //! Returns a reference to outputGen
+    const Generator & getOutputGenerator() { return outputGen; };
     
-  protected:
-    
-    // ND: I moved these to protected because only subclasses should call them.
-    // No reason to make them publicly available since you can't change the signal chain dynamically.
+    //! Set whether synth uses dynamic limiter to prevent clipping/wrapping. Defaults to true.
+    void setLimitOutput(bool shouldLimit) { limitOutput_ = shouldLimit; };
     
     //! Add a ControlParameter with name "name"
     ControlParameter & addParameter(string name, TonicFloat initialValue = 0.f);
-
-    // set to true in constructor to clamp incoming parameters to defined min/max
+    
+    void                      setParameter(string name, float value=1);
+    vector<ControlParameter>  getParameters();
+    
+    void tick( TonicFrames& frames, const Tonic_::SynthesisContext_ & context );
+    
+  protected:
+        
+    Generator     outputGen;
+    TONIC_MUTEX_T outputGenMutex_;
+    
+    Limiter limiter_;
+    bool limitOutput_;
+    
     std::map<string, ControlParameter> parameters_;
     std::vector<string> orderedParameterNames_;
-    
+        
   };
+  
+  inline void Synth::tick(Tonic::TonicFrames &frames, const Tonic_::SynthesisContext_ &context){
+    TONIC_MUTEX_LOCK(&outputGenMutex_);
+    outputGen.tick(frames, context);
+    TONIC_MUTEX_UNLOCK(&outputGenMutex_);
+
+    if (limitOutput_){
+      limiter_.tickThrough(frames, context);
+    }
+  }
   
   // ------------------------------
   //

@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		0183D0FA1735D17D004638EB /* CompressorDuckingTestSynth.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0183D0EC1735D17D004638EB /* CompressorDuckingTestSynth.cpp */; };
-		0183D0FC1735D17D004638EB /* ControlOctaveSnapTestSynth.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0183D0EE1735D17D004638EB /* ControlOctaveSnapTestSynth.cpp */; };
 		0183D0FD1735D17D004638EB /* ControlSwitcherTestSynth.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0183D0EF1735D17D004638EB /* ControlSwitcherTestSynth.cpp */; };
 		0183D0FE1735D17D004638EB /* DelayTestSynth.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0183D0F01735D17D004638EB /* DelayTestSynth.cpp */; };
 		0183D0FF1735D17D004638EB /* FilteredNoiseSynth.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0183D0F11735D17D004638EB /* FilteredNoiseSynth.cpp */; };
@@ -22,6 +21,7 @@
 		01C65FEB17371BBC003B2661 /* ReverbTestSynth.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 01C65FE917371BBC003B2661 /* ReverbTestSynth.cpp */; };
 		01DAA58F173E9EF8001AA383 /* SynthAutoUIViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 01DAA58D173E9EF8001AA383 /* SynthAutoUIViewController.mm */; };
 		01DAA590173E9EF8001AA383 /* SynthAutoUIViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 01DAA58E173E9EF8001AA383 /* SynthAutoUIViewController.xib */; };
+		9AB59D3E17456D4C001E6837 /* ControlSnapToScaleTestSynth.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9AB59D3D17456D4C001E6837 /* ControlSnapToScaleTestSynth.cpp */; };
 		A80F6C2E17431BC00079FB52 /* SimpleStepSeqSynth.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A80F6C2C17431A4F0079FB52 /* SimpleStepSeqSynth.cpp */; };
 		A80F6C2F17431BC00079FB52 /* SimpleStepSeqSynth.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A80F6C2C17431A4F0079FB52 /* SimpleStepSeqSynth.cpp */; };
 		A86C3EC116B2B4FD002A50F0 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A86C3EC016B2B4FD002A50F0 /* UIKit.framework */; };
@@ -94,7 +94,6 @@
 
 /* Begin PBXFileReference section */
 		0183D0EC1735D17D004638EB /* CompressorDuckingTestSynth.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CompressorDuckingTestSynth.cpp; sourceTree = "<group>"; };
-		0183D0EE1735D17D004638EB /* ControlOctaveSnapTestSynth.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ControlOctaveSnapTestSynth.cpp; sourceTree = "<group>"; };
 		0183D0EF1735D17D004638EB /* ControlSwitcherTestSynth.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ControlSwitcherTestSynth.cpp; sourceTree = "<group>"; };
 		0183D0F01735D17D004638EB /* DelayTestSynth.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = DelayTestSynth.cpp; sourceTree = "<group>"; };
 		0183D0F11735D17D004638EB /* FilteredNoiseSynth.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = FilteredNoiseSynth.cpp; sourceTree = "<group>"; };
@@ -109,6 +108,7 @@
 		01DAA58C173E9EF8001AA383 /* SynthAutoUIViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SynthAutoUIViewController.h; sourceTree = "<group>"; };
 		01DAA58D173E9EF8001AA383 /* SynthAutoUIViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = SynthAutoUIViewController.mm; sourceTree = "<group>"; };
 		01DAA58E173E9EF8001AA383 /* SynthAutoUIViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SynthAutoUIViewController.xib; sourceTree = "<group>"; };
+		9AB59D3D17456D4C001E6837 /* ControlSnapToScaleTestSynth.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ControlSnapToScaleTestSynth.cpp; sourceTree = "<group>"; };
 		A80F6C2C17431A4F0079FB52 /* SimpleStepSeqSynth.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SimpleStepSeqSynth.cpp; sourceTree = "<group>"; };
 		A86C3EBC16B2B4FD002A50F0 /* TonicDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TonicDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A86C3EC016B2B4FD002A50F0 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
@@ -200,9 +200,9 @@
 		0183D0EB1735D17D004638EB /* Demo Synths */ = {
 			isa = PBXGroup;
 			children = (
-				F2E2561917400EDB00D74E9D /* CompressorTestSynth.cpp */,
 				0183D0EC1735D17D004638EB /* CompressorDuckingTestSynth.cpp */,
-				0183D0EE1735D17D004638EB /* ControlOctaveSnapTestSynth.cpp */,
+				F2E2561917400EDB00D74E9D /* CompressorTestSynth.cpp */,
+				9AB59D3D17456D4C001E6837 /* ControlSnapToScaleTestSynth.cpp */,
 				0183D0EF1735D17D004638EB /* ControlSwitcherTestSynth.cpp */,
 				0183D0F01735D17D004638EB /* DelayTestSynth.cpp */,
 				0183D0F11735D17D004638EB /* FilteredNoiseSynth.cpp */,
@@ -211,10 +211,10 @@
 				0183D0F41735D17D004638EB /* FMDroneSynth.cpp */,
 				0183D0F51735D17D004638EB /* LFNoiseTestSynth.cpp */,
 				01C65FE917371BBC003B2661 /* ReverbTestSynth.cpp */,
+				A80F6C2C17431A4F0079FB52 /* SimpleStepSeqSynth.cpp */,
 				0183D0F71735D17D004638EB /* SineSumSynth.cpp */,
 				0183D0F81735D17D004638EB /* StereoDelayTestSynth.cpp */,
 				0183D0F91735D17D004638EB /* XYSpeed.cpp */,
-				A80F6C2C17431A4F0079FB52 /* SimpleStepSeqSynth.cpp */,
 			);
 			name = "Demo Synths";
 			path = "../../../Demo Synths";
@@ -537,7 +537,6 @@
 				F256C8E516C5A0BF0096574D /* SynthChooserViewController.mm in Sources */,
 				A89356D817052CAD00C184BE /* SynthDemoDef.mm in Sources */,
 				0183D0FA1735D17D004638EB /* CompressorDuckingTestSynth.cpp in Sources */,
-				0183D0FC1735D17D004638EB /* ControlOctaveSnapTestSynth.cpp in Sources */,
 				0183D0FD1735D17D004638EB /* ControlSwitcherTestSynth.cpp in Sources */,
 				0183D0FE1735D17D004638EB /* DelayTestSynth.cpp in Sources */,
 				0183D0FF1735D17D004638EB /* FilteredNoiseSynth.cpp in Sources */,
@@ -553,6 +552,7 @@
 				F24A98D1173EAB8500BE47CB /* SynthParameterCell.mm in Sources */,
 				F2E2561A17400EDB00D74E9D /* CompressorTestSynth.cpp in Sources */,
 				A80F6C2E17431BC00079FB52 /* SimpleStepSeqSynth.cpp in Sources */,
+				9AB59D3E17456D4C001E6837 /* ControlSnapToScaleTestSynth.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

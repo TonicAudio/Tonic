@@ -19,6 +19,8 @@ class ControlSwitcherTestSynth : public Synth{
 public:
   ControlSwitcherTestSynth(){
   
+#if TONIC_HAS_CPP_11
+      
     ControlMetro metro = ControlMetro().bpm(80 * 4);
     ControlGenerator modeSwitch =  ControlMetro().bpm(4);
     
@@ -88,6 +90,11 @@ public:
       >> StereoDelay(1.1, 1.2).wetLevel(0.1) ;
     Generator bassWithAmp = bass * bassEnv * tremelo;
     outputGen = bassWithAmp  + click;
+#else
+      
+#pragma message("C++11 Support not available - ControlSwitcherTestSynth disabled")
+      
+#endif
   }
 };
 
