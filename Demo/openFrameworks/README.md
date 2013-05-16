@@ -1,13 +1,21 @@
-HOW TO INSTALL THESE DEMOS
+### How to Install the openFrameworks demos (for OSX)
 
-1) Copy each demo's folder to (path_to_openframeworks)/apps/myApps/
+1) Copy each demo's folder to the openFrameworks "myApps" directory (path/to/openFrameworks/apps/myApps/
 
+![copy demos](http://github.com/TonicAudio/TonicDocs/blob/master/screenshots/oF_install_instructions/copy_oF_demos.png?raw=true)
 
 2) Each project contains a Project.xcconfig file. In this file, change TONIC_PATH to point to the `src/` directory of
 the Tonic project, wherever it lives on your computer.
 
-3) Click on Tonic->TonicLib.xcodeproj within the Demo project (it should have red text, indicating Xcode couldn't find
-	it). In the Inspector panel of Xcode, click the icon under
+![tonic path](http://github.com/TonicAudio/TonicDocs/blob/master/screenshots/oF_install_instructions/set_tonic_path.png?raw=true)
+
+3) Click on Tonic->TonicLib.xcodeproj within the Demo project (it should appear as a missing file). In the Inspector panel of Xcode, click the icon under
 "Location" and locate lib/TonicLib.codeproj, within the Tonic directory.
 
-The demos should now work!
+![library file](http://github.com/TonicAudio/TonicDocs/blob/master/screenshots/oF_install_instructions/tonic_lib_loc.png?raw=true)
+<br><br>
+![library location](http://github.com/TonicAudio/TonicDocs/blob/master/screenshots/oF_install_instructions/find_tonic_lib.png?raw=true)
+
+4) Follow the same steps in 3) to locate the "Demo Synths" directory if necessary.
+
+The demos should now compile and run.
