@@ -18,13 +18,41 @@
 #include <stdexcept>
 #include <stdio.h>
 #include <math.h>
+
+// TODO: Including pthread globally for now, will need to put in conditional includes below when
+// win32 mutexes are implemented
 #include <pthread.h>
 
-#ifdef __APPLE__
+// Determine if C++11 is available. If not, some synths cannot be used. (applies to oF demos, mostly)
+#define TONIC_HAS_CPP_11 (__cplusplus > 199711L)
+
+// Platform-specific macros and includes
+#if defined (__APPLE__)
+
   #import <Accelerate/Accelerate.h>
   #define USE_APPLE_ACCELERATE
   #define ARC4RAND_MAX 0x100000000
+
 #endif
+
+#if (defined (__APPLE__) || defined (__linux__))
+
+  #import <Accelerate/Accelerate.h>
+  #define USE_APPLE_ACCELERATE
+  #define ARC4RAND_MAX 0x100000000
+
+  #define TONIC_MUTEX_T pthread_mutex_t
+  #define TONIC_MUTEX_INIT(x) pthread_mutex_init(x, NULL)
+  #define TONIC_MUTEX_DESTROY(x) pthread_mutex_destroy(x)
+  #define TONIC_MUTEX_LOCK(x) pthread_mutex_lock(x)
+  #define TONIC_MUTEX_UNLOCK(x) pthread_mutex_unlock(x)
+
+#elif (defined (_WIN32) || defined (__WIN32__))
+
+  // TODO: Windows macros
+
+#endif
+
 
 using namespace std;
 
@@ -47,6 +75,7 @@ const TonicFloat TWO_PI       = 2.f * PI;
 // Causes 32nd bit in double to have fractional value 1 (decimal point on 32-bit word boundary)
 // Allowing some efficient shortcuts for table lookup using power-of-two tables
 #define BIT32DECPT 1572864.0
+
 
 // Uncomment or define in your build configuration to log debug messages and perform extra debug checks
 // #define TONIC_DEBUG

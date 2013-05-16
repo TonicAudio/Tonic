@@ -19,6 +19,8 @@ class SimpleStepSeqSynth : public Synth {
 
 public:
   SimpleStepSeqSynth(){
+      
+#if TONIC_HAS_CPP_11
   
     const int NUM_STEPS = 8;
   
@@ -41,8 +43,14 @@ public:
     outputGen = (outputGen >> LPF24().cutoff(cutoffs).Q(0.1));
    // outputGen = outputGen >> Reverb().wetLevel(0.1).dryLevel(1).decayTime(1);
     
+#else
+      
+#pragma message("C++11 Support not available - SimpleStepSeqSynth disabled")
+      
+#endif
+      
   }
-  
+    
 };
 
 registerSynth(SimpleStepSeqSynth);
