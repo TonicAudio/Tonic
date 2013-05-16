@@ -35,6 +35,9 @@ namespace Tonic{
     //! Set whether synth uses dynamic limiter to prevent clipping/wrapping. Defaults to true.
     void setLimitOutput(bool shouldLimit) { limitOutput_ = shouldLimit; };
     
+    //! Add a ControlParameter with name "name"
+    ControlParameter & addParameter(string name, TonicFloat initialValue = 0.f);
+    
     void                      setParameter(string name, float value=1);
     vector<ControlParameter>  getParameters();
     
@@ -50,12 +53,6 @@ namespace Tonic{
     
     std::map<string, ControlParameter> parameters_;
     std::vector<string> orderedParameterNames_;
-    
-    // ND: I moved these to protected because only subclasses should call them.
-    // No reason to make them publicly available since you can't change the signal chain dynamically.
-    
-    //! Add a ControlParameter with name "name"
-    ControlParameter & addParameter(string name, TonicFloat initialValue = 0.f);
         
   };
   
