@@ -16,5 +16,11 @@ On top of all that, it maps mouse speed to the cutoff frequency.
 
 You can browse more synth examples [here](http://github.com/TonicAudio/Tonic/tree/master/Demo/Demo%20Synths)
 
-Currently, Tonic comes with a demo iOS project. We plan to add demo projects for Windows and Linux in the future.
+### Example Projects
+
+Tonic comes with three flavors of demo, currently only for OSX. We plan to add demo projects for Windows and Linux in the future.
+
+- Very simple [Standalone Demo](http://github.com/TonicAudio/Tonic/tree/master/Demo/Standalone) for building a non-interactive synth patch that runs from the command line
+- Two [openFrameworks Demos](http://github.com/TonicAudio/Tonic/tree/master/Demo/openFrameworks) for integrating tonic with [openFrameworks](http://www.openframeworks.cc). **Check the README for installation instructions**
+- [iOS Demo](http://github.com/TonicAudio/Tonic/tree/master/Demo/iOS) for making synths on your iPhone/iPad.
 
