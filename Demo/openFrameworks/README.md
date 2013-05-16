@@ -18,4 +18,11 @@ the Tonic project, wherever it lives on your computer.
 
 4) Follow the same steps in 3) to locate the "Demo Synths" directory if necessary.
 
-The demos should now compile and run.
+5) Click the demo project file. Under "Targets", click the project target. Click the "Build Phases" tab. Expand "Target Dependencies" and click the plus icon to add "TonicLib-OSX"
+
+6) Expand "Link Binary with Libraries" and click the plus icon to add "TonicLib-OSX"
+
+![dependencies](http://github.com/TonicAudio/TonicDocs/blob/master/screenshots/oF_install_instructions/add_dependencies.png?raw=true)
+
+
+The demos should now compile and run! 
