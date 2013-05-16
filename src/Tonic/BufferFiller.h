@@ -31,36 +31,33 @@ namespace Tonic{
     TonicFrames                 outputFrames_;
     Tonic_::SynthesisContext_   context_;
     
-  protected:
-    
-    Generator     outputGen;
-    
   public:
     BufferFiller();
-        
-    //! tick method without context argument passes down this instance's SynthesisContext_
+    
+    //! Process a single synthesis vector, output to frames
+    /*!
+     tick method without context argument passes down this instance's SynthesisContext_
+     */
     void tick( TonicFrames& frames );
     
-    //! tick method with context argument uses passed-in context
-    virtual void tick( TonicFrames& frames, const Tonic_::SynthesisContext_ & context );
+    //! Subclasses must implement this method to process one synthesis vector
+    /*!
+     tick method with context argument uses passed-in context
+     */
+    virtual void tick( TonicFrames& frames, const Tonic_::SynthesisContext_ & context ) = 0;
     
     //! Fill an arbitrarily-sized, interleaved buffer of audio samples as floats
     /*!
-        This BufferFiller's outputGen is used to fill an interleaved buffer starting at outData.
-    */
+     This BufferFiller's outputGen is used to fill an interleaved buffer starting at outData.
+     */
     void fillBufferOfFloats(float *outData,  unsigned int numFrames, unsigned int numChannels);
     
-    //! Returns a reference to outputGen
-    const Generator & getOutputGenerator() { return outputGen; };
+  
   };
   
   inline void BufferFiller::tick( TonicFrames& frames ){
     this->tick(frames, context_);
     context_.tick();
-  }
-  
-  inline void BufferFiller::tick( TonicFrames& frames, const Tonic_::SynthesisContext_ & context ){
-    outputGen.tick(frames, context);
   }
   
   // fill a buffer of floats, assuming the buffer is expecting max/min of 1,-1

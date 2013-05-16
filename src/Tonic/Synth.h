@@ -23,24 +23,41 @@ namespace Tonic{
   public:
     
     Synth();
+    virtual ~Synth();
     
-    void                   setParameter(string name, float value=1);
+    //! Set the output gen that produces audio for the Synth
+    void  setOutputGen(Generator gen);
     
-    vector<ControlParameter> getParameters();
+    //! Returns a reference to outputGen
+    const Generator & getOutputGenerator() { return outputGen; };
+    
+    void                      setParameter(string name, float value=1);
+    vector<ControlParameter>  getParameters();
+    
+    void tick( TonicFrames& frames, const Tonic_::SynthesisContext_ & context );
     
   protected:
+        
+    Generator     outputGen;
+    
+    pthread_mutex_t outputGenMutex_;
+    
+    std::map<string, ControlParameter> parameters_;
+    std::vector<string> orderedParameterNames_;
     
     // ND: I moved these to protected because only subclasses should call them.
     // No reason to make them publicly available since you can't change the signal chain dynamically.
     
     //! Add a ControlParameter with name "name"
     ControlParameter & addParameter(string name, TonicFloat initialValue = 0.f);
-
-    // set to true in constructor to clamp incoming parameters to defined min/max
-    std::map<string, ControlParameter> parameters_;
-    std::vector<string> orderedParameterNames_;
-    
+        
   };
+  
+  inline void Synth::tick(Tonic::TonicFrames &frames, const Tonic_::SynthesisContext_ &context){
+    pthread_mutex_lock(&outputGenMutex_);
+    outputGen.tick(frames, context);
+    pthread_mutex_unlock(&outputGenMutex_);
+  }
   
   // ------------------------------
   //

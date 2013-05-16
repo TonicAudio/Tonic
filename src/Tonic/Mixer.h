@@ -14,7 +14,7 @@
 #ifndef __Tonic__Mixer__
 #define __Tonic__Mixer__
 
-#include "BufferFiller.h"
+#include "Synth.h"
 #include "CompressorLimiter.h"
 
 using std::vector;
@@ -24,6 +24,7 @@ namespace Tonic {
   class Mixer : public BufferFiller{
   
   private:
+    
     TonicFrames workSpace_;
     vector<BufferFiller*> inputs_;
     Limiter limiter_;
@@ -33,7 +34,7 @@ namespace Tonic {
     bool limitOutput_;
     
   public:
-    
+        
     Mixer();
     ~Mixer();
     

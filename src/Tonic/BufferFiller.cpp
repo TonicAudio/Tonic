@@ -15,7 +15,6 @@ namespace Tonic {
   
   BufferFiller::BufferFiller() : bufferReadPosition_(0){
     outputFrames_.resize(kSynthesisBlockSize, 2);
-    outputGen = PassThroughGenerator();
   }
   
 }

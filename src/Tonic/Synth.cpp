@@ -17,7 +17,20 @@ namespace Tonic {
   // Synth Factory
   SynthFactory::map_type * SynthFactory::map;
 
-  Synth::Synth() {}
+  Synth::Synth() {
+    pthread_mutex_init(&outputGenMutex_, NULL);
+    outputGen = PassThroughGenerator();
+  }
+  
+  Synth::~Synth() {
+    pthread_mutex_destroy(&outputGenMutex_);
+  }
+  
+  void Synth::setOutputGen(Tonic::Generator gen){
+    pthread_mutex_lock(&outputGenMutex_);
+    outputGen = gen;
+    pthread_mutex_unlock(&outputGenMutex_);
+  }
 
   void Synth::setParameter(string name, float value){
     
