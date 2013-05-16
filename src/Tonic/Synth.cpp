@@ -18,19 +18,19 @@ namespace Tonic {
   SynthFactory::map_type * SynthFactory::map;
 
   Synth::Synth() : limitOutput_(true) {
-    pthread_mutex_init(&outputGenMutex_, NULL);
+    TONIC_MUTEX_INIT(&outputGenMutex_);
     outputGen = PassThroughGenerator();
     limiter_.setIsStereo(true);
   }
   
   Synth::~Synth() {
-    pthread_mutex_destroy(&outputGenMutex_);
+    TONIC_MUTEX_DESTROY(&outputGenMutex_);
   }
   
   void Synth::setOutputGen(Tonic::Generator gen){
-    pthread_mutex_lock(&outputGenMutex_);
+    TONIC_MUTEX_LOCK(&outputGenMutex_);
     outputGen = gen;
-    pthread_mutex_unlock(&outputGenMutex_);
+    TONIC_MUTEX_UNLOCK(&outputGenMutex_);
   }
 
   void Synth::setParameter(string name, float value){

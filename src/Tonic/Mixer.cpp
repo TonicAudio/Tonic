@@ -12,28 +12,28 @@ namespace Tonic {
   
   Mixer::Mixer() {
     workSpace_.resize(kSynthesisBlockSize, 2, 0);
-    pthread_mutex_init(&input_mutex_, NULL);
+    TONIC_MUTEX_INIT(&input_mutex_);
   }
   
   Mixer::~Mixer() {
-    pthread_mutex_destroy(&input_mutex_);
+    TONIC_MUTEX_DESTROY(&input_mutex_);
   }
   
   void Mixer::addInput(BufferFiller* input)
   {
       // no checking for duplicates, maybe we should
-    pthread_mutex_lock(&input_mutex_);
+    TONIC_MUTEX_LOCK(&input_mutex_);
     inputs_.push_back(input);
-    pthread_mutex_unlock(&input_mutex_);
+    TONIC_MUTEX_UNLOCK(&input_mutex_);
   }
   
   void Mixer::removeInput(BufferFiller* input)
   {
     vector<BufferFiller*>::iterator it = std::find(inputs_.begin(), inputs_.end(), input);
     if (it != inputs_.end()){
-      pthread_mutex_lock(&input_mutex_);
+      TONIC_MUTEX_LOCK(&input_mutex_);
       inputs_.erase(it);
-      pthread_mutex_unlock(&input_mutex_);
+      TONIC_MUTEX_UNLOCK(&input_mutex_);
     }
 
   }
@@ -44,13 +44,13 @@ namespace Tonic {
     memset(&frames[0], 0, frames.size() * sizeof(TonicFloat));
     
     // Tick and add inputs
-    pthread_mutex_lock(&input_mutex_);
+    TONIC_MUTEX_LOCK(&input_mutex_);
     for (unsigned int i=0; i<inputs_.size(); i++){
       // Tick each bufferFiller every time, with our context (for now).
       inputs_[i]->tick(workSpace_, context);
       frames += workSpace_;
     }
-    pthread_mutex_unlock(&input_mutex_);
+    TONIC_MUTEX_UNLOCK(&input_mutex_);
   }
 
   

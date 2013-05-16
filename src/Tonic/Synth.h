@@ -43,7 +43,7 @@ namespace Tonic{
   protected:
         
     Generator     outputGen;
-    pthread_mutex_t outputGenMutex_;
+    TONIC_MUTEX_T outputGenMutex_;
     
     Limiter limiter_;
     bool limitOutput_;
@@ -60,9 +60,9 @@ namespace Tonic{
   };
   
   inline void Synth::tick(Tonic::TonicFrames &frames, const Tonic_::SynthesisContext_ &context){
-    pthread_mutex_lock(&outputGenMutex_);
+    TONIC_MUTEX_LOCK(&outputGenMutex_);
     outputGen.tick(frames, context);
-    pthread_mutex_unlock(&outputGenMutex_);
+    TONIC_MUTEX_UNLOCK(&outputGenMutex_);
 
     if (limitOutput_){
       limiter_.tickThrough(frames, context);

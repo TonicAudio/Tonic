@@ -27,7 +27,7 @@ namespace Tonic {
     
     TonicFrames workSpace_;
     vector<BufferFiller*> inputs_;    
-    pthread_mutex_t input_mutex_;
+    TONIC_MUTEX_T input_mutex_;
         
   public:
         

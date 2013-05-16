@@ -47,7 +47,7 @@ namespace Tonic {
       TonicFrames     outputFrames_;
       unsigned long   lastFrameIndex_;
       
-      pthread_mutex_t genMutex_;
+      TONIC_MUTEX_T genMutex_;
 
     };
     
@@ -78,11 +78,11 @@ namespace Tonic {
     }
     
     inline void Generator_::lockMutex(){
-      pthread_mutex_lock(&genMutex_);
+      TONIC_MUTEX_LOCK(&genMutex_);
     }
     
     inline void Generator_::unlockMutex(){
-      pthread_mutex_unlock(&genMutex_);
+      TONIC_MUTEX_UNLOCK(&genMutex_);
     }
     
     /////////////////////
