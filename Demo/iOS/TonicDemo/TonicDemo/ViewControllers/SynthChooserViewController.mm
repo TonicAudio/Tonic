@@ -182,6 +182,16 @@ using namespace Tonic;
         def.synthInstructions = @"Yeeeeah";
         def.shouldAutoGenUI = YES;
       }
+      
+      {
+        SynthDemoDef* def = [[SynthDemoDef alloc] init];
+        [synthDefinitions addObject:def];
+        def.synthClassName = @"SimpleStepSeqSynth";
+        def.synthDisplayName = @"Simple Step Sequencer";
+        def.synthDescription = @"Simple Step Sequencer";
+        def.synthInstructions = @"";
+        def.shouldAutoGenUI = YES;
+      }
 
     }
     return self;
