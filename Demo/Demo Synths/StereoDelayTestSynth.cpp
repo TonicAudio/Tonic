@@ -16,9 +16,11 @@ using namespace Tonic;
 class StereoDelayTestSynth : public Synth {
   
 public:
-  ControlMetro metro = ControlMetro().bpm(100);
-  ControlGenerator freq = ControlRandom().trigger(metro).min(0).max(1);
+  
   StereoDelayTestSynth(){
+    
+    ControlMetro metro = ControlMetro().bpm(100);
+    ControlGenerator freq = ControlRandom().trigger(metro).min(0).max(1);
   
     Generator tone = RectWave().freq(
         freq * addParameter("frequencyRandomAmount") + 100
