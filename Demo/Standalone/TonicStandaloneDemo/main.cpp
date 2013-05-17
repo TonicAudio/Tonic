@@ -36,7 +36,7 @@ int main(int argc, const char * argv[])
     rtParams.deviceId = dac.getDefaultOutputDevice();
     rtParams.nChannels = nChannels;
     unsigned int sampleRate = 44100;
-    unsigned int bufferFrames = 256; // 256 sample frames
+    unsigned int bufferFrames = 512; // 512 sample frames
     
     
     // --------- MAKE A SYNTH HERE -----------
