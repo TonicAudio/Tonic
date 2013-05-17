@@ -14,6 +14,7 @@ namespace Tonic { namespace Tonic_{
     phase_(0.0)
   {
     modFrames_.resize(kSynthesisBlockSize, 1);
+    sampleTable_ = SampleTable(2,1);
   }
   
   void TableLookupOsc_::reset(){

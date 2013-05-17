@@ -8,27 +8,31 @@
 
 #include "SineWave.h"
 
-namespace Tonic { namespace Tonic_{
+namespace Tonic {
   
-  TonicFrames SineWave_::sineTable_;
+  static string const TONIC_SIN_TABLE = "_TONIC_SIN_TABLE_";
   
-  SineWave_::SineWave_(){
-    fillTable();
-  }
-  
-  void SineWave_::fillTable(){
+  SineWave::SineWave(){
     
-    TonicFrames & table = tableReference();
-    if (table.empty()){
-      table.resize( TABLE_SIZE + 1, 1 );
-      TonicFloat temp = 1.0 / TABLE_SIZE;
-      for ( unsigned long i=0; i<=TABLE_SIZE; i++ )
-        table[i] = sinf( TWO_PI * i * temp );
+    // As soon as the first SineWave is allocated, persistent SampleTable is created.
+    // Will stay in memory for program lifetime (retain count of 1 in SampleTables registry)
+    
+    SampleTable sineTable;
+    if (!Tonic_::getSampleTable(TONIC_SIN_TABLE, &sineTable)){
+      
+      const unsigned int tableSize = 4096;
+      
+      sineTable = Tonic_::createSampleTable(TONIC_SIN_TABLE, tableSize, 1);
+      TonicFloat norm = 1.0f / tableSize;
+      TonicFloat *data = sineTable.dataPointer();
+      for ( unsigned long i=0; i<=tableSize; i++ ){
+        *data++ = sinf( TWO_PI * i * norm );
+      }
+      
     }
+    
+    this->gen()->setSampleTable(sineTable);
+    
   }
-  
-} // Namespace Tonic_
-  
-  
   
 } // Namespace Tonic

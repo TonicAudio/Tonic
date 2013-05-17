@@ -19,7 +19,6 @@ namespace Tonic {
 
   Synth::Synth() : limitOutput_(true) {
     TONIC_MUTEX_INIT(&outputGenMutex_);
-    outputGen = PassThroughGenerator();
     limiter_.setIsStereo(true);
   }
   

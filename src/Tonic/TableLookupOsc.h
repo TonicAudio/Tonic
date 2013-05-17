@@ -18,13 +18,12 @@
 #define __Tonic__TableLookupOsc__
 
 #include "Generator.h"
+#include "SampleTables.h"
 
 namespace Tonic {
   
   namespace Tonic_ {
-    
-    const unsigned long TABLE_SIZE = 2048;
-    
+        
     class TableLookupOsc_ : public Generator_{
       
       
@@ -39,21 +38,7 @@ namespace Tonic {
       
     protected:
 
-      //! Subclasses MUST override to provide pointer to table
-      /*
-        Necessary to maintain efficient memory usage by only
-        using one set of static wavetable data per subclss, regardless
-        of number of instances.
-       
-        Subclasses should return static member variable.
-      */
-      virtual TonicFrames & tableReference() = 0;
-      
-      //! Subclasses implement this to fill the wavetable
-      /*
-          Subclasses should ALWAYS call this method from their constructor!
-      */
-      virtual void fillTable() = 0;
+      SampleTable sampleTable_;
       
       double phase_;
       
@@ -72,7 +57,12 @@ namespace Tonic {
       //! Set frequency generator input
       void setFrequency( Generator genArg){
         frequencyGenerator_ = genArg;
-      };
+      }
+      
+      //! set sample table for lookup. MUST BE POWER OF 2 IN LENGTH
+      void setSampleTable( SampleTable table ){
+        sampleTable_ = table;
+      }
 
     };
     
@@ -81,11 +71,13 @@ namespace Tonic {
       // Update the frequency data
       frequencyGenerator_.tick(modFrames_, context);
       
-      const TonicFloat rateConstant = (TonicFloat)TABLE_SIZE / Tonic::sampleRate();
+      unsigned long tableSize = sampleTable_.size();
+      
+      const TonicFloat rateConstant = (TonicFloat)tableSize / Tonic::sampleRate();
       
       TonicFloat *samples = &outputFrames_[0];
       TonicFloat *rateBuffer = &modFrames_[0];
-      TonicFloat *tableData = &(tableReference())[0];
+      TonicFloat *tableData = sampleTable_.dataPointer();
       
       ShiftedDouble sd;
       
@@ -109,7 +101,7 @@ namespace Tonic {
         
         sd.d = ps;
         ps += *rateBuffer++;
-        offs = sd.i[1] & (TABLE_SIZE-1);
+        offs = sd.i[1] & (tableSize-1);
         tAddr = tableData + offs;
         sd.i[1] = msbi;
         frac = sd.d - BIT32DECPT;
@@ -119,11 +111,11 @@ namespace Tonic {
         *samples++ = f1 + frac * (f2 - f1);
       }
       
-      sd.d = BIT32DECPT * TABLE_SIZE;
+      sd.d = BIT32DECPT * tableSize;
       msbi = sd.i[1];
-      sd.d = ps + (BIT32DECPT * TABLE_SIZE - BIT32DECPT);
+      sd.d = ps + (BIT32DECPT * tableSize - BIT32DECPT);
       sd.i[1] = msbi;
-      phase_ = sd.d - BIT32DECPT * TABLE_SIZE;
+      phase_ = sd.d - BIT32DECPT * tableSize;
       
     }
 

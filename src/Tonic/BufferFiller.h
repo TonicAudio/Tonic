@@ -24,6 +24,8 @@
 */
 namespace Tonic{
   
+  // Subclass of Generator for the sole purpose of being able to sit in a signal chain (in theory).
+  // Underlying Generator_ will never be used.
   class BufferFiller : public Generator {
     
   private:
