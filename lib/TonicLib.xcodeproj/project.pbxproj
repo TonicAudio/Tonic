@@ -284,6 +284,7 @@
 		01F72690171520F900EBB4BB /* libTonic-OSX.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libTonic-OSX.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		01F7273D1715225500EBB4BB /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.7.sdk/System/Library/Frameworks/Accelerate.framework; sourceTree = DEVELOPER_DIR; };
 		9A7DB3E7174670DF009C9A8F /* TriangleWave.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TriangleWave.h; sourceTree = "<group>"; };
+		9A7DB3F417467C81009C9A8F /* SquareWave.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SquareWave.h; sourceTree = "<group>"; };
 		9AEDB5C617430E7B00C6A77C /* ControlParameter.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ControlParameter.cpp; sourceTree = "<group>"; };
 		9AEDB5C717430E7B00C6A77C /* ControlParameter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ControlParameter.h; sourceTree = "<group>"; };
 		F23A7CF1171B3D2E00AE8353 /* libTonic-iOS.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libTonic-iOS.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -391,9 +392,6 @@
 				0183D03B1735D0E6004638EB /* FilterUtils.h */,
 				0183D03C1735D0E6004638EB /* FixedValue.cpp */,
 				0183D03D1735D0E6004638EB /* FixedValue.h */,
-				0183D03E1735D0E6004638EB /* SawtoothWave.cpp */,
-				0183D03F1735D0E6004638EB /* SawtoothWave.h */,
-				9A7DB3E7174670DF009C9A8F /* TriangleWave.h */,
 				0183D0401735D0E6004638EB /* Generator.cpp */,
 				0183D0411735D0E6004638EB /* Generator.h */,
 				0183D0421735D0E6004638EB /* LFNoise.cpp */,
@@ -412,8 +410,11 @@
 				0183D04F1735D0E6004638EB /* RectWave.h */,
 				0183D10B1735D835004638EB /* Reverb.cpp */,
 				0183D10C1735D835004638EB /* Reverb.h */,
+				0183D03E1735D0E6004638EB /* SawtoothWave.cpp */,
+				0183D03F1735D0E6004638EB /* SawtoothWave.h */,
 				0183D0501735D0E6004638EB /* SineWave.cpp */,
 				0183D0511735D0E6004638EB /* SineWave.h */,
+				9A7DB3F417467C81009C9A8F /* SquareWave.h */,
 				0183D0521735D0E6004638EB /* StereoDelay.cpp */,
 				0183D0531735D0E6004638EB /* StereoDelay.h */,
 				0183D0541735D0E6004638EB /* Subtractor.cpp */,
@@ -425,6 +426,7 @@
 				0183D05A1735D0E6004638EB /* TonicCore.h */,
 				0183D05B1735D0E6004638EB /* TonicFrames.cpp */,
 				0183D05C1735D0E6004638EB /* TonicFrames.h */,
+				9A7DB3E7174670DF009C9A8F /* TriangleWave.h */,
 			);
 			path = Tonic;
 			sourceTree = "<group>";

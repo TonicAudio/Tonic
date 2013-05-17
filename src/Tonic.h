@@ -19,6 +19,7 @@
 #define __Tonic_TonicHeader__
 
 // ---- Core Objects ----
+
 #include "Tonic/TonicCore.h"
 #include "Tonic/TonicFrames.h"
 #include "Tonic/FixedValue.h"
@@ -44,9 +45,12 @@
 // Oscillators
 #include "Tonic/TableLookupOsc.h"
 #include "Tonic/SineWave.h"
-#include "Tonic/SawtoothWave.h"
-#include "Tonic/TriangleWave.h"
-#include "Tonic/RectWave.h"
+
+#include "Tonic/SawtoothWave.h"   // Aliasing
+#include "Tonic/TriangleWave.h"   // Aliasing
+#include "Tonic/SquareWave.h"     // Aliasing
+#include "Tonic/RectWave.h"       // Aliasing
+
 #include "Tonic/Noise.h"
 
 // Effects
