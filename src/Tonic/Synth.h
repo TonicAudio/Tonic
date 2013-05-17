@@ -57,9 +57,9 @@ namespace Tonic{
   };
   
   inline void Synth::tick(Tonic::TonicFrames &frames, const Tonic_::SynthesisContext_ &context){
-    TONIC_MUTEX_LOCK(outputGenMutex_);
+    TONIC_MUTEX_LOCK(&outputGenMutex_);
     outputGen.tick(frames, context);
-    TONIC_MUTEX_UNLOCK(outputGenMutex_);
+    TONIC_MUTEX_UNLOCK(&outputGenMutex_);
 
     if (limitOutput_){
       limiter_.tickThrough(frames, context);

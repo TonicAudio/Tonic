@@ -40,10 +40,10 @@
   #define ARC4RAND_MAX 0x100000000
 
   #define TONIC_MUTEX_T pthread_mutex_t
-  #define TONIC_MUTEX_INIT(x) pthread_mutex_init(&x, NULL)
-  #define TONIC_MUTEX_DESTROY(x) pthread_mutex_destroy(&x)
-  #define TONIC_MUTEX_LOCK(x) pthread_mutex_lock(&x)
-  #define TONIC_MUTEX_UNLOCK(x) pthread_mutex_unlock(&x)
+  #define TONIC_MUTEX_INIT(x) pthread_mutex_init(x, NULL)
+  #define TONIC_MUTEX_DESTROY(x) pthread_mutex_destroy(x)
+  #define TONIC_MUTEX_LOCK(x) pthread_mutex_lock(x)
+  #define TONIC_MUTEX_UNLOCK(x) pthread_mutex_unlock(x)
 
 #elif (defined (_WIN32) || defined (__WIN32__))
 
@@ -60,11 +60,11 @@
   }
 
   // Windows native mutexes
-  #define TONIC_MUTEX_T HANDLE
-  #define TONIC_MUTEX_INIT(x) x = ::CreateMutex(NULL, FALSE, NULL)
-  #define TONIC_MUTEX_DESTROY(x) ::CloseHandle(x)
-  #define TONIC_MUTEX_LOCK(x) ::WaitForSingleObject(x, INFINITE)
-  #define TONIC_MUTEX_UNLOCK(x) ::ReleaseMutex(x)
+  #define TONIC_MUTEX_T CRITICAL_SECTION
+  #define TONIC_MUTEX_INIT(x) InitializeCriticalSection(x)
+  #define TONIC_MUTEX_DESTROY(x) DeleteCriticalSection(x)
+  #define TONIC_MUTEX_LOCK(x) EnterCriticalSection(x)
+  #define TONIC_MUTEX_UNLOCK(x) LeaveCriticalSection(x)
 
 #endif
 
