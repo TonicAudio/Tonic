@@ -78,14 +78,26 @@ const TonicFloat TWO_PI       = 2.f * PI;
 
 namespace Tonic {
   
+  namespace Tonic_ {
+    static TonicFloat sampleRate_ = 44100.f;
+  }
+  
   // -- Global Constants --
   
+  //! Set the operational sample rate.
+  //  CHANGING WHILE RUNNING WILL RESULT IN UNDEFINED BEHAVIOR. MUST BE SET PRIOR TO OBJECT ALLOCATION.
+  static void setSampleRate(TonicFloat sampleRate){
+    Tonic_::sampleRate_ = sampleRate;
+  }
+  
+  //! Return sample rate
   static TonicFloat sampleRate(){
-      return 44100;
+    return Tonic_::sampleRate_;
   };
 
-  static const unsigned int kSynthesisBlockSize = 64;
-  
+  //! "Vector" size for audio processing. ControlGenerators update at this rate.
+  //! THIS VALUE SHOULD BE A POWER-OF-TWO WHICH IS LESS THAN THE HARDWARE BUFFER SIZE
+  static const unsigned int kSynthesisBlockSize = 32;
   
   // -- Global Types --
   

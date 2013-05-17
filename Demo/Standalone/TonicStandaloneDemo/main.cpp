@@ -38,6 +38,8 @@ int main(int argc, const char * argv[])
     unsigned int sampleRate = 44100;
     unsigned int bufferFrames = 256; // 256 sample frames
     
+    // You don't necessarily have to do this - it will default to 44100 if not set.
+    Tonic::setSampleRate(sampleRate);
     
     // --------- MAKE A SYNTH HERE -----------
     
