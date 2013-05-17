@@ -51,7 +51,7 @@ int main(int argc, const char * argv[])
     Generator tone = RectWave().freq(
                                      freq * 0.25 + 100
                                      + 400
-                                     ) * SineWave().freq(50);
+                                     ) * TriangleWave().freq(50);
     
     ADSR env = ADSR()
     .attack(0.01)

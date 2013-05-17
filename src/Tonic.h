@@ -42,10 +42,10 @@
 // -------  Generators ---------
 
 // Oscillators
-#include "Tonic/SineWave.h"
 #include "Tonic/TableLookupOsc.h"
-#include "Tonic/FlexToothWave.h"
 #include "Tonic/SineWave.h"
+#include "Tonic/SawtoothWave.h"
+#include "Tonic/TriangleWave.h"
 #include "Tonic/RectWave.h"
 #include "Tonic/Noise.h"
 
