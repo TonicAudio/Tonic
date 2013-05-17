@@ -11,7 +11,7 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "CLRDemoSynths", "Synths\Syn
 		{DA022B2D-D880-4BAB-9CDF-B916F7B6879E} = {DA022B2D-D880-4BAB-9CDF-B916F7B6879E}
 	EndProjectSection
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "TonicLib", "TonicLib\TonicLib.vcxproj", "{DA022B2D-D880-4BAB-9CDF-B916F7B6879E}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "TonicLib", "..\..\..\lib\TonicLibVS2012\TonicLib.vcxproj", "{DA022B2D-D880-4BAB-9CDF-B916F7B6879E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
