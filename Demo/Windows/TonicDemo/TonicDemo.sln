@@ -3,6 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Express 2012 for Windows Desktop
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TonicDemo", "TonicDemo\TonicDemo.csproj", "{FB72F784-B300-43E7-A163-9D60C80E2B99}"
 	ProjectSection(ProjectDependencies) = postProject
+		{DA022B2D-D880-4BAB-9CDF-B916F7B6879E} = {DA022B2D-D880-4BAB-9CDF-B916F7B6879E}
 		{DE51357F-2D2E-439B-A31C-3520BB1A6178} = {DE51357F-2D2E-439B-A31C-3520BB1A6178}
 	EndProjectSection
 EndProject

@@ -88,7 +88,7 @@
   <ItemGroup>
     <ClCompile Include="..\..\..\Demo Synths\CompressorDuckingTestSynth.cpp" />
     <ClCompile Include="..\..\..\Demo Synths\CompressorTestSynth.cpp" />
-    <ClCompile Include="..\..\..\Demo Synths\ControlOctaveSnapTestSynth.cpp" />
+    <ClCompile Include="..\..\..\Demo Synths\ControlSnapToScaleTestSynth.cpp" />
     <ClCompile Include="..\..\..\Demo Synths\ControlSwitcherTestSynth.cpp" />
     <ClCompile Include="..\..\..\Demo Synths\DelayTestSynth.cpp" />
     <ClCompile Include="..\..\..\Demo Synths\FilteredNoiseSynth.cpp" />
@@ -96,7 +96,8 @@
     <ClCompile Include="..\..\..\Demo Synths\FlexToothTestSynth.cpp" />
     <ClCompile Include="..\..\..\Demo Synths\FMDroneSynth.cpp" />
     <ClCompile Include="..\..\..\Demo Synths\LFNoiseTestSynth.cpp" />
-    <ClCompile Include="..\..\..\Demo Synths\RectWaveTestSynth.cpp" />
+    <ClCompile Include="..\..\..\Demo Synths\ReverbTestSynth.cpp" />
+    <ClCompile Include="..\..\..\Demo Synths\SimpleStepSeqSynth.cpp" />
     <ClCompile Include="..\..\..\Demo Synths\SineSumSynth.cpp" />
     <ClCompile Include="..\..\..\Demo Synths\StereoDelayTestSynth.cpp" />
     <ClCompile Include="..\..\..\Demo Synths\XYSpeed.cpp" />

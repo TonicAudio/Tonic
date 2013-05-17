@@ -41,9 +41,6 @@
     <ClCompile Include="..\..\..\Demo Synths\CompressorTestSynth.cpp">
       <Filter>Demo Synths</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\Demo Synths\ControlOctaveSnapTestSynth.cpp">
-      <Filter>Demo Synths</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\Demo Synths\ControlSwitcherTestSynth.cpp">
       <Filter>Demo Synths</Filter>
     </ClCompile>
@@ -65,9 +62,6 @@
     <ClCompile Include="..\..\..\Demo Synths\LFNoiseTestSynth.cpp">
       <Filter>Demo Synths</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\Demo Synths\RectWaveTestSynth.cpp">
-      <Filter>Demo Synths</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\Demo Synths\SineSumSynth.cpp">
       <Filter>Demo Synths</Filter>
     </ClCompile>
@@ -79,6 +73,15 @@
     </ClCompile>
     <ClCompile Include="CLRDemoSynths.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Demo Synths\ControlSnapToScaleTestSynth.cpp">
+      <Filter>Demo Synths</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Demo Synths\ReverbTestSynth.cpp">
+      <Filter>Demo Synths</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Demo Synths\SimpleStepSeqSynth.cpp">
+      <Filter>Demo Synths</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

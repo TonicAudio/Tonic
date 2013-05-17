@@ -18,23 +18,21 @@ namespace Tonic {
 		}
 	};
 
-	public ref class CLRSynthParameter
+	public ref class CLRControlParameter
 	{
 	public:
-		String^          name;
+		String^          displayName;
 		CLRControlValue^ value;
-		int				 type;
 		float            min;
 		float            max;
 
-		static CLRSynthParameter^ wrap(Synth::SynthParameter nativeParam)
+		static CLRControlParameter^ wrap(ControlParameter nativeParam)
 		{
-			auto param = gcnew CLRSynthParameter();
-			param->name = gcnew String(nativeParam.name.c_str());
-			param->value = CLRControlValue::wrap(nativeParam.value);
-			param->type = nativeParam.type;
-			param->min = nativeParam.min;
-			param->max = nativeParam.max;
+			auto param = gcnew CLRControlParameter();
+			param->displayName = gcnew String(nativeParam.getDisplayName().c_str());
+			param->value = CLRControlValue::wrap(nativeParam.getValue());
+			param->min = nativeParam.getMin();
+			param->max = nativeParam.getMax();
 			return param;
 		}
 	};
@@ -42,13 +40,13 @@ namespace Tonic {
 	public ref class CLRSynthWrapper abstract
 	{
 	public:
-		List<CLRSynthParameter^>^ GetParameters() 
+		List<CLRControlParameter^>^ GetParameters() 
 		{
 			auto nativeParams = getNativeSynth()->getParameters();
-			auto params = gcnew List<CLRSynthParameter^>();
+			auto params = gcnew List<CLRControlParameter^>();
 			for (auto p : nativeParams)
 			{
-				params->Add(CLRSynthParameter::wrap(p));
+				params->Add(CLRControlParameter::wrap(p));
 			}
 			return params;
 		}
