@@ -63,11 +63,11 @@ namespace Tonic {
     };
     
     inline void ControlGenerator_::lockMutex(){
-      TONIC_MUTEX_LOCK(&genMutex_);
+      TONIC_MUTEX_LOCK(genMutex_);
     }
     
     inline void ControlGenerator_::unlockMutex(){
-      TONIC_MUTEX_UNLOCK(&genMutex_);
+      TONIC_MUTEX_UNLOCK(genMutex_);
     }
 
   }

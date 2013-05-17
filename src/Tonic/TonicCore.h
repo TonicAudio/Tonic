@@ -19,9 +19,6 @@
 #include <stdio.h>
 #include <math.h>
 
-// TODO: Including pthread globally for now, will need to put in conditional includes below when
-// win32 mutexes are implemented
-#include <pthread.h>
 
 // Determine if C++11 is available. If not, some synths cannot be used. (applies to oF demos, mostly)
 #define TONIC_HAS_CPP_11 (__cplusplus > 199711L)
@@ -36,20 +33,38 @@
 #endif
 
 #if (defined (__APPLE__) || defined (__linux__))
-
+  
+  #include <pthread.h>
   #import <Accelerate/Accelerate.h>
   #define USE_APPLE_ACCELERATE
   #define ARC4RAND_MAX 0x100000000
 
   #define TONIC_MUTEX_T pthread_mutex_t
-  #define TONIC_MUTEX_INIT(x) pthread_mutex_init(x, NULL)
-  #define TONIC_MUTEX_DESTROY(x) pthread_mutex_destroy(x)
-  #define TONIC_MUTEX_LOCK(x) pthread_mutex_lock(x)
-  #define TONIC_MUTEX_UNLOCK(x) pthread_mutex_unlock(x)
+  #define TONIC_MUTEX_INIT(x) pthread_mutex_init(&x, NULL)
+  #define TONIC_MUTEX_DESTROY(x) pthread_mutex_destroy(&x)
+  #define TONIC_MUTEX_LOCK(x) pthread_mutex_lock(&x)
+  #define TONIC_MUTEX_UNLOCK(x) pthread_mutex_unlock(&x)
 
 #elif (defined (_WIN32) || defined (__WIN32__))
 
-  // TODO: Windows macros
+  #define WIN32_LEAN_AND_MEAN
+  #include <Windows.h>
+  
+  // Clear these macros to avoid interfering with ControlGenerator::min and ::max
+  #undef min
+  #undef max
+
+  // Windows' C90 <cmath> header does not define log2
+  inline static float log2(float n) {
+	return log(n) / log(2);
+  }
+
+  // Windows native mutexes
+  #define TONIC_MUTEX_T HANDLE
+  #define TONIC_MUTEX_INIT(x) x = ::CreateMutex(NULL, FALSE, NULL)
+  #define TONIC_MUTEX_DESTROY(x) ::CloseHandle(x)
+  #define TONIC_MUTEX_LOCK(x) ::WaitForSingleObject(x, INFINITE)
+  #define TONIC_MUTEX_UNLOCK(x) ::ReleaseMutex(x)
 
 #endif
 
@@ -156,12 +171,6 @@ namespace Tonic {
     }
     return result;
   }
-
-#ifdef _WIN32
-  inline static TonicFloat log2(TonicFloat n) {
-	return log(n) / log(2);
-  }
-#endif
   
   #define TONIC_LOG_MAP_BASEVAL -4
   
