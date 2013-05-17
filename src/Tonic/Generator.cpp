@@ -15,17 +15,17 @@
 namespace Tonic{ namespace Tonic_{
   
   Generator_::Generator_() : lastFrameIndex_(0), isStereoOutput_(false){
-    pthread_mutex_init(&genMutex_, NULL);
-    synthesisBlock_.resize(kSynthesisBlockSize, 1, 0);
+    TONIC_MUTEX_INIT(&genMutex_);
+    outputFrames_.resize(kSynthesisBlockSize, 1, 0);
   }
 
   Generator_::~Generator_(){
-    pthread_mutex_destroy(&genMutex_);
+    TONIC_MUTEX_DESTROY(&genMutex_);
   }
   
   void Generator_::setIsStereoOutput(bool stereo){
     if (stereo != isStereoOutput_){
-      synthesisBlock_.resize(kSynthesisBlockSize, stereo ? 2 : 1, 0);
+      outputFrames_.resize(kSynthesisBlockSize, stereo ? 2 : 1, 0);
     }
     isStereoOutput_ = stereo;
   }

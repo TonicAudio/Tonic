@@ -16,7 +16,7 @@
 - (void)startSession;
 - (void)endSession;
 
-- (void)addSynthWithName:(NSString*)sourceName forKey:(NSString*)key;
+- (Tonic::Synth*)addSynthWithName:(NSString*)sourceName forKey:(NSString*)key;
 - (void)removeSynthForKey:(NSString*)key;
 
 - (Tonic::Synth*)synthForKey:(NSString*)key;

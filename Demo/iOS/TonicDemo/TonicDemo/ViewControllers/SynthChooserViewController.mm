@@ -8,6 +8,7 @@
 
 #import "SynthChooserViewController.h"
 #import "SynthTestViewController.h"
+#import "SynthAutoUIViewController.h"
 #include "Tonic.h"
 
 using namespace Tonic;
@@ -29,7 +30,7 @@ using namespace Tonic;
     
       
       // Add synths here in order to have them displayed in the demo app.
-      // Note -- the synth header must be imported somewhere or you'll get mysterious
+      // Note -- add the "registerSynth" macro to your synth file or you'll get mysterious
       // synth not found errors at runtime.
       
       synthDefinitions = [NSMutableArray array];
@@ -53,11 +54,7 @@ using namespace Tonic;
         def.synthClassName = @"FMDroneSynth";
         def.synthDisplayName = @"FM Drone";
         def.synthDescription = @"Basic FM synth with sinusoidal carrier and modulator";
-        def.synthInstructions = @"Swipe up and down to change modulation amount. Swipe L/R to change modulator and carrier freqs.";
-        def.synthAction = ^(Tonic::Synth* synth, CGPoint touchPointNorm){
-          synth->setParameter("carrierFreq", touchPointNorm.x * 30);
-          synth->setParameter("modIndex", touchPointNorm.y*touchPointNorm.y );
-        };
+        def.shouldAutoGenUI = YES;
       }
       
       {
@@ -89,40 +86,10 @@ using namespace Tonic;
       {
         SynthDemoDef* def = [[SynthDemoDef alloc] init];
         [synthDefinitions addObject:def];
-        def.synthClassName = @"RectWaveTestSynth";
-        def.synthDisplayName = @"Rectangular Wave";
-        def.synthDescription = @"Aliasing rectangular waveform oscillator";
-        def.synthInstructions = @"X-Axis: pulse width\nY-Axis: frequency";
-        def.synthAction = ^(Tonic::Synth* synth, CGPoint touchPointNorm){
-          synth->setParameter("freq", mtof(touchPointNorm.y * 24 + 48));
-          synth->setParameter("pwm", touchPointNorm.x);
-        };
-      }
-      
-      {
-        SynthDemoDef* def = [[SynthDemoDef alloc] init];
-        [synthDefinitions addObject:def];
-        def.synthClassName = @"FlexToothLFOTestSynth";
-        def.synthDisplayName = @"Flexible Sawtooth LFO demo";
-        def.synthDescription = @"Aliasing sawtooth oscillator as morphable LFO";
-        def.synthInstructions = @"X-Axis: slope of sawtooth\nY-Axis: frequency";
-        def.synthAction = ^(Tonic::Synth* synth, CGPoint touchPointNorm){
-          synth->setParameter("freq", touchPointNorm.y * touchPointNorm.y * 20 + 0.1);
-          synth->setParameter("slope", touchPointNorm.x);
-        };
-      }
-      
-      {
-        SynthDemoDef* def = [[SynthDemoDef alloc] init];
-        [synthDefinitions addObject:def];
         def.synthClassName = @"DelayTestSynth";
         def.synthDisplayName = @"Basic Delay";
-        def.synthDescription = @"Basic Delay effect, mono or stereo input";
-        def.synthInstructions = @"Popcorn in SPAAAAACE!";
-        def.synthAction = ^(Tonic::Synth* synth, CGPoint touchPointNorm){
-          synth->setParameter("feedback", touchPointNorm.x);
-          synth->setParameter("delayTime", touchPointNorm.y * touchPointNorm.y);
-        };
+        def.synthDescription = @"Popcorn in SPAAAACE";
+        def.shouldAutoGenUI = YES;
       }
       
       
@@ -150,9 +117,10 @@ using namespace Tonic;
         def.synthAction = ^(Tonic::Synth* synth, CGPoint touchPointNorm){
           synth->setParameter("stepperStart", touchPointNorm.y);
           synth->setParameter("stepperSpread", touchPointNorm.x);
-        };
-        def.accellerometerAction = ^(Tonic::Synth* synth, CMAccelerometerData *accelerometerData){
+//        def.accellerometerAction = ^(Tonic::Synth* synth, CMAccelerometerData *accelerometerData){
 //          synth->setParameter("speed", accelerometerData.acceleration.x + 1);
+//        };
+
         };
       }
       
@@ -163,10 +131,7 @@ using namespace Tonic;
         def.synthDisplayName = @"Dynamic Compressor";
         def.synthDescription = @"Compress an 808-esque snare";
         def.synthInstructions = @"Y axis is compression threshold. Ratio is 8:1";
-        def.synthAction = ^(Tonic::Synth* synth, CGPoint touchPointNorm){
-          synth->setParameter("compThresh", 0.5 + touchPointNorm.y*touchPointNorm.y);
-          synth->setParameter("compGain", 1.5 - 0.5*touchPointNorm.y*touchPointNorm.y);
-        };
+        def.shouldAutoGenUI = YES;
       }
       
       {
@@ -208,7 +173,25 @@ using namespace Tonic;
         };
       }
       
+      {
+        SynthDemoDef* def = [[SynthDemoDef alloc] init];
+        [synthDefinitions addObject:def];
+        def.synthClassName = @"ReverbTestSynth";
+        def.synthDisplayName = @"Reverb";
+        def.synthDescription = @"Artificial Reverb";
+        def.synthInstructions = @"Yeeeeah";
+        def.shouldAutoGenUI = YES;
+      }
       
+      {
+        SynthDemoDef* def = [[SynthDemoDef alloc] init];
+        [synthDefinitions addObject:def];
+        def.synthClassName = @"SimpleStepSeqSynth";
+        def.synthDisplayName = @"Simple Step Sequencer";
+        def.synthDescription = @"Simple Step Sequencer";
+        def.synthInstructions = @"";
+        def.shouldAutoGenUI = YES;
+      }
 
     }
     return self;
@@ -252,7 +235,7 @@ using namespace Tonic;
   if (indexPath.row < [synthDefinitions count]) {
     SynthDemoDef* def = [synthDefinitions objectAtIndex:indexPath.row];
     if (def){
-      SynthTestViewController *stVC = [[SynthTestViewController alloc] initWithSynthDemoDef:def];
+      UIViewController *stVC = def.shouldAutoGenUI ? [[SynthAutoUIViewController alloc] initWithSynthDemoDef:def] : [[SynthTestViewController alloc] initWithSynthDemoDef:def];
       [self.navigationController pushViewController:stVC animated:YES];
     }
   }

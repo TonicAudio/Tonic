@@ -58,16 +58,16 @@ namespace Tonic {
       ControlGeneratorOutput  lastOutput_;
       unsigned long           lastFrameIndex_;
       
-      pthread_mutex_t         genMutex_;
+      TONIC_MUTEX_T           genMutex_;
 
     };
     
     inline void ControlGenerator_::lockMutex(){
-      pthread_mutex_lock(&genMutex_);
+      TONIC_MUTEX_LOCK(&genMutex_);
     }
     
     inline void ControlGenerator_::unlockMutex(){
-      pthread_mutex_unlock(&genMutex_);
+      TONIC_MUTEX_UNLOCK(&genMutex_);
     }
 
   }
@@ -132,15 +132,15 @@ namespace Tonic {
 
 #define createControlGeneratorSetters(generatorClassName, methodNameInGenerator, methodNameInGenerator_)\
 \
-generatorClassName& methodNameInGenerator(float arg){                                 \
-return methodNameInGenerator( ControlValue(arg) );                                  \
-}                                                                                     \
+generatorClassName& methodNameInGenerator(float arg){                              \
+return methodNameInGenerator( ControlValue(arg) );                                 \
+}                                                                                  \
 \
-generatorClassName& methodNameInGenerator(ControlGenerator arg){                      \
-gen()->lockMutex();            \
-gen()->methodNameInGenerator_(arg);                                                   \
-gen()->unlockMutex();            \
-return static_cast<generatorClassName&>(*this);                                     \
+generatorClassName& methodNameInGenerator(ControlGenerator arg){                   \
+this->gen()->lockMutex();            \
+this->gen()->methodNameInGenerator_(arg);                                          \
+this->gen()->unlockMutex();            \
+return static_cast<generatorClassName&>(*this);                                    \
 }
 
 

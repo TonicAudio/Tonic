@@ -26,14 +26,13 @@ namespace Tonic {
       Generator delayTimeGen_;
       TonicFrames delayTimeFrames_;
       
-      Generator mixGen_;
-      TonicFrames mixFrames_;
-      
       Generator fbkGen_;
       TonicFrames fbkFrames_;
 
       DelayLine delayLine_;
-            
+      
+      void computeSynthesisBlock( const SynthesisContext_ &context );
+      
     public:
       
       BasicDelay_();
@@ -44,29 +43,23 @@ namespace Tonic {
       
       void initialize(float delayTime, float maxDelayTime);
       
-      void setDelayTimeGen( Generator & gen ) { delayTimeGen_ = gen; };
-      
-      void setMixGen( Generator & gen ) { mixGen_ = gen; };
-      
-      void setFeedbackGen( Generator & gen ) { fbkGen_ = gen; };
-      
-      void computeSynthesisBlock( const SynthesisContext_ &context );
-      
+      void setDelayTimeGen( Generator gen ) { delayTimeGen_ = gen; };
+            
+      void setFeedbackGen( Generator gen ) { fbkGen_ = gen; };
+            
     };
     
     inline void BasicDelay_::computeSynthesisBlock(const SynthesisContext_ &context){
       
       delayTimeGen_.tick(delayTimeFrames_, context);
-      mixGen_.tick(mixFrames_, context);
       fbkGen_.tick(fbkFrames_, context);
       
       // input->output always has same channel layout
       unsigned int nChannels = isStereoInput() ? 2 : 1;
       
-      TonicFloat outSamp, mix, fbk;
+      TonicFloat fbk, outSamp;
       TonicFloat *dryptr = &dryFrames_[0];
-      TonicFloat *outptr = &synthesisBlock_[0];
-      TonicFloat *mptr = &mixFrames_[0];
+      TonicFloat *outptr = &outputFrames_[0];
       TonicFloat *fbkptr = &fbkFrames_[0];
       TonicFloat *delptr = &delayTimeFrames_[0];
       
@@ -74,15 +67,15 @@ namespace Tonic {
         
         // Don't clamp feeback - be careful! Negative feedback could be interesting.
         fbk = *fbkptr++;
-        mix = clamp(*mptr++, 0.0f, 1.0f);
         
         for (unsigned int c=0; c<nChannels; c++){
-          outSamp = delayLine_.tickOut(c);
-          *outptr++ = (*dryptr * (1.0f - mix)) + (outSamp * mix);
+          outSamp = delayLine_.tickOut(*delptr, c);
           delayLine_.tickIn(*dryptr++ + outSamp * fbk, c);
+          *outptr++ = outSamp;
         }
         
-        delayLine_.advance(*delptr++);
+        delptr++;
+        delayLine_.advance();
       }
     }
     
@@ -100,7 +93,6 @@ namespace Tonic {
     //! Warning: Feedback input is NOT clamped! Beware of feedback values greater than 1 !!!
     createGeneratorSetters(BasicDelay, feedback, setFeedbackGen);
 
-    createGeneratorSetters(BasicDelay, mix, setMixGen);
   };
 }
 

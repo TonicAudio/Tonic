@@ -13,9 +13,9 @@
 #define __Tonic__Synth__
 
 #include <map>
-#include <float.h>
-#include "Tonic.h"
 #include "BufferFiller.h"
+#include "ControlParameter.h"
+#include "CompressorLimiter.h"
 
 namespace Tonic{
   
@@ -23,43 +23,48 @@ namespace Tonic{
     
   public:
     
-    typedef enum{
-      
-      SynthParameterTypeContinuous = 0,
-        
-//      TODO: other types
-//      SynthParameterTypeToggle
-//      SynthParameterTypeMomentary,
-//      SynthParameterTypeTrigger
-      
-    } SynthParameterType;
-    
-    
-    struct SynthParameter{
-      string              name;
-      ControlValue        value;
-      SynthParameterType  type;
-      float               min;
-      float               max;
-      
-      SynthParameter();
-    };
-    
     Synth();
+    ~Synth();
     
-    // It's quite conceivable that we'll want to move the messaging stuff up into Source
-    ControlValue  & addParameter(string name, float value=0, float min=-FLT_MAX, float max=FLT_MAX);
-    ControlValue  & addParameter(string name, SynthParameterType type, float value=0, float min=-FLT_MAX, float max=FLT_MAX);
+    //! Set the output gen that produces audio for the Synth
+    void  setOutputGen(Generator gen);
     
-    void              setParameter(string name, float value=1);
+    //! Returns a reference to outputGen
+    const Generator & getOutputGenerator() { return outputGen; };
     
-    vector<SynthParameter> getParameters();
+    //! Set whether synth uses dynamic limiter to prevent clipping/wrapping. Defaults to true.
+    void setLimitOutput(bool shouldLimit) { limitOutput_ = shouldLimit; };
+    
+    //! Add a ControlParameter with name "name"
+    ControlParameter & addParameter(string name, TonicFloat initialValue = 0.f);
+    
+    void                      setParameter(string name, float value=1);
+    vector<ControlParameter>  getParameters();
+    
+    void tick( TonicFrames& frames, const Tonic_::SynthesisContext_ & context );
     
   protected:
-
-    std::map<string, SynthParameter> parameters;
+        
+    Generator     outputGen;
+    TONIC_MUTEX_T outputGenMutex_;
     
+    Limiter limiter_;
+    bool limitOutput_;
+    
+    std::map<string, ControlParameter> parameters_;
+    std::vector<string> orderedParameterNames_;
+        
   };
+  
+  inline void Synth::tick(Tonic::TonicFrames &frames, const Tonic_::SynthesisContext_ &context){
+    TONIC_MUTEX_LOCK(&outputGenMutex_);
+    outputGen.tick(frames, context);
+    TONIC_MUTEX_UNLOCK(&outputGenMutex_);
+
+    if (limitOutput_){
+      limiter_.tickThrough(frames, context);
+    }
+  }
   
   // ------------------------------
   //

@@ -61,13 +61,13 @@ namespace Tonic {
       ADSRState state;
       void switchState(ADSRState newState);
       
+      void computeSynthesisBlock( const SynthesisContext_ &context );
+      
     public:
       
       ADSR_();
       ~ADSR_();
-      
-      void computeSynthesisBlock( const SynthesisContext_ &context );
-      
+            
       void setTrigger(ControlGenerator trig){mTrigger = trig;}
       void setAttack(ControlGenerator gen){attack = gen;}
       void setDecay(ControlGenerator gen){decay = gen;}
@@ -100,7 +100,7 @@ namespace Tonic {
       bDoesSustain = (bool)doesSustain.tick(context).value;
       bIsLegato = (bool)isLegato.tick(context).value;
       
-      TonicFloat * fdata = &synthesisBlock_[0];
+      TonicFloat * fdata = &outputFrames_[0];
       
       if(triggerOutput.status == ControlGeneratorStatusHasChanged){
         
@@ -147,7 +147,7 @@ namespace Tonic {
 
                 // one pole filter
                 for (unsigned long i=0; i<remainder; i++){
-                  onePoleTick(targetValue, lastValue, pole);
+                  onePoleLPFTick(targetValue, lastValue, pole);
                   *fdata++ = lastValue;
                 }
                 
@@ -194,7 +194,7 @@ namespace Tonic {
                 
                 // one pole filter
                 for (int i=0; i<samplesRemaining; i++){
-                  onePoleTick(targetValue, lastValue, pole);
+                  onePoleLPFTick(targetValue, lastValue, pole);
                   *fdata++ = lastValue;
                 }
                 

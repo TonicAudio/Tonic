@@ -19,17 +19,19 @@ namespace Tonic{
     ControlGenerator_::ControlGenerator_() :
       lastFrameIndex_(0)
     {
-      pthread_mutex_init(&genMutex_, NULL);
+      TONIC_MUTEX_INIT(&genMutex_);
     }
 
     ControlGenerator_::~ControlGenerator_(){
-      pthread_mutex_destroy(&genMutex_);
+      TONIC_MUTEX_DESTROY(&genMutex_);
     }
 
     ControlGeneratorOutput ControlGenerator_::tick(const SynthesisContext_ & context){
       if (lastFrameIndex_ == 0 || lastFrameIndex_ != context.elapsedFrames){
         lastFrameIndex_ = context.elapsedFrames;
+        lockMutex();
         computeOutput(context);
+        unlockMutex();
       }
       
       #ifdef TONIC_DEBUG

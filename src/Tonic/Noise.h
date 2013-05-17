@@ -20,15 +20,15 @@ namespace Tonic {
     
     class Noise_ : public Generator_{
       
-    public:
+    protected:
       
       void computeSynthesisBlock( const SynthesisContext_ & context );
       
     };
     
     inline void Noise_::computeSynthesisBlock( const SynthesisContext_ & context ){
-      TonicFloat* fdata = &synthesisBlock_[0];
-      for (unsigned int i=0; i<synthesisBlock_.size(); i++){
+      TonicFloat* fdata = &outputFrames_[0];
+      for (unsigned int i=0; i<outputFrames_.size(); i++){
         *fdata++ = randomSample();
       }
     }
@@ -42,12 +42,6 @@ namespace Tonic {
     
     class PinkNoise_ : public Generator_{
       
-    public:
-      
-      PinkNoise_();
-      
-      void computeSynthesisBlock( const SynthesisContext_ & context);
-      
     private:
       
       unsigned long countTrailingZeros(unsigned long n);
@@ -56,6 +50,12 @@ namespace Tonic {
       TonicFloat    pinkBins_[kNumPinkNoiseBins];
       unsigned long pinkCount_;
       
+      void computeSynthesisBlock( const SynthesisContext_ & context);
+      
+    public:
+      
+      PinkNoise_();      
+
     };
     
     inline void PinkNoise_::computeSynthesisBlock( const SynthesisContext_ & context)
@@ -64,7 +64,7 @@ namespace Tonic {
       TonicFloat binval, prevbinval;
       unsigned long binidx;
       
-      TonicFloat* outptr = &synthesisBlock_[0];
+      TonicFloat* outptr = &outputFrames_[0];
       
       for (unsigned int i=0; i<kSynthesisBlockSize; i++){
         

@@ -14,10 +14,6 @@ namespace Tonic { namespace Tonic_{
     workSpace.resize(kSynthesisBlockSize, 1, 0);
   }
   
-  Subtractor_::~Subtractor_(){
-    
-  }
-  
 } // Namespace Tonic_
   
   

@@ -51,42 +51,125 @@ namespace Tonic {
       Generator Q_;
       ControlGenerator bypass_;
       
+      bool bNormalizeGain_;
+      
+      void computeSynthesisBlock( const SynthesisContext_ & context );
+      
+      // subclasses override to compute new coefficients and apply filter
+      virtual void applyFilter( TonicFloat cutoff, TonicFloat Q,  const SynthesisContext_ & context ) = 0;
+      
     public:
       
       Filter_();
       
       // Overridden so output channel layout follows input channel layout
-      void setInput( Generator input );
-      inline void setCutoff( Generator cutoff ){ cutoff_ = cutoff; };
-      inline void setQ( Generator Q ){ Q_ = Q; }
-      inline void setBypass( ControlGenerator bypass ){ bypass_ = bypass; };
+      virtual void setInput( Generator input );
       
-      // subclasses override to compute new coefficients and apply filter to passed-in frames
-      virtual void applyFilter( TonicFloat cutoff, TonicFloat Q, TonicFrames & frames, const SynthesisContext_ & context ) = 0;
-      
-      inline void computeSynthesisBlock( const SynthesisContext_ & context ){
-          
-        TonicFloat cCutoff;
-        TonicFloat cQ;
-                
-        // get cutoff and Q inputs
-        // For now only using first frame of output. Setting coefficients each frame is very inefficient.
-        // Updates every 64-samples is typically fast enough to avoid artifacts when sweeping filters.
-        
-        cutoff_.tick(workspace_, context);
-        cCutoff = clamp(workspace_(0,0), 20, sampleRate()/2); // clamp to reasonable range
-        
-        Q_.tick(workspace_, context);
-        cQ = max(workspace_(0,0), 0.7071); // clamp to reasonable range
-                
-        applyFilter(cCutoff, cQ, dryFrames_, context);
-        
-        // copy to block
-        synthesisBlock_.copy(dryFrames_);
+      void setNormalizesGain( bool norm ) { bNormalizeGain_ = norm; };
+      void setCutoff( Generator cutoff ){ cutoff_ = cutoff; };
+      void setQ( Generator Q ){ Q_ = Q; }
+      void setBypass( ControlGenerator bypass ){ bypass_ = bypass; };
 
+            
+    };
+    
+    inline void Filter_::computeSynthesisBlock( const SynthesisContext_ & context ){
+      
+      TonicFloat cCutoff;
+      TonicFloat cQ;
+      
+      // get cutoff and Q inputs
+      // For now only using first frame of output. Setting coefficients each frame is very inefficient.
+      // Updating cutoff every 64-samples is typically fast enough to avoid audible artifacts when sweeping filters.
+      
+      cutoff_.tick(workspace_, context);
+      cCutoff = clamp(workspace_(0,0), 20, sampleRate()/2); // clamp to reasonable range
+      
+      Q_.tick(workspace_, context);
+      cQ = max(workspace_(0,0), 0.7071); // clamp to reasonable range
+      
+      applyFilter(cCutoff, cQ, context);
+      
+    }
+    
+    // ===============================
+    //            LPF 6
+    // ===============================
+    
+    //! One-pole lowpass filter. Q is undefined for this filter
+    class LPF6_ : public Filter_ {
+      
+    private:
+      
+      TonicFloat lastOut_[2];
+      
+    protected:
+      inline void applyFilter( TonicFloat cutoff, TonicFloat Q, const SynthesisContext_ & context )
+      {
+        
+        TonicFloat *inptr = &dryFrames_[0];
+        TonicFloat *outptr = &outputFrames_[0];
+        TonicFloat coef = cutoffToOnePoleCoef(cutoff);
+        TonicFloat norm = bNormalizeGain_ ? 1.0f - coef : 1.0f;
+        unsigned int nChannels = dryFrames_.channels();
+        
+        for (unsigned int i=0; i<kSynthesisBlockSize; i++){
+          for (unsigned int c=0; c<nChannels; c++){
+            lastOut_[c] = (norm * (*inptr++)) + (coef * lastOut_[c]);
+            *outptr++ = lastOut_[c];
+          }
+        }
+      }
+      
+    public:
+      
+      LPF6_(){
+        lastOut_[0] = 0;
+        lastOut_[1] = 0;
       }
       
     };
+    
+    // ===============================
+    //            HPF 6
+    // ===============================
+    
+    //! One-pole highpass filter. Q is undefined for this filter
+    class HPF6_ : public Filter_ {
+      
+    private:
+      
+      TonicFloat lastOut_[2];
+      
+    protected:
+      
+      inline void applyFilter( TonicFloat cutoff, TonicFloat Q, const SynthesisContext_ & context )
+      {
+        
+        TonicFloat *inptr = &dryFrames_[0];
+        TonicFloat *outptr = &outputFrames_[0];
+        TonicFloat coef = 1.0f - cutoffToOnePoleCoef(cutoff);
+        TonicFloat norm = bNormalizeGain_ ? 1.0f - coef : 1.0f;
+        unsigned int nChannels = dryFrames_.channels();
+        
+        for (unsigned int i=0; i<kSynthesisBlockSize; i++){
+          for (unsigned int c=0; c<nChannels; c++){
+            lastOut_[c] = (norm * (*inptr++)) - (coef * lastOut_[c]);
+            *outptr++ = lastOut_[c];
+          }
+        }
+
+      }
+      
+    public:
+      
+      HPF6_(){
+        lastOut_[0] = 0;
+        lastOut_[1] = 0;
+      }
+
+    };
+    
     
     // ===============================
     //            LPF 12
@@ -95,22 +178,30 @@ namespace Tonic {
     //! Butterworth 2-pole LPF
     class LPF12_ : public Filter_ {
 
-    protected:
+    private:
       
       Biquad biquad_;
       
-    public:
+    protected:
       
-      inline void applyFilter( TonicFloat cutoff, TonicFloat Q, TonicFrames & frames, const SynthesisContext_ & context ){
-          // set coefficients
-          TonicFloat newCoef[5];
-          bltCoef(0, 0, 1.0f/Q, 1.0f/Q, 1, cutoff, newCoef);
-          biquad_.setCoefficients(newCoef);
-
-          // compute
-          biquad_.filter(frames);
+      inline void applyFilter( TonicFloat cutoff, TonicFloat Q, const SynthesisContext_ & context ){
+        // set coefficients
+        TonicFloat newCoef[5];
+        bltCoef(0, 0, bNormalizeGain_ ? 1.0f/Q : 1.0f, 1.0f/Q, 1, cutoff, newCoef);
+        biquad_.setCoefficients(newCoef);
+        
+        // compute
+        biquad_.filter(dryFrames_, outputFrames_);
       }
       
+    public:
+      
+      void setIsStereoInput( bool isStereoInput )
+      {
+        Filter_::setIsStereoInput(isStereoInput);
+        biquad_.setIsStereo(isStereoInput);
+      }
+
     };
     
     // ===============================
@@ -120,29 +211,38 @@ namespace Tonic {
     //! Butterworth 4-pole LPF
     class LPF24_ : public Filter_ {
       
+    private:
+      
+      Biquad biquads_[2];
+      
     protected:
       
-      Biquad biquad1_;
-      Biquad biquad2_;
-      
-    public:
-      
-      inline void applyFilter( TonicFloat cutoff, TonicFloat Q, TonicFrames & frames, const SynthesisContext_ & context ){
+      inline void applyFilter( TonicFloat cutoff, TonicFloat Q, const SynthesisContext_ & context ){
         // set coefficients
         TonicFloat newCoef[5];
         
         // stage 1
-        bltCoef(0, 0, 1.0f/Q, 0.5412f/Q, 1, cutoff, newCoef);
-        biquad1_.setCoefficients(newCoef);
+        bltCoef(0, 0, bNormalizeGain_ ? 1.0f/Q : 1.0f, 0.5412f/Q, 1, cutoff, newCoef);
+        biquads_[0].setCoefficients(newCoef);
         
         // stage 2
-        bltCoef(0, 0, 1.0f/Q, 1.3066f/Q, 1, cutoff, newCoef);
-        biquad2_.setCoefficients(newCoef);
+        bltCoef(0, 0, bNormalizeGain_ ? 1.0f/Q : 1.0f, 1.3066f/Q, 1, cutoff, newCoef);
+        biquads_[1].setCoefficients(newCoef);
         
         // compute
-        biquad1_.filter(frames);
-        biquad2_.filter(frames);
+        biquads_[0].filter(dryFrames_, outputFrames_);
+        biquads_[1].filter(outputFrames_, outputFrames_);
       }
+      
+    public:
+      
+      void setIsStereoInput( bool isStereoInput )
+      {
+        Filter_::setIsStereoInput(isStereoInput);
+        biquads_[0].setIsStereo(isStereoInput);
+        biquads_[1].setIsStereo(isStereoInput);
+      }
+
       
     };
     
@@ -153,21 +253,29 @@ namespace Tonic {
     //! Butterworth 2-pole HPF
     class HPF12_ : public Filter_ {
       
-    protected:
+    private:
       
       Biquad biquad_;
+   
+    protected:
       
-    public:
-      
-      inline void applyFilter( TonicFloat cutoff, TonicFloat Q, TonicFrames & frames, const SynthesisContext_ & context ){
+      inline void applyFilter( TonicFloat cutoff, TonicFloat Q, const SynthesisContext_ & context ){
         
         // set coefficients
         TonicFloat newCoef[5];
-        bltCoef(1.0f/Q, 0, 0, 1.0f/Q, 1, cutoff, newCoef);
+        bltCoef(bNormalizeGain_ ? 1.0f/Q : 1.0f, 0, 0, 1.0f/Q, 1, cutoff, newCoef);
         biquad_.setCoefficients(newCoef);
         
         // compute
-        biquad_.filter(frames);
+        biquad_.filter(dryFrames_, outputFrames_);
+      }
+      
+    public:
+      
+      void setIsStereoInput( bool isStereoInput )
+      {
+        Filter_::setIsStereoInput(isStereoInput);
+        biquad_.setIsStereo(isStereoInput);
       }
       
     };
@@ -179,28 +287,36 @@ namespace Tonic {
     //! Butterworth 4-pole HPF
     class HPF24_ : public Filter_ {
       
+    private:
+      
+      Biquad biquads_[2];
+      
     protected:
       
-      Biquad biquad1_;
-      Biquad biquad2_;
-      
-    public:
-      
-      inline void applyFilter( TonicFloat cutoff, TonicFloat Q, TonicFrames & frames, const SynthesisContext_ & context ){
+      inline void applyFilter( TonicFloat cutoff, TonicFloat Q, const SynthesisContext_ & context ){
         // set coefficients
         TonicFloat newCoef[5];
         
         // stage 1
-        bltCoef(1.0f/Q, 0, 0, 0.5412f/Q, 1, cutoff, newCoef);
-        biquad1_.setCoefficients(newCoef);
+        bltCoef(bNormalizeGain_ ? 1.0f/Q : 1.0f, 0, 0, 0.5412f/Q, 1, cutoff, newCoef);
+        biquads_[0].setCoefficients(newCoef);
         
         // stage 2
-        bltCoef(1.0f/Q, 0, 0, 1.3066f/Q, 1, cutoff, newCoef);
-        biquad2_.setCoefficients(newCoef);
+        bltCoef(bNormalizeGain_ ? 1.0f/Q : 1.0f, 0, 0, 1.3066f/Q, 1, cutoff, newCoef);
+        biquads_[1].setCoefficients(newCoef);
         
         // compute
-        biquad1_.filter(frames);
-        biquad2_.filter(frames);
+        biquads_[0].filter(dryFrames_, outputFrames_);
+        biquads_[1].filter(outputFrames_, outputFrames_);
+      }
+      
+    public:
+      
+      void setIsStereoInput( bool isStereoInput )
+      {
+        Filter_::setIsStereoInput(isStereoInput);
+        biquads_[0].setIsStereo(isStereoInput);
+        biquads_[1].setIsStereo(isStereoInput);
       }
       
     };
@@ -212,21 +328,30 @@ namespace Tonic {
     //! Butterworth 2-pole BPF, constant 0dB peak
     class BPF12_ : public Filter_ {
       
-    protected:
+    private:
       
       Biquad biquad_;
       
-    public:
+    protected:
       
-      inline void applyFilter( TonicFloat cutoff, TonicFloat Q, TonicFrames & frames, const SynthesisContext_ & context ){
+      
+      inline void applyFilter( TonicFloat cutoff, TonicFloat Q, const SynthesisContext_ & context ){
         
         // set coefficients
         TonicFloat newCoef[5];
-        bltCoef(0, 1.0f/Q, 0, 1.0f/Q, 1, cutoff, newCoef);
+        bltCoef(0, bNormalizeGain_ ? 1.0f/Q : 1.0f, 0, 1.0f/Q, 1, cutoff, newCoef);
         biquad_.setCoefficients(newCoef);
         
         // compute
-        biquad_.filter(frames);
+        biquad_.filter(dryFrames_, outputFrames_);
+      }
+      
+    public:
+      
+      virtual void setIsStereoInput( bool isStereoInput )
+      {
+        Filter_::setIsStereoInput(isStereoInput);
+        biquad_.setIsStereo(isStereoInput);
       }
       
     };
@@ -238,28 +363,36 @@ namespace Tonic {
     //! Butterworth 4-pole BPF
     class BPF24_ : public Filter_ {
       
+    private:
+      
+      Biquad biquads_[2];
+      
     protected:
       
-      Biquad biquad1_;
-      Biquad biquad2_;
-      
-    public:
-      
-      inline void applyFilter( TonicFloat cutoff, TonicFloat Q, TonicFrames & frames, const SynthesisContext_ & context ){
+      inline void applyFilter( TonicFloat cutoff, TonicFloat Q, const SynthesisContext_ & context ){
         // set coefficients
         TonicFloat newCoef[5];
         
         // stage 1
-        bltCoef(0, 1.0f/Q, 0, 0.5412f/Q, 1, cutoff, newCoef);
-        biquad1_.setCoefficients(newCoef);
+        bltCoef(0, bNormalizeGain_ ? 1.0f/Q : 1.0f, 0, 0.5412f/Q, 1, cutoff, newCoef);
+        biquads_[0].setCoefficients(newCoef);
         
         // stage 2
-        bltCoef(0, 1.0f/Q, 0, 1.3066f/Q, 1, cutoff, newCoef);
-        biquad2_.setCoefficients(newCoef);
+        bltCoef(0, bNormalizeGain_ ? 1.0f/Q : 1.0f, 0, 1.3066f/Q, 1, cutoff, newCoef);
+        biquads_[1].setCoefficients(newCoef);
         
         // compute
-        biquad1_.filter(frames);
-        biquad2_.filter(frames);
+        biquads_[0].filter(dryFrames_, outputFrames_);
+        biquads_[1].filter(outputFrames_, outputFrames_);
+      }
+      
+    public:
+      
+      void setIsStereoInput( bool isStereoInput )
+      {
+        Filter_::setIsStereoInput(isStereoInput);
+        biquads_[0].setIsStereo(isStereoInput);
+        biquads_[1].setIsStereo(isStereoInput);
       }
       
     };
@@ -273,12 +406,21 @@ namespace Tonic {
     
     createGeneratorSetters(FilterType, cutoff, setCutoff);
     createGeneratorSetters(FilterType, Q, setQ);
+    FilterType & normalizesGain(bool norm){
+      this->gen()->setNormalizesGain(norm);
+      return static_cast<FilterType&>(*this);
+    }
 
   };
   
 
   // ------------------- Smart Pointers -----------------------
   
+  // LPF 6
+  class LPF6 : public TemplatedFilter<LPF6, Tonic_::LPF6_>{};
+  
+  // HPF 6
+  class HPF6 : public TemplatedFilter<HPF6, Tonic_::HPF6_>{};
 
   // LPF 12
   class LPF12 : public TemplatedFilter<LPF12, Tonic_::LPF12_>{};

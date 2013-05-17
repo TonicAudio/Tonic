@@ -22,13 +22,13 @@ namespace Tonic {
     
     class ControlConditioner_ : public ControlGenerator_{
       
+    protected:
+      
+      ControlGenerator input_;
+      
     public:
       
-      void in( ControlGenerator & input );
-      
-    protected:
-    
-      ControlGenerator input_;
+      void in( ControlGenerator input );
       
     };
     
