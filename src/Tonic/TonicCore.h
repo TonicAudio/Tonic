@@ -37,10 +37,6 @@
 
 #if (defined (__APPLE__) || defined (__linux__))
 
-  #import <Accelerate/Accelerate.h>
-  #define USE_APPLE_ACCELERATE
-  #define ARC4RAND_MAX 0x100000000
-
   #define TONIC_MUTEX_T pthread_mutex_t
   #define TONIC_MUTEX_INIT(x) pthread_mutex_init(x, NULL)
   #define TONIC_MUTEX_DESTROY(x) pthread_mutex_destroy(x)
