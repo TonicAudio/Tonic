@@ -156,6 +156,18 @@
     <ClInclude Include="..\..\src\Tonic\TonicFrames.h">
       <Filter>src\Tonic</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\src\Tonic\CombFilter.h">
+      <Filter>src\Tonic</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\Tonic\ControlDelay.h">
+      <Filter>src\Tonic</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\Tonic\ControlParameter.h">
+      <Filter>src\Tonic</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\Tonic\Reverb.h">
+      <Filter>src\Tonic</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\src\Tonic\Adder.cpp">
@@ -291,6 +303,24 @@
       <Filter>src\Tonic</Filter>
     </ClCompile>
     <ClCompile Include="..\..\src\Tonic\TonicFrames.cpp">
+      <Filter>src\Tonic</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\Tonic\CombFilter.cpp">
+      <Filter>src\Tonic</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\Tonic\ControlDelay.cpp">
+      <Filter>src\Tonic</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\Tonic\ControlParameter.cpp">
+      <Filter>src\Tonic</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\Tonic\Effect.cpp">
+      <Filter>src\Tonic</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\Tonic\FilterUtils.cpp">
+      <Filter>src\Tonic</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\Tonic\Reverb.cpp">
       <Filter>src\Tonic</Filter>
     </ClCompile>
   </ItemGroup>

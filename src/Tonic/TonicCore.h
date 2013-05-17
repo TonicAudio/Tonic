@@ -50,7 +50,7 @@
   #define WIN32_LEAN_AND_MEAN
   #include <Windows.h>
   
-  // Clear these macros to avoid interfering with ControlGenerator::min and ::max
+  // Clear these macros to avoid interfering with ControlParameter::min and ::max
   #undef min
   #undef max
 
