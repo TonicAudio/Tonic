@@ -298,7 +298,7 @@ using namespace Tonic;
 
 -(void)test110SubtractorTest{
   Generator gen = FixedValue(2) - FixedValue(1);
-  TestBufferFiller testFiller;
+  Synth testFiller;
   testFiller.setOutputGen(gen);
   testFiller.fillBufferOfFloats(stereoOutBuffer, kTestOutputBlockSize, 1);
   STAssertEquals((float)1, *stereoOutBuffer, @"FixedValue(2) - FixedValue(1) failed");
@@ -439,6 +439,15 @@ using namespace Tonic;
   
 }
 
+-(void)testSmoothedChangedStatus{
+  ControlValue val(100);
+  STAssertEquals(val.tick(testContext).status, ControlGeneratorStatusHasNotChanged, @"Inital status of Control Gen should be 'changed'");
+  
+  ControlValue val2(100);
+  val2.smoothed();
+  STAssertEquals(val2.tick(testContext).status, ControlGeneratorStatusHasNotChanged, @"Inital status of Control Gen should be 'changed'");
+  
+}
 
 #pragma mark - Buffer filler tests
 
@@ -609,7 +618,7 @@ using namespace Tonic;
   ControlGenerator gen = ControlValue(10) / right;
   Tonic_::SynthesisContext_ context;
   gen.tick(context);
-  right.setValue(0);
+  right.value(0);
   
   STAssertEquals(gen.tick(context).value, (float)2, @"Divide by zero should return the last valid value.");
 }

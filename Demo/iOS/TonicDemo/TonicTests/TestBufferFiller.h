@@ -15,11 +15,11 @@ using namespace Tonic;
 
 // BufferFiller with publicly settable output generator for testing
 
-class TestBufferFiller : public BufferFiller
+class TestBufferFiller : public Synth
 {
   
 public:
-  void setOutputGen(Generator gen) { outputGen = gen; };
+
 };
 
 #endif /* defined(__TonicDemo__TestBufferFiller__) */
