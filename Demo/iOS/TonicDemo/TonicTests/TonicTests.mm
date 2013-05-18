@@ -439,13 +439,13 @@ using namespace Tonic;
   
 }
 
--(void)testSmoothedChangedStatus{
+-(void)test206SmoothedChangedStatus{
   ControlValue val(100);
-  STAssertEquals(val.tick(testContext).status, ControlGeneratorStatusHasNotChanged, @"Inital status of Control Gen should be 'changed'");
+  STAssertEquals(val.tick(testContext).status, ControlGeneratorStatusHasChanged, @"Inital status of Control Gen should be 'changed'");
   
   ControlValue val2(100);
   val2.smoothed();
-  STAssertEquals(val2.tick(testContext).status, ControlGeneratorStatusHasNotChanged, @"Inital status of Control Gen should be 'changed'");
+  STAssertEquals(val2.tick(testContext).status, ControlGeneratorStatusHasChanged, @"Inital status of Control Gen should be 'changed'");
   
 }
 
