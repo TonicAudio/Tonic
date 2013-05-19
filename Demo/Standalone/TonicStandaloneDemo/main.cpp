@@ -45,34 +45,10 @@ int main(int argc, const char * argv[])
     
     synth = new Synth();
     
-    ControlMetro metro = ControlMetro().bpm(100);
-    ControlGenerator freq = ControlRandom().trigger(metro).min(0).max(1);
+    ControlGenerator freq = ControlValue(300);
+    Generator freqSmoothed = freq.smoothed();
     
-    Generator tone = RectWave().freq(
-                                     freq * 0.25 + 100
-                                     + 400
-                                     ) * SineWave().freq(50);
-    
-    ADSR env = ADSR()
-    .attack(0.01)
-    .decay( 0.4 )
-    .sustain(0)
-    .release(0)
-    .doesSustain(false)
-    .trigger(metro);
-    
-    StereoDelay delay = StereoDelay(3.0f,3.0f)
-    .delayTimeLeft( 0.5 + SineWave().freq(0.2) * 0.01)
-    .delayTimeRight(0.55 + SineWave().freq(0.23) * 0.01)
-    .feedback(0.3)
-    .dryLevel(0.8)
-    .wetLevel(0.2);
-    
-    Generator filterFreq = (SineWave().freq(0.01) + 1) * 200 + 225;
-    
-    LPF24 filter = LPF24().Q(2).cutoff( filterFreq );
-    
-    Generator output = (( tone * env ) >> filter >> delay) * 0.3;
+    Generator output = RectWave().freq(freq);
     
     synth->setOutputGen(output);
     
