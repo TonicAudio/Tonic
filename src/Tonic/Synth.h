@@ -49,6 +49,10 @@ namespace Tonic{
       
       void                      setParameter(string name, float value);
       vector<ControlParameter>  getParameters();
+      
+      void forceNewOutput(){
+        synthContext_.forceNewOutput = true;
+      }
             
     };
     
@@ -92,14 +96,22 @@ namespace Tonic{
       return gen()->addParameter(name, initialValue);
     }
     
+    //! Set the value of a control parameter on this synth
     void setParameter(string name, float value=1)
     {
       gen()->setParameter(name, value);
     }
     
+    //! Get all of the control parameters registered for this synth
     vector<ControlParameter>  getParameters()
     {
       return gen()->getParameters();
+    }
+    
+    void forceNewOutput(){
+      gen()->lockMutex();
+      gen()->forceNewOutput();
+      gen()->unlockMutex();
     }
             
   };
