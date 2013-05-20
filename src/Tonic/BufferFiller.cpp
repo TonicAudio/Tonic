@@ -14,7 +14,12 @@
 namespace Tonic {
   
   BufferFiller::BufferFiller() : bufferReadPosition_(0){
+    TONIC_MUTEX_INIT(&mutex_);
     outputFrames_.resize(kSynthesisBlockSize, 2);
+  }
+  
+  BufferFiller::~BufferFiller(){
+    TONIC_MUTEX_DESTROY(&mutex_);
   }
   
 }

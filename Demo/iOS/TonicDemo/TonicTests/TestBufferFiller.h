@@ -22,6 +22,11 @@ public:
   TestBufferFiller(){
       setLimitOutput(false);
   }
+  
+  void forceOutput(){
+    // SHOULD DO THIS IN MUTEX WHEN IMPLEMENTING NOT FOR TESTS
+    synthContext_.forceNewOutput = true;
+  }
 
 };
 

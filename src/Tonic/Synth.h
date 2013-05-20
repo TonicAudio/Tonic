@@ -24,7 +24,6 @@ namespace Tonic{
   public:
     
     Synth();
-    ~Synth();
     
     //! Set the output gen that produces audio for the Synth
     void  setOutputGen(Generator gen);
@@ -46,7 +45,6 @@ namespace Tonic{
   protected:
         
     Generator     outputGen;
-    TONIC_MUTEX_T outputGenMutex_;
     
     Limiter limiter_;
     bool limitOutput_;
@@ -57,9 +55,9 @@ namespace Tonic{
   };
   
   inline void Synth::tick(Tonic::TonicFrames &frames, const Tonic_::SynthesisContext_ &context){
-    TONIC_MUTEX_LOCK(&outputGenMutex_);
+    TONIC_MUTEX_LOCK(&mutex_);
     outputGen.tick(frames, context);
-    TONIC_MUTEX_UNLOCK(&outputGenMutex_);
+    TONIC_MUTEX_UNLOCK(&mutex_);
 
     if (limitOutput_){
       limiter_.tickThrough(frames, context);

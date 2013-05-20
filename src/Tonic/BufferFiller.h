@@ -29,10 +29,15 @@ namespace Tonic{
   private:
     int                         bufferReadPosition_;
     TonicFrames                 outputFrames_;
-    Tonic_::SynthesisContext_   context_;
+    
+  protected:
+    TONIC_MUTEX_T               mutex_;
+    Tonic_::SynthesisContext_   synthContext_;
     
   public:
+    
     BufferFiller();
+    ~BufferFiller();
     
     //! Process a single synthesis vector, output to frames
     /*!
@@ -56,8 +61,8 @@ namespace Tonic{
   };
   
   inline void BufferFiller::tick( TonicFrames& frames ){
-    this->tick(frames, context_);
-    context_.tick();
+    this->tick(frames, synthContext_);
+    synthContext_.tick();
   }
   
   // fill a buffer of floats, assuming the buffer is expecting max/min of 1,-1

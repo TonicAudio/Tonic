@@ -462,6 +462,10 @@ using namespace Tonic;
   val2.smoothed();
   STAssertEquals(val2.tick(testContext).status, ControlGeneratorStatusHasChanged, @"Inital status of Control Gen should be 'changed'");
   
+  // reset and try again
+  testContext.forceNewOutput = true;
+  STAssertEquals(val2.tick(testContext).status, ControlGeneratorStatusHasChanged, @"Inital status of Control Gen should be 'changed'");
+  
 }
 
 -(void)test207ControlAdderAndMultiplier{
@@ -663,6 +667,12 @@ using namespace Tonic;
   testFiller.setOutputGen(gen1);
   testFiller.fillBufferOfFloats(stereoOutBuffer, kTestOutputBlockSize, 2);
   STAssertEquals(*stereoOutBuffer, 6.f, @"Complex combination of control gen and gen failed");
+   
+  // set the force output flag and try it again to ensure it still works
+  testFiller.forceOutput();
+  testFiller.fillBufferOfFloats(stereoOutBuffer, kTestOutputBlockSize, 2);
+  STAssertEquals(*stereoOutBuffer, 6.f, @"Complex combination of control gen and gen failed");
+  
 }
 
 
