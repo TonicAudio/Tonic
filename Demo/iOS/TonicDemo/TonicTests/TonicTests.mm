@@ -634,5 +634,14 @@ using namespace Tonic;
   STAssertEquals(gen.tick(context).value, (float)2, @"Divide by zero should return the last valid value.");
 }
 
+-(void)test404TestCombinationsOfGenAndControlGen{
+
+  TestBufferFiller testFiller;
+  ControlGenerator ctrlGen1 = ControlValue(2);
+  Generator gen1 = ctrlGen1 + FixedValue(2) * ctrlGen1;
+  testFiller.fillBufferOfFloats(stereoOutBuffer, kTestOutputBlockSize, 2);
+  STAssertEquals((float)6, *stereoOutBuffer, @"Complex combination of control gen and gen failed");
+}
+
 
 @end
