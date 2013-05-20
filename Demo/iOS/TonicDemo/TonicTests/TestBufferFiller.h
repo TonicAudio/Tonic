@@ -19,6 +19,9 @@ class TestBufferFiller : public Synth
 {
   
 public:
+  TestBufferFiller(){
+      setLimitOutput(false);
+  }
 
 };
 

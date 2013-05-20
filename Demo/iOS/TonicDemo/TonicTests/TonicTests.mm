@@ -298,7 +298,7 @@ using namespace Tonic;
 
 -(void)test110SubtractorTest{
   Generator gen = FixedValue(2) - FixedValue(1);
-  Synth testFiller;
+  TestBufferFiller testFiller;
   testFiller.setOutputGen(gen);
   testFiller.fillBufferOfFloats(stereoOutBuffer, kTestOutputBlockSize, 1);
   STAssertEquals((float)1, *stereoOutBuffer, @"FixedValue(2) - FixedValue(1) failed");
