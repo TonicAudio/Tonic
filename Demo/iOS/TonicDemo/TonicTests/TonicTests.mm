@@ -304,13 +304,17 @@ using namespace Tonic;
   STAssertEquals((float)1, *stereoOutBuffer, @"FixedValue(2) - FixedValue(1) failed");
 }
 
-// MP to Nick -- is this expected behavior? Limiter is limiting a fixedvalue to zero. I'd expect it to limit it to one.
-// Fine if this is expected. Just trying to track down some weird bugs.
+// For the limiter output to be observable, limiter must be ticked until the output frame index exceeds the limiter
+// lookahead time (default 3ms), otherwise the output will be zero. Lookahead used to reduce distortion.
 -(void)testSynthLimiter{
   TestBufferFiller testFiller;
   testFiller.setLimitOutput(true);
   testFiller.setOutputGen(FixedValue(100));
-  testFiller.fillBufferOfFloats(stereoOutBuffer, kTestOutputBlockSize, 1);
+  
+  // exceed lookahead of limiter (3 ms lookahead ~ 132 samples
+  for (int i=0; i<4; i++)
+    testFiller.fillBufferOfFloats(stereoOutBuffer, kTestOutputBlockSize, 1);
+ 
   STAssertTrue(*stereoOutBuffer != 0, @"Limiter shouldn't limit 100 to zero");
   
 }
