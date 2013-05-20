@@ -57,7 +57,7 @@ using namespace Tonic;
 - (void)verifyFixedOutputEquals:(float)expectedOutput
 {
   for (unsigned int i=0; i<testFrames.size(); i++){
-    STAssertEquals(testFrames[i], expectedOutput, @"Did not produce expected output");
+    STAssertEquals(expectedOutput, testFrames[i], @"Did not produce expected output");
     if (testFrames[i] != expectedOutput) break;
   }
 }
@@ -65,10 +65,10 @@ using namespace Tonic;
 - (void)verifyStereoFixedOutputEqualsLeft:(float)l right:(float)r
 {
   for (unsigned int i=0; i<testFrames.frames(); i++){
-    STAssertEquals(testFrames[2*i], l, @"Left channel not produce expected output on frame %i", i);
+    STAssertEquals(l, testFrames[2*i], @"Left channel not produce expected output on frame %i", i);
     if (testFrames[2*i] != l) break;
     
-    STAssertEquals(testFrames[2*i+1], r, @"Right channel did not produce expected output on frame %i", i);
+    STAssertEquals(r, testFrames[2*i+1], @"Right channel did not produce expected output on frame %i", i);
     if (testFrames[2*i+1] != r) break;
   }
 }
@@ -76,7 +76,7 @@ using namespace Tonic;
 - (void)verifyBufferFillerMonoFixedOutputEquals:(float)expectedOutput
 {
   for (unsigned int i=0; i<kTestOutputBlockSize; i++){
-    STAssertEquals(monoOutBuffer[i], expectedOutput, @"Did not produce expected output");
+    STAssertEquals(expectedOutput, monoOutBuffer[i], @"Did not produce expected output");
     if (monoOutBuffer[i] != expectedOutput) break;
   }
 }
@@ -84,10 +84,10 @@ using namespace Tonic;
 - (void)verifyBufferFillerStereoFixedOutputEqualsLeft:(float)l right:(float)r
 {
   for (unsigned int i=0; i<kTestOutputBlockSize; i++){
-    STAssertEquals(stereoOutBuffer[2*i], l, @"Left channel not produce expected output");
+    STAssertEquals(l, stereoOutBuffer[2*i], @"Left channel not produce expected output");
     if (stereoOutBuffer[2*i] != l) break;
     
-    STAssertEquals(stereoOutBuffer[2*i+1], r, @"Right channel did not produce expected output");
+    STAssertEquals(r, stereoOutBuffer[2*i+1], @"Right channel did not produce expected output");
     if (stereoOutBuffer[2*i+1] != r) break;
   }
 }
@@ -249,7 +249,7 @@ using namespace Tonic;
   
 }
 
-- (void)test1081DivGenControlGenCombos
+- (void)test1082DivGenControlGenCombos
 {
 
   {
@@ -543,7 +543,7 @@ using namespace Tonic;
   Generator gen =  ControlValue(1) + FixedValue(1);
   testFiller.setOutputGen(gen);
   testFiller.fillBufferOfFloats(stereoOutBuffer, kTestOutputBlockSize, 2);
-  STAssertEquals((float)2, *stereoOutBuffer, @"ControlValue(1) + FixedValue(1) failed");
+  STAssertEquals(2.f, *stereoOutBuffer, @"ControlValue(1) + FixedValue(1) failed");
   
   }
   
@@ -553,7 +553,7 @@ using namespace Tonic;
   Generator gen =   FixedValue(1) + ControlValue(1);
   testFiller.setOutputGen(gen);
   testFiller.fillBufferOfFloats(stereoOutBuffer, kTestOutputBlockSize, 2);
-  STAssertEquals((float)2, *stereoOutBuffer, @"FixedValue(1) + ControlValue(1) failed");
+  STAssertEquals(2.f, *stereoOutBuffer, @"FixedValue(1) + ControlValue(1) failed");
   
   }
   
@@ -563,7 +563,7 @@ using namespace Tonic;
     Generator gen =   FixedValue(3) - ControlValue(2);
     testFiller.setOutputGen(gen);
     testFiller.fillBufferOfFloats(stereoOutBuffer, kTestOutputBlockSize, 2);
-    STAssertEquals((float)1, *stereoOutBuffer, @"FixedValue(1) + ControlValue(1) failed");
+    STAssertEquals(1.f, *stereoOutBuffer, @"FixedValue(1) + ControlValue(1) failed");
 
   }
   
@@ -573,7 +573,7 @@ using namespace Tonic;
     Generator gen =   ControlValue(3) - FixedValue(2);
     testFiller.setOutputGen(gen);
     testFiller.fillBufferOfFloats(stereoOutBuffer, kTestOutputBlockSize, 2);
-    STAssertEquals((float)1, *stereoOutBuffer, @"ControlValue(3) - FixedValue(2) failed");
+    STAssertEquals(1.f, *stereoOutBuffer, @"ControlValue(3) - FixedValue(2) failed");
   }
   
   {
@@ -582,7 +582,7 @@ using namespace Tonic;
     Generator gen =   ControlValue(3) * FixedValue(2);
     testFiller.setOutputGen(gen);
     testFiller.fillBufferOfFloats(stereoOutBuffer, kTestOutputBlockSize, 2);
-    STAssertEquals((float)6, *stereoOutBuffer, @"ControlValue(3) * FixedValue(2) failed");
+    STAssertEquals(6.f, *stereoOutBuffer, @"ControlValue(3) * FixedValue(2) failed");
   }
   
   {
@@ -591,7 +591,7 @@ using namespace Tonic;
     Generator gen =  FixedValue(3) * ControlValue(2);
     testFiller.setOutputGen(gen);
     testFiller.fillBufferOfFloats(stereoOutBuffer, kTestOutputBlockSize, 2);
-    STAssertEquals((float)6, *stereoOutBuffer, @" FixedValue(3) * ControlValue(2) failed");
+    STAssertEquals(6.f, *stereoOutBuffer, @" FixedValue(3) * ControlValue(2) failed");
   }
   
 }
@@ -604,7 +604,7 @@ using namespace Tonic;
   Generator gen =  ControlValue(2) - FixedValue(1);
   testFiller.setOutputGen(gen);
   testFiller.fillBufferOfFloats(stereoOutBuffer, kTestOutputBlockSize, 2);
-  STAssertEquals((float)1, *stereoOutBuffer, @"ControlValue(2) - FixedValue(1) failed");
+  STAssertEquals(1.f, *stereoOutBuffer, @"ControlValue(2) - FixedValue(1) failed");
   
   }
   
@@ -614,7 +614,7 @@ using namespace Tonic;
   Generator gen =   FixedValue(2) - ControlValue(1);
   testFiller.setOutputGen(gen);
   testFiller.fillBufferOfFloats(stereoOutBuffer, kTestOutputBlockSize, 2);
-  STAssertEquals((float)1, *stereoOutBuffer, @"FixedValue(1) - ControlValue(1) failed");
+  STAssertEquals(1.f, *stereoOutBuffer, @"FixedValue(1) - ControlValue(1) failed");
   
   }
   
@@ -624,19 +624,19 @@ using namespace Tonic;
   {
     ControlGenerator gen = ControlValue(10) / ControlValue(5);
     Tonic_::SynthesisContext_ context;
-    STAssertEquals(gen.tick(context).value, (float)2, @"ControlValue(10) / ControlValue(5) failed.");
+    STAssertEquals(gen.tick(context).value, 2.f, @"ControlValue(10) / ControlValue(5) failed.");
   }
 
   {
     ControlGenerator gen = 10 / ControlValue(5);
     Tonic_::SynthesisContext_ context;
-    STAssertEquals(gen.tick(context).value, (float)2, @"10 / ControlValue(5) failed.");
+    STAssertEquals(gen.tick(context).value, 2.f, @"10 / ControlValue(5) failed.");
   }
 
   {
     ControlGenerator gen = ControlValue(10) / 5;
     Tonic_::SynthesisContext_ context;
-    STAssertEquals(gen.tick(context).value, (float)2, @"ControlValue(10) / 5 failed.");
+    STAssertEquals(gen.tick(context).value, 2.f, @"ControlValue(10) / 5 failed.");
   }
 
 }
@@ -648,7 +648,7 @@ using namespace Tonic;
   gen.tick(context);
   right.value(0);
   
-  STAssertEquals(gen.tick(context).value, (float)2, @"Divide by zero should return the last valid value.");
+  STAssertEquals(gen.tick(context).value, 2.f, @"Divide by zero should return the last valid value.");
 }
 
 -(void)test404TestCombinationsOfGenAndControlGen{
@@ -657,7 +657,7 @@ using namespace Tonic;
   ControlGenerator ctrlGen1 = ControlValue(2);
   Generator gen1 = ctrlGen1 + FixedValue(2) * ctrlGen1;
   testFiller.fillBufferOfFloats(stereoOutBuffer, kTestOutputBlockSize, 2);
-  STAssertEquals((float)6, *stereoOutBuffer, @"Complex combination of control gen and gen failed");
+  STAssertEquals(*stereoOutBuffer, 6.f, @"Complex combination of control gen and gen failed");
 }
 
 
