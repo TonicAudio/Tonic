@@ -450,6 +450,7 @@ using namespace Tonic;
   
 }
 
+
 -(void)test206SmoothedChangedStatus{
   ControlValue val(100);
   STAssertEquals(val.tick(testContext).status, ControlGeneratorStatusHasChanged, @"Inital status of Control Gen should be 'changed'");
@@ -458,6 +459,13 @@ using namespace Tonic;
   val2.smoothed();
   STAssertEquals(val2.tick(testContext).status, ControlGeneratorStatusHasChanged, @"Inital status of Control Gen should be 'changed'");
   
+}
+
+-(void)test207ControlAdderAndMultiplier{
+  ControlGenerator val1 = ControlValue(2);
+  ControlGenerator val2 = ControlValue(2);
+  ControlGenerator final = val1 + val1 * val2;
+  STAssertEquals(final.tick(testContext).value, 6.0f, @"val1 + val1 * val2 doesn't combine correctly with ControlGenerators");
 }
 
 #pragma mark - Buffer filler tests
