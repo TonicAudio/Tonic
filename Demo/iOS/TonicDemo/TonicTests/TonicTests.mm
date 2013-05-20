@@ -468,6 +468,15 @@ using namespace Tonic;
   STAssertEquals(final.tick(testContext).value, 6.0f, @"val1 + val1 * val2 doesn't combine correctly with ControlGenerators");
 }
 
+
+-(void)testControlValueHasChangedStatus{
+  ControlGenerator val1 = ControlValue(2);
+  
+  STAssertEquals(val1.tick(testContext).status, ControlGeneratorStatusHasChanged, @"Fist tick to ControlGen should be hasChanged");
+  STAssertEquals(val1.tick(testContext).status, ControlGeneratorStatusHasChanged, @"Subsequent ticks (with no context tick) should still report hasChanged.");
+ 
+}
+
 #pragma mark - Buffer filler tests
 
 - (void)test300BufferFillerMonoOutMonoSource

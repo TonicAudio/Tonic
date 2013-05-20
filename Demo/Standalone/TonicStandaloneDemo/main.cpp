@@ -47,12 +47,16 @@ int main(int argc, const char * argv[])
   
     synth->setLimitOutput(false);
   
-    ControlGenerator ctrlGen1 = ControlValue(2);
-    //ControlGenerator ctrlGen
-    Generator gen1 = ctrlGen1 + FixedValue(2) * ctrlGen1;
+//    ControlGenerator ctrlGen1 = ControlValue(2);
+//    Generator gen1 = ctrlGen1 + FixedValue(3) * ctrlGen1;
   
-    
-    synth->setOutputGen(gen1);
+    ControlGenerator val1 = ControlValue(2);
+  ControlGenerator val2 = ControlValue(2);
+  ControlGenerator final = val1 + val1 * val2;
+  Tonic_::SynthesisContext_ context;
+  final.tick(context);
+  
+  //  synth->setOutputGen(FixedValue());
     
     // ---------------------------------------
     
