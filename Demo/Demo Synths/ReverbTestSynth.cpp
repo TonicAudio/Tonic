@@ -51,7 +51,7 @@ public:
       .dryLevel(ControlDbToLinear().in(dry))
       .wetLevel(ControlDbToLinear().in(wet));
         
-    outputGen = ((click + tone) >> reverb) * 0.8f;
+    setOutputGen( ((click + tone) >> reverb) * 0.8f );
   }
   
 };

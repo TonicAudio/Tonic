@@ -64,7 +64,7 @@ public:
       .dryLevel( 1.0f - smoothMix )
       .wetLevel( smoothMix );
     
-    outputGen = (osc >> filt >> delay) * ControlDbToLinear().in(volume).smoothed();
+    setOutputGen((osc >> filt >> delay) * ControlDbToLinear().in(volume).smoothed());
   }
   
 };

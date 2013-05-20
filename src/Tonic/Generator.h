@@ -21,6 +21,7 @@ namespace Tonic {
     class Generator_{
       
     public:
+      
       Generator_();
       virtual ~Generator_();
       
@@ -136,7 +137,8 @@ namespace Tonic {
 
   };
   
-  template<class GenType> class TemplatedGenerator : public Generator{
+  template<class GenType>
+  class TemplatedGenerator : public Generator{
   protected:
     GenType* gen(){
       return static_cast<GenType*>(mGen);

@@ -45,7 +45,9 @@ public:
                             .makeupGain(ControlDbToLinear().in(gain))
                             .bypass(bypass);
         
-    outputGen = ( ( ( tones * toneADSR ) + ( hpNoise * noiseEnv ) ) >> compressor ) * 0.5;
+    Generator outputGen = ( ( ( tones * toneADSR ) + ( hpNoise * noiseEnv ) ) >> compressor ) * 0.5;
+    
+    setOutputGen(outputGen);
   }
   
 };

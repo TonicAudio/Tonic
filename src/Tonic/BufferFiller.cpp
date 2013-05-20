@@ -13,13 +13,8 @@
 
 namespace Tonic {
   
-  BufferFiller::BufferFiller() : bufferReadPosition_(0){
-    TONIC_MUTEX_INIT(&mutex_);
-    outputFrames_.resize(kSynthesisBlockSize, 2);
+  Tonic_::BufferFiller_::BufferFiller_() :  bufferReadPosition_(0) {
+    setIsStereoOutput(true);
   }
-  
-  BufferFiller::~BufferFiller(){
-    TONIC_MUTEX_DESTROY(&mutex_);
-  }
-  
+    
 }

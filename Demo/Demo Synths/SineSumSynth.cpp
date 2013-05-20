@@ -39,7 +39,9 @@ public:
       
     }
     
-    outputGen = outputAdder * ((1.0f/NUM_SINES) * 0.5f);
+    Generator outputGen = outputAdder * ((1.0f/NUM_SINES) * 0.5f);
+    
+    setOutputGen(outputGen);
 
   }
 

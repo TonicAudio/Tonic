@@ -72,11 +72,11 @@ public:
     
     // add a bit of gain for higher Q
     // Using this to test output limiter as well - this will probably clip/wrap if limiter is not working
-    outputGen =
+    setOutputGen(
       sumOfFilters * (1 + q_v * 0.05)
       +
-      lowToothyBass * 0.05;
-    
+      lowToothyBass * 0.05
+    );
     
     
   }

@@ -19,50 +19,91 @@
 
 namespace Tonic{
   
-  class Synth  : public BufferFiller{
+  namespace Tonic_ {
+    
+    class Synth_ : public BufferFiller_ {
+      
+    protected:
+      
+      Generator     outputGen_;
+      
+      Limiter limiter_;
+      bool limitOutput_;
+      
+      std::map<string, ControlParameter> parameters_;
+      std::vector<string> orderedParameterNames_;
+      
+      void computeSynthesisBlock(const Tonic::Tonic_::SynthesisContext_ &context);
+      
+    public:
+      
+      Synth_();
+      
+      //! Set the output gen that produces audio for the Synth
+      void  setOutputGen(Generator gen){ outputGen_ = gen; }
+      const Generator & getOutputGenerator() { return outputGen_; };
+      
+      void setLimitOutput(bool shouldLimit) { limitOutput_ = shouldLimit; };
+      
+      ControlParameter & addParameter(string name, TonicFloat initialValue);
+      
+      void                      setParameter(string name, float value);
+      vector<ControlParameter>  getParameters();
+            
+    };
+    
+    inline void Synth_::computeSynthesisBlock(const SynthesisContext_ &context){
+
+      outputGen_.tick(outputFrames_, context);
+      
+      if (limitOutput_){
+        limiter_.tickThrough(outputFrames_, context);
+      }
+    }
+    
+  }
+  
+  // ---- Smart Pointer -----
+  
+  class Synth  : public TemplatedBufferFiller<Tonic_::Synth_> {
     
   public:
-    
-    Synth();
-    
+        
     //! Set the output gen that produces audio for the Synth
-    void  setOutputGen(Generator gen);
+    void  setOutputGen(Generator generator){
+      gen()->lockMutex();
+      gen()->setOutputGen(generator);
+      gen()->unlockMutex();
+    }
     
     //! Returns a reference to outputGen
-    const Generator & getOutputGenerator() { return outputGen; };
+    const Generator & getOutputGenerator() {
+      return gen()->getOutputGenerator();
+    }
     
     //! Set whether synth uses dynamic limiter to prevent clipping/wrapping. Defaults to true.
-    void setLimitOutput(bool shouldLimit) { limitOutput_ = shouldLimit; };
+    void setLimitOutput(bool shouldLimit) {
+      gen()->setLimitOutput(shouldLimit);
+    }
     
     //! Add a ControlParameter with name "name"
-    ControlParameter & addParameter(string name, TonicFloat initialValue = 0.f);
-    
-    void                      setParameter(string name, float value=1);
-    vector<ControlParameter>  getParameters();
-    
-    void tick( TonicFrames& frames, const Tonic_::SynthesisContext_ & context );
-    
-  protected:
-        
-    Generator     outputGen;
-    
-    Limiter limiter_;
-    bool limitOutput_;
-    
-    std::map<string, ControlParameter> parameters_;
-    std::vector<string> orderedParameterNames_;
-        
-  };
-  
-  inline void Synth::tick(Tonic::TonicFrames &frames, const Tonic_::SynthesisContext_ &context){
-    TONIC_MUTEX_LOCK(&mutex_);
-    outputGen.tick(frames, context);
-    TONIC_MUTEX_UNLOCK(&mutex_);
-
-    if (limitOutput_){
-      limiter_.tickThrough(frames, context);
+    ControlParameter & addParameter(string name, TonicFloat initialValue = 0.f)
+    {
+      return gen()->addParameter(name, initialValue);
     }
-  }
+    
+    void setParameter(string name, float value=1)
+    {
+      gen()->setParameter(name, value);
+    }
+    
+    vector<ControlParameter>  getParameters()
+    {
+      return gen()->getParameters();
+    }
+            
+  };
+
   
   // ------------------------------
   //

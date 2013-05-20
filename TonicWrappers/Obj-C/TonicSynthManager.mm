@@ -84,9 +84,9 @@ using Tonic::Mixer;
         
         Synth *oldSynth = (Synth*)[[self.synthDict valueForKey:key] pointerValue];
         if (oldSynth){
-          mixer.removeInput(oldSynth);
+          mixer.removeInput(*oldSynth);
         }
-        mixer.addInput(newSynth);
+        mixer.addInput(*newSynth);
         [self.synthDict setValue:[NSValue valueWithPointer:newSynth] forKey:key];
         
       }else{
@@ -104,7 +104,7 @@ using Tonic::Mixer;
     if (key){
       Synth *synth = (Synth*)[[self.synthDict objectForKey:key] pointerValue];
       if (synth){
-        mixer.removeInput(synth);
+        mixer.removeInput(*synth);
         delete synth;
         [self.synthDict removeObjectForKey:key];
       }
