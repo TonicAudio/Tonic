@@ -97,7 +97,7 @@ namespace Tonic {
 
   //! "Vector" size for audio processing. ControlGenerators update at this rate.
   //! THIS VALUE SHOULD BE A POWER-OF-TWO WHICH IS LESS THAN THE HARDWARE BUFFER SIZE
-  static const unsigned int kSynthesisBlockSize = 32;
+  static const unsigned int kSynthesisBlockSize = 64;
   
   // -- Global Types --
   
