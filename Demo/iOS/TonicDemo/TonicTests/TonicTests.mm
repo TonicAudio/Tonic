@@ -422,7 +422,6 @@ using namespace Tonic;
   
   random.min(1).max(2);
   STAssertTrue(random.tick(context).value <= 2, @"ControlRandom should start out with a value inside its range.");
-  
   STAssertTrue(random.tick(context).status == ControlGeneratorStatusHasNotChanged, @"ControlRandom should not change unless triggered.");
   
   float randVal = random.tick(context).value;

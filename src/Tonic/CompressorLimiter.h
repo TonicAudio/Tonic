@@ -75,7 +75,7 @@ namespace Tonic {
     
     inline void Compressor_::tick(TonicFrames &frames, const SynthesisContext_ &context ){
       
-      if (context.elapsedFrames == 0 || lastFrameIndex_ != context.elapsedFrames){
+      if (context.forceNewOutput || lastFrameIndex_ != context.elapsedFrames){
         amplitudeInput_.tick(ampInputFrames_, context); // get amp input frames
       }
       Effect_::tick(frames, context);

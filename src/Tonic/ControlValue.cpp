@@ -14,8 +14,7 @@ namespace Tonic {
   
     ControlValue_::ControlValue_():
       hasChanged_(false),
-      value_(0),
-      frameCountOfLastTick(-1)
+      value_(0)
     {}
         
     void ControlValue_::setValue(TonicFloat value){
@@ -24,12 +23,9 @@ namespace Tonic {
     }
   
     void ControlValue_::computeOutput(const SynthesisContext_ & context){
-      if(frameCountOfLastTick != context.elapsedFrames){
-        lastOutput_.status =  hasChanged_ ? ControlGeneratorStatusHasChanged : ControlGeneratorStatusHasNotChanged;
-        hasChanged_ = false;
-        lastOutput_.value = value_;
-        frameCountOfLastTick = context.elapsedFrames;
-      }
+      lastOutput_.status =  hasChanged_ || context.forceNewOutput ? ControlGeneratorStatusHasChanged : ControlGeneratorStatusHasNotChanged;
+      hasChanged_ = false;
+      lastOutput_.value = value_;
     }
   }
   

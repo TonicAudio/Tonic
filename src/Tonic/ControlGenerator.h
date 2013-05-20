@@ -62,6 +62,24 @@ namespace Tonic {
 
     };
     
+    inline ControlGeneratorOutput ControlGenerator_::tick(const SynthesisContext_ & context){
+      
+      if (context.forceNewOutput || lastFrameIndex_ != context.elapsedFrames){
+        lastFrameIndex_ = context.elapsedFrames;
+        lockMutex();
+        computeOutput(context);
+        unlockMutex();
+      }
+      
+#ifdef TONIC_DEBUG
+      if(lastOutput_.value != lastOutput_.value){
+        Tonic::error("ControlGenerator_::tick NaN detected.", true);
+      }
+#endif
+      
+      return lastOutput_;
+    }
+    
     inline void ControlGenerator_::lockMutex(){
       TONIC_MUTEX_LOCK(&genMutex_);
     }
@@ -72,7 +90,7 @@ namespace Tonic {
 
   }
 
-  // local declaration
+  // forward declaration
   class RampedValue;
 
   class ControlGenerator{
@@ -102,7 +120,7 @@ namespace Tonic {
       }
     }
     
-    ControlGeneratorOutput tick( const Tonic_::SynthesisContext_ & context ){
+    inline ControlGeneratorOutput tick( const Tonic_::SynthesisContext_ & context ){
       return mGen->tick(context);
     }
     
@@ -110,6 +128,7 @@ namespace Tonic {
     RampedValue smoothed(float length = 0.05);
     
   };
+
   
   template<class GenType> class TemplatedControlGenerator : public ControlGenerator{
   protected:

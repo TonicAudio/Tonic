@@ -123,16 +123,25 @@ namespace Tonic {
       // System time in seconds
       double elapsedTime;
       
-      SynthesisContext_() : elapsedFrames(0), elapsedTime(0) {};
+      // If true, generators will be forced to compute fresh output
+      // TODO: Not fully implmenented yet -- ND 2013/05/20
+      bool forceNewOutput;
+      
+      SynthesisContext_() : elapsedFrames(0), elapsedTime(0), forceNewOutput(true) {};
       
       void tick() {
         elapsedFrames += kSynthesisBlockSize;
         elapsedTime += (double)kSynthesisBlockSize/sampleRate();
+        forceNewOutput = false;
       };
     
     };
     
   } // namespace Tonic_
+  
+  // Dummy context for ticking things in-place.
+  // Will always be at time 0, forceNewOutput == true
+  static const Tonic_::SynthesisContext_ DummyContext;
 
 #pragma mark - Utility Functions
   
