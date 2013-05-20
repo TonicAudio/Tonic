@@ -656,6 +656,8 @@ using namespace Tonic;
   TestBufferFiller testFiller;
   ControlGenerator ctrlGen1 = ControlValue(2);
   Generator gen1 = ctrlGen1 + FixedValue(2) * ctrlGen1;
+  testFiller.setLimitOutput(false);
+  testFiller.setOutputGen(gen1);
   testFiller.fillBufferOfFloats(stereoOutBuffer, kTestOutputBlockSize, 2);
   STAssertEquals(*stereoOutBuffer, 6.f, @"Complex combination of control gen and gen failed");
 }
