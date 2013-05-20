@@ -304,6 +304,17 @@ using namespace Tonic;
   STAssertEquals((float)1, *stereoOutBuffer, @"FixedValue(2) - FixedValue(1) failed");
 }
 
+// MP to Nick -- is this expected behavior? Limiter is limiting a fixedvalue to zero. I'd expect it to limit it to one.
+// Fine if this is expected. Just trying to track down some weird bugs.
+-(void)testSynthLimiter{
+  TestBufferFiller testFiller;
+  testFiller.setLimitOutput(true);
+  testFiller.setOutputGen(FixedValue(100));
+  testFiller.fillBufferOfFloats(stereoOutBuffer, kTestOutputBlockSize, 1);
+  STAssertTrue(*stereoOutBuffer != 0, @"Limiter shouldn't limit 100 to zero");
+  
+}
+
 #pragma mark - Control Generator Tests
 
 - (void)test200ControlStepper
