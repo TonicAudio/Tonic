@@ -304,6 +304,17 @@ using namespace Tonic;
   STAssertEquals((float)1, *stereoOutBuffer, @"FixedValue(2) - FixedValue(1) failed");
 }
 
+// MP to Nick -- is this expected behavior? Limiter is limiting a fixedvalue to zero. I'd expect it to limit it to one.
+// Fine if this is expected. Just trying to track down some weird bugs.
+-(void)testSynthLimiter{
+  TestBufferFiller testFiller;
+  testFiller.setLimitOutput(true);
+  testFiller.setOutputGen(FixedValue(100));
+  testFiller.fillBufferOfFloats(stereoOutBuffer, kTestOutputBlockSize, 1);
+  STAssertTrue(*stereoOutBuffer != 0, @"Limiter shouldn't limit 100 to zero");
+  
+}
+
 #pragma mark - Control Generator Tests
 
 - (void)test200ControlStepper
@@ -439,6 +450,32 @@ using namespace Tonic;
   
 }
 
+
+-(void)test206SmoothedChangedStatus{
+  ControlValue val(100);
+  STAssertEquals(val.tick(testContext).status, ControlGeneratorStatusHasChanged, @"Inital status of Control Gen should be 'changed'");
+  
+  ControlValue val2(100);
+  val2.smoothed();
+  STAssertEquals(val2.tick(testContext).status, ControlGeneratorStatusHasChanged, @"Inital status of Control Gen should be 'changed'");
+  
+}
+
+-(void)test207ControlAdderAndMultiplier{
+  ControlGenerator val1 = ControlValue(2);
+  ControlGenerator val2 = ControlValue(2);
+  ControlGenerator final = val1 + val1 * val2;
+  STAssertEquals(final.tick(testContext).value, 6.0f, @"val1 + val1 * val2 doesn't combine correctly with ControlGenerators");
+}
+
+
+-(void)testControlValueHasChangedStatus{
+  ControlGenerator val1 = ControlValue(2);
+  
+  STAssertEquals(val1.tick(testContext).status, ControlGeneratorStatusHasChanged, @"Fist tick to ControlGen should be hasChanged");
+  STAssertEquals(val1.tick(testContext).status, ControlGeneratorStatusHasChanged, @"Subsequent ticks (with no context tick) should still report hasChanged.");
+ 
+}
 
 #pragma mark - Buffer filler tests
 
@@ -609,9 +646,18 @@ using namespace Tonic;
   ControlGenerator gen = ControlValue(10) / right;
   Tonic_::SynthesisContext_ context;
   gen.tick(context);
-  right.setValue(0);
+  right.value(0);
   
   STAssertEquals(gen.tick(context).value, (float)2, @"Divide by zero should return the last valid value.");
+}
+
+-(void)test404TestCombinationsOfGenAndControlGen{
+
+  TestBufferFiller testFiller;
+  ControlGenerator ctrlGen1 = ControlValue(2);
+  Generator gen1 = ctrlGen1 + FixedValue(2) * ctrlGen1;
+  testFiller.fillBufferOfFloats(stereoOutBuffer, kTestOutputBlockSize, 2);
+  STAssertEquals((float)6, *stereoOutBuffer, @"Complex combination of control gen and gen failed");
 }
 
 
