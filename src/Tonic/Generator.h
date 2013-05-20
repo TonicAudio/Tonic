@@ -54,7 +54,7 @@ namespace Tonic {
     inline void Generator_::tick(TonicFrames &frames, const SynthesisContext_ &context ){
       
       // check context to see if we need new frames
-      if (context.elapsedFrames == 0 || lastFrameIndex_ != context.elapsedFrames){
+      if (context.forceNewOutput || lastFrameIndex_ != context.elapsedFrames){
         lockMutex();
         computeSynthesisBlock(context);
         unlockMutex();

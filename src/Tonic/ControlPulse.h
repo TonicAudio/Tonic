@@ -35,9 +35,8 @@ namespace Tonic {
       ControlGenerator pulseLengthGen_;
       
     public:
-      ControlPulse_();
-      ~ControlPulse_();
       
+      ControlPulse_();      
       void setPulseLengthGen( ControlGenerator gen ){ pulseLengthGen_ = gen; };
     
     };
