@@ -138,7 +138,7 @@ namespace Tonic {
 #endif
 
 #ifdef TONIC_DEBUG
-    if(frames(0,0) != frames(0,0)){
+    if(outFrames(0,0) != outFrames(0,0)){
       Tonic::error("Biquad::filter NaN detected.", false);
     }
 #endif

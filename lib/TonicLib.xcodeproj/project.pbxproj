@@ -167,6 +167,9 @@
 		9AEDB5C817430E7B00C6A77C /* ControlParameter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9AEDB5C617430E7B00C6A77C /* ControlParameter.cpp */; };
 		9AEDB5C917430E7B00C6A77C /* ControlParameter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9AEDB5C617430E7B00C6A77C /* ControlParameter.cpp */; };
 		9AEDB5CA17430E7B00C6A77C /* ControlParameter.h in Headers */ = {isa = PBXBuildFile; fileRef = 9AEDB5C717430E7B00C6A77C /* ControlParameter.h */; };
+		9AF6A727174AB4DC00C70173 /* RingBuffer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9AF6A725174AB4DB00C70173 /* RingBuffer.cpp */; };
+		9AF6A728174AB4DC00C70173 /* RingBuffer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9AF6A725174AB4DB00C70173 /* RingBuffer.cpp */; };
+		9AF6A729174AB4DC00C70173 /* RingBuffer.h in Headers */ = {isa = PBXBuildFile; fileRef = 9AF6A726174AB4DC00C70173 /* RingBuffer.h */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -292,6 +295,8 @@
 		9A7DB3F417467C81009C9A8F /* SquareWave.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SquareWave.h; sourceTree = "<group>"; };
 		9AEDB5C617430E7B00C6A77C /* ControlParameter.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ControlParameter.cpp; sourceTree = "<group>"; };
 		9AEDB5C717430E7B00C6A77C /* ControlParameter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ControlParameter.h; sourceTree = "<group>"; };
+		9AF6A725174AB4DB00C70173 /* RingBuffer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = RingBuffer.cpp; sourceTree = "<group>"; };
+		9AF6A726174AB4DC00C70173 /* RingBuffer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RingBuffer.h; sourceTree = "<group>"; };
 		F23A7CF1171B3D2E00AE8353 /* libTonic-iOS-Debug.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libTonic-iOS-Debug.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -415,6 +420,8 @@
 				0183D04F1735D0E6004638EB /* RectWave.h */,
 				0183D10B1735D835004638EB /* Reverb.cpp */,
 				0183D10C1735D835004638EB /* Reverb.h */,
+				9AF6A725174AB4DB00C70173 /* RingBuffer.cpp */,
+				9AF6A726174AB4DC00C70173 /* RingBuffer.h */,
 				9A75063D174689FD00373E88 /* SampleTables.cpp */,
 				9A75063E174689FD00373E88 /* SampleTables.h */,
 				0183D03E1735D0E6004638EB /* SawtoothWave.cpp */,
@@ -528,6 +535,7 @@
 				9AEDB5CA17430E7B00C6A77C /* ControlParameter.h in Headers */,
 				9A750641174689FD00373E88 /* SampleTables.h in Headers */,
 				9A7DB3E8174670DF009C9A8F /* TriangleWave.h in Headers */,
+				9AF6A729174AB4DC00C70173 /* RingBuffer.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -652,6 +660,7 @@
 				01C65FF417372407003B2661 /* FilterUtils.cpp in Sources */,
 				9AEDB5C817430E7B00C6A77C /* ControlParameter.cpp in Sources */,
 				9A75063F174689FD00373E88 /* SampleTables.cpp in Sources */,
+				9AF6A727174AB4DC00C70173 /* RingBuffer.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -711,6 +720,7 @@
 				01C65FF617372CD3003B2661 /* FilterUtils.cpp in Sources */,
 				9AEDB5C917430E7B00C6A77C /* ControlParameter.cpp in Sources */,
 				9A750640174689FD00373E88 /* SampleTables.cpp in Sources */,
+				9AF6A728174AB4DC00C70173 /* RingBuffer.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -737,6 +747,7 @@
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
 					"$(inherited)",
+					TONIC_DEBUG,
 				);
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;

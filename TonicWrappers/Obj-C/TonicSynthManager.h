@@ -13,6 +13,8 @@
 
 + (TonicSynthManager*)sharedManager;
 
+@property (assign, nonatomic) BOOL inputEnabled;
+
 - (void)startSession;
 - (void)endSession;
 

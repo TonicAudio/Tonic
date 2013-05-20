@@ -38,6 +38,16 @@ using namespace Tonic;
       {
         SynthDemoDef* def = [[SynthDemoDef alloc] init];
         [synthDefinitions addObject:def];
+        def.synthClassName = @"InputDemoSynth";
+        def.synthDisplayName = @"Input processing demo";
+        def.synthDescription = @"Process the input";
+        def.synthInstructions = @"Headphones recommended.";
+        def.usesInput = YES;
+      }
+      
+      {
+        SynthDemoDef* def = [[SynthDemoDef alloc] init];
+        [synthDefinitions addObject:def];
         def.synthClassName = @"SineSumSynth";
         def.synthDisplayName = @"10-Sine Additive Spread";
         def.synthDescription = @"10 sinewave oscillators in fifths";

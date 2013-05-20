@@ -10,6 +10,14 @@
 
 namespace Tonic {
   
+  namespace Tonic_ {
+    
+    SampleTable_::SampleTable_(unsigned int frames, unsigned int channels){
+      frames_.resize(frames, channels);
+    }
+    
+  }
+  
   static SampleTableCollection s_sharedSampleTables_;
   
   SampleTableCollection & SharedSampleTables(){

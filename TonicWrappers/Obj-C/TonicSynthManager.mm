@@ -11,15 +11,12 @@
 #include <vector>
 
 using std::vector;
-using Tonic::Synth;
-using Tonic::SynthFactory;
-using Tonic::Mixer;
+using namespace Tonic;
 
 @interface TonicSynthManager ()
-{
-  SynthFactory synthFactory;
-  Mixer mixer;
-}
+
+@property Mixer mixer;
+@property RingBuffer inputBuffer;
 
 @property (nonatomic, strong) NSMutableDictionary *synthDict;
 
@@ -50,16 +47,25 @@ using Tonic::Mixer;
   self = [super init];
   if (self){
     self.synthDict = [NSMutableDictionary dictionaryWithCapacity:10];
+    self.inputBuffer.initialize("input", 8192, 2); // enough and then some
+    self.inputEnabled = NO;
     [self setupNovocaineOutput];
   }
   return self;
 }
 
-
 - (void)setupNovocaineOutput
-{  
-  [[Novocaine audioManager] setOutputBlock:^(float *audioToPlay, UInt32 numSamples, UInt32 numChannels) {
-      mixer.fillBufferOfFloats(audioToPlay, numSamples, numChannels);
+{
+  __weak TonicSynthManager *wself = self;
+
+  [[Novocaine audioManager] setOutputBlock:^(float *data, UInt32 numFrames, UInt32 numChannels) {
+      wself.mixer.fillBufferOfFloats(data, numFrames, numChannels);
+  }];
+  
+  [[Novocaine audioManager] setInputBlock:^(float *data, UInt32 numFrames, UInt32 numChannels){
+    if (wself.inputEnabled){
+      wself.inputBuffer.write(data, numFrames * numChannels);
+    }
   }];
   
   [[Novocaine audioManager] pause];
@@ -75,18 +81,26 @@ using Tonic::Mixer;
   [[Novocaine audioManager] pause];
 }
 
+- (void)setInputEnabled:(BOOL)inputEnabled
+{
+  _inputEnabled = inputEnabled;
+  if (inputEnabled){
+    self.inputBuffer.reset();
+  }
+}
+
 - (Tonic::Synth*)addSynthWithName:(NSString *)synthName forKey:(NSString *)key
 {
   Synth *newSynth = nil;
     if (key){
-      newSynth = synthFactory.createInstance(synthName.UTF8String);
+      newSynth = SynthFactory::createInstance(synthName.UTF8String);
       if (newSynth){
         
         Synth *oldSynth = (Synth*)[[self.synthDict valueForKey:key] pointerValue];
         if (oldSynth){
-          mixer.removeInput(*oldSynth);
+          self.mixer.removeInput(*oldSynth);
         }
-        mixer.addInput(*newSynth);
+        self.mixer.addInput(*newSynth);
         [self.synthDict setValue:[NSValue valueWithPointer:newSynth] forKey:key];
         
       }else{
@@ -104,7 +118,7 @@ using Tonic::Mixer;
     if (key){
       Synth *synth = (Synth*)[[self.synthDict objectForKey:key] pointerValue];
       if (synth){
-        mixer.removeInput(*synth);
+        self.mixer.removeInput(*synth);
         delete synth;
         [self.synthDict removeObjectForKey:key];
       }

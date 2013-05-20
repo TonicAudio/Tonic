@@ -20,6 +20,7 @@
 		01DAA58F173E9EF8001AA383 /* SynthAutoUIViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 01DAA58D173E9EF8001AA383 /* SynthAutoUIViewController.mm */; };
 		01DAA590173E9EF8001AA383 /* SynthAutoUIViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 01DAA58E173E9EF8001AA383 /* SynthAutoUIViewController.xib */; };
 		9AB59D3E17456D4C001E6837 /* ControlSnapToScaleTestSynth.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9AB59D3D17456D4C001E6837 /* ControlSnapToScaleTestSynth.cpp */; };
+		9AF6A72C174AC3AA00C70173 /* InputDemoSynth.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9AF6A72B174AC3A900C70173 /* InputDemoSynth.cpp */; };
 		A80F6C2E17431BC00079FB52 /* SimpleStepSeqSynth.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A80F6C2C17431A4F0079FB52 /* SimpleStepSeqSynth.cpp */; };
 		A80F6C2F17431BC00079FB52 /* SimpleStepSeqSynth.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A80F6C2C17431A4F0079FB52 /* SimpleStepSeqSynth.cpp */; };
 		A86C3EC116B2B4FD002A50F0 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A86C3EC016B2B4FD002A50F0 /* UIKit.framework */; };
@@ -105,6 +106,7 @@
 		01DAA58D173E9EF8001AA383 /* SynthAutoUIViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = SynthAutoUIViewController.mm; sourceTree = "<group>"; };
 		01DAA58E173E9EF8001AA383 /* SynthAutoUIViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SynthAutoUIViewController.xib; sourceTree = "<group>"; };
 		9AB59D3D17456D4C001E6837 /* ControlSnapToScaleTestSynth.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ControlSnapToScaleTestSynth.cpp; sourceTree = "<group>"; };
+		9AF6A72B174AC3A900C70173 /* InputDemoSynth.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = InputDemoSynth.cpp; sourceTree = "<group>"; };
 		A80F6C2C17431A4F0079FB52 /* SimpleStepSeqSynth.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SimpleStepSeqSynth.cpp; sourceTree = "<group>"; };
 		A86C3EBC16B2B4FD002A50F0 /* TonicDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TonicDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A86C3EC016B2B4FD002A50F0 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
@@ -203,6 +205,7 @@
 				0183D0F01735D17D004638EB /* DelayTestSynth.cpp */,
 				0183D0F11735D17D004638EB /* FilteredNoiseSynth.cpp */,
 				0183D0F41735D17D004638EB /* FMDroneSynth.cpp */,
+				9AF6A72B174AC3A900C70173 /* InputDemoSynth.cpp */,
 				0183D0F51735D17D004638EB /* LFNoiseTestSynth.cpp */,
 				01C65FE917371BBC003B2661 /* ReverbTestSynth.cpp */,
 				A80F6C2C17431A4F0079FB52 /* SimpleStepSeqSynth.cpp */,
@@ -545,6 +548,7 @@
 				F2E2561A17400EDB00D74E9D /* CompressorTestSynth.cpp in Sources */,
 				A80F6C2E17431BC00079FB52 /* SimpleStepSeqSynth.cpp in Sources */,
 				9AB59D3E17456D4C001E6837 /* ControlSnapToScaleTestSynth.cpp in Sources */,
+				9AF6A72C174AC3AA00C70173 /* InputDemoSynth.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -657,6 +661,11 @@
 				GCC_INLINES_ARE_PRIVATE_EXTERN = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "TonicDemo/TonicDemo-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+					TONIC_DEBUG,
+				);
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				HEADER_SEARCH_PATHS = ../../../src/;

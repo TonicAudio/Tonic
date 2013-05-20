@@ -29,7 +29,7 @@ TonicFrames :: TonicFrames( unsigned int nFrames, unsigned int nChannels )
 #if defined(TONIC_DEBUG)
     if ( data_ == NULL ) {
       std::string error = "TonicFrames: memory allocation error in constructor!";
-      Stk::handleError( error, StkError::MEMORY_ALLOCATION );
+      Tonic::error(error, true);
     }
 #endif
   }
@@ -52,7 +52,7 @@ TonicFrames :: TonicFrames( const TonicFloat& value, unsigned int nFrames, unsig
 #if defined(TONIC_DEBUG)
     if ( data_ == NULL ) {
       std::string error = "TonicFrames: memory allocation error in constructor!";
-      Stk::handleError( error, StkError::MEMORY_ALLOCATION );
+      Tonic::error(error, true);
     }
 #endif
     for ( long i=0; i<(long)size_; i++ ) data_[i] = value;
@@ -104,7 +104,7 @@ void TonicFrames :: resize( size_t nFrames, unsigned int nChannels )
 #if defined(TONIC_DEBUG)
       if ( data_ == NULL ) {
         std::string error = "TonicFrames::resize: memory allocation error!";
-        Stk::handleError( error, StkError::MEMORY_ALLOCATION );
+        Tonic::error(error, true);
       }
 #endif
       bufferSize_ = size_;
@@ -130,7 +130,7 @@ TonicFloat TonicFrames :: interpolate( TonicFloat frame, unsigned int channel ) 
   if ( frame < 0.0 || frame > (TonicFloat) ( nFrames_ - 1 ) || channel >= nChannels_ ) {
     std::ostringstream error;
     error << "TonicFrames::interpolate: invalid frame (" << frame << ") or channel (" << channel << ") value!";
-    Stk::handleError( error.str(), StkError::MEMORY_ACCESS );
+    Tonic::error(error.str(), true);
   }
 #endif
 
