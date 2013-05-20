@@ -39,9 +39,9 @@ public:
   
     ControlGenerator midiNote = transpose + (pitches >> ControlSnapToScale().setScale({0,2,3,5,7,10}));
   
-    outputGen = RectWave().freq( midiNote >> ControlMidiToFreq() ) * ADSR(0.01, 0.1, 0,0).trigger(metro) * 0.1;
+    outputGen = SquareWave().freq( midiNote >> ControlMidiToFreq() ) * ADSR(0.01, 0.1, 0,0).trigger(metro) * 0.1;
     outputGen = (outputGen >> LPF24().cutoff(cutoffs).Q(0.1));
-   // outputGen = outputGen >> Reverb().wetLevel(0.1).dryLevel(1).decayTime(1);
+    //outputGen = outputGen >> Reverb().wetLevel(0.1).dryLevel(1).decayTime(1);
     
 #else
       
