@@ -13,32 +13,17 @@
 #define __TonicLib__SampleTables__
 
 #include "TonicFrames.h"
+#include <map>
 
 namespace Tonic {
   
   // forward declaration
-  class SampleTable;
+  class SampleTableCollection;
   
-  namespace Tonic_ {
-    
-    // NOTE: Should not have to worry about Mutexes for simultaneous R/W (yet) since audio input/output threads are typically synchronous
-    // and UI/other threads should not be modifying sample tables directly.
-    
-    // Returns reference to new sample table, or pointer to existing sample table if one is already created under the same name
-    // AUTOMATICALLY INCREASES RETAIN COUNT ON NEW TABLE
-    extern SampleTable createSampleTable(std::string name, unsigned int length = 2048, unsigned int channels = 1);
-    
-    // Assings refernce argument to existing sample table. Returns false and does not modify the referenceif name has not been registered.
-    // DOES NOT MODIFY RETAIN COUNT FOR TABLE
-    extern bool getSampleTable(std::string name, SampleTable * table);
-    
-    // retain count management
-    extern void retainSampleTable(std::string name);
-    extern void releaseSampleTable(std::string name);
-   
-  }
-
-  // smart pointer for sample tables
+  //! Shared sample table collection, globally accessible.
+  extern SampleTableCollection & SharedSampleTables();
+  
+  //! Sample Table object. Acts as a smart pointer for a persistent TonicFrames instance.
   class SampleTable{
     
   protected:
@@ -98,6 +83,31 @@ namespace Tonic {
       frames_->resize(frames, channels);
     }
     
+  };
+  
+  //! A collection of named sample tables.
+  /*!
+      Individual instances can be used in more localized scopes to maintain a collection of sample data.
+      Use SharedSampleTables() to get the globally-shared collection.
+  */
+  class SampleTableCollection {
+    
+  protected:
+    
+    typedef std::map<std::string, SampleTable> SampleTableMap;
+    SampleTableMap sampleTables_;
+  
+  public:
+
+    //! Register a sample table. Does nothing if one is already created under the same name.
+    void registerSampleTable(std::string name, SampleTable table);
+    
+    //! Assigns pointer to existing sample table. Returns false and does not modify the pointer if name has not been registered.
+    bool getSampleTable(std::string name, SampleTable * table);
+    
+    //! Unregisters sample table from collection.
+    void unregisterSampleTable(std::string name);
+  
   };
 
 }
