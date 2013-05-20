@@ -11,8 +11,6 @@
 		0183D0FD1735D17D004638EB /* ControlSwitcherTestSynth.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0183D0EF1735D17D004638EB /* ControlSwitcherTestSynth.cpp */; };
 		0183D0FE1735D17D004638EB /* DelayTestSynth.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0183D0F01735D17D004638EB /* DelayTestSynth.cpp */; };
 		0183D0FF1735D17D004638EB /* FilteredNoiseSynth.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0183D0F11735D17D004638EB /* FilteredNoiseSynth.cpp */; };
-		0183D1001735D17D004638EB /* FlexToothLFOTestSynth.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0183D0F21735D17D004638EB /* FlexToothLFOTestSynth.cpp */; };
-		0183D1011735D17D004638EB /* FlexToothTestSynth.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0183D0F31735D17D004638EB /* FlexToothTestSynth.cpp */; };
 		0183D1021735D17D004638EB /* FMDroneSynth.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0183D0F41735D17D004638EB /* FMDroneSynth.cpp */; };
 		0183D1031735D17D004638EB /* LFNoiseTestSynth.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0183D0F51735D17D004638EB /* LFNoiseTestSynth.cpp */; };
 		0183D1051735D17D004638EB /* SineSumSynth.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0183D0F71735D17D004638EB /* SineSumSynth.cpp */; };
@@ -54,10 +52,10 @@
 		F2B8531B1721AAE000C3921A /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A86C3EC216B2B4FD002A50F0 /* Foundation.framework */; };
 		F2B853291721AB1E00C3921A /* TonicTests.mm in Sources */ = {isa = PBXBuildFile; fileRef = F25317EB16EBA0A100A8CFDC /* TonicTests.mm */; };
 		F2B8532A1721AB2000C3921A /* StereoFixedTestGen.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F253182716EBA73200A8CFDC /* StereoFixedTestGen.cpp */; };
-		F2B8532D1721ACDE00C3921A /* libTonic-iOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F2DC166F17219736006DB2CB /* libTonic-iOS.a */; };
+		F2B8532D1721ACDE00C3921A /* libTonic-iOS-Debug.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F2DC166F17219736006DB2CB /* libTonic-iOS-Debug.a */; };
 		F2B8532E1721ACE100C3921A /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A86C3F2216B2B834002A50F0 /* Accelerate.framework */; };
 		F2C6D3E517245C7F006455E7 /* TonicLoggingTests.mm in Sources */ = {isa = PBXBuildFile; fileRef = F2C6D3E417245C7F006455E7 /* TonicLoggingTests.mm */; };
-		F2DC167217219744006DB2CB /* libTonic-iOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F2DC166F17219736006DB2CB /* libTonic-iOS.a */; };
+		F2DC167217219744006DB2CB /* libTonic-iOS-Debug.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F2DC166F17219736006DB2CB /* libTonic-iOS-Debug.a */; };
 		F2E2561A17400EDB00D74E9D /* CompressorTestSynth.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F2E2561917400EDB00D74E9D /* CompressorTestSynth.cpp */; };
 /* End PBXBuildFile section */
 
@@ -97,8 +95,6 @@
 		0183D0EF1735D17D004638EB /* ControlSwitcherTestSynth.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ControlSwitcherTestSynth.cpp; sourceTree = "<group>"; };
 		0183D0F01735D17D004638EB /* DelayTestSynth.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = DelayTestSynth.cpp; sourceTree = "<group>"; };
 		0183D0F11735D17D004638EB /* FilteredNoiseSynth.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = FilteredNoiseSynth.cpp; sourceTree = "<group>"; };
-		0183D0F21735D17D004638EB /* FlexToothLFOTestSynth.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = FlexToothLFOTestSynth.cpp; sourceTree = "<group>"; };
-		0183D0F31735D17D004638EB /* FlexToothTestSynth.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = FlexToothTestSynth.cpp; sourceTree = "<group>"; };
 		0183D0F41735D17D004638EB /* FMDroneSynth.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = FMDroneSynth.cpp; sourceTree = "<group>"; };
 		0183D0F51735D17D004638EB /* LFNoiseTestSynth.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = LFNoiseTestSynth.cpp; sourceTree = "<group>"; };
 		0183D0F71735D17D004638EB /* SineSumSynth.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SineSumSynth.cpp; sourceTree = "<group>"; };
@@ -171,7 +167,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				F24A98D3173EC45700BE47CB /* QuartzCore.framework in Frameworks */,
-				F2DC167217219744006DB2CB /* libTonic-iOS.a in Frameworks */,
+				F2DC167217219744006DB2CB /* libTonic-iOS-Debug.a in Frameworks */,
 				A8CF87F31703D71800D8F5E1 /* CoreMotion.framework in Frameworks */,
 				A86C3F2316B2B834002A50F0 /* Accelerate.framework in Frameworks */,
 				A86C3F1F16B2B7B8002A50F0 /* AudioToolbox.framework in Frameworks */,
@@ -187,7 +183,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				F2B8532E1721ACE100C3921A /* Accelerate.framework in Frameworks */,
-				F2B8532D1721ACDE00C3921A /* libTonic-iOS.a in Frameworks */,
+				F2B8532D1721ACDE00C3921A /* libTonic-iOS-Debug.a in Frameworks */,
 				F2B853191721AAE000C3921A /* SenTestingKit.framework in Frameworks */,
 				F2B8531A1721AAE000C3921A /* UIKit.framework in Frameworks */,
 				F2B8531B1721AAE000C3921A /* Foundation.framework in Frameworks */,
@@ -206,8 +202,6 @@
 				0183D0EF1735D17D004638EB /* ControlSwitcherTestSynth.cpp */,
 				0183D0F01735D17D004638EB /* DelayTestSynth.cpp */,
 				0183D0F11735D17D004638EB /* FilteredNoiseSynth.cpp */,
-				0183D0F21735D17D004638EB /* FlexToothLFOTestSynth.cpp */,
-				0183D0F31735D17D004638EB /* FlexToothTestSynth.cpp */,
 				0183D0F41735D17D004638EB /* FMDroneSynth.cpp */,
 				0183D0F51735D17D004638EB /* LFNoiseTestSynth.cpp */,
 				01C65FE917371BBC003B2661 /* ReverbTestSynth.cpp */,
@@ -384,8 +378,8 @@
 		F2DC166817219736006DB2CB /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				F2DC166D17219736006DB2CB /* libTonic-OSX.a */,
-				F2DC166F17219736006DB2CB /* libTonic-iOS.a */,
+				F2DC166D17219736006DB2CB /* libTonic-OSX-Debug.a */,
+				F2DC166F17219736006DB2CB /* libTonic-iOS-Debug.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -465,17 +459,17 @@
 /* End PBXProject section */
 
 /* Begin PBXReferenceProxy section */
-		F2DC166D17219736006DB2CB /* libTonic-OSX.a */ = {
+		F2DC166D17219736006DB2CB /* libTonic-OSX-Debug.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
-			path = "libTonic-OSX.a";
+			path = "libTonic-OSX-Debug.a";
 			remoteRef = F2DC166C17219736006DB2CB /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		F2DC166F17219736006DB2CB /* libTonic-iOS.a */ = {
+		F2DC166F17219736006DB2CB /* libTonic-iOS-Debug.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
-			path = "libTonic-iOS.a";
+			path = "libTonic-iOS-Debug.a";
 			remoteRef = F2DC166E17219736006DB2CB /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
@@ -540,8 +534,6 @@
 				0183D0FD1735D17D004638EB /* ControlSwitcherTestSynth.cpp in Sources */,
 				0183D0FE1735D17D004638EB /* DelayTestSynth.cpp in Sources */,
 				0183D0FF1735D17D004638EB /* FilteredNoiseSynth.cpp in Sources */,
-				0183D1001735D17D004638EB /* FlexToothLFOTestSynth.cpp in Sources */,
-				0183D1011735D17D004638EB /* FlexToothTestSynth.cpp in Sources */,
 				0183D1021735D17D004638EB /* FMDroneSynth.cpp in Sources */,
 				0183D1031735D17D004638EB /* LFNoiseTestSynth.cpp in Sources */,
 				0183D1051735D17D004638EB /* SineSumSynth.cpp in Sources */,
