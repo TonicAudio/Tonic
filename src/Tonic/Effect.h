@@ -153,10 +153,6 @@ namespace Tonic {
   
   template<class EffectType, class EffectType_>
   class TemplatedEffect : public TemplatedGenerator<EffectType_>{
-  
-  protected:
-    
-    Generator input_;
     
   public:
         

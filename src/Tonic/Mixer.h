@@ -65,6 +65,7 @@ namespace Tonic {
       gen()->addInput(input);
       gen()->unlockMutex();
     }
+    
     void removeInput(BufferFiller input){
       gen()->lockMutex();
       gen()->removeInput(input);
