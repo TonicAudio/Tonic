@@ -10,13 +10,8 @@
 
 namespace Tonic { namespace Tonic_{
   
-  ControlPulse_::ControlPulse_(){
-    
-  }
-  
-  ControlPulse_::~ControlPulse_(){
-    
-  }
+  ControlPulse_::ControlPulse_() : lastOnTime_(0)
+  {}
   
   void ControlPulse_::computeOutput(const SynthesisContext_ & context){
     
@@ -32,10 +27,15 @@ namespace Tonic { namespace Tonic_{
       lastOutput_.status = ControlGeneratorStatusHasChanged;
       lastOutput_.value = 1.0f;
     }
-    else if (state_ == ControlPulseStateOn && (context.elapsedTime - lastOnTime_ >= lengthIn.value)){
-      state_ = ControlPulseStateOff;
-      lastOutput_.value = 0.0f;
-      lastOutput_.status = ControlGeneratorStatusHasChanged;
+    else if (state_ == ControlPulseStateOn){
+      
+      double tDiff = context.elapsedTime - lastOnTime_;
+      
+      if (tDiff < 0 || tDiff >= max(0,lengthIn.value)){
+        state_ = ControlPulseStateOff;
+        lastOutput_.value = 0.0f;
+        lastOutput_.status = ControlGeneratorStatusHasChanged;
+      }
     }
     
   }

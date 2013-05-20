@@ -131,7 +131,7 @@ namespace Tonic {
       
       void tick() {
         elapsedFrames += kSynthesisBlockSize;
-        elapsedTime += (double)kSynthesisBlockSize/sampleRate();
+        elapsedTime = (double)elapsedFrames/sampleRate();
         forceNewOutput = false;
       };
     
