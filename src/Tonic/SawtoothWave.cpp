@@ -1,25 +1,25 @@
 //
-//  FlexToothWave.cpp
+//  SawtoothWave.cpp
 //  Tonic
 //
 //  Created by Nick Donaldson on 3/2/13.
 
 //
 
-#include "FlexToothWave.h"
+#include "SawtoothWave.h"
 
 namespace Tonic { namespace Tonic_{
   
-  FlexToothWave_::FlexToothWave_() : phaseAccum_(0) {
+  AngularWave_::AngularWave_() : phaseAccum_(0) {
     
     freqFrames_.resize(kSynthesisBlockSize, 1, 0);
     slopeFrames_.resize(kSynthesisBlockSize, 1, 0);
     
-  }
-  
-  FlexToothWave_::~FlexToothWave_(){
+    slopeGen_ = FixedValue(0);
+    freqGen_ = FixedValue(440);
     
   }
+  
   
 } // Namespace Tonic_
   

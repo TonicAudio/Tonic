@@ -1,5 +1,5 @@
 //
-//  FlexToothWave.h
+//  SawtoothWave.h
 //  Tonic 
 //
 //  Created by Nick Donaldson on 3/2/13.
@@ -9,18 +9,20 @@
 //
 
 
-#ifndef __Tonic__FlexToothWave__
-#define __Tonic__FlexToothWave__
+#ifndef __Tonic__AngularWave__
+#define __Tonic__AngularWave__
 
 #include "Generator.h"
 
-#define TONIC_FLEXTOOTH_RES 4096
+#define TONIC_SAW_RES 4096
 
 namespace Tonic {
   
   namespace Tonic_ {
 
-    class FlexToothWave_ : public Generator_{
+    // Generator_ class to generate hard-edge rising saw, falling saw, triangle, or any angle in-between.
+    
+    class AngularWave_ : public Generator_{
       
     protected:
       
@@ -35,8 +37,7 @@ namespace Tonic {
       void computeSynthesisBlock( const SynthesisContext_ &context );
       
     public:
-      FlexToothWave_();
-      ~FlexToothWave_();
+      AngularWave_();
       
       void setFrequencyGenerator( Generator gen ){
         freqGen_ = gen;
@@ -49,14 +50,14 @@ namespace Tonic {
       
     };
     
-    inline void FlexToothWave_::computeSynthesisBlock(const SynthesisContext_ &context){
+    inline void AngularWave_::computeSynthesisBlock(const SynthesisContext_ &context){
       
       // tick freq and slope inputs
       freqGen_.tick(freqFrames_, context);
       slopeGen_.tick(slopeFrames_, context);
       
       // calculate the output wave
-      TonicFloat const rateConstant = TONIC_FLEXTOOTH_RES/Tonic::sampleRate();
+      TonicFloat const rateConstant = TONIC_SAW_RES/Tonic::sampleRate();
       
       TonicFloat slope, frac, phase;
       TonicFloat *outptr = &outputFrames_[0];
@@ -81,58 +82,57 @@ namespace Tonic {
       for ( unsigned int i=0; i<outputFrames_.frames(); i++ ) {
         
         // update the slope
-        slope = clamp(*slopeptr++, 0.0f, 1.0f) * TONIC_FLEXTOOTH_RES;
+        slope = clamp(*slopeptr++, 0.0f, 1.0f) * TONIC_SAW_RES;
         
         sd.d = ps;
         ps += *freqptr++;
-        offs = sd.i[1] & (TONIC_FLEXTOOTH_RES-1);
+        offs = sd.i[1] & (TONIC_SAW_RES-1);
         sd.i[1] = msbi;
         frac = sd.d - BIT32DECPT;
         
         phase = offs + frac;
         
         // TODO: this is still a bit slow. Maybe find a way to do it with a real table lookup
+        
         // on the rising edge
         if (phase < slope){
-          *outptr++ = slope == 0 ? 0 : (phase/slope)*2.0f - 1.0f;
+          *outptr++ = (phase/slope)*2.0f - 1.0f;
         }
         // on the falling edge
         else{
-          *outptr++ = slope == 1 ? 0 : (1.0f - ((phase - slope)/(TONIC_FLEXTOOTH_RES - slope))) * 2.0f - 1.0f;
+          *outptr++ = (1.0f - ((phase - slope)/(TONIC_SAW_RES - slope))) * 2.0f - 1.0f;
         }
                 
       }
       
-      sd.d = BIT32DECPT * TONIC_FLEXTOOTH_RES;
+      sd.d = BIT32DECPT * TONIC_SAW_RES;
       msbi = sd.i[1];
-      sd.d = ps + (BIT32DECPT * TONIC_FLEXTOOTH_RES - BIT32DECPT);
+      sd.d = ps + (BIT32DECPT * TONIC_SAW_RES - BIT32DECPT);
       sd.i[1] = msbi;
-      phaseAccum_ = sd.d - BIT32DECPT * TONIC_FLEXTOOTH_RES;
+      phaseAccum_ = sd.d - BIT32DECPT * TONIC_SAW_RES;
       
     }
     
   }
   
-  //! Quick-and-dirty variable sawtooth-triangle
+  //! Quick-and-dirty sawtooth oscillator
   /*!
-      Depending on slope input, this generator can either be a rising sawtooth, a falling sawtooth,
-      or anything in between (including a triangle wave).
-   
-      Slopes:
-        0   = falling sawtooth
-        0.5 = triangle
-        1   = rising sawtooth
-      
       Not anti-aliased, so really best as an LFO. Can be used as an audio sawtooth oscillator in a pinch
       or if you don't mind some aliasing distortion.
   */
-  class FlexToothWave : public TemplatedGenerator<Tonic_::FlexToothWave_>{
+  class SawtoothWave : public TemplatedGenerator<Tonic_::AngularWave_>{
     
   public:
     
-    createGeneratorSetters(FlexToothWave, freq, setFrequencyGenerator);
-    createGeneratorSetters(FlexToothWave, slope, setSlopeGenerator);
-
+    createGeneratorSetters(SawtoothWave, freq, setFrequencyGenerator);
+    
+    //! set whether it's a descending sawtooth (default) or ascending
+    SawtoothWave & isAscending(bool ascending){
+      gen()->lockMutex();
+      gen()->setSlopeGenerator(FixedValue(ascending ? 1.f : 0.f));
+      gen()->unlockMutex();
+      return *this;
+    }
   };
 }
 

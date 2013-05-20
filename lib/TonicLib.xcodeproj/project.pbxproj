@@ -99,9 +99,9 @@
 		0183D0B71735D0E6004638EB /* FixedValue.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0183D03C1735D0E6004638EB /* FixedValue.cpp */; };
 		0183D0B81735D0E6004638EB /* FixedValue.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0183D03C1735D0E6004638EB /* FixedValue.cpp */; };
 		0183D0B91735D0E6004638EB /* FixedValue.h in Headers */ = {isa = PBXBuildFile; fileRef = 0183D03D1735D0E6004638EB /* FixedValue.h */; };
-		0183D0BA1735D0E6004638EB /* FlexToothWave.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0183D03E1735D0E6004638EB /* FlexToothWave.cpp */; };
-		0183D0BB1735D0E6004638EB /* FlexToothWave.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0183D03E1735D0E6004638EB /* FlexToothWave.cpp */; };
-		0183D0BC1735D0E6004638EB /* FlexToothWave.h in Headers */ = {isa = PBXBuildFile; fileRef = 0183D03F1735D0E6004638EB /* FlexToothWave.h */; };
+		0183D0BA1735D0E6004638EB /* SawtoothWave.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0183D03E1735D0E6004638EB /* SawtoothWave.cpp */; };
+		0183D0BB1735D0E6004638EB /* SawtoothWave.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0183D03E1735D0E6004638EB /* SawtoothWave.cpp */; };
+		0183D0BC1735D0E6004638EB /* SawtoothWave.h in Headers */ = {isa = PBXBuildFile; fileRef = 0183D03F1735D0E6004638EB /* SawtoothWave.h */; };
 		0183D0BD1735D0E6004638EB /* Generator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0183D0401735D0E6004638EB /* Generator.cpp */; };
 		0183D0BE1735D0E6004638EB /* Generator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0183D0401735D0E6004638EB /* Generator.cpp */; };
 		0183D0BF1735D0E6004638EB /* Generator.h in Headers */ = {isa = PBXBuildFile; fileRef = 0183D0411735D0E6004638EB /* Generator.h */; };
@@ -163,6 +163,7 @@
 		9A75063F174689FD00373E88 /* SampleTables.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9A75063D174689FD00373E88 /* SampleTables.cpp */; };
 		9A750640174689FD00373E88 /* SampleTables.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9A75063D174689FD00373E88 /* SampleTables.cpp */; };
 		9A750641174689FD00373E88 /* SampleTables.h in Headers */ = {isa = PBXBuildFile; fileRef = 9A75063E174689FD00373E88 /* SampleTables.h */; };
+		9A7DB3E8174670DF009C9A8F /* TriangleWave.h in Headers */ = {isa = PBXBuildFile; fileRef = 9A7DB3E7174670DF009C9A8F /* TriangleWave.h */; };
 		9AEDB5C817430E7B00C6A77C /* ControlParameter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9AEDB5C617430E7B00C6A77C /* ControlParameter.cpp */; };
 		9AEDB5C917430E7B00C6A77C /* ControlParameter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9AEDB5C617430E7B00C6A77C /* ControlParameter.cpp */; };
 		9AEDB5CA17430E7B00C6A77C /* ControlParameter.h in Headers */ = {isa = PBXBuildFile; fileRef = 9AEDB5C717430E7B00C6A77C /* ControlParameter.h */; };
@@ -243,8 +244,8 @@
 		0183D03B1735D0E6004638EB /* FilterUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FilterUtils.h; sourceTree = "<group>"; };
 		0183D03C1735D0E6004638EB /* FixedValue.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = FixedValue.cpp; sourceTree = "<group>"; };
 		0183D03D1735D0E6004638EB /* FixedValue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FixedValue.h; sourceTree = "<group>"; };
-		0183D03E1735D0E6004638EB /* FlexToothWave.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = FlexToothWave.cpp; sourceTree = "<group>"; };
-		0183D03F1735D0E6004638EB /* FlexToothWave.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FlexToothWave.h; sourceTree = "<group>"; };
+		0183D03E1735D0E6004638EB /* SawtoothWave.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SawtoothWave.cpp; sourceTree = "<group>"; };
+		0183D03F1735D0E6004638EB /* SawtoothWave.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SawtoothWave.h; sourceTree = "<group>"; };
 		0183D0401735D0E6004638EB /* Generator.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Generator.cpp; sourceTree = "<group>"; };
 		0183D0411735D0E6004638EB /* Generator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Generator.h; sourceTree = "<group>"; };
 		0183D0421735D0E6004638EB /* LFNoise.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = LFNoise.cpp; sourceTree = "<group>"; };
@@ -287,6 +288,8 @@
 		01F7273D1715225500EBB4BB /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.7.sdk/System/Library/Frameworks/Accelerate.framework; sourceTree = DEVELOPER_DIR; };
 		9A75063D174689FD00373E88 /* SampleTables.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SampleTables.cpp; sourceTree = "<group>"; };
 		9A75063E174689FD00373E88 /* SampleTables.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SampleTables.h; sourceTree = "<group>"; };
+		9A7DB3E7174670DF009C9A8F /* TriangleWave.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TriangleWave.h; sourceTree = "<group>"; };
+		9A7DB3F417467C81009C9A8F /* SquareWave.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SquareWave.h; sourceTree = "<group>"; };
 		9AEDB5C617430E7B00C6A77C /* ControlParameter.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ControlParameter.cpp; sourceTree = "<group>"; };
 		9AEDB5C717430E7B00C6A77C /* ControlParameter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ControlParameter.h; sourceTree = "<group>"; };
 		F23A7CF1171B3D2E00AE8353 /* libTonic-iOS-Debug.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libTonic-iOS-Debug.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -394,8 +397,6 @@
 				0183D03B1735D0E6004638EB /* FilterUtils.h */,
 				0183D03C1735D0E6004638EB /* FixedValue.cpp */,
 				0183D03D1735D0E6004638EB /* FixedValue.h */,
-				0183D03E1735D0E6004638EB /* FlexToothWave.cpp */,
-				0183D03F1735D0E6004638EB /* FlexToothWave.h */,
 				0183D0401735D0E6004638EB /* Generator.cpp */,
 				0183D0411735D0E6004638EB /* Generator.h */,
 				0183D0421735D0E6004638EB /* LFNoise.cpp */,
@@ -416,8 +417,11 @@
 				0183D10C1735D835004638EB /* Reverb.h */,
 				9A75063D174689FD00373E88 /* SampleTables.cpp */,
 				9A75063E174689FD00373E88 /* SampleTables.h */,
+				0183D03E1735D0E6004638EB /* SawtoothWave.cpp */,
+				0183D03F1735D0E6004638EB /* SawtoothWave.h */,
 				0183D0501735D0E6004638EB /* SineWave.cpp */,
 				0183D0511735D0E6004638EB /* SineWave.h */,
+				9A7DB3F417467C81009C9A8F /* SquareWave.h */,
 				0183D0521735D0E6004638EB /* StereoDelay.cpp */,
 				0183D0531735D0E6004638EB /* StereoDelay.h */,
 				0183D0541735D0E6004638EB /* Subtractor.cpp */,
@@ -429,6 +433,7 @@
 				0183D05A1735D0E6004638EB /* TonicCore.h */,
 				0183D05B1735D0E6004638EB /* TonicFrames.cpp */,
 				0183D05C1735D0E6004638EB /* TonicFrames.h */,
+				9A7DB3E7174670DF009C9A8F /* TriangleWave.h */,
 			);
 			path = Tonic;
 			sourceTree = "<group>";
@@ -500,7 +505,7 @@
 				0183D0B51735D0E6004638EB /* Filters.h in Headers */,
 				0183D0B61735D0E6004638EB /* FilterUtils.h in Headers */,
 				0183D0B91735D0E6004638EB /* FixedValue.h in Headers */,
-				0183D0BC1735D0E6004638EB /* FlexToothWave.h in Headers */,
+				0183D0BC1735D0E6004638EB /* SawtoothWave.h in Headers */,
 				0183D0BF1735D0E6004638EB /* Generator.h in Headers */,
 				0183D0C21735D0E6004638EB /* LFNoise.h in Headers */,
 				0183D0C51735D0E6004638EB /* Mixer.h in Headers */,
@@ -522,6 +527,7 @@
 				01C65FF017371C45003B2661 /* ControlDelay.h in Headers */,
 				9AEDB5CA17430E7B00C6A77C /* ControlParameter.h in Headers */,
 				9A750641174689FD00373E88 /* SampleTables.h in Headers */,
+				9A7DB3E8174670DF009C9A8F /* TriangleWave.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -624,7 +630,7 @@
 				0183D0AF1735D0E6004638EB /* Divider.cpp in Sources */,
 				0183D0B31735D0E6004638EB /* Filters.cpp in Sources */,
 				0183D0B71735D0E6004638EB /* FixedValue.cpp in Sources */,
-				0183D0BA1735D0E6004638EB /* FlexToothWave.cpp in Sources */,
+				0183D0BA1735D0E6004638EB /* SawtoothWave.cpp in Sources */,
 				0183D0BD1735D0E6004638EB /* Generator.cpp in Sources */,
 				0183D0C01735D0E6004638EB /* LFNoise.cpp in Sources */,
 				0183D0C31735D0E6004638EB /* Mixer.cpp in Sources */,
@@ -683,7 +689,7 @@
 				0183D0B01735D0E6004638EB /* Divider.cpp in Sources */,
 				0183D0B41735D0E6004638EB /* Filters.cpp in Sources */,
 				0183D0B81735D0E6004638EB /* FixedValue.cpp in Sources */,
-				0183D0BB1735D0E6004638EB /* FlexToothWave.cpp in Sources */,
+				0183D0BB1735D0E6004638EB /* SawtoothWave.cpp in Sources */,
 				0183D0BE1735D0E6004638EB /* Generator.cpp in Sources */,
 				0183D0C11735D0E6004638EB /* LFNoise.cpp in Sources */,
 				0183D0C41735D0E6004638EB /* Mixer.cpp in Sources */,
@@ -788,6 +794,7 @@
 				GCC_INLINES_ARE_PRIVATE_EXTERN = YES;
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
 				MACOSX_DEPLOYMENT_TARGET = 10.6;
+				OBJROOT = build;
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_CPLUSPLUSFLAGS = "$(OTHER_CFLAGS)";
 				PRODUCT_NAME = "$(TARGET_NAME)-Debug";
@@ -810,6 +817,7 @@
 				GCC_INLINES_ARE_PRIVATE_EXTERN = YES;
 				GCC_SYMBOLS_PRIVATE_EXTERN = YES;
 				MACOSX_DEPLOYMENT_TARGET = 10.6;
+				OBJROOT = build;
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_CPLUSPLUSFLAGS = "$(OTHER_CFLAGS)";
 				PRODUCT_NAME = "$(TARGET_NAME)";

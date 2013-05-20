@@ -48,7 +48,7 @@ int main(int argc, const char * argv[])
     ControlMetro metro = ControlMetro().bpm(100);
     ControlGenerator freq = ControlRandom().trigger(metro).min(0).max(1);
     
-    Generator tone = RectWave().freq(
+    Generator tone = SquareWave().freq(
                                      freq * 0.25 + 100
                                      + 400
                                      ) * SineWave().freq(50);
