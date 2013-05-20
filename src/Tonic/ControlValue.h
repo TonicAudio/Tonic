@@ -17,12 +17,6 @@ namespace Tonic {
 
     class ControlValue_ : public ControlGenerator_{
     
-    // ControlGenerator_::tick always calls computeOutput if the frame is zero.
-    // This messes with the status (incorrect reporting of hasChanged)
-    // Keeping track of the last tick number is an inelegant way to make sure
-    // we don't compute the output more than we should. But it should work.
-    unsigned long frameCountOfLastTick;
-      
     public:
       
         ControlValue_();

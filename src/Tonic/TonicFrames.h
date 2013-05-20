@@ -493,7 +493,7 @@ namespace Tonic {
     if (nChannels_ == fChannels){
       
 #ifdef USE_APPLE_ACCELERATE
-      vDSP_vdiv(dptr, 1, fptr, 1, dptr, 1, size_);
+      vDSP_vdiv(fptr, 1, dptr, 1, dptr, 1, size_);
 #else
       for ( unsigned int i=0; i<size_; i++ ){
         *dptr++ /= *fptr++;
@@ -505,7 +505,7 @@ namespace Tonic {
       
       //  just multiply by first channel of rhs
 #ifdef USE_APPLE_ACCELERATE
-      vDSP_vdiv(dptr, 1, fptr, fChannels, dptr, 1, nFrames_);
+      vDSP_vdiv(fptr, fChannels, dptr, 1, dptr, 1, nFrames_);
 #else
       for ( unsigned int i=0; i<nFrames_; i++ ){
         *dptr++ /= *fptr++;
@@ -517,8 +517,8 @@ namespace Tonic {
     else{
       //  multiply both channels by rhs
 #ifdef USE_APPLE_ACCELERATE
-      vDSP_vdiv(dptr, 2, fptr, 1, dptr, 2, nFrames_);
-      vDSP_vdiv(dptr+1, 2, fptr, 1, dptr+1, 2, nFrames_);
+      vDSP_vdiv(fptr, 2, dptr, 1, dptr, 2, nFrames_);
+      vDSP_vdiv(fptr, 2, dptr+1, 1, dptr+1, 2, nFrames_);
 #else
       for ( unsigned int i=0; i<nFrames_; i++ ){
         *dptr++ /= *fptr;
