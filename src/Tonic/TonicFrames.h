@@ -355,7 +355,7 @@ namespace Tonic {
       vDSP_vadd(dptr, 2, fptr, 1, dptr, 2, nFrames_);
       vDSP_vadd(dptr+1, 2, fptr, 1, dptr+1, 2, nFrames_);
 #else
-      for ( unsigned int i=0; i<frames_; i++ ){
+      for ( unsigned int i=0; i<nFrames_; i++ ){
         *dptr++ += *fptr;
         *dptr++ += *fptr++;
       }
@@ -409,7 +409,7 @@ namespace Tonic {
       vDSP_vsub(dptr, 2, fptr, 1, dptr, 2, nFrames_);
       vDSP_vsub(dptr+1, 2, fptr, 1, dptr+1, 2, nFrames_);
 #else
-      for ( unsigned int i=0; i<frames_; i++ ){
+      for ( unsigned int i=0; i<nFrames_; i++ ){
         *dptr++ -= *fptr;
         *dptr++ -= *fptr++;
       }
@@ -453,7 +453,7 @@ namespace Tonic {
 #ifdef USE_APPLE_ACCELERATE
       vDSP_vmul(dptr, 1, fptr, fChannels, dptr, 1, nFrames_);
 #else
-      for ( unsigned int i=0; i<frames_; i++ ){
+      for ( unsigned int i=0; i<nFrames_; i++ ){
         *dptr++ *= *fptr++;
         fptr++;
       }
@@ -466,7 +466,7 @@ namespace Tonic {
       vDSP_vmul(dptr, 2, fptr, 1, dptr, 2, nFrames_);
       vDSP_vmul(dptr+1, 2, fptr, 1, dptr+1, 2, nFrames_);
 #else
-      for ( unsigned int i=0; i<frames_; i++ ){
+      for ( unsigned int i=0; i<nFrames_; i++ ){
         *dptr++ *= *fptr;
         *dptr++ *= *fptr++;
       }
@@ -507,7 +507,7 @@ namespace Tonic {
 #ifdef USE_APPLE_ACCELERATE
       vDSP_vdiv(dptr, 1, fptr, fChannels, dptr, 1, nFrames_);
 #else
-      for ( unsigned int i=0; i<frames_; i++ ){
+      for ( unsigned int i=0; i<nFrames_; i++ ){
         *dptr++ /= *fptr++;
         fptr++;
       }
@@ -520,7 +520,7 @@ namespace Tonic {
       vDSP_vdiv(dptr, 2, fptr, 1, dptr, 2, nFrames_);
       vDSP_vdiv(dptr+1, 2, fptr, 1, dptr+1, 2, nFrames_);
 #else
-      for ( unsigned int i=0; i<frames_; i++ ){
+      for ( unsigned int i=0; i<nFrames_; i++ ){
         *dptr++ /= *fptr;
         *dptr++ /= *fptr++;
       }

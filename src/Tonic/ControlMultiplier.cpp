@@ -23,13 +23,13 @@ namespace Tonic { namespace Tonic_{
         lastOutput_.status = ControlGeneratorStatusHasChanged;
         break;
       }
-      
-      TonicFloat product = inputs[0].tick(context).value;
-      for (unsigned int i=1; i<inputs.size(); i++){
-        product *= inputs[i].tick(context).value;
-      }
-      lastOutput_.value = product;
     }
+      
+    TonicFloat product = inputs[0].tick(context).value;
+    for (unsigned int i=1; i<inputs.size(); i++){
+      product *= inputs[i].tick(context).value;
+    }
+    lastOutput_.value = product;
   }
   
   
