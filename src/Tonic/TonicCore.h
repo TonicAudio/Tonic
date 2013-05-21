@@ -242,12 +242,11 @@ namespace Tonic {
 }
 
   //! Tonic exception class
+  // May want to implement custom exception behavior here, but for now, this is essentially a typedef
   class TonicException : public runtime_error
   {
     public:
     TonicException(string const& error) : runtime_error(error) {};
-
-    // May want to implement custom exception behavior here, but for now, this is essentially a typedef
 
   };
   
