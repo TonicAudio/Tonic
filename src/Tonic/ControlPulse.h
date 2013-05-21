@@ -46,6 +46,7 @@ namespace Tonic {
   class ControlPulse : public TemplatedControlConditioner<ControlPulse, Tonic_::ControlPulse_>{
     
   public:
+    
     ControlPulse(float length = 0.1){
       gen()->setPulseLengthGen(ControlValue(length));
     }

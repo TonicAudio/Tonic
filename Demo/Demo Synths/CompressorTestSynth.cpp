@@ -39,10 +39,10 @@ public:
     Compressor compressor = Compressor()
                             .attack(attack)
                             .release(0.06)
-                            .threshold( ControlDbToLinear().in(threshold) )
+                            .threshold( ControlDbToLinear().input(threshold) )
                             .ratio( ratio )
                             .lookahead(0.001)
-                            .makeupGain(ControlDbToLinear().in(gain))
+                            .makeupGain(ControlDbToLinear().input(gain))
                             .bypass(bypass);
         
     Generator outputGen = ( ( ( tones * toneADSR ) + ( hpNoise * noiseEnv ) ) >> compressor ) * 0.5;

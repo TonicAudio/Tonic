@@ -41,7 +41,7 @@ namespace Tonic{
       
       //! Set the output gen that produces audio for the Synth
       void  setOutputGen(Generator gen){ outputGen_ = gen; }
-      const Generator & getOutputGenerator() { return outputGen_; };
+      const Generator getOutputGen() { return outputGen_; };
       
       void setLimitOutput(bool shouldLimit) { limitOutput_ = shouldLimit; };
       
@@ -81,10 +81,10 @@ namespace Tonic{
     }
     
     //! Returns a reference to outputGen
-    const Generator & getOutputGenerator() {
-      return gen()->getOutputGenerator();
+    const Generator getOutputGen() {
+      return gen()->getOutputGen();
     }
-    
+
     //! Set whether synth uses dynamic limiter to prevent clipping/wrapping. Defaults to true.
     void setLimitOutput(bool shouldLimit) {
       gen()->setLimitOutput(shouldLimit);

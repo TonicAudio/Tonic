@@ -31,7 +31,7 @@ public:
     float bpm = 30.f;
     
     ControlMetro beat = ControlMetro().bpm(bpm);
-    ControlDelay offbeat = ControlDelay(1.2f).in(beat).delayTime(30.0f/bpm);
+    ControlDelay offbeat = ControlDelay(1.2f).input(beat).delayTime(30.0f/bpm);
     
     Generator click = Noise() * ADSR(0.0001f,0.025f,0,0.01f).doesSustain(false).exponential(true).trigger(beat);
     
@@ -48,8 +48,8 @@ public:
       .density(density)
       .roomShape(shape)
       .roomSize(size)
-      .dryLevel(ControlDbToLinear().in(dry))
-      .wetLevel(ControlDbToLinear().in(wet));
+      .dryLevel(ControlDbToLinear().input(dry))
+      .wetLevel(ControlDbToLinear().input(wet));
         
     setOutputGen( ((click + tone) >> reverb) * 0.8f );
   }

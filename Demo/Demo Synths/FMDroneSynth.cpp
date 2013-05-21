@@ -30,7 +30,7 @@ public:
     ControlParameter modIndex = addParameter("modIndex", 0.25f).displayName("FM Amount").min(0.f).max(1.0f);
     ControlParameter lfoAmt = addParameter("lfoAmt", 0.5f).displayName("LFO Amount").min(0.f).max(1.f);
     
-    Generator rCarrierFreq = ControlMidiToFreq().in(carrierPitch).smoothed();
+    Generator rCarrierFreq = ControlMidiToFreq().input(carrierPitch).smoothed();
     Generator rModFreq     = rCarrierFreq * 4.0f;
       
     Generator outputGen = SineWave()
@@ -40,9 +40,10 @@ public:
             rModFreq *
              (modIndex.smoothed() * (1.0f + SineWave().freq((LFNoise().setFreq(0.5f) + 1.f) * 2.f + 0.2f) * (lfoAmt * 0.5f).smoothed()))
           )
-        ) * ControlDbToLinear().in(volume).smoothed() * ((SineWave().freq(0.15f) + 1.f) * 0.75f + 0.25);
+        ) * ControlDbToLinear().input(volume).smoothed() * ((SineWave().freq(0.15f) + 1.f) * 0.75f + 0.25);
     
     setOutputGen(outputGen);
+
   }
   
 };

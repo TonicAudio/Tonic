@@ -72,7 +72,7 @@ class ControlSnapToScaleTestSynth : public Synth{
    
     ControlSnapToScale scaleSnapper1 =  ControlSnapToScale()
       .setScale(scale)
-      .in( stepper1 );
+      .input( stepper1 );
     
     Generator delayMix = ControlRandom().min(0).max(0.1).trigger(switchIt).smoothed();
     
@@ -81,7 +81,7 @@ class ControlSnapToScaleTestSynth : public Synth{
     Generator outputGen = ((
     
       SineWave().freq(
-        ControlMidiToFreq().in(scaleSnapper1 + -12).smoothed().length(
+        ControlMidiToFreq().input(scaleSnapper1 + -12).smoothed().length(
           ControlRandom().min(0).max(0.03).trigger(switchIt)
         )
       ) 
@@ -89,7 +89,7 @@ class ControlSnapToScaleTestSynth : public Synth{
       +
     
       SineWave().freq(
-        ControlMidiToFreq().in(scaleSnapper1 + 12)
+        ControlMidiToFreq().input(scaleSnapper1 + 12)
       ) * 0.1
       
     )
