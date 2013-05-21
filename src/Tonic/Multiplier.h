@@ -30,7 +30,7 @@ namespace Tonic{
       Multiplier_();
       ~Multiplier_();
       
-      void input(Generator& generator);
+      void input(Generator generator);
       
       Generator getInput(unsigned int index) { return inputs[index]; };
       unsigned int numInputs() { return inputs.size(); };
@@ -56,7 +56,7 @@ namespace Tonic{
 
   class Multiplier : public TemplatedGenerator<Tonic_::Multiplier_>{
   public:
-    Multiplier input(Generator& inputSource){
+    Multiplier input(Generator inputSource){
       gen()->input(inputSource);
       return *this;
     }
