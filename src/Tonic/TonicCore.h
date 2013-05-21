@@ -27,9 +27,6 @@
 // Uncomment or define in your build configuration to log debug messages and perform extra debug checks
 // #define TONIC_DEBUG
 
-// Uncomment or define in your build configuration to disable generator-level mutexes. May result in faster performance
- #define TONIC_DISABLE_GEN_MUTEXES
-
 // Determine if C++11 is available. If not, some synths cannot be used. (applies to oF demos, mostly)
 #define TONIC_HAS_CPP_11 (__cplusplus > 199711L)
 

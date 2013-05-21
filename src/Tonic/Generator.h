@@ -57,15 +57,9 @@ namespace Tonic {
       // check context to see if we need new frames
       if (context.forceNewOutput || lastFrameIndex_ != context.elapsedFrames){
         
-#ifndef TONIC_DISABLE_GEN_MUTEXES
         lockMutex();
-#endif
-
         computeSynthesisBlock(context);
-
-#ifndef TONIC_DISABLE_GEN_MUTEXES
         unlockMutex();
-#endif
         lastFrameIndex_ = context.elapsedFrames;
       }
     

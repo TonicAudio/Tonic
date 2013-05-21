@@ -66,15 +66,9 @@ namespace Tonic {
       
       if (context.forceNewOutput || lastFrameIndex_ != context.elapsedFrames){
         lastFrameIndex_ = context.elapsedFrames;
-        
-#ifndef TONIC_DISABLE_GEN_MUTEXES
         lockMutex();
-#endif
         computeOutput(context);
-        
-#ifndef TONIC_DISABLE_GEN_MUTEXES
         unlockMutex();
-#endif
       }
       
 #ifdef TONIC_DEBUG
