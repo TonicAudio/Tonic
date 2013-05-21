@@ -27,10 +27,6 @@ namespace Tonic {
       
       virtual void tick( TonicFrames& frames, const SynthesisContext_ &context );
       
-      // mutex for swapping inputs, etc
-      void lockMutex();
-      void unlockMutex();
-      
       bool isStereoOutput(){ return isStereoOutput_; };
       
       // set stereo/mono - changes number of channels in outputFrames_
@@ -48,32 +44,19 @@ namespace Tonic {
       TonicFrames     outputFrames_;
       unsigned long   lastFrameIndex_;
       
-      TONIC_MUTEX_T genMutex_;
-
     };
     
     inline void Generator_::tick(TonicFrames &frames, const SynthesisContext_ &context ){
       
       // check context to see if we need new frames
       if (context.forceNewOutput || lastFrameIndex_ != context.elapsedFrames){
-        
-        lockMutex();
         computeSynthesisBlock(context);
-        unlockMutex();
         lastFrameIndex_ = context.elapsedFrames;
       }
     
       // copy synthesis block to frames passed in
       frames.copy(outputFrames_);
       
-    }
-    
-    inline void Generator_::lockMutex(){
-      TONIC_MUTEX_LOCK(genMutex_);
-    }
-    
-    inline void Generator_::unlockMutex(){
-      TONIC_MUTEX_UNLOCK(genMutex_);
     }
     
     /////////////////////
@@ -129,9 +112,7 @@ namespace Tonic {
                                                                                         \
                                                                                         \
   generatorClassName& methodNameInGenerator(Generator arg){                             \
-    this->gen()->lockMutex();                                                           \
     this->gen()->methodNameInGenerator_(arg);                                           \
-    this->gen()->unlockMutex();                                                         \
     return static_cast<generatorClassName&>(*this);                                     \
   }                                                                                     \
                                                                                         \

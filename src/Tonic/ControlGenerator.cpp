@@ -19,11 +19,9 @@ namespace Tonic{
     ControlGenerator_::ControlGenerator_() :
       lastFrameIndex_(0)
     {
-      TONIC_MUTEX_INIT(genMutex_);
     }
 
     ControlGenerator_::~ControlGenerator_(){
-      TONIC_MUTEX_DESTROY(genMutex_);
     }
     
     ControlGeneratorOutput ControlGenerator_::initialOutput(){

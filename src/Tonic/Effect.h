@@ -82,9 +82,7 @@ namespace Tonic {
       
       // check context to see if we need new frames
       if (context.elapsedFrames == 0 || lastFrameIndex_ != context.elapsedFrames){
-        
-        lockMutex();
-        
+                
         input_.tick(dryFrames_, context); // get input frames
         
         computeSynthesisBlock(context);
@@ -101,9 +99,7 @@ namespace Tonic {
           dryFrames_ *= mixWorkspace_;
           outputFrames_ += dryFrames_;
         }
-        
-        unlockMutex();
-        
+                
         lastFrameIndex_ = context.elapsedFrames;
       }
       
@@ -122,8 +118,6 @@ namespace Tonic {
 
         // Do not check context here, assume each call should process
       
-        lockMutex();
-
         dryFrames_.copy(inFrames);
         computeSynthesisBlock(context);
         
@@ -144,9 +138,6 @@ namespace Tonic {
           
           outFrames.copy(outputFrames_);
         }
-
-
-        unlockMutex();
       
     }
   }
@@ -171,9 +162,7 @@ namespace Tonic {
     }
     
     void setIsStereoInput( bool isStereoInput ){
-      this->gen()->lockMutex();
       this->gen()->setIsStereoInput(isStereoInput);
-      this->gen()->unlockMutex();
     }
     
     createControlGeneratorSetters(EffectType, bypass, setBypassCtrlGen);

@@ -46,9 +46,7 @@ namespace Tonic {
     
   
   TableLookupOsc & TableLookupOsc::setLookupTable(SampleTable lookupTable){
-    gen()->lockMutex();
     gen()->setLookupTable(lookupTable);
-    gen()->unlockMutex();
     return *this;
   }
   

@@ -58,17 +58,13 @@ namespace Tonic {
       ControlGeneratorOutput  lastOutput_;
       unsigned long           lastFrameIndex_;
       
-      TONIC_MUTEX_T           genMutex_;
-
     };
     
     inline ControlGeneratorOutput ControlGenerator_::tick(const SynthesisContext_ & context){
       
       if (context.forceNewOutput || lastFrameIndex_ != context.elapsedFrames){
         lastFrameIndex_ = context.elapsedFrames;
-        lockMutex();
         computeOutput(context);
-        unlockMutex();
       }
       
 #ifdef TONIC_DEBUG
@@ -78,14 +74,6 @@ namespace Tonic {
 #endif
       
       return lastOutput_;
-    }
-    
-    inline void ControlGenerator_::lockMutex(){
-      TONIC_MUTEX_LOCK(genMutex_);
-    }
-    
-    inline void ControlGenerator_::unlockMutex(){
-      TONIC_MUTEX_UNLOCK(genMutex_);
     }
 
   }
@@ -131,9 +119,7 @@ return methodNameInGenerator( ControlValue(arg) );                              
 }                                                                                  \
 \
 generatorClassName& methodNameInGenerator(ControlGenerator arg){                   \
-this->gen()->lockMutex();            \
 this->gen()->methodNameInGenerator_(arg);                                          \
-this->gen()->unlockMutex();            \
 return static_cast<generatorClassName&>(*this);                                    \
 }
 

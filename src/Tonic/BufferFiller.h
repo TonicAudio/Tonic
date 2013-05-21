@@ -31,6 +31,7 @@ namespace Tonic{
     private:
       
       int                         bufferReadPosition_;
+      TONIC_MUTEX_T               mutex_;
       
     protected:
       
@@ -39,6 +40,11 @@ namespace Tonic{
     public:
       
       BufferFiller_();
+      ~BufferFiller_();
+      
+      // mutex for swapping inputs, etc
+      void lockMutex();
+      void unlockMutex();
       
       //! Process a single synthesis vector, output to frames
       /*!
@@ -50,10 +56,19 @@ namespace Tonic{
 
     };
     
+    inline void BufferFiller_::lockMutex(){
+      TONIC_MUTEX_LOCK(mutex_);
+    }
+    
+    inline void BufferFiller_::unlockMutex(){
+      TONIC_MUTEX_UNLOCK(mutex_);
+    }
     
     inline void BufferFiller_::tick( TonicFrames& frames ){
+      lockMutex();
       Generator_::tick(frames, synthContext_);
       synthContext_.tick();
+      unlockMutex();
     }
     
     inline void BufferFiller_::fillBufferOfFloats(float *outData,  unsigned int numFrames, unsigned int numChannels)
