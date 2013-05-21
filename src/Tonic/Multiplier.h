@@ -29,9 +29,10 @@ namespace Tonic{
     public:
       Multiplier_();
       ~Multiplier_();
-      void in(Generator& generator);
       
-      Generator & getInput(unsigned int index) { return inputs[index]; };
+      void input(Generator generator);
+      
+      Generator getInput(unsigned int index) { return inputs[index]; };
       unsigned int numInputs() { return inputs.size(); };
     };
     
@@ -55,12 +56,12 @@ namespace Tonic{
 
   class Multiplier : public TemplatedGenerator<Tonic_::Multiplier_>{
   public:
-    Multiplier in(Generator& inputSource){
-      gen()->in(inputSource);
+    Multiplier input(Generator inputSource){
+      gen()->input(inputSource);
       return *this;
     }
     
-    Generator & operator[](unsigned int index){
+    Generator operator[](unsigned int index){
       return gen()->getInput(index);
     }
     
@@ -72,8 +73,8 @@ namespace Tonic{
 
   static Multiplier operator*(Generator a, Generator b){
     Multiplier mult;
-    mult.in(a);
-    mult.in(b);
+    mult.input(a);
+    mult.input(b);
     return mult;
   }
   
@@ -83,31 +84,6 @@ namespace Tonic{
   
   static Multiplier operator*(Generator a, float b){
       return a * FixedValue(b);
-  }
-  
-  static Multiplier operator*(Generator a, Multiplier b){
-    b.in(a);
-    return b;
-  }
-  
-  static Multiplier operator*(Multiplier a, Generator b){
-    a.in(b);
-    return a;
-  }
-  
-  static Multiplier operator*(float a, Multiplier b){
-    return FixedValue(a) * b;
-  }
-  
-  static Multiplier operator*(Multiplier a, float b){
-    return FixedValue(b) * a;
-  }
-  
-  static Multiplier operator*(Multiplier a, Multiplier b){
-    for (int i=0; i<b.numInputs(); i++){
-      a.in(b[i]);
-    }
-    return a;
   }
   
   

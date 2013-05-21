@@ -35,8 +35,8 @@ public:
     std::vector<float> scale(scalenums, scalenums + 5);
     
     ControlRandom rand = ControlRandom().min(0).max(36).trigger(metro);
-    ControlSnapToScale snap = ControlSnapToScale().setScale(scale).in(rand);
-    ControlMidiToFreq freq = ControlMidiToFreq().in(48 + snap);
+    ControlSnapToScale snap = ControlSnapToScale().setScale(scale).input(rand);
+    ControlMidiToFreq freq = ControlMidiToFreq().input(48 + snap);
     
     Generator osc = (
                       (
@@ -64,7 +64,7 @@ public:
       .dryLevel( 1.0f - smoothMix )
       .wetLevel( smoothMix );
     
-    outputGen = (osc >> filt >> delay) * ControlDbToLinear().in(volume).smoothed();
+    outputGen = (osc >> filt >> delay) * ControlDbToLinear().input(volume).smoothed();
   }
   
 };

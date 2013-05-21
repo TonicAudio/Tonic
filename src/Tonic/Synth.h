@@ -29,7 +29,7 @@ namespace Tonic{
     void  setOutputGen(Generator gen);
     
     //! Returns a reference to outputGen
-    const Generator & getOutputGenerator() { return outputGen; };
+    const Generator getOutputGenerator() { return outputGen; };
     
     //! Set whether synth uses dynamic limiter to prevent clipping/wrapping. Defaults to true.
     void setLimitOutput(bool shouldLimit) { limitOutput_ = shouldLimit; };
