@@ -52,8 +52,9 @@ namespace Tonic {
   
     // signal flow operator - sets lhs as input to rhs
   template<class ControlConditionerType, class ControlConditionerType_>
-  static ControlConditionerType & operator>>(const ControlGenerator & lhs, TemplatedControlConditioner<ControlConditionerType, ControlConditionerType_> rhs){
-    return rhs.input( lhs );
+  static ControlConditionerType operator>>(const ControlGenerator & lhs, const TemplatedControlConditioner<ControlConditionerType, ControlConditionerType_> & rhs){
+    TemplatedControlConditioner<ControlConditionerType, ControlConditionerType_> cc = rhs;
+    return cc.input( lhs );
   }
   
 }
