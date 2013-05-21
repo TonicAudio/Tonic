@@ -55,11 +55,14 @@ namespace Tonic {
       virtual void setIsStereoInput( bool stereo );
       bool isStereoInput(){ return isStereoInput_; };
       
+      // --- Tick methods ---
+      
+      virtual void tick(TonicFrames &frames, const SynthesisContext_ &context );
+      
       //! Apply effect directly to passed in frames (output in-place)
       /*!
           DO NOT mix calls to tick() with calls to tickThrough(). Result is undefined.
       */
-      virtual void tick(TonicFrames &frames, const SynthesisContext_ &context );
       virtual void tickThrough( TonicFrames & inFrames, TonicFrames & outFrames, const SynthesisContext_ & context );
 
     };

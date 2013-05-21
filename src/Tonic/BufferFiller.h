@@ -29,10 +29,15 @@ namespace Tonic{
   private:
     int                         bufferReadPosition_;
     TonicFrames                 outputFrames_;
-    Tonic_::SynthesisContext_   context_;
+    
+  protected:
+    TONIC_MUTEX_T               mutex_;
+    Tonic_::SynthesisContext_   synthContext_;
     
   public:
+    
     BufferFiller();
+    ~BufferFiller();
     
     //! Process a single synthesis vector, output to frames
     /*!
@@ -56,16 +61,18 @@ namespace Tonic{
   };
   
   inline void BufferFiller::tick( TonicFrames& frames ){
-    this->tick(frames, context_);
-    context_.tick();
+    this->tick(frames, synthContext_);
+    synthContext_.tick();
   }
   
   // fill a buffer of floats, assuming the buffer is expecting max/min of 1,-1
   inline void BufferFiller::fillBufferOfFloats(float *outData,  unsigned int numFrames, unsigned int numChannels){
     
+#ifdef TONIC_DEBUG
     if(numChannels > outputFrames_.channels()) error("Mismatch in channels sent to Synth::fillBufferOfFloats", true);
+#endif
     
-    const unsigned int sampleCount = outputFrames_.channels() * outputFrames_.frames();
+    const unsigned int sampleCount = outputFrames_.size();
     const unsigned int channelsPerSample = (outputFrames_.channels() - numChannels) + 1;
     
     TonicFloat sample = 0.0f;

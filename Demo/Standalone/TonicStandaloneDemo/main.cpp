@@ -38,6 +38,8 @@ int main(int argc, const char * argv[])
     unsigned int sampleRate = 44100;
     unsigned int bufferFrames = 512; // 512 sample frames
     
+    // You don't necessarily have to do this - it will default to 44100 if not set.
+    Tonic::setSampleRate(sampleRate);
     
     // --------- MAKE A SYNTH HERE -----------
     
@@ -46,7 +48,7 @@ int main(int argc, const char * argv[])
     ControlMetro metro = ControlMetro().bpm(100);
     ControlGenerator freq = ControlRandom().trigger(metro).min(0).max(1);
     
-    Generator tone = RectWave().freq(
+    Generator tone = SquareWave().freq(
                                      freq * 0.25 + 100
                                      + 400
                                      ) * SineWave().freq(50);

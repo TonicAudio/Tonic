@@ -25,27 +25,10 @@ namespace Tonic{
     ControlGenerator_::~ControlGenerator_(){
       TONIC_MUTEX_DESTROY(&genMutex_);
     }
-
-    ControlGeneratorOutput ControlGenerator_::tick(const SynthesisContext_ & context){
-      if (lastFrameIndex_ == 0 || lastFrameIndex_ != context.elapsedFrames){
-        lastFrameIndex_ = context.elapsedFrames;
-        lockMutex();
-        computeOutput(context);
-        unlockMutex();
-      }
-      
-      #ifdef TONIC_DEBUG
-      if(lastOutput_.value != lastOutput_.value){
-        Tonic::error("ControlGenerator_::tick NaN detected.", true);
-      }
-      #endif
-      
-      return lastOutput_;
-    }
     
     ControlGeneratorOutput ControlGenerator_::initialOutput(){
-      // return output from passing in an initialized context
-      return tick(SynthesisContext_());
+      // return output from passing in dummy context
+      return tick(Tonic::DummyContext);
     }
     
   }

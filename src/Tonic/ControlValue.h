@@ -16,7 +16,7 @@ namespace Tonic {
   namespace Tonic_{
 
     class ControlValue_ : public ControlGenerator_{
-      
+    
     public:
       
         ControlValue_();

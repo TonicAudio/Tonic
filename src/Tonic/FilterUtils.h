@@ -15,7 +15,8 @@ namespace Tonic {
   
   //! Calculate coefficient for a pole with given time constant to reach -60dB delta in t60s seconds
   inline static TonicFloat t60ToOnePoleCoef( TonicFloat t60s ){
-    return t60s > 0.001f ? expf(-1.0f/((t60s/6.91) * sampleRate())) : 0.0f;
+    float coef = expf(-1.0f/((t60s/6.91f) * sampleRate()));
+    return (coef == coef) ? coef : 0.f; // catch NaN
   }
   
   //! Calculate coefficient for a pole with a given desired cutoff in hz
