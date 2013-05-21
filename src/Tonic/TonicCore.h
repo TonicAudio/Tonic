@@ -42,10 +42,10 @@
 #if (defined (__APPLE__) || defined (__linux__))
 
   #define TONIC_MUTEX_T pthread_mutex_t
-  #define TONIC_MUTEX_INIT(x) pthread_mutex_init(x, NULL)
-  #define TONIC_MUTEX_DESTROY(x) pthread_mutex_destroy(x)
-  #define TONIC_MUTEX_LOCK(x) pthread_mutex_lock(x)
-  #define TONIC_MUTEX_UNLOCK(x) pthread_mutex_unlock(x)
+  #define TONIC_MUTEX_INIT(x) pthread_mutex_init(&x, NULL)
+  #define TONIC_MUTEX_DESTROY(x) pthread_mutex_destroy(&x)
+  #define TONIC_MUTEX_LOCK(x) pthread_mutex_lock(&x)
+  #define TONIC_MUTEX_UNLOCK(x) pthread_mutex_unlock(&x)
 
 #elif (defined (_WIN32) || defined (__WIN32__))
 
@@ -126,7 +126,15 @@ namespace Tonic {
       // TODO: Not fully implmenented yet -- ND 2013/05/20
       bool forceNewOutput;
       
-      SynthesisContext_() : elapsedFrames(0), elapsedTime(0), forceNewOutput(true) {};
+      TONIC_MUTEX_T mutex;
+      
+      SynthesisContext_() : elapsedFrames(0), elapsedTime(0), forceNewOutput(true){
+        TONIC_MUTEX_INIT(mutex);
+      }
+      
+      ~SynthesisContext_(){
+        TONIC_MUTEX_DESTROY(mutex);
+      }
       
       void tick() {
         elapsedFrames += kSynthesisBlockSize;
