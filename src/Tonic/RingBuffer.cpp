@@ -20,6 +20,30 @@ namespace Tonic {
       writeHead_(0),
       readHead_(0)
     {}
+    
+    RingBufferWriter_::~RingBufferWriter_(){
+      s_RingBuffers_.removeObjectNamed(tableName_);
+    }
+    
+    void RingBufferWriter_::initRingBuffer(string name, unsigned int nFrames, unsigned int nChannels){
+     
+      RingBufferTable table = RingBufferTable(nFrames, nChannels);
+      
+      // overwrite existing entry if there is one
+#ifdef TONIC_DEBUG
+      if (s_RingBuffers_.containsObjectNamed(name)){
+        warning("There is already a ring buffer named " + name + " open for writing. It will be replaced with this one.");
+      }
+#endif
+      s_RingBuffers_.insertObject(name, table);
+      
+      ringBufferTable_ = table;
+    }
+    
+    void RingBufferWriter_::reset()
+    {
+      ringBufferTable_.reset();
+    }
   }
   
   RingBufferReader & RingBufferReader::bufferName(string name){
@@ -33,24 +57,14 @@ namespace Tonic {
     return *this;
   }
 
-  RingBufferWriter::RingBufferWriter() {}
+  RingBufferWriter::RingBufferWriter() {
+    obj = new Tonic_::RingBufferWriter_();
+  }
   
   RingBufferWriter::RingBufferWriter(string name, unsigned int nFrames, unsigned int nChannels)
   {
-    ringBufferTable_ = RingBufferTable(nFrames, nChannels);
-    
-    // overwrite existing entry if there is one
-#ifdef TONIC_DEBUG
-    if (s_RingBuffers_.containsObjectNamed(name)){
-      warning("There is already a ring buffer named " + name + " open for writing. It will be replaced with this one.");
-    }
-#endif
-    s_RingBuffers_.insertObject(name, ringBufferTable_);
-  }
-  
-  void RingBufferWriter::reset()
-  {
-    ringBufferTable_.reset();
+    obj = new Tonic_::RingBufferWriter_();
+    obj->initRingBuffer(name, nFrames, nChannels);
   }
   
 } // Namespace Tonic

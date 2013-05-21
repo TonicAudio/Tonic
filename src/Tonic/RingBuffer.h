@@ -199,10 +199,6 @@ namespace Tonic {
     public:
                   
       void setRingBufferTable( RingBufferTable table) { ringBufferTable_ = table; }
-      
-      void reset(){
-        ringBufferTable_.reset();
-      }
             
       void computeSynthesisBlock( const SynthesisContext_ &context );
       
@@ -212,6 +208,29 @@ namespace Tonic {
       // get some output from the table
       ringBufferTable_.read(outputFrames_);
     };
+    
+    // TODO: Maybe make this an Effect_?
+    class RingBufferWriter_ {
+      
+    protected:
+      
+      RingBufferTable ringBufferTable_;
+      string tableName_;
+      
+    public:
+      
+      ~RingBufferWriter_();
+      
+      void initRingBuffer(string name, unsigned int nFrames, unsigned int nChannels);
+      void write(float *data, unsigned int nFrames, unsigned int nChannels);
+      void reset();
+      
+    };
+    
+    inline void RingBufferWriter_::write(float *data, unsigned int nFrames, unsigned int nChannels)
+    {
+      ringBufferTable_.write(data, nFrames, nChannels);
+    }
     
   }
   
@@ -224,25 +243,21 @@ namespace Tonic {
     
   };
   
-  class RingBufferWriter {
-      
-    protected:
-      
-      RingBufferTable ringBufferTable_;
+  class RingBufferWriter : public TonicSmartPointer<Tonic_::RingBufferWriter_> {
       
     public:
     
       RingBufferWriter();
       RingBufferWriter(string name, unsigned int nFrames, unsigned int nChannels);
       
-      void write(float *data, unsigned int nFrames, unsigned int nChannels);
-      void reset();
+      void write(float *data, unsigned int nFrames, unsigned int nChannels){
+        obj->write(data, nFrames, nChannels);
+      }
+    
+      void reset(){
+        obj->reset();
+      }
   };
-  
-  inline void RingBufferWriter::write(float *data, unsigned int nFrames, unsigned int nChannels)
-  {
-    ringBufferTable_.write(data, nFrames, nChannels);
-  }
     
 }
 
