@@ -10,7 +10,7 @@
 
 namespace Tonic { namespace Tonic_{
   
-  void ControlAdder_::in(ControlGenerator input){
+  void ControlAdder_::input(ControlGenerator input){
     inputs.push_back(input);
   }
   

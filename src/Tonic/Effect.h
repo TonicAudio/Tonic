@@ -191,9 +191,8 @@ namespace Tonic {
   
   // signal flow operator - sets lhs as input to rhs
   template<class EffectType, class EffectType_>
-  static EffectType operator>>(const Generator & lhs, const TemplatedEffect<EffectType, EffectType_> & rhs){
-    TemplatedEffect<EffectType, EffectType_> eff = rhs;
-    return eff.input( lhs );
+  static EffectType operator>>(Generator lhs, TemplatedEffect<EffectType, EffectType_> rhs){
+    return rhs.input( lhs );
   }
 
 }

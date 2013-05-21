@@ -20,7 +20,7 @@ namespace Tonic { namespace Tonic_{
   Multiplier_::~Multiplier_(){
   }
   
-  void Multiplier_::in(Generator& generator){
+  void Multiplier_::input(Generator& generator){
     lockMutex();
     inputs.push_back(generator);
     if ( generator.isStereoOutput() && !this->isStereoOutput() ){
