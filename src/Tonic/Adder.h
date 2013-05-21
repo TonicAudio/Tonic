@@ -29,9 +29,9 @@ namespace Tonic {
       Adder_();
       ~Adder_();
       
-      void in(Generator generator);
+      void input(Generator generator);
       
-      Generator & getInput(unsigned int index) { return inputs[index]; };
+      Generator getInput(unsigned int index) { return inputs[index]; };
       unsigned int numInputs() { return inputs.size(); };
             
     };
@@ -54,12 +54,12 @@ namespace Tonic {
   class Adder : public TemplatedGenerator<Tonic_::Adder_>{
   public:
     
-    Adder in(Generator input){
-      gen()->in(input);
+    Adder input(Generator input){
+      gen()->input(input);
       return *this;
     }
     
-    Generator & operator[](unsigned int index){
+    Generator operator[](unsigned int index){
       return gen()->getInput(index);
     }
     
@@ -73,55 +73,27 @@ namespace Tonic {
   
   static Adder operator + (Generator a, Generator b){
     Adder add;
-    add.in(a);
-    add.in(b);
+    add.input(a);
+    add.input(b);
     return add;
   }
   
   
   static Adder operator + (float a, Generator b){
     Adder add;
-    add.in(FixedValue(a));
-    add.in(b);
+    add.input(FixedValue(a));
+    add.input(b);
     return add;
   }
   
   
   static Adder operator + (Generator a, float b){
     Adder add;
-    add.in(a);
-    add.in(FixedValue(b));
+    add.input(a);
+    add.input(FixedValue(b));
     return add;
   }
   
-  // add an adder to another thing
-
-  static Adder operator + (Adder a, Generator b){
-    a.in(b);
-    return a;
-  }
-  
-  static Adder operator + (Generator a, Adder b){
-    b.in(a);
-    return b;
-  }
-  
-  static Adder operator + (Adder a, float b){
-    a.in(FixedValue(b));
-    return a;
-  }
-  
-  static Adder operator + (float a, Adder b){
-    b.in(FixedValue(a));
-    return b;
-  }
-  
-  static Adder operator + (Adder a, Adder b){
-    for (int i=0; i<b.numInputs(); i++){
-      a.in(b[i]);
-    }
-    return a;
-  }
   
   // Add a Generatator and a ControlGenerator
   

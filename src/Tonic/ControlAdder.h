@@ -26,9 +26,9 @@ namespace Tonic {
       
     public:
       
-      void in( ControlGenerator input );
+      void input( ControlGenerator input );
       
-      ControlGenerator & getInput(unsigned int index) { return inputs[index]; };
+      ControlGenerator getInput(unsigned int index) { return inputs[index]; };
       unsigned int numInputs() { return inputs.size(); };
       
     protected:
@@ -45,11 +45,11 @@ namespace Tonic {
     
   public:
     
-    void in( ControlGenerator input ){
-      gen()->in( input );
+    void input( ControlGenerator input ){
+      gen()->input( input );
     }
     
-    ControlGenerator & operator[](unsigned int index){
+    ControlGenerator operator[](unsigned int index){
       return gen()->getInput(index);
     }
     
@@ -60,51 +60,25 @@ namespace Tonic {
   
   static ControlAdder operator+(ControlGenerator a, ControlGenerator b){
     ControlAdder adder;
-    adder.in(a);
-    adder.in(b);
+    adder.input(a);
+    adder.input(b);
     return adder;
   }
   
   static ControlAdder operator+(ControlGenerator a, float b){
     ControlAdder adder;
-    adder.in(a);
-    adder.in(ControlValue(b));
+    adder.input(a);
+    adder.input(ControlValue(b));
     return adder;
   }
   
   static ControlAdder operator+(float a, ControlGenerator b){
     ControlAdder adder;
-    adder.in(ControlValue(a));
-    adder.in(ControlGenerator(b));
+    adder.input(ControlValue(a));
+    adder.input(ControlGenerator(b));
     return adder;
   }
   
-  static ControlAdder operator+(ControlAdder a, ControlGenerator b){
-    a.in(b);
-    return a;
-  }
-  
-  static ControlAdder operator+(ControlGenerator a, ControlAdder b){
-    b.in(a);
-    return b;
-  }
-  
-  static ControlAdder operator+(ControlAdder a, float b){
-    a.in(ControlValue(b));
-    return a;
-  }
-  
-  static ControlAdder operator+(float a, ControlAdder b){
-    b.in(ControlValue(a));
-    return b;
-  }
-  
-  static ControlAdder operator+(ControlAdder a, ControlAdder b){
-    for (unsigned int i=0; i<b.numInputs(); i++){
-      a.in(b[i]);
-    }
-    return a;
-  }
 }
 
 #endif /* defined(__Tonic__ControlAdder__) */

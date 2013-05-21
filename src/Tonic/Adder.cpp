@@ -20,7 +20,7 @@ namespace Tonic{ namespace Tonic_ {
   Adder_::~Adder_(){
   }
   
-  void Adder_::in(Generator generator){
+  void Adder_::input(Generator generator){
     inputs.push_back( generator );
     if ( generator.isStereoOutput() && !this->isStereoOutput() ){
       this->setIsStereoOutput(true);
