@@ -96,43 +96,16 @@ namespace Tonic {
   }
 
   
-  class Generator{
-  protected:
-    Tonic_::Generator_* mGen;
-    int* pcount;
+  class Generator : public TonicSmartPointer<Tonic_::Generator_>{
+
   public:
-    Generator() : mGen( new Tonic_::PassThroughGenerator_() ), pcount(new int(1)) {}
-    Generator(const Generator& r): mGen(r.mGen), pcount(r.pcount){(*pcount)++;}
-    Generator& operator=(const Generator& r)
-    {
-      if(mGen == r.mGen) return *this;
-      if(--(*pcount) == 0){
-        delete mGen;
-        delete pcount;
-      }
-      mGen = r.mGen;
-      pcount = r.pcount;
-      (*pcount)++;
-      return *this;
-    }
-    
-    ~Generator(){
-      if(--(*pcount) == 0){
-        delete mGen;
-        delete pcount;
-      }
-    }
-    
-    bool operator==(const Generator& r){
-      return mGen == r.mGen;
-    }
     
     inline bool isStereoOutput(){
-      return mGen->isStereoOutput();
+      return obj->isStereoOutput();
     }
     
     virtual void tick(TonicFrames& frames, const Tonic_::SynthesisContext_ & context){
-      mGen->tick(frames, context);
+      obj->tick(frames, context);
     }
 
   };
@@ -141,12 +114,11 @@ namespace Tonic {
   class TemplatedGenerator : public Generator{
   protected:
     GenType* gen(){
-      return static_cast<GenType*>(mGen);
+      return static_cast<GenType*>(obj);
     }
   public:
     TemplatedGenerator(){
-      delete mGen;
-      mGen = new GenType();
+      obj = new GenType();
     }
   };
   

@@ -18,14 +18,16 @@
 #define __Tonic__TableLookupOsc__
 
 #include "Generator.h"
-#include "SampleTables.h"
+#include "SampleTable.h"
 
 namespace Tonic {
   
   namespace Tonic_ {
-        
+    
+    // Registry for all static lookup table data
+    static TonicDictionary<SampleTable> s_oscTables_;
+    
     class TableLookupOsc_ : public Generator_{
-      
       
       //------------------------------------
       //
@@ -37,7 +39,7 @@ namespace Tonic {
       //-----------------------------------
       
     protected:
-
+      
       SampleTable sampleTable_;
       
       double phase_;

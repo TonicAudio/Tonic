@@ -26,16 +26,16 @@ namespace Tonic {
   RingBuffer & RingBuffer::initialize(string name, unsigned int nFrames, unsigned int nChannels){
 
     RingBufferTable bufferTable;
-    if (!SharedSampleTables().getSampleTable(name, &bufferTable)){
-      
-      RingBufferTable newTable = RingBufferTable(nFrames, nChannels);
-      SharedSampleTables().registerSampleTable(name, newTable);
-      
-      gen()->setRingBufferTable(newTable);
-    }
-    else{
-      gen()->setRingBufferTable(bufferTable);
-    }
+//    if (!SharedSampleTables().getSampleTable(name, &bufferTable)){
+//      
+//      RingBufferTable newTable = RingBufferTable(nFrames, nChannels);
+//      SharedSampleTables().registerSampleTable(name, newTable);
+//      
+//      gen()->setRingBufferTable(newTable);
+//    }
+//    else{
+//      gen()->setRingBufferTable(bufferTable);
+//    }
     return *this;
   }
   

@@ -13,7 +13,7 @@
 #define __Tonic__RingBuffer__
 
 #include "Effect.h"
-#include "SampleTables.h"
+#include "SampleTable.h"
 
 namespace Tonic {
   
@@ -94,24 +94,24 @@ namespace Tonic {
   
   class RingBufferTable : public SampleTable {
     
-  public:
-    
-    RingBufferTable(unsigned int nFrames = 2, unsigned int nChannels = 2){
-      delete sampleTable_;
-      sampleTable_ = new Tonic_::RingBufferTable_(nFrames, nChannels);
-    }
-    
-    void write(float * inFrames, unsigned int nSamples){
-      static_cast<Tonic_::RingBufferTable_*>(sampleTable_)->write(inFrames, nSamples);
-    }
-    
-    void read(float * outFrames, unsigned int nSamples){
-      static_cast<Tonic_::RingBufferTable_*>(sampleTable_)->read(outFrames, nSamples);
-    }
-    
-    void reset(){
-      static_cast<Tonic_::RingBufferTable_*>(sampleTable_)->reset();
-    }
+//  public:
+//    
+//    RingBufferTable(unsigned int nFrames = 2, unsigned int nChannels = 2){
+//      delete sampleTable_;
+//      sampleTable_ = new Tonic_::RingBufferTable_(nFrames, nChannels);
+//    }
+//    
+//    void write(float * inFrames, unsigned int nSamples){
+//      static_cast<Tonic_::RingBufferTable_*>(sampleTable_)->write(inFrames, nSamples);
+//    }
+//    
+//    void read(float * outFrames, unsigned int nSamples){
+//      static_cast<Tonic_::RingBufferTable_*>(sampleTable_)->read(outFrames, nSamples);
+//    }
+//    
+//    void reset(){
+//      static_cast<Tonic_::RingBufferTable_*>(sampleTable_)->reset();
+//    }
     
   };
   

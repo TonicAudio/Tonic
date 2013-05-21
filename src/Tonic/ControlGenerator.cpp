@@ -33,7 +33,7 @@ namespace Tonic{
     
   }
   RampedValue ControlGenerator::smoothed(float length){
-    return RampedValue( mGen->initialOutput().value, length ).target(*this);
+    return RampedValue( obj->initialOutput().value, length ).target(*this);
   }
   
 }

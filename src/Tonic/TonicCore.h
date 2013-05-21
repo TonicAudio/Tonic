@@ -14,6 +14,7 @@
 
 #include <string>
 #include <vector>
+#include <map>
 #include <algorithm>
 #include <stdexcept>
 #include <stdio.h>
@@ -48,7 +49,6 @@
   // TODO: Windows macros
 
 #endif
-
 
 using namespace std;
 
@@ -258,6 +258,94 @@ namespace Tonic {
 #endif
   }
 
+  //! Dictionary helper class for registering objects by name. For correct usage, objects should be Smart Pointers.
+  template<class T>
+  class TonicDictionary {
+    
+  protected:
+    
+    typedef std::map<string, T> TonicDictionaryMap;
+    TonicDictionaryMap dictionaryMap_;
+    
+  public:
+    
+    //! Add object to dictionary. Replaces old object if one exists.
+    void insertObject(string name, T object){
+      dictionaryMap_[name] = object;
+    }
+    
+    bool containsObjectNamed(string name){
+      typename TonicDictionaryMap::iterator it = dictionaryMap_.find(name);
+      return it != dictionaryMap_.end();
+    }
+    
+    //! Returns object with given name. Returns new object if no object has been set for name, does not insert it.
+    T objectNamed(string name){
+      T obj;
+      typename TonicDictionaryMap::iterator it = dictionaryMap_.find(name);
+      if (it != dictionaryMap_.end()){
+        obj = it->second;
+      }
+      return obj;
+    }
+    
+    //! Remove object for name
+    void removeObjectNamed(string name){
+      typename TonicDictionaryMap::iterator it = dictionaryMap_.find(name);
+      if (it != dictionaryMap_.end()){
+        dictionaryMap_.erase(it);
+      }
+    }
+    
+  };
+  
+  template<class T>
+  class TonicSmartPointer {
+  protected:
+    T * obj;
+    int * pcount;
+  public:
+    TonicSmartPointer() : obj(NULL), pcount(NULL) {}
+    
+    TonicSmartPointer(const TonicSmartPointer& r) : obj(r.obj), pcount(r.pcount){
+      if (pcount)
+        (*pcount)++;
+    }
+    
+    TonicSmartPointer& operator=(const TonicSmartPointer& r)
+    {
+      if(obj == r.obj) return *this;
+      
+      if(pcount && --(*pcount) == 0){
+        if (obj) delete obj;
+        delete pcount;
+        
+        obj = NULL;
+        pcount = NULL;
+      }
+      
+      obj = r.obj;
+      pcount = r.pcount;
+      
+      
+      if (pcount)
+        (*pcount)++;
+      
+      return *this;
+    }
+    
+    ~TonicSmartPointer(){
+      if(pcount && --(*pcount) == 0){
+        if (obj) delete obj;
+        delete pcount;
+      }
+    }
+    
+    bool operator==(const TonicSmartPointer& r){
+      return obj == r.obj;
+    }
+    
+  };
 
   
 } // namespace Tonic

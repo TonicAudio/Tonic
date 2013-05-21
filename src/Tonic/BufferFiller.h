@@ -100,7 +100,7 @@ namespace Tonic{
      This BufferFiller's outputGen is used to fill an interleaved buffer starting at outData.
      */
     inline void fillBufferOfFloats(float *outData,  unsigned int numFrames, unsigned int numChannels){
-      static_cast<Tonic_::BufferFiller_*>(mGen)->fillBufferOfFloats(outData, numFrames, numChannels);
+      static_cast<Tonic_::BufferFiller_*>(obj)->fillBufferOfFloats(outData, numFrames, numChannels);
     }
   
   };
@@ -109,12 +109,11 @@ namespace Tonic{
   class TemplatedBufferFiller : public BufferFiller {
   protected:
     GenType* gen(){
-      return static_cast<GenType*>(mGen);
+      return static_cast<GenType*>(obj);
     }
   public:
     TemplatedBufferFiller(){
-      delete mGen;
-      mGen = new GenType();
+      obj = new GenType();
     }
   };
   

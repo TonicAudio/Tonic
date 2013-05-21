@@ -22,6 +22,7 @@
 
 #include "Tonic/TonicCore.h"
 #include "Tonic/TonicFrames.h"
+#include "Tonic/SampleTable.h"
 #include "Tonic/FixedValue.h"
 #include "Tonic/ControlValue.h"
 #include "Tonic/ControlParameter.h"
@@ -36,7 +37,6 @@
 #include "Tonic/ControlMultiplier.h"
 #include "Tonic/ControlDivider.h"
 #include "Tonic/ADSR.h"
-#include "Tonic/MonoToStereoPanner.h"
 #include "Tonic/Mixer.h"
 #include "Tonic/Synth.h"
 
@@ -64,7 +64,7 @@
 #include "Tonic/Reverb.h"
 
 // Utilities
-#include "Tonic/RingBuffer.h"
+//#include "Tonic/RingBuffer.h"
 #include "Tonic/LFNoise.h"
 
 // ------ Control Generators --------
