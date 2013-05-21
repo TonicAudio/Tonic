@@ -40,8 +40,8 @@ using namespace Tonic;
         [synthDefinitions addObject:def];
         def.synthClassName = @"InputDemoSynth";
         def.synthDisplayName = @"Input processing demo";
-        def.synthDescription = @"Process the input";
-        def.synthInstructions = @"Headphones recommended.";
+        def.synthDescription = @"USE HEADPHONES OR PREPARE FOR MAJOR FEEDBACK!!!";
+        def.synthInstructions = @"Say something.";
         def.usesInput = YES;
         def.shouldAutoGenUI = YES;
       }
