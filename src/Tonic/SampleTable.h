@@ -27,7 +27,7 @@ namespace Tonic {
       
     public:
       
-      SampleTable_(unsigned int frames = 2, unsigned int channels = 1);
+      SampleTable_(unsigned int frames, unsigned int channels);
       
       // Property getters
       unsigned int channels() const {

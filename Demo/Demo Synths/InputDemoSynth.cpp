@@ -9,10 +9,13 @@ class InputDemoSynth : public Synth {
 public:
   
   InputDemoSynth(){
-//    RingBuffer inputBuffer = RingBuffer().initialize("input");
-//    BasicDelay delay = BasicDelay(1.2f).delayTime(1.f).wetLevel(1.f).dryLevel(0.f).feedback(0.f);
-//    
-//    setOutputGen((inputBuffer >> delay) * 0.25f);
+    RingBufferReader inputReader = RingBufferReader().bufferName("input");
+    
+    Generator ringModInput = inputReader * SineWave().freq(250);
+    
+    BasicDelay delay = BasicDelay(1.2f).delayTime(0.4f).wetLevel(0.4f).dryLevel(1.0f).feedback(0.4f);
+    
+    setOutputGen((ringModInput >> delay) * 0.25f);
   }
   
 };

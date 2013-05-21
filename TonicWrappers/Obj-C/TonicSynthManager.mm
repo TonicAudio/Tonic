@@ -16,7 +16,7 @@ using namespace Tonic;
 @interface TonicSynthManager ()
 
 @property Mixer mixer;
-//@property RingBuffer inputBuffer;
+@property RingBufferWriter inputBuffer;
 
 @property (nonatomic, strong) NSMutableDictionary *synthDict;
 
@@ -47,7 +47,7 @@ using namespace Tonic;
   self = [super init];
   if (self){
     self.synthDict = [NSMutableDictionary dictionaryWithCapacity:10];
-//    self.inputBuffer.initialize("input", 8192, 2); // enough and then some
+    self.inputBuffer = RingBufferWriter("input", 8192, 2); // enough and then some
     self.inputEnabled = NO;
     [self setupNovocaineOutput];
   }
@@ -62,12 +62,12 @@ using namespace Tonic;
       wself.mixer.fillBufferOfFloats(data, numFrames, numChannels);
   }];
   
-//  [[Novocaine audioManager] setInputBlock:^(float *data, UInt32 numFrames, UInt32 numChannels){
-//    if (wself.inputEnabled){
-//      wself.inputBuffer.write(data, numFrames * numChannels);
-//    }
-//  }];
-//  
+  [[Novocaine audioManager] setInputBlock:^(float *data, UInt32 numFrames, UInt32 numChannels){
+    if (wself.inputEnabled){
+      wself.inputBuffer.write(data, numFrames, numChannels);
+    }
+  }];
+  
   [[Novocaine audioManager] pause];
 }
 
@@ -84,9 +84,9 @@ using namespace Tonic;
 - (void)setInputEnabled:(BOOL)inputEnabled
 {
   _inputEnabled = inputEnabled;
-//  if (inputEnabled){
-//    self.inputBuffer.reset();
-//  }
+  if (inputEnabled){
+    self.inputBuffer.reset();
+  }
 }
 
 - (Tonic::Synth*)addSynthWithName:(NSString *)synthName forKey:(NSString *)key

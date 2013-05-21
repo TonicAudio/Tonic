@@ -118,7 +118,7 @@ namespace Tonic {
       If destination has more channels than source, they will be copied to all channels.
     */
     void copy( TonicFrames & f );
-    
+        
     //! Return an interpolated value at the fractional frame index and channel.
     /*!
       This function performs linear interpolation.  The \c frame

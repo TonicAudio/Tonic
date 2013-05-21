@@ -64,7 +64,7 @@
 #include "Tonic/Reverb.h"
 
 // Utilities
-//#include "Tonic/RingBuffer.h"
+#include "Tonic/RingBuffer.h"
 #include "Tonic/LFNoise.h"
 
 // ------ Control Generators --------
