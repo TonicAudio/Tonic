@@ -52,6 +52,11 @@ namespace Tonic {
         frames_.resize(frames, channels);
       }
       
+      // Resample
+      void resample(unsigned int frames, unsigned int channels){
+        frames_.resample(frames, channels);
+      }
+      
     };
     
   }
@@ -87,6 +92,11 @@ namespace Tonic {
     // Resize
     void resize(unsigned int frames, unsigned int channels){
       obj->resize(frames, channels);
+    }
+    
+    // Resample
+    void resample(unsigned int frames, unsigned int channels){
+      obj->resample(frames, channels);
     }
     
   };

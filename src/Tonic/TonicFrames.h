@@ -154,6 +154,9 @@ namespace Tonic {
       smaller or equal to a previously allocated size.
     */
     void resize( size_t nFrames, unsigned int nChannels, TonicFloat value );
+    
+    //! Resize and stretch/shrink existing data to fit new size.
+    void resample( size_t nFrames , unsigned int nChannels );
 
     //! Return the number of channels represented by the data.
     inline unsigned int channels( void ) const { return nChannels_; };

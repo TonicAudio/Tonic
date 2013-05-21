@@ -19,6 +19,7 @@
 		01C65FEB17371BBC003B2661 /* ReverbTestSynth.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 01C65FE917371BBC003B2661 /* ReverbTestSynth.cpp */; };
 		01DAA58F173E9EF8001AA383 /* SynthAutoUIViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 01DAA58D173E9EF8001AA383 /* SynthAutoUIViewController.mm */; };
 		01DAA590173E9EF8001AA383 /* SynthAutoUIViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 01DAA58E173E9EF8001AA383 /* SynthAutoUIViewController.xib */; };
+		9A3E0D29174BEF530077641E /* ArbitraryTableLookupDemo.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9A3E0D27174BEF460077641E /* ArbitraryTableLookupDemo.cpp */; };
 		9AB59D3E17456D4C001E6837 /* ControlSnapToScaleTestSynth.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9AB59D3D17456D4C001E6837 /* ControlSnapToScaleTestSynth.cpp */; };
 		9AF6A72C174AC3AA00C70173 /* InputDemoSynth.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9AF6A72B174AC3A900C70173 /* InputDemoSynth.cpp */; };
 		A80F6C2E17431BC00079FB52 /* SimpleStepSeqSynth.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A80F6C2C17431A4F0079FB52 /* SimpleStepSeqSynth.cpp */; };
@@ -105,6 +106,7 @@
 		01DAA58C173E9EF8001AA383 /* SynthAutoUIViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SynthAutoUIViewController.h; sourceTree = "<group>"; };
 		01DAA58D173E9EF8001AA383 /* SynthAutoUIViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = SynthAutoUIViewController.mm; sourceTree = "<group>"; };
 		01DAA58E173E9EF8001AA383 /* SynthAutoUIViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SynthAutoUIViewController.xib; sourceTree = "<group>"; };
+		9A3E0D27174BEF460077641E /* ArbitraryTableLookupDemo.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ArbitraryTableLookupDemo.cpp; sourceTree = "<group>"; };
 		9AB59D3D17456D4C001E6837 /* ControlSnapToScaleTestSynth.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ControlSnapToScaleTestSynth.cpp; sourceTree = "<group>"; };
 		9AF6A72B174AC3A900C70173 /* InputDemoSynth.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = InputDemoSynth.cpp; sourceTree = "<group>"; };
 		A80F6C2C17431A4F0079FB52 /* SimpleStepSeqSynth.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SimpleStepSeqSynth.cpp; sourceTree = "<group>"; };
@@ -198,6 +200,7 @@
 		0183D0EB1735D17D004638EB /* Demo Synths */ = {
 			isa = PBXGroup;
 			children = (
+				9A3E0D27174BEF460077641E /* ArbitraryTableLookupDemo.cpp */,
 				0183D0EC1735D17D004638EB /* CompressorDuckingTestSynth.cpp */,
 				F2E2561917400EDB00D74E9D /* CompressorTestSynth.cpp */,
 				9AB59D3D17456D4C001E6837 /* ControlSnapToScaleTestSynth.cpp */,
@@ -549,6 +552,7 @@
 				A80F6C2E17431BC00079FB52 /* SimpleStepSeqSynth.cpp in Sources */,
 				9AB59D3E17456D4C001E6837 /* ControlSnapToScaleTestSynth.cpp in Sources */,
 				9AF6A72C174AC3AA00C70173 /* InputDemoSynth.cpp in Sources */,
+				9A3E0D29174BEF530077641E /* ArbitraryTableLookupDemo.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

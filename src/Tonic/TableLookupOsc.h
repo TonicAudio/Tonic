@@ -62,9 +62,7 @@ namespace Tonic {
       }
       
       //! set sample table for lookup. MUST BE POWER OF 2 IN LENGTH
-      void setLookupTable( SampleTable table ){
-        lookupTable_ = table;
-      }
+      void setLookupTable( SampleTable table );
 
     };
     

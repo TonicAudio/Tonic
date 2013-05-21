@@ -22,7 +22,7 @@ namespace Tonic {
       SampleTable sineTable = SampleTable(tableSize+1, 1);
       TonicFloat norm = 1.0f / tableSize;
       TonicFloat *data = sineTable.dataPointer();
-      for ( unsigned long i=0; i<=tableSize; i++ ){
+      for ( unsigned long i=0; i<tableSize+1; i++ ){
         *data++ = sinf( TWO_PI * i * norm );
       }
       
