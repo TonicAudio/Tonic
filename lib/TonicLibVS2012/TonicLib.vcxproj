@@ -47,7 +47,6 @@
     <ClInclude Include="..\..\src\Tonic\Filters.h" />
     <ClInclude Include="..\..\src\Tonic\FilterUtils.h" />
     <ClInclude Include="..\..\src\Tonic\FixedValue.h" />
-    <ClInclude Include="..\..\src\Tonic\FlexToothWave.h" />
     <ClInclude Include="..\..\src\Tonic\Generator.h" />
     <ClInclude Include="..\..\src\Tonic\LFNoise.h" />
     <ClInclude Include="..\..\src\Tonic\Mixer.h" />
@@ -57,13 +56,16 @@
     <ClInclude Include="..\..\src\Tonic\RampedValue.h" />
     <ClInclude Include="..\..\src\Tonic\RectWave.h" />
     <ClInclude Include="..\..\src\Tonic\Reverb.h" />
+    <ClInclude Include="..\..\src\Tonic\SawtoothWave.h" />
     <ClInclude Include="..\..\src\Tonic\SineWave.h" />
+    <ClInclude Include="..\..\src\Tonic\SquareWave.h" />
     <ClInclude Include="..\..\src\Tonic\StereoDelay.h" />
     <ClInclude Include="..\..\src\Tonic\Subtractor.h" />
     <ClInclude Include="..\..\src\Tonic\Synth.h" />
     <ClInclude Include="..\..\src\Tonic\TableLookupOsc.h" />
     <ClInclude Include="..\..\src\Tonic\TonicCore.h" />
     <ClInclude Include="..\..\src\Tonic\TonicFrames.h" />
+    <ClInclude Include="..\..\src\Tonic\TriangleWave.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\src\Tonic\Adder.cpp" />
@@ -101,7 +103,6 @@
     <ClCompile Include="..\..\src\Tonic\Filters.cpp" />
     <ClCompile Include="..\..\src\Tonic\FilterUtils.cpp" />
     <ClCompile Include="..\..\src\Tonic\FixedValue.cpp" />
-    <ClCompile Include="..\..\src\Tonic\FlexToothWave.cpp" />
     <ClCompile Include="..\..\src\Tonic\Generator.cpp" />
     <ClCompile Include="..\..\src\Tonic\LFNoise.cpp" />
     <ClCompile Include="..\..\src\Tonic\Mixer.cpp" />
@@ -111,6 +112,7 @@
     <ClCompile Include="..\..\src\Tonic\RampedValue.cpp" />
     <ClCompile Include="..\..\src\Tonic\RectWave.cpp" />
     <ClCompile Include="..\..\src\Tonic\Reverb.cpp" />
+    <ClCompile Include="..\..\src\Tonic\SawtoothWave.cpp" />
     <ClCompile Include="..\..\src\Tonic\SineWave.cpp" />
     <ClCompile Include="..\..\src\Tonic\StereoDelay.cpp" />
     <ClCompile Include="..\..\src\Tonic\Subtractor.cpp" />
