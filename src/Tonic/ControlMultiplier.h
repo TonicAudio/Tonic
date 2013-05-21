@@ -58,48 +58,48 @@ namespace Tonic {
     }
   };
   
-  static ControlMultiplier operator*(ControlGenerator a, ControlGenerator b){
+  static ControlMultiplier operator*(const ControlGenerator & a, const ControlGenerator & b){
     ControlMultiplier mult;
     mult.in(a);
     mult.in(b);
     return mult;
   }
   
-  static ControlMultiplier operator*(ControlGenerator a, float b){
+  static ControlMultiplier operator*(const ControlGenerator & a, float b){
     ControlMultiplier mult;
     mult.in(a);
     mult.in(ControlValue(b));
     return mult;
   }
   
-  static ControlMultiplier operator*(float a, ControlGenerator b){
+  static ControlMultiplier operator*(float a, const ControlGenerator & b){
     ControlMultiplier mult;
     mult.in(ControlValue(a));
     mult.in(ControlGenerator(b));
     return mult;
   }
   
-  static ControlMultiplier operator*(ControlMultiplier a, ControlGenerator b){
+  static ControlMultiplier operator*(ControlMultiplier & a, const ControlGenerator & b){
     a.in(b);
     return a;
   }
   
-  static ControlMultiplier operator*(ControlGenerator a, ControlMultiplier b){
+  static ControlMultiplier operator*(const ControlGenerator & a, ControlMultiplier & b){
     b.in(a);
     return b;
   }
   
-  static ControlMultiplier operator*(ControlMultiplier a, float b){
+  static ControlMultiplier operator*(ControlMultiplier & a, float b){
     a.in(ControlValue(b));
     return a;
   }
   
-  static ControlMultiplier operator*(float a, ControlMultiplier b){
+  static ControlMultiplier operator*(float a, ControlMultiplier & b){
     b.in(ControlValue(a));
     return b;
   }
   
-  static ControlMultiplier operator*(ControlMultiplier a, ControlMultiplier b){
+  static ControlMultiplier operator*(ControlMultiplier & a, ControlMultiplier & b){
     for (unsigned int i=0; i<b.numInputs(); i++){
       a.in(b[i]);
     }

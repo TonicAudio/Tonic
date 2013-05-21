@@ -32,7 +32,7 @@ namespace Tonic{
       void in(Generator& generator);
       
       Generator & getInput(unsigned int index) { return inputs[index]; };
-      unsigned int numInputs() { return inputs.size(); };
+      unsigned int numInputs() const { return inputs.size(); };
     };
     
     
@@ -55,12 +55,12 @@ namespace Tonic{
 
   class Multiplier : public TemplatedGenerator<Tonic_::Multiplier_>{
   public:
-    Multiplier in(Generator& inputSource){
+    Multiplier in(Generator inputSource){
       gen()->in(inputSource);
       return *this;
     }
     
-    Generator & operator[](unsigned int index){
+    Generator & operator[](unsigned int index) {
       return gen()->getInput(index);
     }
     
@@ -70,40 +70,44 @@ namespace Tonic{
 
   };
 
-  static Multiplier operator*(Generator a, Generator b){
+  static Multiplier operator*(const Generator & a, const Generator & b){
     Multiplier mult;
     mult.in(a);
     mult.in(b);
     return mult;
   }
   
-  static Multiplier operator*(float a, Generator b){
-      return FixedValue(a) * b;
+  static Multiplier operator*(float a, const Generator & b){
+    Multiplier mult;
+    mult.in(FixedValue(a));
+    mult.in(b);
+    return mult;
   }
   
-  static Multiplier operator*(Generator a, float b){
+  static Multiplier operator*(const Generator & a, float b){
       return a * FixedValue(b);
   }
   
-  static Multiplier operator*(Generator a, Multiplier b){
+  static Multiplier operator*(const Generator & a, Multiplier & b){
     b.in(a);
     return b;
   }
   
-  static Multiplier operator*(Multiplier a, Generator b){
+  static Multiplier operator*(Multiplier & a, const Generator & b){
     a.in(b);
     return a;
   }
   
-  static Multiplier operator*(float a, Multiplier b){
-    return FixedValue(a) * b;
+  static Multiplier operator*(float a, Multiplier & b){
+    b.in(FixedValue(a));
+    return b;
   }
   
-  static Multiplier operator*(Multiplier a, float b){
+  static Multiplier operator*(Multiplier & a, float b){
     return FixedValue(b) * a;
   }
   
-  static Multiplier operator*(Multiplier a, Multiplier b){
+  static Multiplier operator*(Multiplier & a, Multiplier & b){
     for (int i=0; i<b.numInputs(); i++){
       a.in(b[i]);
     }
@@ -113,21 +117,21 @@ namespace Tonic{
   
   // Multiply a Generatator and a ControlGenerator
   
-  static Multiplier operator * (Generator a, ControlGenerator b){
+  static Multiplier operator * (const Generator & a, const ControlGenerator & b){
     return a * FixedValue().setValue(b);
   }
   
-  static Multiplier operator * (ControlGenerator a, Generator b){
+  static Multiplier operator * (const ControlGenerator & a, const Generator & b){
     return FixedValue().setValue(a) * b;
   }
   
   // Multiply an Multiplier and a ControlGenerator
   
-  static Multiplier operator * (Multiplier a, ControlGenerator b){
+  static Multiplier operator * (const Multiplier & a, const ControlGenerator & b){
     return a * FixedValue().setValue(b);
   }
   
-  static Multiplier operator * (ControlGenerator a, Multiplier b){
+  static Multiplier operator * ( ControlGenerator & a, const Multiplier & b){
     return FixedValue().setValue(a) * b;
   }
 }
