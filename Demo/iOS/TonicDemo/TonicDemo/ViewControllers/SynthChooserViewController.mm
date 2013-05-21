@@ -43,6 +43,7 @@ using namespace Tonic;
         def.synthDescription = @"Process the input";
         def.synthInstructions = @"Headphones recommended.";
         def.usesInput = YES;
+        def.shouldAutoGenUI = YES;
       }
       
       {
