@@ -15,7 +15,7 @@ public:
     
     BasicDelay delay = BasicDelay(1.2f).delayTime(0.4f).wetLevel(0.4f).dryLevel(1.0f).feedback(0.4f);
     
-    setOutputGen((ringModInput >> delay) * 0.25f);
+    setOutputGen((ringModInput >> delay) * 0.5f);
   }
   
 };

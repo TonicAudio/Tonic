@@ -168,7 +168,7 @@ namespace Tonic {
     
   public:
     
-    RingBufferTable(unsigned int nFrames = 2, unsigned int nChannels = 2){
+    RingBufferTable(unsigned int nFrames = 64, unsigned int nChannels = 2){
       obj = new Tonic_::RingBufferTable_(nFrames, nChannels);
     }
     
