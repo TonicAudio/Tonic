@@ -54,7 +54,7 @@
   
   self.motionManager = [[CMMotionManager alloc] init];
 
-   if ([self.motionManager isAccelerometerAvailable]){
+   if ([self.motionManager isAccelerometerAvailable] && self.synthDemoDef.accellerometerAction != nil){
      self.operationQueue = [[NSOperationQueue alloc] init];
         __weak typeof(self) wself = self;
      [self.motionManager

@@ -67,7 +67,6 @@ using namespace Tonic;
         };
       }
       
-      
       {
         SynthDemoDef* def = [[SynthDemoDef alloc] init];
         [synthDefinitions addObject:def];
