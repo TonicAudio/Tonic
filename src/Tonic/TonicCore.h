@@ -34,8 +34,7 @@
 #if defined (__APPLE__)
 
   #import <Accelerate/Accelerate.h>
-  //#define USE_APPLE_ACCELERATE
-  #define ARC4RAND_MAX 0x100000000
+  #define USE_APPLE_ACCELERATE
 
 #endif
 
@@ -232,11 +231,7 @@ namespace Tonic {
   // -- Misc --
   
   inline static TonicFloat randomSample(){
-    #ifdef __APPLE__
-    return ((TonicFloat)arc4random()/ARC4RAND_MAX) * 2.0f - 1.0f;
-    #else
     return ((TonicFloat)rand()/RAND_MAX) * 2.0f - 1.0f;
-    #endif
   }
   
   static float randomFloat(float a, float b) {
@@ -317,6 +312,7 @@ namespace Tonic {
     
   };
   
+  //! Reference counting smart pointer class template
   template<class T>
   class TonicSmartPointer {
   protected:
