@@ -48,21 +48,21 @@ namespace Tonic {
 
   };
   
-  static ControlDivider operator/(const ControlGenerator & a, const ControlGenerator & b){
+  static ControlDivider operator/(ControlGenerator a, ControlGenerator b){
     ControlDivider divider;
     divider.left(a);
     divider.right(b);
     return divider;
   }
   
-  static ControlDivider operator/(const ControlGenerator & a, float b){
+  static ControlDivider operator/(ControlGenerator a, float b){
     ControlDivider divider;
     divider.left(a);
     divider.right(ControlValue(b));
     return divider;
   }
   
-  static ControlDivider operator/(float a, const ControlGenerator & b){
+  static ControlDivider operator/(float a, ControlGenerator b){
     ControlDivider divider;
     divider.left(ControlValue(a));
     divider.right(ControlGenerator(b));

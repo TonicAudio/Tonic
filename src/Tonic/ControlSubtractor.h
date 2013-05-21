@@ -47,21 +47,21 @@ namespace Tonic {
 
   };
 
-  static ControlSubtractor operator-(const ControlGenerator & a, const ControlGenerator & b){
+  static ControlSubtractor operator-(ControlGenerator a, ControlGenerator b){
     ControlSubtractor subtractor;
     subtractor.left(a);
     subtractor.right(b);
     return subtractor;
   }
   
-  static ControlSubtractor operator-(const ControlGenerator & a, float b){
+  static ControlSubtractor operator-(ControlGenerator a, float b){
     ControlSubtractor subtractor;
     subtractor.left(a);
     subtractor.right(ControlValue(b));
     return subtractor;
   }
   
-  static ControlSubtractor operator-(float a, const ControlGenerator & b){
+  static ControlSubtractor operator-(float a, ControlGenerator b){
     ControlSubtractor subtractor;
     subtractor.left(ControlValue(a));
     subtractor.right(ControlGenerator(b));

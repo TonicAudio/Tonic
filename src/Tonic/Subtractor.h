@@ -61,21 +61,21 @@ namespace Tonic {
   };
   
   
-  static Subtractor operator - (const Generator & a, const Generator & b){
+  static Subtractor operator - (Generator a, Generator b){
     Subtractor sub;
     sub.left(a);
     sub.right(b);
     return sub;
   }
   
-  static Subtractor operator - (float a, const Generator & b){
+  static Subtractor operator - (float a, Generator b){
     Subtractor sub;
     sub.left(FixedValue(a));
     sub.right(b);
     return sub;
   }
   
-  static Subtractor operator - (const Generator & a, float b){
+  static Subtractor operator - (Generator a, float b){
     Subtractor sub;
     sub.left(a);
     sub.right(FixedValue(b));
@@ -84,11 +84,11 @@ namespace Tonic {
   
   // Subtract a Generatator and a ControlGenerator
   
-  static Subtractor operator - (const Generator & a, const ControlGenerator & b){
+  static Subtractor operator - (Generator a, ControlGenerator b){
     return a - FixedValue().setValue(b);
   }
   
-  static Subtractor operator - (const ControlGenerator & a, const Generator & b){
+  static Subtractor operator - (ControlGenerator a, Generator b){
     return FixedValue().setValue(a) - b;
   }
   

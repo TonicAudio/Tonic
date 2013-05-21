@@ -71,7 +71,7 @@ namespace Tonic {
   
   // add a Generator to another thing
   
-  static Adder operator + (const Generator & a, const Generator & b){
+  static Adder operator + (Generator a, Generator b){
     Adder add;
     add.in(a);
     add.in(b);
@@ -79,7 +79,7 @@ namespace Tonic {
   }
   
   
-  static Adder operator + (float a, const Generator & b){
+  static Adder operator + (float a, Generator b){
     Adder add;
     add.in(FixedValue(a));
     add.in(b);
@@ -87,7 +87,7 @@ namespace Tonic {
   }
   
   
-  static Adder operator + (const Generator & a, float b){
+  static Adder operator + (Generator a, float b){
     Adder add;
     add.in(a);
     add.in(FixedValue(b));
@@ -96,27 +96,27 @@ namespace Tonic {
   
   // add an adder to another thing
 
-  static Adder operator + (Adder & a, const Generator & b){
+  static Adder operator + (Adder a, Generator b){
     a.in(b);
     return a;
   }
   
-  static Adder operator + (const Generator & a, Adder & b){
+  static Adder operator + (Generator a, Adder b){
     b.in(a);
     return b;
   }
   
-  static Adder operator + (Adder & a, float b){
+  static Adder operator + (Adder a, float b){
     a.in(FixedValue(b));
     return a;
   }
   
-  static Adder operator + (float a, Adder & b){
+  static Adder operator + (float a, Adder b){
     b.in(FixedValue(a));
     return b;
   }
   
-  static Adder operator + (Adder & a, Adder & b){
+  static Adder operator + (Adder a, Adder b){
     for (int i=0; i<b.numInputs(); i++){
       a.in(b[i]);
     }
@@ -125,21 +125,21 @@ namespace Tonic {
   
   // Add a Generatator and a ControlGenerator
   
-  static Adder operator + (const Generator & a, const ControlGenerator & b){
+  static Adder operator + (Generator a, ControlGenerator b){
     return a + FixedValue().setValue(b);
   }
   
-  static Adder operator + (const ControlGenerator & a, const Generator & b){
+  static Adder operator + (ControlGenerator a, Generator b){
     return FixedValue().setValue(a) + b;
   }
   
   // Add an Adder and a ControlGenerator
   
-    static Adder operator + (const Adder & a, const ControlGenerator & b){
+    static Adder operator + (Adder a, ControlGenerator b){
     return a + FixedValue().setValue(b);
   }
   
-  static Adder operator + (const ControlGenerator & a, const Adder & b){
+  static Adder operator + (ControlGenerator a, Adder b){
     return FixedValue().setValue(a) + b;
   }
   

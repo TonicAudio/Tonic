@@ -58,48 +58,48 @@ namespace Tonic {
     }
   };
   
-  static ControlAdder operator+(const ControlGenerator & a, const ControlGenerator & b){
+  static ControlAdder operator+(ControlGenerator a, ControlGenerator b){
     ControlAdder adder;
     adder.in(a);
     adder.in(b);
     return adder;
   }
   
-  static ControlAdder operator+(const ControlGenerator & a, float b){
+  static ControlAdder operator+(ControlGenerator a, float b){
     ControlAdder adder;
     adder.in(a);
     adder.in(ControlValue(b));
     return adder;
   }
   
-  static ControlAdder operator+(float a, const ControlGenerator & b){
+  static ControlAdder operator+(float a, ControlGenerator b){
     ControlAdder adder;
     adder.in(ControlValue(a));
     adder.in(ControlGenerator(b));
     return adder;
   }
   
-  static ControlAdder operator+(ControlAdder & a, const ControlGenerator & b){
+  static ControlAdder operator+(ControlAdder a, ControlGenerator b){
     a.in(b);
     return a;
   }
   
-  static ControlAdder operator+(const ControlGenerator & a, ControlAdder & b){
+  static ControlAdder operator+(ControlGenerator a, ControlAdder b){
     b.in(a);
     return b;
   }
   
-  static ControlAdder operator+(ControlAdder & a, float b){
+  static ControlAdder operator+(ControlAdder a, float b){
     a.in(ControlValue(b));
     return a;
   }
   
-  static ControlAdder operator+(float a, ControlAdder & b){
+  static ControlAdder operator+(float a, ControlAdder b){
     b.in(ControlValue(a));
     return b;
   }
   
-  static ControlAdder operator+(ControlAdder & a, ControlAdder & b){
+  static ControlAdder operator+(ControlAdder a, ControlAdder b){
     for (unsigned int i=0; i<b.numInputs(); i++){
       a.in(b[i]);
     }

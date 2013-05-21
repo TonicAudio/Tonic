@@ -61,21 +61,21 @@ namespace Tonic {
   
     
   
-  static Divider operator / (const Generator & a, const Generator & b){
+  static Divider operator / (Generator a, Generator b){
     Divider div;
     div.left(a);
     div.right(b);
     return div;
   }
   
-  static Divider operator / (float a, const Generator & b){
+  static Divider operator / (float a, Generator b){
     Divider div;
     div.left(FixedValue(a));
     div.right(b);
     return div;
   }
   
-  static Divider operator / (const Generator & a, float b){
+  static Divider operator / (Generator a, float b){
     Divider div;
     div.left(a);
     div.right(FixedValue(b));
@@ -84,11 +84,11 @@ namespace Tonic {
   
   // Subtract a Generatator and a ControlGenerator
   
-  static Divider operator / (const Generator & a, const ControlGenerator & b){
+  static Divider operator / (Generator a, ControlGenerator b){
     return a / FixedValue().setValue(b);
   }
   
-  static Divider operator / (const ControlGenerator & a, const Generator & b){
+  static Divider operator / (ControlGenerator a, Generator b){
     return FixedValue().setValue(a) / b;
   }
   
