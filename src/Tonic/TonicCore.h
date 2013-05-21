@@ -125,16 +125,9 @@ namespace Tonic {
       // If true, generators will be forced to compute fresh output
       // TODO: Not fully implmenented yet -- ND 2013/05/20
       bool forceNewOutput;
-      
-      TONIC_MUTEX_T mutex;
-      
-      SynthesisContext_() : elapsedFrames(0), elapsedTime(0), forceNewOutput(true){
-        TONIC_MUTEX_INIT(mutex);
-      }
-      
-      ~SynthesisContext_(){
-        TONIC_MUTEX_DESTROY(mutex);
-      }
+            
+      SynthesisContext_() : elapsedFrames(0), elapsedTime(0), forceNewOutput(true){}
+    
       
       void tick() {
         elapsedFrames += kSynthesisBlockSize;
