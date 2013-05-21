@@ -27,10 +27,10 @@ namespace Tonic {
       }
       
       Tonic_::s_oscTables_.insertObject(TONIC_SIN_TABLE, sineTable);
-      this->gen()->setSampleTable(sineTable);
+      this->gen()->setLookupTable(sineTable);
     }
     else{
-      this->gen()->setSampleTable(Tonic_::s_oscTables_.objectNamed(TONIC_SIN_TABLE));
+      this->gen()->setLookupTable(Tonic_::s_oscTables_.objectNamed(TONIC_SIN_TABLE));
     }
 
     

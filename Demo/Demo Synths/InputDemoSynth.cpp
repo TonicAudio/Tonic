@@ -9,6 +9,7 @@ class InputDemoSynth : public Synth {
 public:
   
   InputDemoSynth(){
+    
     RingBufferReader inputReader = RingBufferReader().bufferName("input");
     
     Generator ringModInput = inputReader * SineWave().freq(250);

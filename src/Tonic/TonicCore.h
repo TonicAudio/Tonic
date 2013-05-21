@@ -31,7 +31,7 @@
 #if defined (__APPLE__)
 
   #import <Accelerate/Accelerate.h>
-  #define USE_APPLE_ACCELERATE
+  //#define USE_APPLE_ACCELERATE
   #define ARC4RAND_MAX 0x100000000
 
 #endif
@@ -172,6 +172,22 @@ namespace Tonic {
       result = Tonic::clamp(result, min(outMin,outMax), max(outMin,outMax));
     }
     return result;
+  }
+  
+  inline bool isPowerOf2(unsigned int input, unsigned int * prevPo2){
+
+    if (input == 0) return true;
+    
+    unsigned int po2 = 2;
+    while (po2 < input){
+      po2 *= 2;
+    }
+    
+    if (prevPo2){
+      *prevPo2 = po2;
+    }
+    
+    return input == po2;
   }
   
   #define TONIC_LOG_MAP_BASEVAL -4

@@ -8,21 +8,45 @@
 
 #include "TableLookupOsc.h"
 
-namespace Tonic { namespace Tonic_{
+namespace Tonic {
   
-  TableLookupOsc_::TableLookupOsc_() :
-    phase_(0.0)
-  {
-    modFrames_.resize(kSynthesisBlockSize, 1);
-    sampleTable_ = SampleTable(2,1);
-  }
+  namespace Tonic_{
   
-  void TableLookupOsc_::reset(){
-    phase_ = 0.0f;
-  }
+    TableLookupOsc_::TableLookupOsc_() :
+      phase_(0.0)
+    {
+      modFrames_.resize(kSynthesisBlockSize, 1);
+      lookupTable_ = SampleTable(kSynthesisBlockSize,1);
+    }
+    
+    void TableLookupOsc_::reset(){
+      phase_ = 0.0f;
+    }
 
-} // Namespace Tonic_
+  } // Namespace Tonic_
+    
   
+  TableLookupOsc & TableLookupOsc::setLookupTable(SampleTable lookupTable){
+    
+    if (lookupTable.channels() != 1){
+      error("TableLookupOsc expects lookup table with 1 channel only");
+      return *this;
+    }
+    
+    unsigned int lowerPo2;
+    if (!isPowerOf2(lookupTable.frames(), &lowerPo2)){
+      
+      warning("TableLookUpOsc lookup tables must have a power-of-two number of frames. Resizing to next lowest power-of-two");
+      
+      lookupTable.resize(lowerPo2, 1);
+      
+    }
+    
+    gen()->lockMutex();
+    gen()->setLookupTable(lookupTable);
+    gen()->unlockMutex();
+    return *this;
+  }
   
   
 } // Namespace Tonic

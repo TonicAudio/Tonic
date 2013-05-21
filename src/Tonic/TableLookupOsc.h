@@ -40,7 +40,7 @@ namespace Tonic {
       
     protected:
       
-      SampleTable sampleTable_;
+      SampleTable lookupTable_;
       
       double phase_;
       
@@ -62,8 +62,8 @@ namespace Tonic {
       }
       
       //! set sample table for lookup. MUST BE POWER OF 2 IN LENGTH
-      void setSampleTable( SampleTable table ){
-        sampleTable_ = table;
+      void setLookupTable( SampleTable table ){
+        lookupTable_ = table;
       }
 
     };
@@ -73,13 +73,13 @@ namespace Tonic {
       // Update the frequency data
       frequencyGenerator_.tick(modFrames_, context);
       
-      unsigned long tableSize = sampleTable_.size();
+      unsigned long tableSize = lookupTable_.size();
       
       const TonicFloat rateConstant = (TonicFloat)tableSize / Tonic::sampleRate();
       
       TonicFloat *samples = &outputFrames_[0];
       TonicFloat *rateBuffer = &modFrames_[0];
-      TonicFloat *tableData = sampleTable_.dataPointer();
+      TonicFloat *tableData = lookupTable_.dataPointer();
       
       ShiftedDouble sd;
       
@@ -122,6 +122,15 @@ namespace Tonic {
     }
 
   }
+  
+  class TableLookupOsc : public TemplatedGenerator<Tonic_::TableLookupOsc_>{
+    
+    public:
+    
+      TableLookupOsc & setLookupTable( SampleTable lookupTable );
+    
+      createGeneratorSetters(TableLookupOsc, freq, setFrequency);
+  };
 
 }
 
