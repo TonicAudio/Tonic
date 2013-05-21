@@ -19,7 +19,7 @@ namespace Tonic {
       
       const unsigned int tableSize = 4096;
       
-      SampleTable sineTable = SampleTable(tableSize, 1);
+      SampleTable sineTable = SampleTable(tableSize+1, 1);
       TonicFloat norm = 1.0f / tableSize;
       TonicFloat *data = sineTable.dataPointer();
       for ( unsigned long i=0; i<=tableSize; i++ ){
@@ -27,6 +27,7 @@ namespace Tonic {
       }
       
       Tonic_::s_oscTables_.insertObject(TONIC_SIN_TABLE, sineTable);
+      
       this->gen()->setLookupTable(sineTable);
     }
     else{

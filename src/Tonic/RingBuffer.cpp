@@ -11,11 +11,11 @@
 namespace Tonic {
   
   //! Registry of ring buffers
-  TonicDictionary<RingBufferTable> s_RingBuffers_;
+  TonicDictionary<RingBuffer> s_RingBuffers_;
   
   namespace Tonic_ {
     
-    RingBufferTable_::RingBufferTable_(unsigned int frames, unsigned int channels) :
+    RingBuffer_::RingBuffer_(unsigned int frames, unsigned int channels) :
       SampleTable_(frames, channels),
       writeHead_(0),
       readHead_(0)
@@ -27,7 +27,7 @@ namespace Tonic {
     
     void RingBufferWriter_::initRingBuffer(string name, unsigned int nFrames, unsigned int nChannels){
      
-      RingBufferTable table = RingBufferTable(nFrames, nChannels);
+      RingBuffer table = RingBuffer(nFrames, nChannels);
       
       // overwrite existing entry if there is one
 #ifdef TONIC_DEBUG
@@ -37,19 +37,19 @@ namespace Tonic {
 #endif
       s_RingBuffers_.insertObject(name, table);
       
-      ringBufferTable_ = table;
+      ringBuffer_ = table;
     }
     
     void RingBufferWriter_::reset()
     {
-      ringBufferTable_.reset();
+      ringBuffer_.reset();
     }
   }
   
   RingBufferReader & RingBufferReader::bufferName(string name){
 
     if (s_RingBuffers_.containsObjectNamed(name)){      
-      gen()->setRingBufferTable(s_RingBuffers_.objectNamed(name));
+      gen()->setRingBuffer(s_RingBuffers_.objectNamed(name));
     }
     else{
       error("RingBuffer named " + name + " does not exist.");

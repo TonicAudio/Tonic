@@ -184,7 +184,9 @@ namespace Tonic {
     }
     
     if (prevPo2){
-      *prevPo2 = po2;
+      
+      unsigned int nextPo2 = po2 * 2;
+      *prevPo2 = abs((int)input - (int)po2) < abs((int)input - (int)nextPo2) ? po2 : nextPo2;
     }
     
     return input == po2;

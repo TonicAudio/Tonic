@@ -144,6 +144,7 @@ namespace Tonic {
     */
     void resize( size_t nFrames, unsigned int nChannels = 1 );
 
+
     //! Resize self to represent the specified number of channels and frames and perform element initialization.
     /*!
       Changes the size of self based on the number of frames and

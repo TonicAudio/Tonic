@@ -73,7 +73,7 @@ namespace Tonic {
       // Update the frequency data
       frequencyGenerator_.tick(modFrames_, context);
       
-      unsigned long tableSize = lookupTable_.size();
+      unsigned long tableSize = lookupTable_.size()-1;
       
       const TonicFloat rateConstant = (TonicFloat)tableSize / Tonic::sampleRate();
       

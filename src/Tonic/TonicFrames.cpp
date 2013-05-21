@@ -97,18 +97,34 @@ void TonicFrames :: resize( size_t nFrames, unsigned int nChannels )
     nFrames_ = nFrames;
     nChannels_ = nChannels;
 
+    // preserve as much of old data as we can
+    TonicFloat * oldData = data_;
+    unsigned int oldSize = size_;
+    
     size_ = nFrames_ * nChannels_;
+    
     if ( size_ > bufferSize_ ) {
-      if ( data_ ) free( data_ );
+      
       data_ = (TonicFloat *) malloc( size_ * sizeof( TonicFloat ) );
+      
+      if (oldData){
+        for (unsigned int i=0; i<oldSize; i++){
+          data_[i] = oldData[i];
+        }
+      }
+      
 #if defined(TONIC_DEBUG)
       if ( data_ == NULL ) {
         std::string error = "TonicFrames::resize: memory allocation error!";
         Tonic::error(error, true);
       }
 #endif
+      
       bufferSize_ = size_;
+      
+      if (oldData) free(oldData);
     }
+    
   }
 }
 

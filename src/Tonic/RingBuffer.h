@@ -19,7 +19,7 @@ namespace Tonic {
   
   namespace Tonic_ {
     
-    class RingBufferTable_ : public SampleTable_ {
+    class RingBuffer_ : public SampleTable_ {
       
     private:
       
@@ -28,14 +28,14 @@ namespace Tonic {
       
     public:
       
-      RingBufferTable_( unsigned int frames, unsigned int channels );
+      RingBuffer_( unsigned int frames, unsigned int channels );
       void write(float * data, unsigned int nFrames, unsigned int nChannels);
       void read(TonicFrames & outFrames);
       void reset();
       
     };
     
-    inline void RingBufferTable_::write(TonicFloat *data, unsigned int nFrames, unsigned int nChannels){
+    inline void RingBuffer_::write(TonicFloat *data, unsigned int nFrames, unsigned int nChannels){
       
 #ifdef TONIC_DEBUG
       // Detect overrun
@@ -91,7 +91,7 @@ namespace Tonic {
       
     }
     
-    inline void RingBufferTable_::read(TonicFrames & outFrames){
+    inline void RingBuffer_::read(TonicFrames & outFrames){
       
 #ifdef TONIC_DEBUG
       // Detect underrun
@@ -152,7 +152,7 @@ namespace Tonic {
       
     }
     
-    inline void RingBufferTable_::reset(){
+    inline void RingBuffer_::reset(){
       readHead_ = 0;
       writeHead_ = 0;
     }
@@ -160,33 +160,33 @@ namespace Tonic {
   }
   
   
-  // ----------- Ring Buffer sample table -----------
+  // ----------- Ring Buffer Data Container -----------
   
   //! Like a SampleTable_, but with counters for over/underrun detection and easy synchronous read/write
   //  TODO: Maybe template the SampleTable smart pointer instead of statically casting the object.
-  class RingBufferTable : public SampleTable {
+  class RingBuffer : public SampleTable {
     
   public:
     
-    RingBufferTable(unsigned int nFrames = 64, unsigned int nChannels = 2){
-      obj = new Tonic_::RingBufferTable_(nFrames, nChannels);
+    RingBuffer(unsigned int nFrames = 64, unsigned int nChannels = 2){
+      obj = new Tonic_::RingBuffer_(nFrames, nChannels);
     }
     
     void write(TonicFloat * data, unsigned int nFrames, unsigned int nChannels){
-      static_cast<Tonic_::RingBufferTable_*>(obj)->write(data, nFrames, nChannels);
+      static_cast<Tonic_::RingBuffer_*>(obj)->write(data, nFrames, nChannels);
     }
     
     void read(TonicFrames & outFrames){
-      static_cast<Tonic_::RingBufferTable_*>(obj)->read(outFrames);
+      static_cast<Tonic_::RingBuffer_*>(obj)->read(outFrames);
     }
     
     void reset(){
-      static_cast<Tonic_::RingBufferTable_*>(obj)->reset();
+      static_cast<Tonic_::RingBuffer_*>(obj)->reset();
     }
     
   };
   
-// ----- End RingBufferTable implementations -----
+
   
   namespace Tonic_ {
 
@@ -194,11 +194,11 @@ namespace Tonic {
       
     protected:
       
-      RingBufferTable ringBufferTable_;
+      RingBuffer ringBuffer_;
       
     public:
                   
-      void setRingBufferTable( RingBufferTable table) { ringBufferTable_ = table; }
+      void setRingBuffer( RingBuffer buffer ) { ringBuffer_ = buffer; }
             
       void computeSynthesisBlock( const SynthesisContext_ &context );
       
@@ -206,7 +206,7 @@ namespace Tonic {
     
     inline void RingBufferReader_::computeSynthesisBlock(const SynthesisContext_ &context){
       // get some output from the table
-      ringBufferTable_.read(outputFrames_);
+      ringBuffer_.read(outputFrames_);
     };
     
     // TODO: Maybe make this an Effect_?
@@ -214,7 +214,7 @@ namespace Tonic {
       
     protected:
       
-      RingBufferTable ringBufferTable_;
+      RingBuffer ringBuffer_;
       string tableName_;
       
     public:
@@ -229,11 +229,12 @@ namespace Tonic {
     
     inline void RingBufferWriter_::write(float *data, unsigned int nFrames, unsigned int nChannels)
     {
-      ringBufferTable_.write(data, nFrames, nChannels);
+      ringBuffer_.write(data, nFrames, nChannels);
     }
     
   }
   
+// ------
   
   class RingBufferReader : public TemplatedGenerator<Tonic_::RingBufferReader_>{
     
@@ -242,6 +243,8 @@ namespace Tonic {
       RingBufferReader & bufferName(string name);
     
   };
+  
+// ------
   
   class RingBufferWriter : public TonicSmartPointer<Tonic_::RingBufferWriter_> {
       
