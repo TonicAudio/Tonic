@@ -24,6 +24,12 @@
 // win32 mutexes are implemented
 #include <pthread.h>
 
+// Uncomment or define in your build configuration to log debug messages and perform extra debug checks
+// #define TONIC_DEBUG
+
+// Uncomment or define in your build configuration to disable generator-level mutexes. May result in faster performance
+ #define TONIC_DISABLE_GEN_MUTEXES
+
 // Determine if C++11 is available. If not, some synths cannot be used. (applies to oF demos, mostly)
 #define TONIC_HAS_CPP_11 (__cplusplus > 199711L)
 
@@ -71,10 +77,6 @@ const TonicFloat TWO_PI       = 2.f * PI;
 // Causes 32nd bit in double to have fractional value 1 (decimal point on 32-bit word boundary)
 // Allowing some efficient shortcuts for table lookup using power-of-two tables
 #define BIT32DECPT 1572864.0
-
-
-// Uncomment or define in your build configuration to log debug messages and perform extra debug checks
-// #define TONIC_DEBUG
 
 namespace Tonic {
   

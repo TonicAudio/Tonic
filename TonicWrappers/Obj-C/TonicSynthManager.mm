@@ -15,8 +15,8 @@ using namespace Tonic;
 
 @interface TonicSynthManager ()
 
-@property Mixer mixer;
-@property RingBufferWriter inputBuffer;
+@property (nonatomic, assign) Mixer mixer;
+@property (nonatomic, assign) RingBufferWriter inputBuffer;
 
 @property (nonatomic, strong) NSMutableDictionary *synthDict;
 
@@ -59,12 +59,16 @@ using namespace Tonic;
   __weak TonicSynthManager *wself = self;
 
   [[Novocaine audioManager] setOutputBlock:^(float *data, UInt32 numFrames, UInt32 numChannels) {
+    @autoreleasepool {
       wself.mixer.fillBufferOfFloats(data, numFrames, numChannels);
+    }
   }];
   
   [[Novocaine audioManager] setInputBlock:^(float *data, UInt32 numFrames, UInt32 numChannels){
-    if (wself.inputEnabled){
-      wself.inputBuffer.write(data, numFrames, numChannels);
+    @autoreleasepool {
+      if (wself.inputEnabled){
+        wself.inputBuffer.write(data, numFrames, numChannels);
+      }
     }
   }];
   

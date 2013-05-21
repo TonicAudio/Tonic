@@ -56,25 +56,21 @@ namespace Tonic {
       
       // check context to see if we need new frames
       if (context.forceNewOutput || lastFrameIndex_ != context.elapsedFrames){
+        
+#ifndef TONIC_DISABLE_GEN_MUTEXES
         lockMutex();
+#endif
+
         computeSynthesisBlock(context);
+
+#ifndef TONIC_DISABLE_GEN_MUTEXES
         unlockMutex();
+#endif
         lastFrameIndex_ = context.elapsedFrames;
       }
     
       // copy synthesis block to frames passed in
       frames.copy(outputFrames_);
-      
-#ifdef TONIC_DEBUG
-      for(int i = 0; i < frames.frames(); i++){
-        for(int j = 0; j < frames.channels(); j++){
-          if(!isfinite(frames(i,j))){
-            Tonic::error("Generator_::tick NaN or inf detected.", true);
-          }
-        }
-      }
-#endif
-      
       
     }
     

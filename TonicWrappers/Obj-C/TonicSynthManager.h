@@ -23,5 +23,4 @@
 
 - (Tonic::Synth*)synthForKey:(NSString*)key;
 
-
 @end

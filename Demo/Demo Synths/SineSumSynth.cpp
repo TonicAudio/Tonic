@@ -35,7 +35,7 @@ public:
       
       ControlGenerator pitchGen = ((pitch * 220 + 220) * powf(2, (s - (NUM_SINES/2)) * 5.0f / 12.0f));
             
-      outputAdder = outputAdder + SineWave().freq( pitchGen.smoothed() );
+      outputAdder.input(SineWave().freq( pitchGen.smoothed() ));
       
     }
     
