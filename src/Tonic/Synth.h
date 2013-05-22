@@ -144,6 +144,7 @@ namespace Tonic{
         
         error("Error creating synth. Synth named \"" + s + "\" not found. Existing registered synths are: \n" + synthsList);
         
+        // return empty synth
         return Synth();
       }
       return it->second();
