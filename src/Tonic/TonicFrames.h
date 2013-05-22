@@ -13,6 +13,7 @@
 #define __Tonic__TonicFrames__
 
 #include "TonicCore.h"
+#include <sstream>
 
 /*
   This is an almost exact copy of STKFrames. Many thanks to Perry Cook and Gary Scavone.
