@@ -125,13 +125,15 @@ namespace Tonic{
   //
   // -----------------------------
   
-  template<typename T> Synth * createSynth() { return new T; }
+  template<typename T> Synth createSynth() {
+    return T();
+  }
   
   struct SynthFactory {
     
-    typedef std::map<std::string, Synth*(*)()> map_type;
+    typedef std::map<std::string, Synth(*)()> map_type;
     
-    static Synth * createInstance(std::string const& s) {
+    static Synth createInstance(std::string const& s) {
       map_type::iterator it = getMap()->find(s);
       if(it == getMap()->end()){
         string synthsList = "";
@@ -142,7 +144,7 @@ namespace Tonic{
         
         error("Error creating synth. Synth named \"" + s + "\" not found. Existing registered synths are: \n" + synthsList);
         
-        return 0;
+        return Synth();
       }
       return it->second();
     }

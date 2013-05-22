@@ -62,8 +62,8 @@ using namespace Tonic;
         def.synthDisplayName = @"10-Sine Additive Spread";
         def.synthDescription = @"10 sinewave oscillators in fifths";
         def.synthInstructions = @"Swipe up and down to change pitch.";
-        def.synthAction = ^(Tonic::Synth* synth, CGPoint touchPointNorm){
-          synth->setParameter("pitch", touchPointNorm.y);
+        def.synthAction = ^(Tonic::Synth synth, CGPoint touchPointNorm){
+          synth.setParameter("pitch", touchPointNorm.y);
         };
       }
       
@@ -83,9 +83,9 @@ using namespace Tonic;
         def.synthDisplayName = @"Filtered Noise";
         def.synthDescription = @"Filtered Noise";
         def.synthInstructions = @"X axis: cutoff\nY axis: Q";
-        def.synthAction = ^(Tonic::Synth* synth, CGPoint touchPointNorm){
-          synth->setParameter("Q", touchPointNorm.y * 135);
-          synth->setParameter("cutoff", touchPointNorm.x);
+        def.synthAction = ^(Tonic::Synth synth, CGPoint touchPointNorm){
+          synth.setParameter("Q", touchPointNorm.y * 135);
+          synth.setParameter("cutoff", touchPointNorm.x);
         };
       }
       
@@ -97,8 +97,8 @@ using namespace Tonic;
         def.synthDisplayName = @"Sine Wave Modulated By LFNoise";
         def.synthDescription = @"Sine Wave Modulated By LFNoise";
         def.synthInstructions = @"Y Axis: Noise Frequency";
-        def.synthAction = ^(Tonic::Synth* synth, CGPoint touchPointNorm){
-          synth->setParameter("noiseFreq", 0.1 + 1000 * touchPointNorm.y * touchPointNorm.y);
+        def.synthAction = ^(Tonic::Synth synth, CGPoint touchPointNorm){
+          synth.setParameter("noiseFreq", 0.1 + 1000 * touchPointNorm.y * touchPointNorm.y);
         };
       }
       
@@ -119,10 +119,10 @@ using namespace Tonic;
         def.synthDisplayName = @"Stereo Delay";
         def.synthDescription = @"Stereo delay effect, mono or stereo input";
         def.synthInstructions = @"";
-        def.synthAction = ^(Tonic::Synth* synth, CGPoint touchPointNorm){
-          synth->setParameter("freq", touchPointNorm.x * 500);
-          synth->setParameter("frequencyRandomAmount", touchPointNorm.y);
-          synth->setParameter("decay", touchPointNorm.y * 0.5);
+        def.synthAction = ^(Tonic::Synth synth, CGPoint touchPointNorm){
+          synth.setParameter("freq", touchPointNorm.x * 500);
+          synth.setParameter("frequencyRandomAmount", touchPointNorm.y);
+          synth.setParameter("decay", touchPointNorm.y * 0.5);
         };
       }
       
@@ -133,11 +133,11 @@ using namespace Tonic;
         def.synthDisplayName = @"Octave Snap";
         def.synthDescription = @"Snap notes to a scale";
         def.synthInstructions = @"Y axis is pitch -- sort of . X axis is range.";
-        def.synthAction = ^(Tonic::Synth* synth, CGPoint touchPointNorm){
-          synth->setParameter("stepperStart", touchPointNorm.y);
-          synth->setParameter("stepperSpread", touchPointNorm.x);
-//        def.accellerometerAction = ^(Tonic::Synth* synth, CMAccelerometerData *accelerometerData){
-//          synth->setParameter("speed", accelerometerData.acceleration.x + 1);
+        def.synthAction = ^(Tonic::Synth synth, CGPoint touchPointNorm){
+          synth.setParameter("stepperStart", touchPointNorm.y);
+          synth.setParameter("stepperSpread", touchPointNorm.x);
+//        def.accellerometerAction = ^(Tonic::Synth synth, CMAccelerometerData *accelerometerData){
+//          synth.setParameter("speed", accelerometerData.acceleration.x + 1);
 //        };
 
         };
@@ -160,8 +160,8 @@ using namespace Tonic;
         def.synthDisplayName = @"Ducking Compression";
         def.synthDescription = @"Compress a bass line in time";
         def.synthInstructions = @"Y axis is release time";
-        def.synthAction = ^(Tonic::Synth* synth, CGPoint touchPointNorm){
-          synth->setParameter("compRelease", Tonic::map(touchPointNorm.y*touchPointNorm.y, 0, 1, 0.025, 0.5, true));
+        def.synthAction = ^(Tonic::Synth synth, CGPoint touchPointNorm){
+          synth.setParameter("compRelease", Tonic::map(touchPointNorm.y*touchPointNorm.y, 0, 1, 0.025, 0.5, true));
         };
       }
       
@@ -172,9 +172,9 @@ using namespace Tonic;
         def.synthDisplayName = @"XY Speed Reactive";
         def.synthDescription = @"Move fast to make it sound cool!";
         def.synthInstructions = @"Move fast to make it sound cool!";
-        def.synthAction = ^(Tonic::Synth* synth, CGPoint touchPointNorm){
-          synth->setParameter("x", touchPointNorm.x);
-          synth->setParameter("y", touchPointNorm.y);
+        def.synthAction = ^(Tonic::Synth synth, CGPoint touchPointNorm){
+          synth.setParameter("x", touchPointNorm.x);
+          synth.setParameter("y", touchPointNorm.y);
         };
       }
       
@@ -186,9 +186,9 @@ using namespace Tonic;
         def.synthDisplayName = @"Control switcher test";
         def.synthDescription = @"Control switcher test";
         def.synthInstructions = @"x and y modulate the parameters of the steps in random ways";
-        def.synthAction = ^(Tonic::Synth* synth, CGPoint touchPointNorm){
-          synth->setParameter("x", touchPointNorm.x);
-          synth->setParameter("y", touchPointNorm.y);
+        def.synthAction = ^(Tonic::Synth synth, CGPoint touchPointNorm){
+          synth.setParameter("x", touchPointNorm.x);
+          synth.setParameter("y", touchPointNorm.y);
         };
       }
       

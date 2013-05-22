@@ -13,6 +13,29 @@
 using std::vector;
 using namespace Tonic;
 
+// ------ Simple wrapper for storing synth smart pointers in NS containers -----
+
+@interface SynthWrapper : NSObject
+
+@property (nonatomic, assign) Synth synth;
+
++ (SynthWrapper*)wrapperWithSynth:(Synth)synth;
+
+@end
+
+@implementation SynthWrapper
+
++ (SynthWrapper*)wrapperWithSynth:(Tonic::Synth)synth
+{
+  SynthWrapper * wrapper = [SynthWrapper new];
+  wrapper.synth = synth;
+  return wrapper;
+}
+
+@end
+
+// --------------------------
+
 @interface TonicSynthManager ()
 
 @property (nonatomic, assign) Mixer mixer;
@@ -93,55 +116,34 @@ using namespace Tonic;
   }
 }
 
-- (Tonic::Synth*)addSynthWithName:(NSString *)synthName forKey:(NSString *)key
+- (void)addSynth:(Tonic::Synth)synth forKey:(NSString *)key
 {
-  Synth *newSynth = nil;
     if (key){
-      newSynth = SynthFactory::createInstance(synthName.UTF8String);
-      if (newSynth){
-        
-        Synth *oldSynth = (Synth*)[[self.synthDict valueForKey:key] pointerValue];
-        if (oldSynth){
-          self.mixer.removeInput(*oldSynth);
-        }
-        self.mixer.addInput(*newSynth);
-        [self.synthDict setValue:[NSValue valueWithPointer:newSynth] forKey:key];
-        
-      }else{
-        NSLog(@"Error in TonicSynthManager: Failed to add source. Source named %@ not found.", key);
+      
+      if ([[self.synthDict allKeys] containsObject:key]){
+        self.mixer.removeInput([[self.synthDict valueForKey:key] synth]);
       }
+      self.mixer.addInput(synth);
+      [self.synthDict setValue:[SynthWrapper wrapperWithSynth:synth] forKey:key];
+
     }
     else{
       [NSException raise:NSInvalidArgumentException format:@"Argument \"key\" cannot be nil"];
     }
-  return newSynth;
 }
 
 - (void)removeSynthForKey:(NSString *)key
 {
     if (key){
-      Synth *synth = (Synth*)[[self.synthDict objectForKey:key] pointerValue];
-      if (synth){
-        self.mixer.removeInput(*synth);
-        delete synth;
-        [self.synthDict removeObjectForKey:key];
+      if ([[self.synthDict allKeys] containsObject:key]){
+        Synth oldSynth = [[self.synthDict valueForKey:key] synth];
+        self.mixer.removeInput(oldSynth);
       }
     }
     else{
       [NSException raise:NSInvalidArgumentException format:@"Argument \"key\" cannot be nil"];
     }
   
-}
-
-- (Tonic::Synth*)synthForKey:(NSString *)key
-{
-  if (key){
-    return (Tonic::Synth*)[[self.synthDict valueForKey:key] pointerValue];
-  }
-  else{
-    [NSException raise:NSInvalidArgumentException format:@"Argument \"key\" cannot be nil"];
-  }
-  return NULL;
 }
 
 @end

@@ -10,8 +10,8 @@
 #import <CoreMotion/CoreMotion.h>
 #import "Tonic.h"
 
-typedef void (^SynthTestPanAction)(Tonic::Synth* synth, CGPoint touchPointNorm);
-typedef void (^SynthTestAccellerometerAction)(Tonic::Synth* synth, CMAccelerometerData *accelerometerData);
+typedef void (^SynthTestPanAction)(Tonic::Synth synth, CGPoint touchPointNorm);
+typedef void (^SynthTestAccellerometerAction)(Tonic::Synth synth, CMAccelerometerData *accelerometerData);
 
 @interface SynthDemoDef : NSObject
   @property (nonatomic, strong) NSString* synthClassName;

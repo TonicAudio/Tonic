@@ -17,12 +17,12 @@ using Tonic::Synth;
 using Tonic::SynthFactory;
 using Tonic::ControlParameter;
 
-#define kSynthKey       @"DemoSynth"
+#define kSynthKey       @"TestSynth"
 #define kCellIdentifier @"ParamCell"
 
 @interface SynthAutoUIViewController ()
 {
-  Synth *_synth;
+  Synth _synth;
   vector<ControlParameter> _synthParameters;
 }
 
@@ -38,13 +38,11 @@ using Tonic::ControlParameter;
     self = [super initWithNibName:nil bundle:nil];
     if (self) {
       self.demoDef = demoDef;
-      _synth = [[TonicSynthManager sharedManager] addSynthWithName:demoDef.synthClassName forKey:kSynthKey];
-      
-      if (_synth){
-        _synthParameters = _synth->getParameters();
-        if (demoDef.usesInput){
-          [[TonicSynthManager sharedManager] setInputEnabled:YES];
-        }
+      _synth = Tonic::SynthFactory::createInstance(demoDef.synthClassName.UTF8String);
+      [[TonicSynthManager sharedManager] addSynth:_synth forKey:kSynthKey];
+      _synthParameters = _synth.getParameters();
+      if (demoDef.usesInput){
+        [[TonicSynthManager sharedManager] setInputEnabled:YES];
       }
       
     }
