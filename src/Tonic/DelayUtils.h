@@ -69,6 +69,7 @@ namespace Tonic {
         float fidx;
         float frac = modff(readHead_, &fidx);
         int idx_a = ((int)fidx * nChannels_ + channel);
+        if (idx_a >= size_) idx_a -= size_; // this happens occasionally due to floating point rounding
         int idx_b = idx_a + nChannels_;
         if (idx_b >= size_) idx_b -= size_;
         
