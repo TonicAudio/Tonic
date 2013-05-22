@@ -39,6 +39,7 @@
 - (void)dealloc
 {
   [[TonicSynthManager sharedManager] removeSynthForKey:@"testsynth"];
+  [[TonicSynthManager sharedManager] setInputEnabled:NO];
 }
 
 - (void)viewDidLoad
@@ -53,7 +54,7 @@
   
   self.motionManager = [[CMMotionManager alloc] init];
 
-   if ([self.motionManager isAccelerometerAvailable]){
+   if ([self.motionManager isAccelerometerAvailable] && self.synthDemoDef.accellerometerAction != nil){
      self.operationQueue = [[NSOperationQueue alloc] init];
         __weak typeof(self) wself = self;
      [self.motionManager
@@ -76,6 +77,9 @@
   if (self.synthName != nil){
     Tonic::Synth *synthInstance = [[TonicSynthManager sharedManager] synthForKey:self.synthName];
     if (synthInstance == nil){
+      if (self.synthDemoDef.usesInput){
+        [[TonicSynthManager sharedManager] setInputEnabled:YES];
+      }
       [[TonicSynthManager sharedManager] addSynthWithName:self.synthName forKey:@"testsynth"];
     }
   }

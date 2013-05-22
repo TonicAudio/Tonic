@@ -38,6 +38,26 @@ using namespace Tonic;
       {
         SynthDemoDef* def = [[SynthDemoDef alloc] init];
         [synthDefinitions addObject:def];
+        def.synthClassName = @"InputDemoSynth";
+        def.synthDisplayName = @"Input processing demo";
+        def.synthDescription = @"USE HEADPHONES OR PREPARE FOR MAJOR FEEDBACK!!!";
+        def.synthInstructions = @"Say something.";
+        def.usesInput = YES;
+        def.shouldAutoGenUI = YES;
+      }
+      
+      {
+        SynthDemoDef* def = [[SynthDemoDef alloc] init];
+        [synthDefinitions addObject:def];
+        def.synthClassName = @"ArbitraryTableLookupSynth";
+        def.synthDisplayName = @"Build lookup tables dynamically";
+        def.synthDescription = @"";
+        def.synthInstructions = @"Arbitrary oscillators!";
+      }
+      
+      {
+        SynthDemoDef* def = [[SynthDemoDef alloc] init];
+        [synthDefinitions addObject:def];
         def.synthClassName = @"SineSumSynth";
         def.synthDisplayName = @"10-Sine Additive Spread";
         def.synthDescription = @"10 sinewave oscillators in fifths";
@@ -46,7 +66,6 @@ using namespace Tonic;
           synth->setParameter("pitch", touchPointNorm.y);
         };
       }
-      
       
       {
         SynthDemoDef* def = [[SynthDemoDef alloc] init];

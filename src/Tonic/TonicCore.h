@@ -14,6 +14,7 @@
 
 #include <string>
 #include <vector>
+#include <map>
 #include <algorithm>
 #include <stdexcept>
 #include <stdio.h>
@@ -23,6 +24,9 @@
 // win32 mutexes are implemented
 #include <pthread.h>
 
+// Uncomment or define in your build configuration to log debug messages and perform extra debug checks
+// #define TONIC_DEBUG
+
 // Determine if C++11 is available. If not, some synths cannot be used. (applies to oF demos, mostly)
 #define TONIC_HAS_CPP_11 (__cplusplus > 199711L)
 
@@ -31,24 +35,22 @@
 
   #import <Accelerate/Accelerate.h>
   #define USE_APPLE_ACCELERATE
-  #define ARC4RAND_MAX 0x100000000
 
 #endif
 
 #if (defined (__APPLE__) || defined (__linux__))
 
   #define TONIC_MUTEX_T pthread_mutex_t
-  #define TONIC_MUTEX_INIT(x) pthread_mutex_init(x, NULL)
-  #define TONIC_MUTEX_DESTROY(x) pthread_mutex_destroy(x)
-  #define TONIC_MUTEX_LOCK(x) pthread_mutex_lock(x)
-  #define TONIC_MUTEX_UNLOCK(x) pthread_mutex_unlock(x)
+  #define TONIC_MUTEX_INIT(x) pthread_mutex_init(&x, NULL)
+  #define TONIC_MUTEX_DESTROY(x) pthread_mutex_destroy(&x)
+  #define TONIC_MUTEX_LOCK(x) pthread_mutex_lock(&x)
+  #define TONIC_MUTEX_UNLOCK(x) pthread_mutex_unlock(&x)
 
 #elif (defined (_WIN32) || defined (__WIN32__))
 
   // TODO: Windows macros
 
 #endif
-
 
 using namespace std;
 
@@ -71,10 +73,6 @@ const TonicFloat TWO_PI       = 2.f * PI;
 // Causes 32nd bit in double to have fractional value 1 (decimal point on 32-bit word boundary)
 // Allowing some efficient shortcuts for table lookup using power-of-two tables
 #define BIT32DECPT 1572864.0
-
-
-// Uncomment or define in your build configuration to log debug messages and perform extra debug checks
-// #define TONIC_DEBUG
 
 namespace Tonic {
   
@@ -126,8 +124,9 @@ namespace Tonic {
       // If true, generators will be forced to compute fresh output
       // TODO: Not fully implmenented yet -- ND 2013/05/20
       bool forceNewOutput;
-      
-      SynthesisContext_() : elapsedFrames(0), elapsedTime(0), forceNewOutput(true) {};
+            
+      SynthesisContext_() : elapsedFrames(0), elapsedTime(0), forceNewOutput(true){}
+    
       
       void tick() {
         elapsedFrames += kSynthesisBlockSize;
@@ -174,6 +173,24 @@ namespace Tonic {
     return result;
   }
   
+  inline bool isPowerOf2(unsigned int input, unsigned int * prevPo2){
+
+    if (input == 0) return true;
+    
+    unsigned int po2 = 2;
+    while (po2 < input){
+      po2 *= 2;
+    }
+    
+    if (prevPo2){
+      
+      unsigned int nextPo2 = po2 * 2;
+      *prevPo2 = abs((int)input - (int)po2) < abs((int)input - (int)nextPo2) ? po2 : nextPo2;
+    }
+    
+    return input == po2;
+  }
+  
   #define TONIC_LOG_MAP_BASEVAL -4
   
   //! Takes linear value 0-1, maps to logarithmic value (base logBase) scaled to min-max. Useful for making faders.
@@ -214,11 +231,7 @@ namespace Tonic {
   // -- Misc --
   
   inline static TonicFloat randomSample(){
-    #ifdef __APPLE__
-    return ((TonicFloat)arc4random()/ARC4RAND_MAX) * 2.0f - 1.0f;
-    #else
     return ((TonicFloat)rand()/RAND_MAX) * 2.0f - 1.0f;
-    #endif
   }
   
   static float randomFloat(float a, float b) {
@@ -229,12 +242,11 @@ namespace Tonic {
 }
 
   //! Tonic exception class
+  // May want to implement custom exception behavior here, but for now, this is essentially a typedef
   class TonicException : public runtime_error
   {
     public:
     TonicException(string const& error) : runtime_error(error) {};
-
-    // May want to implement custom exception behavior here, but for now, this is essentially a typedef
 
   };
   
@@ -258,6 +270,95 @@ namespace Tonic {
 #endif
   }
 
+  //! Dictionary helper class for registering objects by name. For correct usage, objects should be Smart Pointers.
+  template<class T>
+  class TonicDictionary {
+    
+  protected:
+    
+    typedef std::map<string, T> TonicDictionaryMap;
+    TonicDictionaryMap dictionaryMap_;
+    
+  public:
+    
+    //! Add object to dictionary. Replaces old object if one exists.
+    void insertObject(string name, T object){
+      dictionaryMap_[name] = object;
+    }
+    
+    bool containsObjectNamed(string name){
+      typename TonicDictionaryMap::iterator it = dictionaryMap_.find(name);
+      return it != dictionaryMap_.end();
+    }
+    
+    //! Returns object with given name. Returns new object if no object has been set for name, does not insert it.
+    T objectNamed(string name){
+      T obj;
+      typename TonicDictionaryMap::iterator it = dictionaryMap_.find(name);
+      if (it != dictionaryMap_.end()){
+        obj = it->second;
+      }
+      return obj;
+    }
+    
+    //! Remove object for name
+    void removeObjectNamed(string name){
+      typename TonicDictionaryMap::iterator it = dictionaryMap_.find(name);
+      if (it != dictionaryMap_.end()){
+        dictionaryMap_.erase(it);
+      }
+    }
+    
+  };
+  
+  //! Reference counting smart pointer class template
+  template<class T>
+  class TonicSmartPointer {
+  protected:
+    T * obj;
+    int * pcount;
+  public:
+    TonicSmartPointer() : obj(NULL), pcount(NULL) {}
+    
+    TonicSmartPointer(const TonicSmartPointer& r) : obj(r.obj), pcount(r.pcount){
+      if (pcount)
+        (*pcount)++;
+    }
+    
+    TonicSmartPointer& operator=(const TonicSmartPointer& r)
+    {
+      if(obj == r.obj) return *this;
+      
+      if(pcount && --(*pcount) == 0){
+        if (obj) delete obj;
+        delete pcount;
+        
+        obj = NULL;
+        pcount = NULL;
+      }
+      
+      obj = r.obj;
+      pcount = r.pcount;
+      
+      
+      if (pcount)
+        (*pcount)++;
+      
+      return *this;
+    }
+    
+    ~TonicSmartPointer(){
+      if(pcount && --(*pcount) == 0){
+        if (obj) delete obj;
+        delete pcount;
+      }
+    }
+    
+    bool operator==(const TonicSmartPointer& r){
+      return obj == r.obj;
+    }
+    
+  };
 
   
 } // namespace Tonic

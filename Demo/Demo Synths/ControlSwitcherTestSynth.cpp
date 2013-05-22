@@ -89,7 +89,7 @@ public:
       >> LPF12().cutoff(5500)
       >> StereoDelay(1.1, 1.2).wetLevel(0.1) ;
     Generator bassWithAmp = bass * bassEnv * tremelo;
-    outputGen = bassWithAmp  + click;
+    setOutputGen(bassWithAmp  + click);
 #else
       
 #pragma message("C++11 Support not available - ControlSwitcherTestSynth disabled")

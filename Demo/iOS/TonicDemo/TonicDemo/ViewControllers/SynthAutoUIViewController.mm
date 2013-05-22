@@ -42,6 +42,9 @@ using Tonic::ControlParameter;
       
       if (_synth){
         _synthParameters = _synth->getParameters();
+        if (demoDef.usesInput){
+          [[TonicSynthManager sharedManager] setInputEnabled:YES];
+        }
       }
       
     }
@@ -50,6 +53,7 @@ using Tonic::ControlParameter;
 
 - (void)dealloc
 {
+  [[TonicSynthManager sharedManager] setInputEnabled:NO];
   [[TonicSynthManager sharedManager] removeSynthForKey:kSynthKey];
 }
 

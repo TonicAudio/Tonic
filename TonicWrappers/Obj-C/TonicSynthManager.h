@@ -13,6 +13,8 @@
 
 + (TonicSynthManager*)sharedManager;
 
+@property (assign, nonatomic) BOOL inputEnabled;
+
 - (void)startSession;
 - (void)endSession;
 
@@ -20,6 +22,5 @@
 - (void)removeSynthForKey:(NSString*)key;
 
 - (Tonic::Synth*)synthForKey:(NSString*)key;
-
 
 @end

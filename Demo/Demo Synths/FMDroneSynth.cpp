@@ -33,7 +33,7 @@ public:
     Generator rCarrierFreq = ControlMidiToFreq().input(carrierPitch).smoothed();
     Generator rModFreq     = rCarrierFreq * 4.0f;
       
-      outputGen = SineWave()
+    Generator outputGen = SineWave()
         .freq( rCarrierFreq
           + (
             SineWave().freq( rModFreq ) *
@@ -41,6 +41,9 @@ public:
              (modIndex.smoothed() * (1.0f + SineWave().freq((LFNoise().setFreq(0.5f) + 1.f) * 2.f + 0.2f) * (lfoAmt * 0.5f).smoothed()))
           )
         ) * ControlDbToLinear().input(volume).smoothed() * ((SineWave().freq(0.15f) + 1.f) * 0.75f + 0.25);
+    
+    setOutputGen(outputGen);
+
   }
   
 };
