@@ -26,9 +26,9 @@ namespace Tonic {
       
     public:
       
-      void in( ControlGenerator input );
+      void input( ControlGenerator input );
       
-      ControlGenerator & getInput(unsigned int index) { return inputs[index]; };
+      ControlGenerator getInput(unsigned int index) { return inputs[index]; };
       unsigned int numInputs() { return inputs.size(); };
       
     protected:
@@ -45,11 +45,11 @@ namespace Tonic {
     
   public:
     
-    void in( ControlGenerator input ){
-      gen()->in( input );
+    void input( ControlGenerator input ){
+      gen()->input( input );
     }
     
-    ControlGenerator & operator[](unsigned int index){
+    ControlGenerator operator[](unsigned int index){
       return gen()->getInput(index);
     }
     
@@ -60,50 +60,23 @@ namespace Tonic {
   
   static ControlMultiplier operator*(ControlGenerator a, ControlGenerator b){
     ControlMultiplier mult;
-    mult.in(a);
-    mult.in(b);
+    mult.input(a);
+    mult.input(b);
     return mult;
   }
   
   static ControlMultiplier operator*(ControlGenerator a, float b){
     ControlMultiplier mult;
-    mult.in(a);
-    mult.in(ControlValue(b));
+    mult.input(a);
+    mult.input(ControlValue(b));
     return mult;
   }
   
   static ControlMultiplier operator*(float a, ControlGenerator b){
     ControlMultiplier mult;
-    mult.in(ControlValue(a));
-    mult.in(ControlGenerator(b));
+    mult.input(ControlValue(a));
+    mult.input(ControlGenerator(b));
     return mult;
-  }
-  
-  static ControlMultiplier operator*(ControlMultiplier a, ControlGenerator b){
-    a.in(b);
-    return a;
-  }
-  
-  static ControlMultiplier operator*(ControlGenerator a, ControlMultiplier b){
-    b.in(a);
-    return b;
-  }
-  
-  static ControlMultiplier operator*(ControlMultiplier a, float b){
-    a.in(ControlValue(b));
-    return a;
-  }
-  
-  static ControlMultiplier operator*(float a, ControlMultiplier b){
-    b.in(ControlValue(a));
-    return b;
-  }
-  
-  static ControlMultiplier operator*(ControlMultiplier a, ControlMultiplier b){
-    for (unsigned int i=0; i<b.numInputs(); i++){
-      a.in(b[i]);
-    }
-    return a;
   }
 }
 

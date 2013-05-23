@@ -10,8 +10,8 @@ namespace Tonic {
   
   Biquad::Biquad(){
     memset(coef_, 0, 5 * sizeof(TonicFloat));
-    inputVec_.resize(kSynthesisBlockSize + 2, 1, 0);
-    outputVec_.resize(kSynthesisBlockSize + 2, 1, 0);
+    inputVec_.resize(kSynthesisBlockSize + 4, 1, 0);
+    outputVec_.resize(kSynthesisBlockSize + 4, 1, 0);
   }
   
 }

@@ -56,8 +56,8 @@ namespace Tonic {
     
     inline void StereoDelay_::computeSynthesisBlock(const SynthesisContext_ &context){
       
-      delayTimeGen_[0].tick(delayTimeFrames_[0], context);
-      delayTimeGen_[1].tick(delayTimeFrames_[1], context);
+      delayTimeGen_[0].tick(delayTimeFrames_[TONIC_LEFT], context);
+      delayTimeGen_[1].tick(delayTimeFrames_[TONIC_RIGHT], context);
       fbkGen_.tick(fbkFrames_, context);
       
       TonicFloat outSamp[2], fbk;
@@ -81,7 +81,7 @@ namespace Tonic {
         
         // output right sample
         *outptr++ = outSamp[TONIC_RIGHT];
-        delayLine_[TONIC_RIGHT].tickIn(*dryptr++ + outSamp[1] * fbk);
+        delayLine_[TONIC_RIGHT].tickIn(*dryptr++ + outSamp[TONIC_RIGHT] * fbk);
         
         // advance delay lines
         delayLine_[TONIC_LEFT].advance();
