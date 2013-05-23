@@ -78,8 +78,8 @@ namespace Tonic {
     
     void setIsStereo(bool stereo){
       // resize vectors to match number of channels
-      inputVec_.resize(kSynthesisBlockSize + 2, stereo ? 2 : 1, 0);
-      outputVec_.resize(kSynthesisBlockSize + 2, stereo ? 2 : 1, 0);
+      inputVec_.resize(kSynthesisBlockSize + 4, stereo ? 2 : 1, 0);
+      outputVec_.resize(kSynthesisBlockSize + 4, stereo ? 2 : 1, 0);
     }
     
     //! Set the coefficients for the filtering operation.
@@ -119,7 +119,7 @@ namespace Tonic {
     
 #ifdef USE_APPLE_ACCELERATE
     for (unsigned int c=0; c<stride; c++){
-      vDSP_deq22(&inputVec_(0,c), stride, coef_, &outputVec_(0,c), stride, kSynthesisBlockSize);
+      vDSP_deq22(&inputVec_[0] + c, stride, coef_, &outputVec_[0] + c, stride, kSynthesisBlockSize);
     }
 #else
     
