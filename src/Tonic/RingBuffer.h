@@ -251,7 +251,7 @@ namespace Tonic {
       
     public:
     
-      RingBufferWriter();
+      RingBufferWriter() : TonicSmartPointer<Tonic_::RingBufferWriter_>(new Tonic_::RingBufferWriter_) {}
       RingBufferWriter(string name, unsigned int nFrames, unsigned int nChannels);
       
       void write(float *data, unsigned int nFrames, unsigned int nChannels){

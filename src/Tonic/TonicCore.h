@@ -318,11 +318,13 @@ namespace Tonic {
     T * obj;
     int * pcount;
   public:
+    
     TonicSmartPointer() : obj(NULL), pcount(NULL) {}
     
+    TonicSmartPointer(T * initObj) : obj(initObj) , pcount(initObj ? new int(1) : NULL) {}
+    
     TonicSmartPointer(const TonicSmartPointer& r) : obj(r.obj), pcount(r.pcount){
-      if (pcount)
-        (*pcount)++;
+      if (pcount) (*pcount)++;
     }
     
     TonicSmartPointer& operator=(const TonicSmartPointer& r)

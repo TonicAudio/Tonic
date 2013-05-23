@@ -67,9 +67,7 @@ namespace Tonic {
     
   public:
     
-    SampleTable(unsigned int nFrames = 64, unsigned int nChannels = 2){
-      obj = new Tonic_::SampleTable_(nFrames, nChannels);
-    }
+    SampleTable(unsigned int nFrames = 64, unsigned int nChannels = 2) : TonicSmartPointer<Tonic_::SampleTable_>( new Tonic_::SampleTable_(nFrames, nChannels) ) {}
   
     // Property getters
     unsigned int channels() const {

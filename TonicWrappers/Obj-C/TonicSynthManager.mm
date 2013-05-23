@@ -37,9 +37,10 @@ using namespace Tonic;
 // --------------------------
 
 @interface TonicSynthManager ()
-
-@property (nonatomic, assign) Mixer mixer;
-@property (nonatomic, assign) RingBufferWriter inputBuffer;
+{
+  Mixer mixer;
+  RingBufferWriter inputBuffer;
+}
 
 @property (nonatomic, strong) NSMutableDictionary *synthDict;
 
@@ -69,8 +70,10 @@ using namespace Tonic;
 {
   self = [super init];
   if (self){
+    
+    inputBuffer = RingBufferWriter("input", 8192, 2); // enough and then some
+    
     self.synthDict = [NSMutableDictionary dictionaryWithCapacity:10];
-    self.inputBuffer = RingBufferWriter("input", 8192, 2); // enough and then some
     self.inputEnabled = NO;
     [self setupNovocaineOutput];
   }
@@ -83,14 +86,14 @@ using namespace Tonic;
 
   [[Novocaine audioManager] setOutputBlock:^(float *data, UInt32 numFrames, UInt32 numChannels) {
     @autoreleasepool {
-      wself.mixer.fillBufferOfFloats(data, numFrames, numChannels);
+      mixer.fillBufferOfFloats(data, numFrames, numChannels);
     }
   }];
   
   [[Novocaine audioManager] setInputBlock:^(float *data, UInt32 numFrames, UInt32 numChannels){
     @autoreleasepool {
       if (wself.inputEnabled){
-        wself.inputBuffer.write(data, numFrames, numChannels);
+        inputBuffer.write(data, numFrames, numChannels);
       }
     }
   }];
@@ -112,7 +115,7 @@ using namespace Tonic;
 {
   _inputEnabled = inputEnabled;
   if (inputEnabled){
-    self.inputBuffer.reset();
+    inputBuffer.reset();
   }
 }
 
@@ -121,9 +124,9 @@ using namespace Tonic;
     if (key){
       
       if ([[self.synthDict allKeys] containsObject:key]){
-        self.mixer.removeInput([[self.synthDict valueForKey:key] synth]);
+        mixer.removeInput([[self.synthDict objectForKey:key] synth]);
       }
-      self.mixer.addInput(synth);
+      mixer.addInput(synth);
       [self.synthDict setValue:[SynthWrapper wrapperWithSynth:synth] forKey:key];
 
     }
@@ -136,9 +139,10 @@ using namespace Tonic;
 {
     if (key){
       if ([[self.synthDict allKeys] containsObject:key]){
-        Synth oldSynth = [[self.synthDict valueForKey:key] synth];
-        self.mixer.removeInput(oldSynth);
+        Synth oldSynth = [[self.synthDict objectForKey:key] synth];
+        mixer.removeInput(oldSynth);
       }
+      [self.synthDict removeObjectForKey:key];
     }
     else{
       [NSException raise:NSInvalidArgumentException format:@"Argument \"key\" cannot be nil"];

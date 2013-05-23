@@ -84,6 +84,9 @@ namespace Tonic {
   class ControlGenerator : public TonicSmartPointer<Tonic_::ControlGenerator_>{
 
   public:
+    
+    ControlGenerator(Tonic_::ControlGenerator_ * cGen = NULL) : TonicSmartPointer<Tonic_::ControlGenerator_>(cGen) {}
+    
     inline ControlGeneratorOutput tick( const Tonic_::SynthesisContext_ & context ){
       return obj->tick(context);
     }
@@ -101,9 +104,7 @@ namespace Tonic {
     }
     
   public:
-    TemplatedControlGenerator(){
-      obj = new GenType();
-    }
+    TemplatedControlGenerator() : ControlGenerator(new GenType) {}
     
   };
 

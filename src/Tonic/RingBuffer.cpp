@@ -56,10 +56,6 @@ namespace Tonic {
     }
     return *this;
   }
-
-  RingBufferWriter::RingBufferWriter() {
-    obj = new Tonic_::RingBufferWriter_();
-  }
   
   RingBufferWriter::RingBufferWriter(string name, unsigned int nFrames, unsigned int nChannels)
   {

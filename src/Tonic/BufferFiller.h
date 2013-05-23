@@ -109,6 +109,8 @@ namespace Tonic{
   class BufferFiller : public Generator {
     
   public:
+    
+    BufferFiller(Tonic_::BufferFiller_ * newBf) : Generator(newBf) {}
         
     //! Fill an arbitrarily-sized, interleaved buffer of audio samples as floats
     /*!
@@ -127,9 +129,7 @@ namespace Tonic{
       return static_cast<GenType*>(obj);
     }
   public:
-    TemplatedBufferFiller(){
-      obj = new GenType();
-    }
+    TemplatedBufferFiller() : BufferFiller(new GenType) {}
   };
   
 }

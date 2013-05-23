@@ -73,6 +73,8 @@ namespace Tonic {
 
   public:
     
+    Generator(Tonic_::Generator_ * gen = NULL) : TonicSmartPointer<Tonic_::Generator_>(gen) {}
+    
     inline bool isStereoOutput(){
       return obj->isStereoOutput();
     }
@@ -90,9 +92,7 @@ namespace Tonic {
       return static_cast<GenType*>(obj);
     }
   public:
-    TemplatedGenerator(){
-      obj = new GenType();
-    }
+    TemplatedGenerator() : Generator(new GenType) {}
   };
   
   class PassThroughGenerator : public TemplatedGenerator<Tonic_::PassThroughGenerator_>{
