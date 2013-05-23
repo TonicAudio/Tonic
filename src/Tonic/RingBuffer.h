@@ -163,12 +163,13 @@ namespace Tonic {
   // ----------- Ring Buffer Data Container -----------
   
   //! Like a SampleTable_, but with counters for over/underrun detection and easy synchronous read/write
-  //  TODO: Maybe template the SampleTable smart pointer instead of statically casting the object.
+  //  TODO: Maybe should template the SampleTable smart pointer instead of statically casting the object?
   class RingBuffer : public SampleTable {
     
   public:
     
     RingBuffer(unsigned int nFrames = 64, unsigned int nChannels = 2){
+      if (obj) delete obj;
       obj = new Tonic_::RingBuffer_(nFrames, nChannels);
     }
     
