@@ -60,7 +60,7 @@ using Tonic::ControlParameter;
   [super viewDidLoad];
   
   self.navigationItem.title = self.demoDef.synthDisplayName;
-  self.descLabel.text = self.demoDef.synthDescription;
+  self.descLabel.text = self.demoDef.synthInstructions;
  
   self.controlTableView.rowHeight = [SynthParameterCell height];
   [self.controlTableView registerClass:[SynthParameterCell class] forCellReuseIdentifier:kCellIdentifier];

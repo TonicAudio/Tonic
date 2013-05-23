@@ -149,7 +149,7 @@ using namespace Tonic;
         def.synthClassName = @"CompressorTestSynth";
         def.synthDisplayName = @"Dynamic Compressor";
         def.synthDescription = @"Compress an 808-esque snare";
-        def.synthInstructions = @"Y axis is compression threshold. Ratio is 8:1";
+        def.synthInstructions = @"Compress it!";
         def.shouldAutoGenUI = YES;
       }
       
@@ -198,7 +198,7 @@ using namespace Tonic;
         def.synthClassName = @"ReverbTestSynth";
         def.synthDisplayName = @"Reverb";
         def.synthDescription = @"Artificial Reverb";
-        def.synthInstructions = @"Yeeeeah";
+        def.synthInstructions = @"Reverberate!";
         def.shouldAutoGenUI = YES;
       }
       
@@ -208,8 +208,23 @@ using namespace Tonic;
         def.synthClassName = @"SimpleStepSeqSynth";
         def.synthDisplayName = @"Simple Step Sequencer";
         def.synthDescription = @"Simple Step Sequencer";
-        def.synthInstructions = @"";
+        def.synthInstructions = @"Simple Step Sequencer";
         def.shouldAutoGenUI = YES;
+      }
+      
+      {
+        SynthDemoDef* def = [[SynthDemoDef alloc] init];
+        [synthDefinitions addObject:def];
+        def.synthClassName = @"SynthsAsGeneratorsDemoSynth";
+        def.synthDisplayName = @"Build a synth from other synths";
+        def.synthDescription = @"Two synths at once!";
+        def.synthInstructions = @"Pan around to change both synths!";
+        def.synthAction = ^(Tonic::Synth synth, CGPoint touchPointNorm){
+          synth.setParameter("Q", touchPointNorm.y * 135);
+          synth.setParameter("cutoff", touchPointNorm.x);
+          synth.setParameter("stepperStart", touchPointNorm.y);
+          synth.setParameter("stepperSpread", touchPointNorm.x);
+        };
       }
 
     }

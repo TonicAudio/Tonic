@@ -19,6 +19,9 @@
 
 namespace Tonic{
   
+  // forward declaration
+  class Synth;
+  
   namespace Tonic_ {
     
     class Synth_ : public BufferFiller_ {
@@ -45,9 +48,14 @@ namespace Tonic{
       
       void setLimitOutput(bool shouldLimit) { limitOutput_ = shouldLimit; };
       
-      ControlParameter & addParameter(string name, TonicFloat initialValue);
+      ControlParameter addParameter(string name, TonicFloat initialValue);
       
-      void                      setParameter(string name, float value);
+      void addParameter(ControlParameter parameter);
+      
+      void addParametersFromSynth(Synth synth);
+      
+      void setParameter(string name, float value);
+      
       vector<ControlParameter>  getParameters();
       
       void forceNewOutput(){
@@ -91,9 +99,21 @@ namespace Tonic{
     }
     
     //! Add a ControlParameter with name "name"
-    ControlParameter & addParameter(string name, TonicFloat initialValue = 0.f)
+    ControlParameter addParameter(string name, TonicFloat initialValue = 0.f)
     {
       return gen()->addParameter(name, initialValue);
+    }
+    
+    //! Add a ControlParameter initialized elsewhere. Will overwrite existing parameter with the same name.
+    void addParameter(ControlParameter parameter)
+    {
+      gen()->addParameter(parameter);
+    }
+    
+    //! Add all the parameters from another synth
+    void addParametersFromSynth(Synth synth)
+    {
+      gen()->addParametersFromSynth(synth);
     }
     
     //! Set the value of a control parameter on this synth

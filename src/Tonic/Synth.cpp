@@ -37,15 +37,27 @@ namespace Tonic {
 
     }
     
-    ControlParameter & Synth_::addParameter(string name, TonicFloat initialValue)
+    ControlParameter Synth_::addParameter(string name, TonicFloat initialValue)
     {
       if (parameters_.find(name) == parameters_.end())
       {
-        ControlParameter param = ControlParameter(name).value(initialValue).displayName(name);
+        ControlParameter param = ControlParameter().name(name).value(initialValue).displayName(name);
         parameters_[name] = param;
         orderedParameterNames_.push_back(name);
       }
       return parameters_[name];
+    }
+    
+    void Synth_::addParameter(ControlParameter parameter){
+      string name = parameter.getName();
+      parameters_[name] = parameter;
+      orderedParameterNames_.push_back(name);
+    }
+    
+    void Synth_::addParametersFromSynth(Synth synth){
+      vector<ControlParameter> params = synth.getParameters();
+      for (unsigned int i=0; i<params.size(); i++)
+        addParameter(params[i]);
     }
     
     vector<ControlParameter> Synth_::getParameters(){
