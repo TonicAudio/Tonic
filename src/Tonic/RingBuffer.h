@@ -199,8 +199,11 @@ namespace Tonic {
       
     public:
                   
-      void setRingBuffer( RingBuffer buffer ) { ringBuffer_ = buffer; }
-            
+      void setRingBuffer( RingBuffer buffer ) {
+        setIsStereoOutput(buffer.channels() == 2);
+        ringBuffer_ = buffer;
+      }
+      
       void computeSynthesisBlock( const SynthesisContext_ &context );
       
     };
