@@ -196,24 +196,18 @@ namespace Tonic {
 
     //! Input for audio to be compressed
     Compressor & audioInput( Generator input ){
-      this->gen()->lockMutex();
       this->gen()->setInput( input );
-      this->gen()->unlockMutex();
       return *this;
     }
     
     //! Input for audio for compression amplitude envelope
     Compressor & sidechainInput( Generator input ){
-      this->gen()->lockMutex();
       this->gen()->setAmplitudeInput(input);
-      this->gen()->unlockMutex();
       return *this;
     }
     
     void setIsStereo( bool isStereo ){
-      this->gen()->lockMutex();
       this->gen()->setIsStereo(isStereo);
-      this->gen()->unlockMutex();
     }
     
     createControlGeneratorSetters(Compressor, attack, setAttack);
@@ -237,9 +231,7 @@ namespace Tonic {
     Limiter();
     
     void setIsStereo( bool isStereo ){
-      this->gen()->lockMutex();
       this->gen()->setIsStereo(isStereo);
-      this->gen()->unlockMutex();
     }
     
     createControlGeneratorSetters(Limiter, release, setRelease);

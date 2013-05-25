@@ -19,50 +19,123 @@
 
 namespace Tonic{
   
-  class Synth  : public BufferFiller{
+  // forward declaration
+  class Synth;
+  
+  namespace Tonic_ {
+    
+    class Synth_ : public BufferFiller_ {
+      
+    protected:
+      
+      Generator     outputGen_;
+      
+      Limiter limiter_;
+      bool limitOutput_;
+      
+      std::map<string, ControlParameter> parameters_;
+      std::vector<string> orderedParameterNames_;
+      
+      void computeSynthesisBlock(const Tonic::Tonic_::SynthesisContext_ &context);
+      
+    public:
+      
+      Synth_();
+      
+      //! Set the output gen that produces audio for the Synth
+      void  setOutputGen(Generator gen){ outputGen_ = gen; }
+      const Generator getOutputGen() { return outputGen_; };
+      
+      void setLimitOutput(bool shouldLimit) { limitOutput_ = shouldLimit; };
+      
+      ControlParameter addParameter(string name, TonicFloat initialValue);
+      
+      void addParameter(ControlParameter parameter);
+      
+      void addParametersFromSynth(Synth synth);
+      
+      void setParameter(string name, float value);
+      
+      vector<ControlParameter>  getParameters();
+      
+      void forceNewOutput(){
+        synthContext_.forceNewOutput = true;
+      }
+            
+    };
+    
+    inline void Synth_::computeSynthesisBlock(const SynthesisContext_ &context){
+
+      outputGen_.tick(outputFrames_, context);
+      
+      if (limitOutput_){
+        limiter_.tickThrough(outputFrames_, context);
+      }
+    }
+    
+  }
+  
+  // ---- Smart Pointer -----
+  
+  class Synth  : public TemplatedBufferFiller<Tonic_::Synth_> {
     
   public:
-    
-    Synth();
-    
+        
     //! Set the output gen that produces audio for the Synth
-    void  setOutputGen(Generator gen);
+    void  setOutputGen(Generator generator){
+      gen()->lockMutex();
+      gen()->setOutputGen(generator);
+      gen()->unlockMutex();
+    }
     
     //! Returns a reference to outputGen
-    const Generator getOutputGenerator() { return outputGen; };
-    
+    const Generator getOutputGen() {
+      return gen()->getOutputGen();
+    }
+
     //! Set whether synth uses dynamic limiter to prevent clipping/wrapping. Defaults to true.
-    void setLimitOutput(bool shouldLimit) { limitOutput_ = shouldLimit; };
+    void setLimitOutput(bool shouldLimit) {
+      gen()->setLimitOutput(shouldLimit);
+    }
     
     //! Add a ControlParameter with name "name"
-    ControlParameter & addParameter(string name, TonicFloat initialValue = 0.f);
-    
-    void                      setParameter(string name, float value=1);
-    vector<ControlParameter>  getParameters();
-    
-    void tick( TonicFrames& frames, const Tonic_::SynthesisContext_ & context );
-    
-  protected:
-        
-    Generator     outputGen;
-    
-    Limiter limiter_;
-    bool limitOutput_;
-    
-    std::map<string, ControlParameter> parameters_;
-    std::vector<string> orderedParameterNames_;
-        
-  };
-  
-  inline void Synth::tick(Tonic::TonicFrames &frames, const Tonic_::SynthesisContext_ &context){
-    TONIC_MUTEX_LOCK(&mutex_);
-    outputGen.tick(frames, context);
-    TONIC_MUTEX_UNLOCK(&mutex_);
-
-    if (limitOutput_){
-      limiter_.tickThrough(frames, context);
+    ControlParameter addParameter(string name, TonicFloat initialValue = 0.f)
+    {
+      return gen()->addParameter(name, initialValue);
     }
-  }
+    
+    //! Add a ControlParameter initialized elsewhere. Will overwrite existing parameter with the same name.
+    void addParameter(ControlParameter parameter)
+    {
+      gen()->addParameter(parameter);
+    }
+    
+    //! Add all the parameters from another synth
+    void addParametersFromSynth(Synth synth)
+    {
+      gen()->addParametersFromSynth(synth);
+    }
+    
+    //! Set the value of a control parameter on this synth
+    void setParameter(string name, float value=1)
+    {
+      gen()->setParameter(name, value);
+    }
+    
+    //! Get all of the control parameters registered for this synth
+    vector<ControlParameter>  getParameters()
+    {
+      return gen()->getParameters();
+    }
+    
+    void forceNewOutput(){
+      gen()->lockMutex();
+      gen()->forceNewOutput();
+      gen()->unlockMutex();
+    }
+            
+  };
+
   
   // ------------------------------
   //
@@ -72,13 +145,15 @@ namespace Tonic{
   //
   // -----------------------------
   
-  template<typename T> Synth * createSynth() { return new T; }
+  template<typename T> Synth createSynth() {
+    return T();
+  }
   
   struct SynthFactory {
     
-    typedef std::map<std::string, Synth*(*)()> map_type;
+    typedef std::map<std::string, Synth(*)()> map_type;
     
-    static Synth * createInstance(std::string const& s) {
+    static Synth createInstance(std::string const& s) {
       map_type::iterator it = getMap()->find(s);
       if(it == getMap()->end()){
         string synthsList = "";
@@ -89,7 +164,8 @@ namespace Tonic{
         
         error("Error creating synth. Synth named \"" + s + "\" not found. Existing registered synths are: \n" + synthsList);
         
-        return 0;
+        // return empty synth
+        return Synth();
       }
       return it->second();
     }

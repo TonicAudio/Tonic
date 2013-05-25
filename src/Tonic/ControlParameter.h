@@ -48,7 +48,7 @@ namespace Tonic {
       
       ControlParameter_();
       
-      void        setName( string name ) { name = name_; };
+      void        setName( string name ) { name_ = name; };
       string      getName() { return name_; };
       
       void        setDisplayName( string displayName ) { displayName_ = displayName; };
@@ -76,9 +76,7 @@ namespace Tonic {
   class ControlParameter : public TemplatedControlGenerator<Tonic_::ControlParameter_>{
     
   public:
-    
-    ControlParameter(string name = "");
-    
+        
     string              getName();
     ControlParameter &  name(string name);
     

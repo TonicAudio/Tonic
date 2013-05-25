@@ -50,7 +50,7 @@ public:
     
     StereoDelay delay = StereoDelay(0.37, 0.38).feedback(0.4).dryLevel(0.8).wetLevel(0.2);
     
-    outputGen = (duckingComp.audioInput(randomBass >> delay).sidechainInput(snare)  + snare * 0.5);
+    setOutputGen(duckingComp.audioInput(randomBass >> delay).sidechainInput(snare)  + snare * 0.5);
   }
   
 };
