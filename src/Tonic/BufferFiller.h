@@ -15,17 +15,17 @@
 #include <map>
 #include "Generator.h"
 
-//! BufferFiller is the base class for any generator expected to produce output for a buffer fill.
-/*!
- BufferFillers provide a high-level interface for combinations of generators, and can be used to fill
- arbitraryly large buffers.
-  
- Subclasses to include mixer, channel, synth, etc.
-*/
 namespace Tonic{
   
   namespace Tonic_ {
     
+    //! Base class for any generator expected to produce output for a buffer fill.
+    /*!
+     BufferFillers provide a high-level interface for combinations of generators, and can be used to fill
+     arbitraryly large buffers.
+     
+     Subclasses to include mixer, channel, synth, etc.
+     */
     class BufferFiller_ : public Generator_ {
       
     private:

@@ -74,16 +74,22 @@ const TonicFloat TWO_PI       = 2.f * PI;
 // Allowing some efficient shortcuts for table lookup using power-of-two tables
 #define BIT32DECPT 1572864.0
 
+//! Top-level namespace.
+/*! Objects under the Tonic namespace are used to bulid synths and generator chains */
 namespace Tonic {
   
+  //! DSP-level namespace.
+  /*! Objects under the Tonic_ namespace are internal DSP-level objects not intended for public usage */
   namespace Tonic_ {
+    
     static TonicFloat sampleRate_ = 44100.f;
+    
   }
   
   // -- Global Constants --
   
   //! Set the operational sample rate.
-  //  CHANGING WHILE RUNNING WILL RESULT IN UNDEFINED BEHAVIOR. MUST BE SET PRIOR TO OBJECT ALLOCATION.
+  /*! !!!: CHANGING WHILE RUNNING WILL RESULT IN UNDEFINED BEHAVIOR. MUST BE SET PRIOR TO OBJECT ALLOCATION. */
   static void setSampleRate(TonicFloat sampleRate){
     Tonic_::sampleRate_ = sampleRate;
   }
@@ -94,13 +100,13 @@ namespace Tonic {
   };
 
   //! "Vector" size for audio processing. ControlGenerators update at this rate.
-  //! THIS VALUE SHOULD BE A POWER-OF-TWO WHICH IS LESS THAN THE HARDWARE BUFFER SIZE
+  /*! !!!: THIS VALUE SHOULD BE A POWER-OF-TWO WHICH IS LESS THAN THE HARDWARE BUFFER SIZE */
   static const unsigned int kSynthesisBlockSize = 64;
   
   // -- Global Types --
   
-  // For fast computation of int/fract using some bit-twiddlery
-  // inspired by the pd implementation
+  //!For fast computation of int/fract using some bit-twiddlery
+  /*! inspired by the pd implementation */
   union ShiftedDouble {
     double d;
     TonicUInt32 i[2];
@@ -108,26 +114,28 @@ namespace Tonic {
   
   
   namespace Tonic_{
-    // -- Synthesis Context Struct --
     
-    // Context passed down from root BufferFiller graph object to all sub-generators
-    // Synchronizes signal flow in cases when generator output is shared between multiple inputs
+    //! Context which defines a particular synthesis graph
+    
+    /*! 
+        Context passed down from root BufferFiller graph object to all sub-generators.
+        synchronizes signal flow in cases when generator output is shared between multiple inputs
+    */
     struct SynthesisContext_{
       
-      // Number of frames elapsed since program start
+      //! Number of frames elapsed since context start
       // unsigned long will last 38+ days before overflow at 44.1 kHz
       unsigned long elapsedFrames;
       
-      // System time in seconds
+      //! Elapsed time since context start
       double elapsedTime;
       
-      // If true, generators will be forced to compute fresh output
+      //! If true, generators will be forced to compute fresh output
       // TODO: Not fully implmenented yet -- ND 2013/05/20
       bool forceNewOutput;
             
       SynthesisContext_() : elapsedFrames(0), elapsedTime(0), forceNewOutput(true){}
     
-      
       void tick() {
         elapsedFrames += kSynthesisBlockSize;
         elapsedTime = (double)elapsedFrames/sampleRate();
@@ -138,7 +146,7 @@ namespace Tonic {
     
   } // namespace Tonic_
   
-  // Dummy context for ticking things in-place.
+  //! Dummy context for ticking things in-place.
   // Will always be at time 0, forceNewOutput == true
   static const Tonic_::SynthesisContext_ DummyContext;
 

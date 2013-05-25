@@ -35,7 +35,7 @@ namespace Tonic {
   }
 
   //! Compute coefficients from analog prototype using bilinear transform
-  /*
+  /*!
       Analog transfer function (laplace domain) should look like:
  
               b2 s^2 + b1 s + b0
