@@ -11,14 +11,35 @@
 #include <vector>
 
 using std::vector;
-using Tonic::Synth;
-using Tonic::SynthFactory;
-using Tonic::Mixer;
+using namespace Tonic;
+
+// ------ Simple wrapper for storing synth smart pointers in NS containers -----
+
+@interface SynthWrapper : NSObject
+
+@property (nonatomic, assign) Synth synth;
+
++ (SynthWrapper*)wrapperWithSynth:(Synth)synth;
+
+@end
+
+@implementation SynthWrapper
+
++ (SynthWrapper*)wrapperWithSynth:(Tonic::Synth)synth
+{
+  SynthWrapper * wrapper = [SynthWrapper new];
+  wrapper.synth = synth;
+  return wrapper;
+}
+
+@end
+
+// --------------------------
 
 @interface TonicSynthManager ()
 {
-  SynthFactory synthFactory;
   Mixer mixer;
+  RingBufferWriter inputBuffer;
 }
 
 @property (nonatomic, strong) NSMutableDictionary *synthDict;
@@ -49,17 +70,32 @@ using Tonic::Mixer;
 {
   self = [super init];
   if (self){
+    
+    inputBuffer = RingBufferWriter("input", 8192, 2); // enough and then some
+    
     self.synthDict = [NSMutableDictionary dictionaryWithCapacity:10];
+    self.inputEnabled = NO;
     [self setupNovocaineOutput];
   }
   return self;
 }
 
-
 - (void)setupNovocaineOutput
-{  
-  [[Novocaine audioManager] setOutputBlock:^(float *audioToPlay, UInt32 numSamples, UInt32 numChannels) {
-      mixer.fillBufferOfFloats(audioToPlay, numSamples, numChannels);
+{
+  __weak TonicSynthManager *wself = self;
+
+  [[Novocaine audioManager] setOutputBlock:^(float *data, UInt32 numFrames, UInt32 numChannels) {
+    @autoreleasepool {
+      mixer.fillBufferOfFloats(data, numFrames, numChannels);
+    }
+  }];
+  
+  [[Novocaine audioManager] setInputBlock:^(float *data, UInt32 numFrames, UInt32 numChannels){
+    @autoreleasepool {
+      if (wself.inputEnabled){
+        inputBuffer.write(data, numFrames, numChannels);
+      }
+    }
   }];
   
   [[Novocaine audioManager] pause];
@@ -75,55 +111,43 @@ using Tonic::Mixer;
   [[Novocaine audioManager] pause];
 }
 
-- (Tonic::Synth*)addSynthWithName:(NSString *)synthName forKey:(NSString *)key
+- (void)setInputEnabled:(BOOL)inputEnabled
 {
-  Synth *newSynth = nil;
+  _inputEnabled = inputEnabled;
+  if (inputEnabled){
+    inputBuffer.reset();
+  }
+}
+
+- (void)addSynth:(Tonic::Synth)synth forKey:(NSString *)key
+{
     if (key){
-      newSynth = synthFactory.createInstance(synthName.UTF8String);
-      if (newSynth){
-        
-        Synth *oldSynth = (Synth*)[[self.synthDict valueForKey:key] pointerValue];
-        if (oldSynth){
-          mixer.removeInput(oldSynth);
-        }
-        mixer.addInput(newSynth);
-        [self.synthDict setValue:[NSValue valueWithPointer:newSynth] forKey:key];
-        
-      }else{
-        NSLog(@"Error in TonicSynthManager: Failed to add source. Source named %@ not found.", key);
+      
+      if ([[self.synthDict allKeys] containsObject:key]){
+        mixer.removeInput([[self.synthDict objectForKey:key] synth]);
       }
+      mixer.addInput(synth);
+      [self.synthDict setValue:[SynthWrapper wrapperWithSynth:synth] forKey:key];
+
     }
     else{
       [NSException raise:NSInvalidArgumentException format:@"Argument \"key\" cannot be nil"];
     }
-  return newSynth;
 }
 
 - (void)removeSynthForKey:(NSString *)key
 {
     if (key){
-      Synth *synth = (Synth*)[[self.synthDict objectForKey:key] pointerValue];
-      if (synth){
-        mixer.removeInput(synth);
-        delete synth;
-        [self.synthDict removeObjectForKey:key];
+      if ([[self.synthDict allKeys] containsObject:key]){
+        Synth oldSynth = [[self.synthDict objectForKey:key] synth];
+        mixer.removeInput(oldSynth);
       }
+      [self.synthDict removeObjectForKey:key];
     }
     else{
       [NSException raise:NSInvalidArgumentException format:@"Argument \"key\" cannot be nil"];
     }
   
-}
-
-- (Tonic::Synth*)synthForKey:(NSString *)key
-{
-  if (key){
-    return (Tonic::Synth*)[[self.synthDict valueForKey:key] pointerValue];
-  }
-  else{
-    [NSException raise:NSInvalidArgumentException format:@"Argument \"key\" cannot be nil"];
-  }
-  return NULL;
 }
 
 @end

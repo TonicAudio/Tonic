@@ -741,10 +741,8 @@ OSStatus renderCallback (void						*inRefCon,
     if (!sm.outputBlock)
         return noErr;
 
-
     // Collect data to render from the callbacks
     sm.outputBlock(sm.outData, inNumberFrames, sm.numOutputChannels);
-    
     
     // Put the rendered data into the output buffer
     // TODO: convert SInt16 ranges to float ranges.

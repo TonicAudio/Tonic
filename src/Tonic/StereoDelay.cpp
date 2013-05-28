@@ -16,6 +16,8 @@ namespace Tonic { namespace Tonic_{
     delayTimeFrames_[TONIC_LEFT].resize(kSynthesisBlockSize, 1, 0);
     delayTimeFrames_[TONIC_RIGHT].resize(kSynthesisBlockSize, 1, 0);
     fbkFrames_.resize(kSynthesisBlockSize, 1, 0);
+    
+    setFeedback(FixedValue(0.0));
     setDryLevelGen(FixedValue(0.5));
     setWetLevelGen(FixedValue(0.5));
   }

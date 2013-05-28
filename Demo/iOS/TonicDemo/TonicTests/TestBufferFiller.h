@@ -19,15 +19,11 @@ class TestBufferFiller : public Synth
 {
   
 public:
+  
   TestBufferFiller(){
       setLimitOutput(false);
   }
   
-  void forceOutput(){
-    // SHOULD DO THIS IN MUTEX WHEN IMPLEMENTING NOT FOR TESTS
-    synthContext_.forceNewOutput = true;
-  }
-
 };
 
 #endif /* defined(__TonicDemo__TestBufferFiller__) */

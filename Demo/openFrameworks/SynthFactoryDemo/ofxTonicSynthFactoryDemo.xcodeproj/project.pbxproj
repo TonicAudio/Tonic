@@ -13,8 +13,6 @@
 		9A113A64174562C100D5E14C /* ControlSwitcherTestSynth.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9A113A55174562C100D5E14C /* ControlSwitcherTestSynth.cpp */; };
 		9A113A65174562C100D5E14C /* DelayTestSynth.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9A113A56174562C100D5E14C /* DelayTestSynth.cpp */; };
 		9A113A66174562C100D5E14C /* FilteredNoiseSynth.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9A113A57174562C100D5E14C /* FilteredNoiseSynth.cpp */; };
-		9A113A67174562C100D5E14C /* FlexToothLFOTestSynth.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9A113A58174562C100D5E14C /* FlexToothLFOTestSynth.cpp */; };
-		9A113A68174562C100D5E14C /* FlexToothTestSynth.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9A113A59174562C100D5E14C /* FlexToothTestSynth.cpp */; };
 		9A113A69174562C100D5E14C /* FMDroneSynth.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9A113A5A174562C100D5E14C /* FMDroneSynth.cpp */; };
 		9A113A6A174562C100D5E14C /* LFNoiseTestSynth.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9A113A5B174562C100D5E14C /* LFNoiseTestSynth.cpp */; };
 		9A113A6B174562C100D5E14C /* ReverbTestSynth.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9A113A5C174562C100D5E14C /* ReverbTestSynth.cpp */; };
@@ -45,14 +43,14 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		9A113A7B1745677400D5E14C /* PBXContainerItemProxy */ = {
+		9A89619B174D899800D5DDBC /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 9A677AD117454FFB00388041 /* TonicLib.xcodeproj */;
 			proxyType = 2;
 			remoteGlobalIDString = 01F72690171520F900EBB4BB;
 			remoteInfo = "Tonic-OSX";
 		};
-		9A113A7D1745677400D5E14C /* PBXContainerItemProxy */ = {
+		9A89619D174D899800D5DDBC /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 9A677AD117454FFB00388041 /* TonicLib.xcodeproj */;
 			proxyType = 2;
@@ -95,8 +93,6 @@
 		9A113A55174562C100D5E14C /* ControlSwitcherTestSynth.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ControlSwitcherTestSynth.cpp; sourceTree = "<group>"; };
 		9A113A56174562C100D5E14C /* DelayTestSynth.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = DelayTestSynth.cpp; sourceTree = "<group>"; };
 		9A113A57174562C100D5E14C /* FilteredNoiseSynth.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = FilteredNoiseSynth.cpp; sourceTree = "<group>"; };
-		9A113A58174562C100D5E14C /* FlexToothLFOTestSynth.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = FlexToothLFOTestSynth.cpp; sourceTree = "<group>"; };
-		9A113A59174562C100D5E14C /* FlexToothTestSynth.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = FlexToothTestSynth.cpp; sourceTree = "<group>"; };
 		9A113A5A174562C100D5E14C /* FMDroneSynth.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = FMDroneSynth.cpp; sourceTree = "<group>"; };
 		9A113A5B174562C100D5E14C /* LFNoiseTestSynth.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = LFNoiseTestSynth.cpp; sourceTree = "<group>"; };
 		9A113A5C174562C100D5E14C /* ReverbTestSynth.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ReverbTestSynth.cpp; sourceTree = "<group>"; };
@@ -168,8 +164,6 @@
 				9A113A55174562C100D5E14C /* ControlSwitcherTestSynth.cpp */,
 				9A113A56174562C100D5E14C /* DelayTestSynth.cpp */,
 				9A113A57174562C100D5E14C /* FilteredNoiseSynth.cpp */,
-				9A113A58174562C100D5E14C /* FlexToothLFOTestSynth.cpp */,
-				9A113A59174562C100D5E14C /* FlexToothTestSynth.cpp */,
 				9A113A5A174562C100D5E14C /* FMDroneSynth.cpp */,
 				9A113A5B174562C100D5E14C /* LFNoiseTestSynth.cpp */,
 				9A113A5C174562C100D5E14C /* ReverbTestSynth.cpp */,
@@ -182,15 +176,6 @@
 			path = "../../Demo Synths";
 			sourceTree = "<group>";
 		};
-		9A113A771745677400D5E14C /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				9A113A7C1745677400D5E14C /* libTonic-OSX.a */,
-				9A113A7E1745677400D5E14C /* libTonic-iOS.a */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
 		9A677A3317454CCA00388041 /* Tonic */ = {
 			isa = PBXGroup;
 			children = (
@@ -198,6 +183,15 @@
 				9A677AD117454FFB00388041 /* TonicLib.xcodeproj */,
 			);
 			name = Tonic;
+			sourceTree = "<group>";
+		};
+		9A896197174D899800D5DDBC /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				9A89619C174D899800D5DDBC /* libTonic-OSX-Debug.a */,
+				9A89619E174D899800D5DDBC /* libTonic-iOS-Debug.a */,
+			);
+			name = Products;
 			sourceTree = "<group>";
 		};
 		BB4B014C10F69532006C3DED /* addons */ = {
@@ -333,7 +327,7 @@
 					ProjectRef = E4328143138ABC890047C5CB /* openFrameworksLib.xcodeproj */;
 				},
 				{
-					ProductGroup = 9A113A771745677400D5E14C /* Products */;
+					ProductGroup = 9A896197174D899800D5DDBC /* Products */;
 					ProjectRef = 9A677AD117454FFB00388041 /* TonicLib.xcodeproj */;
 				},
 			);
@@ -345,18 +339,18 @@
 /* End PBXProject section */
 
 /* Begin PBXReferenceProxy section */
-		9A113A7C1745677400D5E14C /* libTonic-OSX.a */ = {
+		9A89619C174D899800D5DDBC /* libTonic-OSX-Debug.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
-			path = "libTonic-OSX.a";
-			remoteRef = 9A113A7B1745677400D5E14C /* PBXContainerItemProxy */;
+			path = "libTonic-OSX-Debug.a";
+			remoteRef = 9A89619B174D899800D5DDBC /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		9A113A7E1745677400D5E14C /* libTonic-iOS.a */ = {
+		9A89619E174D899800D5DDBC /* libTonic-iOS-Debug.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
-			path = "libTonic-iOS.a";
-			remoteRef = 9A113A7D1745677400D5E14C /* PBXContainerItemProxy */;
+			path = "libTonic-iOS-Debug.a";
+			remoteRef = 9A89619D174D899800D5DDBC /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 		E4328148138ABC890047C5CB /* openFrameworksDebug.a */ = {
@@ -397,8 +391,6 @@
 				9A113A64174562C100D5E14C /* ControlSwitcherTestSynth.cpp in Sources */,
 				9A113A65174562C100D5E14C /* DelayTestSynth.cpp in Sources */,
 				9A113A66174562C100D5E14C /* FilteredNoiseSynth.cpp in Sources */,
-				9A113A67174562C100D5E14C /* FlexToothLFOTestSynth.cpp in Sources */,
-				9A113A68174562C100D5E14C /* FlexToothTestSynth.cpp in Sources */,
 				9A113A69174562C100D5E14C /* FMDroneSynth.cpp in Sources */,
 				9A113A6A174562C100D5E14C /* LFNoiseTestSynth.cpp in Sources */,
 				9A113A6B174562C100D5E14C /* ReverbTestSynth.cpp in Sources */,
@@ -573,7 +565,6 @@
 					"$(LIBRARY_SEARCH_PATHS_QUOTED_FOR_TARGET_51)",
 					"$(LIBRARY_SEARCH_PATHS_QUOTED_FOR_TARGET_52)",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 10.6;
 				PREBINDING = NO;
 				PRODUCT_NAME = ofxTonicSynthFactoryDemoDebug;
 				SDKROOT = macosx;
@@ -666,7 +657,6 @@
 					"$(LIBRARY_SEARCH_PATHS_QUOTED_FOR_TARGET_50)",
 					"$(LIBRARY_SEARCH_PATHS_QUOTED_FOR_TARGET_51)",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 10.6;
 				PREBINDING = NO;
 				PRODUCT_NAME = ofxTonicSynthFactoryDemo;
 				SDKROOT = macosx;
