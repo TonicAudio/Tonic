@@ -45,7 +45,11 @@ namespace Tonic {
 
       virtual void setInput( Generator input ) { input_ = input; };
       
-      //! set to true to disable dry/wet (always fully wet)
+      //! Set to true to disable dry/wet (always fully wet)
+      /*!
+          For effects that will always be fully-wet (filters, compressor, etc) setting this flag to true
+          will bypass applying dry/wet level inputs as a minor CPU usage optimization
+       */
       void setIsAlwaysWet( bool isAlwaysWet ) { isAlwaysWet_ = isAlwaysWet; };
       
       //! set stereo/mono - changes number of channels in dryFrames_
@@ -77,15 +81,15 @@ namespace Tonic {
     }
     
     // Overridden tick - pre-ticks input to fill dryFrames_.
-    // subclasses don't need to tick input - dryFrames_ contains "dry" input
+    // subclasses don't need to tick input - dryFrames_ contains "dry" input by the time
+    // computeSynthesisBlock() is called
     inline void Effect_::tick(TonicFrames &frames, const SynthesisContext_ &context ){
       
       // check context to see if we need new frames
       if (context.elapsedFrames == 0 || lastFrameIndex_ != context.elapsedFrames){
         
-        lockMutex();
-        
-        input_.tick(dryFrames_, context); // get input frames
+        // get dry input frames
+        input_.tick(dryFrames_, context);
         
         computeSynthesisBlock(context);
 
@@ -95,15 +99,15 @@ namespace Tonic {
           outputFrames_.copy(dryFrames_);
         }
         else if (!isAlwaysWet_){
+          // do not apply dry/wet levels if always wet flag is set
+          // offers minor CPU usage optimization
           wetLevelGen_.tick(mixWorkspace_, context);
           outputFrames_ *= mixWorkspace_;
           dryLevelGen_.tick(mixWorkspace_, context);
           dryFrames_ *= mixWorkspace_;
           outputFrames_ += dryFrames_;
         }
-        
-        unlockMutex();
-        
+                
         lastFrameIndex_ = context.elapsedFrames;
       }
       
@@ -120,10 +124,8 @@ namespace Tonic {
     
     inline void Effect_::tickThrough(TonicFrames & inFrames, TonicFrames & outFrames, const SynthesisContext_ & context){
 
-        // Do not check context here, assume each call should process
-      
-        lockMutex();
-
+        // Do not check context here, assume each call should produce new output.
+        
         dryFrames_.copy(inFrames);
         computeSynthesisBlock(context);
         
@@ -144,19 +146,12 @@ namespace Tonic {
           
           outFrames.copy(outputFrames_);
         }
-
-
-        unlockMutex();
       
     }
   }
   
   template<class EffectType, class EffectType_>
   class TemplatedEffect : public TemplatedGenerator<EffectType_>{
-  
-  protected:
-    
-    Generator input_;
     
   public:
         
@@ -175,9 +170,7 @@ namespace Tonic {
     }
     
     void setIsStereoInput( bool isStereoInput ){
-      this->gen()->lockMutex();
       this->gen()->setIsStereoInput(isStereoInput);
-      this->gen()->unlockMutex();
     }
     
     createControlGeneratorSetters(EffectType, bypass, setBypassCtrlGen);

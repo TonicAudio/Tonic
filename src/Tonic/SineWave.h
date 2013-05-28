@@ -16,29 +16,11 @@
 
 namespace Tonic {
   
-  namespace Tonic_ {
-    
-    class SineWave_ : public TableLookupOsc_{
-      
-    protected:
-      
-      static TonicFrames sineTable_;
-      TonicFrames & tableReference();
-      
-    public:
-      
-      SineWave_();
-      void fillTable();
-      
-    };
-    
-    inline TonicFrames & SineWave_::tableReference(){ return sineTable_; }
-  
-  }
-  
-  class SineWave : public TemplatedGenerator<Tonic_::SineWave_>{
+  class SineWave : public TemplatedGenerator<Tonic_::TableLookupOsc_>{
     
   public:
+    
+    SineWave();
     
     createGeneratorSetters(SineWave, freq, setFrequency)
 
