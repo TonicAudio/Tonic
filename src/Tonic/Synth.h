@@ -16,6 +16,7 @@
 #include "BufferFiller.h"
 #include "ControlParameter.h"
 #include "CompressorLimiter.h"
+#include "ControlChangeNotifier.h"
 
 namespace Tonic{
   
@@ -42,6 +43,25 @@ namespace Tonic{
     
     void tick( TonicFrames& frames, const Tonic_::SynthesisContext_ & context );
     
+    //! Returns a ControlConditioner which accepts an input and a ControlChangeSubscriber (supplied by the UI).
+    //! When the input value changes, ControlChangeSubscriber::messageRecieved is called
+    template<class T>
+    T exposeToUI(T input, string name){
+      ControlChangeNotifier messenger;
+      messenger.setName(name);
+      messenger.input(input);
+      uiMessengers_[name] = messenger;
+      addAuxControlGenerator(messenger);
+      return input;
+    }
+    
+    /*! In cases where we want ControlGenerator to be ticked, but don't necessarily want to add it to the
+      synthesis graph, we can add it here and it will be automatically ticked.
+    */
+    void addAuxControlGenerator(ControlGenerator);
+    void addControlChangeSubscriber(string name, ControlChangeSubscriber* resp);
+    void tickUI();
+    
   protected:
         
     Generator     outputGen;
@@ -51,12 +71,18 @@ namespace Tonic{
     
     std::map<string, ControlParameter> parameters_;
     std::vector<string> orderedParameterNames_;
+    std::map<string, ControlChangeNotifier> uiMessengers_; // TODO rename this
+    // ControlGenerators that may not be part of the synthesis graph, but should be ticked anyway
+    vector<ControlGenerator> auxControlGenerators_;
         
   };
   
   inline void Synth::tick(Tonic::TonicFrames &frames, const Tonic_::SynthesisContext_ &context){
     TONIC_MUTEX_LOCK(&mutex_);
     outputGen.tick(frames, context);
+    for (vector<ControlGenerator>::iterator it = auxControlGenerators_.begin(); it != auxControlGenerators_.end(); it++) {
+      it->tick(context);
+    }
     TONIC_MUTEX_UNLOCK(&mutex_);
 
     if (limitOutput_){

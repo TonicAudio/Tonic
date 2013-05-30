@@ -540,6 +540,40 @@ using namespace Tonic;
   
 }
 
+-(void)test304ControlChangeNotifierTest
+{
+
+  class TestSynth : public Synth {
+    public:
+    TestSynth(){
+      exposeToUI(ControlRandom().trigger(ControlMetro().bpm(1000)), "random");
+    }
+  };
+  
+  class TestControlChangeSubscriber : public ControlChangeSubscriber{
+    public:
+    bool valueChangedFlag;
+    TestControlChangeSubscriber() : valueChangedFlag(false){
+        
+    }
+    
+    void valueChanged(string, TonicFloat){
+      valueChangedFlag = true;
+    }
+  };
+  
+  TestControlChangeSubscriber subscriber;
+  TestSynth synth;
+  synth.addControlChangeSubscriber("random", &subscriber);
+  for(int i = 0; i < 1000; i++){
+    synth.fillBufferOfFloats(stereoOutBuffer, kTestOutputBlockSize, 2);
+  }
+  synth.tickUI();
+  STAssertTrue(subscriber.valueChangedFlag, @"Value changed notification should have happened");
+ 
+
+}
+
 #pragma mark operator tests
 
 -(void)test400CombineGeneratorControlGenerator{
