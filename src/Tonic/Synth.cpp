@@ -70,29 +70,28 @@ namespace Tonic {
       }
       return returnParams;
     }
-  }
-  
-  // TODO I think this should use a mutex
-  void Synth::addAuxControlGenerator(ControlGenerator gen){
-    TONIC_MUTEX_LOCK(&mutex_);
-    auxControlGenerators_.push_back(gen);
-    TONIC_MUTEX_UNLOCK(&mutex_);
-  }
-  
-  void Synth::tickUI(){
-    std::map<string, ControlChangeNotifier>::iterator it = uiMessengers_.begin();
-    for (; it != uiMessengers_.end(); it++) {
-      it->second.tickUI();
+    
+    void Synth_::sendControlChangesToSubscribers(){
+      std::map<string, ControlChangeNotifier>::iterator it = controlChangeNotifiers_.begin();
+      for (; it != controlChangeNotifiers_.end(); it++) {
+        it->second.sendControlChangesToSubscribers();
+      }
     }
+    
+    void Synth_::addControlChangeSubscriber(string name, ControlChangeSubscriber* resp){
+      if(controlChangeNotifiers_.find(name) != controlChangeNotifiers_.end()){
+        controlChangeNotifiers_[name].setValueChangedCallback(resp);
+      }else{
+        error("No value called " + name + " was exposed to the UI.");
+      }
+    }
+    
+    
   }
   
-  void Synth::addControlChangeSubscriber(string name, ControlChangeSubscriber* resp){
-    if(uiMessengers_.find(name) != uiMessengers_.end()){
-      uiMessengers_[name].setValueChangedCallback(resp);
-    }else{
-      error("No value called " + name + " was exposed to the UI.");
-    }
-  }
+
+  
+
   
   
 }

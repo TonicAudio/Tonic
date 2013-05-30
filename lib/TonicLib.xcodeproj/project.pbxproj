@@ -167,12 +167,12 @@
 		9AEDB5C817430E7B00C6A77C /* ControlParameter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9AEDB5C617430E7B00C6A77C /* ControlParameter.cpp */; };
 		9AEDB5C917430E7B00C6A77C /* ControlParameter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9AEDB5C617430E7B00C6A77C /* ControlParameter.cpp */; };
 		9AEDB5CA17430E7B00C6A77C /* ControlParameter.h in Headers */ = {isa = PBXBuildFile; fileRef = 9AEDB5C717430E7B00C6A77C /* ControlParameter.h */; };
-		A80782D9175591FD009057BC /* ControlChangeNotifier.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A80782D7175591FD009057BC /* ControlChangeNotifier.cpp */; };
-		A80782DA175591FD009057BC /* ControlChangeNotifier.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A80782D7175591FD009057BC /* ControlChangeNotifier.cpp */; };
-		A80782DB175591FD009057BC /* ControlChangeNotifier.h in Headers */ = {isa = PBXBuildFile; fileRef = A80782D8175591FD009057BC /* ControlChangeNotifier.h */; };
 		9AF6A72F174AFCF900C70173 /* RingBuffer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9AF6A72D174AFCF700C70173 /* RingBuffer.cpp */; };
 		9AF6A730174AFCF900C70173 /* RingBuffer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9AF6A72D174AFCF700C70173 /* RingBuffer.cpp */; };
 		9AF6A731174AFCF900C70173 /* RingBuffer.h in Headers */ = {isa = PBXBuildFile; fileRef = 9AF6A72E174AFCF800C70173 /* RingBuffer.h */; };
+		A80782D9175591FD009057BC /* ControlChangeNotifier.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A80782D7175591FD009057BC /* ControlChangeNotifier.cpp */; };
+		A80782DA175591FD009057BC /* ControlChangeNotifier.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A80782D7175591FD009057BC /* ControlChangeNotifier.cpp */; };
+		A80782DB175591FD009057BC /* ControlChangeNotifier.h in Headers */ = {isa = PBXBuildFile; fileRef = A80782D8175591FD009057BC /* ControlChangeNotifier.h */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -274,7 +274,7 @@
 		0183D0531735D0E6004638EB /* StereoDelay.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StereoDelay.h; sourceTree = "<group>"; };
 		0183D0541735D0E6004638EB /* Subtractor.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Subtractor.cpp; sourceTree = "<group>"; };
 		0183D0551735D0E6004638EB /* Subtractor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Subtractor.h; sourceTree = "<group>"; };
-		0183D0561735D0E6004638EB /* Synth.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Synth.cpp; sourceTree = "<group>"; };
+		0183D0561735D0E6004638EB /* Synth.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; lineEnding = 0; path = Synth.cpp; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.cpp; };
 		0183D0571735D0E6004638EB /* Synth.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Synth.h; sourceTree = "<group>"; };
 		0183D0581735D0E6004638EB /* TableLookupOsc.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TableLookupOsc.cpp; sourceTree = "<group>"; };
 		0183D0591735D0E6004638EB /* TableLookupOsc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TableLookupOsc.h; sourceTree = "<group>"; };
@@ -298,10 +298,10 @@
 		9A7DB3F417467C81009C9A8F /* SquareWave.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SquareWave.h; sourceTree = "<group>"; };
 		9AEDB5C617430E7B00C6A77C /* ControlParameter.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ControlParameter.cpp; sourceTree = "<group>"; };
 		9AEDB5C717430E7B00C6A77C /* ControlParameter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ControlParameter.h; sourceTree = "<group>"; };
-		A80782D7175591FD009057BC /* ControlChangeNotifier.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ControlChangeNotifier.cpp; sourceTree = "<group>"; };
-		A80782D8175591FD009057BC /* ControlChangeNotifier.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ControlChangeNotifier.h; sourceTree = "<group>"; };
 		9AF6A72D174AFCF700C70173 /* RingBuffer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = RingBuffer.cpp; sourceTree = "<group>"; };
 		9AF6A72E174AFCF800C70173 /* RingBuffer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RingBuffer.h; sourceTree = "<group>"; };
+		A80782D7175591FD009057BC /* ControlChangeNotifier.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; lineEnding = 0; path = ControlChangeNotifier.cpp; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.cpp; };
+		A80782D8175591FD009057BC /* ControlChangeNotifier.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = ControlChangeNotifier.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		F23A7CF1171B3D2E00AE8353 /* libTonic-iOS-Debug.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libTonic-iOS-Debug.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 

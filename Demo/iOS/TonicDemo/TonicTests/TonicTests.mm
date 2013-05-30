@@ -546,7 +546,8 @@ using namespace Tonic;
   class TestSynth : public Synth {
     public:
     TestSynth(){
-      exposeToUI(ControlRandom().trigger(ControlMetro().bpm(1000)), "random");
+      ControlGenerator random = ControlRandom().trigger(ControlMetro().bpm(1000));
+      publishChanges(random, "random");
     }
   };
   
@@ -568,9 +569,22 @@ using namespace Tonic;
   for(int i = 0; i < 1000; i++){
     synth.fillBufferOfFloats(stereoOutBuffer, kTestOutputBlockSize, 2);
   }
-  synth.tickUI();
+  
+  STAssertFalse(subscriber.valueChangedFlag, @"Value changed notification should not have happened");
+  subscriber.valueChangedFlag = false;
+  synth.sendControlChangesToSubscribers();
   STAssertTrue(subscriber.valueChangedFlag, @"Value changed notification should have happened");
+  subscriber.valueChangedFlag = false;
+  synth.sendControlChangesToSubscribers();
+  STAssertFalse(subscriber.valueChangedFlag, @"Value changed notification should not have happened");
  
+  for(int i = 0; i < 1000; i++){
+    synth.fillBufferOfFloats(stereoOutBuffer, kTestOutputBlockSize, 2);
+  }
+  
+  subscriber.valueChangedFlag = false;
+  synth.sendControlChangesToSubscribers();
+  STAssertTrue(subscriber.valueChangedFlag, @"Value changed notification should have happened");
 
 }
 

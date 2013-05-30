@@ -37,7 +37,7 @@ namespace Tonic {
       ControlChangeNotifier_();
       ~ControlChangeNotifier_();
       void setValueChangedCallback(ControlChangeSubscriber* resp){valueChangedCallback = resp;};
-      void tickUI();
+      void sendControlChangesToSubscribers();
       string name;
     };
     
@@ -47,7 +47,7 @@ namespace Tonic {
     
   public:
   
-    void tickUI();
+    void sendControlChangesToSubscribers();
     void setValueChangedCallback(ControlChangeSubscriber* resp){gen()->setValueChangedCallback(resp);};
     void setName(string name){gen()->name = name;}
 

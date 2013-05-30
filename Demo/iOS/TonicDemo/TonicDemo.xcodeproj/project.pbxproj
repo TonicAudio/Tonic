@@ -149,7 +149,7 @@
 		F25317E616EBA0A100A8CFDC /* TonicTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "TonicTests-Info.plist"; sourceTree = "<group>"; };
 		F25317E816EBA0A100A8CFDC /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		F25317EA16EBA0A100A8CFDC /* TonicTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TonicTests.h; sourceTree = "<group>"; };
-		F25317EB16EBA0A100A8CFDC /* TonicTests.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = TonicTests.mm; sourceTree = "<group>"; };
+		F25317EB16EBA0A100A8CFDC /* TonicTests.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; lineEnding = 0; path = TonicTests.mm; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		F25317ED16EBA0A100A8CFDC /* TonicTests-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "TonicTests-Prefix.pch"; sourceTree = "<group>"; };
 		F253182716EBA73200A8CFDC /* StereoFixedTestGen.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = StereoFixedTestGen.cpp; sourceTree = "<group>"; };
 		F253182816EBA73200A8CFDC /* StereoFixedTestGen.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StereoFixedTestGen.h; sourceTree = "<group>"; };

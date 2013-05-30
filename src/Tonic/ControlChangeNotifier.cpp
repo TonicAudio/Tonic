@@ -28,7 +28,7 @@ namespace Tonic { namespace Tonic_{
   }
   
   
-  void  ControlChangeNotifier_::tickUI(){
+  void  ControlChangeNotifier_::sendControlChangesToSubscribers(){
     if(outputReadyToBeSentToUI && valueChangedCallback){
       valueChangedCallback->valueChanged(name, outputToSendToUI.value);
       outputReadyToBeSentToUI = false;
@@ -38,8 +38,8 @@ namespace Tonic { namespace Tonic_{
 } // Namespace Tonic_
   
   
-  void ControlChangeNotifier::tickUI(){
-    gen()->tickUI();
+  void ControlChangeNotifier::sendControlChangesToSubscribers(){
+    gen()->sendControlChangesToSubscribers();
   }
 
 } // Namespace Tonic

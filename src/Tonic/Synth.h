@@ -36,7 +36,7 @@ namespace Tonic{
       
       std::map<string, ControlParameter> parameters_;
       std::vector<string> orderedParameterNames_;
-      std::map<string, ControlChangeNotifier> uiMessengers_; // TODO rename this
+      std::map<string, ControlChangeNotifier> controlChangeNotifiers_;
       // ControlGenerators that may not be part of the synthesis graph, but should be ticked anyway
       vector<ControlGenerator> auxControlGenerators_;
       
@@ -63,7 +63,7 @@ namespace Tonic{
       vector<ControlParameter>  getParameters();
       
       template<class T>
-      T exposeToUI(T input, string name);
+      T publishChanges(T input, string name);
       
       void addAuxControlGenerator(ControlGenerator generator){
         auxControlGenerators_.push_back(generator);
@@ -72,6 +72,14 @@ namespace Tonic{
       void forceNewOutput(){
         synthContext_.forceNewOutput = true;
       }
+      
+      void sendControlChangesToSubscribers();
+      
+      // TODO:
+      // Add removeControlChangeSubscriber method
+      // allow a list of subscribers, rather than only one per name
+      // allow lambda functions, not just ControlChangeSubscriber objects
+      void addControlChangeSubscriber(string name, ControlChangeSubscriber* resp);
             
     };
     
@@ -89,11 +97,11 @@ namespace Tonic{
     }
     
     template<class T>
-    T Synth_::exposeToUI(T input, string name){
+    T Synth_::publishChanges(T input, string name){
       ControlChangeNotifier messenger;
       messenger.setName(name);
       messenger.input(input);
-      uiMessengers_[name] = messenger;
+      controlChangeNotifiers_[name] = messenger;
       addAuxControlGenerator(messenger);
       return input;
     }
@@ -144,14 +152,27 @@ namespace Tonic{
     //! Returns a ControlConditioner which accepts an input and a ControlChangeSubscriber (supplied by the UI).
     //! When the input value changes, ControlChangeSubscriber::messageRecieved is called
     template<class T>
-    T exposeToUI(T input, string name){
-      return gen()->exposeToUI(input, name);
+    T publishChanges(T input, string name){
+      return gen()->publishChanges(input, name);
     }
     
     void addAuxControlGenerator(ControlGenerator generator){
       gen()->lockMutex();
       gen()->addAuxControlGenerator(generator);
       gen()->unlockMutex();
+    }
+    
+    void addControlChangeSubscriber(string name, ControlChangeSubscriber* resp){
+      gen()->addControlChangeSubscriber(name, resp);
+    }
+    
+    /*! 
+      Use in conjunction with publishChanges and addControlChangeSubscriber.
+      This is designed as a way to get events from the audio thread to the UI thread. 
+      sendControlChangesToSubscribers should be called from the UI thread, not the audio thread.
+    */
+    void sendControlChangesToSubscribers(){
+      gen()->sendControlChangesToSubscribers();
     }
     
     //! Set the value of a control parameter on this synth
