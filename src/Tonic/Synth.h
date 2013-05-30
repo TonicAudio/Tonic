@@ -20,33 +20,76 @@
 
 namespace Tonic{
   
-  class Synth  : public BufferFiller{
+  // forward declaration
+  class Synth;
+  
+  namespace Tonic_ {
     
-  public:
+    class Synth_ : public BufferFiller_ {
+      
+    protected:
+      
+      Generator     outputGen_;
+      
+      Limiter limiter_;
+      bool limitOutput_;
+      
+      std::map<string, ControlParameter> parameters_;
+      std::vector<string> orderedParameterNames_;
+      std::map<string, ControlChangeNotifier> uiMessengers_; // TODO rename this
+      // ControlGenerators that may not be part of the synthesis graph, but should be ticked anyway
+      vector<ControlGenerator> auxControlGenerators_;
+      
+      void computeSynthesisBlock(const Tonic::Tonic_::SynthesisContext_ &context);
+      
+    public:
+      
+      Synth_();
+      
+      //! Set the output gen that produces audio for the Synth
+      void  setOutputGen(Generator gen){ outputGen_ = gen; }
+      const Generator getOutputGen() { return outputGen_; };
+      
+      void setLimitOutput(bool shouldLimit) { limitOutput_ = shouldLimit; };
+      
+      ControlParameter addParameter(string name, TonicFloat initialValue);
+      
+      void addParameter(ControlParameter parameter);
+      
+      void addParametersFromSynth(Synth synth);
+      
+      void setParameter(string name, float value);
+      
+      vector<ControlParameter>  getParameters();
+      
+      template<class T>
+      T exposeToUI(T input, string name);
+      
+      void addAuxControlGenerator(ControlGenerator generator){
+        auxControlGenerators_.push_back(generator);
+      }
+      
+      void forceNewOutput(){
+        synthContext_.forceNewOutput = true;
+      }
+            
+    };
     
-    Synth();
+    inline void Synth_::computeSynthesisBlock(const SynthesisContext_ &context){
+
+      outputGen_.tick(outputFrames_, context);
+      
+      for (vector<ControlGenerator>::iterator it = auxControlGenerators_.begin(); it != auxControlGenerators_.end(); it++) {
+        it->tick(context);
+      }
+      
+      if (limitOutput_){
+        limiter_.tickThrough(outputFrames_, context);
+      }
+    }
     
-    //! Set the output gen that produces audio for the Synth
-    void  setOutputGen(Generator gen);
-    
-    //! Returns a reference to outputGen
-    const Generator getOutputGenerator() { return outputGen; };
-    
-    //! Set whether synth uses dynamic limiter to prevent clipping/wrapping. Defaults to true.
-    void setLimitOutput(bool shouldLimit) { limitOutput_ = shouldLimit; };
-    
-    //! Add a ControlParameter with name "name"
-    ControlParameter & addParameter(string name, TonicFloat initialValue = 0.f);
-    
-    void                      setParameter(string name, float value=1);
-    vector<ControlParameter>  getParameters();
-    
-    void tick( TonicFrames& frames, const Tonic_::SynthesisContext_ & context );
-    
-    //! Returns a ControlConditioner which accepts an input and a ControlChangeSubscriber (supplied by the UI).
-    //! When the input value changes, ControlChangeSubscriber::messageRecieved is called
     template<class T>
-    T exposeToUI(T input, string name){
+    T Synth_::exposeToUI(T input, string name){
       ControlChangeNotifier messenger;
       messenger.setName(name);
       messenger.input(input);
@@ -55,40 +98,82 @@ namespace Tonic{
       return input;
     }
     
-    /*! In cases where we want ControlGenerator to be ticked, but don't necessarily want to add it to the
-      synthesis graph, we can add it here and it will be automatically ticked.
-    */
-    void addAuxControlGenerator(ControlGenerator);
-    void addControlChangeSubscriber(string name, ControlChangeSubscriber* resp);
-    void tickUI();
-    
-  protected:
-        
-    Generator     outputGen;
-    
-    Limiter limiter_;
-    bool limitOutput_;
-    
-    std::map<string, ControlParameter> parameters_;
-    std::vector<string> orderedParameterNames_;
-    std::map<string, ControlChangeNotifier> uiMessengers_; // TODO rename this
-    // ControlGenerators that may not be part of the synthesis graph, but should be ticked anyway
-    vector<ControlGenerator> auxControlGenerators_;
-        
-  };
-  
-  inline void Synth::tick(Tonic::TonicFrames &frames, const Tonic_::SynthesisContext_ &context){
-    TONIC_MUTEX_LOCK(&mutex_);
-    outputGen.tick(frames, context);
-    for (vector<ControlGenerator>::iterator it = auxControlGenerators_.begin(); it != auxControlGenerators_.end(); it++) {
-      it->tick(context);
-    }
-    TONIC_MUTEX_UNLOCK(&mutex_);
-
-    if (limitOutput_){
-      limiter_.tickThrough(frames, context);
-    }
   }
+  
+  // ---- Smart Pointer -----
+  
+  class Synth  : public TemplatedBufferFiller<Tonic_::Synth_> {
+    
+  public:
+        
+    //! Set the output gen that produces audio for the Synth
+    void  setOutputGen(Generator generator){
+      gen()->lockMutex();
+      gen()->setOutputGen(generator);
+      gen()->unlockMutex();
+    }
+    
+    //! Returns a reference to outputGen
+    const Generator getOutputGen() {
+      return gen()->getOutputGen();
+    }
+
+    //! Set whether synth uses dynamic limiter to prevent clipping/wrapping. Defaults to true.
+    void setLimitOutput(bool shouldLimit) {
+      gen()->setLimitOutput(shouldLimit);
+    }
+    
+    //! Add a ControlParameter with name "name"
+    ControlParameter addParameter(string name, TonicFloat initialValue = 0.f)
+    {
+      return gen()->addParameter(name, initialValue);
+    }
+    
+    //! Add a ControlParameter initialized elsewhere. Will overwrite existing parameter with the same name.
+    void addParameter(ControlParameter parameter)
+    {
+      gen()->addParameter(parameter);
+    }
+    
+    //! Add all the parameters from another synth
+    void addParametersFromSynth(Synth synth)
+    {
+      gen()->addParametersFromSynth(synth);
+    }
+    
+    //! Returns a ControlConditioner which accepts an input and a ControlChangeSubscriber (supplied by the UI).
+    //! When the input value changes, ControlChangeSubscriber::messageRecieved is called
+    template<class T>
+    T exposeToUI(T input, string name){
+      return gen()->exposeToUI(input, name);
+    }
+    
+    void addAuxControlGenerator(ControlGenerator generator){
+      gen()->lockMutex();
+      gen()->addAuxControlGenerator(generator);
+      gen()->unlockMutex();
+    }
+    
+    //! Set the value of a control parameter on this synth
+    void setParameter(string name, float value=1)
+    {
+      gen()->setParameter(name, value);
+    }
+    
+    //! Get all of the control parameters registered for this synth
+    vector<ControlParameter>  getParameters()
+    {
+      return gen()->getParameters();
+    }
+    
+    void forceNewOutput(){
+      gen()->lockMutex();
+      gen()->forceNewOutput();
+      gen()->unlockMutex();
+    }
+            
+  };
+
   
   // ------------------------------
   //
@@ -98,13 +183,15 @@ namespace Tonic{
   //
   // -----------------------------
   
-  template<typename T> Synth * createSynth() { return new T; }
+  template<typename T> Synth createSynth() {
+    return T();
+  }
   
   struct SynthFactory {
     
-    typedef std::map<std::string, Synth*(*)()> map_type;
+    typedef std::map<std::string, Synth(*)()> map_type;
     
-    static Synth * createInstance(std::string const& s) {
+    static Synth createInstance(std::string const& s) {
       map_type::iterator it = getMap()->find(s);
       if(it == getMap()->end()){
         string synthsList = "";
@@ -115,7 +202,8 @@ namespace Tonic{
         
         error("Error creating synth. Synth named \"" + s + "\" not found. Existing registered synths are: \n" + synthsList);
         
-        return 0;
+        // return empty synth
+        return Synth();
       }
       return it->second();
     }

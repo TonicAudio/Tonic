@@ -703,7 +703,7 @@ using namespace Tonic;
   STAssertEquals(*stereoOutBuffer, 6.f, @"Complex combination of control gen and gen failed");
    
   // set the force output flag and try it again to ensure it still works
-  testFiller.forceOutput();
+  testFiller.forceNewOutput();
   testFiller.fillBufferOfFloats(stereoOutBuffer, kTestOutputBlockSize, 2);
   STAssertEquals(*stereoOutBuffer, 6.f, @"Complex combination of control gen and gen failed");
   

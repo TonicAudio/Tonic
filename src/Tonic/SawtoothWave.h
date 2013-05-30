@@ -128,9 +128,7 @@ namespace Tonic {
     
     //! set whether it's a descending sawtooth (default) or ascending
     SawtoothWave & isAscending(bool ascending){
-      gen()->lockMutex();
       gen()->setSlopeGenerator(FixedValue(ascending ? 1.f : 0.f));
-      gen()->unlockMutex();
       return *this;
     }
   };
