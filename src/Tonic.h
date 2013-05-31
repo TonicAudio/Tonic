@@ -32,6 +32,7 @@
 #include "Tonic/Subtractor.h"
 #include "Tonic/Multiplier.h"
 #include "Tonic/Divider.h"
+#include "Tonic/ControlBooleanLogic.h"
 #include "Tonic/ControlAdder.h"
 #include "Tonic/ControlSubtractor.h"
 #include "Tonic/ControlMultiplier.h"

@@ -22,13 +22,17 @@ namespace Tonic {
       
     protected:
       void computeOutput(const SynthesisContext_ & context);
-      vector<ControlGenerator>inputs;
-      ControlGenerator inputIndex;
+     
+      vector<ControlGenerator>  inputs_;
+      ControlGenerator          inputIndex_;
+      
+      int                       lastInputIndex_;
       
     public:
+      
       ControlSwitcher_();
-      ~ControlSwitcher_();
       void addInput(ControlGenerator input);
+      void setInputs( vector<ControlGenerator> inputs );
       void setInputIndex(ControlGenerator inputIndexArg);
       
     };
@@ -42,6 +46,9 @@ namespace Tonic {
   class ControlSwitcher : public TemplatedControlGenerator<Tonic_::ControlSwitcher_>{
     
   public:
+    
+    ControlSwitcher & setFloatInputs( vector<float> inputs );
+    
     createControlGeneratorSetters(ControlSwitcher, addInput, addInput);
     createControlGeneratorSetters(ControlSwitcher, inputIndex, setInputIndex);
 
