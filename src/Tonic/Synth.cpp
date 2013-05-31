@@ -24,12 +24,18 @@ namespace Tonic {
       limiter_.setIsStereo(true);
     }
 
-    void Synth_::setParameter(string name, float value){
+    void Synth_::setParameter(string name, float value, bool normalized){
       
       if (parameters_.find(name)!=parameters_.end()) {
         
         ControlParameter & param = parameters_[name];
-        param.value(value);
+        
+        if (normalized){
+          param.setNormalizedValue(value);
+        }
+        else{
+          param.value(value);
+        }
         
       }
       else{
