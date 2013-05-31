@@ -25,7 +25,9 @@ namespace Tonic {
       void computeOutput(const SynthesisContext_ & context);
       
       ControlGenerator divisonsGen_;
+      ControlGenerator offsetGen_;
       
+      unsigned int offset_;
       unsigned int tickCounter_;
       
     public:
@@ -33,6 +35,7 @@ namespace Tonic {
       ControlMetroDivider_();
       
       void setDivisionsGen( ControlGenerator gen ) { divisonsGen_ = gen; }
+      void setOffsetGen( ControlGenerator gen ) { offsetGen_ = gen; }
       
     };
     
@@ -43,6 +46,8 @@ namespace Tonic {
   public:
     
     createControlGeneratorSetters(ControlMetroDivider, divisions, setDivisionsGen);
+    createControlGeneratorSetters(ControlMetroDivider, offset, setOffsetGen);
+    
 
   };
 }
