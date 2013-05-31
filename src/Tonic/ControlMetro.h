@@ -9,7 +9,6 @@
 //
 
 
-// Metronome! Ouputs a "changed" status at a regular BPM interval
 
 #ifndef __Tonic__ControlMetro__
 #define __Tonic__ControlMetro__
@@ -40,6 +39,7 @@ namespace Tonic {
     
   }
   
+  //!Ouputs a "changed" status at a regular BPM interval
   class ControlMetro : public TemplatedControlGenerator<Tonic_::ControlMetro_>{
     
   public:

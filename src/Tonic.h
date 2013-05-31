@@ -77,6 +77,7 @@
 #include "Tonic/ControlPrinter.h"
 #include "Tonic/ControlXYSpeed.h"
 #include "Tonic/ControlMetro.h"
+#include "Tonic/ControlMetroDivider.h"
 #include "Tonic/ControlSwitcher.h"
 #include "Tonic/ControlCounter.h"
 #include "Tonic/ControlStepper.h"
