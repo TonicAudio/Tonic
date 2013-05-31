@@ -18,7 +18,7 @@ namespace Tonic { namespace Tonic_{
     
     ControlGeneratorOutput lhsOut = input_.tick(context);
     ControlGeneratorOutput rhsOut = rhsGen_.tick(context);
-    if (lhsOut.status == ControlGeneratorStatusHasChanged || rhsOut.status == ControlGeneratorStatusHasChanged){
+    if (lhsOut.status == ControlGeneratorStatusHasChanged){
       lastOutput_.value = lhsOut.value > rhsOut.value ? 1.0f : 0.0f;
       lastOutput_.status = ControlGeneratorStatusHasChanged;
     }
