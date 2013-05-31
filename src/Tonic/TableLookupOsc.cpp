@@ -34,8 +34,9 @@ namespace Tonic {
         
         warning("TableLookUpOsc lookup tables must have a (power-of-two + 1) number of samples (example 2049 or 4097). Resizing to nearest power-of-two + 1");
         
-        // TODO: This will just lop off samples or add silence. Don't want to do that.
-        table.resample(nearestPo2+1, 1);
+        table.resample(nearestPo2, 1);
+        table.resize(nearestPo2+1, 1);
+        table.dataPointer()[nearestPo2] = table.dataPointer()[0]; // copy first sample to last
         
       }
       
