@@ -97,7 +97,8 @@ namespace Tonic {
   };
 
   
-  template<class GenType> class TemplatedControlGenerator : public ControlGenerator{
+  template<class GenType>
+  class TemplatedControlGenerator : public ControlGenerator{
   protected:
     GenType* gen(){
       return static_cast<GenType*>(obj);

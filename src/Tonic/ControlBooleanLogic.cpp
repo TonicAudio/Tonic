@@ -10,13 +10,20 @@
 
 namespace Tonic { namespace Tonic_{
   
-  ControlGreaterThan_::ControlGreaterThan_() : rhsGen_(ControlValue(0)) {};
+  ControlBooleanOperator_::ControlBooleanOperator_() :
+    lhsGen_(ControlValue(0)),
+    rhsGen_(ControlValue(0))
+  {};
+  
+  // --------------------------------------
+  //            GREATER THAN
+  // --------------------------------------
   
   void ControlGreaterThan_::computeOutput(const SynthesisContext_ & context){
   
     lastOutput_.status = ControlGeneratorStatusHasNotChanged;
     
-    ControlGeneratorOutput lhsOut = input_.tick(context);
+    ControlGeneratorOutput lhsOut = lhsGen_.tick(context);
     ControlGeneratorOutput rhsOut = rhsGen_.tick(context);
     if (lhsOut.status == ControlGeneratorStatusHasChanged){
       lastOutput_.value = lhsOut.value > rhsOut.value ? 1.0f : 0.0f;
