@@ -22,9 +22,9 @@
 		0183D06A1735D0E6004638EB /* CompressorLimiter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0183D0081735D0E6004638EB /* CompressorLimiter.cpp */; };
 		0183D06B1735D0E6004638EB /* CompressorLimiter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0183D0081735D0E6004638EB /* CompressorLimiter.cpp */; };
 		0183D06C1735D0E6004638EB /* CompressorLimiter.h in Headers */ = {isa = PBXBuildFile; fileRef = 0183D0091735D0E6004638EB /* CompressorLimiter.h */; };
-		0183D06D1735D0E6004638EB /* ControlAdder.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0183D00A1735D0E6004638EB /* ControlAdder.cpp */; };
-		0183D06E1735D0E6004638EB /* ControlAdder.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0183D00A1735D0E6004638EB /* ControlAdder.cpp */; };
-		0183D06F1735D0E6004638EB /* ControlAdder.h in Headers */ = {isa = PBXBuildFile; fileRef = 0183D00B1735D0E6004638EB /* ControlAdder.h */; };
+		0183D06D1735D0E6004638EB /* ControlArithmetic.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0183D00A1735D0E6004638EB /* ControlArithmetic.cpp */; };
+		0183D06E1735D0E6004638EB /* ControlArithmetic.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0183D00A1735D0E6004638EB /* ControlArithmetic.cpp */; };
+		0183D06F1735D0E6004638EB /* ControlArithmetic.h in Headers */ = {isa = PBXBuildFile; fileRef = 0183D00B1735D0E6004638EB /* ControlArithmetic.h */; };
 		0183D0701735D0E6004638EB /* ControlConditioner.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0183D00C1735D0E6004638EB /* ControlConditioner.cpp */; };
 		0183D0711735D0E6004638EB /* ControlConditioner.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0183D00C1735D0E6004638EB /* ControlConditioner.cpp */; };
 		0183D0721735D0E6004638EB /* ControlConditioner.h in Headers */ = {isa = PBXBuildFile; fileRef = 0183D00D1735D0E6004638EB /* ControlConditioner.h */; };
@@ -34,9 +34,6 @@
 		0183D0761735D0E6004638EB /* ControlDbToLinear.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0183D0101735D0E6004638EB /* ControlDbToLinear.cpp */; };
 		0183D0771735D0E6004638EB /* ControlDbToLinear.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0183D0101735D0E6004638EB /* ControlDbToLinear.cpp */; };
 		0183D0781735D0E6004638EB /* ControlDbToLinear.h in Headers */ = {isa = PBXBuildFile; fileRef = 0183D0111735D0E6004638EB /* ControlDbToLinear.h */; };
-		0183D0791735D0E6004638EB /* ControlDivider.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0183D0121735D0E6004638EB /* ControlDivider.cpp */; };
-		0183D07A1735D0E6004638EB /* ControlDivider.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0183D0121735D0E6004638EB /* ControlDivider.cpp */; };
-		0183D07B1735D0E6004638EB /* ControlDivider.h in Headers */ = {isa = PBXBuildFile; fileRef = 0183D0131735D0E6004638EB /* ControlDivider.h */; };
 		0183D07C1735D0E6004638EB /* ControlFloor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0183D0141735D0E6004638EB /* ControlFloor.cpp */; };
 		0183D07D1735D0E6004638EB /* ControlFloor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0183D0141735D0E6004638EB /* ControlFloor.cpp */; };
 		0183D07E1735D0E6004638EB /* ControlFloor.h in Headers */ = {isa = PBXBuildFile; fileRef = 0183D0151735D0E6004638EB /* ControlFloor.h */; };
@@ -49,9 +46,6 @@
 		0183D0851735D0E6004638EB /* ControlMidiToFreq.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0183D01A1735D0E6004638EB /* ControlMidiToFreq.cpp */; };
 		0183D0861735D0E6004638EB /* ControlMidiToFreq.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0183D01A1735D0E6004638EB /* ControlMidiToFreq.cpp */; };
 		0183D0871735D0E6004638EB /* ControlMidiToFreq.h in Headers */ = {isa = PBXBuildFile; fileRef = 0183D01B1735D0E6004638EB /* ControlMidiToFreq.h */; };
-		0183D0881735D0E6004638EB /* ControlMultiplier.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0183D01C1735D0E6004638EB /* ControlMultiplier.cpp */; };
-		0183D0891735D0E6004638EB /* ControlMultiplier.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0183D01C1735D0E6004638EB /* ControlMultiplier.cpp */; };
-		0183D08A1735D0E6004638EB /* ControlMultiplier.h in Headers */ = {isa = PBXBuildFile; fileRef = 0183D01D1735D0E6004638EB /* ControlMultiplier.h */; };
 		0183D08B1735D0E6004638EB /* ControlPrinter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0183D01E1735D0E6004638EB /* ControlPrinter.cpp */; };
 		0183D08C1735D0E6004638EB /* ControlPrinter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0183D01E1735D0E6004638EB /* ControlPrinter.cpp */; };
 		0183D08D1735D0E6004638EB /* ControlPrinter.h in Headers */ = {isa = PBXBuildFile; fileRef = 0183D01F1735D0E6004638EB /* ControlPrinter.h */; };
@@ -70,9 +64,6 @@
 		0183D09A1735D0E6004638EB /* ControlStepper.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0183D0281735D0E6004638EB /* ControlStepper.cpp */; };
 		0183D09B1735D0E6004638EB /* ControlStepper.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0183D0281735D0E6004638EB /* ControlStepper.cpp */; };
 		0183D09C1735D0E6004638EB /* ControlStepper.h in Headers */ = {isa = PBXBuildFile; fileRef = 0183D0291735D0E6004638EB /* ControlStepper.h */; };
-		0183D09D1735D0E6004638EB /* ControlSubtractor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0183D02A1735D0E6004638EB /* ControlSubtractor.cpp */; };
-		0183D09E1735D0E6004638EB /* ControlSubtractor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0183D02A1735D0E6004638EB /* ControlSubtractor.cpp */; };
-		0183D09F1735D0E6004638EB /* ControlSubtractor.h in Headers */ = {isa = PBXBuildFile; fileRef = 0183D02B1735D0E6004638EB /* ControlSubtractor.h */; };
 		0183D0A01735D0E6004638EB /* ControlSwitcher.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0183D02C1735D0E6004638EB /* ControlSwitcher.cpp */; };
 		0183D0A11735D0E6004638EB /* ControlSwitcher.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0183D02C1735D0E6004638EB /* ControlSwitcher.cpp */; };
 		0183D0A21735D0E6004638EB /* ControlSwitcher.h in Headers */ = {isa = PBXBuildFile; fileRef = 0183D02D1735D0E6004638EB /* ControlSwitcher.h */; };
@@ -201,16 +192,14 @@
 		0183D0071735D0E6004638EB /* BufferFiller.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BufferFiller.h; sourceTree = "<group>"; };
 		0183D0081735D0E6004638EB /* CompressorLimiter.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CompressorLimiter.cpp; sourceTree = "<group>"; };
 		0183D0091735D0E6004638EB /* CompressorLimiter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CompressorLimiter.h; sourceTree = "<group>"; };
-		0183D00A1735D0E6004638EB /* ControlAdder.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ControlAdder.cpp; sourceTree = "<group>"; };
-		0183D00B1735D0E6004638EB /* ControlAdder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ControlAdder.h; sourceTree = "<group>"; };
+		0183D00A1735D0E6004638EB /* ControlArithmetic.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ControlArithmetic.cpp; sourceTree = "<group>"; };
+		0183D00B1735D0E6004638EB /* ControlArithmetic.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ControlArithmetic.h; sourceTree = "<group>"; };
 		0183D00C1735D0E6004638EB /* ControlConditioner.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ControlConditioner.cpp; sourceTree = "<group>"; };
 		0183D00D1735D0E6004638EB /* ControlConditioner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ControlConditioner.h; sourceTree = "<group>"; };
 		0183D00E1735D0E6004638EB /* ControlCounter.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ControlCounter.cpp; sourceTree = "<group>"; };
 		0183D00F1735D0E6004638EB /* ControlCounter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ControlCounter.h; sourceTree = "<group>"; };
 		0183D0101735D0E6004638EB /* ControlDbToLinear.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ControlDbToLinear.cpp; sourceTree = "<group>"; };
 		0183D0111735D0E6004638EB /* ControlDbToLinear.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ControlDbToLinear.h; sourceTree = "<group>"; };
-		0183D0121735D0E6004638EB /* ControlDivider.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ControlDivider.cpp; sourceTree = "<group>"; };
-		0183D0131735D0E6004638EB /* ControlDivider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ControlDivider.h; sourceTree = "<group>"; };
 		0183D0141735D0E6004638EB /* ControlFloor.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ControlFloor.cpp; sourceTree = "<group>"; };
 		0183D0151735D0E6004638EB /* ControlFloor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ControlFloor.h; sourceTree = "<group>"; };
 		0183D0161735D0E6004638EB /* ControlGenerator.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ControlGenerator.cpp; sourceTree = "<group>"; };
@@ -219,8 +208,6 @@
 		0183D0191735D0E6004638EB /* ControlMetro.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ControlMetro.h; sourceTree = "<group>"; };
 		0183D01A1735D0E6004638EB /* ControlMidiToFreq.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ControlMidiToFreq.cpp; sourceTree = "<group>"; };
 		0183D01B1735D0E6004638EB /* ControlMidiToFreq.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ControlMidiToFreq.h; sourceTree = "<group>"; };
-		0183D01C1735D0E6004638EB /* ControlMultiplier.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ControlMultiplier.cpp; sourceTree = "<group>"; };
-		0183D01D1735D0E6004638EB /* ControlMultiplier.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ControlMultiplier.h; sourceTree = "<group>"; };
 		0183D01E1735D0E6004638EB /* ControlPrinter.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ControlPrinter.cpp; sourceTree = "<group>"; };
 		0183D01F1735D0E6004638EB /* ControlPrinter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ControlPrinter.h; sourceTree = "<group>"; };
 		0183D0201735D0E6004638EB /* ControlPulse.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ControlPulse.cpp; sourceTree = "<group>"; };
@@ -233,8 +220,6 @@
 		0183D0271735D0E6004638EB /* ControlSnapToScale.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ControlSnapToScale.h; sourceTree = "<group>"; };
 		0183D0281735D0E6004638EB /* ControlStepper.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ControlStepper.cpp; sourceTree = "<group>"; };
 		0183D0291735D0E6004638EB /* ControlStepper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ControlStepper.h; sourceTree = "<group>"; };
-		0183D02A1735D0E6004638EB /* ControlSubtractor.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ControlSubtractor.cpp; sourceTree = "<group>"; };
-		0183D02B1735D0E6004638EB /* ControlSubtractor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ControlSubtractor.h; sourceTree = "<group>"; };
 		0183D02C1735D0E6004638EB /* ControlSwitcher.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ControlSwitcher.cpp; sourceTree = "<group>"; };
 		0183D02D1735D0E6004638EB /* ControlSwitcher.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ControlSwitcher.h; sourceTree = "<group>"; };
 		0183D02E1735D0E6004638EB /* ControlTrigger.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ControlTrigger.cpp; sourceTree = "<group>"; };
@@ -356,8 +341,8 @@
 				0183D0091735D0E6004638EB /* CompressorLimiter.h */,
 				9A5FB71E175928FC007A2F31 /* ControlBooleanLogic.cpp */,
 				9A5FB71F175928FC007A2F31 /* ControlBooleanLogic.h */,
-				0183D00A1735D0E6004638EB /* ControlAdder.cpp */,
-				0183D00B1735D0E6004638EB /* ControlAdder.h */,
+				0183D00A1735D0E6004638EB /* ControlArithmetic.cpp */,
+				0183D00B1735D0E6004638EB /* ControlArithmetic.h */,
 				0183D00C1735D0E6004638EB /* ControlConditioner.cpp */,
 				0183D00D1735D0E6004638EB /* ControlConditioner.h */,
 				0183D00E1735D0E6004638EB /* ControlCounter.cpp */,
@@ -366,8 +351,6 @@
 				0183D0111735D0E6004638EB /* ControlDbToLinear.h */,
 				01C65FEC17371C45003B2661 /* ControlDelay.cpp */,
 				01C65FED17371C45003B2661 /* ControlDelay.h */,
-				0183D0121735D0E6004638EB /* ControlDivider.cpp */,
-				0183D0131735D0E6004638EB /* ControlDivider.h */,
 				0183D0141735D0E6004638EB /* ControlFloor.cpp */,
 				0183D0151735D0E6004638EB /* ControlFloor.h */,
 				0183D0161735D0E6004638EB /* ControlGenerator.cpp */,
@@ -378,8 +361,6 @@
 				9A5FB71A17591983007A2F31 /* ControlMetroDivider.h */,
 				0183D01A1735D0E6004638EB /* ControlMidiToFreq.cpp */,
 				0183D01B1735D0E6004638EB /* ControlMidiToFreq.h */,
-				0183D01C1735D0E6004638EB /* ControlMultiplier.cpp */,
-				0183D01D1735D0E6004638EB /* ControlMultiplier.h */,
 				9AEDB5C617430E7B00C6A77C /* ControlParameter.cpp */,
 				9AEDB5C717430E7B00C6A77C /* ControlParameter.h */,
 				0183D01E1735D0E6004638EB /* ControlPrinter.cpp */,
@@ -394,8 +375,6 @@
 				0183D0271735D0E6004638EB /* ControlSnapToScale.h */,
 				0183D0281735D0E6004638EB /* ControlStepper.cpp */,
 				0183D0291735D0E6004638EB /* ControlStepper.h */,
-				0183D02A1735D0E6004638EB /* ControlSubtractor.cpp */,
-				0183D02B1735D0E6004638EB /* ControlSubtractor.h */,
 				0183D02C1735D0E6004638EB /* ControlSwitcher.cpp */,
 				0183D02D1735D0E6004638EB /* ControlSwitcher.h */,
 				0183D02E1735D0E6004638EB /* ControlTrigger.cpp */,
@@ -499,23 +478,20 @@
 				0183D0661735D0E6004638EB /* BasicDelay.h in Headers */,
 				0183D0691735D0E6004638EB /* BufferFiller.h in Headers */,
 				0183D06C1735D0E6004638EB /* CompressorLimiter.h in Headers */,
-				0183D06F1735D0E6004638EB /* ControlAdder.h in Headers */,
+				0183D06F1735D0E6004638EB /* ControlArithmetic.h in Headers */,
 				0183D0721735D0E6004638EB /* ControlConditioner.h in Headers */,
 				0183D0751735D0E6004638EB /* ControlCounter.h in Headers */,
 				0183D0781735D0E6004638EB /* ControlDbToLinear.h in Headers */,
-				0183D07B1735D0E6004638EB /* ControlDivider.h in Headers */,
 				0183D07E1735D0E6004638EB /* ControlFloor.h in Headers */,
 				0183D0811735D0E6004638EB /* ControlGenerator.h in Headers */,
 				0183D0841735D0E6004638EB /* ControlMetro.h in Headers */,
 				0183D0871735D0E6004638EB /* ControlMidiToFreq.h in Headers */,
-				0183D08A1735D0E6004638EB /* ControlMultiplier.h in Headers */,
 				0183D08D1735D0E6004638EB /* ControlPrinter.h in Headers */,
 				0183D0901735D0E6004638EB /* ControlPulse.h in Headers */,
 				0183D0931735D0E6004638EB /* ControlRandom.h in Headers */,
 				0183D0961735D0E6004638EB /* ControlRecorder.h in Headers */,
 				0183D0991735D0E6004638EB /* ControlSnapToScale.h in Headers */,
 				0183D09C1735D0E6004638EB /* ControlStepper.h in Headers */,
-				0183D09F1735D0E6004638EB /* ControlSubtractor.h in Headers */,
 				0183D0A21735D0E6004638EB /* ControlSwitcher.h in Headers */,
 				0183D0A51735D0E6004638EB /* ControlTrigger.h in Headers */,
 				0183D0A81735D0E6004638EB /* ControlValue.h in Headers */,
@@ -629,23 +605,20 @@
 				0183D0641735D0E6004638EB /* BasicDelay.cpp in Sources */,
 				0183D0671735D0E6004638EB /* BufferFiller.cpp in Sources */,
 				0183D06A1735D0E6004638EB /* CompressorLimiter.cpp in Sources */,
-				0183D06D1735D0E6004638EB /* ControlAdder.cpp in Sources */,
+				0183D06D1735D0E6004638EB /* ControlArithmetic.cpp in Sources */,
 				0183D0701735D0E6004638EB /* ControlConditioner.cpp in Sources */,
 				0183D0731735D0E6004638EB /* ControlCounter.cpp in Sources */,
 				0183D0761735D0E6004638EB /* ControlDbToLinear.cpp in Sources */,
-				0183D0791735D0E6004638EB /* ControlDivider.cpp in Sources */,
 				0183D07C1735D0E6004638EB /* ControlFloor.cpp in Sources */,
 				0183D07F1735D0E6004638EB /* ControlGenerator.cpp in Sources */,
 				0183D0821735D0E6004638EB /* ControlMetro.cpp in Sources */,
 				0183D0851735D0E6004638EB /* ControlMidiToFreq.cpp in Sources */,
-				0183D0881735D0E6004638EB /* ControlMultiplier.cpp in Sources */,
 				0183D08B1735D0E6004638EB /* ControlPrinter.cpp in Sources */,
 				0183D08E1735D0E6004638EB /* ControlPulse.cpp in Sources */,
 				0183D0911735D0E6004638EB /* ControlRandom.cpp in Sources */,
 				0183D0941735D0E6004638EB /* ControlRecorder.cpp in Sources */,
 				0183D0971735D0E6004638EB /* ControlSnapToScale.cpp in Sources */,
 				0183D09A1735D0E6004638EB /* ControlStepper.cpp in Sources */,
-				0183D09D1735D0E6004638EB /* ControlSubtractor.cpp in Sources */,
 				0183D0A01735D0E6004638EB /* ControlSwitcher.cpp in Sources */,
 				0183D0A31735D0E6004638EB /* ControlTrigger.cpp in Sources */,
 				0183D0A61735D0E6004638EB /* ControlValue.cpp in Sources */,
@@ -691,23 +664,20 @@
 				0183D0651735D0E6004638EB /* BasicDelay.cpp in Sources */,
 				0183D0681735D0E6004638EB /* BufferFiller.cpp in Sources */,
 				0183D06B1735D0E6004638EB /* CompressorLimiter.cpp in Sources */,
-				0183D06E1735D0E6004638EB /* ControlAdder.cpp in Sources */,
+				0183D06E1735D0E6004638EB /* ControlArithmetic.cpp in Sources */,
 				0183D0711735D0E6004638EB /* ControlConditioner.cpp in Sources */,
 				0183D0741735D0E6004638EB /* ControlCounter.cpp in Sources */,
 				0183D0771735D0E6004638EB /* ControlDbToLinear.cpp in Sources */,
-				0183D07A1735D0E6004638EB /* ControlDivider.cpp in Sources */,
 				0183D07D1735D0E6004638EB /* ControlFloor.cpp in Sources */,
 				0183D0801735D0E6004638EB /* ControlGenerator.cpp in Sources */,
 				0183D0831735D0E6004638EB /* ControlMetro.cpp in Sources */,
 				0183D0861735D0E6004638EB /* ControlMidiToFreq.cpp in Sources */,
-				0183D0891735D0E6004638EB /* ControlMultiplier.cpp in Sources */,
 				0183D08C1735D0E6004638EB /* ControlPrinter.cpp in Sources */,
 				0183D08F1735D0E6004638EB /* ControlPulse.cpp in Sources */,
 				0183D0921735D0E6004638EB /* ControlRandom.cpp in Sources */,
 				0183D0951735D0E6004638EB /* ControlRecorder.cpp in Sources */,
 				0183D0981735D0E6004638EB /* ControlSnapToScale.cpp in Sources */,
 				0183D09B1735D0E6004638EB /* ControlStepper.cpp in Sources */,
-				0183D09E1735D0E6004638EB /* ControlSubtractor.cpp in Sources */,
 				0183D0A11735D0E6004638EB /* ControlSwitcher.cpp in Sources */,
 				0183D0A41735D0E6004638EB /* ControlTrigger.cpp in Sources */,
 				0183D0A71735D0E6004638EB /* ControlValue.cpp in Sources */,

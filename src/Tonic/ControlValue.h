@@ -60,10 +60,4 @@ namespace Tonic {
 
 }
 
-
-// This allows anything that knows about ControlValues to also use the operator overloads
-// Probably should move the implementation of the operator overloads into the .cpp file.
-#include "ControlMultiplier.h"
-#include "ControlAdder.h"
-
 #endif /* defined(__TonicDemo__ControlValue__) */
