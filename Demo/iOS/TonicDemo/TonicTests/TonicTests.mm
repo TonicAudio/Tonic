@@ -674,12 +674,12 @@ using namespace Tonic;
   
 }
 
-- (void)test405ControlGeneratorBooleanLogic{
+- (void)test405ControlGeneratorComparison {
   
+  const int n_iterations = 10;
   Tonic_::SynthesisContext_ context;
   
   // equals
-  const int n_iterations = 10;
   for (int i=0; i<n_iterations; i++){
     
     float rf = randomFloat(-1000.f, 1000.f);
@@ -712,6 +712,75 @@ using namespace Tonic;
     STAssertEquals(g2.tick(context).value, 0.0f, @"%.2f should be equal to rhs", rf);
     
   }
+  
+  // greater than
+  for (int i=0; i<n_iterations; i++){
+    
+    float rf = randomFloat(0.1f, 1000.f);
+    
+    ControlGenerator g = ControlValue(rf) > ControlValue(0.f);
+    ControlGenerator g1 = ControlValue(rf) > 0.f;
+    ControlGenerator g2 = ControlValue(rf) > ControlValue(99999.f);
+    
+    STAssertTrue(g.tick(context).status == ControlGeneratorStatusHasChanged, @"Every tick should produce a change");
+    
+    STAssertEquals(g.tick(context).value, 1.0f, @"%.2f should be greater than rhs", rf);
+    STAssertEquals(g1.tick(context).value, 1.0f, @"%.2f should be greater than rhs", rf);
+    STAssertEquals(g2.tick(context).value, 0.0f, @"%.2f should not be greater than rhs", rf);
+    
+  }
+  
+  // greater than or equal
+  for (int i=0; i<n_iterations; i++){
+    
+    float rf = randomFloat(0.1f, 1000.f);
+    
+    ControlGenerator g = ControlValue(rf) >= ControlValue(rf);
+    ControlGenerator g1 = ControlValue(rf) > 0.f;
+    ControlGenerator g2 = ControlValue(rf) >= ControlValue(99999.f);
+    
+    STAssertTrue(g.tick(context).status == ControlGeneratorStatusHasChanged, @"Every tick should produce a change");
+    
+    STAssertEquals(g.tick(context).value, 1.0f, @"%.2f should be greater than or equal to rhs", rf);
+    STAssertEquals(g1.tick(context).value, 1.0f, @"%.2f should be greater than or equal to rhs", rf);
+    STAssertEquals(g2.tick(context).value, 0.0f, @"%.2f should not be greater than or equal rhs", rf);
+    
+  }
+  
+  // less than
+  for (int i=0; i<n_iterations; i++){
+    
+    float rf = randomFloat(0.1f, 1000.f);
+    
+    ControlGenerator g = ControlValue(rf) < ControlValue(99999.f);
+    ControlGenerator g1 = ControlValue(rf) < 99999.f;
+    ControlGenerator g2 = ControlValue(rf) < ControlValue(0.f);
+    
+    STAssertTrue(g.tick(context).status == ControlGeneratorStatusHasChanged, @"Every tick should produce a change");
+    
+    STAssertEquals(g.tick(context).value, 1.0f, @"%.2f should be less than rhs", rf);
+    STAssertEquals(g1.tick(context).value, 1.0f, @"%.2f should be less than rhs", rf);
+    STAssertEquals(g2.tick(context).value, 0.0f, @"%.2f should not be less than rhs", rf);
+    
+  }
+  
+  // less than or equal
+  for (int i=0; i<n_iterations; i++){
+    
+    float rf = randomFloat(0.1f, 1000.f);
+    
+    ControlGenerator g = ControlValue(rf) <= ControlValue(rf);
+    ControlGenerator g1 = ControlValue(rf) <= 99999.f;
+    ControlGenerator g2 = ControlValue(rf) <= ControlValue(0.f);
+    
+    STAssertTrue(g.tick(context).status == ControlGeneratorStatusHasChanged, @"Every tick should produce a change");
+    
+    STAssertEquals(g.tick(context).value, 1.0f, @"%.2f should be less than or equal to rhs", rf);
+    STAssertEquals(g1.tick(context).value, 1.0f, @"%.2f should be less than or equal to rhs", rf);
+    STAssertEquals(g2.tick(context).value, 0.0f, @"%.2f should not be less than or equal to rhs", rf);
+    
+  }
+  
 }
 
 @end

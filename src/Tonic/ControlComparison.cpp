@@ -1,11 +1,11 @@
 //
-//  ControlBooleanLogic.cpp
+//  ControlComparison.cpp
 //  Tonic
 //
 //  Created by Nick Donaldson on 5/31/13.
 //
 
-#include "ControlBooleanLogic.h"
+#include "ControlComparison.h"
 
 namespace Tonic { namespace Tonic_{
   

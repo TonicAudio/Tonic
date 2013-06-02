@@ -1,5 +1,5 @@
 //
-//  ControlBooleanLogic.h
+//  ControlComparison.h
 //  Tonic 
 //
 //  Created by Nick Donaldson on 5/31/13.
@@ -8,8 +8,8 @@
 //
 
 
-#ifndef __Tonic__ControlBooleanLogic__
-#define __Tonic__ControlBooleanLogic__
+#ifndef __Tonic__ControlComparison__
+#define __Tonic__ControlComparison__
 
 #include "ControlValue.h"
 

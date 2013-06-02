@@ -145,9 +145,9 @@
 		9A5FB71B17591983007A2F31 /* ControlMetroDivider.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9A5FB71917591983007A2F31 /* ControlMetroDivider.cpp */; };
 		9A5FB71C17591983007A2F31 /* ControlMetroDivider.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9A5FB71917591983007A2F31 /* ControlMetroDivider.cpp */; };
 		9A5FB71D17591983007A2F31 /* ControlMetroDivider.h in Headers */ = {isa = PBXBuildFile; fileRef = 9A5FB71A17591983007A2F31 /* ControlMetroDivider.h */; };
-		9A5FB720175928FC007A2F31 /* ControlBooleanLogic.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9A5FB71E175928FC007A2F31 /* ControlBooleanLogic.cpp */; };
-		9A5FB721175928FC007A2F31 /* ControlBooleanLogic.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9A5FB71E175928FC007A2F31 /* ControlBooleanLogic.cpp */; };
-		9A5FB722175928FC007A2F31 /* ControlBooleanLogic.h in Headers */ = {isa = PBXBuildFile; fileRef = 9A5FB71F175928FC007A2F31 /* ControlBooleanLogic.h */; };
+		9A5FB720175928FC007A2F31 /* ControlComparison.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9A5FB71E175928FC007A2F31 /* ControlComparison.cpp */; };
+		9A5FB721175928FC007A2F31 /* ControlComparison.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9A5FB71E175928FC007A2F31 /* ControlComparison.cpp */; };
+		9A5FB722175928FC007A2F31 /* ControlComparison.h in Headers */ = {isa = PBXBuildFile; fileRef = 9A5FB71F175928FC007A2F31 /* ControlComparison.h */; };
 		9A75063F174689FD00373E88 /* SampleTable.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9A75063D174689FD00373E88 /* SampleTable.cpp */; };
 		9A750640174689FD00373E88 /* SampleTable.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9A75063D174689FD00373E88 /* SampleTable.cpp */; };
 		9A750641174689FD00373E88 /* SampleTable.h in Headers */ = {isa = PBXBuildFile; fileRef = 9A75063E174689FD00373E88 /* SampleTable.h */; };
@@ -267,8 +267,8 @@
 		01F7273D1715225500EBB4BB /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.7.sdk/System/Library/Frameworks/Accelerate.framework; sourceTree = DEVELOPER_DIR; };
 		9A5FB71917591983007A2F31 /* ControlMetroDivider.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ControlMetroDivider.cpp; sourceTree = "<group>"; };
 		9A5FB71A17591983007A2F31 /* ControlMetroDivider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ControlMetroDivider.h; sourceTree = "<group>"; };
-		9A5FB71E175928FC007A2F31 /* ControlBooleanLogic.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ControlBooleanLogic.cpp; sourceTree = "<group>"; };
-		9A5FB71F175928FC007A2F31 /* ControlBooleanLogic.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ControlBooleanLogic.h; sourceTree = "<group>"; };
+		9A5FB71E175928FC007A2F31 /* ControlComparison.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ControlComparison.cpp; sourceTree = "<group>"; };
+		9A5FB71F175928FC007A2F31 /* ControlComparison.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ControlComparison.h; sourceTree = "<group>"; };
 		9A75063D174689FD00373E88 /* SampleTable.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; lineEnding = 0; path = SampleTable.cpp; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.cpp; };
 		9A75063E174689FD00373E88 /* SampleTable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = SampleTable.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		9A7DB3E7174670DF009C9A8F /* TriangleWave.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TriangleWave.h; sourceTree = "<group>"; };
@@ -324,8 +324,8 @@
 				0183D1101735DCB0004638EB /* CombFilter.h */,
 				0183D0081735D0E6004638EB /* CompressorLimiter.cpp */,
 				0183D0091735D0E6004638EB /* CompressorLimiter.h */,
-				9A5FB71E175928FC007A2F31 /* ControlBooleanLogic.cpp */,
-				9A5FB71F175928FC007A2F31 /* ControlBooleanLogic.h */,
+				9A5FB71E175928FC007A2F31 /* ControlComparison.cpp */,
+				9A5FB71F175928FC007A2F31 /* ControlComparison.h */,
 				0183D00A1735D0E6004638EB /* ControlArithmetic.cpp */,
 				0183D00B1735D0E6004638EB /* ControlArithmetic.h */,
 				0183D00C1735D0E6004638EB /* ControlConditioner.cpp */,
@@ -503,7 +503,7 @@
 				9A7DB3E8174670DF009C9A8F /* TriangleWave.h in Headers */,
 				9AF6A731174AFCF900C70173 /* RingBuffer.h in Headers */,
 				9A5FB71D17591983007A2F31 /* ControlMetroDivider.h in Headers */,
-				9A5FB722175928FC007A2F31 /* ControlBooleanLogic.h in Headers */,
+				9A5FB722175928FC007A2F31 /* ControlComparison.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -624,7 +624,7 @@
 				9A75063F174689FD00373E88 /* SampleTable.cpp in Sources */,
 				9AF6A72F174AFCF900C70173 /* RingBuffer.cpp in Sources */,
 				9A5FB71B17591983007A2F31 /* ControlMetroDivider.cpp in Sources */,
-				9A5FB720175928FC007A2F31 /* ControlBooleanLogic.cpp in Sources */,
+				9A5FB720175928FC007A2F31 /* ControlComparison.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -680,7 +680,7 @@
 				9A750640174689FD00373E88 /* SampleTable.cpp in Sources */,
 				9AF6A730174AFCF900C70173 /* RingBuffer.cpp in Sources */,
 				9A5FB71C17591983007A2F31 /* ControlMetroDivider.cpp in Sources */,
-				9A5FB721175928FC007A2F31 /* ControlBooleanLogic.cpp in Sources */,
+				9A5FB721175928FC007A2F31 /* ControlComparison.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -28,7 +28,7 @@
 #include "Tonic/ControlValue.h"
 #include "Tonic/ControlParameter.h"
 #include "Tonic/ControlArithmetic.h"
-#include "Tonic/ControlBooleanLogic.h"
+#include "Tonic/ControlComparison.h"
 #include "Tonic/MonoToStereoPanner.h"
 #include "Tonic/RampedValue.h"
 #include "Tonic/Synth.h"
