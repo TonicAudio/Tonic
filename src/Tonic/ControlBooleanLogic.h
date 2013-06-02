@@ -3,7 +3,6 @@
 //  Tonic 
 //
 //  Created by Nick Donaldson on 5/31/13.
-//  Copyright (c) 2013 Nick Donaldson. All rights reserved.
 //
 // See LICENSE.txt for license and usage information.
 //
@@ -29,6 +28,8 @@ namespace Tonic {
       ControlGenerator lhsGen_;
       ControlGenerator rhsGen_;
       
+      virtual bool satisfiesCondition( float l, float r) = 0;
+      void computeOutput(const SynthesisContext_ & context);
       
     public:
       
@@ -60,13 +61,63 @@ namespace Tonic {
   //              EQUALITY
   // --------------------------------------
   
-  // TODO: Implement
+  namespace Tonic_ {
+    
+    class ControlEquals_ : public ControlBooleanOperator_ {
+      
+    protected:
+      
+      bool satisfiesCondition( float l, float r);
+      
+    };
+  }
+  
+  class ControlEquals : public TemplatedControlBooleanOperator<Tonic_::ControlEquals_> {};
+  
+  static ControlEquals operator == (ControlGenerator lhs, ControlGenerator rhs){
+    ControlEquals c;
+    c.setLeft(lhs);
+    c.setRight(rhs);
+    return c;
+  }
+  
+  static ControlEquals operator == (ControlGenerator lhs, float right){
+    ControlEquals c;
+    c.setLeft(lhs);
+    c.setRight(ControlValue(right));
+    return c;
+  }
   
   // --------------------------------------
   //             INEQUALITY
   // --------------------------------------
   
-  // TODO: Implement
+  namespace Tonic_ {
+    
+    class ControlNotEquals_ : public ControlBooleanOperator_ {
+      
+    protected:
+      
+      bool satisfiesCondition( float l, float r);
+      
+    };
+  }
+  
+  class ControlNotEquals : public TemplatedControlBooleanOperator<Tonic_::ControlNotEquals_> {};
+  
+  static ControlNotEquals operator != (ControlGenerator lhs, ControlGenerator rhs){
+    ControlNotEquals c;
+    c.setLeft(lhs);
+    c.setRight(rhs);
+    return c;
+  }
+  
+  static ControlNotEquals operator != (ControlGenerator lhs, float right){
+    ControlNotEquals c;
+    c.setLeft(lhs);
+    c.setRight(ControlValue(right));
+    return c;
+  }
   
   // --------------------------------------
   //            GREATER THAN
@@ -78,7 +129,7 @@ namespace Tonic {
       
     protected:
       
-      void computeOutput(const SynthesisContext_ & context);
+      bool satisfiesCondition( float l, float r);
       
     };
     
@@ -87,37 +138,115 @@ namespace Tonic {
   class ControlGreaterThan : public TemplatedControlBooleanOperator<Tonic_::ControlGreaterThan_> {};
   
   static ControlGreaterThan operator > (ControlGenerator lhs, ControlGenerator rhs){
-    ControlGreaterThan gt;
-    gt.setLeft(lhs);
-    gt.setRight(rhs);
-    return gt;
+    ControlGreaterThan c;
+    c.setLeft(lhs);
+    c.setRight(rhs);
+    return c;
   }
   
   static ControlGreaterThan operator > (ControlGenerator lhs, float right){
-    ControlGreaterThan gt;
-    gt.setLeft(lhs);
-    gt.setRight(ControlValue(right));
-    return gt;
+    ControlGreaterThan c;
+    c.setLeft(lhs);
+    c.setRight(ControlValue(right));
+    return c;
   }
   
   // --------------------------------------
   //          GREATER OR EQUAL
   // --------------------------------------
   
-  // TODO: Implement
+  namespace Tonic_ {
+    
+    class ControlGreaterOrEqual_ : public ControlBooleanOperator_ {
+      
+    protected:
+      
+      bool satisfiesCondition( float l, float r);
+      
+    };
+    
+  }
+  
+  class ControlGreaterOrEqual : public TemplatedControlBooleanOperator<Tonic_::ControlGreaterOrEqual_> {};
+  
+  static ControlGreaterOrEqual operator >= (ControlGenerator lhs, ControlGenerator rhs){
+    ControlGreaterOrEqual c;
+    c.setLeft(lhs);
+    c.setRight(rhs);
+    return c;
+  }
+  
+  static ControlGreaterOrEqual operator >= (ControlGenerator lhs, float right){
+    ControlGreaterOrEqual c;
+    c.setLeft(lhs);
+    c.setRight(ControlValue(right));
+    return c;
+  }
   
   // --------------------------------------
   //              LESS THAN
   // --------------------------------------
   
-  // TODO: Implement
+  namespace Tonic_ {
+    
+    class ControlLessThan_ : public ControlBooleanOperator_ {
+      
+    protected:
+      
+      bool satisfiesCondition( float l, float r);
+      
+    };
+    
+  }
+  
+  class ControlLessThan : public TemplatedControlBooleanOperator<Tonic_::ControlLessThan_> {};
+  
+  static ControlLessThan operator < (ControlGenerator lhs, ControlGenerator rhs){
+    ControlLessThan c;
+    c.setLeft(lhs);
+    c.setRight(rhs);
+    return c;
+  }
+  
+  static ControlLessThan operator < (ControlGenerator lhs, float right){
+    ControlLessThan c;
+    c.setLeft(lhs);
+    c.setRight(ControlValue(right));
+    return c;
+  }
   
   // --------------------------------------
   //           LESS OR EQUAL
   // --------------------------------------
   
-  // TODO: Implement
+  namespace Tonic_ {
+    
+    class ControlLessOrEqual_ : public ControlBooleanOperator_ {
+      
+    protected:
+      
+      bool satisfiesCondition( float l, float r);
+      
+    };
+    
+  }
   
+  class ControlLessOrEqual : public TemplatedControlBooleanOperator<Tonic_::ControlLessOrEqual_> {};
+  
+  static ControlLessOrEqual operator <= (ControlGenerator lhs, ControlGenerator rhs){
+    ControlLessOrEqual c;
+    c.setLeft(lhs);
+    c.setRight(rhs);
+    return c;
+  }
+  
+  static ControlLessOrEqual operator <= (ControlGenerator lhs, float right){
+    ControlLessOrEqual c;
+    c.setLeft(lhs);
+    c.setRight(ControlValue(right));
+    return c;
+  }
+    
 }
 
 #endif /* defined(__Tonic__ControlBooleanLogic__) */
