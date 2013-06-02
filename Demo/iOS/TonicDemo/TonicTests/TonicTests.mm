@@ -397,8 +397,6 @@ using namespace Tonic;
     STAssertEquals(result.value, 2.0f, @"ControlStepper did not produce expected output");
     
     
-    
-    
   }
 }
 
@@ -658,6 +656,7 @@ using namespace Tonic;
   STAssertEquals(gen.tick(context).value, 2.f, @"Divide by zero should return the last valid value.");
 }
 
+
 -(void)test404TestCombinationsOfGenAndControlGen{
 
   TestBufferFiller testFiller;
@@ -675,5 +674,44 @@ using namespace Tonic;
   
 }
 
+- (void)test405ControlGeneratorBooleanLogic{
+  
+  Tonic_::SynthesisContext_ context;
+  
+  // equals
+  const int n_iterations = 10;
+  for (int i=0; i<n_iterations; i++){
+    
+    float rf = randomFloat(-1000.f, 1000.f);
+    
+    ControlGenerator g = ControlValue(rf) == ControlValue(rf);
+    ControlGenerator g1 = ControlValue(rf) == rf;
+    ControlGenerator g2 = ControlValue(rf) == ControlValue(99999.f);
+    
+    STAssertTrue(g.tick(context).status == ControlGeneratorStatusHasChanged, @"Every tick should produce a change");
+    
+    STAssertEquals(g.tick(context).value, 1.0f, @"%.2f should equal itself", rf);
+    STAssertEquals(g1.tick(context).value, 1.0f, @"%.2f should equal itself", rf);
+    STAssertEquals(g2.tick(context).value, 0.0f, @"%.2f should not be equal to rhs", rf);
+
+  }
+  
+  // not equals
+  for (int i=0; i<n_iterations; i++){
+    
+    float rf = randomFloat(-1000.f, 1000.f);
+    
+    ControlGenerator g = ControlValue(rf) != ControlValue(99999.f);
+    ControlGenerator g1 = ControlValue(rf) != 99999.f;
+    ControlGenerator g2 = ControlValue(rf) != ControlValue(rf);
+    
+    STAssertTrue(g.tick(context).status == ControlGeneratorStatusHasChanged, @"Every tick should produce a change");
+    
+    STAssertEquals(g.tick(context).value, 1.0f, @"%.2f should not be equal to rhs", rf);
+    STAssertEquals(g1.tick(context).value, 1.0f, @"%.2f should not be equal to rhs", rf);
+    STAssertEquals(g2.tick(context).value, 0.0f, @"%.2f should be equal to rhs", rf);
+    
+  }
+}
 
 @end
