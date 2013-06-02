@@ -7,9 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		0183D05E1735D0E6004638EB /* Adder.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0183D0001735D0E6004638EB /* Adder.cpp */; };
-		0183D05F1735D0E6004638EB /* Adder.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0183D0001735D0E6004638EB /* Adder.cpp */; };
-		0183D0601735D0E6004638EB /* Adder.h in Headers */ = {isa = PBXBuildFile; fileRef = 0183D0011735D0E6004638EB /* Adder.h */; };
+		0183D05E1735D0E6004638EB /* Arithmetic.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0183D0001735D0E6004638EB /* Arithmetic.cpp */; };
+		0183D05F1735D0E6004638EB /* Arithmetic.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0183D0001735D0E6004638EB /* Arithmetic.cpp */; };
+		0183D0601735D0E6004638EB /* Arithmetic.h in Headers */ = {isa = PBXBuildFile; fileRef = 0183D0011735D0E6004638EB /* Arithmetic.h */; };
 		0183D0611735D0E6004638EB /* ADSR.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0183D0021735D0E6004638EB /* ADSR.cpp */; };
 		0183D0621735D0E6004638EB /* ADSR.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0183D0021735D0E6004638EB /* ADSR.cpp */; };
 		0183D0631735D0E6004638EB /* ADSR.h in Headers */ = {isa = PBXBuildFile; fileRef = 0183D0031735D0E6004638EB /* ADSR.h */; };
@@ -79,9 +79,6 @@
 		0183D0AC1735D0E6004638EB /* DelayUtils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0183D0341735D0E6004638EB /* DelayUtils.cpp */; };
 		0183D0AD1735D0E6004638EB /* DelayUtils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0183D0341735D0E6004638EB /* DelayUtils.cpp */; };
 		0183D0AE1735D0E6004638EB /* DelayUtils.h in Headers */ = {isa = PBXBuildFile; fileRef = 0183D0351735D0E6004638EB /* DelayUtils.h */; };
-		0183D0AF1735D0E6004638EB /* Divider.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0183D0361735D0E6004638EB /* Divider.cpp */; };
-		0183D0B01735D0E6004638EB /* Divider.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0183D0361735D0E6004638EB /* Divider.cpp */; };
-		0183D0B11735D0E6004638EB /* Divider.h in Headers */ = {isa = PBXBuildFile; fileRef = 0183D0371735D0E6004638EB /* Divider.h */; };
 		0183D0B21735D0E6004638EB /* Effect.h in Headers */ = {isa = PBXBuildFile; fileRef = 0183D0381735D0E6004638EB /* Effect.h */; };
 		0183D0B31735D0E6004638EB /* Filters.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0183D0391735D0E6004638EB /* Filters.cpp */; };
 		0183D0B41735D0E6004638EB /* Filters.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0183D0391735D0E6004638EB /* Filters.cpp */; };
@@ -105,9 +102,6 @@
 		0183D0C61735D0E6004638EB /* MonoToStereoPanner.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0183D0461735D0E6004638EB /* MonoToStereoPanner.cpp */; };
 		0183D0C71735D0E6004638EB /* MonoToStereoPanner.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0183D0461735D0E6004638EB /* MonoToStereoPanner.cpp */; };
 		0183D0C81735D0E6004638EB /* MonoToStereoPanner.h in Headers */ = {isa = PBXBuildFile; fileRef = 0183D0471735D0E6004638EB /* MonoToStereoPanner.h */; };
-		0183D0C91735D0E6004638EB /* Multiplier.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0183D0481735D0E6004638EB /* Multiplier.cpp */; };
-		0183D0CA1735D0E6004638EB /* Multiplier.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0183D0481735D0E6004638EB /* Multiplier.cpp */; };
-		0183D0CB1735D0E6004638EB /* Multiplier.h in Headers */ = {isa = PBXBuildFile; fileRef = 0183D0491735D0E6004638EB /* Multiplier.h */; };
 		0183D0CC1735D0E6004638EB /* Noise.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0183D04A1735D0E6004638EB /* Noise.cpp */; };
 		0183D0CD1735D0E6004638EB /* Noise.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0183D04A1735D0E6004638EB /* Noise.cpp */; };
 		0183D0CE1735D0E6004638EB /* Noise.h in Headers */ = {isa = PBXBuildFile; fileRef = 0183D04B1735D0E6004638EB /* Noise.h */; };
@@ -123,9 +117,6 @@
 		0183D0D81735D0E6004638EB /* StereoDelay.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0183D0521735D0E6004638EB /* StereoDelay.cpp */; };
 		0183D0D91735D0E6004638EB /* StereoDelay.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0183D0521735D0E6004638EB /* StereoDelay.cpp */; };
 		0183D0DA1735D0E6004638EB /* StereoDelay.h in Headers */ = {isa = PBXBuildFile; fileRef = 0183D0531735D0E6004638EB /* StereoDelay.h */; };
-		0183D0DB1735D0E6004638EB /* Subtractor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0183D0541735D0E6004638EB /* Subtractor.cpp */; };
-		0183D0DC1735D0E6004638EB /* Subtractor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0183D0541735D0E6004638EB /* Subtractor.cpp */; };
-		0183D0DD1735D0E6004638EB /* Subtractor.h in Headers */ = {isa = PBXBuildFile; fileRef = 0183D0551735D0E6004638EB /* Subtractor.h */; };
 		0183D0DE1735D0E6004638EB /* Synth.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0183D0561735D0E6004638EB /* Synth.cpp */; };
 		0183D0DF1735D0E6004638EB /* Synth.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0183D0561735D0E6004638EB /* Synth.cpp */; };
 		0183D0E01735D0E6004638EB /* Synth.h in Headers */ = {isa = PBXBuildFile; fileRef = 0183D0571735D0E6004638EB /* Synth.h */; };
@@ -182,8 +173,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		0183D0001735D0E6004638EB /* Adder.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Adder.cpp; sourceTree = "<group>"; };
-		0183D0011735D0E6004638EB /* Adder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Adder.h; sourceTree = "<group>"; };
+		0183D0001735D0E6004638EB /* Arithmetic.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Arithmetic.cpp; sourceTree = "<group>"; };
+		0183D0011735D0E6004638EB /* Arithmetic.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Arithmetic.h; sourceTree = "<group>"; };
 		0183D0021735D0E6004638EB /* ADSR.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ADSR.cpp; sourceTree = "<group>"; };
 		0183D0031735D0E6004638EB /* ADSR.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ADSR.h; sourceTree = "<group>"; };
 		0183D0041735D0E6004638EB /* BasicDelay.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = BasicDelay.cpp; sourceTree = "<group>"; };
@@ -230,8 +221,6 @@
 		0183D0331735D0E6004638EB /* ControlXYSpeed.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ControlXYSpeed.h; sourceTree = "<group>"; };
 		0183D0341735D0E6004638EB /* DelayUtils.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = DelayUtils.cpp; sourceTree = "<group>"; };
 		0183D0351735D0E6004638EB /* DelayUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DelayUtils.h; sourceTree = "<group>"; };
-		0183D0361735D0E6004638EB /* Divider.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Divider.cpp; sourceTree = "<group>"; };
-		0183D0371735D0E6004638EB /* Divider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Divider.h; sourceTree = "<group>"; };
 		0183D0381735D0E6004638EB /* Effect.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Effect.h; sourceTree = "<group>"; };
 		0183D0391735D0E6004638EB /* Filters.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Filters.cpp; sourceTree = "<group>"; };
 		0183D03A1735D0E6004638EB /* Filters.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Filters.h; sourceTree = "<group>"; };
@@ -248,8 +237,6 @@
 		0183D0451735D0E6004638EB /* Mixer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Mixer.h; sourceTree = "<group>"; };
 		0183D0461735D0E6004638EB /* MonoToStereoPanner.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MonoToStereoPanner.cpp; sourceTree = "<group>"; };
 		0183D0471735D0E6004638EB /* MonoToStereoPanner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MonoToStereoPanner.h; sourceTree = "<group>"; };
-		0183D0481735D0E6004638EB /* Multiplier.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Multiplier.cpp; sourceTree = "<group>"; };
-		0183D0491735D0E6004638EB /* Multiplier.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Multiplier.h; sourceTree = "<group>"; };
 		0183D04A1735D0E6004638EB /* Noise.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Noise.cpp; sourceTree = "<group>"; };
 		0183D04B1735D0E6004638EB /* Noise.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Noise.h; sourceTree = "<group>"; };
 		0183D04C1735D0E6004638EB /* RampedValue.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = RampedValue.cpp; sourceTree = "<group>"; };
@@ -260,8 +247,6 @@
 		0183D0511735D0E6004638EB /* SineWave.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SineWave.h; sourceTree = "<group>"; };
 		0183D0521735D0E6004638EB /* StereoDelay.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = StereoDelay.cpp; sourceTree = "<group>"; };
 		0183D0531735D0E6004638EB /* StereoDelay.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StereoDelay.h; sourceTree = "<group>"; };
-		0183D0541735D0E6004638EB /* Subtractor.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Subtractor.cpp; sourceTree = "<group>"; };
-		0183D0551735D0E6004638EB /* Subtractor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Subtractor.h; sourceTree = "<group>"; };
 		0183D0561735D0E6004638EB /* Synth.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Synth.cpp; sourceTree = "<group>"; };
 		0183D0571735D0E6004638EB /* Synth.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Synth.h; sourceTree = "<group>"; };
 		0183D0581735D0E6004638EB /* TableLookupOsc.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TableLookupOsc.cpp; sourceTree = "<group>"; };
@@ -327,8 +312,8 @@
 		0183CFFF1735D0E6004638EB /* Tonic */ = {
 			isa = PBXGroup;
 			children = (
-				0183D0001735D0E6004638EB /* Adder.cpp */,
-				0183D0011735D0E6004638EB /* Adder.h */,
+				0183D0001735D0E6004638EB /* Arithmetic.cpp */,
+				0183D0011735D0E6004638EB /* Arithmetic.h */,
 				0183D0021735D0E6004638EB /* ADSR.cpp */,
 				0183D0031735D0E6004638EB /* ADSR.h */,
 				0183D0041735D0E6004638EB /* BasicDelay.cpp */,
@@ -385,8 +370,6 @@
 				0183D0331735D0E6004638EB /* ControlXYSpeed.h */,
 				0183D0341735D0E6004638EB /* DelayUtils.cpp */,
 				0183D0351735D0E6004638EB /* DelayUtils.h */,
-				0183D0361735D0E6004638EB /* Divider.cpp */,
-				0183D0371735D0E6004638EB /* Divider.h */,
 				01C65FF1173723C6003B2661 /* Effect.cpp */,
 				0183D0381735D0E6004638EB /* Effect.h */,
 				0183D0391735D0E6004638EB /* Filters.cpp */,
@@ -403,8 +386,6 @@
 				0183D0451735D0E6004638EB /* Mixer.h */,
 				0183D0461735D0E6004638EB /* MonoToStereoPanner.cpp */,
 				0183D0471735D0E6004638EB /* MonoToStereoPanner.h */,
-				0183D0481735D0E6004638EB /* Multiplier.cpp */,
-				0183D0491735D0E6004638EB /* Multiplier.h */,
 				0183D04A1735D0E6004638EB /* Noise.cpp */,
 				0183D04B1735D0E6004638EB /* Noise.h */,
 				0183D04C1735D0E6004638EB /* RampedValue.cpp */,
@@ -424,8 +405,6 @@
 				9A7DB3F417467C81009C9A8F /* SquareWave.h */,
 				0183D0521735D0E6004638EB /* StereoDelay.cpp */,
 				0183D0531735D0E6004638EB /* StereoDelay.h */,
-				0183D0541735D0E6004638EB /* Subtractor.cpp */,
-				0183D0551735D0E6004638EB /* Subtractor.h */,
 				0183D0561735D0E6004638EB /* Synth.cpp */,
 				0183D0571735D0E6004638EB /* Synth.h */,
 				0183D0581735D0E6004638EB /* TableLookupOsc.cpp */,
@@ -473,7 +452,7 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0183D0601735D0E6004638EB /* Adder.h in Headers */,
+				0183D0601735D0E6004638EB /* Arithmetic.h in Headers */,
 				0183D0631735D0E6004638EB /* ADSR.h in Headers */,
 				0183D0661735D0E6004638EB /* BasicDelay.h in Headers */,
 				0183D0691735D0E6004638EB /* BufferFiller.h in Headers */,
@@ -497,7 +476,6 @@
 				0183D0A81735D0E6004638EB /* ControlValue.h in Headers */,
 				0183D0AB1735D0E6004638EB /* ControlXYSpeed.h in Headers */,
 				0183D0AE1735D0E6004638EB /* DelayUtils.h in Headers */,
-				0183D0B11735D0E6004638EB /* Divider.h in Headers */,
 				0183D0B21735D0E6004638EB /* Effect.h in Headers */,
 				0183D0B51735D0E6004638EB /* Filters.h in Headers */,
 				0183D0B61735D0E6004638EB /* FilterUtils.h in Headers */,
@@ -507,13 +485,11 @@
 				0183D0C21735D0E6004638EB /* LFNoise.h in Headers */,
 				0183D0C51735D0E6004638EB /* Mixer.h in Headers */,
 				0183D0C81735D0E6004638EB /* MonoToStereoPanner.h in Headers */,
-				0183D0CB1735D0E6004638EB /* Multiplier.h in Headers */,
 				0183D0CE1735D0E6004638EB /* Noise.h in Headers */,
 				0183D0D11735D0E6004638EB /* RampedValue.h in Headers */,
 				0183D0D41735D0E6004638EB /* RectWave.h in Headers */,
 				0183D0D71735D0E6004638EB /* SineWave.h in Headers */,
 				0183D0DA1735D0E6004638EB /* StereoDelay.h in Headers */,
-				0183D0DD1735D0E6004638EB /* Subtractor.h in Headers */,
 				0183D0E01735D0E6004638EB /* Synth.h in Headers */,
 				0183D0E31735D0E6004638EB /* TableLookupOsc.h in Headers */,
 				0183D0E41735D0E6004638EB /* TonicCore.h in Headers */,
@@ -600,7 +576,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0183D05E1735D0E6004638EB /* Adder.cpp in Sources */,
+				0183D05E1735D0E6004638EB /* Arithmetic.cpp in Sources */,
 				0183D0611735D0E6004638EB /* ADSR.cpp in Sources */,
 				0183D0641735D0E6004638EB /* BasicDelay.cpp in Sources */,
 				0183D0671735D0E6004638EB /* BufferFiller.cpp in Sources */,
@@ -624,7 +600,6 @@
 				0183D0A61735D0E6004638EB /* ControlValue.cpp in Sources */,
 				0183D0A91735D0E6004638EB /* ControlXYSpeed.cpp in Sources */,
 				0183D0AC1735D0E6004638EB /* DelayUtils.cpp in Sources */,
-				0183D0AF1735D0E6004638EB /* Divider.cpp in Sources */,
 				0183D0B31735D0E6004638EB /* Filters.cpp in Sources */,
 				0183D0B71735D0E6004638EB /* FixedValue.cpp in Sources */,
 				0183D0BA1735D0E6004638EB /* SawtoothWave.cpp in Sources */,
@@ -632,13 +607,11 @@
 				0183D0C01735D0E6004638EB /* LFNoise.cpp in Sources */,
 				0183D0C31735D0E6004638EB /* Mixer.cpp in Sources */,
 				0183D0C61735D0E6004638EB /* MonoToStereoPanner.cpp in Sources */,
-				0183D0C91735D0E6004638EB /* Multiplier.cpp in Sources */,
 				0183D0CC1735D0E6004638EB /* Noise.cpp in Sources */,
 				0183D0CF1735D0E6004638EB /* RampedValue.cpp in Sources */,
 				0183D0D21735D0E6004638EB /* RectWave.cpp in Sources */,
 				0183D0D51735D0E6004638EB /* SineWave.cpp in Sources */,
 				0183D0D81735D0E6004638EB /* StereoDelay.cpp in Sources */,
-				0183D0DB1735D0E6004638EB /* Subtractor.cpp in Sources */,
 				0183D0DE1735D0E6004638EB /* Synth.cpp in Sources */,
 				0183D0E11735D0E6004638EB /* TableLookupOsc.cpp in Sources */,
 				0183D0E51735D0E6004638EB /* TonicFrames.cpp in Sources */,
@@ -659,7 +632,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0183D05F1735D0E6004638EB /* Adder.cpp in Sources */,
+				0183D05F1735D0E6004638EB /* Arithmetic.cpp in Sources */,
 				0183D0621735D0E6004638EB /* ADSR.cpp in Sources */,
 				0183D0651735D0E6004638EB /* BasicDelay.cpp in Sources */,
 				0183D0681735D0E6004638EB /* BufferFiller.cpp in Sources */,
@@ -683,7 +656,6 @@
 				0183D0A71735D0E6004638EB /* ControlValue.cpp in Sources */,
 				0183D0AA1735D0E6004638EB /* ControlXYSpeed.cpp in Sources */,
 				0183D0AD1735D0E6004638EB /* DelayUtils.cpp in Sources */,
-				0183D0B01735D0E6004638EB /* Divider.cpp in Sources */,
 				0183D0B41735D0E6004638EB /* Filters.cpp in Sources */,
 				0183D0B81735D0E6004638EB /* FixedValue.cpp in Sources */,
 				0183D0BB1735D0E6004638EB /* SawtoothWave.cpp in Sources */,
@@ -691,13 +663,11 @@
 				0183D0C11735D0E6004638EB /* LFNoise.cpp in Sources */,
 				0183D0C41735D0E6004638EB /* Mixer.cpp in Sources */,
 				0183D0C71735D0E6004638EB /* MonoToStereoPanner.cpp in Sources */,
-				0183D0CA1735D0E6004638EB /* Multiplier.cpp in Sources */,
 				0183D0CD1735D0E6004638EB /* Noise.cpp in Sources */,
 				0183D0D01735D0E6004638EB /* RampedValue.cpp in Sources */,
 				0183D0D31735D0E6004638EB /* RectWave.cpp in Sources */,
 				0183D0D61735D0E6004638EB /* SineWave.cpp in Sources */,
 				0183D0D91735D0E6004638EB /* StereoDelay.cpp in Sources */,
-				0183D0DC1735D0E6004638EB /* Subtractor.cpp in Sources */,
 				0183D0DF1735D0E6004638EB /* Synth.cpp in Sources */,
 				0183D0E21735D0E6004638EB /* TableLookupOsc.cpp in Sources */,
 				0183D0E61735D0E6004638EB /* TonicFrames.cpp in Sources */,

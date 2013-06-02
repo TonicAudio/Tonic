@@ -19,12 +19,10 @@ using std::vector;
 
 namespace Tonic {
   
-  
   // -----------------------------------------
   //                 ADDER
   // -----------------------------------------
 
-  
   namespace Tonic_ {
     
     class ControlAdder_ : public ControlGenerator_{
