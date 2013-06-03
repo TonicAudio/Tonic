@@ -21,15 +21,15 @@ namespace Tonic { namespace Tonic_{
     if (delta >= 2*sPerBeat || delta < 0){
       // account for bpm interval outrunning tick interval or timer wrap-around
       lastClickTime_ = context.elapsedTime;
-      lastOutput_.status = ControlGeneratorStatusHasChanged;
+      lastOutput_.triggered = true;
     }
     else if (delta >= sPerBeat){
       // acocunt for drift
       lastClickTime_ += sPerBeat;
-      lastOutput_.status = ControlGeneratorStatusHasChanged;
+      lastOutput_.triggered = true;
     }
     else{
-      lastOutput_.status = ControlGeneratorStatusHasNotChanged;
+      lastOutput_.triggered = false;
     }
     
     lastOutput_.value = 1;

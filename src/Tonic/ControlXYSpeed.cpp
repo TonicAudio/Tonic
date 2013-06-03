@@ -22,8 +22,8 @@ namespace Tonic { namespace Tonic_{
     const int numToAverage = 1;
     ControlGeneratorOutput xOut = x.tick(context);
     ControlGeneratorOutput yOut = y.tick(context);
-    if(xOut.status == ControlGeneratorStatusHasChanged || yOut.status == ControlGeneratorStatusHasChanged){
-      lastOutput_.status = ControlGeneratorStatusHasChanged;
+    if(xOut.triggered || yOut.triggered){
+      lastOutput_.triggered = true;
       float dX = xOut.value - lastXVal;
       float dY = yOut.value  - lastYVal;
       float speed = sqrt(dX * dX + dY * dY);
@@ -39,7 +39,7 @@ namespace Tonic { namespace Tonic_{
       lastXVal = xOut.value;
       lastYVal = yOut.value;
     }else{
-      lastOutput_.status = ControlGeneratorStatusHasNotChanged;
+      lastOutput_.triggered = false;
     }
     
   }

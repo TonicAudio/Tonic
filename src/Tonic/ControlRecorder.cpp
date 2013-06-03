@@ -24,7 +24,7 @@ namespace Tonic { namespace Tonic_{
     
     ControlRecorder::Mode currenMode = (ControlRecorder::Mode)(int)modeOut.value;
     
-    if(modeOut.status == ControlGeneratorStatusHasChanged){
+    if(modeOut.triggered){
       if(currenMode == ControlRecorder::STOP){
         printf("ControlRecorder_::computeOutput STOP\n");
         recording.clear();

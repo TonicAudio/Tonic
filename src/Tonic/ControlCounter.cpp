@@ -17,8 +17,8 @@ namespace Tonic { namespace Tonic_{
   void ControlCounter_::computeOutput(const SynthesisContext_ & context){
     ControlGeneratorOutput tickOut = trigger.tick(context);
     ControlGeneratorOutput endOut = end.tick(context);
-    lastOutput_.status = tickOut.status;
-      if (tickOut.status == ControlGeneratorStatusHasChanged) {
+    lastOutput_.triggered = tickOut.triggered;
+      if (tickOut.triggered) {
         lastOutput_.value += 1;
         if(lastOutput_.value > endOut.value){
           lastOutput_.value = 0;

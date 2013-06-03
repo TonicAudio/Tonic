@@ -21,13 +21,13 @@ namespace Tonic { namespace Tonic_{
     offset_ = (unsigned int)(offsetGen_.tick(context).value);
     unsigned int divisions = max(1, divisonsGen_.tick(context).value);
     
-    lastOutput_.status = ControlGeneratorStatusHasNotChanged;
+    lastOutput_.triggered = false;
     
-    if (input_.tick(context).status == ControlGeneratorStatusHasChanged)
+    if (input_.tick(context).triggered)
     {
       unsigned int modcount = (tickCounter_++ + offset_) % divisions;
       if (modcount == 0){
-        lastOutput_.status = ControlGeneratorStatusHasChanged;
+        lastOutput_.triggered = true;
       }
       
       if (tickCounter_ >= divisions) tickCounter_ = 0;

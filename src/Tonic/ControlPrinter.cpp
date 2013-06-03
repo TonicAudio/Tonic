@@ -21,7 +21,7 @@ namespace Tonic { namespace Tonic_{
   
   void ControlPrinter_::computeOutput(const SynthesisContext_ & context){
     lastOutput_ = input_.tick(context);
-    if(!hasPrinted ||  (lastOutput_.status == ControlGeneratorStatusHasChanged)){
+    if(!hasPrinted ||  (lastOutput_.triggered)){
       printf(message.c_str(), lastOutput_.value);
       hasPrinted = true;
     }

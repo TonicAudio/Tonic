@@ -22,11 +22,11 @@ namespace Tonic{
     
       bool outInRange =  (lastOutput_.value >= minOut.value) && (lastOutput_.value <= maxOut.value);
     
-      if(!outInRange || trigger.tick(context).status == ControlGeneratorStatusHasChanged){
-        lastOutput_.status = ControlGeneratorStatusHasChanged;
+      if(!outInRange || trigger.tick(context).triggered){
+        lastOutput_.triggered = true;
         lastOutput_.value = randomFloat(minOut.value, maxOut.value);
       }else{
-        lastOutput_.status = ControlGeneratorStatusHasNotChanged;
+        lastOutput_.triggered = false;
       }
     }
     

@@ -18,13 +18,13 @@ namespace Tonic { namespace Tonic_{
     ControlGeneratorOutput tickIn = input_.tick(context);
     ControlGeneratorOutput lengthIn = pulseLengthGen_.tick(context);
     
-    lastOutput_.status = ControlGeneratorStatusHasNotChanged;
+    lastOutput_.triggered = false;
     
     // every time input changes, reset status, start new pulse
-    if (tickIn.status == ControlGeneratorStatusHasChanged){
+    if (tickIn.triggered){
       state_ = ControlPulseStateOn;
       lastOnTime_ = context.elapsedTime;
-      lastOutput_.status = ControlGeneratorStatusHasChanged;
+      lastOutput_.triggered = true;
       lastOutput_.value = 1.0f;
     }
     else if (state_ == ControlPulseStateOn){
@@ -34,7 +34,7 @@ namespace Tonic { namespace Tonic_{
       if (tDiff < 0 || tDiff >= max(0,lengthIn.value)){
         state_ = ControlPulseStateOff;
         lastOutput_.value = 0.0f;
-        lastOutput_.status = ControlGeneratorStatusHasChanged;
+        lastOutput_.triggered = true;
       }
     }
     

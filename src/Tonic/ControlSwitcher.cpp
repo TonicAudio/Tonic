@@ -37,13 +37,13 @@ namespace Tonic { namespace Tonic_{
     int index = indexOutput.value;
 
     // always send has changed message when input index changes
-    if (indexOutput.status == ControlGeneratorStatusHasChanged && index != lastInputIndex_) {
+    if (indexOutput.triggered && index != lastInputIndex_) {
       lastInputIndex_ = index;
       ControlGeneratorOutput output = inputs_.at(clamp(index, 0, inputs_.size() -1 )).tick(context);
-      lastOutput_.status = ControlGeneratorStatusHasChanged;
+      lastOutput_.triggered = true;
       lastOutput_.value = output.value;
     }else{
-      lastOutput_.status = ControlGeneratorStatusHasNotChanged;
+      lastOutput_.triggered = false;
     }
   }
   

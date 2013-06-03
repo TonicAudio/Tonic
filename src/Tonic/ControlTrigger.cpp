@@ -19,7 +19,7 @@ namespace Tonic { namespace Tonic_{
   }
   
   void ControlTrigger_::computeOutput(const SynthesisContext_ & context){
-    lastOutput_.status = doTrigger ? ControlGeneratorStatusHasChanged : ControlGeneratorStatusHasNotChanged;
+    lastOutput_.triggered = doTrigger;
     doTrigger = false;
   }
   

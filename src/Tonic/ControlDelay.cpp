@@ -26,7 +26,7 @@ namespace Tonic { namespace Tonic_{
     delayLine_[writeHead_] = input_.tick(context);
     
     ControlGeneratorOutput delayTimeOutput = delayTimeCtrlGen_.tick(context);
-    if (delayTimeOutput.status == ControlGeneratorStatusHasChanged){
+    if (delayTimeOutput.triggered){
       
       unsigned delayBlocks = max(delayTimeOutput.value * sampleRate() / kSynthesisBlockSize, 1);
       

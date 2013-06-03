@@ -14,17 +14,12 @@
 
 namespace Tonic {
   
-  typedef enum {
-    ControlGeneratorStatusHasNotChanged = 0,
-    ControlGeneratorStatusHasChanged
-    
-  } ControlGeneratorStatus;
-  
   struct ControlGeneratorOutput{
-    TonicFloat value;
-    ControlGeneratorStatus status;
     
-    ControlGeneratorOutput() : value(0), status(ControlGeneratorStatusHasNotChanged) {};
+    TonicFloat  value;
+    bool        triggered;
+    
+    ControlGeneratorOutput() : value(0), triggered(false) {};
   };
 
   namespace Tonic_{

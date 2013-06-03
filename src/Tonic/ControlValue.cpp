@@ -23,7 +23,7 @@ namespace Tonic {
     }
   
     void ControlValue_::computeOutput(const SynthesisContext_ & context){
-      lastOutput_.status =  (hasChanged_ || context.forceNewOutput) ? ControlGeneratorStatusHasChanged : ControlGeneratorStatusHasNotChanged;
+      lastOutput_.triggered =  (hasChanged_ || context.forceNewOutput);
       hasChanged_ = context.forceNewOutput; // if new output forced, don't reset changed status until next tick
       lastOutput_.value = value_;
     }

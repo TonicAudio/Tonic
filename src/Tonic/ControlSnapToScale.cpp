@@ -42,7 +42,8 @@ namespace Tonic { namespace Tonic_{
   void ControlSnapToScale_::computeOutput(const SynthesisContext_ & context){
     static const int NOTES_PER_OCTAVE = 12;
     
-    if( input_.tick(context).status ==  ControlGeneratorStatusHasChanged){
+    if( input_.tick(context).triggered ){
+      
       float number = input_.tick(context).value;
       
       int octave = number / NOTES_PER_OCTAVE;
@@ -50,12 +51,12 @@ namespace Tonic { namespace Tonic_{
       float snappedValue = snap(baseNumber) + (octave * NOTES_PER_OCTAVE);
       if(lastOutput_.value != snappedValue ){
         lastOutput_.value = snappedValue;
-        lastOutput_.status = ControlGeneratorStatusHasChanged;
+        lastOutput_.triggered = true;
       }else{
-        lastOutput_.status = ControlGeneratorStatusHasNotChanged;
+        lastOutput_.triggered = false;
       }
     }else{
-      lastOutput_.status = ControlGeneratorStatusHasNotChanged;
+      lastOutput_.triggered = false;
     }
   }
   

@@ -20,11 +20,11 @@ namespace Tonic { namespace Tonic_{
   
   void ControlAdder_::computeOutput(const SynthesisContext_ &context){
     
-    lastOutput_.status = ControlGeneratorStatusHasNotChanged;
+    lastOutput_.triggered = false;
     
     for (unsigned int i=0; i<inputs.size(); i++){
-      if (inputs[i].tick(context).status == ControlGeneratorStatusHasChanged){
-        lastOutput_.status = ControlGeneratorStatusHasChanged;
+      if (inputs[i].tick(context).triggered){
+        lastOutput_.triggered = true;
         break;
       }
     }
@@ -43,10 +43,10 @@ namespace Tonic { namespace Tonic_{
   void ControlSubtractor_::computeOutput(const SynthesisContext_ & context){
     ControlGeneratorOutput leftOut = left.tick(context);
     ControlGeneratorOutput rightOut = right.tick(context);
-    if(leftOut.status == ControlGeneratorStatusHasNotChanged && rightOut.status == ControlGeneratorStatusHasNotChanged){
-      lastOutput_.status = ControlGeneratorStatusHasNotChanged;
+    if(!leftOut.triggered && !rightOut.triggered){
+      lastOutput_.triggered = false;
     }else{
-      lastOutput_.status = ControlGeneratorStatusHasChanged;
+      lastOutput_.triggered = true;
       lastOutput_.value = leftOut.value - rightOut.value;
     }
   }
@@ -61,11 +61,11 @@ namespace Tonic { namespace Tonic_{
   
   void ControlMultiplier_::computeOutput(const SynthesisContext_ &context){
     
-    lastOutput_.status = ControlGeneratorStatusHasNotChanged;
+    lastOutput_.triggered = false;
     
     for (unsigned int i=0; i<inputs.size(); i++){
-      if (inputs[i].tick(context).status == ControlGeneratorStatusHasChanged){
-        lastOutput_.status = ControlGeneratorStatusHasChanged;
+      if (inputs[i].tick(context).triggered){
+        lastOutput_.triggered = true;
         break;
       }
     }
@@ -89,11 +89,11 @@ namespace Tonic { namespace Tonic_{
     if(rightIsZero){
       error("ControlGenerator divide by zero encountered. Returning last valid value");
     }
-    bool noChange = leftOut.status == ControlGeneratorStatusHasNotChanged && rightOut.status == ControlGeneratorStatusHasNotChanged;
+    bool noChange = !leftOut.triggered && !rightOut.triggered;
     if(rightIsZero || noChange){
-      lastOutput_.status = ControlGeneratorStatusHasNotChanged;
+      lastOutput_.triggered = false;
     }else{
-      lastOutput_.status = ControlGeneratorStatusHasChanged;
+      lastOutput_.triggered = true;
       lastOutput_.value = leftOut.value / rightOut.value;
     }
   }
