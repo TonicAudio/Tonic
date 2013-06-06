@@ -28,24 +28,24 @@ namespace Tonic { namespace Tonic_{
     float stepVal = step.tick(context).value;
     bool bi = bidirectional.tick(context).value;
     
-    lastOutput_.triggered = trigger.tick(context).triggered;
+    output_.triggered = trigger.tick(context).triggered;
     if(hasBeenTriggered){
-      if(lastOutput_.triggered){
-        lastOutput_.value += stepVal * direction;
-        if (lastOutput_.value <= startVal) {
-          lastOutput_.value = startVal;
+      if(output_.triggered){
+        output_.value += stepVal * direction;
+        if (output_.value <= startVal) {
+          output_.value = startVal;
           direction = 1;
-        }else if(lastOutput_.value >= endVal){
+        }else if(output_.value >= endVal){
             if(bi){
               direction = -1;
             }else{
-              lastOutput_.value = startVal;
+              output_.value = startVal;
             }
         }
       }
     } else{
       // So first tick will output start value, even if it hasn't been triggered yet
-      lastOutput_.value = startVal;
+      output_.value = startVal;
       hasBeenTriggered = true;
     }
   }

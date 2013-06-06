@@ -13,7 +13,7 @@ namespace Tonic { namespace Tonic_{
   ControlMetroDivider_::ControlMetroDivider_() : tickCounter_(0) {
     divisonsGen_ = ControlValue(1);
     offsetGen_ = ControlValue(0);
-    lastOutput_.value = 1.f;
+    output_.value = 1.f;
   }
     
   void ControlMetroDivider_::computeOutput(const SynthesisContext_ & context){
@@ -21,13 +21,13 @@ namespace Tonic { namespace Tonic_{
     offset_ = (unsigned int)(offsetGen_.tick(context).value);
     unsigned int divisions = max(1, divisonsGen_.tick(context).value);
     
-    lastOutput_.triggered = false;
+    output_.triggered = false;
     
     if (input_.tick(context).triggered)
     {
       unsigned int modcount = (tickCounter_++ + offset_) % divisions;
       if (modcount == 0){
-        lastOutput_.triggered = true;
+        output_.triggered = true;
       }
       
       if (tickCounter_ >= divisions) tickCounter_ = 0;

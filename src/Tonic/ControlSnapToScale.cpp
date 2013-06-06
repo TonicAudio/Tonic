@@ -49,14 +49,14 @@ namespace Tonic { namespace Tonic_{
       int octave = number / NOTES_PER_OCTAVE;
       float baseNumber = number - (octave * NOTES_PER_OCTAVE);
       float snappedValue = snap(baseNumber) + (octave * NOTES_PER_OCTAVE);
-      if(lastOutput_.value != snappedValue ){
-        lastOutput_.value = snappedValue;
-        lastOutput_.triggered = true;
+      if(output_.value != snappedValue ){
+        output_.value = snappedValue;
+        output_.triggered = true;
       }else{
-        lastOutput_.triggered = false;
+        output_.triggered = false;
       }
     }else{
-      lastOutput_.triggered = false;
+      output_.triggered = false;
     }
   }
   

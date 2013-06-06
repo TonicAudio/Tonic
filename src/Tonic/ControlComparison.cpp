@@ -16,16 +16,16 @@ namespace Tonic { namespace Tonic_{
   
   void ControlBooleanOperator_::computeOutput(const SynthesisContext_ & context){
     
-    lastOutput_.triggered = false;
+    output_.triggered = false;
     
     ControlGeneratorOutput lhsOut = lhsGen_.tick(context);
     ControlGeneratorOutput rhsOut = rhsGen_.tick(context);
     if (lhsOut.triggered){
-      lastOutput_.value = satisfiesCondition(lhsOut.value, rhsOut.value) ? 1.0f : 0.0f;
-      lastOutput_.triggered = true;
+      output_.value = satisfiesCondition(lhsOut.value, rhsOut.value) ? 1.0f : 0.0f;
+      output_.triggered = true;
     }
     else{
-      lastOutput_.value = 0;
+      output_.value = 0;
     }
     
   }

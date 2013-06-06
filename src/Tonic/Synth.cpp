@@ -20,7 +20,6 @@ namespace Tonic {
   namespace Tonic_ {
     
     Synth_::Synth_() : limitOutput_(true) {
-      outputGen_ = PassThroughGenerator();
       limiter_.setIsStereo(true);
     }
 

@@ -41,7 +41,7 @@ namespace Tonic { namespace Tonic_{
       
     }
     
-    lastOutput_ = delayLine_[readHead_];
+    output_ = delayLine_[readHead_];
     
     if (++writeHead_ >= maxDelay_) writeHead_ = 0;
     if (++readHead_ >= maxDelay_) readHead_ = 0;

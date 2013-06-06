@@ -20,13 +20,13 @@ namespace Tonic{
       ControlGeneratorOutput minOut = min.tick(context);
       ControlGeneratorOutput maxOut = max.tick(context);
     
-      bool outInRange =  (lastOutput_.value >= minOut.value) && (lastOutput_.value <= maxOut.value);
+      bool outInRange =  (output_.value >= minOut.value) && (output_.value <= maxOut.value);
     
       if(!outInRange || trigger.tick(context).triggered){
-        lastOutput_.triggered = true;
-        lastOutput_.value = randomFloat(minOut.value, maxOut.value);
+        output_.triggered = true;
+        output_.value = randomFloat(minOut.value, maxOut.value);
       }else{
-        lastOutput_.triggered = false;
+        output_.triggered = false;
       }
     }
     

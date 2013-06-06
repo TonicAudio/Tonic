@@ -19,13 +19,13 @@ namespace Tonic { namespace Tonic_{
   }
   
   void ControlTrigger_::computeOutput(const SynthesisContext_ & context){
-    lastOutput_.triggered = doTrigger;
+    output_.triggered = doTrigger;
     doTrigger = false;
   }
   
   void  ControlTrigger_::trigger(float value){
       doTrigger = true;
-      lastOutput_.value = value;
+      output_.value = value;
   }
   
   

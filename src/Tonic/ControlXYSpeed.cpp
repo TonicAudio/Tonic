@@ -23,7 +23,7 @@ namespace Tonic { namespace Tonic_{
     ControlGeneratorOutput xOut = x.tick(context);
     ControlGeneratorOutput yOut = y.tick(context);
     if(xOut.triggered || yOut.triggered){
-      lastOutput_.triggered = true;
+      output_.triggered = true;
       float dX = xOut.value - lastXVal;
       float dY = yOut.value  - lastYVal;
       float speed = sqrt(dX * dX + dY * dY);
@@ -35,11 +35,11 @@ namespace Tonic { namespace Tonic_{
       for(list<float>::iterator it = vals.begin(); it != vals.end(); it++){
         total += *it;
       }
-      lastOutput_.value = total / vals.size();
+      output_.value = total / vals.size();
       lastXVal = xOut.value;
       lastYVal = yOut.value;
     }else{
-      lastOutput_.triggered = false;
+      output_.triggered = false;
     }
     
   }

@@ -23,9 +23,9 @@ namespace Tonic {
     }
   
     void ControlValue_::computeOutput(const SynthesisContext_ & context){
-      lastOutput_.triggered =  (hasChanged_ || context.forceNewOutput);
+      output_.triggered =  (hasChanged_ || context.forceNewOutput);
       hasChanged_ = context.forceNewOutput; // if new output forced, don't reset changed status until next tick
-      lastOutput_.value = value_;
+      output_.value = value_;
     }
   }
   

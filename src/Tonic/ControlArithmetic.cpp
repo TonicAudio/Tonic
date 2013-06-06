@@ -20,11 +20,11 @@ namespace Tonic { namespace Tonic_{
   
   void ControlAdder_::computeOutput(const SynthesisContext_ &context){
     
-    lastOutput_.triggered = false;
+    output_.triggered = false;
     
     for (unsigned int i=0; i<inputs.size(); i++){
       if (inputs[i].tick(context).triggered){
-        lastOutput_.triggered = true;
+        output_.triggered = true;
         break;
       }
     }
@@ -33,7 +33,7 @@ namespace Tonic { namespace Tonic_{
     for (unsigned int i=0; i<inputs.size(); i++){
       sum += inputs[i].tick(context).value;
     }
-    lastOutput_.value = sum;
+    output_.value = sum;
   }
   
   // -----------------------------------------
@@ -44,10 +44,10 @@ namespace Tonic { namespace Tonic_{
     ControlGeneratorOutput leftOut = left.tick(context);
     ControlGeneratorOutput rightOut = right.tick(context);
     if(!leftOut.triggered && !rightOut.triggered){
-      lastOutput_.triggered = false;
+      output_.triggered = false;
     }else{
-      lastOutput_.triggered = true;
-      lastOutput_.value = leftOut.value - rightOut.value;
+      output_.triggered = true;
+      output_.value = leftOut.value - rightOut.value;
     }
   }
   
@@ -61,11 +61,11 @@ namespace Tonic { namespace Tonic_{
   
   void ControlMultiplier_::computeOutput(const SynthesisContext_ &context){
     
-    lastOutput_.triggered = false;
+    output_.triggered = false;
     
     for (unsigned int i=0; i<inputs.size(); i++){
       if (inputs[i].tick(context).triggered){
-        lastOutput_.triggered = true;
+        output_.triggered = true;
         break;
       }
     }
@@ -74,7 +74,7 @@ namespace Tonic { namespace Tonic_{
     for (unsigned int i=1; i<inputs.size(); i++){
       product *= inputs[i].tick(context).value;
     }
-    lastOutput_.value = product;
+    output_.value = product;
   }
   
   // -----------------------------------------
@@ -91,10 +91,10 @@ namespace Tonic { namespace Tonic_{
     }
     bool noChange = !leftOut.triggered && !rightOut.triggered;
     if(rightIsZero || noChange){
-      lastOutput_.triggered = false;
+      output_.triggered = false;
     }else{
-      lastOutput_.triggered = true;
-      lastOutput_.value = leftOut.value / rightOut.value;
+      output_.triggered = true;
+      output_.value = leftOut.value / rightOut.value;
     }
   }
   

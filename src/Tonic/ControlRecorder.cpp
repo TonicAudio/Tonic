@@ -42,22 +42,22 @@ namespace Tonic { namespace Tonic_{
     switch (currenMode) {
       case ControlRecorder::RECORD:
         recording.push_back(inputOut);
-        lastOutput_ = inputOut;
+        output_ = inputOut;
         break;
 
       case ControlRecorder::STOP:
-        lastOutput_ = inputOut;
+        output_ = inputOut;
         break;
 
       case ControlRecorder::PLAY:
-        lastOutput_ = *playbackHead;
+        output_ = *playbackHead;
         playbackHead++;
         count++;
         if (playbackHead >= recording.end()) {
           playbackHead = recording.begin();
           count = 0;
         }
-//        printf("ControlRecorder_::computeOutput playing back sample: %i of %lu. Value is: %f\n", count, recording.size(), lastOutput_.value);
+//        printf("ControlRecorder_::computeOutput playing back sample: %i of %lu. Value is: %f\n", count, recording.size(), output_.value);
         break;
         
       default:

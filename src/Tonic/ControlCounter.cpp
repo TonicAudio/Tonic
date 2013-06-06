@@ -17,11 +17,11 @@ namespace Tonic { namespace Tonic_{
   void ControlCounter_::computeOutput(const SynthesisContext_ & context){
     ControlGeneratorOutput tickOut = trigger.tick(context);
     ControlGeneratorOutput endOut = end.tick(context);
-    lastOutput_.triggered = tickOut.triggered;
+    output_.triggered = tickOut.triggered;
       if (tickOut.triggered) {
-        lastOutput_.value += 1;
-        if(lastOutput_.value > endOut.value){
-          lastOutput_.value = 0;
+        output_.value += 1;
+        if(output_.value > endOut.value){
+          output_.value = 0;
         }
       }
   }

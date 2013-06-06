@@ -40,10 +40,10 @@ namespace Tonic { namespace Tonic_{
     if (indexOutput.triggered && index != lastInputIndex_) {
       lastInputIndex_ = index;
       ControlGeneratorOutput output = inputs_.at(clamp(index, 0, inputs_.size() -1 )).tick(context);
-      lastOutput_.triggered = true;
-      lastOutput_.value = output.value;
+      output_.triggered = true;
+      output_.value = output.value;
     }else{
-      lastOutput_.triggered = false;
+      output_.triggered = false;
     }
   }
   

@@ -15,8 +15,8 @@ namespace Tonic{
   
     void ControlMidiToFreq_::computeOutput(const SynthesisContext_ & context){
       ControlGeneratorOutput inputOut = input_.tick(context);
-      lastOutput_.triggered = inputOut.triggered;
-      lastOutput_.value = mtof( inputOut.value );
+      output_.triggered = inputOut.triggered;
+      output_.value = mtof( inputOut.value );
     }
     
   }
