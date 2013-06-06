@@ -26,6 +26,7 @@
 #include "Tonic/FixedValue.h"
 #include "Tonic/Arithmetic.h"
 #include "Tonic/ControlValue.h"
+#include "Tonic/ControlTrigger.h"
 #include "Tonic/ControlParameter.h"
 #include "Tonic/ControlArithmetic.h"
 #include "Tonic/ControlComparison.h"
@@ -66,7 +67,6 @@
 
 #include "Tonic/ControlDelay.h"
 #include "Tonic/ControlDbToLinear.h"
-#include "Tonic/ControlTrigger.h"
 #include "Tonic/ControlFloor.h"
 #include "Tonic/ControlPulse.h"
 #include "Tonic/ControlPrinter.h"

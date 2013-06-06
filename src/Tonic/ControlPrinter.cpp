@@ -15,18 +15,6 @@ namespace Tonic { namespace Tonic_{
     
   }
   
-  ControlPrinter_::~ControlPrinter_(){
-    
-  }
-  
-  void ControlPrinter_::computeOutput(const SynthesisContext_ & context){
-    output_ = input_.tick(context);
-    if(!hasPrinted ||  (output_.triggered)){
-      printf(message.c_str(), output_.value);
-      hasPrinted = true;
-    }
-  }
-  
   void ControlPrinter_::setMessage(string messageArg){
     message = messageArg + "\n";
   }

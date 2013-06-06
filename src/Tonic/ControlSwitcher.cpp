@@ -8,47 +8,28 @@
 
 #include "ControlSwitcher.h"
 
-namespace Tonic { namespace Tonic_{
+namespace Tonic {
   
-  ControlSwitcher_::ControlSwitcher_() : inputIndex_(ControlValue(0)), lastInputIndex_(-1) {
-    
-  }
+  namespace Tonic_{
   
-  void ControlSwitcher_::addInput(ControlGenerator input){
-    inputs_.push_back(input);
-  }
-  
-  void ControlSwitcher_::setInputs(vector<ControlGenerator> inputs)
-  {
-    inputs_ = inputs;
-  }
-  
-  void ControlSwitcher_::setInputIndex(ControlGenerator inputIndexArg){
-    inputIndex_ = inputIndexArg;
-  }
-  
-  void ControlSwitcher_::computeOutput(const SynthesisContext_ & context){
-    
-    for(vector<ControlGenerator>::iterator it = inputs_.begin(); it != inputs_.end(); it++){
-      it->tick(context);
+    ControlSwitcher_::ControlSwitcher_() : inputIndex_(ControlValue(0)), lastInputIndex_(-1) {
+      
     }
     
-    ControlGeneratorOutput indexOutput = inputIndex_.tick(context);
-    int index = indexOutput.value;
-
-    // always send has changed message when input index changes
-    if (indexOutput.triggered && index != lastInputIndex_) {
-      lastInputIndex_ = index;
-      ControlGeneratorOutput output = inputs_.at(clamp(index, 0, inputs_.size() -1 )).tick(context);
-      output_.triggered = true;
-      output_.value = output.value;
-    }else{
-      output_.triggered = false;
+    void ControlSwitcher_::addInput(ControlGenerator input){
+      inputs_.push_back(input);
     }
-  }
-  
-  
-} // Namespace Tonic_
+    
+    void ControlSwitcher_::setInputs(vector<ControlGenerator> inputs)
+    {
+      inputs_ = inputs;
+    }
+    
+    void ControlSwitcher_::setInputIndex(ControlGenerator inputIndexArg){
+      inputIndex_ = inputIndexArg;
+    }
+    
+  } // Namespace Tonic_
   
   ControlSwitcher & ControlSwitcher::setFloatInputs(vector<float> inputs){
     

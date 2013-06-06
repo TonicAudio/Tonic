@@ -42,6 +42,24 @@ namespace Tonic {
       
     };
     
+    inline void ControlAdder_::computeOutput(const SynthesisContext_ &context){
+      
+      output_.triggered = false;
+      
+      for (unsigned int i=0; i<inputs.size(); i++){
+        if (inputs[i].tick(context).triggered){
+          output_.triggered = true;
+          break;
+        }
+      }
+      
+      TonicFloat sum = 0.0f;
+      for (unsigned int i=0; i<inputs.size(); i++){
+        sum += inputs[i].tick(context).value;
+      }
+      output_.value = sum;
+    }
+    
   }
   
   class ControlAdder : public TemplatedControlGenerator<Tonic_::ControlAdder_>{
@@ -105,6 +123,17 @@ namespace Tonic {
       }
     };
     
+    inline void ControlSubtractor_::computeOutput(const SynthesisContext_ & context){
+      ControlGeneratorOutput leftOut = left.tick(context);
+      ControlGeneratorOutput rightOut = right.tick(context);
+      if(!leftOut.triggered && !rightOut.triggered){
+        output_.triggered = false;
+      }else{
+        output_.triggered = true;
+        output_.value = leftOut.value - rightOut.value;
+      }
+    }
+    
   }
   
   class ControlSubtractor : public TemplatedControlGenerator<Tonic_::ControlSubtractor_>{
@@ -160,6 +189,24 @@ namespace Tonic {
       vector<ControlGenerator> inputs;
       
     };
+    
+    inline void ControlMultiplier_::computeOutput(const SynthesisContext_ &context){
+      
+      output_.triggered = false;
+      
+      for (unsigned int i=0; i<inputs.size(); i++){
+        if (inputs[i].tick(context).triggered){
+          output_.triggered = true;
+          break;
+        }
+      }
+      
+      TonicFloat product = inputs[0].tick(context).value;
+      for (unsigned int i=1; i<inputs.size(); i++){
+        product *= inputs[i].tick(context).value;
+      }
+      output_.value = product;
+    }
     
   }
   
@@ -224,6 +271,23 @@ namespace Tonic {
       }
       
     };
+    
+    inline void ControlDivider_::computeOutput(const SynthesisContext_ & context){
+      ControlGeneratorOutput leftOut = left.tick(context);
+      ControlGeneratorOutput rightOut = right.tick(context);
+      
+      bool rightIsZero = rightOut.value == 0;
+      if(rightIsZero){
+        error("ControlGenerator divide by zero encountered. Returning last valid value");
+      }
+      bool noChange = !leftOut.triggered && !rightOut.triggered;
+      if(rightIsZero || noChange){
+        output_.triggered = false;
+      }else{
+        output_.triggered = true;
+        output_.value = leftOut.value / rightOut.value;
+      }
+    }
     
   }
   

@@ -14,20 +14,6 @@ namespace Tonic { namespace Tonic_{
     end = ControlValue(std::numeric_limits<float>::infinity());
   }
   
-  void ControlCounter_::computeOutput(const SynthesisContext_ & context){
-    ControlGeneratorOutput tickOut = trigger.tick(context);
-    ControlGeneratorOutput endOut = end.tick(context);
-    output_.triggered = tickOut.triggered;
-      if (tickOut.triggered) {
-        output_.value += 1;
-        if(output_.value > endOut.value){
-          output_.value = 0;
-        }
-      }
-  }
-  
-  
-  
 } // Namespace Tonic_
   
   

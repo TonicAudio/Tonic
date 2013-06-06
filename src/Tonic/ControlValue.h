@@ -20,8 +20,13 @@ namespace Tonic {
     public:
       
         ControlValue_();
-
-        void setValue(float value);
+      
+        inline void setValue(float value){
+          value_ = value;
+          triggered_ = true;
+        }
+      
+        inline void trigger() { triggered_ = true; }
       
         // Get current value directly
         TonicFloat getValue() { return value_;};
@@ -34,6 +39,12 @@ namespace Tonic {
         bool        triggered_;
       
     };
+    
+    inline void ControlValue_::computeOutput(const SynthesisContext_ & context){
+      output_.triggered =  (triggered_ || context.forceNewOutput);
+      triggered_ = context.forceNewOutput; // if new output forced, don't reset changed status until next tick
+      output_.value = value_;
+    }
   }
   
   
@@ -49,6 +60,10 @@ namespace Tonic {
     {
       gen()->setValue(value);
       return *this;
+    }
+    
+    void trigger(){
+      gen()->trigger();
     }
     
     // for higher-level access - doesn't affect tick state

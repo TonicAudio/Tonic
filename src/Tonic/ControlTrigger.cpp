@@ -14,21 +14,10 @@ namespace Tonic { namespace Tonic_{
     
   }
   
-  ControlTrigger_::~ControlTrigger_(){
-    
+  void ControlTrigger_::trigger(float value){
+    doTrigger = true;
+    output_.value = value;
   }
-  
-  void ControlTrigger_::computeOutput(const SynthesisContext_ & context){
-    output_.triggered = doTrigger;
-    doTrigger = false;
-  }
-  
-  void  ControlTrigger_::trigger(float value){
-      doTrigger = true;
-      output_.value = value;
-  }
-  
-  
   
 } // Namespace Tonic_
   

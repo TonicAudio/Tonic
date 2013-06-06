@@ -40,6 +40,22 @@ namespace Tonic {
       
     };
     
+    inline void ControlBooleanOperator_::computeOutput(const SynthesisContext_ & context){
+      
+      output_.triggered = false;
+      
+      ControlGeneratorOutput lhsOut = lhsGen_.tick(context);
+      ControlGeneratorOutput rhsOut = rhsGen_.tick(context);
+      if (lhsOut.triggered){
+        output_.value = satisfiesCondition(lhsOut.value, rhsOut.value) ? 1.0f : 0.0f;
+        output_.triggered = true;
+      }
+      else{
+        output_.value = 0;
+      }
+      
+    }
+    
   }
   
   template <class OperatorType>

@@ -9,16 +9,6 @@
 #include "ControlDbToLinear.h"
 
 namespace Tonic { namespace Tonic_{
-
-  void ControlDbToLinear_::computeOutput(const SynthesisContext_ & context){
-    
-    ControlGeneratorOutput inputOutput = input_.tick(context);
-    output_.triggered = inputOutput.triggered;
-    if (inputOutput.triggered){
-      output_.value = dBToLin(inputOutput.value);
-    }
-    
-  }
   
 } // Namespace Tonic_
   

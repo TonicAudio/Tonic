@@ -39,6 +39,25 @@ namespace Tonic {
       
     };
     
+    inline   void ControlMetroDivider_::computeOutput(const SynthesisContext_ & context){
+      
+      offset_ = (unsigned int)(offsetGen_.tick(context).value);
+      unsigned int divisions = max(1, divisonsGen_.tick(context).value);
+      
+      output_.triggered = false;
+      
+      if (input_.tick(context).triggered)
+      {
+        unsigned int modcount = (tickCounter_++ + offset_) % divisions;
+        if (modcount == 0){
+          output_.triggered = true;
+        }
+        
+        if (tickCounter_ >= divisions) tickCounter_ = 0;
+      }
+      
+    }
+    
   }
   
   class ControlMetroDivider : public TemplatedControlConditioner<ControlMetroDivider, Tonic_::ControlMetroDivider_>
@@ -48,7 +67,6 @@ namespace Tonic {
     createControlGeneratorSetters(ControlMetroDivider, divisions, setDivisionsGen);
     createControlGeneratorSetters(ControlMetroDivider, offset, setOffsetGen);
     
-
   };
 }
 

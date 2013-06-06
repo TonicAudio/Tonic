@@ -22,15 +22,23 @@ namespace Tonic {
       
     protected:
       void computeOutput(const SynthesisContext_ & context);
+      
       string message;
       bool hasPrinted;
       
     public:
       ControlPrinter_();
-      ~ControlPrinter_();
       void setMessage(string message);
       
     };
+    
+    inline void ControlPrinter_::computeOutput(const SynthesisContext_ & context){
+      output_ = input_.tick(context);
+      if(!hasPrinted ||  (output_.triggered)){
+        printf(message.c_str(), output_.value);
+        hasPrinted = true;
+      }
+    }
     
   }
   
