@@ -31,7 +31,7 @@ namespace Tonic {
         void computeOutput(const SynthesisContext_ & context);
       
         TonicFloat  value_;
-        bool        hasChanged_;
+        bool        triggered_;
       
     };
   }
