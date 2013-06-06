@@ -17,8 +17,8 @@
 #include <map>
 #include <algorithm>
 #include <stdexcept>
-#include <stdio.h>
-#include <math.h>
+#include <iostream>
+#include <cmath>
 
 
 // Uncomment or define in your build configuration to log debug messages and perform extra debug checks
@@ -39,11 +39,11 @@
 
   #include <pthread.h> 
 
-  #define TONIC_MUTEX_T pthread_mutex_t
-  #define TONIC_MUTEX_INIT(x) pthread_mutex_init(&x, NULL)
-  #define TONIC_MUTEX_DESTROY(x) pthread_mutex_destroy(&x)
-  #define TONIC_MUTEX_LOCK(x) pthread_mutex_lock(&x)
-  #define TONIC_MUTEX_UNLOCK(x) pthread_mutex_unlock(&x)
+  #define TONIC_MUTEX_T           pthread_mutex_t
+  #define TONIC_MUTEX_INIT(x)     pthread_mutex_init(&x, NULL)
+  #define TONIC_MUTEX_DESTROY(x)  pthread_mutex_destroy(&x)
+  #define TONIC_MUTEX_LOCK(x)     pthread_mutex_lock(&x)
+  #define TONIC_MUTEX_UNLOCK(x)   pthread_mutex_unlock(&x)
 
 #elif (defined (_WIN32) || defined (__WIN32__))
 
@@ -87,7 +87,7 @@ const TonicFloat TWO_PI       = 2.f * PI;
 #define TONIC_RIGHT           1
 
 // Causes 32nd bit in double to have fractional value 1 (decimal point on 32-bit word boundary)
-// Allowing some efficient shortcuts for table lookup using power-of-two tables
+// Allowing some efficient shortcuts for table lookup using power-of-two length tables
 #define BIT32DECPT 1572864.0
 
 //! Top-level namespace.
@@ -123,7 +123,7 @@ namespace Tonic {
   
   //!For fast computation of int/fract using some bit-twiddlery
   /*! inspired by the pd implementation */
-  union ShiftedDouble {
+  union FastPhasor {
     double d;
     TonicUInt32 i[2];
   };
