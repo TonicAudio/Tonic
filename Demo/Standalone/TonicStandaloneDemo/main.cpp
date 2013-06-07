@@ -16,15 +16,13 @@ using namespace Tonic;
 
 const unsigned int nChannels = 2;
 
-Synth * synth = NULL;
+// Static smart pointer for our Synth
+static Synth synth;
 
 int renderCallback( void *outputBuffer, void *inputBuffer, unsigned int nBufferFrames,
         double streamTime, RtAudioStreamStatus status, void *userData )
 {
-    if (synth != NULL){
-        synth->fillBufferOfFloats((float*)outputBuffer, nBufferFrames, nChannels);
-    }
-    
+    synth.fillBufferOfFloats((float*)outputBuffer, nBufferFrames, nChannels);
     return 0;
 }
 
@@ -42,9 +40,7 @@ int main(int argc, const char * argv[])
     Tonic::setSampleRate(sampleRate);
     
     // --------- MAKE A SYNTH HERE -----------
-    
-    synth = new Synth();
-    
+        
     ControlMetro metro = ControlMetro().bpm(100);
     ControlGenerator freq = ControlRandom().trigger(metro).min(0).max(1);
     
@@ -74,7 +70,7 @@ int main(int argc, const char * argv[])
     
     Generator output = (( tone * env ) >> filter >> delay) * 0.3;
     
-    synth->setOutputGen(output);
+    synth.setOutputGen(output);
     
     // ---------------------------------------
     

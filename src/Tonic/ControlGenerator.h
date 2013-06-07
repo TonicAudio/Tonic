@@ -58,17 +58,13 @@ namespace Tonic {
       ControlGeneratorOutput  lastOutput_;
       unsigned long           lastFrameIndex_;
       
-      TONIC_MUTEX_T           genMutex_;
-
     };
     
     inline ControlGeneratorOutput ControlGenerator_::tick(const SynthesisContext_ & context){
       
       if (context.forceNewOutput || lastFrameIndex_ != context.elapsedFrames){
         lastFrameIndex_ = context.elapsedFrames;
-        lockMutex();
         computeOutput(context);
-        unlockMutex();
       }
       
 #ifdef TONIC_DEBUG
@@ -79,49 +75,20 @@ namespace Tonic {
       
       return lastOutput_;
     }
-    
-    inline void ControlGenerator_::lockMutex(){
-      TONIC_MUTEX_LOCK(&genMutex_);
-    }
-    
-    inline void ControlGenerator_::unlockMutex(){
-      TONIC_MUTEX_UNLOCK(&genMutex_);
-    }
 
   }
 
   // forward declaration
   class RampedValue;
 
-  class ControlGenerator{
-  protected:
-    Tonic_::ControlGenerator_* mGen;
-    int* pcount;
+  class ControlGenerator : public TonicSmartPointer<Tonic_::ControlGenerator_>{
+
   public:
-    ControlGenerator() : mGen() , pcount(new int(1)) {}
-    ControlGenerator(const ControlGenerator& r): mGen(r.mGen), pcount(r.pcount){(*pcount)++;}
-    ControlGenerator& operator=(const ControlGenerator& r)
-    {
-      if(mGen == r.mGen) return *this;
-      if(--(*pcount) == 0){
-        delete mGen;
-        delete pcount;
-      }
-      mGen = r.mGen;
-      pcount = r.pcount;
-      (*pcount)++;
-      return *this;
-    }
     
-    ~ControlGenerator(){
-      if(--(*pcount) == 0){
-        delete mGen;
-        delete pcount;
-      }
-    }
+    ControlGenerator(Tonic_::ControlGenerator_ * cGen = NULL) : TonicSmartPointer<Tonic_::ControlGenerator_>(cGen) {}
     
     inline ControlGeneratorOutput tick( const Tonic_::SynthesisContext_ & context ){
-      return mGen->tick(context);
+      return obj->tick(context);
     }
     
     // shortcut for creating ramped value
@@ -133,14 +100,11 @@ namespace Tonic {
   template<class GenType> class TemplatedControlGenerator : public ControlGenerator{
   protected:
     GenType* gen(){
-      return static_cast<GenType*>(mGen);
+      return static_cast<GenType*>(obj);
     }
     
   public:
-    TemplatedControlGenerator(){
-      delete mGen;
-      mGen = new GenType();
-    }
+    TemplatedControlGenerator() : ControlGenerator(new GenType) {}
     
   };
 
@@ -156,9 +120,7 @@ return methodNameInGenerator( ControlValue(arg) );                              
 }                                                                                  \
 \
 generatorClassName& methodNameInGenerator(ControlGenerator arg){                   \
-this->gen()->lockMutex();            \
 this->gen()->methodNameInGenerator_(arg);                                          \
-this->gen()->unlockMutex();            \
 return static_cast<generatorClassName&>(*this);                                    \
 }
 

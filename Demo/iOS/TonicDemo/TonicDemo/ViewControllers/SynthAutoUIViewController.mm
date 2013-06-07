@@ -17,12 +17,12 @@ using Tonic::Synth;
 using Tonic::SynthFactory;
 using Tonic::ControlParameter;
 
-#define kSynthKey       @"DemoSynth"
+#define kSynthKey       @"TestSynth"
 #define kCellIdentifier @"ParamCell"
 
 @interface SynthAutoUIViewController ()
 {
-  Synth *_synth;
+  Synth _synth;
   vector<ControlParameter> _synthParameters;
 }
 
@@ -38,10 +38,11 @@ using Tonic::ControlParameter;
     self = [super initWithNibName:nil bundle:nil];
     if (self) {
       self.demoDef = demoDef;
-      _synth = [[TonicSynthManager sharedManager] addSynthWithName:demoDef.synthClassName forKey:kSynthKey];
-      
-      if (_synth){
-        _synthParameters = _synth->getParameters();
+      _synth = Tonic::SynthFactory::createInstance(demoDef.synthClassName.UTF8String);
+      [[TonicSynthManager sharedManager] addSynth:_synth forKey:kSynthKey];
+      _synthParameters = _synth.getParameters();
+      if (demoDef.usesInput){
+        [[TonicSynthManager sharedManager] setInputEnabled:YES];
       }
       
     }
@@ -50,6 +51,7 @@ using Tonic::ControlParameter;
 
 - (void)dealloc
 {
+  [[TonicSynthManager sharedManager] setInputEnabled:NO];
   [[TonicSynthManager sharedManager] removeSynthForKey:kSynthKey];
 }
 
@@ -58,7 +60,7 @@ using Tonic::ControlParameter;
   [super viewDidLoad];
   
   self.navigationItem.title = self.demoDef.synthDisplayName;
-  self.descLabel.text = self.demoDef.synthDescription;
+  self.descLabel.text = self.demoDef.synthInstructions;
  
   self.controlTableView.rowHeight = [SynthParameterCell height];
   [self.controlTableView registerClass:[SynthParameterCell class] forCellReuseIdentifier:kCellIdentifier];

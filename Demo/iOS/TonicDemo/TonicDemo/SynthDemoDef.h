@@ -10,15 +10,16 @@
 #import <CoreMotion/CoreMotion.h>
 #import "Tonic.h"
 
-typedef void (^SynthTestPanAction)(Tonic::Synth* synth, CGPoint touchPointNorm);
-typedef void (^SynthTestAccellerometerAction)(Tonic::Synth* synth, CMAccelerometerData *accelerometerData);
+typedef void (^SynthTestPanAction)(Tonic::Synth synth, CGPoint touchPointNorm);
+typedef void (^SynthTestAccellerometerAction)(Tonic::Synth synth, CMAccelerometerData *accelerometerData);
 
 @interface SynthDemoDef : NSObject
   @property (nonatomic, strong) NSString* synthClassName;
   @property (nonatomic, strong) NSString* synthDisplayName;
   @property (nonatomic, strong) NSString* synthDescription;
   @property (nonatomic, strong) NSString* synthInstructions;
-  @property (nonatomic, assign) BOOL shouldAutoGenUI; // If TRUE the below blocks are ignored
+  @property BOOL usesInput;
+  @property BOOL shouldAutoGenUI; // If TRUE the below blocks are ignored
   @property (nonatomic, copy) SynthTestPanAction synthAction;
   @property (nonatomic, copy) SynthTestAccellerometerAction accellerometerAction;
 @end

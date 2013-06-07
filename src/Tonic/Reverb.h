@@ -34,7 +34,10 @@ namespace Tonic {
   
   namespace Tonic_ {
     
-    //! Allpass filter for use with reverb
+    //! Allpass filter for use with reverb.
+    /*!
+        This is not a Generator_ subclass and is optimized for the purposes of the Reverb_ class.
+    */
     class ImpulseDiffuserAllpass {
       
     protected:
@@ -72,12 +75,17 @@ namespace Tonic {
     
     //! Moorer-Schroeder style Artificial Reverb effect
     /*!
-        - [x] Pre-delay
-        - [x] Input filter
-        - [x] Early reflection taps
-        - [x] Decay time and decay filtering
-        - [x] Variable "Room size"
-        - [x] Variable stereo width
+        - Pre-delay
+        - Input filter
+        - Early reflection taps
+        - Decay time and decay filtering
+        - Variable "Room size"
+        - Variable stereo width
+     
+        TODO:
+        - Reverb fb comb cutoff setting parameters should be normalized value, not Hz. Not a "true" cutoff.
+        - Highpass portion of fb comb filter is too wide. Should be LPF24.
+        - More deterministic early reflection time scattering.
      */
     
     class Reverb_ : public Effect_

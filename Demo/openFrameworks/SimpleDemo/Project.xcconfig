@@ -6,7 +6,7 @@ OF_PATH = ../../..
 #include "../../../libs/openFrameworksCompiled/project/osx/CoreOF.xcconfig"
 
 //This should point to the Tonic src directory
-TONIC_PATH = ~/path/to/Tonic/src
+TONIC_PATH = ~/developer/flatline/Tonic/src
 
 OTHER_LDFLAGS = $(OF_CORE_LIBS) 
 HEADER_SEARCH_PATHS = $(OF_CORE_HEADERS) $(TONIC_PATH)

@@ -36,9 +36,7 @@ public:
     ControlGenerator cutoffCtrl = addParameter("cutoff", 0.5);
     
     Generator q_v = addParameter("Q", 5).smoothed();
-    
-    Adder sumOfFilters;
-    
+        
     ControlGenerator lowBasFreq =   ControlFloor().input( midiNums.at(0) + 12 + cutoffCtrl * cutoffMult ) >> ControlMidiToFreq();
     ControlGenerator fmAmt = ControlValue(0.1);
     Generator cutoffSlowSwell = (SineWave().freq(0.1) + 1.0f) * 500;
@@ -63,20 +61,22 @@ public:
     lowToothyBass = filter.input( lowToothyBass );
     lowToothyBass = lowToothyBass * toothyBassSwell;
     
+    Adder sumOfFilters;
+    
     for(int i = 0; i < midiNums.size(); i++){
       Generator tremelo = (SineWave().freq( randomFloat(0.1, 0.3) ) + 1.5) * 0.3;
       Generator cutoff = ControlMidiToFreq().input( ControlFloor().input( midiNums.at(i) + cutoffCtrl * cutoffMult  )).smoothed().length(0.01);
       BPF24 filter = BPF24().Q( q_v ).cutoff( cutoff ).normalizesGain(true);
-      sumOfFilters = sumOfFilters + (noise >> filter) * tremelo;
+      sumOfFilters.input((noise >> filter) * tremelo);
     }
     
     // add a bit of gain for higher Q
     // Using this to test output limiter as well - this will probably clip/wrap if limiter is not working
-    outputGen =
+    setOutputGen(
       sumOfFilters * (1 + q_v * 0.05)
       +
-      lowToothyBass * 0.05;
-    
+      lowToothyBass * 0.05
+    );
     
     
   }

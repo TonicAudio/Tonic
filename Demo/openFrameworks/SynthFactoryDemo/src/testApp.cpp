@@ -22,16 +22,11 @@ void testApp::setupSynth()
     // set this to the name of one of the Demo Synths
     string synthName = "DelayTestSynth";
     
+    // if a synth with that name does not exist, error message will be logged
     synth = SynthFactory::createInstance(synthName);
     
-    if (synth == NULL){
-        ofLogError("ERROR: Synth named " + synthName + " could not be found.");
-    }
-    else{
-        
-        // Get some parameters - we will map mouse to these later
-        synthParameters = synth->getParameters();
-    }
+    // Get some parameters - we will map mouse to these later
+    synthParameters = synth.getParameters();
     
     // ---------------------------------------
 }
@@ -44,7 +39,7 @@ void testApp::update(){
 //--------------------------------------------------------------
 void testApp::draw(){
     
-    if (synth && synthParameters.size() > 0){
+    if (synthParameters.size() > 0){
         
         // print some info about what's going on
         ofSetColor(0);
@@ -82,7 +77,7 @@ void testApp::mouseMoved(int x, int y){
 //--------------------------------------------------------------
 void testApp::mouseDragged(int x, int y, int button){
     
-    if (synth){
+    if (synthParameters.size() > 0){
         ControlParameter currentParam = synthParameters[currentParameter];
         currentParam.setNormalizedValue(ofClamp(1.0f - (float)y/ofGetHeight(), 0.f, 1.f));
     }
@@ -116,7 +111,5 @@ void testApp::dragEvent(ofDragInfo dragInfo){
 // give us a Tonic buffer!
 void testApp::audioOut(float * input, int bufferSize, int nChannels)
 {
-    if (synth){
-        synth->fillBufferOfFloats(input, bufferSize, nChannels);
-    }
+    synth.fillBufferOfFloats(input, bufferSize, nChannels);
 }

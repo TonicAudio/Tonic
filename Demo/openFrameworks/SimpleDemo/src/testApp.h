@@ -22,7 +22,7 @@ class testApp : public ofBaseApp {
 		void gotMessage(ofMessage msg);
     
         void setupSynth();
-        Synth * synth;
+        Synth synth;
     
         void audioOut(float * input, int bufferSize, int nChannels);
         ofSoundStream soundStream;

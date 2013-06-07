@@ -11,22 +11,20 @@ void testApp::setup(){
 }
 
 void testApp::setupSynth()
-{
-    synth = new Synth();
-    
+{    
     // ------ Configure your synth here! ------
     
     // Paraemter for pitch as note number
-    ControlParameter pitch = synth->addParameter("pitch", 60.f);
+    ControlParameter pitch = synth.addParameter("pitch", 60.f);
     
     // Parameter for triggering lfo
-    ControlParameter lfoTrig = synth->addParameter("lfoTrig", 0);
+    ControlParameter lfoTrig = synth.addParameter("lfoTrig", 0);
     
     // Parameter for lfo frequency
-    ControlParameter lfoFreq = synth->addParameter("lfoFreq", 5.0f);
+    ControlParameter lfoFreq = synth.addParameter("lfoFreq", 5.0f);
     
     // Convert note number to Hz and smooth it
-    Generator smoothFreq = (ControlMidiToFreq().in(pitch)).smoothed();
+    Generator smoothFreq = (ControlMidiToFreq().input(pitch)).smoothed();
     
     // Envelope for lfo
     ADSR lfoEnv = ADSR(0.5f, 0.f, 1.f, 2.5f).trigger(lfoTrig).exponential(true);
@@ -41,7 +39,7 @@ void testApp::setupSynth()
     
     ) * 0.25f;
     
-    synth->setOutputGen(singingSines);
+    synth.setOutputGen(singingSines);
     
     // ---------------------------------------
 }
@@ -70,10 +68,10 @@ void testApp::keyReleased(int key){
 void testApp::mouseMoved(int x, int y){
     
     // normalize x, map to pitch
-    synth->setParameter("pitch", ofMap((float)x/ofGetWidth(), 0.f, 1.f, 40.f, 80.f, true));
+    synth.setParameter("pitch", ofMap((float)x/ofGetWidth(), 0.f, 1.f, 40.f, 80.f, true));
     
     // normalize y, map to lfo freq
-    synth->setParameter("lfoFreq", ofMap((float)y/ofGetHeight(), 0.f, 1.f, 8.0f, 0.5f, true));
+    synth.setParameter("lfoFreq", ofMap((float)y/ofGetHeight(), 0.f, 1.f, 8.0f, 0.5f, true));
 }
 
 //--------------------------------------------------------------
@@ -85,13 +83,13 @@ void testApp::mouseDragged(int x, int y, int button){
 //--------------------------------------------------------------
 void testApp::mousePressed(int x, int y, int button){
     // mouse down press turns on lfo
-    synth->setParameter("lfoTrig", 1.f);
+    synth.setParameter("lfoTrig", 1.f);
 }
 
 //--------------------------------------------------------------
 void testApp::mouseReleased(int x, int y, int button){
     // mouse up press turns off lfo
-    synth->setParameter("lfoTrig", 0.f);
+    synth.setParameter("lfoTrig", 0.f);
 }
 
 //--------------------------------------------------------------
@@ -112,5 +110,5 @@ void testApp::dragEvent(ofDragInfo dragInfo){
 // give us a Tonic buffer!
 void testApp::audioOut(float * input, int bufferSize, int nChannels)
 {
-    synth->fillBufferOfFloats(input, bufferSize, nChannels);
+    synth.fillBufferOfFloats(input, bufferSize, nChannels);
 }
