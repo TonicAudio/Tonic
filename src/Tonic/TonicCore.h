@@ -20,9 +20,6 @@
 #include <stdio.h>
 #include <math.h>
 
-// TODO: Including pthread globally for now, will need to put in conditional includes below when
-// win32 mutexes are implemented
-#include <pthread.h>
 
 // Uncomment or define in your build configuration to log debug messages and perform extra debug checks
 // #define TONIC_DEBUG
@@ -40,6 +37,8 @@
 
 #if (defined (__APPLE__) || defined (__linux__))
 
+  #include <pthread.h> 
+
   #define TONIC_MUTEX_T pthread_mutex_t
   #define TONIC_MUTEX_INIT(x) pthread_mutex_init(&x, NULL)
   #define TONIC_MUTEX_DESTROY(x) pthread_mutex_destroy(&x)
@@ -48,7 +47,24 @@
 
 #elif (defined (_WIN32) || defined (__WIN32__))
 
-  // TODO: Windows macros
+  #define WIN32_LEAN_AND_MEAN
+  #include <Windows.h>
+  
+  // Clear these macros to avoid interfering with ControlParameter::min and ::max
+  #undef min
+  #undef max
+
+  // Windows' C90 <cmath> header does not define log2
+  inline static float log2(float n) {
+	return log(n) / log(2);
+  }
+
+  // Windows native mutexes
+  #define TONIC_MUTEX_T CRITICAL_SECTION
+  #define TONIC_MUTEX_INIT(x) InitializeCriticalSection(&x)
+  #define TONIC_MUTEX_DESTROY(x) DeleteCriticalSection(&x)
+  #define TONIC_MUTEX_LOCK(x) EnterCriticalSection(&x)
+  #define TONIC_MUTEX_UNLOCK(x) LeaveCriticalSection(&x)
 
 #endif
 
