@@ -1,0 +1,333 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="src">
+      <UniqueIdentifier>{d8c6da0f-f344-4f7d-98bb-87ac5ba750ce}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Tonic">
+      <UniqueIdentifier>{29d605e9-17a6-442b-9fbf-71b52b18a5e9}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\src\Tonic.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\Tonic\Adder.h">
+      <Filter>src\Tonic</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\Tonic\ADSR.h">
+      <Filter>src\Tonic</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\Tonic\BasicDelay.h">
+      <Filter>src\Tonic</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\Tonic\BufferFiller.h">
+      <Filter>src\Tonic</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\Tonic\CompressorLimiter.h">
+      <Filter>src\Tonic</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\Tonic\ControlAdder.h">
+      <Filter>src\Tonic</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\Tonic\ControlConditioner.h">
+      <Filter>src\Tonic</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\Tonic\ControlCounter.h">
+      <Filter>src\Tonic</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\Tonic\ControlDbToLinear.h">
+      <Filter>src\Tonic</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\Tonic\ControlDivider.h">
+      <Filter>src\Tonic</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\Tonic\ControlFloor.h">
+      <Filter>src\Tonic</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\Tonic\ControlGenerator.h">
+      <Filter>src\Tonic</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\Tonic\ControlMetro.h">
+      <Filter>src\Tonic</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\Tonic\ControlMidiToFreq.h">
+      <Filter>src\Tonic</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\Tonic\ControlMultiplier.h">
+      <Filter>src\Tonic</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\Tonic\ControlPrinter.h">
+      <Filter>src\Tonic</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\Tonic\ControlPulse.h">
+      <Filter>src\Tonic</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\Tonic\ControlRandom.h">
+      <Filter>src\Tonic</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\Tonic\ControlRecorder.h">
+      <Filter>src\Tonic</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\Tonic\ControlSnapToScale.h">
+      <Filter>src\Tonic</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\Tonic\ControlStepper.h">
+      <Filter>src\Tonic</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\Tonic\ControlSubtractor.h">
+      <Filter>src\Tonic</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\Tonic\ControlSwitcher.h">
+      <Filter>src\Tonic</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\Tonic\ControlTrigger.h">
+      <Filter>src\Tonic</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\Tonic\ControlValue.h">
+      <Filter>src\Tonic</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\Tonic\ControlXYSpeed.h">
+      <Filter>src\Tonic</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\Tonic\DelayUtils.h">
+      <Filter>src\Tonic</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\Tonic\Divider.h">
+      <Filter>src\Tonic</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\Tonic\Effect.h">
+      <Filter>src\Tonic</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\Tonic\Filters.h">
+      <Filter>src\Tonic</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\Tonic\FilterUtils.h">
+      <Filter>src\Tonic</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\Tonic\FixedValue.h">
+      <Filter>src\Tonic</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\Tonic\Generator.h">
+      <Filter>src\Tonic</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\Tonic\LFNoise.h">
+      <Filter>src\Tonic</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\Tonic\Mixer.h">
+      <Filter>src\Tonic</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\Tonic\MonoToStereoPanner.h">
+      <Filter>src\Tonic</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\Tonic\Multiplier.h">
+      <Filter>src\Tonic</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\Tonic\Noise.h">
+      <Filter>src\Tonic</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\Tonic\RampedValue.h">
+      <Filter>src\Tonic</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\Tonic\RectWave.h">
+      <Filter>src\Tonic</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\Tonic\SineWave.h">
+      <Filter>src\Tonic</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\Tonic\StereoDelay.h">
+      <Filter>src\Tonic</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\Tonic\Subtractor.h">
+      <Filter>src\Tonic</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\Tonic\Synth.h">
+      <Filter>src\Tonic</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\Tonic\TableLookupOsc.h">
+      <Filter>src\Tonic</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\Tonic\TonicCore.h">
+      <Filter>src\Tonic</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\Tonic\TonicFrames.h">
+      <Filter>src\Tonic</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\Tonic\CombFilter.h">
+      <Filter>src\Tonic</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\Tonic\ControlDelay.h">
+      <Filter>src\Tonic</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\Tonic\ControlParameter.h">
+      <Filter>src\Tonic</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\Tonic\Reverb.h">
+      <Filter>src\Tonic</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\Tonic\SawtoothWave.h">
+      <Filter>src\Tonic</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\Tonic\SquareWave.h">
+      <Filter>src\Tonic</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\Tonic\TriangleWave.h">
+      <Filter>src\Tonic</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\src\Tonic\Adder.cpp">
+      <Filter>src\Tonic</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\Tonic\ADSR.cpp">
+      <Filter>src\Tonic</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\Tonic\BasicDelay.cpp">
+      <Filter>src\Tonic</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\Tonic\BufferFiller.cpp">
+      <Filter>src\Tonic</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\Tonic\CompressorLimiter.cpp">
+      <Filter>src\Tonic</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\Tonic\ControlAdder.cpp">
+      <Filter>src\Tonic</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\Tonic\ControlConditioner.cpp">
+      <Filter>src\Tonic</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\Tonic\ControlCounter.cpp">
+      <Filter>src\Tonic</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\Tonic\ControlDbToLinear.cpp">
+      <Filter>src\Tonic</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\Tonic\ControlDivider.cpp">
+      <Filter>src\Tonic</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\Tonic\ControlFloor.cpp">
+      <Filter>src\Tonic</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\Tonic\ControlGenerator.cpp">
+      <Filter>src\Tonic</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\Tonic\ControlMetro.cpp">
+      <Filter>src\Tonic</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\Tonic\ControlMidiToFreq.cpp">
+      <Filter>src\Tonic</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\Tonic\ControlMultiplier.cpp">
+      <Filter>src\Tonic</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\Tonic\ControlPrinter.cpp">
+      <Filter>src\Tonic</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\Tonic\ControlPulse.cpp">
+      <Filter>src\Tonic</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\Tonic\ControlRandom.cpp">
+      <Filter>src\Tonic</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\Tonic\ControlRecorder.cpp">
+      <Filter>src\Tonic</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\Tonic\ControlSnapToScale.cpp">
+      <Filter>src\Tonic</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\Tonic\ControlStepper.cpp">
+      <Filter>src\Tonic</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\Tonic\ControlSubtractor.cpp">
+      <Filter>src\Tonic</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\Tonic\ControlSwitcher.cpp">
+      <Filter>src\Tonic</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\Tonic\ControlTrigger.cpp">
+      <Filter>src\Tonic</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\Tonic\ControlValue.cpp">
+      <Filter>src\Tonic</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\Tonic\ControlXYSpeed.cpp">
+      <Filter>src\Tonic</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\Tonic\DelayUtils.cpp">
+      <Filter>src\Tonic</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\Tonic\Divider.cpp">
+      <Filter>src\Tonic</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\Tonic\Filters.cpp">
+      <Filter>src\Tonic</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\Tonic\FixedValue.cpp">
+      <Filter>src\Tonic</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\Tonic\Generator.cpp">
+      <Filter>src\Tonic</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\Tonic\LFNoise.cpp">
+      <Filter>src\Tonic</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\Tonic\Mixer.cpp">
+      <Filter>src\Tonic</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\Tonic\MonoToStereoPanner.cpp">
+      <Filter>src\Tonic</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\Tonic\Multiplier.cpp">
+      <Filter>src\Tonic</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\Tonic\Noise.cpp">
+      <Filter>src\Tonic</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\Tonic\RampedValue.cpp">
+      <Filter>src\Tonic</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\Tonic\RectWave.cpp">
+      <Filter>src\Tonic</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\Tonic\SineWave.cpp">
+      <Filter>src\Tonic</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\Tonic\StereoDelay.cpp">
+      <Filter>src\Tonic</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\Tonic\Subtractor.cpp">
+      <Filter>src\Tonic</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\Tonic\Synth.cpp">
+      <Filter>src\Tonic</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\Tonic\TableLookupOsc.cpp">
+      <Filter>src\Tonic</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\Tonic\TonicFrames.cpp">
+      <Filter>src\Tonic</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\Tonic\CombFilter.cpp">
+      <Filter>src\Tonic</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\Tonic\ControlDelay.cpp">
+      <Filter>src\Tonic</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\Tonic\ControlParameter.cpp">
+      <Filter>src\Tonic</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\Tonic\Effect.cpp">
+      <Filter>src\Tonic</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\Tonic\FilterUtils.cpp">
+      <Filter>src\Tonic</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\Tonic\Reverb.cpp">
+      <Filter>src\Tonic</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\Tonic\SawtoothWave.cpp">
+      <Filter>src\Tonic</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>

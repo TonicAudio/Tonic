@@ -9,7 +9,7 @@
 #ifndef TonicDemo_ControlSnapToScaleTestSynth_cpp
 #define TonicDemo_ControlSnapToScaleTestSynth_cpp
 
-#import "Tonic.h"
+#include "Tonic.h"
 
 using namespace Tonic;
 

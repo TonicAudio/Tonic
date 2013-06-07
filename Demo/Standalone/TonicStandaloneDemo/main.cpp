@@ -36,7 +36,7 @@ int main(int argc, const char * argv[])
     rtParams.deviceId = dac.getDefaultOutputDevice();
     rtParams.nChannels = nChannels;
     unsigned int sampleRate = 44100;
-    unsigned int bufferFrames = 256; // 256 sample frames
+    unsigned int bufferFrames = 512; // 512 sample frames
     
     // You don't necessarily have to do this - it will default to 44100 if not set.
     Tonic::setSampleRate(sampleRate);
