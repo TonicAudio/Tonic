@@ -22,7 +22,7 @@ namespace Tonic { namespace Tonic_{
     ControlGeneratorOutput inputOut = input_.tick(context);
     ControlGeneratorOutput modeOut = mode.tick(context);
     
-    ControlRecorder::Mode currenMode = (ControlRecorder::Mode)modeOut.value;
+    ControlRecorder::Mode currenMode = (ControlRecorder::Mode)(int)modeOut.value;
     
     if(modeOut.status == ControlGeneratorStatusHasChanged){
       if(currenMode == ControlRecorder::STOP){
