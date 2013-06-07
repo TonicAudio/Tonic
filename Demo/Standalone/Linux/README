@@ -1,0 +1,14 @@
+This directory contains a makefile needed to run 
+TonicAudio standalone test under Linux.
+
+Tested on Ubuntu 12.04.
+
+Needs the following packages: librtaudio4, librtaudio-dev.
+
+Note: RtAudio works fine for ordinary sound cards, but
+seems to have occasional compatibity problems with high-end GPUs.
+
+make       -- build the demo
+make clean -- delete the files associated with the demo
+./demo     -- run the demo
+
