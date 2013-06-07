@@ -19,6 +19,8 @@
 #include <stdexcept>
 #include <stdio.h>
 #include <math.h>
+#include <cstring>
+#include <limits>
 
 // TODO: Including pthread globally for now, will need to put in conditional includes below when
 // win32 mutexes are implemented
