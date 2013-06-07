@@ -348,35 +348,38 @@ namespace Tonic {
     TonicSmartPointer(T * initObj) : obj(initObj) , pcount(initObj ? new int(1) : NULL) {}
     
     TonicSmartPointer(const TonicSmartPointer& r) : obj(r.obj), pcount(r.pcount){
-      if (pcount) (*pcount)++;
+      retain();
     }
     
     TonicSmartPointer& operator=(const TonicSmartPointer& r)
     {
       if(obj == r.obj) return *this;
       
+      release();
+      
+      obj = r.obj;
+      pcount = r.pcount;
+      
+      retain();
+      
+      return *this;
+    }
+    
+    ~TonicSmartPointer(){
+      release();
+    }
+    
+    void retain(){
+      if (pcount) (*pcount)++;
+    }
+    
+    void release(){
       if(pcount && --(*pcount) == 0){
         if (obj) delete obj;
         delete pcount;
         
         obj = NULL;
         pcount = NULL;
-      }
-      
-      obj = r.obj;
-      pcount = r.pcount;
-      
-      
-      if (pcount)
-        (*pcount)++;
-      
-      return *this;
-    }
-    
-    ~TonicSmartPointer(){
-      if(pcount && --(*pcount) == 0){
-        if (obj) delete obj;
-        delete pcount;
       }
     }
     
