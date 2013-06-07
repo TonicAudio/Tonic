@@ -24,3 +24,7 @@ Tonic comes with three flavors of demo, currently only for OSX. We plan to add d
 - Two [openFrameworks Demos](http://github.com/TonicAudio/Tonic/tree/master/Demo/openFrameworks) for integrating tonic with [openFrameworks](http://www.openframeworks.cc). **Check the README for installation instructions**
 - [iOS Demo](http://github.com/TonicAudio/Tonic/tree/master/Demo/iOS) for making synths on your iPhone/iPad.
 
+
+##### Development
+
+If you are interested in contributing to Tonic, please visit our [Wiki](https://github.com/TonicAudio/Tonic/wiki) and read the guidelines.
