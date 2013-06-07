@@ -56,6 +56,8 @@
     <ClInclude Include="..\..\src\Tonic\RampedValue.h" />
     <ClInclude Include="..\..\src\Tonic\RectWave.h" />
     <ClInclude Include="..\..\src\Tonic\Reverb.h" />
+    <ClInclude Include="..\..\src\Tonic\RingBuffer.h" />
+    <ClInclude Include="..\..\src\Tonic\SampleTable.h" />
     <ClInclude Include="..\..\src\Tonic\SawtoothWave.h" />
     <ClInclude Include="..\..\src\Tonic\SineWave.h" />
     <ClInclude Include="..\..\src\Tonic\SquareWave.h" />
@@ -112,6 +114,8 @@
     <ClCompile Include="..\..\src\Tonic\RampedValue.cpp" />
     <ClCompile Include="..\..\src\Tonic\RectWave.cpp" />
     <ClCompile Include="..\..\src\Tonic\Reverb.cpp" />
+    <ClCompile Include="..\..\src\Tonic\RingBuffer.cpp" />
+    <ClCompile Include="..\..\src\Tonic\SampleTable.cpp" />
     <ClCompile Include="..\..\src\Tonic\SawtoothWave.cpp" />
     <ClCompile Include="..\..\src\Tonic\SineWave.cpp" />
     <ClCompile Include="..\..\src\Tonic\StereoDelay.cpp" />
