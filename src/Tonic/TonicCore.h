@@ -17,8 +17,8 @@
 #include <map>
 #include <algorithm>
 #include <stdexcept>
-#include <stdio.h>
-#include <math.h>
+#include <iostream>
+#include <cmath>
 
 
 // Uncomment or define in your build configuration to log debug messages and perform extra debug checks
@@ -39,11 +39,11 @@
 
   #include <pthread.h> 
 
-  #define TONIC_MUTEX_T pthread_mutex_t
-  #define TONIC_MUTEX_INIT(x) pthread_mutex_init(&x, NULL)
-  #define TONIC_MUTEX_DESTROY(x) pthread_mutex_destroy(&x)
-  #define TONIC_MUTEX_LOCK(x) pthread_mutex_lock(&x)
-  #define TONIC_MUTEX_UNLOCK(x) pthread_mutex_unlock(&x)
+  #define TONIC_MUTEX_T           pthread_mutex_t
+  #define TONIC_MUTEX_INIT(x)     pthread_mutex_init(&x, NULL)
+  #define TONIC_MUTEX_DESTROY(x)  pthread_mutex_destroy(&x)
+  #define TONIC_MUTEX_LOCK(x)     pthread_mutex_lock(&x)
+  #define TONIC_MUTEX_UNLOCK(x)   pthread_mutex_unlock(&x)
 
 #elif (defined (_WIN32) || defined (__WIN32__))
 
@@ -60,11 +60,11 @@
   }
 
   // Windows native mutexes
-  #define TONIC_MUTEX_T CRITICAL_SECTION
-  #define TONIC_MUTEX_INIT(x) InitializeCriticalSection(&x)
-  #define TONIC_MUTEX_DESTROY(x) DeleteCriticalSection(&x)
-  #define TONIC_MUTEX_LOCK(x) EnterCriticalSection(&x)
-  #define TONIC_MUTEX_UNLOCK(x) LeaveCriticalSection(&x)
+  #define TONIC_MUTEX_T           CRITICAL_SECTION
+  #define TONIC_MUTEX_INIT(x)     InitializeCriticalSection(&x)
+  #define TONIC_MUTEX_DESTROY(x)  DeleteCriticalSection(&x)
+  #define TONIC_MUTEX_LOCK(x)     EnterCriticalSection(&x)
+  #define TONIC_MUTEX_UNLOCK(x)   LeaveCriticalSection(&x)
 
 #endif
 
@@ -98,7 +98,7 @@ const TonicFloat TWO_PI       = 2.f * PI;
 #define TONIC_RIGHT           1
 
 // Causes 32nd bit in double to have fractional value 1 (decimal point on 32-bit word boundary)
-// Allowing some efficient shortcuts for table lookup using power-of-two tables
+// Allowing some efficient shortcuts for table lookup using power-of-two length tables
 #define BIT32DECPT 1572864.0
 
 //! Top-level namespace.
@@ -134,7 +134,7 @@ namespace Tonic {
   
   //!For fast computation of int/fract using some bit-twiddlery
   /*! inspired by the pd implementation */
-  union ShiftedDouble {
+  union FastPhasor {
     double d;
     TonicUInt32 i[2];
   };
@@ -248,7 +248,7 @@ namespace Tonic {
   
   //! Frequency in Hz to midi note number
   inline static TonicFloat ftom(TonicFloat f){
-    return 12.0f * log2(f/440.0f) + 69.0f;
+    return 12.0f * (logf(f/440.0f)/logf(2.0f)) + 69.0f;
   }
   
   //-- Decibels --
@@ -359,35 +359,38 @@ namespace Tonic {
     TonicSmartPointer(T * initObj) : obj(initObj) , pcount(initObj ? new int(1) : NULL) {}
     
     TonicSmartPointer(const TonicSmartPointer& r) : obj(r.obj), pcount(r.pcount){
-      if (pcount) (*pcount)++;
+      retain();
     }
     
     TonicSmartPointer& operator=(const TonicSmartPointer& r)
     {
       if(obj == r.obj) return *this;
       
+      release();
+      
+      obj = r.obj;
+      pcount = r.pcount;
+      
+      retain();
+      
+      return *this;
+    }
+    
+    ~TonicSmartPointer(){
+      release();
+    }
+    
+    void retain(){
+      if (pcount) (*pcount)++;
+    }
+    
+    void release(){
       if(pcount && --(*pcount) == 0){
         if (obj) delete obj;
         delete pcount;
         
         obj = NULL;
         pcount = NULL;
-      }
-      
-      obj = r.obj;
-      pcount = r.pcount;
-      
-      
-      if (pcount)
-        (*pcount)++;
-      
-      return *this;
-    }
-    
-    ~TonicSmartPointer(){
-      if(pcount && --(*pcount) == 0){
-        if (obj) delete obj;
-        delete pcount;
       }
     }
     

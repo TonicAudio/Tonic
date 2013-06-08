@@ -120,9 +120,9 @@ namespace Tonic { namespace Tonic_{
     ControlGeneratorOutput sizeOutput = roomSizeCtrlGen_.tick(context);
     ControlGeneratorOutput decayOutput = decayTimeCtrlGen_.tick(context);
     
-    if (densityOutput.status == ControlGeneratorStatusHasChanged ||
-        shapeOutput.status == ControlGeneratorStatusHasChanged ||
-        sizeOutput.status == ControlGeneratorStatusHasChanged)
+    if (densityOutput.triggered ||
+        shapeOutput.triggered ||
+        sizeOutput.triggered)
     {
       
       reflectTapTimes_.clear();
@@ -148,8 +148,8 @@ namespace Tonic { namespace Tonic_{
     }
     
     // if decay or room size have changed, need to update comb times/scales
-    if (sizeOutput.status == ControlGeneratorStatusHasChanged ||
-        decayOutput.status == ControlGeneratorStatusHasChanged)
+    if (sizeOutput.triggered ||
+        decayOutput.triggered)
     {
       
       TonicFloat decayTime = decayOutput.value;
