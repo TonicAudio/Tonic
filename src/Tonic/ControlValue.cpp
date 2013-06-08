@@ -13,7 +13,7 @@ namespace Tonic {
   namespace Tonic_{
   
     ControlValue_::ControlValue_():
-      triggered_(false),
+      changed_(false),
       value_(0)
     {}
       
