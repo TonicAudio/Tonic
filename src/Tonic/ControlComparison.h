@@ -7,6 +7,16 @@
 // See LICENSE.txt for license and usage information.
 //
 
+/**************************************************
+ *
+ *  For all comparison operators, only the lhs will
+ *  drive new triggers at the output. This allows
+ *  for trigger routing based on satisfying a
+ *  condition.
+ *
+ *  Output is either 0 or 1.
+ *
+ ***************************************************/
 
 #ifndef __Tonic__ControlComparison__
 #define __Tonic__ControlComparison__
@@ -28,7 +38,7 @@ namespace Tonic {
       ControlGenerator lhsGen_;
       ControlGenerator rhsGen_;
       
-      virtual bool satisfiesCondition( float l, float r) = 0;
+      virtual bool satisfiesCondition( TonicFloat l, TonicFloat r) = 0;
       void computeOutput(const SynthesisContext_ & context);
       
     public:
@@ -83,9 +93,13 @@ namespace Tonic {
       
     protected:
       
-      bool satisfiesCondition( float l, float r);
+      inline bool satisfiesCondition( TonicFloat l, TonicFloat r)
+      {
+        return l == r;
+      }
       
     };
+    
   }
   
   class ControlEquals : public TemplatedControlBooleanOperator<Tonic_::ControlEquals_> {};
@@ -97,7 +111,7 @@ namespace Tonic {
     return c;
   }
   
-  static ControlEquals operator == (ControlGenerator lhs, float right){
+  static ControlEquals operator == (ControlGenerator lhs, TonicFloat right){
     ControlEquals c;
     c.setLeft(lhs);
     c.setRight(ControlValue(right));
@@ -114,7 +128,10 @@ namespace Tonic {
       
     protected:
       
-      bool satisfiesCondition( float l, float r);
+      inline bool satisfiesCondition( TonicFloat l, TonicFloat r)
+      {
+        return l != r;
+      }
       
     };
   }
@@ -128,7 +145,7 @@ namespace Tonic {
     return c;
   }
   
-  static ControlNotEquals operator != (ControlGenerator lhs, float right){
+  static ControlNotEquals operator != (ControlGenerator lhs, TonicFloat right){
     ControlNotEquals c;
     c.setLeft(lhs);
     c.setRight(ControlValue(right));
@@ -145,7 +162,10 @@ namespace Tonic {
       
     protected:
       
-      bool satisfiesCondition( float l, float r);
+      inline bool satisfiesCondition( TonicFloat l, TonicFloat r)
+      {
+        return l > r;
+      }
       
     };
     
@@ -160,7 +180,7 @@ namespace Tonic {
     return c;
   }
   
-  static ControlGreaterThan operator > (ControlGenerator lhs, float right){
+  static ControlGreaterThan operator > (ControlGenerator lhs, TonicFloat right){
     ControlGreaterThan c;
     c.setLeft(lhs);
     c.setRight(ControlValue(right));
@@ -177,7 +197,10 @@ namespace Tonic {
       
     protected:
       
-      bool satisfiesCondition( float l, float r);
+      inline bool satisfiesCondition( TonicFloat l, TonicFloat r)
+      {
+        return l >= r;
+      }
       
     };
     
@@ -192,7 +215,7 @@ namespace Tonic {
     return c;
   }
   
-  static ControlGreaterOrEqual operator >= (ControlGenerator lhs, float right){
+  static ControlGreaterOrEqual operator >= (ControlGenerator lhs, TonicFloat right){
     ControlGreaterOrEqual c;
     c.setLeft(lhs);
     c.setRight(ControlValue(right));
@@ -209,7 +232,10 @@ namespace Tonic {
       
     protected:
       
-      bool satisfiesCondition( float l, float r);
+      inline bool satisfiesCondition( TonicFloat l, TonicFloat r)
+      {
+        return l < r;
+      }
       
     };
     
@@ -224,7 +250,7 @@ namespace Tonic {
     return c;
   }
   
-  static ControlLessThan operator < (ControlGenerator lhs, float right){
+  static ControlLessThan operator < (ControlGenerator lhs, TonicFloat right){
     ControlLessThan c;
     c.setLeft(lhs);
     c.setRight(ControlValue(right));
@@ -241,7 +267,10 @@ namespace Tonic {
       
     protected:
       
-      bool satisfiesCondition( float l, float r);
+      inline bool satisfiesCondition( TonicFloat l, TonicFloat r)
+      {
+        return l <= r;
+      }
       
     };
     
@@ -256,7 +285,7 @@ namespace Tonic {
     return c;
   }
   
-  static ControlLessOrEqual operator <= (ControlGenerator lhs, float right){
+  static ControlLessOrEqual operator <= (ControlGenerator lhs, TonicFloat right){
     ControlLessOrEqual c;
     c.setLeft(lhs);
     c.setRight(ControlValue(right));
