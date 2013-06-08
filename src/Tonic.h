@@ -47,8 +47,6 @@
 #include "Tonic/StereoDelay.h"
 #include "Tonic/BasicDelay.h"
 #include "Tonic/Reverb.h"
-#include "Tonic/FilterUtils.h"
-#include "Tonic/DelayUtils.h"
 #include "Tonic/Reverb.h"
 
 // Utilities
@@ -58,15 +56,13 @@
 
 // ------- Control Generators --------
 
+#include "Tonic/ControlConversionUtils.h"
 #include "Tonic/ControlTimingUtils.h"
 #include "Tonic/ControlSequencingUtils.h"
 
-#include "Tonic/ControlDbToLinear.h"
-#include "Tonic/ControlFloor.h"
 #include "Tonic/ControlPrinter.h"
 #include "Tonic/ControlXYSpeed.h"
 #include "Tonic/ControlRandom.h"
-#include "Tonic/ControlMidiToFreq.h"
 
 
 #endif
