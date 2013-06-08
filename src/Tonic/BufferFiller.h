@@ -13,7 +13,15 @@
 #define __Tonic__BufferFiller__
 
 #include "Generator.h"
-#include <xmmintrin.h>
+
+// TODO: Any other non-SSE platforms that allow denormals by default? ARM-based targets (iPhone, for example) do not.
+#ifdef __SSE__
+  #include <xmmintrin.h>
+  #define  TONIC_ENABLE_DENORMAL_ROUNDING() _MM_SET_FLUSH_ZERO_MODE(_MM_FLUSH_ZERO_ON) 
+#else
+  #define  TONIC_ENABLE_DENORMAL_ROUNDING()
+#endif
+
 
 namespace Tonic{
   
@@ -75,10 +83,8 @@ namespace Tonic{
     {
       
       // flush denormals on this thread
-#ifdef _MM_SET_FLUSH_ZERO_MODE
-      _MM_SET_FLUSH_ZERO_MODE(_MM_FLUSH_ZERO_ON);
-#endif
-            
+      TONIC_ENABLE_DENORMAL_ROUNDING();
+      
 #ifdef TONIC_DEBUG
       if(numChannels > outputFrames_.channels()) error("Mismatch in channels sent to Synth::fillBufferOfFloats", true);
 #endif
