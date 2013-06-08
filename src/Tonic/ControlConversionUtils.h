@@ -22,7 +22,19 @@ namespace Tonic{
       }
       
     };
+    
+    //-------------------------------------------------
 
+    class ControlRound_ : public ControlConditioner_{
+      
+    protected:
+      inline void computeOutput(const SynthesisContext_ & context){
+        output_.value = roundf(input_.tick(context).value);
+        output_.triggered = input_.tick(context).triggered;
+      }
+      
+    };
+    
     //-------------------------------------------------
 
     class ControlMidiToFreq_ : public ControlConditioner_{
@@ -61,6 +73,11 @@ namespace Tonic{
   
   //! Floors incoming float value to integer
   class ControlFloor : public TemplatedControlConditioner<ControlFloor, Tonic_::ControlFloor_> {};
+  
+  //-------------------------------------------------
+  
+  //! Rounds (towards zero) incoming float value to integer
+  class ControlRound : public TemplatedControlConditioner<ControlFloor, Tonic_::ControlRound_> {};
   
   //-------------------------------------------------
 

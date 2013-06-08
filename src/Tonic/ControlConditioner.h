@@ -9,8 +9,6 @@
 #ifndef __TonicDemo__ControlConditioner__
 #define __TonicDemo__ControlConditioner__
 
-
-#include <vector>
 #include "ControlGenerator.h"
 #include "ControlValue.h"
 
