@@ -60,11 +60,11 @@
   }
 
   // Windows native mutexes
-  #define TONIC_MUTEX_T CRITICAL_SECTION
-  #define TONIC_MUTEX_INIT(x) InitializeCriticalSection(&x)
-  #define TONIC_MUTEX_DESTROY(x) DeleteCriticalSection(&x)
-  #define TONIC_MUTEX_LOCK(x) EnterCriticalSection(&x)
-  #define TONIC_MUTEX_UNLOCK(x) LeaveCriticalSection(&x)
+  #define TONIC_MUTEX_T           CRITICAL_SECTION
+  #define TONIC_MUTEX_INIT(x)     InitializeCriticalSection(&x)
+  #define TONIC_MUTEX_DESTROY(x)  DeleteCriticalSection(&x)
+  #define TONIC_MUTEX_LOCK(x)     EnterCriticalSection(&x)
+  #define TONIC_MUTEX_UNLOCK(x)   LeaveCriticalSection(&x)
 
 #endif
 

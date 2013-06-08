@@ -111,7 +111,7 @@ namespace Tonic {
   
   // Add an Adder and a ControlGenerator
   
-    static Adder operator + (Adder a, ControlGenerator b){
+  static Adder operator + (Adder a, ControlGenerator b){
     return a + FixedValue().setValue(b);
   }
   

@@ -38,14 +38,7 @@
 // -------- Generators ---------
 
 // Oscillators
-#include "Tonic/TableLookupOsc.h"
-#include "Tonic/SineWave.h"
-
-#include "Tonic/SawtoothWave.h"   // Aliasing
-#include "Tonic/TriangleWave.h"   // Aliasing
-#include "Tonic/SquareWave.h"     // Aliasing
-#include "Tonic/RectWave.h"       // Aliasing
-
+#include "Tonic/Oscillators.h" // Aliasing
 #include "Tonic/Noise.h"
 
 // Effects
