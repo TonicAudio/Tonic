@@ -58,14 +58,14 @@
 
 // ------- Control Generators --------
 
+#include "Tonic/ControlTimingUtils.h"
+
 #include "Tonic/ControlDelay.h"
 #include "Tonic/ControlDbToLinear.h"
 #include "Tonic/ControlFloor.h"
 #include "Tonic/ControlPulse.h"
 #include "Tonic/ControlPrinter.h"
 #include "Tonic/ControlXYSpeed.h"
-#include "Tonic/ControlMetro.h"
-#include "Tonic/ControlMetroDivider.h"
 #include "Tonic/ControlSwitcher.h"
 #include "Tonic/ControlCounter.h"
 #include "Tonic/ControlStepper.h"

@@ -6,8 +6,8 @@
 //
 
 
-#ifndef __Tonic__TableLookupOsc__
-#define __Tonic__TableLookupOsc__
+#ifndef __Tonic__Oscillators__
+#define __Tonic__Oscillators__
 
 #include "Generator.h"
 #include "SampleTable.h"
@@ -18,19 +18,14 @@ namespace Tonic {
   
   namespace Tonic_ {
     
-    // Registry for all static lookup table data
+    //! Registry for all static lookup table data
     static TonicDictionary<SampleTable> s_oscTables_;
     
+    //! Base fast table-lookup oscillator
+    /*!
+        TODO: Add phase sync/reset
+     */
     class TableLookupOsc_ : public Generator_{
-      
-      //------------------------------------
-      //
-      // Many of the original STK methods are not applicable in our use case
-      // (direct phase/freq manipulation) and have been removed for optimization.
-      // In the future, phase inputs may be added, but will be optimized and made
-      // Tonic-friendly for universal routing.
-      //
-      //-----------------------------------
       
     protected:
       
@@ -398,6 +393,6 @@ namespace Tonic {
 
 }
 
-#endif /* defined(__Tonic__TableLookupOsc__) */
+#endif /* defined(__Tonic__Oscillators__) */
 
 
