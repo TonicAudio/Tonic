@@ -31,7 +31,7 @@ namespace Tonic {
   
   namespace Tonic_ {
     
-    class ControlBooleanOperator_ : public ControlGenerator_ {
+    class ControlComparisonOperator_ : public ControlGenerator_ {
       
     protected:
             
@@ -43,14 +43,14 @@ namespace Tonic {
       
     public:
       
-      ControlBooleanOperator_();
+      ControlComparisonOperator_();
       
       void setLeft( ControlGenerator gen ) { lhsGen_ = gen; }
       void setRight( ControlGenerator gen ) { rhsGen_ = gen; }
       
     };
     
-    inline void ControlBooleanOperator_::computeOutput(const SynthesisContext_ & context){
+    inline void ControlComparisonOperator_::computeOutput(const SynthesisContext_ & context){
       
       output_.triggered = false;
       
@@ -69,7 +69,7 @@ namespace Tonic {
   }
   
   template <class OperatorType>
-  class TemplatedControlBooleanOperator : public TemplatedControlGenerator<OperatorType> {
+  class TemplatedControlComparisonOperator : public TemplatedControlGenerator<OperatorType> {
     
   public:
     
@@ -89,7 +89,7 @@ namespace Tonic {
   
   namespace Tonic_ {
     
-    class ControlEquals_ : public ControlBooleanOperator_ {
+    class ControlEquals_ : public ControlComparisonOperator_ {
       
     protected:
       
@@ -102,7 +102,7 @@ namespace Tonic {
     
   }
   
-  class ControlEquals : public TemplatedControlBooleanOperator<Tonic_::ControlEquals_> {};
+  class ControlEquals : public TemplatedControlComparisonOperator<Tonic_::ControlEquals_> {};
   
   static ControlEquals operator == (ControlGenerator lhs, ControlGenerator rhs){
     ControlEquals c;
@@ -124,7 +124,7 @@ namespace Tonic {
   
   namespace Tonic_ {
     
-    class ControlNotEquals_ : public ControlBooleanOperator_ {
+    class ControlNotEquals_ : public ControlComparisonOperator_ {
       
     protected:
       
@@ -136,7 +136,7 @@ namespace Tonic {
     };
   }
   
-  class ControlNotEquals : public TemplatedControlBooleanOperator<Tonic_::ControlNotEquals_> {};
+  class ControlNotEquals : public TemplatedControlComparisonOperator<Tonic_::ControlNotEquals_> {};
   
   static ControlNotEquals operator != (ControlGenerator lhs, ControlGenerator rhs){
     ControlNotEquals c;
@@ -158,7 +158,7 @@ namespace Tonic {
   
   namespace Tonic_ {
 
-    class ControlGreaterThan_ : public ControlBooleanOperator_ {
+    class ControlGreaterThan_ : public ControlComparisonOperator_ {
       
     protected:
       
@@ -171,7 +171,7 @@ namespace Tonic {
     
   }
   
-  class ControlGreaterThan : public TemplatedControlBooleanOperator<Tonic_::ControlGreaterThan_> {};
+  class ControlGreaterThan : public TemplatedControlComparisonOperator<Tonic_::ControlGreaterThan_> {};
   
   static ControlGreaterThan operator > (ControlGenerator lhs, ControlGenerator rhs){
     ControlGreaterThan c;
@@ -193,7 +193,7 @@ namespace Tonic {
   
   namespace Tonic_ {
     
-    class ControlGreaterOrEqual_ : public ControlBooleanOperator_ {
+    class ControlGreaterOrEqual_ : public ControlComparisonOperator_ {
       
     protected:
       
@@ -206,7 +206,7 @@ namespace Tonic {
     
   }
   
-  class ControlGreaterOrEqual : public TemplatedControlBooleanOperator<Tonic_::ControlGreaterOrEqual_> {};
+  class ControlGreaterOrEqual : public TemplatedControlComparisonOperator<Tonic_::ControlGreaterOrEqual_> {};
   
   static ControlGreaterOrEqual operator >= (ControlGenerator lhs, ControlGenerator rhs){
     ControlGreaterOrEqual c;
@@ -228,7 +228,7 @@ namespace Tonic {
   
   namespace Tonic_ {
     
-    class ControlLessThan_ : public ControlBooleanOperator_ {
+    class ControlLessThan_ : public ControlComparisonOperator_ {
       
     protected:
       
@@ -241,7 +241,7 @@ namespace Tonic {
     
   }
   
-  class ControlLessThan : public TemplatedControlBooleanOperator<Tonic_::ControlLessThan_> {};
+  class ControlLessThan : public TemplatedControlComparisonOperator<Tonic_::ControlLessThan_> {};
   
   static ControlLessThan operator < (ControlGenerator lhs, ControlGenerator rhs){
     ControlLessThan c;
@@ -263,7 +263,7 @@ namespace Tonic {
   
   namespace Tonic_ {
     
-    class ControlLessOrEqual_ : public ControlBooleanOperator_ {
+    class ControlLessOrEqual_ : public ControlComparisonOperator_ {
       
     protected:
       
@@ -276,7 +276,7 @@ namespace Tonic {
     
   }
   
-  class ControlLessOrEqual : public TemplatedControlBooleanOperator<Tonic_::ControlLessOrEqual_> {};
+  class ControlLessOrEqual : public TemplatedControlComparisonOperator<Tonic_::ControlLessOrEqual_> {};
   
   static ControlLessOrEqual operator <= (ControlGenerator lhs, ControlGenerator rhs){
     ControlLessOrEqual c;
