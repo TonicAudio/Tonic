@@ -68,6 +68,17 @@
 
 #endif
 
+// --- Macro for enabling denormal rounding on audio thread ---
+
+// TODO: Any other non-SSE platforms that allow denormals by default? ARM-based targets (iPhone, for example) do not.
+#if (defined (__SSE__) || defined (_WIN32))
+  #include <xmmintrin.h>
+  #define  TONIC_ENABLE_DENORMAL_ROUNDING() _MM_SET_FLUSH_ZERO_MODE(_MM_FLUSH_ZERO_ON)
+#else
+  #define  TONIC_ENABLE_DENORMAL_ROUNDING()
+#endif
+
+
 using namespace std;
 
 typedef unsigned long         TonicUInt32;
