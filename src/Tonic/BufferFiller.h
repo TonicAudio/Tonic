@@ -73,6 +73,12 @@ namespace Tonic{
     
     inline void BufferFiller_::fillBufferOfFloats(float *outData,  unsigned int numFrames, unsigned int numChannels)
     {
+      
+      // flush denormals on this thread      
+#ifdef _MM_SET_FLUSH_ZERO_MODE
+      _MM_SET_FLUSH_ZERO_MODE(_MM_FLUSH_ZERO_ON);
+#endif
+      
 #ifdef TONIC_DEBUG
       if(numChannels > outputFrames_.channels()) error("Mismatch in channels sent to Synth::fillBufferOfFloats", true);
 #endif
