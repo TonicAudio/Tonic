@@ -92,10 +92,14 @@ namespace Tonic {
 #endif
       
       sd.d = BIT32DECPT;
-      TonicInt32 offs, msbi = sd.i[1];
+      
+      TonicInt32 offs;
+      TonicInt32 msbi = sd.i[1];
+      
+      double frac;
       double ps = phase_ + BIT32DECPT;
       
-      TonicFloat *tAddr, f1, f2, frac;
+      TonicFloat *tAddr, f1, f2;
       
       for ( unsigned int i=0; i<kSynthesisBlockSize; i++ ) {
         
