@@ -1,12 +1,12 @@
 //
-//  ControlSwitcher.cpp
+//  ControlSequencingUtils.cpp
 //  Tonic
 //
 //  Created by Morgan Packard on 4/11/13.
 //
 //
 
-#include "ControlSwitcher.h"
+#include "ControlSequencingUtils.h"
 
 namespace Tonic {
   
@@ -27,6 +27,22 @@ namespace Tonic {
     
     void ControlSwitcher_::setInputIndex(ControlGenerator inputIndexArg){
       inputIndex_ = inputIndexArg;
+    }
+    
+    // ------------
+    
+    ControlStepper_::ControlStepper_():hasBeenTriggered(false) {
+      start = ControlValue(0);
+      end = ControlValue(1);
+      step = ControlValue(1);
+      direction = 1;
+      bidirectional = ControlValue(0);
+    }
+    
+    // ------------
+    
+    ControlCounter_::ControlCounter_(){
+      end = ControlValue(std::numeric_limits<float>::infinity());
     }
     
   } // Namespace Tonic_

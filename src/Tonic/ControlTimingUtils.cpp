@@ -41,4 +41,9 @@ namespace Tonic {
   
   } // Namespace Tonic_
   
+  
+  ControlDelay::ControlDelay(float maxDelayTime){
+    this->gen()->initialize(maxDelayTime);
+  }
+  
 } // Namespace Tonic
