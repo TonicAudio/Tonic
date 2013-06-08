@@ -26,7 +26,7 @@
 namespace Tonic {
   
   // --------------------------------------
-  //      BASE LOGIC CONTROLGENERATOR
+  //   BASE COMPARISON CONTROLGENERATOR
   // --------------------------------------
   
   namespace Tonic_ {
