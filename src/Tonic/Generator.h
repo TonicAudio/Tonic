@@ -37,7 +37,7 @@ namespace Tonic {
       
       // override point for defining generator behavior
       // subclasses should implment to fill frames with new data
-      virtual void computeSynthesisBlock( const SynthesisContext_ &context ) = 0;
+      virtual void computeSynthesisBlock( const SynthesisContext_ &context ) {};
 
       
       bool            isStereoOutput_;
@@ -58,13 +58,6 @@ namespace Tonic {
       frames.copy(outputFrames_);
       
     }
-    
-    /////////////////////
-
-    class PassThroughGenerator_ : public Tonic_::Generator_{
-    public:
-      void computeSynthesisBlock( const SynthesisContext_ &context ) {};
-    };
 
   }
 
@@ -73,7 +66,7 @@ namespace Tonic {
 
   public:
     
-    Generator(Tonic_::Generator_ * gen = NULL) : TonicSmartPointer<Tonic_::Generator_>(gen) {}
+    Generator( Tonic_::Generator_ * gen = new Tonic_::Generator_ ) : TonicSmartPointer<Tonic_::Generator_>(gen) {}
     
     inline bool isStereoOutput(){
       return obj->isStereoOutput();
@@ -93,11 +86,6 @@ namespace Tonic {
     }
   public:
     TemplatedGenerator() : Generator(new GenType) {}
-  };
-  
-  class PassThroughGenerator : public TemplatedGenerator<Tonic_::PassThroughGenerator_>{
-  public:
-  
   };
   
 }

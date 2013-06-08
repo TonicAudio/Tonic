@@ -397,19 +397,17 @@ using namespace Tonic;
     STAssertEquals(result.value, 2.0f, @"ControlStepper did not produce expected output");
     
     
-    
-    
   }
 }
 
 - (void)test202ControlTrigger{
   ControlTrigger trig;
   Tonic_::SynthesisContext_ context;
-  STAssertEquals(trig.tick(context).status, ControlGeneratorStatusHasNotChanged, @"ControlGenerator did not produce expected output");
+  STAssertFalse(trig.tick(context).triggered, @"ControlGenerator did not produce expected output");
   
   trig.trigger();
   context.tick();
-  STAssertEquals(trig.tick(context).status, ControlGeneratorStatusHasChanged, @"ControlGenerator did not produce expected output");
+  STAssertTrue(trig.tick(context).triggered, @"ControlGenerator did not produce expected output");
   
 }
 
@@ -422,11 +420,11 @@ using namespace Tonic;
   
   random.min(1).max(2);
   STAssertTrue(random.tick(context).value <= 2, @"ControlRandom should start out with a value inside its range.");
-  STAssertTrue(random.tick(context).status == ControlGeneratorStatusHasNotChanged, @"ControlRandom should not change unless triggered.");
+  STAssertFalse(random.tick(context).triggered, @"ControlRandom should not produce new trigger unless input is triggered.");
   
   float randVal = random.tick(context).value;
   trig.trigger();
-  STAssertTrue(random.tick(context).status == ControlGeneratorStatusHasChanged, @"ControlRandom should report change if triggered");
+  STAssertTrue(random.tick(context).triggered, @"ControlRandom should report change if triggered");
   STAssertTrue(random.tick(context).value != randVal, @"ControlRandom should not have the same value after trigger.");
   
 }
@@ -441,7 +439,7 @@ using namespace Tonic;
   context.tick();
   metro.tick(context);
   context.tick();
-  STAssertEquals( metro.tick(context).status, ControlGeneratorStatusHasNotChanged, @"Metro shouldn't report status changed.");
+  STAssertFalse( metro.tick(context).triggered, @"Metro shouldn't report trigger.");
   
 }
 
@@ -456,15 +454,15 @@ using namespace Tonic;
 
 -(void)test206SmoothedChangedStatus{
   ControlValue val(100);
-  STAssertEquals(val.tick(testContext).status, ControlGeneratorStatusHasChanged, @"Inital status of Control Gen should be 'changed'");
+  STAssertTrue(val.tick(testContext).triggered, @"Inital status of Control Gen should be 'triggered'");
   
   ControlValue val2(100);
   val2.smoothed();
-  STAssertEquals(val2.tick(testContext).status, ControlGeneratorStatusHasChanged, @"Inital status of Control Gen should be 'changed'");
+  STAssertTrue(val2.tick(testContext).triggered, @"Inital status of Control Gen should be 'triggered'");
   
   // reset and try again
   testContext.forceNewOutput = true;
-  STAssertEquals(val2.tick(testContext).status, ControlGeneratorStatusHasChanged, @"Inital status of Control Gen should be 'changed'");
+  STAssertTrue(val2.tick(testContext).triggered, @"Inital status of Control Gen should be 'triggered'");
   
 }
 
@@ -476,11 +474,10 @@ using namespace Tonic;
 }
 
 
--(void)testControlValueHasChangedStatus{
+-(void)testControlValueTriggering {
   ControlGenerator val1 = ControlValue(2);
-  
-  STAssertEquals(val1.tick(testContext).status, ControlGeneratorStatusHasChanged, @"Fist tick to ControlGen should be hasChanged");
-  STAssertEquals(val1.tick(testContext).status, ControlGeneratorStatusHasChanged, @"Subsequent ticks (with no context tick) should still report hasChanged.");
+  STAssertTrue(val1.tick(testContext).triggered, @"Fist tick to ControlGen should cause trigger");
+  STAssertTrue(val1.tick(testContext).triggered, @"Subsequent ticks (with no context change) should still report triggered.");
  
 }
 
@@ -658,6 +655,7 @@ using namespace Tonic;
   STAssertEquals(gen.tick(context).value, 2.f, @"Divide by zero should return the last valid value.");
 }
 
+
 -(void)test404TestCombinationsOfGenAndControlGen{
 
   TestBufferFiller testFiller;
@@ -675,5 +673,113 @@ using namespace Tonic;
   
 }
 
+- (void)test405ControlGeneratorComparison {
+  
+  const int n_iterations = 10;
+  Tonic_::SynthesisContext_ context;
+  
+  // equals
+  for (int i=0; i<n_iterations; i++){
+    
+    float rf = randomFloat(-1000.f, 1000.f);
+    
+    ControlGenerator g = ControlValue(rf) == ControlValue(rf);
+    ControlGenerator g1 = ControlValue(rf) == rf;
+    ControlGenerator g2 = ControlValue(rf) == ControlValue(99999.f);
+    
+    STAssertTrue(g.tick(context).triggered, @"Every tick should produce a change");
+    
+    STAssertEquals(g.tick(context).value, 1.0f, @"%.2f should equal itself", rf);
+    STAssertEquals(g1.tick(context).value, 1.0f, @"%.2f should equal itself", rf);
+    STAssertEquals(g2.tick(context).value, 0.0f, @"%.2f should not be equal to rhs", rf);
+
+  }
+  
+  // not equals
+  for (int i=0; i<n_iterations; i++){
+    
+    float rf = randomFloat(-1000.f, 1000.f);
+    
+    ControlGenerator g = ControlValue(rf) != ControlValue(99999.f);
+    ControlGenerator g1 = ControlValue(rf) != 99999.f;
+    ControlGenerator g2 = ControlValue(rf) != ControlValue(rf);
+    
+    STAssertTrue(g.tick(context).triggered, @"Every tick should produce a change");
+    
+    STAssertEquals(g.tick(context).value, 1.0f, @"%.2f should not be equal to rhs", rf);
+    STAssertEquals(g1.tick(context).value, 1.0f, @"%.2f should not be equal to rhs", rf);
+    STAssertEquals(g2.tick(context).value, 0.0f, @"%.2f should be equal to rhs", rf);
+    
+  }
+  
+  // greater than
+  for (int i=0; i<n_iterations; i++){
+    
+    float rf = randomFloat(0.1f, 1000.f);
+    
+    ControlGenerator g = ControlValue(rf) > ControlValue(0.f);
+    ControlGenerator g1 = ControlValue(rf) > 0.f;
+    ControlGenerator g2 = ControlValue(rf) > ControlValue(99999.f);
+    
+    STAssertTrue(g.tick(context).triggered, @"Every tick should produce a change");
+    
+    STAssertEquals(g.tick(context).value, 1.0f, @"%.2f should be greater than rhs", rf);
+    STAssertEquals(g1.tick(context).value, 1.0f, @"%.2f should be greater than rhs", rf);
+    STAssertEquals(g2.tick(context).value, 0.0f, @"%.2f should not be greater than rhs", rf);
+    
+  }
+  
+  // greater than or equal
+  for (int i=0; i<n_iterations; i++){
+    
+    float rf = randomFloat(0.1f, 1000.f);
+    
+    ControlGenerator g = ControlValue(rf) >= ControlValue(rf);
+    ControlGenerator g1 = ControlValue(rf) > 0.f;
+    ControlGenerator g2 = ControlValue(rf) >= ControlValue(99999.f);
+    
+    STAssertTrue(g.tick(context).triggered, @"Every tick should produce a change");
+    
+    STAssertEquals(g.tick(context).value, 1.0f, @"%.2f should be greater than or equal to rhs", rf);
+    STAssertEquals(g1.tick(context).value, 1.0f, @"%.2f should be greater than or equal to rhs", rf);
+    STAssertEquals(g2.tick(context).value, 0.0f, @"%.2f should not be greater than or equal rhs", rf);
+    
+  }
+  
+  // less than
+  for (int i=0; i<n_iterations; i++){
+    
+    float rf = randomFloat(0.1f, 1000.f);
+    
+    ControlGenerator g = ControlValue(rf) < ControlValue(99999.f);
+    ControlGenerator g1 = ControlValue(rf) < 99999.f;
+    ControlGenerator g2 = ControlValue(rf) < ControlValue(0.f);
+    
+    STAssertTrue(g.tick(context).triggered, @"Every tick should produce a change");
+    
+    STAssertEquals(g.tick(context).value, 1.0f, @"%.2f should be less than rhs", rf);
+    STAssertEquals(g1.tick(context).value, 1.0f, @"%.2f should be less than rhs", rf);
+    STAssertEquals(g2.tick(context).value, 0.0f, @"%.2f should not be less than rhs", rf);
+    
+  }
+  
+  // less than or equal
+  for (int i=0; i<n_iterations; i++){
+    
+    float rf = randomFloat(0.1f, 1000.f);
+    
+    ControlGenerator g = ControlValue(rf) <= ControlValue(rf);
+    ControlGenerator g1 = ControlValue(rf) <= 99999.f;
+    ControlGenerator g2 = ControlValue(rf) <= ControlValue(0.f);
+    
+    STAssertTrue(g.tick(context).triggered, @"Every tick should produce a change");
+    
+    STAssertEquals(g.tick(context).value, 1.0f, @"%.2f should be less than or equal to rhs", rf);
+    STAssertEquals(g1.tick(context).value, 1.0f, @"%.2f should be less than or equal to rhs", rf);
+    STAssertEquals(g2.tick(context).value, 0.0f, @"%.2f should not be less than or equal to rhs", rf);
+    
+  }
+  
+}
 
 @end
