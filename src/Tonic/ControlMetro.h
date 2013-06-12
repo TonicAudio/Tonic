@@ -9,7 +9,6 @@
 //
 
 
-// Metronome! Ouputs a "changed" status at a regular BPM interval
 
 #ifndef __Tonic__ControlMetro__
 #define __Tonic__ControlMetro__
@@ -38,8 +37,31 @@ namespace Tonic {
       
     };
     
+    inline void ControlMetro_::computeOutput(const SynthesisContext_ & context){
+      
+      double sPerBeat = 60.0/max(0.001,bpm_.tick(context).value);
+      double delta = context.elapsedTime - lastClickTime_;
+      if (delta >= 2*sPerBeat || delta < 0){
+        // account for bpm interval outrunning tick interval or timer wrap-around
+        lastClickTime_ = context.elapsedTime;
+        output_.triggered = true;
+      }
+      else if (delta >= sPerBeat){
+        // acocunt for drift
+        lastClickTime_ += sPerBeat;
+        output_.triggered = true;
+      }
+      else{
+        output_.triggered = false;
+      }
+      
+      output_.value = 1;
+      
+    }
+    
   }
   
+  //!Ouputs a "changed" status at a regular BPM interval
   class ControlMetro : public TemplatedControlGenerator<Tonic_::ControlMetro_>{
     
   public:

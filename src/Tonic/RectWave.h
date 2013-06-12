@@ -63,7 +63,7 @@ namespace Tonic {
       TonicFloat *freqptr = &freqFrames_[0];
       TonicFloat *pwmptr = &pwmFrames_[0];
       
-      ShiftedDouble sd;
+      FastPhasor sd;
       
       // pre-multiply rate constant for speed
 #ifdef USE_APPLE_ACCELERATE
