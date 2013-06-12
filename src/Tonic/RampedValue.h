@@ -55,14 +55,14 @@ namespace Tonic {
           
       // First set the value, if necessary (abort ramp, go immediately to value)
       ControlGeneratorOutput valueOutput = valueGen_.tick(context);
-      if(valueOutput.status == ControlGeneratorStatusHasChanged){
+      if(valueOutput.triggered){
         updateValue(valueOutput.value);
       }
       
       // Then update the target or ramp length (start a new ramp)
       ControlGeneratorOutput lengthOutput = lengthGen_.tick(context);
       ControlGeneratorOutput targetOutput = targetGen_.tick(context);
-      if (lengthOutput.status == ControlGeneratorStatusHasChanged || targetOutput.status == ControlGeneratorStatusHasChanged){
+      if (lengthOutput.triggered || targetOutput.triggered){
         unsigned long lSamp = lengthOutput.value*Tonic::sampleRate();
         updateTarget(targetOutput.value, lSamp);
       }

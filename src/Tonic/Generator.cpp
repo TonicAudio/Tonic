@@ -1,6 +1,6 @@
 //
 //  Generator.cpp
-//  2013_1_23_melody
+//  Tonic
 //
 //  Created by Morgan Packard on 1/23/13.
 //
@@ -10,7 +10,6 @@
 
 
 #include "Generator.h"
-#include "Multiplier.h"
 
 namespace Tonic{ namespace Tonic_{
   

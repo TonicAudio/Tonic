@@ -26,6 +26,16 @@ namespace Tonic {
       
     };
     
+    inline void ControlDbToLinear_::computeOutput(const SynthesisContext_ & context){
+      
+      ControlGeneratorOutput inputOutput = input_.tick(context);
+      output_.triggered = inputOutput.triggered;
+      if (inputOutput.triggered){
+        output_.value = dBToLin(inputOutput.value);
+      }
+      
+    }
+    
   }
   
   class ControlDbToLinear : public TemplatedControlConditioner<ControlDbToLinear, Tonic_::ControlDbToLinear_>{

@@ -14,17 +14,12 @@
 
 namespace Tonic {
   
-  typedef enum {
-    ControlGeneratorStatusHasNotChanged = 0,
-    ControlGeneratorStatusHasChanged
-    
-  } ControlGeneratorStatus;
-  
   struct ControlGeneratorOutput{
-    TonicFloat value;
-    ControlGeneratorStatus status;
     
-    ControlGeneratorOutput() : value(0), status(ControlGeneratorStatusHasNotChanged) {};
+    TonicFloat  value;
+    bool        triggered;
+    
+    ControlGeneratorOutput() : value(0), triggered(false) {};
   };
 
   namespace Tonic_{
@@ -51,11 +46,11 @@ namespace Tonic {
       
       //! Override this function to implement a new ControlGenerator
       /*!
-          Subclasses should use this function to put new data into lastOutput_
+          Subclasses should use this function to put new data into output_
       */
-      virtual void computeOutput(const SynthesisContext_ & context) = 0;
+      virtual void computeOutput(const SynthesisContext_ & context) {};
       
-      ControlGeneratorOutput  lastOutput_;
+      ControlGeneratorOutput  output_;
       unsigned long           lastFrameIndex_;
       
     };
@@ -68,12 +63,12 @@ namespace Tonic {
       }
       
 #ifdef TONIC_DEBUG
-      if(lastOutput_.value != lastOutput_.value){
+      if(output_.value != output_.value){
         Tonic::error("ControlGenerator_::tick NaN detected.", true);
       }
 #endif
       
-      return lastOutput_;
+      return output_;
     }
 
   }
@@ -97,7 +92,8 @@ namespace Tonic {
   };
 
   
-  template<class GenType> class TemplatedControlGenerator : public ControlGenerator{
+  template<class GenType>
+  class TemplatedControlGenerator : public ControlGenerator{
   protected:
     GenType* gen(){
       return static_cast<GenType*>(obj);
