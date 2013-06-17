@@ -76,5 +76,38 @@ namespace Tonic {
       }
       return returnParams;
     }
+    
+    void Synth_::sendControlChangesToSubscribers(){
+      std::map<string, ControlChangeNotifier>::iterator it = controlChangeNotifiers_.begin();
+      for (; it != controlChangeNotifiers_.end(); it++) {
+        it->second.sendControlChangesToSubscribers();
+      }
+    }
+    
+    void Synth_::addControlChangeSubscriber(string name, ControlChangeSubscriber* resp){
+      if(controlChangeNotifiers_.find(name) != controlChangeNotifiers_.end()){
+        controlChangeNotifiers_[name].addValueChangedSubscriber(resp);
+      }else{
+        error("No value called " + name + " was exposed to the UI.");
+      }
+    }
+    
+    void Synth_::addControlChangeSubscriber(ControlChangeSubscriber* sub){
+      typedef std::map<string, ControlChangeNotifier>::iterator NotifiersIterator;
+      for(NotifiersIterator it = controlChangeNotifiers_.begin(); it != controlChangeNotifiers_.end(); it++){
+        it->second.addValueChangedSubscriber(sub);
+      }
+    }
+    
+    void Synth_::removeControlChangeSubscriber(ControlChangeSubscriber* sub){
+      std::map<string, ControlChangeNotifier>::iterator it = controlChangeNotifiers_.begin();
+      for (; it != controlChangeNotifiers_.end(); it++) {
+        it->second.removeValueChangedSubscriber(sub);
+      }
+    }
+    
   }
+  
+
+  
 }
