@@ -67,7 +67,7 @@ build/
 #
 
 xcuserdata
-
+*.xccheckout
 ####
 # XCode 4 workspaces - more detailed
 #
@@ -109,6 +109,22 @@ xcuserdata
 # We're using source-control, so this is a "feature" that we do not want!
 
 *.moved-aside
+
+####
+# Windows
+
+####
+# Visual Studio project bookkeeping files
+*.suo
+*.sdf
+*.user
+*.opensdf
+ipch/
+
+####
+# Visual Studio build folders
+Debug/
+Release/
 
 # TONIC-SPECIFIC
 lib/osx/

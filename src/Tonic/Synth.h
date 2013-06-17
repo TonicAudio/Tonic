@@ -58,7 +58,7 @@ namespace Tonic{
       
       void addParametersFromSynth(Synth synth);
       
-      void setParameter(string name, float value);
+      void setParameter(string name, float value, bool normalized = false);
       
       vector<ControlParameter>  getParameters();
       
@@ -75,12 +75,10 @@ namespace Tonic{
       
       void sendControlChangesToSubscribers();
       
-      // TODO:
-      // Add removeControlChangeSubscriber method
-      // allow a list of subscribers, rather than only one per name
-      // allow lambda functions, not just ControlChangeSubscriber objects
       void addControlChangeSubscriber(string name, ControlChangeSubscriber* resp);
-            
+      void addControlChangeSubscriber(ControlChangeSubscriber* resp);
+      void removeControlChangeSubscriber(ControlChangeSubscriber* sub);
+      
     };
     
     inline void Synth_::computeSynthesisBlock(const SynthesisContext_ &context){
@@ -149,21 +147,38 @@ namespace Tonic{
       gen()->addParametersFromSynth(synth);
     }
     
-    //! Returns a ControlConditioner which accepts an input and a ControlChangeSubscriber (supplied by the UI).
-    //! When the input value changes, ControlChangeSubscriber::messageRecieved is called
+    /*! 
+      Returns a ControlConditioner which accepts an input and a ControlChangeSubscriber (supplied by the UI).
+      When the input value changes, ControlChangeSubscriber::messageRecieved is called.
+      You would typically call this method inside a synth definition if you have a ControlGenerator whose value you want
+      to make accessible to the UI thread.
+    */
+    
     template<class T>
     T publishChanges(T input, string name){
       return gen()->publishChanges(input, name);
     }
     
+    //! Add a ControlGenerator to a list of objects which will be ticked regardless of whether they're part of the synthesis graph or not.
     void addAuxControlGenerator(ControlGenerator generator){
       gen()->lockMutex();
       gen()->addAuxControlGenerator(generator);
       gen()->unlockMutex();
     }
     
+    //! Add an object which will be notified when a particular ControlChangeNotifier changes value or is triggered.
     void addControlChangeSubscriber(string name, ControlChangeSubscriber* resp){
       gen()->addControlChangeSubscriber(name, resp);
+    }
+    
+    //! Add an object which will be notified when any ControlChangeNotifier changes value or is triggered.
+    void addControlChangeSubscriber(ControlChangeSubscriber* resp){
+      gen()->addControlChangeSubscriber(resp);
+    }
+    
+    //! Unsubscribe a ControlChangeSubscriber 
+    void removeControlChangeSubscriber(ControlChangeSubscriber* sub){
+      gen()->removeControlChangeSubscriber(sub);
     }
     
     /*! 
@@ -176,13 +191,17 @@ namespace Tonic{
     }
     
     //! Set the value of a control parameter on this synth
-    void setParameter(string name, float value=1)
+    /*!
+        If normalized is true, value will be mapped to defined range of parameter
+     */
+    void setParameter(string name, float value = 1.f, bool normalized = false)
     {
-      gen()->setParameter(name, value);
+      gen()->setParameter(name, value, normalized);
     }
+  
     
     //! Get all of the control parameters registered for this synth
-    vector<ControlParameter>  getParameters()
+    vector<ControlParameter> getParameters()
     {
       return gen()->getParameters();
     }

@@ -12,7 +12,6 @@
 #ifndef __Tonic__BufferFiller__
 #define __Tonic__BufferFiller__
 
-#include <map>
 #include "Generator.h"
 
 namespace Tonic{
@@ -73,6 +72,10 @@ namespace Tonic{
     
     inline void BufferFiller_::fillBufferOfFloats(float *outData,  unsigned int numFrames, unsigned int numChannels)
     {
+      
+      // flush denormals on this thread
+      TONIC_ENABLE_DENORMAL_ROUNDING();
+      
 #ifdef TONIC_DEBUG
       if(numChannels > outputFrames_.channels()) error("Mismatch in channels sent to Synth::fillBufferOfFloats", true);
 #endif

@@ -20,9 +20,12 @@ namespace Tonic {
     public:
       
         ControlValue_();
-
-        void setValue(float value);
       
+        inline void setValue(float value){
+          value_ = value;
+          changed_ = true;
+        }
+            
         // Get current value directly
         TonicFloat getValue() { return value_;};
       
@@ -31,9 +34,15 @@ namespace Tonic {
         void computeOutput(const SynthesisContext_ & context);
       
         TonicFloat  value_;
-        bool        hasChanged_;
+        bool        changed_;
       
     };
+    
+    inline void ControlValue_::computeOutput(const SynthesisContext_ & context){
+      output_.triggered =  (changed_ || context.forceNewOutput);
+      changed_ = context.forceNewOutput; // if new output forced, don't reset changed status until next tick
+      output_.value = value_;
+    }
   }
   
   
@@ -59,11 +68,5 @@ namespace Tonic {
   };
 
 }
-
-
-// This allows anything that knows about ControlValues to also use the operator overloads
-// Probably should move the implementation of the operator overloads into the .cpp file.
-#include "ControlMultiplier.h"
-#include "ControlAdder.h"
 
 #endif /* defined(__TonicDemo__ControlValue__) */

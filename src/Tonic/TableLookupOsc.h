@@ -9,11 +9,6 @@
 //
 
 
-/*
- This class is heavily borrowed from the PD implementation of a table-lookup oscillator.
- Necessary attribution/license TBD.
-*/
-
 #ifndef __Tonic__TableLookupOsc__
 #define __Tonic__TableLookupOsc__
 
@@ -79,7 +74,9 @@ namespace Tonic {
       TonicFloat *rateBuffer = &modFrames_[0];
       TonicFloat *tableData = lookupTable_.dataPointer();
       
-      ShiftedDouble sd;
+      // R. Hoelderich style fast phasor.
+      
+      FastPhasor sd;
       
       // pre-multiply rate constant for speed
 #ifdef USE_APPLE_ACCELERATE
@@ -92,10 +89,14 @@ namespace Tonic {
 #endif
       
       sd.d = BIT32DECPT;
-      TonicInt32 offs, msbi = sd.i[1];
+      
+      TonicInt32 offs;
+      TonicInt32 msbi = sd.i[1];
+      
+      double frac;
       double ps = phase_ + BIT32DECPT;
       
-      TonicFloat *tAddr, f1, f2, frac;
+      TonicFloat *tAddr, f1, f2;
       
       for ( unsigned int i=0; i<kSynthesisBlockSize; i++ ) {
         

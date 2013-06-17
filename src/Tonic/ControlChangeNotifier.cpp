@@ -10,7 +10,7 @@
 
 namespace Tonic { namespace Tonic_{
   
-  ControlChangeNotifier_::ControlChangeNotifier_() : outputReadyToBeSentToUI(false), valueChangedCallback(NULL){
+  ControlChangeNotifier_::ControlChangeNotifier_() : outputReadyToBeSentToUI(false){
     
   }
   
@@ -19,20 +19,30 @@ namespace Tonic { namespace Tonic_{
   }
   
   void ControlChangeNotifier_::computeOutput(const SynthesisContext_ & context){
-    lastOutput_ = input_.tick(context);
-    if(lastOutput_.status == ControlGeneratorStatusHasChanged){
+    output_ = input_.tick(context);
+    if(output_.triggered){
       outputReadyToBeSentToUI = false; // maybe silly, but a tiny bit of atomicness/thread safety here
-      outputToSendToUI = lastOutput_;
+      outputToSendToUI = output_;
       outputReadyToBeSentToUI = true;
     }
   }
   
-  
   void  ControlChangeNotifier_::sendControlChangesToSubscribers(){
-    if(outputReadyToBeSentToUI && valueChangedCallback){
-      valueChangedCallback->valueChanged(name, outputToSendToUI.value);
+    if(outputReadyToBeSentToUI){
+      for(vector<ControlChangeSubscriber*>::iterator it = subscribers.begin(); it != subscribers.end(); it++){
+        (*it)->valueChanged(name, outputToSendToUI.value);
+      }
       outputReadyToBeSentToUI = false;
     }
+  }
+  
+  void ControlChangeNotifier_::addValueChangedSubscriber(ControlChangeSubscriber* sub){
+    subscribers.push_back(sub);
+  }
+  
+  
+  void ControlChangeNotifier_::removeValueChangedSubscriber(ControlChangeSubscriber* sub){
+    subscribers.erase( std::remove( subscribers.begin(), subscribers.end(), sub ), subscribers.end() );
   }
   
 } // Namespace Tonic_

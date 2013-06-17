@@ -16,7 +16,6 @@ using namespace Tonic;
 class StereoDelayTestSynth : public Synth {
   
 public:
-  
   StereoDelayTestSynth(){
     
     ControlMetro metro = ControlMetro().bpm(100);

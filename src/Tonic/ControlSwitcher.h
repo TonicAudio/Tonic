@@ -22,16 +22,40 @@ namespace Tonic {
       
     protected:
       void computeOutput(const SynthesisContext_ & context);
-      vector<ControlGenerator>inputs;
-      ControlGenerator inputIndex;
+     
+      vector<ControlGenerator>  inputs_;
+      ControlGenerator          inputIndex_;
+      
+      int                       lastInputIndex_;
       
     public:
+      
       ControlSwitcher_();
-      ~ControlSwitcher_();
       void addInput(ControlGenerator input);
+      void setInputs( vector<ControlGenerator> inputs );
       void setInputIndex(ControlGenerator inputIndexArg);
       
     };
+    
+    inline void ControlSwitcher_::computeOutput(const SynthesisContext_ & context){
+      
+      for(vector<ControlGenerator>::iterator it = inputs_.begin(); it != inputs_.end(); it++){
+        it->tick(context);
+      }
+      
+      ControlGeneratorOutput indexOutput = inputIndex_.tick(context);
+      int index = indexOutput.value;
+      
+      // always send has changed message when input index changes
+      if (indexOutput.triggered && index != lastInputIndex_) {
+        lastInputIndex_ = index;
+        ControlGeneratorOutput output = inputs_.at(clamp(index, 0, inputs_.size() -1 )).tick(context);
+        output_.triggered = true;
+        output_.value = output.value;
+      }else{
+        output_.triggered = false;
+      }
+    }
     
   }
   
@@ -42,6 +66,9 @@ namespace Tonic {
   class ControlSwitcher : public TemplatedControlGenerator<Tonic_::ControlSwitcher_>{
     
   public:
+    
+    ControlSwitcher & setFloatInputs( vector<float> inputs );
+    
     createControlGeneratorSetters(ControlSwitcher, addInput, addInput);
     createControlGeneratorSetters(ControlSwitcher, inputIndex, setInputIndex);
 

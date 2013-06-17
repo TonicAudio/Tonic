@@ -17,6 +17,7 @@
 
 namespace Tonic {
 
+  //! Abstract class to be extended by any class that wants to be notified of control events. 
   class ControlChangeSubscriber{
     public:
     virtual ~ControlChangeSubscriber(){}
@@ -29,26 +30,33 @@ namespace Tonic {
       
     protected:
       void computeOutput(const SynthesisContext_ & context);
-      ControlChangeSubscriber* valueChangedCallback;
+      vector<ControlChangeSubscriber*> subscribers;
       bool outputReadyToBeSentToUI;
       ControlGeneratorOutput outputToSendToUI;
       
     public:
       ControlChangeNotifier_();
       ~ControlChangeNotifier_();
-      void setValueChangedCallback(ControlChangeSubscriber* resp){valueChangedCallback = resp;};
+      void addValueChangedSubscriber(ControlChangeSubscriber* sub);
+      void removeValueChangedSubscriber(ControlChangeSubscriber* sub);
       void sendControlChangesToSubscribers();
       string name;
     };
     
   }
   
+  /*! 
+    A ControlChangeNotifier observes a ControlGenerator and notifies its subscribers when its value changes, 
+    or when the value of its outputs "triggered" flag is true. Generally you don't instantiate this object directly,
+    rather you "publish" a controlGenerator using Synth::publishChanges(myControlGen, "nameOfMyControlGen");
+  */
   class ControlChangeNotifier : public TemplatedControlConditioner<Tonic::ControlChangeNotifier, Tonic_::ControlChangeNotifier_>{
     
   public:
   
     void sendControlChangesToSubscribers();
-    void setValueChangedCallback(ControlChangeSubscriber* resp){gen()->setValueChangedCallback(resp);};
+    void addValueChangedSubscriber(ControlChangeSubscriber* resp){gen()->addValueChangedSubscriber(resp);};
+    void removeValueChangedSubscriber(ControlChangeSubscriber* sub){gen()->removeValueChangedSubscriber(sub);};
     void setName(string name){gen()->name = name;}
 
   };

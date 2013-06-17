@@ -44,7 +44,7 @@ namespace Tonic {
       
       ControlGeneratorOutput valueOutput = valueGen.tick(context);
       
-      if (valueOutput.status == ControlGeneratorStatusHasChanged){
+      if (valueOutput.triggered){
         
 #ifdef USE_APPLE_ACCELERATE
         
