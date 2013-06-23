@@ -158,6 +158,9 @@
 		9AF6A72F174AFCF900C70173 /* RingBuffer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9AF6A72D174AFCF700C70173 /* RingBuffer.cpp */; };
 		9AF6A730174AFCF900C70173 /* RingBuffer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9AF6A72D174AFCF700C70173 /* RingBuffer.cpp */; };
 		9AF6A731174AFCF900C70173 /* RingBuffer.h in Headers */ = {isa = PBXBuildFile; fileRef = 9AF6A72E174AFCF800C70173 /* RingBuffer.h */; };
+		A80782D9175591FD009057BC /* ControlChangeNotifier.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A80782D7175591FD009057BC /* ControlChangeNotifier.cpp */; };
+		A80782DA175591FD009057BC /* ControlChangeNotifier.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A80782D7175591FD009057BC /* ControlChangeNotifier.cpp */; };
+		A80782DB175591FD009057BC /* ControlChangeNotifier.h in Headers */ = {isa = PBXBuildFile; fileRef = A80782D8175591FD009057BC /* ControlChangeNotifier.h */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -277,6 +280,8 @@
 		9AEDB5C717430E7B00C6A77C /* ControlParameter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ControlParameter.h; sourceTree = "<group>"; };
 		9AF6A72D174AFCF700C70173 /* RingBuffer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = RingBuffer.cpp; sourceTree = "<group>"; };
 		9AF6A72E174AFCF800C70173 /* RingBuffer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RingBuffer.h; sourceTree = "<group>"; };
+		A80782D7175591FD009057BC /* ControlChangeNotifier.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; lineEnding = 0; path = ControlChangeNotifier.cpp; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.cpp; };
+		A80782D8175591FD009057BC /* ControlChangeNotifier.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = ControlChangeNotifier.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		F23A7CF1171B3D2E00AE8353 /* libTonic-iOS-Debug.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libTonic-iOS-Debug.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -328,6 +333,8 @@
 				9A5FB71F175928FC007A2F31 /* ControlComparison.h */,
 				0183D00A1735D0E6004638EB /* ControlArithmetic.cpp */,
 				0183D00B1735D0E6004638EB /* ControlArithmetic.h */,
+				A80782D7175591FD009057BC /* ControlChangeNotifier.cpp */,
+				A80782D8175591FD009057BC /* ControlChangeNotifier.h */,
 				0183D00C1735D0E6004638EB /* ControlConditioner.cpp */,
 				0183D00D1735D0E6004638EB /* ControlConditioner.h */,
 				0183D00E1735D0E6004638EB /* ControlCounter.cpp */,
@@ -500,6 +507,7 @@
 				9AEDB5CA17430E7B00C6A77C /* ControlParameter.h in Headers */,
 				9A750641174689FD00373E88 /* SampleTable.h in Headers */,
 				9A7DB3E8174670DF009C9A8F /* TriangleWave.h in Headers */,
+				A80782DB175591FD009057BC /* ControlChangeNotifier.h in Headers */,
 				9AF6A731174AFCF900C70173 /* RingBuffer.h in Headers */,
 				9A5FB71D17591983007A2F31 /* ControlMetroDivider.h in Headers */,
 				9A5FB722175928FC007A2F31 /* ControlComparison.h in Headers */,
@@ -620,6 +628,7 @@
 				01C65FF2173723C6003B2661 /* Effect.cpp in Sources */,
 				01C65FF417372407003B2661 /* FilterUtils.cpp in Sources */,
 				9AEDB5C817430E7B00C6A77C /* ControlParameter.cpp in Sources */,
+				A80782D9175591FD009057BC /* ControlChangeNotifier.cpp in Sources */,
 				9A75063F174689FD00373E88 /* SampleTable.cpp in Sources */,
 				9AF6A72F174AFCF900C70173 /* RingBuffer.cpp in Sources */,
 				9A5FB71B17591983007A2F31 /* ControlMetroDivider.cpp in Sources */,
@@ -676,6 +685,7 @@
 				01C65FF517372A5F003B2661 /* Effect.cpp in Sources */,
 				01C65FF617372CD3003B2661 /* FilterUtils.cpp in Sources */,
 				9AEDB5C917430E7B00C6A77C /* ControlParameter.cpp in Sources */,
+				A80782DA175591FD009057BC /* ControlChangeNotifier.cpp in Sources */,
 				9A750640174689FD00373E88 /* SampleTable.cpp in Sources */,
 				9AF6A730174AFCF900C70173 /* RingBuffer.cpp in Sources */,
 				9A5FB71C17591983007A2F31 /* ControlMetroDivider.cpp in Sources */,

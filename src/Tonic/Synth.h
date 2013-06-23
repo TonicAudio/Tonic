@@ -16,6 +16,7 @@
 #include "BufferFiller.h"
 #include "ControlParameter.h"
 #include "CompressorLimiter.h"
+#include "ControlChangeNotifier.h"
 
 namespace Tonic{
   
@@ -35,6 +36,9 @@ namespace Tonic{
       
       std::map<string, ControlParameter> parameters_;
       std::vector<string> orderedParameterNames_;
+      std::map<string, ControlChangeNotifier> controlChangeNotifiers_;
+      // ControlGenerators that may not be part of the synthesis graph, but should be ticked anyway
+      vector<ControlGenerator> auxControlGenerators_;
       
       void computeSynthesisBlock(const Tonic::Tonic_::SynthesisContext_ &context);
       
@@ -58,19 +62,46 @@ namespace Tonic{
       
       vector<ControlParameter>  getParameters();
       
+      template<class T>
+      T publishChanges(T input, string name);
+      
+      void addAuxControlGenerator(ControlGenerator generator){
+        auxControlGenerators_.push_back(generator);
+      }
+      
       void forceNewOutput(){
         synthContext_.forceNewOutput = true;
       }
-            
+      
+      void sendControlChangesToSubscribers();
+      
+      void addControlChangeSubscriber(string name, ControlChangeSubscriber* resp);
+      void addControlChangeSubscriber(ControlChangeSubscriber* resp);
+      void removeControlChangeSubscriber(ControlChangeSubscriber* sub);
+      
     };
     
     inline void Synth_::computeSynthesisBlock(const SynthesisContext_ &context){
 
       outputGen_.tick(outputFrames_, context);
       
+      for (vector<ControlGenerator>::iterator it = auxControlGenerators_.begin(); it != auxControlGenerators_.end(); it++) {
+        it->tick(context);
+      }
+      
       if (limitOutput_){
         limiter_.tickThrough(outputFrames_, context);
       }
+    }
+    
+    template<class T>
+    T Synth_::publishChanges(T input, string name){
+      ControlChangeNotifier messenger;
+      messenger.setName(name);
+      messenger.input(input);
+      controlChangeNotifiers_[name] = messenger;
+      addAuxControlGenerator(messenger);
+      return input;
     }
     
   }
@@ -114,6 +145,49 @@ namespace Tonic{
     void addParametersFromSynth(Synth synth)
     {
       gen()->addParametersFromSynth(synth);
+    }
+    
+    /*! 
+      Returns a ControlConditioner which accepts an input and a ControlChangeSubscriber (supplied by the UI).
+      When the input value changes, ControlChangeSubscriber::messageRecieved is called.
+      You would typically call this method inside a synth definition if you have a ControlGenerator whose value you want
+      to make accessible to the UI thread.
+    */
+    
+    template<class T>
+    T publishChanges(T input, string name){
+      return gen()->publishChanges(input, name);
+    }
+    
+    //! Add a ControlGenerator to a list of objects which will be ticked regardless of whether they're part of the synthesis graph or not.
+    void addAuxControlGenerator(ControlGenerator generator){
+      gen()->lockMutex();
+      gen()->addAuxControlGenerator(generator);
+      gen()->unlockMutex();
+    }
+    
+    //! Add an object which will be notified when a particular ControlChangeNotifier changes value or is triggered.
+    void addControlChangeSubscriber(string name, ControlChangeSubscriber* resp){
+      gen()->addControlChangeSubscriber(name, resp);
+    }
+    
+    //! Add an object which will be notified when any ControlChangeNotifier changes value or is triggered.
+    void addControlChangeSubscriber(ControlChangeSubscriber* resp){
+      gen()->addControlChangeSubscriber(resp);
+    }
+    
+    //! Unsubscribe a ControlChangeSubscriber 
+    void removeControlChangeSubscriber(ControlChangeSubscriber* sub){
+      gen()->removeControlChangeSubscriber(sub);
+    }
+    
+    /*! 
+      Use in conjunction with publishChanges and addControlChangeSubscriber.
+      This is designed as a way to get events from the audio thread to the UI thread. 
+      sendControlChangesToSubscribers should be called from the UI thread, not the audio thread.
+    */
+    void sendControlChangesToSubscribers(){
+      gen()->sendControlChangesToSubscribers();
     }
     
     //! Set the value of a control parameter on this synth
