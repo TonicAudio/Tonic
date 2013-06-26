@@ -82,7 +82,7 @@ int main(int argc, const char * argv[])
         dac.startStream();
         
         // hacky, yes, but let's just hang out for awhile until someone presses a key
-        printf("\n\nPress any key to stop\n\n");
+        printf("\n\nPress Enter to stop\n\n");
         cin.get();
         
         dac.stopStream();
