@@ -1,0 +1,6 @@
+# For linux build
+
+*.a
+*.o
+demo
+
