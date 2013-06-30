@@ -20,6 +20,9 @@
 #include <iostream>
 #include <cmath>
 
+extern "C" {
+  #include <stdint.h>
+}
 
 // Uncomment or define in your build configuration to log debug messages and perform extra debug checks
 // #define TONIC_DEBUG
@@ -81,8 +84,8 @@
 
 using namespace std;
 
-typedef unsigned long         TonicUInt32;
-typedef long                  TonicInt32;
+typedef uint32_t              TonicUInt32;
+typedef int32_t               TonicInt32;
 typedef float                 TonicFloat;
 
 #ifndef PI
@@ -136,7 +139,7 @@ namespace Tonic {
   /*! inspired by the pd implementation */
   union FastPhasor {
     double d;
-    TonicUInt32 i[2];
+    TonicInt32 i[2];
   };
   
   
@@ -208,7 +211,7 @@ namespace Tonic {
     return result;
   }
   
-  inline bool isPowerOf2(unsigned int input, unsigned int * prevPo2){
+  inline bool isPowerOf2(unsigned long input, unsigned int * prevPo2){
 
     if (input == 0) return true;
     

@@ -39,7 +39,7 @@ namespace Tonic {
       
 #ifdef TONIC_DEBUG
       // Detect overrun
-      unsigned int finalWriteHead = (writeHead_ + nFrames) % frames();
+      unsigned long finalWriteHead = (writeHead_ + nFrames) % frames();
       if (finalWriteHead >= readHead_ && (writeHead_ < readHead_ || finalWriteHead < writeHead_)){
         warning("RingBuffer overrun detected");
       }
@@ -48,7 +48,7 @@ namespace Tonic {
       TonicFloat *writeptr = &frames_(writeHead_, 0);
       
       unsigned int bufChannels = channels();
-      unsigned int bufFrames = frames();
+      unsigned long bufFrames = frames();
       
       if (bufChannels == nChannels){
         
@@ -95,7 +95,7 @@ namespace Tonic {
       
 #ifdef TONIC_DEBUG
       // Detect underrun
-      unsigned int finalReadHead = (readHead_ + outFrames.frames()) % frames();
+      unsigned long finalReadHead = (readHead_ + outFrames.frames()) % frames();
       if (finalReadHead > writeHead_ && (readHead_ < writeHead_ || finalReadHead < readHead_)){
         warning("RingBuffer underrun detected");
       }
@@ -104,11 +104,11 @@ namespace Tonic {
       TonicFloat *readptr = &frames_(readHead_, 0);
       TonicFloat *outptr = &outFrames[0];
       
-      unsigned int nFrames = outFrames.frames();
+      unsigned long nFrames = outFrames.frames();
       unsigned int nChannels = outFrames.channels();
       
+      unsigned long bufFrames = frames();
       unsigned int bufChannels = channels();
-      unsigned int bufFrames = frames();
       
       if (bufChannels == nChannels){
         
