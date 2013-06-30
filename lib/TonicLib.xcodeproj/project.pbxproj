@@ -766,7 +766,7 @@
 		01F72695171520F900EBB4BB /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				CLANG_CXX_LANGUAGE_STANDARD = "compiler-default";
 				CLANG_CXX_LIBRARY = "compiler-default";
 				CONFIGURATION_BUILD_DIR = "$(SRCROOT)/osx";
@@ -782,14 +782,14 @@
 				SDKROOT = macosx;
 				SUPPORTED_PLATFORMS = macosx;
 				SYMROOT = build;
-				VALID_ARCHS = "i386 x86_64";
+				VALID_ARCHS = i386;
 			};
 			name = Debug;
 		};
 		01F72696171520F900EBB4BB /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				CLANG_CXX_LANGUAGE_STANDARD = "compiler-default";
 				CLANG_CXX_LIBRARY = "compiler-default";
 				CONFIGURATION_BUILD_DIR = "$(SRCROOT)/osx";
@@ -805,7 +805,7 @@
 				SDKROOT = macosx;
 				SUPPORTED_PLATFORMS = macosx;
 				SYMROOT = build;
-				VALID_ARCHS = "i386 x86_64";
+				VALID_ARCHS = i386;
 			};
 			name = Release;
 		};
