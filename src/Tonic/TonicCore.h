@@ -139,7 +139,7 @@ namespace Tonic {
   /*! inspired by the pd implementation */
   union FastPhasor {
     double d;
-    TonicUInt32 i[2];
+    TonicInt32 i[2];
   };
   
   
@@ -211,7 +211,7 @@ namespace Tonic {
     return result;
   }
   
-  inline bool isPowerOf2(unsigned int input, unsigned int * prevPo2){
+  inline bool isPowerOf2(unsigned long input, unsigned int * prevPo2){
 
     if (input == 0) return true;
     

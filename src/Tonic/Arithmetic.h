@@ -36,7 +36,7 @@ namespace Tonic {
       void input(Generator generator);
       
       Generator getInput(unsigned int index) { return inputs[index]; };
-      unsigned int numInputs() { return inputs.size(); };
+      unsigned long numInputs() { return inputs.size(); };
             
     };
     
@@ -67,7 +67,7 @@ namespace Tonic {
       return gen()->getInput(index);
     }
     
-    unsigned int numInputs(){
+    unsigned long numInputs(){
       return gen()->numInputs();
     }
     
@@ -219,7 +219,7 @@ namespace Tonic {
       void input(Generator generator);
       
       Generator getInput(unsigned int index) { return inputs[index]; };
-      unsigned int numInputs() { return inputs.size(); };
+      unsigned long numInputs() { return inputs.size(); };
     };
     
     
@@ -251,7 +251,7 @@ namespace Tonic {
       return gen()->getInput(index);
     }
     
-    unsigned int numInputs(){
+    unsigned long numInputs(){
       return gen()->numInputs();
     }
     
