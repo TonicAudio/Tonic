@@ -19,7 +19,7 @@
 #include <stdexcept>
 #include <iostream>
 #include <cmath>
-
+#include <cstdint>
 
 // Uncomment or define in your build configuration to log debug messages and perform extra debug checks
 // #define TONIC_DEBUG
@@ -81,8 +81,8 @@
 
 using namespace std;
 
-typedef unsigned long         TonicUInt32;
-typedef long                  TonicInt32;
+typedef uint32_t              TonicUInt32;
+typedef int32_t               TonicInt32;
 typedef float                 TonicFloat;
 
 #ifndef PI
