@@ -19,7 +19,10 @@
 #include <stdexcept>
 #include <iostream>
 #include <cmath>
-#include <cstdint>
+
+extern "C" {
+  #include <stdint.h>
+}
 
 // Uncomment or define in your build configuration to log debug messages and perform extra debug checks
 // #define TONIC_DEBUG
