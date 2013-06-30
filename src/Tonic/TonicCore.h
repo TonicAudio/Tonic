@@ -19,6 +19,8 @@
 #include <stdexcept>
 #include <iostream>
 #include <cmath>
+#include <cstring>
+#include <limits>
 
 
 // Uncomment or define in your build configuration to log debug messages and perform extra debug checks

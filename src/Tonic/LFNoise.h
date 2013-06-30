@@ -12,7 +12,10 @@
 #ifndef __TonicDemo__LFNoise__
 #define __TonicDemo__LFNoise__
 
-#include <iostream>
+#ifndef _WIN32
+#include "Util.h"
+#endif
+
 #include "Generator.h"
 
 namespace Tonic{
