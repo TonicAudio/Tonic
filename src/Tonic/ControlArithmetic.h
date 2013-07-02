@@ -32,7 +32,7 @@ namespace Tonic {
       void input( ControlGenerator input );
       
       ControlGenerator getInput(unsigned int index) { return inputs[index]; };
-      unsigned int numInputs() { return inputs.size(); };
+      unsigned long numInputs() { return inputs.size(); };
       
     protected:
       
@@ -74,7 +74,7 @@ namespace Tonic {
       return gen()->getInput(index);
     }
     
-    unsigned int numInputs(){
+    unsigned long numInputs(){
       return gen()->numInputs();
     }
   };
@@ -180,7 +180,7 @@ namespace Tonic {
       void input( ControlGenerator input );
       
       ControlGenerator getInput(unsigned int index) { return inputs[index]; };
-      unsigned int numInputs() { return inputs.size(); };
+      unsigned long numInputs() { return inputs.size(); };
       
     protected:
       
@@ -222,7 +222,7 @@ namespace Tonic {
       return gen()->getInput(index);
     }
     
-    unsigned int numInputs(){
+    unsigned long numInputs(){
       return gen()->numInputs();
     }
   };
