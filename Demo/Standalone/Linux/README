@@ -3,6 +3,9 @@ TonicAudio standalone test under Linux.
 
 Tested on Ubuntu 12.04.
 
+NOTE: 64-bit systems require packages:
+- g++-multilib
+
 ## RTAUDIO
 
 The demo uses RTAudio for real-time audio hardware abstraction, which supports several different Linux audio APIs. 

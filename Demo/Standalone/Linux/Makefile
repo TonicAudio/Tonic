@@ -6,7 +6,11 @@
 
 ##############################################################
 #
-# NOTE: Please set this to the Audio API you intend to use
+# NOTE: Please set this to the Audio API you intend to use.
+#
+# Each API has its own set of linker dependencies, which are
+# automatically added to the linker flags below.
+#
 # Valid values are:
 #	LINUX_ALSA
 #	LINUX_PULSE
