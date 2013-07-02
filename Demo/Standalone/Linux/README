@@ -3,10 +3,32 @@ TonicAudio standalone test under Linux.
 
 Tested on Ubuntu 12.04.
 
-Needs the following packages: librtaudio4, librtaudio-dev.
+## RTAUDIO
+
+The demo uses RTAudio for real-time audio hardware abstraction, which supports several different Linux audio APIs. 
+The makefile builds against ALSA by default, so please edit the makefile to use a different API if you are not using ALSA.
+
+The following Linux audio APIs are supported:
+
+ALSA
+Requred Packages:
+- libasound
+
+OSS (untested)
+Required Packages:
+- n/a
+
+PulseAudio (untested)
+Required Packages:
+- libpulse-simple
+- libpulse
+
+JACK (untested)
 
 Note: RtAudio works fine for ordinary sound cards, but
 seems to have occasional compatibity problems with high-end GPUs.
+
+## INSTRUCTIONS
 
 make       -- build the demo
 make clean -- delete the files associated with the demo
