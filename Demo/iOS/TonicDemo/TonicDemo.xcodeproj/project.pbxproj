@@ -22,6 +22,7 @@
 		9A3E0D29174BEF530077641E /* ArbitraryTableLookupDemo.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9A3E0D27174BEF460077641E /* ArbitraryTableLookupDemo.cpp */; };
 		9A57FA28174E573200BC73C5 /* SynthsAsGenerators.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9A57FA26174E573200BC73C5 /* SynthsAsGenerators.cpp */; };
 		9AB59D3E17456D4C001E6837 /* ControlSnapToScaleTestSynth.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9AB59D3D17456D4C001E6837 /* ControlSnapToScaleTestSynth.cpp */; };
+		9AEB7712178DB72500FC98D6 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9AEB7711178DB72500FC98D6 /* AVFoundation.framework */; };
 		9AF6A72C174AC3AA00C70173 /* InputDemoSynth.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9AF6A72B174AC3A900C70173 /* InputDemoSynth.cpp */; };
 		A80F6C2E17431BC00079FB52 /* SimpleStepSeqSynth.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A80F6C2C17431A4F0079FB52 /* SimpleStepSeqSynth.cpp */; };
 		A80F6C2F17431BC00079FB52 /* SimpleStepSeqSynth.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A80F6C2C17431A4F0079FB52 /* SimpleStepSeqSynth.cpp */; };
@@ -34,9 +35,9 @@
 		A86C3ED316B2B4FD002A50F0 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = A86C3ED216B2B4FD002A50F0 /* Default.png */; };
 		A86C3ED516B2B4FD002A50F0 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A86C3ED416B2B4FD002A50F0 /* Default@2x.png */; };
 		A86C3ED716B2B4FD002A50F0 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A86C3ED616B2B4FD002A50F0 /* Default-568h@2x.png */; };
-		A86C3F1816B2B5BE002A50F0 /* AudioFileReader.mm in Sources */ = {isa = PBXBuildFile; fileRef = A86C3F1116B2B5BE002A50F0 /* AudioFileReader.mm */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
-		A86C3F1916B2B5BE002A50F0 /* AudioFileWriter.m in Sources */ = {isa = PBXBuildFile; fileRef = A86C3F1316B2B5BE002A50F0 /* AudioFileWriter.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
-		A86C3F1A16B2B5BE002A50F0 /* Novocaine.m in Sources */ = {isa = PBXBuildFile; fileRef = A86C3F1516B2B5BE002A50F0 /* Novocaine.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		A86C3F1816B2B5BE002A50F0 /* AudioFileReader.mm in Sources */ = {isa = PBXBuildFile; fileRef = A86C3F1116B2B5BE002A50F0 /* AudioFileReader.mm */; };
+		A86C3F1916B2B5BE002A50F0 /* AudioFileWriter.m in Sources */ = {isa = PBXBuildFile; fileRef = A86C3F1316B2B5BE002A50F0 /* AudioFileWriter.m */; };
+		A86C3F1A16B2B5BE002A50F0 /* Novocaine.m in Sources */ = {isa = PBXBuildFile; fileRef = A86C3F1516B2B5BE002A50F0 /* Novocaine.m */; };
 		A86C3F1B16B2B5BE002A50F0 /* RingBuffer.mm in Sources */ = {isa = PBXBuildFile; fileRef = A86C3F1716B2B5BE002A50F0 /* RingBuffer.mm */; };
 		A86C3F1F16B2B7B8002A50F0 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A86C3F1C16B2B7B8002A50F0 /* AudioToolbox.framework */; };
 		A86C3F2116B2B7B8002A50F0 /* CoreAudio.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A86C3F1E16B2B7B8002A50F0 /* CoreAudio.framework */; };
@@ -110,6 +111,7 @@
 		9A3E0D27174BEF460077641E /* ArbitraryTableLookupDemo.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ArbitraryTableLookupDemo.cpp; sourceTree = "<group>"; };
 		9A57FA26174E573200BC73C5 /* SynthsAsGenerators.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SynthsAsGenerators.cpp; sourceTree = "<group>"; };
 		9AB59D3D17456D4C001E6837 /* ControlSnapToScaleTestSynth.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ControlSnapToScaleTestSynth.cpp; sourceTree = "<group>"; };
+		9AEB7711178DB72500FC98D6 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		9AF6A72B174AC3A900C70173 /* InputDemoSynth.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = InputDemoSynth.cpp; sourceTree = "<group>"; };
 		A80F6C2C17431A4F0079FB52 /* SimpleStepSeqSynth.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SimpleStepSeqSynth.cpp; sourceTree = "<group>"; };
 		A86C3EBC16B2B4FD002A50F0 /* TonicDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TonicDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -172,6 +174,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9AEB7712178DB72500FC98D6 /* AVFoundation.framework in Frameworks */,
 				F24A98D3173EC45700BE47CB /* QuartzCore.framework in Frameworks */,
 				F2DC167217219744006DB2CB /* libTonic-iOS-Debug.a in Frameworks */,
 				A8CF87F31703D71800D8F5E1 /* CoreMotion.framework in Frameworks */,
@@ -247,6 +250,7 @@
 		A86C3EBF16B2B4FD002A50F0 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				9AEB7711178DB72500FC98D6 /* AVFoundation.framework */,
 				F24A98D2173EC45700BE47CB /* QuartzCore.framework */,
 				A8CF87F21703D71800D8F5E1 /* CoreMotion.framework */,
 				A86C3F2216B2B834002A50F0 /* Accelerate.framework */,
