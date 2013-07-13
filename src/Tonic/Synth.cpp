@@ -106,6 +106,15 @@ namespace Tonic {
       }
     }
     
+    ControlChangeNotifier Synth_::publishChanges(ControlGenerator input, string name){
+      ControlChangeNotifier messenger;
+      messenger.setName(name);
+      messenger.input(input);
+      controlChangeNotifiers_[name] = messenger;
+      addAuxControlGenerator(messenger);
+      return messenger;
+    }
+    
   }
   
 
