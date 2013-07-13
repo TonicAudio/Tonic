@@ -42,9 +42,6 @@ namespace Tonic { namespace Tonic_{
   
 } // Namespace Tonic_
   
-  ControlParameter::ControlParameter(string name){
-    gen()->setName(name);
-  }
 
   string ControlParameter::getName(){
     return gen()->getName();

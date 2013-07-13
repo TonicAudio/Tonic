@@ -22,7 +22,7 @@ class testApp : public ofBaseApp {
 		void gotMessage(ofMessage msg);
     
         void setupSynth();
-        Synth * synth;
+        Synth synth;
         vector<ControlParameter> synthParameters;
         int currentParameter;
     

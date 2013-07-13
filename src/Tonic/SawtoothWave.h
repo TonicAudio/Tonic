@@ -64,7 +64,7 @@ namespace Tonic {
       TonicFloat *freqptr = &freqFrames_[0];
       TonicFloat *slopeptr = &slopeFrames_[0];
       
-      ShiftedDouble sd;
+      FastPhasor sd;
       
       // pre-multiply rate constant for speed
 #ifdef USE_APPLE_ACCELERATE
@@ -128,9 +128,7 @@ namespace Tonic {
     
     //! set whether it's a descending sawtooth (default) or ascending
     SawtoothWave & isAscending(bool ascending){
-      gen()->lockMutex();
       gen()->setSlopeGenerator(FixedValue(ascending ? 1.f : 0.f));
-      gen()->unlockMutex();
       return *this;
     }
   };

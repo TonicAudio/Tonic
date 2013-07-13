@@ -16,6 +16,15 @@
 
 using namespace Tonic;
 
+  class TestControlChangeSubscriber : public ControlChangeSubscriber{
+    public:
+    bool valueChangedFlag;
+    TestControlChangeSubscriber() : valueChangedFlag(false){}
+    void valueChanged(string, TonicFloat){
+      valueChangedFlag = true;
+    }
+  };
+
 // ======================================================
 
 @interface TonicTests ()  
@@ -397,19 +406,17 @@ using namespace Tonic;
     STAssertEquals(result.value, 2.0f, @"ControlStepper did not produce expected output");
     
     
-    
-    
   }
 }
 
 - (void)test202ControlTrigger{
   ControlTrigger trig;
   Tonic_::SynthesisContext_ context;
-  STAssertEquals(trig.tick(context).status, ControlGeneratorStatusHasNotChanged, @"ControlGenerator did not produce expected output");
+  STAssertFalse(trig.tick(context).triggered, @"ControlGenerator did not produce expected output");
   
   trig.trigger();
   context.tick();
-  STAssertEquals(trig.tick(context).status, ControlGeneratorStatusHasChanged, @"ControlGenerator did not produce expected output");
+  STAssertTrue(trig.tick(context).triggered, @"ControlGenerator did not produce expected output");
   
 }
 
@@ -422,11 +429,11 @@ using namespace Tonic;
   
   random.min(1).max(2);
   STAssertTrue(random.tick(context).value <= 2, @"ControlRandom should start out with a value inside its range.");
-  STAssertTrue(random.tick(context).status == ControlGeneratorStatusHasNotChanged, @"ControlRandom should not change unless triggered.");
+  STAssertFalse(random.tick(context).triggered, @"ControlRandom should not produce new trigger unless input is triggered.");
   
   float randVal = random.tick(context).value;
   trig.trigger();
-  STAssertTrue(random.tick(context).status == ControlGeneratorStatusHasChanged, @"ControlRandom should report change if triggered");
+  STAssertTrue(random.tick(context).triggered, @"ControlRandom should report change if triggered");
   STAssertTrue(random.tick(context).value != randVal, @"ControlRandom should not have the same value after trigger.");
   
 }
@@ -441,7 +448,7 @@ using namespace Tonic;
   context.tick();
   metro.tick(context);
   context.tick();
-  STAssertEquals( metro.tick(context).status, ControlGeneratorStatusHasNotChanged, @"Metro shouldn't report status changed.");
+  STAssertFalse( metro.tick(context).triggered, @"Metro shouldn't report trigger.");
   
 }
 
@@ -456,15 +463,15 @@ using namespace Tonic;
 
 -(void)test206SmoothedChangedStatus{
   ControlValue val(100);
-  STAssertEquals(val.tick(testContext).status, ControlGeneratorStatusHasChanged, @"Inital status of Control Gen should be 'changed'");
+  STAssertTrue(val.tick(testContext).triggered, @"Inital status of Control Gen should be 'triggered'");
   
   ControlValue val2(100);
   val2.smoothed();
-  STAssertEquals(val2.tick(testContext).status, ControlGeneratorStatusHasChanged, @"Inital status of Control Gen should be 'changed'");
+  STAssertTrue(val2.tick(testContext).triggered, @"Inital status of Control Gen should be 'triggered'");
   
   // reset and try again
   testContext.forceNewOutput = true;
-  STAssertEquals(val2.tick(testContext).status, ControlGeneratorStatusHasChanged, @"Inital status of Control Gen should be 'changed'");
+  STAssertTrue(val2.tick(testContext).triggered, @"Inital status of Control Gen should be 'triggered'");
   
 }
 
@@ -476,11 +483,10 @@ using namespace Tonic;
 }
 
 
--(void)testControlValueHasChangedStatus{
+-(void)testControlValueTriggering {
   ControlGenerator val1 = ControlValue(2);
-  
-  STAssertEquals(val1.tick(testContext).status, ControlGeneratorStatusHasChanged, @"Fist tick to ControlGen should be hasChanged");
-  STAssertEquals(val1.tick(testContext).status, ControlGeneratorStatusHasChanged, @"Subsequent ticks (with no context tick) should still report hasChanged.");
+  STAssertTrue(val1.tick(testContext).triggered, @"Fist tick to ControlGen should cause trigger");
+  STAssertTrue(val1.tick(testContext).triggered, @"Subsequent ticks (with no context change) should still report triggered.");
  
 }
 
@@ -537,6 +543,91 @@ using namespace Tonic;
   testFiller.fillBufferOfFloats(stereoOutBuffer, kTestOutputBlockSize, 2);
   
   [self verifyBufferFillerStereoFixedOutputEqualsLeft:0.5 right:1.0];
+  
+}
+
+-(void)test304ControlChangeNotifierTest
+{
+
+  class TestSynth : public Synth {
+    public:
+    TestSynth(){
+      ControlGenerator random = ControlRandom().trigger(ControlMetro().bpm(1000));
+      publishChanges(random, "random");
+    }
+  };
+  
+  TestControlChangeSubscriber subscriber;
+  TestSynth synth;
+  synth.addControlChangeSubscriber("random", &subscriber);
+  for(int i = 0; i < 1000; i++){
+    synth.fillBufferOfFloats(stereoOutBuffer, kTestOutputBlockSize, 2);
+  }
+  
+  STAssertFalse(subscriber.valueChangedFlag, @"Value changed notification should not have happened");
+  subscriber.valueChangedFlag = false;
+  synth.sendControlChangesToSubscribers();
+  STAssertTrue(subscriber.valueChangedFlag, @"Value changed notification should have happened");
+  subscriber.valueChangedFlag = false;
+  synth.sendControlChangesToSubscribers();
+  STAssertFalse(subscriber.valueChangedFlag, @"Value changed notification should not have happened");
+ 
+  for(int i = 0; i < 1000; i++){
+    synth.fillBufferOfFloats(stereoOutBuffer, kTestOutputBlockSize, 2);
+  }
+  
+  subscriber.valueChangedFlag = false;
+  synth.sendControlChangesToSubscribers();
+  STAssertTrue(subscriber.valueChangedFlag, @"Value changed notification should have happened");
+  
+  // now remove the subscriber and make sure it's not notified any more
+  
+  synth.removeControlChangeSubscriber(&subscriber);
+  subscriber.valueChangedFlag = false;
+  for(int i = 0; i < 1000; i++){
+    synth.fillBufferOfFloats(stereoOutBuffer, kTestOutputBlockSize, 2);
+  }
+  synth.sendControlChangesToSubscribers();
+  STAssertFalse(subscriber.valueChangedFlag, @"Value changed notification should not have happened");
+  
+  ////////////////////////////
+  // Unnamed notifier test
+  ////////////////////////////
+  
+  synth = TestSynth();
+
+  subscriber.valueChangedFlag = false;
+  synth.addControlChangeSubscriber(&subscriber);
+  for(int i = 0; i < 1000; i++){
+    synth.fillBufferOfFloats(stereoOutBuffer, kTestOutputBlockSize, 2);
+  }
+  
+  STAssertFalse(subscriber.valueChangedFlag, @"Value changed notification should not have happened");
+  synth.sendControlChangesToSubscribers();
+  STAssertTrue(subscriber.valueChangedFlag, @"Value changed notification should have happened");
+  
+}
+
+// publishChanges should return a ControlChangeNotifier which we can subscribe to
+// directly, as an alternative to going through Synth::addControlChangeSubscriber
+-(void)test304ControlChangeNotifierInlineTest{
+  Synth synth;
+  const float VALUE = 0.5;
+  ControlValue val(VALUE);
+  TestControlChangeSubscriber subscriber;
+  ControlChangeNotifier notifier = synth.publishChanges(val, "controlValue");
+  notifier.addValueChangedSubscriber(&subscriber);
+  
+  Tonic_::SynthesisContext_ context;
+  STAssertEquals(notifier.tick(context).value, VALUE, @"A controlChangeNotifier should wrap the ControlGenerator it's observing");
+  
+  for(int i = 0; i < 1000; i++){
+    synth.fillBufferOfFloats(stereoOutBuffer, kTestOutputBlockSize, 2);
+  }
+  STAssertFalse(subscriber.valueChangedFlag, @"Value changed notification should not have happened");
+  synth.sendControlChangesToSubscribers();
+  STAssertTrue(subscriber.valueChangedFlag, @"Value changed notification should have happened");
+  
   
 }
 
@@ -658,6 +749,7 @@ using namespace Tonic;
   STAssertEquals(gen.tick(context).value, 2.f, @"Divide by zero should return the last valid value.");
 }
 
+
 -(void)test404TestCombinationsOfGenAndControlGen{
 
   TestBufferFiller testFiller;
@@ -669,11 +761,119 @@ using namespace Tonic;
   STAssertEquals(*stereoOutBuffer, 6.f, @"Complex combination of control gen and gen failed");
    
   // set the force output flag and try it again to ensure it still works
-  testFiller.forceOutput();
+  testFiller.forceNewOutput();
   testFiller.fillBufferOfFloats(stereoOutBuffer, kTestOutputBlockSize, 2);
   STAssertEquals(*stereoOutBuffer, 6.f, @"Complex combination of control gen and gen failed");
   
 }
 
+- (void)test405ControlGeneratorComparison {
+  
+  const int n_iterations = 10;
+  Tonic_::SynthesisContext_ context;
+  
+  // equals
+  for (int i=0; i<n_iterations; i++){
+    
+    float rf = randomFloat(-1000.f, 1000.f);
+    
+    ControlGenerator g = ControlValue(rf) == ControlValue(rf);
+    ControlGenerator g1 = ControlValue(rf) == rf;
+    ControlGenerator g2 = ControlValue(rf) == ControlValue(99999.f);
+    
+    STAssertTrue(g.tick(context).triggered, @"Every tick should produce a change");
+    
+    STAssertEquals(g.tick(context).value, 1.0f, @"%.2f should equal itself", rf);
+    STAssertEquals(g1.tick(context).value, 1.0f, @"%.2f should equal itself", rf);
+    STAssertEquals(g2.tick(context).value, 0.0f, @"%.2f should not be equal to rhs", rf);
+
+  }
+  
+  // not equals
+  for (int i=0; i<n_iterations; i++){
+    
+    float rf = randomFloat(-1000.f, 1000.f);
+    
+    ControlGenerator g = ControlValue(rf) != ControlValue(99999.f);
+    ControlGenerator g1 = ControlValue(rf) != 99999.f;
+    ControlGenerator g2 = ControlValue(rf) != ControlValue(rf);
+    
+    STAssertTrue(g.tick(context).triggered, @"Every tick should produce a change");
+    
+    STAssertEquals(g.tick(context).value, 1.0f, @"%.2f should not be equal to rhs", rf);
+    STAssertEquals(g1.tick(context).value, 1.0f, @"%.2f should not be equal to rhs", rf);
+    STAssertEquals(g2.tick(context).value, 0.0f, @"%.2f should be equal to rhs", rf);
+    
+  }
+  
+  // greater than
+  for (int i=0; i<n_iterations; i++){
+    
+    float rf = randomFloat(0.1f, 1000.f);
+    
+    ControlGenerator g = ControlValue(rf) > ControlValue(0.f);
+    ControlGenerator g1 = ControlValue(rf) > 0.f;
+    ControlGenerator g2 = ControlValue(rf) > ControlValue(99999.f);
+    
+    STAssertTrue(g.tick(context).triggered, @"Every tick should produce a change");
+    
+    STAssertEquals(g.tick(context).value, 1.0f, @"%.2f should be greater than rhs", rf);
+    STAssertEquals(g1.tick(context).value, 1.0f, @"%.2f should be greater than rhs", rf);
+    STAssertEquals(g2.tick(context).value, 0.0f, @"%.2f should not be greater than rhs", rf);
+    
+  }
+  
+  // greater than or equal
+  for (int i=0; i<n_iterations; i++){
+    
+    float rf = randomFloat(0.1f, 1000.f);
+    
+    ControlGenerator g = ControlValue(rf) >= ControlValue(rf);
+    ControlGenerator g1 = ControlValue(rf) > 0.f;
+    ControlGenerator g2 = ControlValue(rf) >= ControlValue(99999.f);
+    
+    STAssertTrue(g.tick(context).triggered, @"Every tick should produce a change");
+    
+    STAssertEquals(g.tick(context).value, 1.0f, @"%.2f should be greater than or equal to rhs", rf);
+    STAssertEquals(g1.tick(context).value, 1.0f, @"%.2f should be greater than or equal to rhs", rf);
+    STAssertEquals(g2.tick(context).value, 0.0f, @"%.2f should not be greater than or equal rhs", rf);
+    
+  }
+  
+  // less than
+  for (int i=0; i<n_iterations; i++){
+    
+    float rf = randomFloat(0.1f, 1000.f);
+    
+    ControlGenerator g = ControlValue(rf) < ControlValue(99999.f);
+    ControlGenerator g1 = ControlValue(rf) < 99999.f;
+    ControlGenerator g2 = ControlValue(rf) < ControlValue(0.f);
+    
+    STAssertTrue(g.tick(context).triggered, @"Every tick should produce a change");
+    
+    STAssertEquals(g.tick(context).value, 1.0f, @"%.2f should be less than rhs", rf);
+    STAssertEquals(g1.tick(context).value, 1.0f, @"%.2f should be less than rhs", rf);
+    STAssertEquals(g2.tick(context).value, 0.0f, @"%.2f should not be less than rhs", rf);
+    
+  }
+  
+  // less than or equal
+  for (int i=0; i<n_iterations; i++){
+    
+    float rf = randomFloat(0.1f, 1000.f);
+    
+    ControlGenerator g = ControlValue(rf) <= ControlValue(rf);
+    ControlGenerator g1 = ControlValue(rf) <= 99999.f;
+    ControlGenerator g2 = ControlValue(rf) <= ControlValue(0.f);
+    
+    STAssertTrue(g.tick(context).triggered, @"Every tick should produce a change");
+    
+    STAssertEquals(g.tick(context).value, 1.0f, @"%.2f should be less than or equal to rhs", rf);
+    STAssertEquals(g1.tick(context).value, 1.0f, @"%.2f should be less than or equal to rhs", rf);
+    STAssertEquals(g2.tick(context).value, 0.0f, @"%.2f should not be less than or equal to rhs", rf);
+    
+  }
+  
+}
 
 @end

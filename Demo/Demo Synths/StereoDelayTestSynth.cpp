@@ -16,7 +16,6 @@ using namespace Tonic;
 class StereoDelayTestSynth : public Synth {
   
 public:
-  
   StereoDelayTestSynth(){
     
     ControlMetro metro = ControlMetro().bpm(100);
@@ -46,7 +45,9 @@ public:
     
     LPF24 filter = LPF24().Q(2).cutoff( filterFreq );
 
-    outputGen = filter.input(delay.input( tone * env )) * 0.3;
+    Generator outputGen = filter.input(delay.input( tone * env )) * 0.3;
+    
+    setOutputGen(outputGen);
   }
   
   

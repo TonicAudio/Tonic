@@ -9,9 +9,7 @@
 #import "SynthDemoDef.h"
 
 @implementation SynthDemoDef
--(id)init{
-  self = [super init];
-  self.accellerometerAction = ^(Tonic::Synth* synth, CMAccelerometerData *accelerometerData){};
-  return self;
-}
+
+// nil initial values are fine
+
 @end
