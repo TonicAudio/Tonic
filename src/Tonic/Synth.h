@@ -62,8 +62,7 @@ namespace Tonic{
       
       vector<ControlParameter>  getParameters();
       
-      template<class T>
-      T publishChanges(T input, string name);
+      ControlChangeNotifier publishChanges(ControlGenerator input, string name);
       
       void addAuxControlGenerator(ControlGenerator generator){
         auxControlGenerators_.push_back(generator);
@@ -92,16 +91,6 @@ namespace Tonic{
       if (limitOutput_){
         limiter_.tickThrough(outputFrames_, context);
       }
-    }
-    
-    template<class T>
-    T Synth_::publishChanges(T input, string name){
-      ControlChangeNotifier messenger;
-      messenger.setName(name);
-      messenger.input(input);
-      controlChangeNotifiers_[name] = messenger;
-      addAuxControlGenerator(messenger);
-      return input;
     }
     
   }
@@ -153,9 +142,8 @@ namespace Tonic{
       You would typically call this method inside a synth definition if you have a ControlGenerator whose value you want
       to make accessible to the UI thread.
     */
-    
-    template<class T>
-    T publishChanges(T input, string name){
+  
+    ControlChangeNotifier publishChanges(ControlGenerator input, string name){
       return gen()->publishChanges(input, name);
     }
     
