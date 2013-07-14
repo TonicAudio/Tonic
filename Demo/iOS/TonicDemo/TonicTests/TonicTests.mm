@@ -16,6 +16,15 @@
 
 using namespace Tonic;
 
+  class TestControlChangeSubscriber : public ControlChangeSubscriber{
+    public:
+    bool valueChangedFlag;
+    TestControlChangeSubscriber() : valueChangedFlag(false){}
+    void valueChanged(string, TonicFloat){
+      valueChangedFlag = true;
+    }
+  };
+
 // ======================================================
 
 @interface TonicTests ()  
@@ -548,18 +557,6 @@ using namespace Tonic;
     }
   };
   
-  class TestControlChangeSubscriber : public ControlChangeSubscriber{
-    public:
-    bool valueChangedFlag;
-    TestControlChangeSubscriber() : valueChangedFlag(false){
-        
-    }
-    
-    void valueChanged(string, TonicFloat){
-      valueChangedFlag = true;
-    }
-  };
-  
   TestControlChangeSubscriber subscriber;
   TestSynth synth;
   synth.addControlChangeSubscriber("random", &subscriber);
@@ -606,11 +603,55 @@ using namespace Tonic;
   }
   
   STAssertFalse(subscriber.valueChangedFlag, @"Value changed notification should not have happened");
-  subscriber.valueChangedFlag = false;
   synth.sendControlChangesToSubscribers();
   STAssertTrue(subscriber.valueChangedFlag, @"Value changed notification should have happened");
   
+}
+
+// publishChanges should return a ControlChangeNotifier which we can subscribe to
+// directly, as an alternative to going through Synth::addControlChangeSubscriber
+-(void)test304ControlChangeNotifierInlineTest{
+  Synth synth;
+  const float VALUE = 0.5;
+  ControlValue val(VALUE);
+  TestControlChangeSubscriber subscriber;
+  ControlChangeNotifier notifier = synth.publishChanges(val, "controlValue");
+  notifier.addValueChangedSubscriber(&subscriber);
   
+  Tonic_::SynthesisContext_ context;
+  STAssertEquals(notifier.tick(context).value, VALUE, @"A controlChangeNotifier should wrap the ControlGenerator it's observing");
+  
+  for(int i = 0; i < 1000; i++){
+    synth.fillBufferOfFloats(stereoOutBuffer, kTestOutputBlockSize, 2);
+  }
+  STAssertFalse(subscriber.valueChangedFlag, @"Value changed notification should not have happened");
+  synth.sendControlChangesToSubscribers();
+  STAssertTrue(subscriber.valueChangedFlag, @"Value changed notification should have happened");
+  
+}
+
+-(void)test304UnNamedControlChangeNotifier{
+  Synth synth;
+  const float VALUE_1 = 0.5;
+  ControlValue val1(VALUE_1);
+  
+  const float VALUE_2 = 1;
+  ControlValue val2(VALUE_2);
+  
+  TestControlChangeSubscriber subscriber1;
+  TestControlChangeSubscriber subscriber2;
+  synth.publishChanges(val1).addValueChangedSubscriber(&subscriber1);
+  synth.publishChanges(val2).addValueChangedSubscriber(&subscriber2);
+  
+  for(int i = 0; i < 1000; i++){
+    synth.fillBufferOfFloats(stereoOutBuffer, kTestOutputBlockSize, 2);
+  }
+  
+  synth.sendControlChangesToSubscribers();
+  
+  STAssertTrue(subscriber1.valueChangedFlag, @"Value changed notification should have happened");
+  STAssertTrue(subscriber2.valueChangedFlag, @"Value changed notification should have happened");
+
 }
 
 #pragma mark operator tests
