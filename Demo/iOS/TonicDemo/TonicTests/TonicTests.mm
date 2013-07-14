@@ -628,7 +628,30 @@ using namespace Tonic;
   synth.sendControlChangesToSubscribers();
   STAssertTrue(subscriber.valueChangedFlag, @"Value changed notification should have happened");
   
+}
+
+-(void)test304UnNamedControlChangeNotifier{
+  Synth synth;
+  const float VALUE_1 = 0.5;
+  ControlValue val1(VALUE_1);
   
+  const float VALUE_2 = 1;
+  ControlValue val2(VALUE_2);
+  
+  TestControlChangeSubscriber subscriber1;
+  TestControlChangeSubscriber subscriber2;
+  synth.publishChanges(val1).addValueChangedSubscriber(&subscriber1);
+  synth.publishChanges(val2).addValueChangedSubscriber(&subscriber2);
+  
+  for(int i = 0; i < 1000; i++){
+    synth.fillBufferOfFloats(stereoOutBuffer, kTestOutputBlockSize, 2);
+  }
+  
+  synth.sendControlChangesToSubscribers();
+  
+  STAssertTrue(subscriber1.valueChangedFlag, @"Value changed notification should have happened");
+  STAssertTrue(subscriber2.valueChangedFlag, @"Value changed notification should have happened");
+
 }
 
 #pragma mark operator tests

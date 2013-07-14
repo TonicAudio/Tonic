@@ -37,6 +37,7 @@ namespace Tonic{
       std::map<string, ControlParameter> parameters_;
       std::vector<string> orderedParameterNames_;
       std::map<string, ControlChangeNotifier> controlChangeNotifiers_;
+      vector<ControlChangeNotifier> controlChangeNotifiersList_;
       // ControlGenerators that may not be part of the synthesis graph, but should be ticked anyway
       vector<ControlGenerator> auxControlGenerators_;
       
@@ -143,7 +144,7 @@ namespace Tonic{
       to make accessible to the UI thread.
     */
   
-    ControlChangeNotifier publishChanges(ControlGenerator input, string name){
+    ControlChangeNotifier publishChanges(ControlGenerator input, string name=""){
       return gen()->publishChanges(input, name);
     }
     
