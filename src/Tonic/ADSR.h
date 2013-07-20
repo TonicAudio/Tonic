@@ -102,7 +102,7 @@ namespace Tonic {
       
       TonicFloat * fdata = &outputFrames_[0];
       
-      if(triggerOutput.status == ControlGeneratorStatusHasChanged){
+      if(triggerOutput.triggered){
         
         if(triggerOutput.value != 0){
           switchState(ATTACK);

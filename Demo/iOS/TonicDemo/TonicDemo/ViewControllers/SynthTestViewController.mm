@@ -8,17 +8,19 @@
 
 #import "SynthTestViewController.h"
 
-@interface SynthTestViewController ()
+using namespace Tonic;
 
-@property (nonatomic, strong) NSString *synthName;
-@property (nonatomic, strong) NSString *description;
+@interface SynthTestViewController ()
+{
+  Synth _synth;
+}
+
 @property (nonatomic, copy)   SynthTestPanAction panAction;
 @property (nonatomic, copy) SynthTestAccellerometerAction accelAction;
 @property (strong, nonatomic) NSOperationQueue* operationQueue;
 @property (strong, nonatomic) CMMotionManager* motionManager;
 @property (strong, nonatomic) SynthDemoDef* synthDemoDef;
 
-- (void)addSynthIfNecessary;
 - (void)handlePan:(UIPanGestureRecognizer*)pan;
 
 @end
@@ -29,9 +31,10 @@
   self = [super initWithNibName:@"SynthTestViewController" bundle:nil];
   if (self){
     self.synthDemoDef = def;
-    self.synthName = def.synthClassName;
-    self.description = def.synthInstructions;
     self.panAction = def.synthAction;
+    
+    _synth = SynthFactory::createInstance(def.synthClassName.UTF8String);
+    [[TonicSynthManager sharedManager] addSynth:_synth forKey:@"testsynth"];
   }
   return self;
 }
@@ -39,53 +42,38 @@
 - (void)dealloc
 {
   [[TonicSynthManager sharedManager] removeSynthForKey:@"testsynth"];
+  [[TonicSynthManager sharedManager] setInputEnabled:NO];
 }
 
 - (void)viewDidLoad
 {
   [super viewDidLoad];
-  [self addSynthIfNecessary];
+  
   UIPanGestureRecognizer *pan = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(handlePan:)];
   [self.view addGestureRecognizer:pan];
   
-  self.navigationItem.title = self.synthName;
-  self.descLabel.text = self.description;
+  self.navigationItem.title = self.synthDemoDef.synthDisplayName;
+  self.descLabel.text = self.synthDemoDef.synthInstructions;
   
   self.motionManager = [[CMMotionManager alloc] init];
 
-   if ([self.motionManager isAccelerometerAvailable]){
+   if ([self.motionManager isAccelerometerAvailable] && self.synthDemoDef.accellerometerAction != nil){
      self.operationQueue = [[NSOperationQueue alloc] init];
         __weak typeof(self) wself = self;
      [self.motionManager
       startAccelerometerUpdatesToQueue:self.operationQueue
       withHandler:^(CMAccelerometerData *accelerometerData, NSError *error) {
-        Tonic::Synth *synthInstance = [[TonicSynthManager sharedManager] synthForKey:@"testsynth"];
-        if (synthInstance == NULL) return;
         if (wself.synthDemoDef && wself.synthDemoDef.accellerometerAction){
-          wself.synthDemoDef.accellerometerAction(synthInstance, accelerometerData);
+          wself.synthDemoDef.accellerometerAction(_synth, accelerometerData);
         }
     
       }];
-   } else {
-    
    }
 }
 
-- (void)addSynthIfNecessary
-{
-  if (self.synthName != nil){
-    Tonic::Synth *synthInstance = [[TonicSynthManager sharedManager] synthForKey:self.synthName];
-    if (synthInstance == nil){
-      [[TonicSynthManager sharedManager] addSynthWithName:self.synthName forKey:@"testsynth"];
-    }
-  }
-} 
 
 - (void)handlePan:(UIPanGestureRecognizer *)pan{
-  
-  Tonic::Synth *synthInstance = [[TonicSynthManager sharedManager] synthForKey:@"testsynth"];
-  if (synthInstance == NULL) return;
-  
+    
   switch (pan.state){
       
     case UIGestureRecognizerStateBegan:
@@ -96,7 +84,7 @@
       touchPoint.x = Tonic::map(touchPoint.x, 0, self.view.bounds.size.width, 0, 1, true);
       touchPoint.y = 1.0f - Tonic::map(touchPoint.y, 0, self.view.bounds.size.height, 0, 1, true);
       if (self.panAction){
-        self.panAction(synthInstance, touchPoint);
+        self.panAction(_synth, touchPoint);
       }
       
     }

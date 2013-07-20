@@ -19,7 +19,11 @@
 		01C65FEB17371BBC003B2661 /* ReverbTestSynth.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 01C65FE917371BBC003B2661 /* ReverbTestSynth.cpp */; };
 		01DAA58F173E9EF8001AA383 /* SynthAutoUIViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 01DAA58D173E9EF8001AA383 /* SynthAutoUIViewController.mm */; };
 		01DAA590173E9EF8001AA383 /* SynthAutoUIViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 01DAA58E173E9EF8001AA383 /* SynthAutoUIViewController.xib */; };
+		9A3E0D29174BEF530077641E /* ArbitraryTableLookupDemo.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9A3E0D27174BEF460077641E /* ArbitraryTableLookupDemo.cpp */; };
+		9A57FA28174E573200BC73C5 /* SynthsAsGenerators.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9A57FA26174E573200BC73C5 /* SynthsAsGenerators.cpp */; };
 		9AB59D3E17456D4C001E6837 /* ControlSnapToScaleTestSynth.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9AB59D3D17456D4C001E6837 /* ControlSnapToScaleTestSynth.cpp */; };
+		9AEB7712178DB72500FC98D6 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9AEB7711178DB72500FC98D6 /* AVFoundation.framework */; };
+		9AF6A72C174AC3AA00C70173 /* InputDemoSynth.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9AF6A72B174AC3A900C70173 /* InputDemoSynth.cpp */; };
 		A80F6C2E17431BC00079FB52 /* SimpleStepSeqSynth.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A80F6C2C17431A4F0079FB52 /* SimpleStepSeqSynth.cpp */; };
 		A80F6C2F17431BC00079FB52 /* SimpleStepSeqSynth.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A80F6C2C17431A4F0079FB52 /* SimpleStepSeqSynth.cpp */; };
 		A86C3EC116B2B4FD002A50F0 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A86C3EC016B2B4FD002A50F0 /* UIKit.framework */; };
@@ -31,9 +35,9 @@
 		A86C3ED316B2B4FD002A50F0 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = A86C3ED216B2B4FD002A50F0 /* Default.png */; };
 		A86C3ED516B2B4FD002A50F0 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A86C3ED416B2B4FD002A50F0 /* Default@2x.png */; };
 		A86C3ED716B2B4FD002A50F0 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A86C3ED616B2B4FD002A50F0 /* Default-568h@2x.png */; };
-		A86C3F1816B2B5BE002A50F0 /* AudioFileReader.mm in Sources */ = {isa = PBXBuildFile; fileRef = A86C3F1116B2B5BE002A50F0 /* AudioFileReader.mm */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
-		A86C3F1916B2B5BE002A50F0 /* AudioFileWriter.m in Sources */ = {isa = PBXBuildFile; fileRef = A86C3F1316B2B5BE002A50F0 /* AudioFileWriter.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
-		A86C3F1A16B2B5BE002A50F0 /* Novocaine.m in Sources */ = {isa = PBXBuildFile; fileRef = A86C3F1516B2B5BE002A50F0 /* Novocaine.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		A86C3F1816B2B5BE002A50F0 /* AudioFileReader.mm in Sources */ = {isa = PBXBuildFile; fileRef = A86C3F1116B2B5BE002A50F0 /* AudioFileReader.mm */; };
+		A86C3F1916B2B5BE002A50F0 /* AudioFileWriter.m in Sources */ = {isa = PBXBuildFile; fileRef = A86C3F1316B2B5BE002A50F0 /* AudioFileWriter.m */; };
+		A86C3F1A16B2B5BE002A50F0 /* Novocaine.m in Sources */ = {isa = PBXBuildFile; fileRef = A86C3F1516B2B5BE002A50F0 /* Novocaine.m */; };
 		A86C3F1B16B2B5BE002A50F0 /* RingBuffer.mm in Sources */ = {isa = PBXBuildFile; fileRef = A86C3F1716B2B5BE002A50F0 /* RingBuffer.mm */; };
 		A86C3F1F16B2B7B8002A50F0 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A86C3F1C16B2B7B8002A50F0 /* AudioToolbox.framework */; };
 		A86C3F2116B2B7B8002A50F0 /* CoreAudio.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A86C3F1E16B2B7B8002A50F0 /* CoreAudio.framework */; };
@@ -104,7 +108,11 @@
 		01DAA58C173E9EF8001AA383 /* SynthAutoUIViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SynthAutoUIViewController.h; sourceTree = "<group>"; };
 		01DAA58D173E9EF8001AA383 /* SynthAutoUIViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = SynthAutoUIViewController.mm; sourceTree = "<group>"; };
 		01DAA58E173E9EF8001AA383 /* SynthAutoUIViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SynthAutoUIViewController.xib; sourceTree = "<group>"; };
+		9A3E0D27174BEF460077641E /* ArbitraryTableLookupDemo.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ArbitraryTableLookupDemo.cpp; sourceTree = "<group>"; };
+		9A57FA26174E573200BC73C5 /* SynthsAsGenerators.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SynthsAsGenerators.cpp; sourceTree = "<group>"; };
 		9AB59D3D17456D4C001E6837 /* ControlSnapToScaleTestSynth.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ControlSnapToScaleTestSynth.cpp; sourceTree = "<group>"; };
+		9AEB7711178DB72500FC98D6 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		9AF6A72B174AC3A900C70173 /* InputDemoSynth.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = InputDemoSynth.cpp; sourceTree = "<group>"; };
 		A80F6C2C17431A4F0079FB52 /* SimpleStepSeqSynth.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SimpleStepSeqSynth.cpp; sourceTree = "<group>"; };
 		A86C3EBC16B2B4FD002A50F0 /* TonicDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TonicDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A86C3EC016B2B4FD002A50F0 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
@@ -143,7 +151,7 @@
 		F25317E616EBA0A100A8CFDC /* TonicTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "TonicTests-Info.plist"; sourceTree = "<group>"; };
 		F25317E816EBA0A100A8CFDC /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		F25317EA16EBA0A100A8CFDC /* TonicTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TonicTests.h; sourceTree = "<group>"; };
-		F25317EB16EBA0A100A8CFDC /* TonicTests.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = TonicTests.mm; sourceTree = "<group>"; };
+		F25317EB16EBA0A100A8CFDC /* TonicTests.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; lineEnding = 0; path = TonicTests.mm; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		F25317ED16EBA0A100A8CFDC /* TonicTests-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "TonicTests-Prefix.pch"; sourceTree = "<group>"; };
 		F253182716EBA73200A8CFDC /* StereoFixedTestGen.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = StereoFixedTestGen.cpp; sourceTree = "<group>"; };
 		F253182816EBA73200A8CFDC /* StereoFixedTestGen.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StereoFixedTestGen.h; sourceTree = "<group>"; };
@@ -166,6 +174,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9AEB7712178DB72500FC98D6 /* AVFoundation.framework in Frameworks */,
 				F24A98D3173EC45700BE47CB /* QuartzCore.framework in Frameworks */,
 				F2DC167217219744006DB2CB /* libTonic-iOS-Debug.a in Frameworks */,
 				A8CF87F31703D71800D8F5E1 /* CoreMotion.framework in Frameworks */,
@@ -196,6 +205,7 @@
 		0183D0EB1735D17D004638EB /* Demo Synths */ = {
 			isa = PBXGroup;
 			children = (
+				9A3E0D27174BEF460077641E /* ArbitraryTableLookupDemo.cpp */,
 				0183D0EC1735D17D004638EB /* CompressorDuckingTestSynth.cpp */,
 				F2E2561917400EDB00D74E9D /* CompressorTestSynth.cpp */,
 				9AB59D3D17456D4C001E6837 /* ControlSnapToScaleTestSynth.cpp */,
@@ -203,11 +213,13 @@
 				0183D0F01735D17D004638EB /* DelayTestSynth.cpp */,
 				0183D0F11735D17D004638EB /* FilteredNoiseSynth.cpp */,
 				0183D0F41735D17D004638EB /* FMDroneSynth.cpp */,
+				9AF6A72B174AC3A900C70173 /* InputDemoSynth.cpp */,
 				0183D0F51735D17D004638EB /* LFNoiseTestSynth.cpp */,
 				01C65FE917371BBC003B2661 /* ReverbTestSynth.cpp */,
 				A80F6C2C17431A4F0079FB52 /* SimpleStepSeqSynth.cpp */,
 				0183D0F71735D17D004638EB /* SineSumSynth.cpp */,
 				0183D0F81735D17D004638EB /* StereoDelayTestSynth.cpp */,
+				9A57FA26174E573200BC73C5 /* SynthsAsGenerators.cpp */,
 				0183D0F91735D17D004638EB /* XYSpeed.cpp */,
 			);
 			name = "Demo Synths";
@@ -238,6 +250,7 @@
 		A86C3EBF16B2B4FD002A50F0 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				9AEB7711178DB72500FC98D6 /* AVFoundation.framework */,
 				F24A98D2173EC45700BE47CB /* QuartzCore.framework */,
 				A8CF87F21703D71800D8F5E1 /* CoreMotion.framework */,
 				A86C3F2216B2B834002A50F0 /* Accelerate.framework */,
@@ -545,6 +558,9 @@
 				F2E2561A17400EDB00D74E9D /* CompressorTestSynth.cpp in Sources */,
 				A80F6C2E17431BC00079FB52 /* SimpleStepSeqSynth.cpp in Sources */,
 				9AB59D3E17456D4C001E6837 /* ControlSnapToScaleTestSynth.cpp in Sources */,
+				9AF6A72C174AC3AA00C70173 /* InputDemoSynth.cpp in Sources */,
+				9A3E0D29174BEF530077641E /* ArbitraryTableLookupDemo.cpp in Sources */,
+				9A57FA28174E573200BC73C5 /* SynthsAsGenerators.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -603,6 +619,7 @@
 				CLANG_ENABLE_OBJC_ARC = NO;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				GCC_C_LANGUAGE_STANDARD = "compiler-default";
@@ -619,6 +636,7 @@
 				HEADER_SEARCH_PATHS = ../../../src/;
 				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
 				ONLY_ACTIVE_ARCH = YES;
+				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -633,7 +651,8 @@
 				CLANG_ENABLE_OBJC_ARC = NO;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Nicholas Donaldson (2PEW4VKBN7)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Nicholas Donaldson (2PEW4VKBN7)";
 				COPY_PHASE_STRIP = YES;
 				GCC_C_LANGUAGE_STANDARD = "compiler-default";
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
@@ -642,6 +661,8 @@
 				HEADER_SEARCH_PATHS = ../../../src/;
 				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				PROVISIONING_PROFILE = "5DE4C82A-4DC9-4608-A14F-60C632C6E9DF";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "5DE4C82A-4DC9-4608-A14F-60C632C6E9DF";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
@@ -657,6 +678,11 @@
 				GCC_INLINES_ARE_PRIVATE_EXTERN = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "TonicDemo/TonicDemo-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+					TONIC_DEBUG,
+				);
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				HEADER_SEARCH_PATHS = ../../../src/;
@@ -672,6 +698,8 @@
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_INLINES_ARE_PRIVATE_EXTERN = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "TonicDemo/TonicDemo-Prefix.pch";
@@ -680,6 +708,8 @@
 				HEADER_SEARCH_PATHS = ../../../src/;
 				INFOPLIST_FILE = "TonicDemo/TonicDemo-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;

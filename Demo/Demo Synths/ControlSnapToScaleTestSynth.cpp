@@ -9,7 +9,7 @@
 #ifndef TonicDemo_ControlSnapToScaleTestSynth_cpp
 #define TonicDemo_ControlSnapToScaleTestSynth_cpp
 
-#import "Tonic.h"
+#include "Tonic.h"
 
 using namespace Tonic;
 
@@ -78,7 +78,7 @@ class ControlSnapToScaleTestSynth : public Synth{
     
     Reverb verb = Reverb().inputHPFCutoff(200.f).decayTime(0.8).roomSize(0.1).density(0.8).wetLevel(dBToLin(-30.f));
     
-    outputGen = ((
+    Generator outputGen = ((
     
       SineWave().freq(
         ControlMidiToFreq().input(scaleSnapper1 + -12).smoothed().length(
@@ -96,6 +96,7 @@ class ControlSnapToScaleTestSynth : public Synth{
     
     * 0.3 * env) >> StereoDelay(0.3,0.33).feedback(0.3).dryLevel(1.0 - delayMix).wetLevel(delayMix) >> verb;
     
+    setOutputGen(outputGen);
     
   }
 };
