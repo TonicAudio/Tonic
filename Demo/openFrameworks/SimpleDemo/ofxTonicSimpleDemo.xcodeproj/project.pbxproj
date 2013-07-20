@@ -30,16 +30,16 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		9AAB717D174558C100CC832F /* PBXContainerItemProxy */ = {
+		9A8961A8174D8A5100D5DDBC /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = 9A677AD117454FFB00388041 /* TonicLib.xcodeproj */;
+			containerPortal = 9A8961A3174D8A5100D5DDBC /* TonicLib.xcodeproj */;
 			proxyType = 2;
 			remoteGlobalIDString = 01F72690171520F900EBB4BB;
 			remoteInfo = "Tonic-OSX";
 		};
-		9AAB717F174558C100CC832F /* PBXContainerItemProxy */ = {
+		9A8961AA174D8A5100D5DDBC /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = 9A677AD117454FFB00388041 /* TonicLib.xcodeproj */;
+			containerPortal = 9A8961A3174D8A5100D5DDBC /* TonicLib.xcodeproj */;
 			proxyType = 2;
 			remoteGlobalIDString = F23A7CF1171B3D2E00AE8353;
 			remoteInfo = "Tonic-iOS";
@@ -74,7 +74,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		9A677AD117454FFB00388041 /* TonicLib.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = TonicLib.xcodeproj; path = ../../../lib/TonicLib.xcodeproj; sourceTree = "<group>"; };
+		9A8961A3174D8A5100D5DDBC /* TonicLib.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = TonicLib.xcodeproj; path = ../../../lib/TonicLib.xcodeproj; sourceTree = "<group>"; };
 		BBAB23BE13894E4700AA2426 /* GLUT.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLUT.framework; path = ../../../libs/glut/lib/osx/GLUT.framework; sourceTree = "<group>"; };
 		E4328143138ABC890047C5CB /* openFrameworksLib.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = openFrameworksLib.xcodeproj; path = ../../../libs/openFrameworksCompiled/project/osx/openFrameworksLib.xcodeproj; sourceTree = SOURCE_ROOT; };
 		E45BE9710E8CC7DD009D7055 /* AGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AGL.framework; path = /System/Library/Frameworks/AGL.framework; sourceTree = "<absolute>"; };
@@ -132,16 +132,16 @@
 		9A677A3317454CCA00388041 /* Tonic */ = {
 			isa = PBXGroup;
 			children = (
-				9A677AD117454FFB00388041 /* TonicLib.xcodeproj */,
+				9A8961A3174D8A5100D5DDBC /* TonicLib.xcodeproj */,
 			);
 			name = Tonic;
 			sourceTree = "<group>";
 		};
-		9AAB7179174558C100CC832F /* Products */ = {
+		9A8961A4174D8A5100D5DDBC /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				9AAB717E174558C100CC832F /* libTonic-OSX.a */,
-				9AAB7180174558C100CC832F /* libTonic-iOS.a */,
+				9A8961A9174D8A5100D5DDBC /* libTonic-OSX-Debug.a */,
+				9A8961AB174D8A5100D5DDBC /* libTonic-iOS-Debug.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -279,8 +279,8 @@
 					ProjectRef = E4328143138ABC890047C5CB /* openFrameworksLib.xcodeproj */;
 				},
 				{
-					ProductGroup = 9AAB7179174558C100CC832F /* Products */;
-					ProjectRef = 9A677AD117454FFB00388041 /* TonicLib.xcodeproj */;
+					ProductGroup = 9A8961A4174D8A5100D5DDBC /* Products */;
+					ProjectRef = 9A8961A3174D8A5100D5DDBC /* TonicLib.xcodeproj */;
 				},
 			);
 			projectRoot = "";
@@ -291,18 +291,18 @@
 /* End PBXProject section */
 
 /* Begin PBXReferenceProxy section */
-		9AAB717E174558C100CC832F /* libTonic-OSX.a */ = {
+		9A8961A9174D8A5100D5DDBC /* libTonic-OSX-Debug.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
-			path = "libTonic-OSX.a";
-			remoteRef = 9AAB717D174558C100CC832F /* PBXContainerItemProxy */;
+			path = "libTonic-OSX-Debug.a";
+			remoteRef = 9A8961A8174D8A5100D5DDBC /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		9AAB7180174558C100CC832F /* libTonic-iOS.a */ = {
+		9A8961AB174D8A5100D5DDBC /* libTonic-iOS-Debug.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
-			path = "libTonic-iOS.a";
-			remoteRef = 9AAB717F174558C100CC832F /* PBXContainerItemProxy */;
+			path = "libTonic-iOS-Debug.a";
+			remoteRef = 9A8961AA174D8A5100D5DDBC /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 		E4328148138ABC890047C5CB /* openFrameworksDebug.a */ = {
@@ -504,10 +504,8 @@
 					"$(LIBRARY_SEARCH_PATHS_QUOTED_FOR_TARGET_51)",
 					"$(LIBRARY_SEARCH_PATHS_QUOTED_FOR_TARGET_52)",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 10.6;
 				PREBINDING = NO;
 				PRODUCT_NAME = ofxTonicSimpleDemoDebug;
-				SDKROOT = macosx;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -597,10 +595,8 @@
 					"$(LIBRARY_SEARCH_PATHS_QUOTED_FOR_TARGET_50)",
 					"$(LIBRARY_SEARCH_PATHS_QUOTED_FOR_TARGET_51)",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 10.6;
 				PREBINDING = NO;
 				PRODUCT_NAME = ofxTonicSimpleDemo;
-				SDKROOT = macosx;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;

@@ -29,7 +29,7 @@ TonicFrames :: TonicFrames( unsigned int nFrames, unsigned int nChannels )
 #if defined(TONIC_DEBUG)
     if ( data_ == NULL ) {
       std::string error = "TonicFrames: memory allocation error in constructor!";
-      Stk::handleError( error, StkError::MEMORY_ALLOCATION );
+      Tonic::error(error, true);
     }
 #endif
   }
@@ -52,7 +52,7 @@ TonicFrames :: TonicFrames( const TonicFloat& value, unsigned int nFrames, unsig
 #if defined(TONIC_DEBUG)
     if ( data_ == NULL ) {
       std::string error = "TonicFrames: memory allocation error in constructor!";
-      Stk::handleError( error, StkError::MEMORY_ALLOCATION );
+      Tonic::error(error, true);
     }
 #endif
     for ( long i=0; i<(long)size_; i++ ) data_[i] = value;
@@ -97,18 +97,34 @@ void TonicFrames :: resize( size_t nFrames, unsigned int nChannels )
     nFrames_ = nFrames;
     nChannels_ = nChannels;
 
+    // preserve as much of old data as we can
+    TonicFloat * oldData = data_;
+    unsigned int oldSize = size_;
+    
     size_ = nFrames_ * nChannels_;
+    
     if ( size_ > bufferSize_ ) {
-      if ( data_ ) free( data_ );
+      
       data_ = (TonicFloat *) malloc( size_ * sizeof( TonicFloat ) );
+      
+      if (oldData){
+        for (unsigned int i=0; i<oldSize; i++){
+          data_[i] = oldData[i];
+        }
+      }
+      
 #if defined(TONIC_DEBUG)
       if ( data_ == NULL ) {
         std::string error = "TonicFrames::resize: memory allocation error!";
-        Stk::handleError( error, StkError::MEMORY_ALLOCATION );
+        Tonic::error(error, true);
       }
 #endif
+      
       bufferSize_ = size_;
+      
+      if (oldData) free(oldData);
     }
+    
   }
 }
 
@@ -123,6 +139,82 @@ void TonicFrames :: resize( size_t nFrames, unsigned int nChannels, TonicFloat v
 #endif
   
 }
+  
+void TonicFrames :: resample( size_t nFrames , unsigned int nChannels )
+  {
+    if (nChannels > 2){
+      error("Invalid number of channels. TonicFrames is limited to mono or stereo only (1 or 2 channels)", true);
+    }
+    
+    if (nFrames != nFrames_ || nChannels != nChannels_){
+      
+      
+      // preserve as much of old data as we can
+      TonicFloat * oldData = data_;
+      unsigned int oldFrames = nFrames_;
+      unsigned int oldchannels = nChannels_;
+      
+      nFrames_ = nFrames;
+      nChannels_ = nChannels;
+      
+      size_ = nFrames_ * nChannels_;
+        
+      data_ = (TonicFloat *) malloc( size_ * sizeof( TonicFloat ) );
+      
+#if defined(TONIC_DEBUG)
+      if ( data_ == NULL ) {
+        std::string error = "TonicFrames::resize: memory allocation error!";
+        Tonic::error(error, true);
+      }
+#endif
+      
+      // resample the content (brute-force, no AA applied)
+      if (oldData){
+        
+        float inc = (float)oldFrames/nFrames_;
+        
+        for (unsigned int c=0; c<nChannels_; c++){
+          
+          float fIdx = 0.f;
+          
+          for (unsigned int i=0; i<nFrames_; i++){
+            
+            float fi, y1, y2;
+            float frac = modff(fIdx, &fi);
+            unsigned int idx = (unsigned int)fi;
+            
+            unsigned int ocIdx = oldchannels > 1 ? c : 0;
+            
+            if (idx == oldFrames-1){
+              data_[i*nChannels_ + c] = oldData[idx * oldchannels + ocIdx];
+            }
+            else{
+              y1 = oldData[idx * oldchannels + ocIdx];
+              y2 = oldData[(idx+1) * oldchannels + ocIdx];
+              data_[i*nChannels + c] = y1 + frac * (y2 - y1);
+            }
+            
+            // handle different channel mapping
+            if (oldchannels > nChannels_){
+              // add and average
+              y1 = oldData[idx * oldchannels + ocIdx + 1];
+              y2 = oldData[(idx+1) * oldchannels + ocIdx + 1];
+              data_[i*nChannels + c] += (y1 + frac * (y2 - y1));
+              data_[i*nChannels + c] *= 0.5f;
+            }
+            
+            fIdx += inc;
+          }
+        }
+      }
+      
+      bufferSize_ = size_;
+      
+      if (oldData) free(oldData);
+    
+    }
+
+  }
 
 TonicFloat TonicFrames :: interpolate( TonicFloat frame, unsigned int channel ) const
 {
@@ -130,7 +222,7 @@ TonicFloat TonicFrames :: interpolate( TonicFloat frame, unsigned int channel ) 
   if ( frame < 0.0 || frame > (TonicFloat) ( nFrames_ - 1 ) || channel >= nChannels_ ) {
     std::ostringstream error;
     error << "TonicFrames::interpolate: invalid frame (" << frame << ") or channel (" << channel << ") value!";
-    Stk::handleError( error.str(), StkError::MEMORY_ACCESS );
+    Tonic::error(error.str(), true);
   }
 #endif
 

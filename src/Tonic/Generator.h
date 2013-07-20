@@ -21,14 +21,11 @@ namespace Tonic {
     class Generator_{
       
     public:
+      
       Generator_();
       virtual ~Generator_();
       
       virtual void tick( TonicFrames& frames, const SynthesisContext_ &context );
-      
-      // mutex for swapping inputs, etc
-      void lockMutex();
-      void unlockMutex();
       
       bool isStereoOutput(){ return isStereoOutput_; };
       
@@ -40,117 +37,55 @@ namespace Tonic {
       
       // override point for defining generator behavior
       // subclasses should implment to fill frames with new data
-      virtual void computeSynthesisBlock( const SynthesisContext_ &context ) = 0;
+      virtual void computeSynthesisBlock( const SynthesisContext_ &context ) {};
 
       
       bool            isStereoOutput_;
       TonicFrames     outputFrames_;
       unsigned long   lastFrameIndex_;
       
-      TONIC_MUTEX_T genMutex_;
-
     };
     
     inline void Generator_::tick(TonicFrames &frames, const SynthesisContext_ &context ){
       
       // check context to see if we need new frames
       if (context.forceNewOutput || lastFrameIndex_ != context.elapsedFrames){
-        lockMutex();
         computeSynthesisBlock(context);
-        unlockMutex();
         lastFrameIndex_ = context.elapsedFrames;
       }
     
       // copy synthesis block to frames passed in
       frames.copy(outputFrames_);
       
-#ifdef TONIC_DEBUG
-      for(int i = 0; i < frames.frames(); i++){
-        for(int j = 0; j < frames.channels(); j++){
-          if(!isfinite(frames(i,j))){
-            Tonic::error("Generator_::tick NaN or inf detected.", true);
-          }
-        }
-      }
-#endif
-      
-      
     }
-    
-    inline void Generator_::lockMutex(){
-      TONIC_MUTEX_LOCK(&genMutex_);
-    }
-    
-    inline void Generator_::unlockMutex(){
-      TONIC_MUTEX_UNLOCK(&genMutex_);
-    }
-    
-    /////////////////////
-
-    class PassThroughGenerator_ : public Tonic_::Generator_{
-    public:
-      void computeSynthesisBlock( const SynthesisContext_ &context ) {};
-    };
 
   }
 
   
-  class Generator{
-  protected:
-    Tonic_::Generator_* mGen;
-    int* pcount;
+  class Generator : public TonicSmartPointer<Tonic_::Generator_>{
+
   public:
-    Generator() : mGen( new Tonic_::PassThroughGenerator_() ), pcount(new int(1)) {}
-    Generator(const Generator& r): mGen(r.mGen), pcount(r.pcount){(*pcount)++;}
-    Generator& operator=(const Generator& r)
-    {
-      if(mGen == r.mGen) return *this;
-      if(--(*pcount) == 0){
-        delete mGen;
-        delete pcount;
-      }
-      mGen = r.mGen;
-      pcount = r.pcount;
-      (*pcount)++;
-      return *this;
-    }
     
-    ~Generator(){
-      if(--(*pcount) == 0){
-        delete mGen;
-        delete pcount;
-      }
-    }
-    
-    bool operator==(const Generator& r){
-      return mGen == r.mGen;
-    }
+    Generator( Tonic_::Generator_ * gen = new Tonic_::Generator_ ) : TonicSmartPointer<Tonic_::Generator_>(gen) {}
     
     inline bool isStereoOutput(){
-      return mGen->isStereoOutput();
+      return obj->isStereoOutput();
     }
     
     virtual void tick(TonicFrames& frames, const Tonic_::SynthesisContext_ & context){
-      mGen->tick(frames, context);
+      obj->tick(frames, context);
     }
 
   };
   
-  template<class GenType> class TemplatedGenerator : public Generator{
+  template<class GenType>
+  class TemplatedGenerator : public Generator{
   protected:
     GenType* gen(){
-      return static_cast<GenType*>(mGen);
+      return static_cast<GenType*>(obj);
     }
   public:
-    TemplatedGenerator(){
-      delete mGen;
-      mGen = new GenType();
-    }
-  };
-  
-  class PassThroughGenerator : public TemplatedGenerator<Tonic_::PassThroughGenerator_>{
-  public:
-  
+    TemplatedGenerator() : Generator(new GenType) {}
   };
   
 }
@@ -165,9 +100,7 @@ namespace Tonic {
                                                                                         \
                                                                                         \
   generatorClassName& methodNameInGenerator(Generator arg){                             \
-    this->gen()->lockMutex();                                                           \
     this->gen()->methodNameInGenerator_(arg);                                           \
-    this->gen()->unlockMutex();                                                         \
     return static_cast<generatorClassName&>(*this);                                     \
   }                                                                                     \
                                                                                         \

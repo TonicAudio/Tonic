@@ -21,23 +21,57 @@ using std::vector;
 
 namespace Tonic {
 
-  class Mixer : public BufferFiller{
+  namespace Tonic_ {
+    class Mixer_ : public BufferFiller_ {
+      
+    private:
+      
+      TonicFrames workSpace_;
+      vector<BufferFiller> inputs_;
+      
+      void computeSynthesisBlock(const SynthesisContext_ &context);
+      
+    public:
+      
+      Mixer_();
+      
+      void addInput(BufferFiller input);
+      void removeInput(BufferFiller input);
+      
+    };
+    
+    inline void Mixer_::computeSynthesisBlock(const SynthesisContext_ &context)
+    {
+      // Clear buffer
+      outputFrames_.clear();
+      
+      // Tick and add inputs
+      for (unsigned int i=0; i<inputs_.size(); i++){
+        // Tick each bufferFiller every time, with our context (for now).
+        inputs_[i].tick(workSpace_, context);
+        outputFrames_ += workSpace_;
+      }
+      
+    }
+
+  }
   
-  private:
+  class Mixer : public TemplatedBufferFiller<Tonic_::Mixer_>{
     
-    TonicFrames workSpace_;
-    vector<BufferFiller*> inputs_;    
-    TONIC_MUTEX_T input_mutex_;
-        
   public:
-        
-    Mixer();
-    ~Mixer();
     
-    void addInput(BufferFiller* input);
-    void removeInput(BufferFiller* input);
-        
-    void tick( TonicFrames& frames, const Tonic_::SynthesisContext_ & context );
+    void addInput(BufferFiller input){
+      gen()->lockMutex();
+      gen()->addInput(input);
+      gen()->unlockMutex();
+    }
+    
+    void removeInput(BufferFiller input){
+      gen()->lockMutex();
+      gen()->removeInput(input);
+      gen()->unlockMutex();
+    }
+    
   };
 }
 

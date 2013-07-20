@@ -14,17 +14,12 @@
 
 namespace Tonic {
   
-  typedef enum {
-    ControlGeneratorStatusHasNotChanged = 0,
-    ControlGeneratorStatusHasChanged
-    
-  } ControlGeneratorStatus;
-  
   struct ControlGeneratorOutput{
-    TonicFloat value;
-    ControlGeneratorStatus status;
     
-    ControlGeneratorOutput() : value(0), status(ControlGeneratorStatusHasNotChanged) {};
+    TonicFloat  value;
+    bool        triggered;
+    
+    ControlGeneratorOutput() : value(0), triggered(false) {};
   };
 
   namespace Tonic_{
@@ -51,41 +46,29 @@ namespace Tonic {
       
       //! Override this function to implement a new ControlGenerator
       /*!
-          Subclasses should use this function to put new data into lastOutput_
+          Subclasses should use this function to put new data into output_
       */
-      virtual void computeOutput(const SynthesisContext_ & context) = 0;
+      virtual void computeOutput(const SynthesisContext_ & context) {};
       
-      ControlGeneratorOutput  lastOutput_;
+      ControlGeneratorOutput  output_;
       unsigned long           lastFrameIndex_;
       
-      TONIC_MUTEX_T           genMutex_;
-
     };
     
     inline ControlGeneratorOutput ControlGenerator_::tick(const SynthesisContext_ & context){
       
       if (context.forceNewOutput || lastFrameIndex_ != context.elapsedFrames){
         lastFrameIndex_ = context.elapsedFrames;
-        lockMutex();
         computeOutput(context);
-        unlockMutex();
       }
       
 #ifdef TONIC_DEBUG
-      if(lastOutput_.value != lastOutput_.value){
+      if(output_.value != output_.value){
         Tonic::error("ControlGenerator_::tick NaN detected.", true);
       }
 #endif
       
-      return lastOutput_;
-    }
-    
-    inline void ControlGenerator_::lockMutex(){
-      TONIC_MUTEX_LOCK(&genMutex_);
-    }
-    
-    inline void ControlGenerator_::unlockMutex(){
-      TONIC_MUTEX_UNLOCK(&genMutex_);
+      return output_;
     }
 
   }
@@ -93,35 +76,14 @@ namespace Tonic {
   // forward declaration
   class RampedValue;
 
-  class ControlGenerator{
-  protected:
-    Tonic_::ControlGenerator_* mGen;
-    int* pcount;
+  class ControlGenerator : public TonicSmartPointer<Tonic_::ControlGenerator_>{
+
   public:
-    ControlGenerator() : mGen() , pcount(new int(1)) {}
-    ControlGenerator(const ControlGenerator& r): mGen(r.mGen), pcount(r.pcount){(*pcount)++;}
-    ControlGenerator& operator=(const ControlGenerator& r)
-    {
-      if(mGen == r.mGen) return *this;
-      if(--(*pcount) == 0){
-        delete mGen;
-        delete pcount;
-      }
-      mGen = r.mGen;
-      pcount = r.pcount;
-      (*pcount)++;
-      return *this;
-    }
     
-    ~ControlGenerator(){
-      if(--(*pcount) == 0){
-        delete mGen;
-        delete pcount;
-      }
-    }
+    ControlGenerator(Tonic_::ControlGenerator_ * cGen = NULL) : TonicSmartPointer<Tonic_::ControlGenerator_>(cGen) {}
     
     inline ControlGeneratorOutput tick( const Tonic_::SynthesisContext_ & context ){
-      return mGen->tick(context);
+      return obj->tick(context);
     }
     
     // shortcut for creating ramped value
@@ -130,17 +92,15 @@ namespace Tonic {
   };
 
   
-  template<class GenType> class TemplatedControlGenerator : public ControlGenerator{
+  template<class GenType>
+  class TemplatedControlGenerator : public ControlGenerator{
   protected:
     GenType* gen(){
-      return static_cast<GenType*>(mGen);
+      return static_cast<GenType*>(obj);
     }
     
   public:
-    TemplatedControlGenerator(){
-      delete mGen;
-      mGen = new GenType();
-    }
+    TemplatedControlGenerator() : ControlGenerator(new GenType) {}
     
   };
 
@@ -156,9 +116,7 @@ return methodNameInGenerator( ControlValue(arg) );                              
 }                                                                                  \
 \
 generatorClassName& methodNameInGenerator(ControlGenerator arg){                   \
-this->gen()->lockMutex();            \
 this->gen()->methodNameInGenerator_(arg);                                          \
-this->gen()->unlockMutex();            \
 return static_cast<generatorClassName&>(*this);                                    \
 }
 

@@ -8,27 +8,33 @@
 
 #include "SineWave.h"
 
-namespace Tonic { namespace Tonic_{
+namespace Tonic {
   
-  TonicFrames SineWave_::sineTable_;
+  static string const TONIC_SIN_TABLE = "_TONIC_SIN_TABLE_";
   
-  SineWave_::SineWave_(){
-    fillTable();
-  }
-  
-  void SineWave_::fillTable(){
+  SineWave::SineWave(){
     
-    TonicFrames & table = tableReference();
-    if (table.empty()){
-      table.resize( TABLE_SIZE + 1, 1 );
-      TonicFloat temp = 1.0 / TABLE_SIZE;
-      for ( unsigned long i=0; i<=TABLE_SIZE; i++ )
-        table[i] = sinf( TWO_PI * i * temp );
+    // As soon as the first SineWave is allocated, persistent SampleTable is created. Will stay in memory for program lifetime.
+    if (!Tonic_::s_oscTables_.containsObjectNamed(TONIC_SIN_TABLE)){
+      
+      const unsigned int tableSize = 4096;
+      
+      SampleTable sineTable = SampleTable(tableSize+1, 1);
+      TonicFloat norm = 1.0f / tableSize;
+      TonicFloat *data = sineTable.dataPointer();
+      for ( unsigned long i=0; i<tableSize+1; i++ ){
+        *data++ = sinf( TWO_PI * i * norm );
+      }
+      
+      Tonic_::s_oscTables_.insertObject(TONIC_SIN_TABLE, sineTable);
+      
+      this->gen()->setLookupTable(sineTable);
     }
+    else{
+      this->gen()->setLookupTable(Tonic_::s_oscTables_.objectNamed(TONIC_SIN_TABLE));
+    }
+
+    
   }
-  
-} // Namespace Tonic_
-  
-  
   
 } // Namespace Tonic

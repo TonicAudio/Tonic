@@ -24,10 +24,14 @@ namespace Tonic {
       
     public:
       ControlTrigger_();
-      ~ControlTrigger_();
       void trigger(float value);
       
     };
+    
+    inline void ControlTrigger_::computeOutput(const SynthesisContext_ & context){
+      output_.triggered = doTrigger;
+      doTrigger = false;
+    }
     
   }
   
