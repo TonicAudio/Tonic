@@ -3,7 +3,6 @@
 //  Tonic
 //
 //  Created by Morgan Packard on 4/28/13.
-//  Copyright (c) 2013 Nick Donaldson. All rights reserved.
 //
 
 #include "ControlPrinter.h"
