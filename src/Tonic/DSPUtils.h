@@ -73,8 +73,16 @@ namespace Tonic
    */
   void InverseDFT(int length, float *realFreqIn, float *imagFreqIn, float *realTimeOut, float *imagTimeOut);
   
-  // Real Cepstrum
+  //! Real Cepstrum
   void RealCepstrum(int length, float *signalIn, float *realCepstrumOut);
+
+  //! Compute Minimum Phase Reconstruction
+  void MinimumPhase(int n, float *realCepstrum, float *minimumPhase);
+
+  // ---------------- minBLEP Generation --------------------
+
+  //! Generate minBlep
+  float *GenerateMinBLEP(int zeroCrossings, int overSampling, int *lengthOut);
 
 }
 

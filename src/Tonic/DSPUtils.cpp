@@ -103,4 +103,116 @@ namespace Tonic
     delete realFreq;
     delete imagFreq;
   }
+  
+  // Compute Minimum Phase Reconstruction Of Signal
+  void MinimumPhase(int length, float *realCepstrum, float *minimumPhase)
+  {
+    int i, nd2;
+    float *realTime, *imagTime, *realFreq, *imagFreq;
+    
+    nd2 = length / 2;
+    realTime = new float[length];
+    imagTime = new float[length];
+    realFreq = new float[length];
+    imagFreq = new float[length];
+    
+    if((length % 2) == 1)
+    {
+      realTime[0] = realCepstrum[0];
+      for(i = 1; i < nd2; i++)
+        realTime[i] = 2.0f * realCepstrum[i];
+      for(i = nd2; i < length; i++)
+        realTime[i] = 0.0f;
+    }
+    else
+    {
+      realTime[0] = realCepstrum[0];
+      for(i = 1; i < nd2; i++)
+        realTime[i] = 2.0f * realCepstrum[i];
+      realTime[nd2] = realCepstrum[nd2];
+      for(i = nd2 + 1; i < length; i++)
+        realTime[i] = 0.0f;
+    }
+    
+    for(i = 0; i < length; i++)
+      imagTime[i] = 0.0f;
+    
+    DFT(length, realTime, imagTime, realFreq, imagFreq);
+    
+    for(i = 0; i < length; i++)
+      cexp(realFreq[i], imagFreq[i], &realFreq[i], &imagFreq[i]);
+    
+    InverseDFT(length, realTime, imagTime, realFreq, imagFreq);
+    
+    for(i = 0; i < length; i++)
+      minimumPhase[i] = realTime[i];
+    
+    delete realTime;
+    delete imagTime;
+    delete realFreq;
+    delete imagFreq;
+  }
+  
+  // ---------------- minBLEP Generation --------------------
+  
+  // Generate MinBLEP And Return It In An Array Of Floating Point Values
+  float *GenerateMinBLEP(int zeroCrossings, int overSampling, int *lengthOut)
+  {
+    int i, n;
+    float r, a, b;
+    float *buffer1, *buffer2, *minBLEP;
+    
+    n = (zeroCrossings * 2 * overSampling) + 1;
+    
+    // return length of minBLEP table
+    if (lengthOut)
+    {
+      *lengthOut = n;
+    }
+    
+    buffer1 = new float[n];
+    buffer2 = new float[n];
+    
+    // Generate Sinc
+    
+    a = (float)-zeroCrossings;
+    b = (float)zeroCrossings;
+    for(i = 0; i < n; i++)
+    {
+      r = ((float)i) / ((float)(n - 1));
+      buffer1[i] = sinc(a + (r * (b - a)));
+    }
+    
+    // Window Sinc
+    
+    GenerateBlackmanWindow(n, buffer2);
+    for(i = 0; i < n; i++)
+      buffer1[i] *= buffer2[i];
+    
+    // Minimum Phase Reconstruction
+    
+    RealCepstrum(n, buffer1, buffer2);
+    MinimumPhase(n, buffer2, buffer1);
+    
+    // Integrate Into MinBLEP
+    
+    minBLEP = new float[n];
+    a = 0.0f;
+    for(i = 0; i < n; i++)
+    {
+      a += buffer1[i];
+      minBLEP[i] = a;
+    }
+    
+    // Normalize
+    a = minBLEP[n - 1];
+    a = 1.0f / a;
+    for(i = 0; i < n; i++)
+      minBLEP[i] *= a;
+    
+    delete buffer1;
+    delete buffer2;
+    return minBLEP;
+  }
+
 }
