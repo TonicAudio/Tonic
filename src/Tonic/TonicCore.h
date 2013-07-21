@@ -208,6 +208,10 @@ namespace Tonic {
     return result;
   }
   
+  inline static TonicFloat lerp(TonicFloat x1, TonicFloat x2, TonicFloat f){
+    return (x1 + f*(x2-x1));
+  }
+  
   inline TonicFloat sinc(float x)
   {
     TonicFloat pi_x;

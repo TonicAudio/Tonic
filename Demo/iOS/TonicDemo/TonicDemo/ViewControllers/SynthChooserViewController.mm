@@ -49,15 +49,6 @@ using namespace Tonic;
       {
         SynthDemoDef* def = [[SynthDemoDef alloc] init];
         [synthDefinitions addObject:def];
-        def.synthClassName = @"ArbitraryTableLookupSynth";
-        def.synthDisplayName = @"Build lookup tables dynamically";
-        def.synthDescription = @"";
-        def.synthInstructions = @"Arbitrary oscillators!";
-      }
-      
-      {
-        SynthDemoDef* def = [[SynthDemoDef alloc] init];
-        [synthDefinitions addObject:def];
         def.synthClassName = @"SineSumSynth";
         def.synthDisplayName = @"10-Sine Additive Spread";
         def.synthDescription = @"10 sinewave oscillators in fifths";
@@ -65,6 +56,15 @@ using namespace Tonic;
         def.synthAction = ^(Tonic::Synth synth, CGPoint touchPointNorm){
           synth.setParameter("pitch", touchPointNorm.y);
         };
+      }
+      
+      {
+        SynthDemoDef* def = [[SynthDemoDef alloc] init];
+        [synthDefinitions addObject:def];
+        def.synthClassName = @"ArbitraryTableLookupSynth";
+        def.synthDisplayName = @"Build lookup tables dynamically";
+        def.synthDescription = @"";
+        def.synthInstructions = @"Arbitrary oscillators!";
       }
       
       {
@@ -89,7 +89,6 @@ using namespace Tonic;
         };
       }
       
-      
       {
         SynthDemoDef* def = [[SynthDemoDef alloc] init];
         [synthDefinitions addObject:def];
@@ -100,6 +99,15 @@ using namespace Tonic;
         def.synthAction = ^(Tonic::Synth synth, CGPoint touchPointNorm){
           synth.setParameter("noiseFreq", 0.1 + 1000 * touchPointNorm.y * touchPointNorm.y);
         };
+      }
+      
+      {
+        SynthDemoDef* def = [[SynthDemoDef alloc] init];
+        [synthDefinitions addObject:def];
+        def.synthClassName = @"AAOscillatorTestSynth";
+        def.synthDisplayName = @"Bandlimited oscillators";
+        def.synthDescription = @"";
+        def.synthInstructions = @"Bandlimited oscillators!";
       }
       
       {

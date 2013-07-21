@@ -13,6 +13,7 @@
 #define __Tonic__RectWave__
 
 #include "Generator.h"
+#include "BLEPOscillator.h"
 
 #define TONIC_RECT_RES 4096
 
@@ -20,6 +21,7 @@ namespace Tonic {
   
   namespace Tonic_ {
 
+    //! Quick-and-dirty non-bandlimited rect wave
     class RectWave_ : public Generator_
     {
       
@@ -96,10 +98,70 @@ namespace Tonic {
         
     }
     
+    // Bandlimited Rect Wave
+    class RectWaveBL_ : public BLEPOscillator_
+    {
+      
+    protected:
+      
+      // Input Generators
+      Generator   pwmGen_;
+      TonicFrames pwmFrames_;
+      
+    public:
+      
+      inline void computeSynthesisBlock( const SynthesisContext_ &context )
+      {
+        
+        static const TonicFloat rateConstant =  (TonicFloat)(BLEPlength_) / Tonic::sampleRate();
+        
+        // tick freq and pwm
+        freqGen_.tick(freqFrames_, context);
+        pwmGen_.tick(pwmFrames_, context);
+        
+        
+        TonicFloat *outptr = &outputFrames_[0];
+        TonicFloat *freqptr = &freqFrames_[0];
+        TonicFloat *pwmptr = &pwmFrames_[0];
+        
+        FastPhasor sd;
+        
+        // pre-multiply rate constant for speed
+#ifdef USE_APPLE_ACCELERATE
+        vDSP_vsmul(freqptr, 1, &rateConstant, freqptr, 1, kSynthesisBlockSize);
+#else
+        for (unsigned int i=0; i<kSynthesisBlockSize; i++){
+          *freqptr++ *= rateConstant;
+        }
+        freqptr = &freqFrames_[0];
+#endif
+        
+        sd.d = BIT32DECPT;
+        TonicInt32 offs, msbi = sd.i[1];
+        double ps = phase_ + BIT32DECPT;
+        for ( unsigned int i=0; i<outputFrames_.frames(); i++ ) {
+          
+          sd.d = ps;
+          ps += *freqptr++;
+          offs = sd.i[1] & (BLEPlength_-1);
+          sd.i[1] = msbi;
+          
+          *outptr++ = offs > (BLEPlength_ * *pwmptr++) ? -1.0f : 1.0f;
+        }
+        
+        sd.d = BIT32DECPT * BLEPlength_;
+        msbi = sd.i[1];
+        sd.d = ps + (BIT32DECPT * BLEPlength_ - BIT32DECPT);
+        sd.i[1] = msbi;
+        phase_ = sd.d - BIT32DECPT * BLEPlength_;
+      }
+      
+    };
+    
   }
   
-  //! Quick-and-dirty rectangular wave.
-  /*! 
+  //! Quick-and-dirty rectangular wave
+  /*!
       WARNING: Is NOT anti-aliased!! Best for use as LFO, or if you just don't care :)
   */
   class RectWave : public TemplatedGenerator<Tonic_::RectWave_>{
@@ -112,6 +174,15 @@ namespace Tonic {
     //! Set the pulse width of the rectangle. Input should be clipped between 0-1
     createGeneratorSetters(RectWave, pwm, setPwmGenerator);
 
+  };
+  
+  //! Bandlimited rectangular wave
+  class RectWaveBL : public TemplatedGenerator<Tonic_::RectWaveBL_>{
+    
+  public:
+    
+    createGeneratorSetters(RectWaveBL, freq, setFreqGen);
+    
   };
 }
 

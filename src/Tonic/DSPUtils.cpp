@@ -92,7 +92,7 @@ namespace Tonic
     
     // Perform Inverse FFT
     
-    InverseDFT(length, realTime, imagTime, realFreq, imagFreq);
+    InverseDFT(length, realFreq, imagFreq, realTime, imagTime);
     
     // Output Real Part Of FFT
     for(i = 0; i < length; i++)
@@ -142,7 +142,7 @@ namespace Tonic
     for(i = 0; i < length; i++)
       cexp(realFreq[i], imagFreq[i], &realFreq[i], &imagFreq[i]);
     
-    InverseDFT(length, realTime, imagTime, realFreq, imagFreq);
+    InverseDFT(length, realFreq, imagFreq, realTime, imagTime);
     
     for(i = 0; i < length; i++)
       minimumPhase[i] = realTime[i];
@@ -164,10 +164,10 @@ namespace Tonic
     
     n = (zeroCrossings * 2 * overSampling) + 1;
     
-    // return length of minBLEP table
+    // return length of minBLEP table (minus extra sample for overlap)
     if (lengthOut)
     {
-      *lengthOut = n;
+      *lengthOut = n-1;
     }
     
     buffer1 = new float[n];
@@ -187,7 +187,9 @@ namespace Tonic
     
     GenerateBlackmanWindow(n, buffer2);
     for(i = 0; i < n; i++)
+    {
       buffer1[i] *= buffer2[i];
+    }
     
     // Minimum Phase Reconstruction
     
@@ -200,15 +202,17 @@ namespace Tonic
     a = 0.0f;
     for(i = 0; i < n; i++)
     {
-      a += buffer1[i];
-      minBLEP[i] = a;
+        a += buffer1[i];
+        minBLEP[i] = a;
     }
     
     // Normalize
     a = minBLEP[n - 1];
     a = 1.0f / a;
     for(i = 0; i < n; i++)
+    {
       minBLEP[i] *= a;
+    }
     
     delete buffer1;
     delete buffer2;

@@ -113,5 +113,4 @@ namespace Tonic
 }
 
 
-
 #endif /* defined(__TonicLib__DSPUtils__) */

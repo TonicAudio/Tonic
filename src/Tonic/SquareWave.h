@@ -11,7 +11,8 @@
 
 #include "RectWave.h"
 
-namespace Tonic {
+namespace Tonic
+{
   
   //! Quck-and-dirty square wave
   class SquareWave : public TemplatedGenerator<Tonic_::RectWave_>{
@@ -25,6 +26,8 @@ namespace Tonic {
     createGeneratorSetters(SquareWave, freq, setFrequencyGenerator);
     
   };
+  
+  //! Bandlimited square wave
 
 }
 
