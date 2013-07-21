@@ -98,7 +98,7 @@ namespace Tonic
   //! Real Cepstrum
   void RealCepstrum(int length, float *signalIn, float *realCepstrumOut);
 
-  //! Compute Minimum Phase Reconstruction
+  //! Compute Minimum Phase Reconstruction of singal from its real cepstrum
   void MinimumPhase(int n, float *realCepstrum, float *minimumPhase);
 
   // ---------------- minBLEP Generation --------------------
