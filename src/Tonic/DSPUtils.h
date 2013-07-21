@@ -39,7 +39,29 @@ namespace Tonic
   
 // --------------- Window Generation -------------------
   
-  // TODO: Hann, Hamming, ?
+  //! Hann Window generation
+  inline void GenerateHannWindow(int length, float *output)
+  {
+    int m = length - 1;
+    int i;
+    
+    for (i=0; i <= m; i++)
+    {
+      output[i] = 0.5f*(1.f - cosf((2 * PI * i)/m));
+    }
+  }
+  
+  //! Hamming Window generation
+  inline void GenerateHammingWindow(int length, float *output)
+  {
+    int m = length - 1;
+    int i;
+    
+    for (i=0; i <= m; i++)
+    {
+      output[i] = 0.54f - 0.46f * cosf((2 * PI * i)/m);
+    }
+  }
   
   //! Blackman Window generation
   inline void GenerateBlackmanWindow(int length, float *output)
@@ -82,6 +104,10 @@ namespace Tonic
   // ---------------- minBLEP Generation --------------------
 
   //! Generate minBlep
+  /*!
+      Returns pointer to buffer of length *lengthOut.
+      Caller is responsible for freeing heap-allocated buffer.
+   */
   float *GenerateMinBLEP(int zeroCrossings, int overSampling, int *lengthOut);
 
 }
