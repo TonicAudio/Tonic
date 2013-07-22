@@ -7,13 +7,13 @@
 
 #include "BLEPOscillator.h"
 
-#define TONIC_MINBLEP_ZEROCROSSINGS   256
-#define TONIC_MINBLEP_OVERSAMPLING    4
+#define TONIC_MINBLEP_ZEROCROSSINGS   16
+#define TONIC_MINBLEP_OVERSAMPLING    32
 
 namespace Tonic { namespace Tonic_{
   
   TonicFloat * BLEPOscillator_::minBLEP_ = NULL;
-  int BLEPOscillator_::BLEPlength_ = 0;
+  int BLEPOscillator_::minBLEPlength_ = 0;
   
   BLEPOscillator_::BLEPOscillator_() :
     phase_(0),
@@ -27,10 +27,11 @@ namespace Tonic { namespace Tonic_{
       // (it's sort of slow)
       if (NULL == minBLEP_)
       {
-        minBLEP_ = GenerateMinBLEP(TONIC_MINBLEP_ZEROCROSSINGS, TONIC_MINBLEP_OVERSAMPLING, &BLEPlength_);
+        minBLEP_ = GenerateMinBLEP(TONIC_MINBLEP_ZEROCROSSINGS, TONIC_MINBLEP_OVERSAMPLING, &minBLEPlength_);
+        minBLEPlength_ = TONIC_MINBLEP_ZEROCROSSINGS * TONIC_MINBLEP_OVERSAMPLING * 2;
       }
     
-      lBuffer_ = BLEPlength_/TONIC_MINBLEP_OVERSAMPLING;
+      lBuffer_ = minBLEPlength_/TONIC_MINBLEP_OVERSAMPLING;
       ringBuf_ = new TonicFloat[lBuffer_+1];
       memset(ringBuf_, 0, (lBuffer_+1)*sizeof(TonicFloat));
   }

@@ -40,7 +40,6 @@ namespace Tonic {
       public:
       
         RectWave_();
-        ~RectWave_();
         
         void setFrequencyGenerator( Generator gen ){
           freqGen_ = gen;
@@ -98,7 +97,11 @@ namespace Tonic {
         
     }
     
-    // Bandlimited Rect Wave
+    
+    // -------------------------------------
+    
+    
+    //! Bandlimited Rect Wave
     class RectWaveBL_ : public BLEPOscillator_
     {
       
@@ -107,56 +110,61 @@ namespace Tonic {
       // Input Generators
       Generator   pwmGen_;
       TonicFrames pwmFrames_;
+          
+      void computeSynthesisBlock( const SynthesisContext_ &context );
       
     public:
       
-      inline void computeSynthesisBlock( const SynthesisContext_ &context )
-      {
-        
-        static const TonicFloat rateConstant =  (TonicFloat)(BLEPlength_) / Tonic::sampleRate();
-        
-        // tick freq and pwm
-        freqGen_.tick(freqFrames_, context);
-        pwmGen_.tick(pwmFrames_, context);
-        
-        
-        TonicFloat *outptr = &outputFrames_[0];
-        TonicFloat *freqptr = &freqFrames_[0];
-        TonicFloat *pwmptr = &pwmFrames_[0];
-        
-        FastPhasor sd;
-        
-        // pre-multiply rate constant for speed
+      RectWaveBL_();
+      void setPWMGen(Generator gen) { pwmGen_ = gen; };
+
+    };
+    
+    inline void RectWaveBL_::computeSynthesisBlock(const Tonic_::SynthesisContext_ &context)
+    {
+      
+      static const TonicFloat rateConstant =  (TonicFloat)(minBLEPlength_) / Tonic::sampleRate();
+      
+      // tick freq and pwm
+      freqGen_.tick(freqFrames_, context);
+      pwmGen_.tick(pwmFrames_, context);
+      
+      
+      TonicFloat *outptr = &outputFrames_[0];
+      TonicFloat *freqptr = &freqFrames_[0];
+      TonicFloat *pwmptr = &pwmFrames_[0];
+      
+      FastPhasor sd;
+      
+      // pre-multiply rate constant for speed
 #ifdef USE_APPLE_ACCELERATE
-        vDSP_vsmul(freqptr, 1, &rateConstant, freqptr, 1, kSynthesisBlockSize);
+      vDSP_vsmul(freqptr, 1, &rateConstant, freqptr, 1, kSynthesisBlockSize);
 #else
-        for (unsigned int i=0; i<kSynthesisBlockSize; i++){
-          *freqptr++ *= rateConstant;
-        }
-        freqptr = &freqFrames_[0];
+      for (unsigned int i=0; i<kSynthesisBlockSize; i++){
+        *freqptr++ *= rateConstant;
+      }
+      freqptr = &freqFrames_[0];
 #endif
+      
+      sd.d = BIT32DECPT;
+      TonicInt32 offs, msbi = sd.i[1];
+      double ps = phase_ + BIT32DECPT;
+      for ( unsigned int i=0; i<outputFrames_.frames(); i++ ) {
         
-        sd.d = BIT32DECPT;
-        TonicInt32 offs, msbi = sd.i[1];
-        double ps = phase_ + BIT32DECPT;
-        for ( unsigned int i=0; i<outputFrames_.frames(); i++ ) {
-          
-          sd.d = ps;
-          ps += *freqptr++;
-          offs = sd.i[1] & (BLEPlength_-1);
-          sd.i[1] = msbi;
-          
-          *outptr++ = offs > (BLEPlength_ * *pwmptr++) ? -1.0f : 1.0f;
-        }
-        
-        sd.d = BIT32DECPT * BLEPlength_;
-        msbi = sd.i[1];
-        sd.d = ps + (BIT32DECPT * BLEPlength_ - BIT32DECPT);
+        sd.d = ps;
+        ps += *freqptr++;
         sd.i[1] = msbi;
-        phase_ = sd.d - BIT32DECPT * BLEPlength_;
+        offs = sd.i[1] & (minBLEPlength_-1);
+
+        //*outptr++ = offs > (minBLEPlength_ * *pwmptr++) ? -1.0f : 1.0f;
       }
       
-    };
+      sd.d = BIT32DECPT * minBLEPlength_;
+      msbi = sd.i[1];
+      sd.d = ps + (BIT32DECPT * minBLEPlength_ - BIT32DECPT);
+      sd.i[1] = msbi;
+      phase_ = sd.d - BIT32DECPT * minBLEPlength_;
+    }
     
   }
   
@@ -181,8 +189,11 @@ namespace Tonic {
     
   public:
     
+    //! Set the frequency of the waveform
     createGeneratorSetters(RectWaveBL, freq, setFreqGen);
     
+    //! Set the pulse width of the rectangle. Input should be clipped between 0-1
+    createGeneratorSetters(RectWaveBL, pwm, setPWMGen);
   };
 }
 

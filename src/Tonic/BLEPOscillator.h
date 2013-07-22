@@ -42,7 +42,7 @@ namespace Tonic {
       
       // Lookup table
       static TonicFloat * minBLEP_;
-      static int BLEPlength_;
+      static int minBLEPlength_;
       
       // phase accumulator and fast phasor
       FastPhasor fastPhasor_;

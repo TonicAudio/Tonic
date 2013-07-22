@@ -164,10 +164,9 @@ namespace Tonic
     
     n = (zeroCrossings * 2 * overSampling) + 1;
     
-    // return length of minBLEP table (minus extra sample for overlap)
-    if (lengthOut)
+    if (lengthOut != NULL)
     {
-      *lengthOut = n-1;
+      *lengthOut = n;
     }
     
     buffer1 = new float[n];
@@ -184,12 +183,21 @@ namespace Tonic
     }
     
     // Window Sinc
+    printf("\n\nn = %d", n);
+    printf("\n\ns = [");
     
     GenerateBlackmanWindow(n, buffer2);
     for(i = 0; i < n; i++)
     {
       buffer1[i] *= buffer2[i];
+      printf("%.10f", buffer1[i]);
+      if (i != n-1)
+      {
+        printf(",\n");
+      }
     }
+    
+    printf("];\n\n");
     
     // Minimum Phase Reconstruction
     
@@ -213,7 +221,7 @@ namespace Tonic
     {
       minBLEP[i] *= a;
     }
-    
+        
     delete buffer1;
     delete buffer2;
     return minBLEP;

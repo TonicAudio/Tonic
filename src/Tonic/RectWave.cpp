@@ -16,7 +16,10 @@ namespace Tonic { namespace Tonic_{
     pwmFrames_.resize(kSynthesisBlockSize, 1, 0);
   }
   
-  RectWave_::~RectWave_(){
+  // ------
+  
+  RectWaveBL_::RectWaveBL_()
+  {
     
   }
   
