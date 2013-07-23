@@ -23,7 +23,7 @@
 #ifndef __Tonic__BLEPOscillator__
 #define __Tonic__BLEPOscillator__
 
-// BOTH of thes must be powers of two
+// Do not change these or you'll have a bad time.
 #define TONIC_MINBLEP_ZEROCROSSINGS   128
 #define TONIC_MINBLEP_OVERSAMPLING    16
 
@@ -45,8 +45,8 @@ namespace Tonic {
       // TODO: Hardsync?
       
       // Lookup table
-      static TonicFloat * minBLEP_;
-      static int minBLEPlength_;
+      static const TonicFloat minBLEP_[];
+      static const int minBLEPlength_;
       
       // phase accumulator
       float phase_;
@@ -66,7 +66,7 @@ namespace Tonic {
         
         TonicFloat f;
         TonicFloat * outptr = ringBuf_ + iBuffer_;
-        TonicFloat * inptr = minBLEP_ + (int)bufOffset;
+        TonicFloat * inptr = (TonicFloat*)minBLEP_ + (int)bufOffset;
         TonicFloat * bufEnd = ringBuf_ + lBuffer_;
         
         float frac = fmodf(bufOffset,1.0);

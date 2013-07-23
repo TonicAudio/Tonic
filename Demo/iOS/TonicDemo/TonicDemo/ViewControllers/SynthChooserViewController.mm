@@ -17,9 +17,7 @@ using namespace Tonic;
   NSMutableArray* synthDefinitions;
 }
 
-
 @end
-
 
 @implementation SynthChooserViewController
 
@@ -28,7 +26,6 @@ using namespace Tonic;
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
     
-      
       // Add synths here in order to have them displayed in the demo app.
       // Note -- add the "registerSynth" macro to your synth file or you'll get mysterious
       // synth not found errors at runtime.

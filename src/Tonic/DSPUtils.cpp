@@ -155,7 +155,15 @@ namespace Tonic
   
   // ---------------- minBLEP Generation --------------------
   
-  // Generate MinBLEP And Return It In An Array Of Floating Point Values
+  //! Generate MinBLEP And Return It In An Array Of Floating Point Values
+  /*! 
+      This can be used to create a new minimum phase bandlimited step function
+      to store for later use as a lookup table.
+   
+      Note that BLEPOscillator.cpp already has a runtime constant version of a BLEP
+      for use with the BLEP-based oscillators.
+   
+   */
   float *GenerateMinBLEP(int zeroCrossings, int overSampling)
   {
     int i, n, m;
