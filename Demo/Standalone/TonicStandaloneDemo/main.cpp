@@ -68,7 +68,9 @@ int main(int argc, const char * argv[])
     
     LPF24 filter = LPF24().Q(2).cutoff( filterFreq );
     
-    Generator output = (( tone * env ) >> filter >> delay) * 0.3;
+//    Generator output = (( tone * env ) >> filter >> delay) * 0.3;
+    
+    Generator output = RectWaveBL().freq( (SquareWave().freq(0.25) * 0.5 + 0.5) * 2000 + 80 ) * 0.1;
     
     synth.setOutputGen(output);
     

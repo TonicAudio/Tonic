@@ -206,6 +206,7 @@ namespace Tonic {
     //! Set the pulse width of the rectangle. Input should be clipped between 0-1
     createGeneratorSetters(RectWaveBL, pwm, setPWMGen);
   };
+  
 }
 
 #endif /* defined(__Tonic__RectWave__) */

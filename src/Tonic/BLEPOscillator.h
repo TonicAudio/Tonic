@@ -24,8 +24,8 @@
 #define __Tonic__BLEPOscillator__
 
 // BOTH of thes must be powers of two
-#define TONIC_MINBLEP_ZEROCROSSINGS   16
-#define TONIC_MINBLEP_OVERSAMPLING    32
+#define TONIC_MINBLEP_ZEROCROSSINGS   128
+#define TONIC_MINBLEP_OVERSAMPLING    16
 
 #include "Generator.h"
 #include "DSPUtils.h"
