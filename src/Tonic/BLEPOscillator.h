@@ -48,8 +48,8 @@ namespace Tonic {
       static TonicFloat * minBLEP_;
       static int minBLEPlength_;
       
-      // phase accumulator and fast phasor
-      double phase_;
+      // phase accumulator
+      float phase_;
       
       // ring buffer and accumulator
       TonicFloat * ringBuf_;

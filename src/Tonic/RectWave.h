@@ -173,6 +173,9 @@ namespace Tonic {
           if (++iBuffer_ >= lBuffer_) iBuffer_ = 0;
         }
         
+        // remove DC offset
+        *outptr = (*outptr * 2.f) - 1.f;
+        
       }
 
     }
