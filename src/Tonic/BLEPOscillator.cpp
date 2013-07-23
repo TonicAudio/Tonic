@@ -17,6 +17,7 @@ namespace Tonic { namespace Tonic_{
     accum_(0),
     lBuffer_(0),
     iBuffer_(0),
+    nInit_(0),
     ringBuf_(NULL)
   {
       // Generate static minBLEP lookup

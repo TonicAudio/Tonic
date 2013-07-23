@@ -104,10 +104,16 @@ using namespace Tonic;
       {
         SynthDemoDef* def = [[SynthDemoDef alloc] init];
         [synthDefinitions addObject:def];
-        def.synthClassName = @"AAOscillatorTestSynth";
-        def.synthDisplayName = @"Bandlimited oscillators";
-        def.synthDescription = @"";
-        def.synthInstructions = @"Bandlimited oscillators!";
+        def.synthClassName = @"BandlimitedOscillatorTest";
+        def.synthDisplayName = @"Aliasing is lame";
+        def.synthDescription = @"Compare aliasing and bandlimited version of square wave";
+        def.synthInstructions = @"Pan up and down to change blend.\nDown = aliasing\nUp = bandlimited";
+        def.synthAction = ^(Tonic::Synth synth, CGPoint touchPointNorm){
+          
+          // let it reach full blend before the end
+          synth.setParameter("blend", clamp(touchPointNorm.y * 1.5 - 0.25,0,1));
+          
+        };
       }
       
       {
@@ -118,7 +124,6 @@ using namespace Tonic;
         def.synthDescription = @"Popcorn in SPAAAACE";
         def.shouldAutoGenUI = YES;
       }
-      
       
       {
         SynthDemoDef* def = [[SynthDemoDef alloc] init];
