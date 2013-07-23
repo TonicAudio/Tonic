@@ -7,9 +7,6 @@
 
 #include "BLEPOscillator.h"
 
-#define TONIC_MINBLEP_ZEROCROSSINGS   16
-#define TONIC_MINBLEP_OVERSAMPLING    32
-
 namespace Tonic { namespace Tonic_{
   
   TonicFloat * BLEPOscillator_::minBLEP_ = NULL;
@@ -27,13 +24,15 @@ namespace Tonic { namespace Tonic_{
       // (it's sort of slow)
       if (NULL == minBLEP_)
       {
-        minBLEP_ = GenerateMinBLEP(TONIC_MINBLEP_ZEROCROSSINGS, TONIC_MINBLEP_OVERSAMPLING, &minBLEPlength_);
+        minBLEP_ = GenerateMinBLEP(TONIC_MINBLEP_ZEROCROSSINGS, TONIC_MINBLEP_OVERSAMPLING);
         minBLEPlength_ = TONIC_MINBLEP_ZEROCROSSINGS * TONIC_MINBLEP_OVERSAMPLING * 2;
       }
     
       lBuffer_ = minBLEPlength_/TONIC_MINBLEP_OVERSAMPLING;
       ringBuf_ = new TonicFloat[lBuffer_+1];
       memset(ringBuf_, 0, (lBuffer_+1)*sizeof(TonicFloat));
+    
+      freqFrames_.resize(kSynthesisBlockSize, 1, 0);
   }
   
   BLEPOscillator_::~BLEPOscillator_()

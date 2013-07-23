@@ -20,7 +20,8 @@ namespace Tonic { namespace Tonic_{
   
   RectWaveBL_::RectWaveBL_()
   {
-    
+    pwmGen_ = FixedValue(0.5);
+    pwmFrames_.resize(kSynthesisBlockSize, 1, 0);
   }
   
 } // Namespace Tonic_

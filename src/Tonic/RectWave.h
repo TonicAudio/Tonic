@@ -123,19 +123,16 @@ namespace Tonic {
     inline void RectWaveBL_::computeSynthesisBlock(const Tonic_::SynthesisContext_ &context)
     {
       
-      static const TonicFloat rateConstant =  (TonicFloat)(minBLEPlength_) / Tonic::sampleRate();
+      static const TonicFloat rateConstant =  1.0f / Tonic::sampleRate();
       
       // tick freq and pwm
       freqGen_.tick(freqFrames_, context);
       pwmGen_.tick(pwmFrames_, context);
       
-      
       TonicFloat *outptr = &outputFrames_[0];
       TonicFloat *freqptr = &freqFrames_[0];
       TonicFloat *pwmptr = &pwmFrames_[0];
-      
-      FastPhasor sd;
-      
+            
       // pre-multiply rate constant for speed
 #ifdef USE_APPLE_ACCELERATE
       vDSP_vsmul(freqptr, 1, &rateConstant, freqptr, 1, kSynthesisBlockSize);
@@ -145,25 +142,39 @@ namespace Tonic {
       }
       freqptr = &freqFrames_[0];
 #endif
-      
-      sd.d = BIT32DECPT;
-      TonicInt32 offs, msbi = sd.i[1];
-      double ps = phase_ + BIT32DECPT;
-      for ( unsigned int i=0; i<outputFrames_.frames(); i++ ) {
+            
+      // TODO: Maybe do this using a fast phasor for wraparound speed
+      for (unsigned int i=0; i<kSynthesisBlockSize; i++, pwmptr++, freqptr++, outptr++){
         
-        sd.d = ps;
-        ps += *freqptr++;
-        sd.i[1] = msbi;
-        offs = sd.i[1] & (minBLEPlength_-1);
-
-        //*outptr++ = offs > (minBLEPlength_ * *pwmptr++) ? -1.0f : 1.0f;
+        phase_ += *freqptr;
+        
+        // add BLEP at end
+        if (phase_ >= 1.0)
+        {
+          phase_ -= 1.0;
+          accum_ = 0.0f;
+          addBLEP(phase_/(*freqptr), 1.0f);
+        }
+        
+        // add BLEP when we exceed pwm
+        if (accum_ == 0.f && phase_ > *pwmptr)
+        {
+          accum_ = 1.0f;
+          addBLEP((phase_ - (*pwmptr))/(*freqptr),-1.0f);
+        }
+        
+        *outptr = accum_;
+        
+        // add BLEP buffer contents
+        if (nInit_ > 0)
+        {
+          *outptr += ringBuf_[iBuffer_];
+          nInit_--;
+          if (++iBuffer_ >= lBuffer_) iBuffer_ = 0;
+        }
+        
       }
-      
-      sd.d = BIT32DECPT * minBLEPlength_;
-      msbi = sd.i[1];
-      sd.d = ps + (BIT32DECPT * minBLEPlength_ - BIT32DECPT);
-      sd.i[1] = msbi;
-      phase_ = sd.d - BIT32DECPT * minBLEPlength_;
+
     }
     
   }

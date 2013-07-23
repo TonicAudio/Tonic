@@ -108,7 +108,7 @@ namespace Tonic
       Returns pointer to buffer of length *lengthOut.
       Caller is responsible for freeing heap-allocated buffer.
    */
-  float *GenerateMinBLEP(int zeroCrossings, int overSampling, int *lengthOut);
+  float *GenerateMinBLEP(int zeroCrossings, int overSampling);
 
 }
 

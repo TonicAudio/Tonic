@@ -156,66 +156,56 @@ namespace Tonic
   // ---------------- minBLEP Generation --------------------
   
   // Generate MinBLEP And Return It In An Array Of Floating Point Values
-  float *GenerateMinBLEP(int zeroCrossings, int overSampling, int *lengthOut)
+  float *GenerateMinBLEP(int zeroCrossings, int overSampling)
   {
-    int i, n;
+    int i, n, m;
     float r, a, b;
     float *buffer1, *buffer2, *minBLEP;
     
+    // use power-of-two for DFT/Cepstrum for potential future
+    // speed boost
     n = (zeroCrossings * 2 * overSampling) + 1;
+    m = n-1;
     
-    if (lengthOut != NULL)
-    {
-      *lengthOut = n;
-    }
-    
-    buffer1 = new float[n];
-    buffer2 = new float[n];
+    buffer1 = new float[m];
+    buffer2 = new float[m];
     
     // Generate Sinc
     
     a = (float)-zeroCrossings;
     b = (float)zeroCrossings;
-    for(i = 0; i < n; i++)
+    for(i = 0; i < m; i++)
     {
-      r = ((float)i) / ((float)(n - 1));
+      r = ((float)i) / ((float)m);
       buffer1[i] = sinc(a + (r * (b - a)));
     }
     
-    // Window Sinc
-    printf("\n\nn = %d", n);
-    printf("\n\ns = [");
-    
-    GenerateBlackmanWindow(n, buffer2);
-    for(i = 0; i < n; i++)
+    GenerateBlackmanWindow(m, buffer2);
+    for(i = 0; i < m; i++)
     {
       buffer1[i] *= buffer2[i];
-      printf("%.10f", buffer1[i]);
-      if (i != n-1)
-      {
-        printf(",\n");
-      }
     }
-    
-    printf("];\n\n");
-    
+        
     // Minimum Phase Reconstruction
     
-    RealCepstrum(n, buffer1, buffer2);
-    MinimumPhase(n, buffer2, buffer1);
+    RealCepstrum(m, buffer1, buffer2);
+    MinimumPhase(m, buffer2, buffer1);
     
     // Integrate Into MinBLEP
     
     minBLEP = new float[n];
     a = 0.0f;
-    for(i = 0; i < n; i++)
+    for(i = 0; i < m; i++)
     {
         a += buffer1[i];
         minBLEP[i] = a;
     }
     
+    // copy next-to-last sample
+    minBLEP[m] = minBLEP[m-1];
+    
     // Normalize
-    a = minBLEP[n - 1];
+    a = minBLEP[m];
     a = 1.0f / a;
     for(i = 0; i < n; i++)
     {

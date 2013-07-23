@@ -14,21 +14,25 @@
 namespace Tonic
 {
   
+  // The PWM of a RectWave_ or RectWaveBL_ is 0.5 by default (square)
+  
   //! Quck-and-dirty square wave
   class SquareWave : public TemplatedGenerator<Tonic_::RectWave_>{
     
   public:
-    
-    SquareWave(){
-      gen()->setPwmGenerator(FixedValue(0.5f));
-    }
     
     createGeneratorSetters(SquareWave, freq, setFrequencyGenerator);
     
   };
   
   //! Bandlimited square wave
-
+  class SquareWaveBL : public TemplatedGenerator<Tonic_::RectWaveBL_>{
+    
+  public:
+    
+    createGeneratorSetters(SquareWaveBL, freq, setFreqGen);
+    
+  };
 }
 
 #endif
