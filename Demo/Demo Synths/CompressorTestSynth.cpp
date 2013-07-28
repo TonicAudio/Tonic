@@ -28,7 +28,7 @@ public:
     Generator hpNoise = (Noise() * dBToLin(-18.0)) >> HPF24().cutoff(2000.0) >> LPF12().cutoff(8000);
     Generator tones = SineWave().freq(180) * dBToLin(-6.0) + SineWave().freq(332) * dBToLin(-18.0);
 
-    ControlGenerator snareGate = ControlMetro(80) >> ControlPulse(60.0*0.8/80.0);
+    ControlGenerator snareGate = ControlPulse(60.0*0.8/80.0).trigger( ControlMetro(80) );
     ADSR toneADSR = ADSR(0.0005, 0.03, 0.0, 0.01).trigger(snareGate);
     ADSR noiseADSR = ADSR(0.001, 0.25, 0.0, 0.25).trigger(snareGate);
   

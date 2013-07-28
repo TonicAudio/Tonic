@@ -68,10 +68,8 @@ int main(int argc, const char * argv[])
     
     LPF24 filter = LPF24().Q(2).cutoff( filterFreq );
     
-    //Generator output = (( tone * env ) >> filter >> delay) * 0.3;
-    
-    Generator output = SineWave().freq(440 + ControlSwitcher().inputIndex(0)) * 0.5;
-        
+    Generator output = (( tone * env ) >> filter >> delay) * 0.3;
+            
     synth.setOutputGen(output);
     
     // ---------------------------------------
