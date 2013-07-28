@@ -124,7 +124,7 @@ namespace Tonic {
     
   public:
     
-    createGeneratorSetters(SawtoothWave, freq, setFrequencyGenerator);
+    TONIC_MAKE_GEN_SETTERS(SawtoothWave, freq, setFrequencyGenerator);
     
     //! set whether it's a descending sawtooth (default) or ascending
     SawtoothWave & isAscending(bool ascending){

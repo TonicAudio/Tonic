@@ -7,9 +7,9 @@
 //
 
 /*
-Because of the fancy registerSynth macro, and because this synth has the same interface
+Because of the fancy TONIC_REGISTER_SYNTH macro, and because this synth has the same interface
 as Synth it's not necessary to create a header file. You can create an instance of this synth using 
-SynthFactory::createInstance(SYNTH_NAME), where SYNTH_NAME is the name supplied to registerSynth.
+SynthFactory::createInstance(SYNTH_NAME), where SYNTH_NAME is the name supplied to TONIC_REGISTER_SYNTH.
 */
 
 #ifndef TonicDemo_SineSumSynth_h
@@ -47,6 +47,6 @@ public:
 
 };
 
-registerSynth(SineSumSynth);
+TONIC_REGISTER_SYNTH(SineSumSynth);
 
 #endif

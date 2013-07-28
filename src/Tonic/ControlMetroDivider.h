@@ -64,8 +64,8 @@ namespace Tonic {
   {
   public:
     
-    createControlGeneratorSetters(ControlMetroDivider, divisions, setDivisionsGen);
-    createControlGeneratorSetters(ControlMetroDivider, offset, setOffsetGen);
+    TONIC_MAKE_CTRL_GEN_SETTERS(ControlMetroDivider, divisions, setDivisionsGen);
+    TONIC_MAKE_CTRL_GEN_SETTERS(ControlMetroDivider, offset, setOffsetGen);
     
   };
 }

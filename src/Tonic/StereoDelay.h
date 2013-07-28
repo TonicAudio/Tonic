@@ -97,9 +97,9 @@ namespace Tonic {
   
   StereoDelay(float leftDelay, float rightDelay, float maxDelayLeft = -1, float maxDelayRight = -1);
   
-  createGeneratorSetters(StereoDelay, feedback, setFeedback)
-  createGeneratorSetters(StereoDelay, delayTimeLeft, setDelayTimeLeft)
-  createGeneratorSetters(StereoDelay, delayTimeRight, setDelayTimeRight)
+  TONIC_MAKE_GEN_SETTERS(StereoDelay, feedback, setFeedback)
+  TONIC_MAKE_GEN_SETTERS(StereoDelay, delayTimeLeft, setDelayTimeLeft)
+  TONIC_MAKE_GEN_SETTERS(StereoDelay, delayTimeRight, setDelayTimeRight)
 
   };
 }

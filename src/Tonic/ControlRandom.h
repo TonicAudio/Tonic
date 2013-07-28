@@ -57,9 +57,9 @@ namespace Tonic_{
 
   class ControlRandom : public TemplatedControlGenerator<Tonic_::ControlRandom_>{
   public:
-    createControlGeneratorSetters(ControlRandom, max, setMax)
-    createControlGeneratorSetters(ControlRandom, min, setMin)
-    createControlGeneratorSetters(ControlRandom, trigger, setTrigger)
+    TONIC_MAKE_CTRL_GEN_SETTERS(ControlRandom, max, setMax)
+    TONIC_MAKE_CTRL_GEN_SETTERS(ControlRandom, min, setMin)
+    TONIC_MAKE_CTRL_GEN_SETTERS(ControlRandom, trigger, setTrigger)
   };
 
 }

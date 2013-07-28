@@ -52,4 +52,4 @@ public:
   
 };
 
-registerSynth(CompressorTestSynth);
+TONIC_REGISTER_SYNTH(CompressorTestSynth);

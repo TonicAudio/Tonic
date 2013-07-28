@@ -88,10 +88,10 @@ namespace Tonic {
     //! Allocating only with time argument will default max delay time to 1.5 * delayTime
     BasicDelay(float initialDelayTime = 0.5f, float maxDelayTime = -1);
     
-    createGeneratorSetters(BasicDelay, delayTime, setDelayTimeGen);
+    TONIC_MAKE_GEN_SETTERS(BasicDelay, delayTime, setDelayTimeGen);
     
     //! Warning: Feedback input is NOT clamped! Beware of feedback values greater than 1 !!!
-    createGeneratorSetters(BasicDelay, feedback, setFeedbackGen);
+    TONIC_MAKE_GEN_SETTERS(BasicDelay, feedback, setFeedbackGen);
 
   };
 }

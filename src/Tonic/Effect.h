@@ -173,13 +173,13 @@ namespace Tonic {
       this->gen()->setIsStereoInput(isStereoInput);
     }
     
-    createControlGeneratorSetters(EffectType, bypass, setBypassCtrlGen);
+    TONIC_MAKE_CTRL_GEN_SETTERS(EffectType, bypass, setBypassCtrlGen);
     
     // Defaults to 1.0
-    createGeneratorSetters(EffectType, wetLevel, setWetLevelGen);
+    TONIC_MAKE_GEN_SETTERS(EffectType, wetLevel, setWetLevelGen);
     
     // Defaults to 0.0 (full wet)
-    createGeneratorSetters(EffectType, dryLevel, setDryLevelGen);
+    TONIC_MAKE_GEN_SETTERS(EffectType, dryLevel, setDryLevelGen);
   };
   
   // signal flow operator - sets lhs as input to rhs

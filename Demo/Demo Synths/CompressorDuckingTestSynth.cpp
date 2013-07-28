@@ -55,4 +55,4 @@ public:
   
 };
 
-registerSynth(CompressorDuckingTestSynth);
+TONIC_REGISTER_SYNTH(CompressorDuckingTestSynth);

@@ -102,6 +102,6 @@ class ControlSnapToScaleTestSynth : public Synth{
 };
 
 
-registerSynth(ControlSnapToScaleTestSynth);
+TONIC_REGISTER_SYNTH(ControlSnapToScaleTestSynth);
 
 #endif

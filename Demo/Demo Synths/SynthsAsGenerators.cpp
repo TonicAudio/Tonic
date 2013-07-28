@@ -36,6 +36,6 @@ class SynthsAsGeneratorsDemoSynth : public Synth
   
 };
 
-registerSynth(SynthsAsGeneratorsDemoSynth);
+TONIC_REGISTER_SYNTH(SynthsAsGeneratorsDemoSynth);
 
 #endif

@@ -69,8 +69,8 @@ namespace Tonic {
     
     ControlSwitcher & setFloatInputs( vector<float> inputs );
     
-    createControlGeneratorSetters(ControlSwitcher, addInput, addInput);
-    createControlGeneratorSetters(ControlSwitcher, inputIndex, setInputIndex);
+    TONIC_MAKE_CTRL_GEN_SETTERS(ControlSwitcher, addInput, addInput);
+    TONIC_MAKE_CTRL_GEN_SETTERS(ControlSwitcher, inputIndex, setInputIndex);
 
   };
 }

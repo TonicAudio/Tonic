@@ -159,8 +159,8 @@ namespace Tonic {
     
   public:
     
-    createGeneratorSetters(Subtractor, left, setLeft);
-    createGeneratorSetters(Subtractor, right, setRight);
+    TONIC_MAKE_GEN_SETTERS(Subtractor, left, setLeft);
+    TONIC_MAKE_GEN_SETTERS(Subtractor, right, setRight);
     
   };
   
@@ -329,8 +329,8 @@ namespace Tonic {
   class Divider : public TemplatedGenerator<Tonic_::Divider_>{
     
   public:
-    createGeneratorSetters(Divider, left, setLeft);
-    createGeneratorSetters(Divider, right, setRight);
+    TONIC_MAKE_GEN_SETTERS(Divider, left, setLeft);
+    TONIC_MAKE_GEN_SETTERS(Divider, right, setRight);
     
   };
   

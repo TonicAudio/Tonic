@@ -46,7 +46,7 @@ namespace Tonic {
       STOP
     };
     
-    createControlGeneratorSetters(ControlRecorder, mode, setMode)
+    TONIC_MAKE_CTRL_GEN_SETTERS(ControlRecorder, mode, setMode)
 
   };
   
