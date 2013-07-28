@@ -80,7 +80,7 @@ namespace Tonic {
 
   public:
     
-    ControlGenerator(Tonic_::ControlGenerator_ * cGen = NULL) : TonicSmartPointer<Tonic_::ControlGenerator_>(cGen) {}
+    ControlGenerator(Tonic_::ControlGenerator_ * cGen = new Tonic_::ControlGenerator_) : TonicSmartPointer<Tonic_::ControlGenerator_>(cGen) {}
     
     inline ControlGeneratorOutput tick( const Tonic_::SynthesisContext_ & context ){
       return obj->tick(context);

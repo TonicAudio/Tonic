@@ -21,7 +21,8 @@ namespace Tonic{
     {
     }
 
-    ControlGenerator_::~ControlGenerator_(){
+    ControlGenerator_::~ControlGenerator_()
+    {
     }
     
     ControlGeneratorOutput ControlGenerator_::initialOutput(){

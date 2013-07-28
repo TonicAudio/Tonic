@@ -309,94 +309,97 @@ namespace Tonic {
   template<class T>
   class TonicDictionary {
     
-  protected:
-    
-    typedef std::map<string, T> TonicDictionaryMap;
-    TonicDictionaryMap dictionaryMap_;
-    
-  public:
-    
-    //! Add object to dictionary. Replaces old object if one exists.
-    void insertObject(string name, T object){
-      dictionaryMap_[name] = object;
-    }
-    
-    bool containsObjectNamed(string name){
-      typename TonicDictionaryMap::iterator it = dictionaryMap_.find(name);
-      return it != dictionaryMap_.end();
-    }
-    
-    //! Returns object with given name. Returns new object if no object has been set for name, does not insert it.
-    T objectNamed(string name){
-      T obj;
-      typename TonicDictionaryMap::iterator it = dictionaryMap_.find(name);
-      if (it != dictionaryMap_.end()){
-        obj = it->second;
+    protected:
+      
+      typedef std::map<string, T> TonicDictionaryMap;
+      TonicDictionaryMap dictionaryMap_;
+      
+    public:
+      
+      //! Add object to dictionary. Replaces old object if one exists.
+      void insertObject(string name, T object){
+        dictionaryMap_[name] = object;
       }
-      return obj;
-    }
-    
-    //! Remove object for name
-    void removeObjectNamed(string name){
-      typename TonicDictionaryMap::iterator it = dictionaryMap_.find(name);
-      if (it != dictionaryMap_.end()){
-        dictionaryMap_.erase(it);
+      
+      bool containsObjectNamed(string name){
+        typename TonicDictionaryMap::iterator it = dictionaryMap_.find(name);
+        return it != dictionaryMap_.end();
       }
-    }
+      
+      //! Returns object with given name. Returns new object if no object has been set for name, does not insert it.
+      T objectNamed(string name){
+        T obj;
+        typename TonicDictionaryMap::iterator it = dictionaryMap_.find(name);
+        if (it != dictionaryMap_.end()){
+          obj = it->second;
+        }
+        return obj;
+      }
+      
+      //! Remove object for name
+      void removeObjectNamed(string name){
+        typename TonicDictionaryMap::iterator it = dictionaryMap_.find(name);
+        if (it != dictionaryMap_.end()){
+          dictionaryMap_.erase(it);
+        }
+      }
     
   };
   
   //! Reference counting smart pointer class template
   template<class T>
   class TonicSmartPointer {
-  protected:
-    T * obj;
-    int * pcount;
-  public:
     
-    TonicSmartPointer() : obj(NULL), pcount(NULL) {}
-    
-    TonicSmartPointer(T * initObj) : obj(initObj) , pcount(initObj ? new int(1) : NULL) {}
-    
-    TonicSmartPointer(const TonicSmartPointer& r) : obj(r.obj), pcount(r.pcount){
-      retain();
-    }
-    
-    TonicSmartPointer& operator=(const TonicSmartPointer& r)
-    {
-      if(obj == r.obj) return *this;
+    protected:
       
-      release();
+      T * obj;
+      int * pcount;
       
-      obj = r.obj;
-      pcount = r.pcount;
+    public:
       
-      retain();
+      TonicSmartPointer() : obj(NULL), pcount(NULL) {}
       
-      return *this;
-    }
-    
-    ~TonicSmartPointer(){
-      release();
-    }
-    
-    void retain(){
-      if (pcount) (*pcount)++;
-    }
-    
-    void release(){
-      if(pcount && --(*pcount) == 0){
-        if (obj) delete obj;
-        delete pcount;
-        
-        obj = NULL;
-        pcount = NULL;
+      TonicSmartPointer(T * initObj) : obj(initObj) , pcount(initObj ? new int(1) : NULL) {}
+      
+      TonicSmartPointer(const TonicSmartPointer& r) : obj(r.obj), pcount(r.pcount){
+        retain();
       }
-    }
-    
-    bool operator==(const TonicSmartPointer& r){
-      return obj == r.obj;
-    }
+      
+      TonicSmartPointer& operator=(const TonicSmartPointer& r)
+      {
+        if(obj == r.obj) return *this;
+        
+        release();
+        
+        obj = r.obj;
+        pcount = r.pcount;
+        
+        retain();
+        
+        return *this;
+      }
+      
+      ~TonicSmartPointer(){
+        release();
+      }
+      
+      void retain(){
+        if (pcount) (*pcount)++;
+      }
+      
+      void release(){
+        if(pcount && --(*pcount) == 0){
+          if (obj) delete obj;
+          delete pcount;
+          
+          obj = NULL;
+          pcount = NULL;
+        }
+      }
+      
+      bool operator==(const TonicSmartPointer& r){
+        return obj == r.obj;
+      }
     
   };
 

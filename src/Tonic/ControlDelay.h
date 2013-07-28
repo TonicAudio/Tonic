@@ -54,7 +54,7 @@ namespace Tonic {
       
     };
     
-    inline     void ControlDelay_::computeOutput(const SynthesisContext_ & context){
+    inline void ControlDelay_::computeOutput(const SynthesisContext_ & context){
       
       delayLine_[writeHead_] = input_.tick(context);
       

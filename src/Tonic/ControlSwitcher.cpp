@@ -12,11 +12,10 @@ namespace Tonic {
   
   namespace Tonic_{
   
-    ControlSwitcher_::ControlSwitcher_() : inputIndex_(ControlValue(0)), lastInputIndex_(-1) {
-      
-    }
+    ControlSwitcher_::ControlSwitcher_() : inputIndex_(ControlValue(0)), lastInputIndex_(-1) {}
     
-    void ControlSwitcher_::addInput(ControlGenerator input){
+    void ControlSwitcher_::addInput(ControlGenerator input)
+    {
       inputs_.push_back(input);
     }
     
