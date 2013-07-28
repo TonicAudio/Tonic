@@ -28,7 +28,6 @@
 #define TONIC_MINBLEP_OVERSAMPLING    16
 
 #include "Generator.h"
-#include "DSPUtils.h"
 
 namespace Tonic {
   
