@@ -3,7 +3,6 @@
 //  Tonic
 //
 //  Created by Nick Donaldson on 5/31/13.
-//  Copyright (c) 2013 Nick Donaldson. All rights reserved.
 //
 
 #include "ControlMetroDivider.h"
