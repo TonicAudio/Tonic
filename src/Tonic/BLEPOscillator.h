@@ -23,10 +23,6 @@
 #ifndef __Tonic__BLEPOscillator__
 #define __Tonic__BLEPOscillator__
 
-// Do not change these or you'll have a bad time.
-#define TONIC_MINBLEP_ZEROCROSSINGS   128
-#define TONIC_MINBLEP_OVERSAMPLING    16
-
 #include "Generator.h"
 
 namespace Tonic {
@@ -46,6 +42,7 @@ namespace Tonic {
       // Lookup table
       static const TonicFloat minBLEP_[];
       static const int minBLEPlength_;
+      static const int minBLEPOversampling_;
       
       // phase accumulator
       float phase_;
@@ -61,7 +58,7 @@ namespace Tonic {
       inline void addBLEP(TonicFloat offset, TonicFloat scale)
       {
         int i;
-        float bufOffset = TONIC_MINBLEP_OVERSAMPLING*offset;
+        float bufOffset = minBLEPOversampling_ * offset;
         
         TonicFloat f;
         TonicFloat * outptr = ringBuf_ + iBuffer_;
@@ -72,7 +69,7 @@ namespace Tonic {
         
         
         // add
-        for (i=0; i<nInit_; i++, inptr += TONIC_MINBLEP_OVERSAMPLING, outptr++)
+        for (i=0; i<nInit_; i++, inptr += minBLEPOversampling_, outptr++)
         {
           if (outptr >= bufEnd) outptr = ringBuf_;
           f = lerp(inptr[0], inptr[1], frac);
@@ -80,7 +77,7 @@ namespace Tonic {
         }
         
         // copy
-        for (; i<lBuffer_-1; i++, inptr += TONIC_MINBLEP_OVERSAMPLING, outptr++)
+        for (; i<lBuffer_-1; i++, inptr += minBLEPOversampling_, outptr++)
         {
           if (outptr >= bufEnd) outptr = ringBuf_;
           f = lerp(inptr[0], inptr[1], frac);

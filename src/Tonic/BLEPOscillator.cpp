@@ -7,6 +7,10 @@
 
 #include "BLEPOscillator.h"
 
+// Do not change these or you'll have a bad time.
+#define TONIC_MINBLEP_ZEROCROSSINGS   128
+#define TONIC_MINBLEP_OVERSAMPLING    16
+
 namespace Tonic { namespace Tonic_{
   
   BLEPOscillator_::BLEPOscillator_() :
@@ -34,6 +38,8 @@ namespace Tonic { namespace Tonic_{
     }
   }
   
+  const int BLEPOscillator_::minBLEPOversampling_ = TONIC_MINBLEP_OVERSAMPLING;
+    
   const int BLEPOscillator_::minBLEPlength_ = TONIC_MINBLEP_ZEROCROSSINGS * TONIC_MINBLEP_OVERSAMPLING * 2;
   
   // minBLEP data - pre-generated and loaded into memory for speed (it's too slow to compute on-demand)
