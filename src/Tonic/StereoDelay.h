@@ -19,7 +19,7 @@ namespace Tonic {
   
   namespace Tonic_ {
 
-    class StereoDelay_ : public Effect_{
+    class StereoDelay_ : public WetDryEffect_{
       
     protected:
     
@@ -91,7 +91,7 @@ namespace Tonic {
     
   }
   
-  class StereoDelay : public TemplatedEffect<StereoDelay, Tonic_::StereoDelay_>{
+  class StereoDelay : public TemplatedWetDryEffect<StereoDelay, Tonic_::StereoDelay_>{
     
   public:
   
