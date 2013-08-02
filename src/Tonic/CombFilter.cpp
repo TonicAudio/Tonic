@@ -11,7 +11,6 @@
 namespace Tonic { namespace Tonic_{
   
   CombFilter_::CombFilter_(){
-    setIsAlwaysWet(true);
     delayTimeFrames_.resize(kSynthesisBlockSize, 1, 0);
   }
   
