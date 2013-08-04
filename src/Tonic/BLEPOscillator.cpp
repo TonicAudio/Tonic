@@ -26,6 +26,7 @@ namespace Tonic { namespace Tonic_{
       ringBuf_ = new TonicFloat[lBuffer_+1];
       memset(ringBuf_, 0, (lBuffer_+1)*sizeof(TonicFloat));
     
+      freqGen_ = FixedValue(440);
       freqFrames_.resize(kSynthesisBlockSize, 1, 0);
   }
   

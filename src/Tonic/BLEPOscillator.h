@@ -12,7 +12,7 @@
  *  Abstract base Generator_ class for bandlimited
  *  waveform generation using minBLEP technique.
  *
- *  Sources here:
+ *  Derived from:
  *
  *  http://www.experimentalscene.com/articles/minbleps.php
  *  http://www.musicdsp.org/showArchiveComment.php?ArchiveID=112
@@ -66,7 +66,6 @@ namespace Tonic {
         TonicFloat * bufEnd = ringBuf_ + lBuffer_;
         
         float frac = fmodf(bufOffset,1.0);
-        
         
         // add
         for (i=0; i<nInit_; i++, inptr += minBLEPOversampling_, outptr++)
