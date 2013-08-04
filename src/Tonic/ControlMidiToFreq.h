@@ -5,6 +5,8 @@
 //  Created by Morgan Packard on 3/5/13.
 
 //
+// See LICENSE.txt for license and usage information.
+//
 
 #ifndef __TonicDemo__ControlMidiToFreq__
 #define __TonicDemo__ControlMidiToFreq__
