@@ -5,6 +5,8 @@
 //  Created by Morgan Packard on 3/4/13.
 
 //
+// See LICENSE.txt for license and usage information.
+//
 
 #ifndef __TonicDemo__ControlConditioner__
 #define __TonicDemo__ControlConditioner__
