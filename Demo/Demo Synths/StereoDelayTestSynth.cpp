@@ -53,6 +53,6 @@ public:
   
 };
 
-registerSynth(StereoDelayTestSynth)
+TONIC_REGISTER_SYNTH(StereoDelayTestSynth)
 
 #endif

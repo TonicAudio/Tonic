@@ -21,7 +21,7 @@ public:
     Generator tones = SineWave().freq(180) * dBToLin(-6.0) + SineWave().freq(332) * dBToLin(-18.0);
     
     ControlMetro metro = ControlMetro(120);
-    ControlGenerator snareGate = metro >> ControlPulse(60.0*0.8/120.0);
+    ControlGenerator snareGate = ControlPulse(60.0*0.8/120.0).trigger(metro);
     ADSR toneADSR = ADSR(0.0005, 0.03, 0.0, 0.01).trigger(snareGate);
     ADSR noiseADSR = ADSR(0.001, 0.25, 0.0, 0.25).trigger(snareGate);
     
@@ -55,4 +55,4 @@ public:
   
 };
 
-registerSynth(CompressorDuckingTestSynth);
+TONIC_REGISTER_SYNTH(CompressorDuckingTestSynth);

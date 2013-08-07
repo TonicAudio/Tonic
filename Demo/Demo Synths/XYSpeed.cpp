@@ -33,6 +33,6 @@ class XYSpeed : public Synth{
 };
 
 
-registerSynth(XYSpeed);
+TONIC_REGISTER_SYNTH(XYSpeed);
 
 #endif

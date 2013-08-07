@@ -98,6 +98,6 @@ public:
   }
 };
 
-registerSynth(ControlSwitcherTestSynth)
+TONIC_REGISTER_SYNTH(ControlSwitcherTestSynth)
 
 #endif

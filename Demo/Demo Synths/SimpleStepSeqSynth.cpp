@@ -55,7 +55,7 @@ public:
     
 };
 
-registerSynth(SimpleStepSeqSynth);
+TONIC_REGISTER_SYNTH(SimpleStepSeqSynth);
 
 
 #endif

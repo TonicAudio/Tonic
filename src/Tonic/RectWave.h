@@ -191,10 +191,10 @@ namespace Tonic {
   public:
     
     //! Set the frequency of the waveform
-    createGeneratorSetters(RectWave, freq, setFrequencyGenerator);
+    TONIC_MAKE_GEN_SETTERS(RectWave, freq, setFrequencyGenerator);
     
     //! Set the pulse width of the rectangle. Input should be clipped between 0-1
-    createGeneratorSetters(RectWave, pwm, setPwmGenerator);
+    TONIC_MAKE_GEN_SETTERS(RectWave, pwm, setPwmGenerator);
 
   };
   
@@ -204,10 +204,10 @@ namespace Tonic {
   public:
     
     //! Set the frequency of the waveform
-    createGeneratorSetters(RectWaveBL, freq, setFreqGen);
+    TONIC_MAKE_GEN_SETTERS(RectWaveBL, freq, setFreqGen);
     
     //! Set the pulse width of the rectangle. Input should be clipped between 0-1
-    createGeneratorSetters(RectWaveBL, pwm, setPWMGen);
+    TONIC_MAKE_GEN_SETTERS(RectWaveBL, pwm, setPWMGen);
   };
   
 }

@@ -20,9 +20,9 @@ namespace Tonic
   class SquareWave : public TemplatedGenerator<Tonic_::RectWave_>{
     
   public:
-    
-    createGeneratorSetters(SquareWave, freq, setFrequencyGenerator);
-    
+
+    TONIC_MAKE_GEN_SETTERS(SquareWave, freq, setFrequencyGenerator);
+
   };
   
   //! Bandlimited square wave
@@ -30,7 +30,7 @@ namespace Tonic
     
   public:
     
-    createGeneratorSetters(SquareWaveBL, freq, setFreqGen);
+    TONIC_MAKE_GEN_SETTERS(SquareWaveBL, freq, setFreqGen);
     
   };
 }
