@@ -5,7 +5,8 @@
 //  Created by Morgan Packard on 2/12/13.
 
 //
-
+// See LICENSE.txt for license and usage information.
+//
 
 #ifndef __Tonic_ControlGenerator__
 #define __Tonic_ControlGenerator__

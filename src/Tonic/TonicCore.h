@@ -208,6 +208,24 @@ namespace Tonic {
     return result;
   }
   
+  inline static TonicFloat lerp(TonicFloat x1, TonicFloat x2, TonicFloat f){
+    return (x1 + f*(x2-x1));
+  }
+  
+  inline TonicFloat sinc(float x)
+  {
+    TonicFloat pi_x;
+    
+    if(x == 0.0f)
+      return 1.0f;
+    else
+    {
+      pi_x = PI * x;
+      return sinf(pi_x) / pi_x;
+    }
+  }
+
+  
   inline bool isPowerOf2(unsigned int input, unsigned int * prevPo2){
 
     if (input == 0) return true;

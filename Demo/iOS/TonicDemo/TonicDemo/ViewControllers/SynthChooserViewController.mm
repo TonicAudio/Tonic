@@ -17,9 +17,7 @@ using namespace Tonic;
   NSMutableArray* synthDefinitions;
 }
 
-
 @end
-
 
 @implementation SynthChooserViewController
 
@@ -28,7 +26,6 @@ using namespace Tonic;
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
     
-      
       // Add synths here in order to have them displayed in the demo app.
       // Note -- add the "TONIC_REGISTER_SYNTH" macro to your synth file or you'll get mysterious
       // synth not found errors at runtime.
@@ -49,15 +46,6 @@ using namespace Tonic;
       {
         SynthDemoDef* def = [[SynthDemoDef alloc] init];
         [synthDefinitions addObject:def];
-        def.synthClassName = @"ArbitraryTableLookupSynth";
-        def.synthDisplayName = @"Build lookup tables dynamically";
-        def.synthDescription = @"";
-        def.synthInstructions = @"Arbitrary oscillators!";
-      }
-      
-      {
-        SynthDemoDef* def = [[SynthDemoDef alloc] init];
-        [synthDefinitions addObject:def];
         def.synthClassName = @"SineSumSynth";
         def.synthDisplayName = @"10-Sine Additive Spread";
         def.synthDescription = @"10 sinewave oscillators in fifths";
@@ -65,6 +53,15 @@ using namespace Tonic;
         def.synthAction = ^(Tonic::Synth synth, CGPoint touchPointNorm){
           synth.setParameter("pitch", touchPointNorm.y);
         };
+      }
+      
+      {
+        SynthDemoDef* def = [[SynthDemoDef alloc] init];
+        [synthDefinitions addObject:def];
+        def.synthClassName = @"ArbitraryTableLookupSynth";
+        def.synthDisplayName = @"Build lookup tables dynamically";
+        def.synthDescription = @"";
+        def.synthInstructions = @"Arbitrary oscillators!";
       }
       
       {
@@ -89,7 +86,6 @@ using namespace Tonic;
         };
       }
       
-      
       {
         SynthDemoDef* def = [[SynthDemoDef alloc] init];
         [synthDefinitions addObject:def];
@@ -105,12 +101,26 @@ using namespace Tonic;
       {
         SynthDemoDef* def = [[SynthDemoDef alloc] init];
         [synthDefinitions addObject:def];
+        def.synthClassName = @"BandlimitedOscillatorTest";
+        def.synthDisplayName = @"Aliasing is lame";
+        def.synthDescription = @"Compare aliasing and bandlimited version of square wave";
+        def.synthInstructions = @"Pan up and down to change blend.\nDown = aliasing\nUp = bandlimited";
+        def.synthAction = ^(Tonic::Synth synth, CGPoint touchPointNorm){
+          
+          // let it reach full blend before the end
+          synth.setParameter("blend", clamp(touchPointNorm.y * 1.5 - 0.25,0,1));
+          
+        };
+      }
+      
+      {
+        SynthDemoDef* def = [[SynthDemoDef alloc] init];
+        [synthDefinitions addObject:def];
         def.synthClassName = @"DelayTestSynth";
         def.synthDisplayName = @"Basic Delay";
         def.synthDescription = @"Popcorn in SPAAAACE";
         def.shouldAutoGenUI = YES;
       }
-      
       
       {
         SynthDemoDef* def = [[SynthDemoDef alloc] init];

@@ -31,11 +31,7 @@
 		0183D0731735D0E6004638EB /* ControlCounter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0183D00E1735D0E6004638EB /* ControlCounter.cpp */; };
 		0183D0741735D0E6004638EB /* ControlCounter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0183D00E1735D0E6004638EB /* ControlCounter.cpp */; };
 		0183D0751735D0E6004638EB /* ControlCounter.h in Headers */ = {isa = PBXBuildFile; fileRef = 0183D00F1735D0E6004638EB /* ControlCounter.h */; };
-		0183D0761735D0E6004638EB /* ControlDbToLinear.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0183D0101735D0E6004638EB /* ControlDbToLinear.cpp */; };
-		0183D0771735D0E6004638EB /* ControlDbToLinear.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0183D0101735D0E6004638EB /* ControlDbToLinear.cpp */; };
 		0183D0781735D0E6004638EB /* ControlDbToLinear.h in Headers */ = {isa = PBXBuildFile; fileRef = 0183D0111735D0E6004638EB /* ControlDbToLinear.h */; };
-		0183D07C1735D0E6004638EB /* ControlFloor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0183D0141735D0E6004638EB /* ControlFloor.cpp */; };
-		0183D07D1735D0E6004638EB /* ControlFloor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0183D0141735D0E6004638EB /* ControlFloor.cpp */; };
 		0183D07E1735D0E6004638EB /* ControlFloor.h in Headers */ = {isa = PBXBuildFile; fileRef = 0183D0151735D0E6004638EB /* ControlFloor.h */; };
 		0183D07F1735D0E6004638EB /* ControlGenerator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0183D0161735D0E6004638EB /* ControlGenerator.cpp */; };
 		0183D0801735D0E6004638EB /* ControlGenerator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0183D0161735D0E6004638EB /* ControlGenerator.cpp */; };
@@ -161,6 +157,16 @@
 		A80782D9175591FD009057BC /* ControlChangeNotifier.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A80782D7175591FD009057BC /* ControlChangeNotifier.cpp */; };
 		A80782DA175591FD009057BC /* ControlChangeNotifier.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A80782D7175591FD009057BC /* ControlChangeNotifier.cpp */; };
 		A80782DB175591FD009057BC /* ControlChangeNotifier.h in Headers */ = {isa = PBXBuildFile; fileRef = A80782D8175591FD009057BC /* ControlChangeNotifier.h */; };
+		F218C86F179C73F6000906B2 /* DSPUtils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F218C86D179C73F6000906B2 /* DSPUtils.cpp */; };
+		F218C870179C73F6000906B2 /* DSPUtils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F218C86D179C73F6000906B2 /* DSPUtils.cpp */; };
+		F218C871179C73F6000906B2 /* DSPUtils.h in Headers */ = {isa = PBXBuildFile; fileRef = F218C86E179C73F6000906B2 /* DSPUtils.h */; };
+		F218C874179C7642000906B2 /* ControlDbToLinear.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F218C872179C763A000906B2 /* ControlDbToLinear.cpp */; };
+		F218C875179C7642000906B2 /* ControlDbToLinear.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F218C872179C763A000906B2 /* ControlDbToLinear.cpp */; };
+		F218C876179C7642000906B2 /* ControlFloor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F218C873179C763D000906B2 /* ControlFloor.cpp */; };
+		F218C877179C7642000906B2 /* ControlFloor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F218C873179C763D000906B2 /* ControlFloor.cpp */; };
+		F278D372179C8227004EBCA3 /* BLEPOscillator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F278D370179C8227004EBCA3 /* BLEPOscillator.cpp */; };
+		F278D373179C8227004EBCA3 /* BLEPOscillator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F278D370179C8227004EBCA3 /* BLEPOscillator.cpp */; };
+		F278D374179C8227004EBCA3 /* BLEPOscillator.h in Headers */ = {isa = PBXBuildFile; fileRef = F278D371179C8227004EBCA3 /* BLEPOscillator.h */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -192,9 +198,7 @@
 		0183D00D1735D0E6004638EB /* ControlConditioner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ControlConditioner.h; sourceTree = "<group>"; };
 		0183D00E1735D0E6004638EB /* ControlCounter.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ControlCounter.cpp; sourceTree = "<group>"; };
 		0183D00F1735D0E6004638EB /* ControlCounter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ControlCounter.h; sourceTree = "<group>"; };
-		0183D0101735D0E6004638EB /* ControlDbToLinear.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ControlDbToLinear.cpp; sourceTree = "<group>"; };
 		0183D0111735D0E6004638EB /* ControlDbToLinear.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ControlDbToLinear.h; sourceTree = "<group>"; };
-		0183D0141735D0E6004638EB /* ControlFloor.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ControlFloor.cpp; sourceTree = "<group>"; };
 		0183D0151735D0E6004638EB /* ControlFloor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ControlFloor.h; sourceTree = "<group>"; };
 		0183D0161735D0E6004638EB /* ControlGenerator.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ControlGenerator.cpp; sourceTree = "<group>"; };
 		0183D0171735D0E6004638EB /* ControlGenerator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ControlGenerator.h; sourceTree = "<group>"; };
@@ -282,7 +286,13 @@
 		9AF6A72E174AFCF800C70173 /* RingBuffer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RingBuffer.h; sourceTree = "<group>"; };
 		A80782D7175591FD009057BC /* ControlChangeNotifier.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; lineEnding = 0; path = ControlChangeNotifier.cpp; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.cpp; };
 		A80782D8175591FD009057BC /* ControlChangeNotifier.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = ControlChangeNotifier.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
+		F218C86D179C73F6000906B2 /* DSPUtils.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = DSPUtils.cpp; sourceTree = "<group>"; };
+		F218C86E179C73F6000906B2 /* DSPUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DSPUtils.h; sourceTree = "<group>"; };
+		F218C872179C763A000906B2 /* ControlDbToLinear.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ControlDbToLinear.cpp; sourceTree = "<group>"; };
+		F218C873179C763D000906B2 /* ControlFloor.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ControlFloor.cpp; sourceTree = "<group>"; };
 		F23A7CF1171B3D2E00AE8353 /* libTonic-iOS-Debug.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libTonic-iOS-Debug.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		F278D370179C8227004EBCA3 /* BLEPOscillator.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = BLEPOscillator.cpp; sourceTree = "<group>"; };
+		F278D371179C8227004EBCA3 /* BLEPOscillator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BLEPOscillator.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -323,6 +333,8 @@
 				0183D0031735D0E6004638EB /* ADSR.h */,
 				0183D0041735D0E6004638EB /* BasicDelay.cpp */,
 				0183D0051735D0E6004638EB /* BasicDelay.h */,
+				F278D370179C8227004EBCA3 /* BLEPOscillator.cpp */,
+				F278D371179C8227004EBCA3 /* BLEPOscillator.h */,
 				0183D0061735D0E6004638EB /* BufferFiller.cpp */,
 				0183D0071735D0E6004638EB /* BufferFiller.h */,
 				0183D10F1735DCAF004638EB /* CombFilter.cpp */,
@@ -339,11 +351,11 @@
 				0183D00D1735D0E6004638EB /* ControlConditioner.h */,
 				0183D00E1735D0E6004638EB /* ControlCounter.cpp */,
 				0183D00F1735D0E6004638EB /* ControlCounter.h */,
-				0183D0101735D0E6004638EB /* ControlDbToLinear.cpp */,
+				F218C872179C763A000906B2 /* ControlDbToLinear.cpp */,
 				0183D0111735D0E6004638EB /* ControlDbToLinear.h */,
 				01C65FEC17371C45003B2661 /* ControlDelay.cpp */,
 				01C65FED17371C45003B2661 /* ControlDelay.h */,
-				0183D0141735D0E6004638EB /* ControlFloor.cpp */,
+				F218C873179C763D000906B2 /* ControlFloor.cpp */,
 				0183D0151735D0E6004638EB /* ControlFloor.h */,
 				0183D0161735D0E6004638EB /* ControlGenerator.cpp */,
 				0183D0171735D0E6004638EB /* ControlGenerator.h */,
@@ -377,6 +389,8 @@
 				0183D0331735D0E6004638EB /* ControlXYSpeed.h */,
 				0183D0341735D0E6004638EB /* DelayUtils.cpp */,
 				0183D0351735D0E6004638EB /* DelayUtils.h */,
+				F218C86D179C73F6000906B2 /* DSPUtils.cpp */,
+				F218C86E179C73F6000906B2 /* DSPUtils.h */,
 				01C65FF1173723C6003B2661 /* Effect.cpp */,
 				0183D0381735D0E6004638EB /* Effect.h */,
 				0183D0391735D0E6004638EB /* Filters.cpp */,
@@ -512,6 +526,8 @@
 				9A5FB71D17591983007A2F31 /* ControlMetroDivider.h in Headers */,
 				9A5FB722175928FC007A2F31 /* ControlComparison.h in Headers */,
 				9AE5AA0417601CB4001F3E60 /* ControlTrigger.h in Headers */,
+				F218C871179C73F6000906B2 /* DSPUtils.h in Headers */,
+				F278D374179C8227004EBCA3 /* BLEPOscillator.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -592,8 +608,6 @@
 				0183D06D1735D0E6004638EB /* ControlArithmetic.cpp in Sources */,
 				0183D0701735D0E6004638EB /* ControlConditioner.cpp in Sources */,
 				0183D0731735D0E6004638EB /* ControlCounter.cpp in Sources */,
-				0183D0761735D0E6004638EB /* ControlDbToLinear.cpp in Sources */,
-				0183D07C1735D0E6004638EB /* ControlFloor.cpp in Sources */,
 				0183D07F1735D0E6004638EB /* ControlGenerator.cpp in Sources */,
 				0183D0821735D0E6004638EB /* ControlMetro.cpp in Sources */,
 				0183D0851735D0E6004638EB /* ControlMidiToFreq.cpp in Sources */,
@@ -634,6 +648,10 @@
 				9A5FB71B17591983007A2F31 /* ControlMetroDivider.cpp in Sources */,
 				9A5FB720175928FC007A2F31 /* ControlComparison.cpp in Sources */,
 				9AE5AA0217601CB4001F3E60 /* ControlTrigger.cpp in Sources */,
+				F218C86F179C73F6000906B2 /* DSPUtils.cpp in Sources */,
+				F218C874179C7642000906B2 /* ControlDbToLinear.cpp in Sources */,
+				F218C876179C7642000906B2 /* ControlFloor.cpp in Sources */,
+				F278D372179C8227004EBCA3 /* BLEPOscillator.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -649,8 +667,6 @@
 				0183D06E1735D0E6004638EB /* ControlArithmetic.cpp in Sources */,
 				0183D0711735D0E6004638EB /* ControlConditioner.cpp in Sources */,
 				0183D0741735D0E6004638EB /* ControlCounter.cpp in Sources */,
-				0183D0771735D0E6004638EB /* ControlDbToLinear.cpp in Sources */,
-				0183D07D1735D0E6004638EB /* ControlFloor.cpp in Sources */,
 				0183D0801735D0E6004638EB /* ControlGenerator.cpp in Sources */,
 				0183D0831735D0E6004638EB /* ControlMetro.cpp in Sources */,
 				0183D0861735D0E6004638EB /* ControlMidiToFreq.cpp in Sources */,
@@ -691,6 +707,10 @@
 				9A5FB71C17591983007A2F31 /* ControlMetroDivider.cpp in Sources */,
 				9A5FB721175928FC007A2F31 /* ControlComparison.cpp in Sources */,
 				9AE5AA0317601CB4001F3E60 /* ControlTrigger.cpp in Sources */,
+				F218C870179C73F6000906B2 /* DSPUtils.cpp in Sources */,
+				F218C875179C7642000906B2 /* ControlDbToLinear.cpp in Sources */,
+				F218C877179C7642000906B2 /* ControlFloor.cpp in Sources */,
+				F278D373179C8227004EBCA3 /* BLEPOscillator.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

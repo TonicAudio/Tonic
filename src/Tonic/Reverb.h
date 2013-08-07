@@ -3,22 +3,11 @@
 //  Tonic 
 //
 //  Created by Nick Donaldson on 5/4/13.
-//  Copyright (c) 2013 Nick Donaldson. All rights reserved.
 //
 
-/*+++++++++++++++++++++ License ++++++++++++++++++++
-
-Use this code for whatever you want. There are NO 
-RESTRICTIONS WHATSOVER. Modify it, repackage it, 
-sell it, get rich from it, whatever. Go crazy. If 
-you want to make mehappy, contribute to this 
-project, but feel free to just use the code as a 
-starting point for whatever you like.
-
-Note that Tonic is heavily indebted to STK
-https://ccrma.stanford.edu/software/stk/
-
-++++++++++++++++++++++++++++++++++++++++++++++++++*/
+//
+// See LICENSE.txt for license and usage information.
+//
 
 #ifndef __Tonic__Reverb__
 #define __Tonic__Reverb__

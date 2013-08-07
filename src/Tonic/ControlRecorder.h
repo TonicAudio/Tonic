@@ -28,7 +28,6 @@ namespace Tonic {
       
     public:
       ControlRecorder_();
-      ~ControlRecorder_();
       
       void setMode(ControlGenerator);
 
