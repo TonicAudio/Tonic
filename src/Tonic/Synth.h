@@ -260,7 +260,7 @@ namespace Tonic{
 
 // This macro will auto-register a synth type. Just add it below the Synth class definition.
 
-#define registerSynth(SynthName)              \
+#define TONIC_REGISTER_SYNTH(SynthName)              \
                                               \
 class SynthName ## _RegistrationPoint {       \
                                               \

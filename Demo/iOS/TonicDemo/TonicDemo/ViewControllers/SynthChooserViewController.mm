@@ -27,7 +27,7 @@ using namespace Tonic;
     if (self) {
     
       // Add synths here in order to have them displayed in the demo app.
-      // Note -- add the "registerSynth" macro to your synth file or you'll get mysterious
+      // Note -- add the "TONIC_REGISTER_SYNTH" macro to your synth file or you'll get mysterious
       // synth not found errors at runtime.
       
       synthDefinitions = [NSMutableArray array];

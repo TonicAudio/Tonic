@@ -44,6 +44,6 @@ public:
   
 };
 
-registerSynth(ArbitraryTableLookupSynth);
+TONIC_REGISTER_SYNTH(ArbitraryTableLookupSynth);
 
 #endif

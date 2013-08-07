@@ -70,6 +70,6 @@ public:
   
 };
 
-registerSynth(DelayTestSynth);
+TONIC_REGISTER_SYNTH(DelayTestSynth);
 
 #endif

@@ -56,4 +56,4 @@ public:
   
 };
 
-registerSynth(ReverbTestSynth);
+TONIC_REGISTER_SYNTH(ReverbTestSynth);

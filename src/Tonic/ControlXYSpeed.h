@@ -76,8 +76,8 @@ namespace Tonic {
     
   public:
   
-  createControlGeneratorSetters(ControlXYSpeed, x, setX);
-  createControlGeneratorSetters(ControlXYSpeed, y, setY);
+  TONIC_MAKE_CTRL_GEN_SETTERS(ControlXYSpeed, x, setX);
+  TONIC_MAKE_CTRL_GEN_SETTERS(ControlXYSpeed, y, setY);
 
   };
 }

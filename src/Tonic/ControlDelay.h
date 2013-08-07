@@ -41,7 +41,7 @@ namespace Tonic {
       
     };
     
-    inline     void ControlDelay_::computeOutput(const SynthesisContext_ & context){
+    inline void ControlDelay_::computeOutput(const SynthesisContext_ & context){
       
       delayLine_[writeHead_] = input_.tick(context);
       
@@ -74,7 +74,7 @@ namespace Tonic {
   public:
     
     ControlDelay(float maxDelayTime = 1.0f);
-    createControlGeneratorSetters(ControlDelay, delayTime, setDelayTimeGen);
+    TONIC_MAKE_CTRL_GEN_SETTERS(ControlDelay, delayTime, setDelayTimeGen);
     
   };
 }

@@ -78,11 +78,11 @@ namespace Tonic {
     
   public:
   
-  createControlGeneratorSetters(ControlStepper, start, setStart);
-  createControlGeneratorSetters(ControlStepper, end, setEnd);
-  createControlGeneratorSetters(ControlStepper, step, setStep);
-  createControlGeneratorSetters(ControlStepper, trigger, setTigger);
-  createControlGeneratorSetters(ControlStepper, bidirectional, setBidirectional);
+  TONIC_MAKE_CTRL_GEN_SETTERS(ControlStepper, start, setStart);
+  TONIC_MAKE_CTRL_GEN_SETTERS(ControlStepper, end, setEnd);
+  TONIC_MAKE_CTRL_GEN_SETTERS(ControlStepper, step, setStep);
+  TONIC_MAKE_CTRL_GEN_SETTERS(ControlStepper, trigger, setTigger);
+  TONIC_MAKE_CTRL_GEN_SETTERS(ControlStepper, bidirectional, setBidirectional);
 
   };
 }
