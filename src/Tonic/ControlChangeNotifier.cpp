@@ -3,7 +3,6 @@
 //  Tonic
 //
 //  Created by Morgan Packard on 5/11/13.
-//  Copyright (c) 2013 Nick Donaldson. All rights reserved.
 //
 
 #include "ControlChangeNotifier.h"

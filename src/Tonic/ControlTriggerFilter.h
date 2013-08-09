@@ -45,7 +45,7 @@ namespace Tonic {
     
   public:
   
-  createControlGeneratorSetters(ControlTriggerFilter, trigger, trigger)
+  TONIC_MAKE_CTRL_GEN_SETTERS(ControlTriggerFilter, trigger, trigger)
   ControlTriggerFilter sequence(string seqArg){gen()->sequence(seqArg); return *this;};
 
   };

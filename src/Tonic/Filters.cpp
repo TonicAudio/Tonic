@@ -20,6 +20,7 @@ namespace Tonic { namespace Tonic_{
     bypass_(ControlValue(0)),
     bNormalizeGain_(true)
   {
+    setIsAlwaysWet(true);
     workspace_.resize(kSynthesisBlockSize, 1, 0);
   }
   

@@ -5,7 +5,8 @@
 //  Created by Morgan Packard on 2/12/13.
 
 //
-
+// See LICENSE.txt for license and usage information.
+//
 
 #ifndef __Tonic_ControlGenerator__
 #define __Tonic_ControlGenerator__
@@ -80,7 +81,7 @@ namespace Tonic {
 
   public:
     
-    ControlGenerator(Tonic_::ControlGenerator_ * cGen = NULL) : TonicSmartPointer<Tonic_::ControlGenerator_>(cGen) {}
+    ControlGenerator(Tonic_::ControlGenerator_ * cGen = new Tonic_::ControlGenerator_) : TonicSmartPointer<Tonic_::ControlGenerator_>(cGen) {}
     
     inline ControlGeneratorOutput tick( const Tonic_::SynthesisContext_ & context ){
       return obj->tick(context);
@@ -109,7 +110,7 @@ namespace Tonic {
 
 #include "ControlValue.h"
 
-#define createControlGeneratorSetters(generatorClassName, methodNameInGenerator, methodNameInGenerator_)\
+#define TONIC_MAKE_CTRL_GEN_SETTERS(generatorClassName, methodNameInGenerator, methodNameInGenerator_)\
 \
 generatorClassName& methodNameInGenerator(float arg){                              \
 return methodNameInGenerator( ControlValue(arg) );                                 \

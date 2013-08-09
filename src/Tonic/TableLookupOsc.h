@@ -128,7 +128,7 @@ namespace Tonic {
     
       TableLookupOsc & setLookupTable( SampleTable lookupTable );
     
-      createGeneratorSetters(TableLookupOsc, freq, setFrequency);
+      TONIC_MAKE_GEN_SETTERS(TableLookupOsc, freq, setFrequency);
   };
 
 }

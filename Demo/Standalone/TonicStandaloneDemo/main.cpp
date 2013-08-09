@@ -44,7 +44,7 @@ int main(int argc, const char * argv[])
     ControlMetro metro = ControlMetro().bpm(100);
     ControlGenerator freq = ControlRandom().trigger(metro).min(0).max(1);
     
-    Generator tone = SquareWave().freq(
+    Generator tone = SquareWaveBL().freq(
                                      freq * 0.25 + 100
                                      + 400
                                      ) * SineWave().freq(50);
@@ -69,7 +69,7 @@ int main(int argc, const char * argv[])
     LPF24 filter = LPF24().Q(2).cutoff( filterFreq );
     
     Generator output = (( tone * env ) >> filter >> delay) * 0.3;
-    
+
     synth.setOutputGen(output);
     
     // ---------------------------------------

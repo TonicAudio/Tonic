@@ -13,6 +13,7 @@
 #define __Tonic__AngularWave__
 
 #include "Generator.h"
+#include "BLEPOscillator.h"
 
 #define TONIC_SAW_RES 4096
 
@@ -113,6 +114,69 @@ namespace Tonic {
       
     }
     
+    // -----------------------------------
+    
+    //! Anti-aliased BLEP sawtooth
+    class SawtoothWaveBL_ : public BLEPOscillator_
+    {
+      
+    protected:
+      
+      void computeSynthesisBlock( const SynthesisContext_ &context );
+      
+    };
+    
+    inline void SawtoothWaveBL_::computeSynthesisBlock(const Tonic_::SynthesisContext_ &context)
+    {
+      
+      static const TonicFloat rateConstant =  1.0f / Tonic::sampleRate();
+      
+      // tick freq and pwm
+      freqGen_.tick(freqFrames_, context);
+      
+      TonicFloat *outptr = &outputFrames_[0];
+      TonicFloat *freqptr = &freqFrames_[0];
+      
+      // pre-multiply rate constant for speed
+#ifdef USE_APPLE_ACCELERATE
+      vDSP_vsmul(freqptr, 1, &rateConstant, freqptr, 1, kSynthesisBlockSize);
+#else
+      for (unsigned int i=0; i<kSynthesisBlockSize; i++){
+        *freqptr++ *= rateConstant;
+      }
+      freqptr = &freqFrames_[0];
+#endif
+      
+      // TODO: Maybe do this using a fast phasor for wraparound speed
+      for (unsigned int i=0; i<kSynthesisBlockSize; i++, freqptr++, outptr++){
+        
+        phase_ += *freqptr;
+        
+        // add BLEP at end
+        if (phase_ >= 1.0)
+        {
+          phase_ -= 1.0;
+          accum_ = 0.0f;
+          addBLEP(phase_/(*freqptr), 1.0f);
+        }
+        
+        *outptr = (TonicFloat)phase_;
+        
+        // add BLEP buffer contents
+        if (nInit_ > 0)
+        {
+          *outptr += ringBuf_[iBuffer_];
+          nInit_--;
+          if (++iBuffer_ >= lBuffer_) iBuffer_ = 0;
+        }
+        
+        // remove DC offset
+        *outptr = (*outptr * 2.f) - 1.f;
+        
+      }
+      
+    }
+
   }
   
   //! Quick-and-dirty sawtooth oscillator
@@ -120,18 +184,31 @@ namespace Tonic {
       Not anti-aliased, so really best as an LFO. Can be used as an audio sawtooth oscillator in a pinch
       or if you don't mind some aliasing distortion.
   */
-  class SawtoothWave : public TemplatedGenerator<Tonic_::AngularWave_>{
+  class SawtoothWave : public TemplatedGenerator<Tonic_::AngularWave_>
+  {
     
-  public:
+    public:
+      
+      TONIC_MAKE_GEN_SETTERS(SawtoothWave, freq, setFrequencyGenerator);
+      
+      //! set whether it's a descending sawtooth (default) or ascending
+      SawtoothWave & isAscending(bool ascending){
+        gen()->setSlopeGenerator(FixedValue(ascending ? 1.f : 0.f));
+        return *this;
+      }
     
-    createGeneratorSetters(SawtoothWave, freq, setFrequencyGenerator);
-    
-    //! set whether it's a descending sawtooth (default) or ascending
-    SawtoothWave & isAscending(bool ascending){
-      gen()->setSlopeGenerator(FixedValue(ascending ? 1.f : 0.f));
-      return *this;
-    }
   };
+  
+  //! Bandlimited sawtooth generator
+  class SawtoothWaveBL : public TemplatedGenerator<Tonic_::SawtoothWaveBL_>
+  {
+    
+    public:
+      TONIC_MAKE_GEN_SETTERS(SawtoothWaveBL, freq, setFreqGen);
+
+  };
+  
+  
 }
 
 #endif /* defined(__Tonic__SawWave__) */

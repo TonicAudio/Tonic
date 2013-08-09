@@ -3,7 +3,6 @@
 //  TonicDemo
 //
 //  Created by Nick Donaldson on 5/21/13.
-//  Copyright (c) 2013 Morgan Packard. All rights reserved.
 //
 
 #ifndef TonicDemo_ArbitraryTableLookupDemo_h
@@ -45,6 +44,6 @@ public:
   
 };
 
-registerSynth(ArbitraryTableLookupSynth);
+TONIC_REGISTER_SYNTH(ArbitraryTableLookupSynth);
 
 #endif
