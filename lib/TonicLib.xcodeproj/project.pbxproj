@@ -161,6 +161,9 @@
 		A80782D9175591FD009057BC /* ControlChangeNotifier.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A80782D7175591FD009057BC /* ControlChangeNotifier.cpp */; };
 		A80782DA175591FD009057BC /* ControlChangeNotifier.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A80782D7175591FD009057BC /* ControlChangeNotifier.cpp */; };
 		A80782DB175591FD009057BC /* ControlChangeNotifier.h in Headers */ = {isa = PBXBuildFile; fileRef = A80782D8175591FD009057BC /* ControlChangeNotifier.h */; };
+		A883ED7B17B468EA00F60C06 /* ControlTriggerFilter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A883ED7917B468EA00F60C06 /* ControlTriggerFilter.cpp */; };
+		A883ED7C17B468EA00F60C06 /* ControlTriggerFilter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A883ED7917B468EA00F60C06 /* ControlTriggerFilter.cpp */; };
+		A883ED7D17B468EA00F60C06 /* ControlTriggerFilter.h in Headers */ = {isa = PBXBuildFile; fileRef = A883ED7A17B468EA00F60C06 /* ControlTriggerFilter.h */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -282,6 +285,8 @@
 		9AF6A72E174AFCF800C70173 /* RingBuffer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RingBuffer.h; sourceTree = "<group>"; };
 		A80782D7175591FD009057BC /* ControlChangeNotifier.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; lineEnding = 0; path = ControlChangeNotifier.cpp; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.cpp; };
 		A80782D8175591FD009057BC /* ControlChangeNotifier.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = ControlChangeNotifier.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
+		A883ED7917B468EA00F60C06 /* ControlTriggerFilter.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ControlTriggerFilter.cpp; sourceTree = "<group>"; };
+		A883ED7A17B468EA00F60C06 /* ControlTriggerFilter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ControlTriggerFilter.h; sourceTree = "<group>"; };
 		F23A7CF1171B3D2E00AE8353 /* libTonic-iOS-Debug.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libTonic-iOS-Debug.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -317,6 +322,8 @@
 		0183CFFF1735D0E6004638EB /* Tonic */ = {
 			isa = PBXGroup;
 			children = (
+				A883ED7917B468EA00F60C06 /* ControlTriggerFilter.cpp */,
+				A883ED7A17B468EA00F60C06 /* ControlTriggerFilter.h */,
 				0183D0001735D0E6004638EB /* Arithmetic.cpp */,
 				0183D0011735D0E6004638EB /* Arithmetic.h */,
 				0183D0021735D0E6004638EB /* ADSR.cpp */,
@@ -512,6 +519,7 @@
 				9A5FB71D17591983007A2F31 /* ControlMetroDivider.h in Headers */,
 				9A5FB722175928FC007A2F31 /* ControlComparison.h in Headers */,
 				9AE5AA0417601CB4001F3E60 /* ControlTrigger.h in Headers */,
+				A883ED7D17B468EA00F60C06 /* ControlTriggerFilter.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -634,6 +642,7 @@
 				9A5FB71B17591983007A2F31 /* ControlMetroDivider.cpp in Sources */,
 				9A5FB720175928FC007A2F31 /* ControlComparison.cpp in Sources */,
 				9AE5AA0217601CB4001F3E60 /* ControlTrigger.cpp in Sources */,
+				A883ED7B17B468EA00F60C06 /* ControlTriggerFilter.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -691,6 +700,7 @@
 				9A5FB71C17591983007A2F31 /* ControlMetroDivider.cpp in Sources */,
 				9A5FB721175928FC007A2F31 /* ControlComparison.cpp in Sources */,
 				9AE5AA0317601CB4001F3E60 /* ControlTrigger.cpp in Sources */,
+				A883ED7C17B468EA00F60C06 /* ControlTriggerFilter.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
