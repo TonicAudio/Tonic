@@ -81,5 +81,4 @@
 #include "Tonic/ControlMidiToFreq.h"
 #include "Tonic/ControlTriggerFilter.h"
 
-
 #endif
