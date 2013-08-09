@@ -82,8 +82,11 @@ namespace Tonic {
   class ControlSnapToScale : public TemplatedControlConditioner<ControlSnapToScale, Tonic_::ControlSnapToScale_>{
   
   public:
-  
-    TONIC_MAKE_CTRL_GEN_SETTERS(ControlSnapToScale, setScale, setScale)
+
+    ControlSnapToScale setScale(vector<float> scale){
+      gen()->setScale(scale);
+      return *this;
+    }
 
   };
 }
