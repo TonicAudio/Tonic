@@ -12,7 +12,11 @@ namespace Tonic {
   
   namespace Tonic_{
   
-    ControlSwitcher_::ControlSwitcher_() : inputIndex_(ControlValue(0)), lastInputIndex_(-1) {}
+    ControlSwitcher_::ControlSwitcher_() :
+      inputIndex_(ControlValue(0)),
+      lastInputIndex_(-1),
+      doesWrap_(ControlValue(0)),
+      addAfterWrap_(ControlValue(0)) {}
     
     void ControlSwitcher_::addInput(ControlGenerator input)
     {
@@ -24,8 +28,16 @@ namespace Tonic {
       inputs_ = inputs;
     }
     
+    void ControlSwitcher_::setDoesWrap(ControlGenerator doesWrap){
+      doesWrap_ = doesWrap;
+    }
+    
     void ControlSwitcher_::setInputIndex(ControlGenerator inputIndexArg){
       inputIndex_ = inputIndexArg;
+    }
+    
+    void ControlSwitcher_::setAddAfterWrap(ControlGenerator addAfterWrap){
+      addAfterWrap_ = addAfterWrap;
     }
     
   } // Namespace Tonic_
