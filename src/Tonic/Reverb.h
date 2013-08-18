@@ -77,7 +77,7 @@ namespace Tonic {
         - More deterministic early reflection time scattering.
      */
     
-    class Reverb_ : public Effect_
+    class Reverb_ : public WetDryEffect_
     {
       protected:
       
@@ -214,7 +214,7 @@ namespace Tonic {
         
   }
   
-  class Reverb : public TemplatedEffect<Reverb, Tonic_::Reverb_>
+  class Reverb : public TemplatedWetDryEffect<Reverb, Tonic_::Reverb_>
   {
 
     public:

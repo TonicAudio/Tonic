@@ -30,6 +30,6 @@ public:
   
 };
 
-registerSynth(BandlimitedOscillatorTest);
+TONIC_REGISTER_SYNTH(BandlimitedOscillatorTest);
 
 #endif
