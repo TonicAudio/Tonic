@@ -38,6 +38,28 @@ using namespace Tonic;
       {
         SynthDemoDef* def = [[SynthDemoDef alloc] init];
         [synthDefinitions addObject:def];
+        def.synthClassName = @"BRCA1";
+        def.synthDisplayName = @"BRCA1";
+        def.synthDescription = @"a genetic 'sequencer' ";
+        def.synthInstructions = @"";
+        def.synthAction = ^(Tonic::Synth* synth, CGPoint touchPointNorm){
+        };
+      }
+      
+      {
+        SynthDemoDef* def = [[SynthDemoDef alloc] init];
+        [synthDefinitions addObject:def];
+        def.synthClassName = @"Fakeblock";
+        def.synthDisplayName = @"Fakeblock";
+        def.synthDescription = @"a Boolean driven aggregation of what programmers call 'hacker traps' ";
+        def.synthInstructions = @"";
+        def.synthAction = ^(Tonic::Synth* synth, CGPoint touchPointNorm){
+        };
+      }
+      
+      {
+        SynthDemoDef* def = [[SynthDemoDef alloc] init];
+        [synthDefinitions addObject:def];
         def.synthClassName = @"SineSumSynth";
         def.synthDisplayName = @"10-Sine Additive Spread";
         def.synthDescription = @"10 sinewave oscillators in fifths";

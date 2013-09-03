@@ -19,6 +19,8 @@
 		01C65FEB17371BBC003B2661 /* ReverbTestSynth.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 01C65FE917371BBC003B2661 /* ReverbTestSynth.cpp */; };
 		01DAA58F173E9EF8001AA383 /* SynthAutoUIViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 01DAA58D173E9EF8001AA383 /* SynthAutoUIViewController.mm */; };
 		01DAA590173E9EF8001AA383 /* SynthAutoUIViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 01DAA58E173E9EF8001AA383 /* SynthAutoUIViewController.xib */; };
+		65665FD417A1A6E8009B314F /* Fakeblock.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 65665FD317A1A6E8009B314F /* Fakeblock.cpp */; };
+		65CF780F1777D8A4001B839C /* BRCA1.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 65CF780E1777D8A4001B839C /* BRCA1.cpp */; };
 		9AB59D3E17456D4C001E6837 /* ControlSnapToScaleTestSynth.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9AB59D3D17456D4C001E6837 /* ControlSnapToScaleTestSynth.cpp */; };
 		A80F6C2E17431BC00079FB52 /* SimpleStepSeqSynth.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A80F6C2C17431A4F0079FB52 /* SimpleStepSeqSynth.cpp */; };
 		A80F6C2F17431BC00079FB52 /* SimpleStepSeqSynth.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A80F6C2C17431A4F0079FB52 /* SimpleStepSeqSynth.cpp */; };
@@ -104,6 +106,8 @@
 		01DAA58C173E9EF8001AA383 /* SynthAutoUIViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SynthAutoUIViewController.h; sourceTree = "<group>"; };
 		01DAA58D173E9EF8001AA383 /* SynthAutoUIViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = SynthAutoUIViewController.mm; sourceTree = "<group>"; };
 		01DAA58E173E9EF8001AA383 /* SynthAutoUIViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SynthAutoUIViewController.xib; sourceTree = "<group>"; };
+		65665FD317A1A6E8009B314F /* Fakeblock.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Fakeblock.cpp; sourceTree = "<group>"; };
+		65CF780E1777D8A4001B839C /* BRCA1.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = BRCA1.cpp; sourceTree = "<group>"; };
 		9AB59D3D17456D4C001E6837 /* ControlSnapToScaleTestSynth.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ControlSnapToScaleTestSynth.cpp; sourceTree = "<group>"; };
 		A80F6C2C17431A4F0079FB52 /* SimpleStepSeqSynth.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SimpleStepSeqSynth.cpp; sourceTree = "<group>"; };
 		A86C3EBC16B2B4FD002A50F0 /* TonicDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TonicDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -196,6 +200,7 @@
 		0183D0EB1735D17D004638EB /* Demo Synths */ = {
 			isa = PBXGroup;
 			children = (
+				65CF780E1777D8A4001B839C /* BRCA1.cpp */,
 				0183D0EC1735D17D004638EB /* CompressorDuckingTestSynth.cpp */,
 				F2E2561917400EDB00D74E9D /* CompressorTestSynth.cpp */,
 				9AB59D3D17456D4C001E6837 /* ControlSnapToScaleTestSynth.cpp */,
@@ -209,6 +214,7 @@
 				0183D0F71735D17D004638EB /* SineSumSynth.cpp */,
 				0183D0F81735D17D004638EB /* StereoDelayTestSynth.cpp */,
 				0183D0F91735D17D004638EB /* XYSpeed.cpp */,
+				65665FD317A1A6E8009B314F /* Fakeblock.cpp */,
 			);
 			name = "Demo Synths";
 			path = "../../../Demo Synths";
@@ -545,6 +551,8 @@
 				F2E2561A17400EDB00D74E9D /* CompressorTestSynth.cpp in Sources */,
 				A80F6C2E17431BC00079FB52 /* SimpleStepSeqSynth.cpp in Sources */,
 				9AB59D3E17456D4C001E6837 /* ControlSnapToScaleTestSynth.cpp in Sources */,
+				65CF780F1777D8A4001B839C /* BRCA1.cpp in Sources */,
+				65665FD417A1A6E8009B314F /* Fakeblock.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -617,7 +625,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				HEADER_SEARCH_PATHS = ../../../src/;
-				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -640,7 +648,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				HEADER_SEARCH_PATHS = ../../../src/;
-				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
