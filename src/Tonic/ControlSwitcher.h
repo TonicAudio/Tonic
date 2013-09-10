@@ -38,6 +38,7 @@ namespace Tonic {
       void setInputIndex(ControlGenerator inputIndexArg);
       void setDoesWrap(ControlGenerator doesWrap);
       void setAddAfterWrap(ControlGenerator addAfterWrap);
+      void  setTriggerForIndex(ControlValue trigger, int index);
       
     };
     
@@ -92,6 +93,8 @@ namespace Tonic {
     //! Useful if you want to use this to map to scale degrees. For midi notes, you can use 12 to jump to the next octave when it wraps.
     // who knows. Maybe useful for something else!
     TONIC_MAKE_CTRL_GEN_SETTERS(ControlSwitcher, addAfterWrap, setAddAfterWrap);
+    
+    ControlSwitcher & setTriggerForIndex(ControlValue trigger, int index);
 
   };
 }

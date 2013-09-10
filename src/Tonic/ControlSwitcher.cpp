@@ -40,7 +40,16 @@ namespace Tonic {
       addAfterWrap_ = addAfterWrap;
     }
     
+    void  setTriggerForIndex(ControlValue trigger, int index){
+      
+    }
+    
   } // Namespace Tonic_
+  
+  
+  ControlSwitcher & ControlSwitcher::setTriggerForIndex(ControlValue trigger, int index){
+    return *this;
+  }
   
   ControlSwitcher & ControlSwitcher::setFloatInputs(vector<float> inputs){
     
