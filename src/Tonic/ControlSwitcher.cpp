@@ -28,6 +28,9 @@ namespace Tonic {
         
         // first, get the default input
         ControlGeneratorOutput indexOutput = inputIndex_.tick(context);
+        
+        // Check to see if the value changed. If it hasn't changed, ignore it, lest we overwrite a value set
+        // by one of the triggers.
         if(lastIndexOutputValue != indexOutput.value){
           lastIndexOutputValue = indexOutput.value;
           currentInputIndex_ = indexOutput.value;
