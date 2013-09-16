@@ -15,7 +15,7 @@ namespace Tonic { namespace Tonic_{
   }
   
   void ControlPrinter_::setMessage(string messageArg){
-    message = messageArg + "\n";
+    message = "Tonic::ControlPrinter message:" +  messageArg + "\n";
   }
   
 } // Namespace Tonic_
