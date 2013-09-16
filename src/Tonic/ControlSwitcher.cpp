@@ -16,7 +16,55 @@ namespace Tonic {
       inputIndex_(ControlValue(0)),
       lastInputIndex_(-1),
       doesWrap_(ControlValue(0)),
-      addAfterWrap_(ControlValue(0)) {}
+      addAfterWrap_(ControlValue(0)),
+      lastIndexOutputValue(-1)
+      {}
+    
+    inline void ControlSwitcher_::computeOutput(const SynthesisContext_ & context){
+    
+      if(inputs_.size() > 0){
+        
+        output_.triggered = false;
+        
+        // first, get the default input
+        ControlGeneratorOutput indexOutput = inputIndex_.tick(context);
+        if(lastIndexOutputValue != indexOutput.value){
+          lastIndexOutputValue = indexOutput.value;
+          currentInputIndex_ = indexOutput.value;
+        }
+        
+        // then check the input triggers to see if one fired
+        for(std::map<int, ControlGenerator>::iterator it = triggers_.begin(); it != triggers_.end(); it++){
+          ControlGeneratorOutput  triggerOut = it->second.tick(context);
+          if (triggerOut.triggered) {
+            currentInputIndex_ = it->first;
+          }
+        }
+        
+        ControlGeneratorOutput doesWrapOut = doesWrap_.tick(context);
+        ControlGeneratorOutput addAfterWrapOut = addAfterWrap_.tick(context);
+        
+        int cleanedInput = doesWrapOut.value ? currentInputIndex_ % inputs_.size() : clamp(currentInputIndex_, 0, inputs_.size() -1 );
+        
+        int index = 0;
+        for(vector<ControlGenerator>::iterator it = inputs_.begin(); it != inputs_.end(); it++){
+          ControlGeneratorOutput tempOut = it->tick(context);
+          if (index++ == cleanedInput) {
+              output_ = tempOut;
+          }
+        }
+        
+        // Do the add after wrap thing. Mostly useful for going to scale degrees in higher octaves
+        int numTimes = currentInputIndex_ / inputs_.size();
+        output_.value += numTimes * addAfterWrapOut.value;
+        
+        if (lastInputIndex_ != currentInputIndex_) {
+          lastInputIndex_ = currentInputIndex_;
+          output_.triggered = true;
+        }
+        
+      }
+    }
     
     void ControlSwitcher_::addInput(ControlGenerator input)
     {
@@ -40,14 +88,15 @@ namespace Tonic {
       addAfterWrap_ = addAfterWrap;
     }
     
-    void  setTriggerForIndex(ControlValue trigger, int index){
-      
+    void  ControlSwitcher_::setTriggerForIndex(ControlGenerator trigger, int index){
+      triggers_[index] = trigger;
     }
     
   } // Namespace Tonic_
   
   
-  ControlSwitcher & ControlSwitcher::setTriggerForIndex(ControlValue trigger, int index){
+  ControlSwitcher & ControlSwitcher::triggerForIndex(ControlGenerator trigger, int index){
+    gen()->setTriggerForIndex(trigger, index);
     return *this;
   }
   
