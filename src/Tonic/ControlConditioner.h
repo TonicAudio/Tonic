@@ -50,6 +50,10 @@ namespace Tonic {
       return static_cast<ControlConditionerType&>(*this);
     }
     
+    ControlConditionerType input( float inputVal ){
+      return input( ControlValue(inputVal) );
+    }
+    
   };
   
     // signal flow operator - sets lhs as input to rhs

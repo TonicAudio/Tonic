@@ -484,10 +484,88 @@ using namespace Tonic;
 
 
 -(void)testControlValueTriggering {
+  Tonic_::SynthesisContext_ context;
+  context.forceNewOutput = false;
+  context.tick();
   ControlGenerator val1 = ControlValue(2);
-  STAssertTrue(val1.tick(testContext).triggered, @"Fist tick to ControlGen should cause trigger");
-  STAssertTrue(val1.tick(testContext).triggered, @"Subsequent ticks (with no context change) should still report triggered.");
+  STAssertTrue(val1.tick(context).triggered, @"Fist tick to ControlGen should cause trigger");
+  STAssertTrue(val1.tick(context).triggered, @"Subsequent ticks (with no context change) should still report triggered.");
+  
+  context.tick();
+  
+  STAssertFalse(val1.tick(context).triggered, @"Triggered should be false on subsequent ticks after context has advanced.");
  
+}
+
+-(void)test208ControlSwitcher{
+
+
+  Tonic_::SynthesisContext_ localContext;
+  
+  localContext.forceNewOutput = false;
+
+  ControlTrigger input0Trig;
+  ControlTrigger input1Trig;
+  ControlValue inputIndex(0);
+  ControlSwitcher switcher;
+  
+  ControlValue index0Val(0);
+  ControlValue index1Val(1);
+  
+  switcher
+    .addInput(index0Val)
+    .addInput(index1Val)
+    .triggerForIndex(input0Trig, 0)
+    .triggerForIndex(input1Trig, 1)
+    .inputIndex(inputIndex);
+  
+  ControlGeneratorOutput output;
+  
+  
+  localContext.tick();
+  output = switcher.tick(localContext);
+  STAssertEquals( output.value, index0Val.getValue(), @"InputIndex should be zero");
+  
+  localContext.tick();
+  output = switcher.tick(localContext);
+  STAssertFalse(output.triggered, @"Second tick with no change should not result in trigger.");
+  
+  inputIndex.value(1);
+  
+  localContext.tick();
+  output = switcher.tick(localContext);
+  STAssertEquals( output.value, index1Val.getValue(), @"InputIndex should be one");
+  
+  index1Val.value(100);
+  localContext.tick();
+  output = switcher.tick(localContext);
+  STAssertTrue(output.triggered, @"Change in input value should pass through to output.");
+  
+  
+  localContext.tick();
+  output = switcher.tick(localContext);
+  STAssertFalse(output.triggered, @"Change in input value should pass through to output.");
+  
+  input0Trig.trigger();
+  localContext.tick();
+  output = switcher.tick(localContext);
+  STAssertEquals( output.value, index0Val.getValue(), @"InputIndex should be zero");
+  
+  input0Trig.trigger();
+  localContext.tick();
+  output = switcher.tick(localContext);
+  STAssertFalse( output.triggered, @"Repeat call to same input shouldn't trigger if the input didn't trigger");
+  
+  input1Trig.trigger();
+  localContext.tick();
+  output = switcher.tick(localContext);
+  STAssertTrue( output.triggered, @"Switching inputs should cause a trigger.");
+  
+  inputIndex.value(0);
+  localContext.tick();
+  output = switcher.tick(localContext);
+  STAssertEquals( output.value, index0Val.getValue(), @"Changing the inputIndex should work, even after using an input trigger.");
+  
 }
 
 #pragma mark - Buffer filler tests
