@@ -17,6 +17,9 @@
 #include "ControlParameter.h"
 #include "CompressorLimiter.h"
 #include "ControlChangeNotifier.h"
+#ifdef TONIC_CPP_11
+#include <functional>
+#endif
 
 namespace Tonic{
   
@@ -64,6 +67,7 @@ namespace Tonic{
       vector<ControlParameter>  getParameters();
       
       ControlChangeNotifier publishChanges(ControlGenerator input, string name);
+      
       
       void addAuxControlGenerator(ControlGenerator generator){
         auxControlGenerators_.push_back(generator);

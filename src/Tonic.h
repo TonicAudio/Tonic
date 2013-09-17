@@ -18,6 +18,10 @@
 #ifndef __Tonic_TonicHeader__
 #define __Tonic_TonicHeader__
 
+#if __cplusplus > 199711L
+  #define TONIC_CPP_11
+#endif
+
 // ------- Core Objects --------
 
 #include "Tonic/TonicCore.h"
