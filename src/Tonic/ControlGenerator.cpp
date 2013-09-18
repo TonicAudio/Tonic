@@ -30,9 +30,18 @@ namespace Tonic{
       return tick(Tonic::DummyContext);
     }
     
+    ControlGeneratorOutput ControlGenerator_::getLastOutput(){
+      return output_;
+    }
+    
   }
+  
   RampedValue ControlGenerator::smoothed(float length){
     return RampedValue( obj->initialOutput().value, length ).target(*this);
+  }
+  
+  ControlGeneratorOutput ControlGenerator::getLastOutput(){
+    return obj->getLastOutput();
   }
   
 }

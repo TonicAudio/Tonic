@@ -21,7 +21,10 @@ namespace Tonic { namespace Tonic_{
   }
   
   void ControlCallback_::computeOutput(const SynthesisContext_ & context){
-    callback_(input_.tick(context));
+    ControlGeneratorOutput inputOut = input_.tick(context);
+    if(inputOut.triggered){
+      callback_(inputOut);
+    }
   }
   
   void  ControlCallback_::setCallback(function<void(ControlGeneratorOutput)> fn){
