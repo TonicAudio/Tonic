@@ -57,10 +57,12 @@ namespace Tonic {
           }
         }
         
-        // Do the add after wrap thing. Mostly useful for going to scale degrees in higher octaves
-        int numTimes = currentInputIndex_ / inputs_.size();
-        output_.value += numTimes * addAfterWrapOut.value;
-        
+        if (doesWrapOut.value) {
+          // Do the add after wrap thing. Mostly useful for going to scale degrees in higher octaves
+          int numTimes = currentInputIndex_ / inputs_.size();
+          output_.value += numTimes * addAfterWrapOut.value;
+        }
+                  
         if (lastInputIndex_ != currentInputIndex_) {
           lastInputIndex_ = currentInputIndex_;
           output_.triggered = true;
