@@ -568,6 +568,53 @@ using namespace Tonic;
   
 }
 
+-(void)test209ControlSwitcherWrap{
+
+  Tonic_::SynthesisContext_ localContext;
+  localContext.forceNewOutput = false;
+  
+  ControlSwitcher switcher;
+  float addAfterWrap = 12;
+  float inputZero = 0;
+  float inputOne = 2;
+  switcher.addInput(inputZero);
+  switcher.addInput(inputOne);
+  switcher.doesWrap(true);
+  switcher.addAfterWrap(addAfterWrap);
+  
+  
+  switcher.inputIndex(0);
+  localContext.tick();
+  switcher.tick(localContext);
+  STAssertEquals(switcher.tick(localContext).value, inputZero, @"ControlSwitcher basic test.");
+  
+  
+  switcher.inputIndex(2);
+  localContext.tick();
+  switcher.tick(localContext);
+  STAssertEquals(switcher.tick(localContext).value, inputZero + addAfterWrap, @"ControlSwitcher basic test.");
+  
+  
+  switcher.inputIndex(3);
+  localContext.tick();
+  switcher.tick(localContext);
+  STAssertEquals(switcher.tick(localContext).value, inputOne + addAfterWrap, @"ControlSwitcher basic test.");
+  
+  
+  switcher.inputIndex(4);
+  localContext.tick();
+  switcher.tick(localContext);
+  STAssertEquals(switcher.tick(localContext).value, inputZero + addAfterWrap * 2, @"ControlSwitcher basic test.");
+  
+  
+  switcher.inputIndex(5);
+  localContext.tick();
+  switcher.tick(localContext);
+  STAssertEquals(switcher.tick(localContext).value, inputOne + addAfterWrap * 2, @"ControlSwitcher basic test.");
+  
+  
+}
+
 #pragma mark - Buffer filler tests
 
 - (void)test300BufferFillerMonoOutMonoSource
