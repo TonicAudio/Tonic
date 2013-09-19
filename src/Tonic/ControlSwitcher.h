@@ -27,6 +27,7 @@ namespace Tonic {
       ControlGenerator                  inputIndex_;
       ControlGenerator                  doesWrap_;
       ControlGenerator                  addAfterWrap_;
+      ControlGenerator                  advanceTrigger_;
       std::map<int, ControlGenerator>   triggers_;
       int                               lastInputIndex_;
       int                               currentInputIndex_;
@@ -40,8 +41,8 @@ namespace Tonic {
       void setInputIndex(ControlGenerator inputIndexArg);
       void setDoesWrap(ControlGenerator doesWrap);
       void setAddAfterWrap(ControlGenerator addAfterWrap);
-      void  setTriggerForIndex(ControlGenerator trigger, int index);
-      
+      void setTriggerForIndex(ControlGenerator trigger, int index);
+      void setAdvanceTrigger(ControlGenerator trigger);
     };
     
     
@@ -67,6 +68,9 @@ namespace Tonic {
     TONIC_MAKE_CTRL_GEN_SETTERS(ControlSwitcher, addAfterWrap, setAddAfterWrap);
     
     ControlSwitcher & triggerForIndex(ControlGenerator trigger, int index);
+    
+    
+    TONIC_MAKE_CTRL_GEN_SETTERS(ControlSwitcher, advanceTrigger, setAdvanceTrigger);
 
   };
 }
