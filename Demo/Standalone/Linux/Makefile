@@ -17,14 +17,14 @@
 #	LINUX_OSS
 #	UNIX_JACK
 
-AUDIO_API = LINUX_ALSA
+AUDIO_API = LINUX_PULSE
 
 ###############################################################
 
 # == Variables ==
 
 CC = g++
-CCFLAGS = -m32
+#CCFLAGS = -m32
 
 RTAUDIO_DIR = ../RTAudio
 TONIC_SRC_DIR = ../../../src
