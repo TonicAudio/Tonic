@@ -78,9 +78,9 @@ namespace Tonic {
     }
     
     void Synth_::sendControlChangesToSubscribers(){
-      std::map<string, ControlChangeNotifier>::iterator it = controlChangeNotifiers_.begin();
-      for (; it != controlChangeNotifiers_.end(); it++) {
-        it->second.sendControlChangesToSubscribers();
+      vector<ControlChangeNotifier>::iterator it = controlChangeNotifiersList_.begin();
+      for (; it != controlChangeNotifiersList_.end(); it++) {
+        it->sendControlChangesToSubscribers();
       }
     }
     
@@ -93,17 +93,28 @@ namespace Tonic {
     }
     
     void Synth_::addControlChangeSubscriber(ControlChangeSubscriber* sub){
-      typedef std::map<string, ControlChangeNotifier>::iterator NotifiersIterator;
-      for(NotifiersIterator it = controlChangeNotifiers_.begin(); it != controlChangeNotifiers_.end(); it++){
-        it->second.addValueChangedSubscriber(sub);
+      for(vector<ControlChangeNotifier>::iterator it = controlChangeNotifiersList_.begin(); it != controlChangeNotifiersList_.end(); it++){
+        it->addValueChangedSubscriber(sub);
       }
     }
     
     void Synth_::removeControlChangeSubscriber(ControlChangeSubscriber* sub){
-      std::map<string, ControlChangeNotifier>::iterator it = controlChangeNotifiers_.begin();
-      for (; it != controlChangeNotifiers_.end(); it++) {
-        it->second.removeValueChangedSubscriber(sub);
+      vector<ControlChangeNotifier>::iterator it = controlChangeNotifiersList_.begin();
+      for (; it != controlChangeNotifiersList_.end(); it++) {
+        it->removeValueChangedSubscriber(sub);
       }
+    }
+    
+    ControlChangeNotifier Synth_::publishChanges(ControlGenerator input, string name){
+      ControlChangeNotifier messenger;
+      messenger.setName(name);
+      messenger.input(input);
+      controlChangeNotifiersList_.push_back(messenger);
+      if(name != ""){
+        controlChangeNotifiers_[name] = messenger;
+      }
+      addAuxControlGenerator(messenger);
+      return messenger;
     }
     
   }

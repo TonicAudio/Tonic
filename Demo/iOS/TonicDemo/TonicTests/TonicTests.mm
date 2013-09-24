@@ -16,6 +16,15 @@
 
 using namespace Tonic;
 
+  class TestControlChangeSubscriber : public ControlChangeSubscriber{
+    public:
+    bool valueChangedFlag;
+    TestControlChangeSubscriber() : valueChangedFlag(false){}
+    void valueChanged(string, TonicFloat){
+      valueChangedFlag = true;
+    }
+  };
+
 // ======================================================
 
 @interface TonicTests ()  
@@ -475,10 +484,135 @@ using namespace Tonic;
 
 
 -(void)testControlValueTriggering {
+  Tonic_::SynthesisContext_ context;
+  context.forceNewOutput = false;
+  context.tick();
   ControlGenerator val1 = ControlValue(2);
-  STAssertTrue(val1.tick(testContext).triggered, @"Fist tick to ControlGen should cause trigger");
-  STAssertTrue(val1.tick(testContext).triggered, @"Subsequent ticks (with no context change) should still report triggered.");
+  STAssertTrue(val1.tick(context).triggered, @"Fist tick to ControlGen should cause trigger");
+  STAssertTrue(val1.tick(context).triggered, @"Subsequent ticks (with no context change) should still report triggered.");
+  
+  context.tick();
+  
+  STAssertFalse(val1.tick(context).triggered, @"Triggered should be false on subsequent ticks after context has advanced.");
  
+}
+
+-(void)test208ControlSwitcher{
+
+
+  Tonic_::SynthesisContext_ localContext;
+  
+  localContext.forceNewOutput = false;
+
+  ControlTrigger input0Trig;
+  ControlTrigger input1Trig;
+  ControlValue inputIndex(0);
+  ControlSwitcher switcher;
+  
+  ControlValue index0Val(0);
+  ControlValue index1Val(1);
+  
+  switcher
+    .addInput(index0Val)
+    .addInput(index1Val)
+    .triggerForIndex(input0Trig, 0)
+    .triggerForIndex(input1Trig, 1)
+    .inputIndex(inputIndex);
+  
+  ControlGeneratorOutput output;
+  
+  
+  localContext.tick();
+  output = switcher.tick(localContext);
+  STAssertEquals( output.value, index0Val.getValue(), @"InputIndex should be zero");
+  
+  localContext.tick();
+  output = switcher.tick(localContext);
+  STAssertFalse(output.triggered, @"Second tick with no change should not result in trigger.");
+  
+  inputIndex.value(1);
+  
+  localContext.tick();
+  output = switcher.tick(localContext);
+  STAssertEquals( output.value, index1Val.getValue(), @"InputIndex should be one");
+  
+  index1Val.value(100);
+  localContext.tick();
+  output = switcher.tick(localContext);
+  STAssertTrue(output.triggered, @"Change in input value should pass through to output.");
+  
+  
+  localContext.tick();
+  output = switcher.tick(localContext);
+  STAssertFalse(output.triggered, @"Change in input value should pass through to output.");
+  
+  input0Trig.trigger();
+  localContext.tick();
+  output = switcher.tick(localContext);
+  STAssertEquals( output.value, index0Val.getValue(), @"InputIndex should be zero");
+  
+  input0Trig.trigger();
+  localContext.tick();
+  output = switcher.tick(localContext);
+  STAssertFalse( output.triggered, @"Repeat call to same input shouldn't trigger if the input didn't trigger");
+  
+  input1Trig.trigger();
+  localContext.tick();
+  output = switcher.tick(localContext);
+  STAssertTrue( output.triggered, @"Switching inputs should cause a trigger.");
+  
+  inputIndex.value(0);
+  localContext.tick();
+  output = switcher.tick(localContext);
+  STAssertEquals( output.value, index0Val.getValue(), @"Changing the inputIndex should work, even after using an input trigger.");
+  
+}
+
+-(void)test209ControlSwitcherWrap{
+
+  Tonic_::SynthesisContext_ localContext;
+  localContext.forceNewOutput = false;
+  
+  ControlSwitcher switcher;
+  float addAfterWrap = 12;
+  float inputZero = 0;
+  float inputOne = 2;
+  switcher.addInput(inputZero);
+  switcher.addInput(inputOne);
+  switcher.doesWrap(true);
+  switcher.addAfterWrap(addAfterWrap);
+  
+  
+  switcher.inputIndex(0);
+  localContext.tick();
+  switcher.tick(localContext);
+  STAssertEquals(switcher.tick(localContext).value, inputZero, @"ControlSwitcher basic test.");
+  
+  
+  switcher.inputIndex(2);
+  localContext.tick();
+  switcher.tick(localContext);
+  STAssertEquals(switcher.tick(localContext).value, inputZero + addAfterWrap, @"ControlSwitcher basic test.");
+  
+  
+  switcher.inputIndex(3);
+  localContext.tick();
+  switcher.tick(localContext);
+  STAssertEquals(switcher.tick(localContext).value, inputOne + addAfterWrap, @"ControlSwitcher basic test.");
+  
+  
+  switcher.inputIndex(4);
+  localContext.tick();
+  switcher.tick(localContext);
+  STAssertEquals(switcher.tick(localContext).value, inputZero + addAfterWrap * 2, @"ControlSwitcher basic test.");
+  
+  
+  switcher.inputIndex(5);
+  localContext.tick();
+  switcher.tick(localContext);
+  STAssertEquals(switcher.tick(localContext).value, inputOne + addAfterWrap * 2, @"ControlSwitcher basic test.");
+  
+  
 }
 
 #pragma mark - Buffer filler tests
@@ -548,18 +682,6 @@ using namespace Tonic;
     }
   };
   
-  class TestControlChangeSubscriber : public ControlChangeSubscriber{
-    public:
-    bool valueChangedFlag;
-    TestControlChangeSubscriber() : valueChangedFlag(false){
-        
-    }
-    
-    void valueChanged(string, TonicFloat){
-      valueChangedFlag = true;
-    }
-  };
-  
   TestControlChangeSubscriber subscriber;
   TestSynth synth;
   synth.addControlChangeSubscriber("random", &subscriber);
@@ -606,11 +728,55 @@ using namespace Tonic;
   }
   
   STAssertFalse(subscriber.valueChangedFlag, @"Value changed notification should not have happened");
-  subscriber.valueChangedFlag = false;
   synth.sendControlChangesToSubscribers();
   STAssertTrue(subscriber.valueChangedFlag, @"Value changed notification should have happened");
   
+}
+
+// publishChanges should return a ControlChangeNotifier which we can subscribe to
+// directly, as an alternative to going through Synth::addControlChangeSubscriber
+-(void)test304ControlChangeNotifierInlineTest{
+  Synth synth;
+  const float VALUE = 0.5;
+  ControlValue val(VALUE);
+  TestControlChangeSubscriber subscriber;
+  ControlChangeNotifier notifier = synth.publishChanges(val, "controlValue");
+  notifier.addValueChangedSubscriber(&subscriber);
   
+  Tonic_::SynthesisContext_ context;
+  STAssertEquals(notifier.tick(context).value, VALUE, @"A controlChangeNotifier should wrap the ControlGenerator it's observing");
+  
+  for(int i = 0; i < 1000; i++){
+    synth.fillBufferOfFloats(stereoOutBuffer, kTestOutputBlockSize, 2);
+  }
+  STAssertFalse(subscriber.valueChangedFlag, @"Value changed notification should not have happened");
+  synth.sendControlChangesToSubscribers();
+  STAssertTrue(subscriber.valueChangedFlag, @"Value changed notification should have happened");
+  
+}
+
+-(void)test304UnNamedControlChangeNotifier{
+  Synth synth;
+  const float VALUE_1 = 0.5;
+  ControlValue val1(VALUE_1);
+  
+  const float VALUE_2 = 1;
+  ControlValue val2(VALUE_2);
+  
+  TestControlChangeSubscriber subscriber1;
+  TestControlChangeSubscriber subscriber2;
+  synth.publishChanges(val1).addValueChangedSubscriber(&subscriber1);
+  synth.publishChanges(val2).addValueChangedSubscriber(&subscriber2);
+  
+  for(int i = 0; i < 1000; i++){
+    synth.fillBufferOfFloats(stereoOutBuffer, kTestOutputBlockSize, 2);
+  }
+  
+  synth.sendControlChangesToSubscribers();
+  
+  STAssertTrue(subscriber1.valueChangedFlag, @"Value changed notification should have happened");
+  STAssertTrue(subscriber2.valueChangedFlag, @"Value changed notification should have happened");
+
 }
 
 #pragma mark operator tests

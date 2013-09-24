@@ -61,7 +61,7 @@ namespace Tonic{
   
   class LFNoise : public TemplatedGenerator<Tonic_::LFNoise_>{
   public:
-    createControlGeneratorSetters(LFNoise, setFreq, setFreq);
+    TONIC_MAKE_CTRL_GEN_SETTERS(LFNoise, setFreq, setFreq);
   };
 
 }

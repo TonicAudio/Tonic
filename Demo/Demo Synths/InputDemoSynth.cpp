@@ -25,4 +25,4 @@ public:
   
 };
 
-registerSynth(InputDemoSynth);
+TONIC_REGISTER_SYNTH(InputDemoSynth);

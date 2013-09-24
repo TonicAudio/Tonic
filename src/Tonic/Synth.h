@@ -37,6 +37,7 @@ namespace Tonic{
       std::map<string, ControlParameter> parameters_;
       std::vector<string> orderedParameterNames_;
       std::map<string, ControlChangeNotifier> controlChangeNotifiers_;
+      vector<ControlChangeNotifier> controlChangeNotifiersList_;
       // ControlGenerators that may not be part of the synthesis graph, but should be ticked anyway
       vector<ControlGenerator> auxControlGenerators_;
       
@@ -62,8 +63,7 @@ namespace Tonic{
       
       vector<ControlParameter>  getParameters();
       
-      template<class T>
-      T publishChanges(T input, string name);
+      ControlChangeNotifier publishChanges(ControlGenerator input, string name);
       
       void addAuxControlGenerator(ControlGenerator generator){
         auxControlGenerators_.push_back(generator);
@@ -92,16 +92,6 @@ namespace Tonic{
       if (limitOutput_){
         limiter_.tickThrough(outputFrames_, context);
       }
-    }
-    
-    template<class T>
-    T Synth_::publishChanges(T input, string name){
-      ControlChangeNotifier messenger;
-      messenger.setName(name);
-      messenger.input(input);
-      controlChangeNotifiers_[name] = messenger;
-      addAuxControlGenerator(messenger);
-      return input;
     }
     
   }
@@ -151,11 +141,11 @@ namespace Tonic{
       Returns a ControlConditioner which accepts an input and a ControlChangeSubscriber (supplied by the UI).
       When the input value changes, ControlChangeSubscriber::messageRecieved is called.
       You would typically call this method inside a synth definition if you have a ControlGenerator whose value you want
-      to make accessible to the UI thread.
+      to make accessible to the UI thread. You then subscribe to these events by creating a subclass of ControlChangeSubscriber
+      and passing a pointer to that object to Synth::addControlChangeSubscriber.
     */
-    
-    template<class T>
-    T publishChanges(T input, string name){
+  
+    ControlChangeNotifier publishChanges(ControlGenerator input, string name=""){
       return gen()->publishChanges(input, name);
     }
     
@@ -271,7 +261,7 @@ namespace Tonic{
 
 // This macro will auto-register a synth type. Just add it below the Synth class definition.
 
-#define registerSynth(SynthName)              \
+#define TONIC_REGISTER_SYNTH(SynthName)              \
                                               \
 class SynthName ## _RegistrationPoint {       \
                                               \

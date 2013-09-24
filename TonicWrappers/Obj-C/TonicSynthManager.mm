@@ -97,8 +97,8 @@ using namespace Tonic;
       }
     }
   }];
-  
-  [[Novocaine audioManager] pause];
+
+  [[Novocaine audioManager] setForceOutputToSpeaker:YES];
 }
 
 - (void)startSession

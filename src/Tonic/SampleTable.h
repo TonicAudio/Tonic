@@ -1,16 +1,18 @@
 //
 //  SampleTable.h
-//  TonicLib
+//  Tonic
 //
 //  Created by Nick Donaldson on 5/17/13.
-//  Copyright (c) 2013 Nick Donaldson. All rights reserved.
+//
+//
+// See LICENSE.txt for license and usage information.
 //
 
 // Global storage for sampled audio data - wavetables, in-memory samples, ring buffers, audio input, etc
 // Allows registration of a TonicFrames object with a name (string)
 
-#ifndef __TonicLib__SampleTable__
-#define __TonicLib__SampleTable__
+#ifndef __Tonic__SampleTable__
+#define __Tonic__SampleTable__
 
 #include "TonicFrames.h"
 
