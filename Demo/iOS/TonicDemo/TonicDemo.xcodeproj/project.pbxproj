@@ -19,6 +19,8 @@
 		01C65FEB17371BBC003B2661 /* ReverbTestSynth.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 01C65FE917371BBC003B2661 /* ReverbTestSynth.cpp */; };
 		01DAA58F173E9EF8001AA383 /* SynthAutoUIViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 01DAA58D173E9EF8001AA383 /* SynthAutoUIViewController.mm */; };
 		01DAA590173E9EF8001AA383 /* SynthAutoUIViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 01DAA58E173E9EF8001AA383 /* SynthAutoUIViewController.xib */; };
+		65CBA0C417F4C8230050E6CA /* BRCA1.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 65CBA0C317F4C8230050E6CA /* BRCA1.cpp */; };
+		65CBA0C717F4C8740050E6CA /* Fakeblock.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 65CBA0C617F4C8740050E6CA /* Fakeblock.cpp */; };
 		9A3E0D29174BEF530077641E /* ArbitraryTableLookupDemo.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9A3E0D27174BEF460077641E /* ArbitraryTableLookupDemo.cpp */; };
 		9A57FA28174E573200BC73C5 /* SynthsAsGenerators.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9A57FA26174E573200BC73C5 /* SynthsAsGenerators.cpp */; };
 		9AB59D3E17456D4C001E6837 /* ControlSnapToScaleTestSynth.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9AB59D3D17456D4C001E6837 /* ControlSnapToScaleTestSynth.cpp */; };
@@ -108,6 +110,8 @@
 		01DAA58C173E9EF8001AA383 /* SynthAutoUIViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SynthAutoUIViewController.h; sourceTree = "<group>"; };
 		01DAA58D173E9EF8001AA383 /* SynthAutoUIViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = SynthAutoUIViewController.mm; sourceTree = "<group>"; };
 		01DAA58E173E9EF8001AA383 /* SynthAutoUIViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SynthAutoUIViewController.xib; sourceTree = "<group>"; };
+		65CBA0C317F4C8230050E6CA /* BRCA1.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = BRCA1.cpp; sourceTree = "<group>"; };
+		65CBA0C617F4C8740050E6CA /* Fakeblock.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Fakeblock.cpp; sourceTree = "<group>"; };
 		9A3E0D27174BEF460077641E /* ArbitraryTableLookupDemo.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ArbitraryTableLookupDemo.cpp; sourceTree = "<group>"; };
 		9A57FA26174E573200BC73C5 /* SynthsAsGenerators.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SynthsAsGenerators.cpp; sourceTree = "<group>"; };
 		9AB59D3D17456D4C001E6837 /* ControlSnapToScaleTestSynth.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ControlSnapToScaleTestSynth.cpp; sourceTree = "<group>"; };
@@ -212,7 +216,9 @@
 				0183D0EF1735D17D004638EB /* ControlSwitcherTestSynth.cpp */,
 				0183D0F01735D17D004638EB /* DelayTestSynth.cpp */,
 				0183D0F11735D17D004638EB /* FilteredNoiseSynth.cpp */,
+				65CBA0C317F4C8230050E6CA /* BRCA1.cpp */,
 				0183D0F41735D17D004638EB /* FMDroneSynth.cpp */,
+				65CBA0C617F4C8740050E6CA /* Fakeblock.cpp */,
 				9AF6A72B174AC3A900C70173 /* InputDemoSynth.cpp */,
 				0183D0F51735D17D004638EB /* LFNoiseTestSynth.cpp */,
 				01C65FE917371BBC003B2661 /* ReverbTestSynth.cpp */,
@@ -561,6 +567,8 @@
 				9AF6A72C174AC3AA00C70173 /* InputDemoSynth.cpp in Sources */,
 				9A3E0D29174BEF530077641E /* ArbitraryTableLookupDemo.cpp in Sources */,
 				9A57FA28174E573200BC73C5 /* SynthsAsGenerators.cpp in Sources */,
+				65CBA0C417F4C8230050E6CA /* BRCA1.cpp in Sources */,
+				65CBA0C717F4C8740050E6CA /* Fakeblock.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
