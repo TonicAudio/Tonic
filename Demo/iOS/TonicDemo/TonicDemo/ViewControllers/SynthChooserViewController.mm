@@ -38,6 +38,28 @@ using namespace Tonic;
       {
         SynthDemoDef* def = [[SynthDemoDef alloc] init];
         [synthDefinitions addObject:def];
+        def.synthClassName = @"BRCA1";
+        def.synthDisplayName = @"BRCA1";
+        def.synthDescription = @"a genetic 'sequencer'--the soundtrack to your life.";
+        def.synthInstructions = @"brought to you by the letters: GTACCTTGATTTCGTATTCTGAGAGGCTGCTGCTTAGCGGTAGCCCCTTGGTTTCCGTGGCAACGGAAAAGCGCGGGAATTACAGATAAATTAAAACTGCGACTGCGCGGCGTGAGCTCGCTGAGACTTCCTGGACGGGGGACAGGCTGTGGGGTTTCTCAGATAACTGGGCCCCTGCGCTCAGGAGGCCTTCACCCTCTGCTCTGGGTAAAGGTAGTAGAGTCCCGGGAAAGGGACAGGGGGCCCAAGTGATGCTCTGGGGTACTGGCGTGGGAGAGTGGATTTCCGAAGCTGACAGATGGGTATTCTTTGACGGGGGGTAGGGGCGGAACCTGAGAGGCGTAAGGCGT";
+        def.usesInput = YES;
+        def.shouldAutoGenUI = YES;
+      }
+      
+      {
+        SynthDemoDef* def = [[SynthDemoDef alloc] init];
+        [synthDefinitions addObject:def];
+        def.synthClassName = @"Fakeblock";
+        def.synthDisplayName = @"Fakeblock";
+        def.synthDescription = @"a Boolean driven aggregation of what programmers call 'hacker traps'";
+        def.synthInstructions = @"a nice woodgrain texture should go here.  (thank you to Arrested Development for the idea.)";
+        def.usesInput = YES;
+        def.shouldAutoGenUI = YES;
+      }
+      
+      {
+        SynthDemoDef* def = [[SynthDemoDef alloc] init];
+        [synthDefinitions addObject:def];
         def.synthClassName = @"InputDemoSynth";
         def.synthDisplayName = @"Input processing demo (use headphones)";
         def.synthDescription = @"USE HEADPHONES or you may experience a feedback loop";
