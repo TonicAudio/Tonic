@@ -69,7 +69,7 @@ namespace Tonic {
       return gen()->getInput(index);
     }
     
-    unsigned int numInputs(){
+    unsigned long numInputs(){
       return gen()->numInputs();
     }
     
@@ -219,6 +219,7 @@ namespace Tonic {
       
       Generator getInput(unsigned int index) { return inputs_[index]; };
       unsigned int numInputs() { return inputs_.size(); };
+
     };
     
     
@@ -250,7 +251,7 @@ namespace Tonic {
       return gen()->getInput(index);
     }
     
-    unsigned int numInputs(){
+    unsigned long numInputs(){
       return gen()->numInputs();
     }
     

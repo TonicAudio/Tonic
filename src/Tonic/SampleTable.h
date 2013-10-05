@@ -36,7 +36,7 @@ namespace Tonic {
         return frames_.channels();
       }
       
-      unsigned int frames() const {
+      unsigned long frames() const {
         return frames_.frames();
       }
       
@@ -76,7 +76,7 @@ namespace Tonic {
       return obj->channels();
     }
   
-    unsigned int frames() const {
+    unsigned long frames() const {
       return obj->frames();
     }
   
