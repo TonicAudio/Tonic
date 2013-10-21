@@ -329,7 +329,7 @@
 				F20FCD4F16C58D3E0039832A /* Obj-C */,
 			);
 			name = TonicWrappers;
-			path = ../../../../TonicWrappers;
+			path = ../../../../extensions/TonicWrappers;
 			sourceTree = "<group>";
 		};
 		F20FCD4F16C58D3E0039832A /* Obj-C */ = {
