@@ -48,7 +48,6 @@ namespace Tonic {
       }
     }
     
-    
   }
   
   class BufferPlayer : public TemplatedGenerator<Tonic_::BufferPlayer_>{

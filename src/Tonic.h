@@ -66,6 +66,7 @@
 // Non-Oscillator Audio Sources
 #include "Tonic/BufferPlayer.h"
 
+
 // ------- Control Generators --------
 
 #include "Tonic/ControlDelay.h"
@@ -83,5 +84,9 @@
 #include "Tonic/ControlSnapToScale.h"
 #include "Tonic/ControlMidiToFreq.h"
 #include "Tonic/ControlTriggerFilter.h"
+
+// -------- Util ---------
+
+#include "Tonic/AudioFileUtils.h"
 
 #endif
