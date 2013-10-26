@@ -1,13 +1,15 @@
 //
 //  TriangleWave.h
-//  TonicLib
+//  Tonic
 //
 //  Created by Nick Donaldson on 5/17/13.
-//  Copyright (c) 2013 Nick Donaldson. All rights reserved.
+//
+//
+// See LICENSE.txt for license and usage information.
 //
 
-#ifndef TonicLib_TriangleWave_h
-#define TonicLib_TriangleWave_h
+#ifndef Tonic_TriangleWave_h
+#define Tonic_TriangleWave_h
 
 #include "SawtoothWave.h"
 
@@ -23,10 +25,10 @@ namespace Tonic {
       gen()->setSlopeGenerator(FixedValue(0.5f));
     }
     
-    createGeneratorSetters(TriangleWave, freq, setFrequencyGenerator);
+    TONIC_MAKE_GEN_SETTERS(TriangleWave, freq, setFrequencyGenerator);
     
     //! Set from 0-1 to change slope. At 0, it's a falling saw, at 1, it's a rising saw (defaults to 0.5, triangle)
-    createGeneratorSetters(TriangleWave, slope, setSlopeGenerator);
+    TONIC_MAKE_GEN_SETTERS(TriangleWave, slope, setSlopeGenerator);
     
   };
   

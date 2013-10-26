@@ -405,8 +405,8 @@ namespace Tonic {
   
   public:
     
-    createGeneratorSetters(FilterType, cutoff, setCutoff);
-    createGeneratorSetters(FilterType, Q, setQ);
+    TONIC_MAKE_GEN_SETTERS(FilterType, cutoff, setCutoff);
+    TONIC_MAKE_GEN_SETTERS(FilterType, Q, setQ);
     FilterType & normalizesGain(bool norm){
       this->gen()->setNormalizesGain(norm);
       return static_cast<FilterType&>(*this);

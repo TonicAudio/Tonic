@@ -163,7 +163,7 @@ namespace Tonic {
     inline unsigned int channels( void ) const { return nChannels_; };
 
     //! Return the number of sample frames represented by the data.
-    inline unsigned int frames( void ) const { return nFrames_; };
+    inline unsigned long frames( void ) const { return nFrames_; };
 
     //! Set the sample rate associated with the TonicFrames data.
     /*!
@@ -255,7 +255,7 @@ namespace Tonic {
     TonicFloat *dptr = data_ + dst;
     unsigned int stride = nChannels_;
     
-    vcopy(dptr, stride, sptr, stride, nFrames_);
+    vcopy(dptr, stride, sptr, stride, (unsigned int)nFrames_);
 
   }
 
@@ -308,7 +308,7 @@ namespace Tonic {
     }
     else{
       // just copy one channel, then fill
-      vcopy(dptr, nChannels_, fptr, fChannels, nFrames_);
+      vcopy(dptr, nChannels_, fptr, fChannels, (unsigned int)nFrames_);
       
       // fill all channels if necessary
       fillChannels();

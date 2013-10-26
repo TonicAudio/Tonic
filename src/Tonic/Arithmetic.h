@@ -23,10 +23,11 @@ namespace Tonic {
   namespace Tonic_{
       
     class Adder_ : public Generator_ {
-    protected:
       
-      std::vector<Generator> inputs;
-      TonicFrames workSpace;
+    protected:
+      vector<Generator> inputs_;
+      TonicFrames workSpace_;
+      
       void computeSynthesisBlock( const SynthesisContext_ &context );
 
     public:
@@ -34,9 +35,10 @@ namespace Tonic {
       Adder_();
       
       void input(Generator generator);
+      void setIsStereoOutput( bool stereo );
       
-      Generator getInput(unsigned int index) { return inputs[index]; };
-      unsigned int numInputs() { return inputs.size(); };
+      Generator getInput(unsigned int index) { return inputs_[index]; };
+      unsigned int numInputs() { return inputs_.size(); };
             
     };
     
@@ -46,9 +48,9 @@ namespace Tonic {
       
       memset(framesData, 0, sizeof(TonicFloat) * outputFrames_.size());
       
-      for (int j =0; j < inputs.size(); j++) {
-        inputs[j].tick(workSpace, context);
-        outputFrames_ += workSpace; // add each sample in frames to each sample in workspace
+      for (int j =0; j < inputs_.size(); j++) {
+        inputs_[j].tick(workSpace_, context);
+        outputFrames_ += workSpace_; // add each sample in frames to each sample in workspace
       }
       
     }
@@ -67,7 +69,7 @@ namespace Tonic {
       return gen()->getInput(index);
     }
     
-    unsigned int numInputs(){
+    unsigned long numInputs(){
       return gen()->numInputs();
     }
     
@@ -129,9 +131,9 @@ namespace Tonic {
       
     protected:
       
-      Generator left;
-      Generator right;
-      TonicFrames workSpace;
+      Generator left_;
+      Generator right_;
+      TonicFrames workSpace_;
       
       void computeSynthesisBlock( const SynthesisContext_ &context );
       
@@ -139,20 +141,16 @@ namespace Tonic {
       
       Subtractor_();
       
-      void setLeft(Generator arg){
-        left = arg;
-      }
-      
-      void setRight(Generator arg){
-        right = arg;
-      }
+      void setLeft(Generator arg);
+      void setRight(Generator arg);
+      void setIsStereoOutput( bool stereo );
       
     };
     
     inline void Subtractor_::computeSynthesisBlock(const SynthesisContext_ &context){
-      left.tick(outputFrames_, context);
-      right.tick(workSpace, context);
-      outputFrames_ -= workSpace;
+      left_.tick(outputFrames_, context);
+      right_.tick(workSpace_, context);
+      outputFrames_ -= workSpace_;
     }
     
   }
@@ -161,8 +159,8 @@ namespace Tonic {
     
   public:
     
-    createGeneratorSetters(Subtractor, left, setLeft);
-    createGeneratorSetters(Subtractor, right, setRight);
+    TONIC_MAKE_GEN_SETTERS(Subtractor, left, setLeft);
+    TONIC_MAKE_GEN_SETTERS(Subtractor, right, setRight);
     
   };
   
@@ -207,8 +205,8 @@ namespace Tonic {
     class Multiplier_ : public Generator_{
       
     protected:
-      TonicFrames workSpace;
-      vector<Generator> inputs;
+      vector<Generator> inputs_;
+      TonicFrames workSpace_;
       
       void computeSynthesisBlock( const SynthesisContext_ & context );
       
@@ -217,9 +215,11 @@ namespace Tonic {
       Multiplier_();
       
       void input(Generator generator);
+      void setIsStereoOutput( bool stereo );
       
-      Generator getInput(unsigned int index) { return inputs[index]; };
-      unsigned int numInputs() { return inputs.size(); };
+      Generator getInput(unsigned int index) { return inputs_[index]; };
+      unsigned int numInputs() { return inputs_.size(); };
+
     };
     
     
@@ -228,12 +228,12 @@ namespace Tonic {
       memset(&outputFrames_[0], 0, sizeof(TonicFloat) * outputFrames_.size());
       
       // for the first generator, store the value in the block
-      inputs[0].tick(outputFrames_, context);
+      inputs_[0].tick(outputFrames_, context);
       
       // for additional generators, use the workspace stkframes for tick, and multiply it into the frames argument
-      for(int i = 1; i < inputs.size(); i++) {
-        inputs[i].tick(workSpace, context);
-        outputFrames_ *= workSpace;
+      for(int i = 1; i < inputs_.size(); i++) {
+        inputs_[i].tick(workSpace_, context);
+        outputFrames_ *= workSpace_;
       }
       
     }
@@ -251,7 +251,7 @@ namespace Tonic {
       return gen()->getInput(index);
     }
     
-    unsigned int numInputs(){
+    unsigned long numInputs(){
       return gen()->numInputs();
     }
     
@@ -302,9 +302,9 @@ namespace Tonic {
     class Divider_ : public Generator_{
       
     protected:
-      Generator left;
-      Generator right;
-      TonicFrames workSpace;
+      Generator left_;
+      Generator right_;
+      TonicFrames workSpace_;
       
       void computeSynthesisBlock( const SynthesisContext_ &context );
       
@@ -312,20 +312,16 @@ namespace Tonic {
 
       Divider_();
       
-      void setLeft(Generator arg){
-        left = arg;
-      }
-      
-      void setRight(Generator arg){
-        right = arg;
-      }
+      void setLeft(Generator arg);
+      void setRight(Generator arg);
+      void setIsStereoOutput( bool stereo );
       
     };
     
     inline void Divider_::computeSynthesisBlock(const SynthesisContext_ &context){
-      left.tick(outputFrames_, context);
-      right.tick(workSpace, context);
-      outputFrames_ /= workSpace;
+      left_.tick(outputFrames_, context);
+      right_.tick(workSpace_, context);
+      outputFrames_ /= workSpace_;
       
     }
     
@@ -334,8 +330,8 @@ namespace Tonic {
   class Divider : public TemplatedGenerator<Tonic_::Divider_>{
     
   public:
-    createGeneratorSetters(Divider, left, setLeft);
-    createGeneratorSetters(Divider, right, setRight);
+    TONIC_MAKE_GEN_SETTERS(Divider, left, setLeft);
+    TONIC_MAKE_GEN_SETTERS(Divider, right, setRight);
     
   };
   

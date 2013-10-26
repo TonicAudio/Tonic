@@ -141,7 +141,8 @@ namespace Tonic{
       Returns a ControlConditioner which accepts an input and a ControlChangeSubscriber (supplied by the UI).
       When the input value changes, ControlChangeSubscriber::messageRecieved is called.
       You would typically call this method inside a synth definition if you have a ControlGenerator whose value you want
-      to make accessible to the UI thread.
+      to make accessible to the UI thread. You then subscribe to these events by creating a subclass of ControlChangeSubscriber
+      and passing a pointer to that object to Synth::addControlChangeSubscriber.
     */
   
     ControlChangeNotifier publishChanges(ControlGenerator input, string name=""){
@@ -260,7 +261,7 @@ namespace Tonic{
 
 // This macro will auto-register a synth type. Just add it below the Synth class definition.
 
-#define registerSynth(SynthName)              \
+#define TONIC_REGISTER_SYNTH(SynthName)              \
                                               \
 class SynthName ## _RegistrationPoint {       \
                                               \

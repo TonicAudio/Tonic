@@ -12,7 +12,6 @@
 #ifndef __TonicDemo__LFNoise__
 #define __TonicDemo__LFNoise__
 
-#include <iostream>
 #include "Generator.h"
 
 namespace Tonic{
@@ -24,7 +23,7 @@ namespace Tonic{
     protected:
       TonicFrames   mFreqFrames;
       float         mSlope;
-      int           mCounter;
+      signed long   mCounter;
       float         mLevel;
       
       void computeSynthesisBlock( const SynthesisContext_ &context );
@@ -38,7 +37,7 @@ namespace Tonic{
     };
     
     inline void LFNoise_::computeSynthesisBlock( const SynthesisContext_ &context ){
-      int remain = outputFrames_.frames();
+      unsigned long remain = (unsigned int)outputFrames_.frames();
       TonicFloat* out = &outputFrames_[0];
       do{
         if (mCounter<=0) {
@@ -46,8 +45,8 @@ namespace Tonic{
           mCounter = std::max<float>(1, mCounter);
           float nextlevel = randomFloat(-1, 1);
           mSlope = (nextlevel - mLevel) / mCounter;
-		}
-        int nsmps = std::min(remain, mCounter);
+        }
+        unsigned long nsmps = std::min(remain, (unsigned long)mCounter);
         remain -= nsmps;
         mCounter -= nsmps;
         for(int i = 0; i < nsmps; i++){
@@ -62,7 +61,7 @@ namespace Tonic{
   
   class LFNoise : public TemplatedGenerator<Tonic_::LFNoise_>{
   public:
-    createControlGeneratorSetters(LFNoise, setFreq, setFreq);
+    TONIC_MAKE_CTRL_GEN_SETTERS(LFNoise, setFreq, setFreq);
   };
 
 }

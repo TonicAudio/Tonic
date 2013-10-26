@@ -12,14 +12,14 @@
 #ifndef __Tonic__ControlPulse__
 #define __Tonic__ControlPulse__
 
-#include "ControlConditioner.h"
+#include "ControlGenerator.h"
 
 namespace Tonic {
   
   namespace Tonic_ {
     
 
-    class ControlPulse_ : public ControlConditioner_{
+    class ControlPulse_ : public ControlGenerator_ {
       
     protected:
       void computeOutput(const SynthesisContext_ & context);
@@ -32,18 +32,21 @@ namespace Tonic {
       ControlPulseState state_;
       double lastOnTime_;
       
+      ControlGenerator triggerGen_;
       ControlGenerator pulseLengthGen_;
       
     public:
       
-      ControlPulse_();      
+      ControlPulse_();
+      
+      void setTriggerGen( ControlGenerator gen ){ triggerGen_ = gen; };
       void setPulseLengthGen( ControlGenerator gen ){ pulseLengthGen_ = gen; };
     
     };
     
     inline   void ControlPulse_::computeOutput(const SynthesisContext_ & context){
       
-      ControlGeneratorOutput tickIn = input_.tick(context);
+      ControlGeneratorOutput tickIn = triggerGen_.tick(context);
       ControlGeneratorOutput lengthIn = pulseLengthGen_.tick(context);
       
       output_.triggered = false;
@@ -70,16 +73,17 @@ namespace Tonic {
     
   }
   
-  class ControlPulse : public TemplatedControlConditioner<ControlPulse, Tonic_::ControlPulse_>{
+  class ControlPulse : public TemplatedControlGenerator<Tonic_::ControlPulse_> {
     
-  public:
+    public:
+      
+      ControlPulse(float length = 0.1){
+        gen()->setPulseLengthGen(ControlValue(length));
+      }
     
-    ControlPulse(float length = 0.1){
-      gen()->setPulseLengthGen(ControlValue(length));
-    }
-    
-    createControlGeneratorSetters(ControlPulse, length, setPulseLengthGen);
-    
+      TONIC_MAKE_CTRL_GEN_SETTERS(ControlPulse, trigger, setTriggerGen);
+      TONIC_MAKE_CTRL_GEN_SETTERS(ControlPulse, length, setPulseLengthGen);
+      
   };
 }
 

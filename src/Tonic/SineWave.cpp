@@ -10,12 +10,12 @@
 
 namespace Tonic {
   
-  static string const TONIC_SIN_TABLE = "_TONIC_SIN_TABLE_";
-  
   SineWave::SineWave(){
     
+    static string const TONIC_SIN_TABLE = "_TONIC_SIN_TABLE_";
+    
     // As soon as the first SineWave is allocated, persistent SampleTable is created. Will stay in memory for program lifetime.
-    if (!Tonic_::s_oscTables_.containsObjectNamed(TONIC_SIN_TABLE)){
+    if (!Tonic_::s_oscillatorTables()->containsObjectNamed(TONIC_SIN_TABLE)){
       
       const unsigned int tableSize = 4096;
       
@@ -26,12 +26,12 @@ namespace Tonic {
         *data++ = sinf( TWO_PI * i * norm );
       }
       
-      Tonic_::s_oscTables_.insertObject(TONIC_SIN_TABLE, sineTable);
+      Tonic_::s_oscillatorTables()->insertObject(TONIC_SIN_TABLE, sineTable);
       
       this->gen()->setLookupTable(sineTable);
     }
     else{
-      this->gen()->setLookupTable(Tonic_::s_oscTables_.objectNamed(TONIC_SIN_TABLE));
+      this->gen()->setLookupTable(Tonic_::s_oscillatorTables()->objectNamed(TONIC_SIN_TABLE));
     }
 
     
