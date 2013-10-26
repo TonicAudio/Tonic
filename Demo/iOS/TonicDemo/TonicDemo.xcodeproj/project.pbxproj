@@ -45,6 +45,8 @@
 		A86C3F2316B2B834002A50F0 /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A86C3F2216B2B834002A50F0 /* Accelerate.framework */; };
 		A89356D817052CAD00C184BE /* SynthDemoDef.mm in Sources */ = {isa = PBXBuildFile; fileRef = A89356D617052CAD00C184BE /* SynthDemoDef.mm */; };
 		A8CF87F31703D71800D8F5E1 /* CoreMotion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A8CF87F21703D71800D8F5E1 /* CoreMotion.framework */; };
+		A8F87051181C380200B82527 /* BufferplayerTest.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A8F87050181C380200B82527 /* BufferplayerTest.cpp */; };
+		A8F87052181C380200B82527 /* BufferplayerTest.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A8F87050181C380200B82527 /* BufferplayerTest.cpp */; };
 		F20FCD5216C58D5B0039832A /* TonicSynthManager.mm in Sources */ = {isa = PBXBuildFile; fileRef = F20FCD5116C58D5B0039832A /* TonicSynthManager.mm */; };
 		F24A98D1173EAB8500BE47CB /* SynthParameterCell.mm in Sources */ = {isa = PBXBuildFile; fileRef = F24A98D0173EAB8500BE47CB /* SynthParameterCell.mm */; };
 		F24A98D3173EC45700BE47CB /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F24A98D2173EC45700BE47CB /* QuartzCore.framework */; };
@@ -143,6 +145,7 @@
 		A89356D517052CAD00C184BE /* SynthDemoDef.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SynthDemoDef.h; sourceTree = "<group>"; };
 		A89356D617052CAD00C184BE /* SynthDemoDef.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = SynthDemoDef.mm; sourceTree = "<group>"; };
 		A8CF87F21703D71800D8F5E1 /* CoreMotion.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMotion.framework; path = System/Library/Frameworks/CoreMotion.framework; sourceTree = SDKROOT; };
+		A8F87050181C380200B82527 /* BufferplayerTest.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = BufferplayerTest.cpp; sourceTree = "<group>"; };
 		F20FCD5016C58D5B0039832A /* TonicSynthManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TonicSynthManager.h; sourceTree = "<group>"; };
 		F20FCD5116C58D5B0039832A /* TonicSynthManager.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = TonicSynthManager.mm; sourceTree = "<group>"; };
 		F24A98CF173EAB8500BE47CB /* SynthParameterCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SynthParameterCell.h; sourceTree = "<group>"; };
@@ -224,6 +227,7 @@
 				0183D0F81735D17D004638EB /* StereoDelayTestSynth.cpp */,
 				9A57FA26174E573200BC73C5 /* SynthsAsGenerators.cpp */,
 				0183D0F91735D17D004638EB /* XYSpeed.cpp */,
+				A8F87050181C380200B82527 /* BufferplayerTest.cpp */,
 			);
 			name = "Demo Synths";
 			path = "../../../Demo Synths";
@@ -565,6 +569,7 @@
 				9A3E0D29174BEF530077641E /* ArbitraryTableLookupDemo.cpp in Sources */,
 				9A57FA28174E573200BC73C5 /* SynthsAsGenerators.cpp in Sources */,
 				F2541D30179C94BC00054407 /* BandlimitedOscillatorTest.cpp in Sources */,
+				A8F87051181C380200B82527 /* BufferplayerTest.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -576,6 +581,7 @@
 				F2B8532A1721AB2000C3921A /* StereoFixedTestGen.cpp in Sources */,
 				F2C6D3E517245C7F006455E7 /* TonicLoggingTests.mm in Sources */,
 				A80F6C2F17431BC00079FB52 /* SimpleStepSeqSynth.cpp in Sources */,
+				A8F87052181C380200B82527 /* BufferplayerTest.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

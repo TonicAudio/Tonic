@@ -63,6 +63,9 @@
 #include "Tonic/RingBuffer.h"
 #include "Tonic/LFNoise.h"
 
+// Non-Oscillator Audio Sources
+#include "Tonic/BufferPlayer.h"
+
 // ------- Control Generators --------
 
 #include "Tonic/ControlDelay.h"

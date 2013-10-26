@@ -160,6 +160,9 @@
 		A883ED7B17B468EA00F60C06 /* ControlTriggerFilter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A883ED7917B468EA00F60C06 /* ControlTriggerFilter.cpp */; };
 		A883ED7C17B468EA00F60C06 /* ControlTriggerFilter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A883ED7917B468EA00F60C06 /* ControlTriggerFilter.cpp */; };
 		A883ED7D17B468EA00F60C06 /* ControlTriggerFilter.h in Headers */ = {isa = PBXBuildFile; fileRef = A883ED7A17B468EA00F60C06 /* ControlTriggerFilter.h */; };
+		A8F87056181C3B6500B82527 /* BufferPlayer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A8F87054181C3B6500B82527 /* BufferPlayer.cpp */; };
+		A8F87057181C3B6500B82527 /* BufferPlayer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A8F87054181C3B6500B82527 /* BufferPlayer.cpp */; };
+		A8F87058181C3B6500B82527 /* BufferPlayer.h in Headers */ = {isa = PBXBuildFile; fileRef = A8F87055181C3B6500B82527 /* BufferPlayer.h */; };
 		F218C86F179C73F6000906B2 /* DSPUtils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F218C86D179C73F6000906B2 /* DSPUtils.cpp */; };
 		F218C870179C73F6000906B2 /* DSPUtils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F218C86D179C73F6000906B2 /* DSPUtils.cpp */; };
 		F218C871179C73F6000906B2 /* DSPUtils.h in Headers */ = {isa = PBXBuildFile; fileRef = F218C86E179C73F6000906B2 /* DSPUtils.h */; };
@@ -295,6 +298,8 @@
 		A80782D8175591FD009057BC /* ControlChangeNotifier.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = ControlChangeNotifier.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		A883ED7917B468EA00F60C06 /* ControlTriggerFilter.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ControlTriggerFilter.cpp; sourceTree = "<group>"; };
 		A883ED7A17B468EA00F60C06 /* ControlTriggerFilter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ControlTriggerFilter.h; sourceTree = "<group>"; };
+		A8F87054181C3B6500B82527 /* BufferPlayer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = BufferPlayer.cpp; sourceTree = "<group>"; };
+		A8F87055181C3B6500B82527 /* BufferPlayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BufferPlayer.h; sourceTree = "<group>"; };
 		F218C86D179C73F6000906B2 /* DSPUtils.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = DSPUtils.cpp; sourceTree = "<group>"; };
 		F218C86E179C73F6000906B2 /* DSPUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DSPUtils.h; sourceTree = "<group>"; };
 		F218C872179C763A000906B2 /* ControlDbToLinear.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ControlDbToLinear.cpp; sourceTree = "<group>"; };
@@ -445,6 +450,8 @@
 				0183D05B1735D0E6004638EB /* TonicFrames.cpp */,
 				0183D05C1735D0E6004638EB /* TonicFrames.h */,
 				9A7DB3E7174670DF009C9A8F /* TriangleWave.h */,
+				A8F87054181C3B6500B82527 /* BufferPlayer.cpp */,
+				A8F87055181C3B6500B82527 /* BufferPlayer.h */,
 			);
 			path = Tonic;
 			sourceTree = "<group>";
@@ -560,6 +567,7 @@
 				A883ED7D17B468EA00F60C06 /* ControlTriggerFilter.h in Headers */,
 				F218C871179C73F6000906B2 /* DSPUtils.h in Headers */,
 				F278D374179C8227004EBCA3 /* BLEPOscillator.h in Headers */,
+				A8F87058181C3B6500B82527 /* BufferPlayer.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -718,6 +726,7 @@
 				F218C874179C7642000906B2 /* ControlDbToLinear.cpp in Sources */,
 				F218C876179C7642000906B2 /* ControlFloor.cpp in Sources */,
 				F278D372179C8227004EBCA3 /* BLEPOscillator.cpp in Sources */,
+				A8F87056181C3B6500B82527 /* BufferPlayer.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -778,6 +787,7 @@
 				F218C875179C7642000906B2 /* ControlDbToLinear.cpp in Sources */,
 				F218C877179C7642000906B2 /* ControlFloor.cpp in Sources */,
 				F278D373179C8227004EBCA3 /* BLEPOscillator.cpp in Sources */,
+				A8F87057181C3B6500B82527 /* BufferPlayer.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
