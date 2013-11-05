@@ -43,6 +43,8 @@ namespace Tonic {
       // Used for initializing other generators (see smoothed() method for example)
       virtual ControlGeneratorOutput initialOutput();
       
+       ControlGeneratorOutput getLastOutput();
+      
     protected:
       
       //! Override this function to implement a new ControlGenerator
@@ -89,6 +91,8 @@ namespace Tonic {
     
     // shortcut for creating ramped value
     RampedValue smoothed(float length = 0.05);
+    
+    ControlGeneratorOutput getLastOutput();
     
   };
 
