@@ -33,8 +33,8 @@ namespace Tonic {
     public:
       ControlCallback_();
       ~ControlCallback_();
-      void setCallback(function<void(ControlGeneratorOutput)> fn);
-      
+	  void setCallback(function<void(ControlGeneratorOutput)> fn);
+      bool synthWasSet;
     };
     
   }
@@ -43,7 +43,15 @@ namespace Tonic {
     
   public:
   
-    ControlCallback(Synth* synth, function<void(ControlGeneratorOutput)>);
+    ControlCallback(Synth synth, function<void(ControlGeneratorOutput)>);
+
+	ControlCallback();
+
+
+	ControlCallback& callback(function<void(ControlGeneratorOutput)> fn);;
+
+
+	ControlCallback& synth(Synth synth);
     
 
   };
