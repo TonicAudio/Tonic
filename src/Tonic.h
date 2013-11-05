@@ -86,6 +86,7 @@
 #include "Tonic/ControlMidiToFreq.h"
 #include "Tonic/ControlTriggerFilter.h"
 #include "Tonic/ControlCallback.h" // C++11 only
+#include "Tonic/ControlRampedValue.h"
 
 // -------- Util ---------
 
