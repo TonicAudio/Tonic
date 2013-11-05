@@ -3,7 +3,6 @@
 //  Tonic 
 //
 //  Created by Morgan Packard on 4/15/13.
-//  Copyright (c) 2013 Morgan Packard. All rights reserved.
 //
 // See LICENSE.txt for license and usage information.
 //
@@ -52,8 +51,8 @@ namespace Tonic {
     
   public:
   
-    createControlGeneratorSetters(ControlCounter, trigger, setTrigger);
-    createControlGeneratorSetters(ControlCounter, end, setEnd);
+    TONIC_MAKE_CTRL_GEN_SETTERS(ControlCounter, trigger, setTrigger);
+    TONIC_MAKE_CTRL_GEN_SETTERS(ControlCounter, end, setEnd);
 
   };
 }

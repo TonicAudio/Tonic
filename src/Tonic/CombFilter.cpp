@@ -3,7 +3,9 @@
 //  Tonic
 //
 //  Created by Nick Donaldson on 5/4/13.
-//  Copyright (c) 2013 Nick Donaldson. All rights reserved.
+//
+//
+// See LICENSE.txt for license and usage information.
 //
 
 #include "CombFilter.h"
@@ -11,7 +13,6 @@
 namespace Tonic { namespace Tonic_{
   
   CombFilter_::CombFilter_(){
-    setIsAlwaysWet(true);
     delayTimeFrames_.resize(kSynthesisBlockSize, 1, 0);
   }
   

@@ -250,14 +250,14 @@ namespace Tonic {
     
       ADSR(float attack = 0.001f, float decay = 0.03f, float sustain = 1.0f, float release = 0.05f);
     
-      createControlGeneratorSetters(ADSR, trigger, setTrigger);
-      createControlGeneratorSetters(ADSR, attack, setAttack);
-      createControlGeneratorSetters(ADSR, decay, setDecay);
-      createControlGeneratorSetters(ADSR, sustain, setSustain);
-      createControlGeneratorSetters(ADSR, release, setRelease);
-      createControlGeneratorSetters(ADSR, exponential, setIsExponential);
-      createControlGeneratorSetters(ADSR, doesSustain, setDoesSustain);
-      createControlGeneratorSetters(ADSR, legato, setIsLegato);
+      TONIC_MAKE_CTRL_GEN_SETTERS(ADSR, trigger, setTrigger);
+      TONIC_MAKE_CTRL_GEN_SETTERS(ADSR, attack, setAttack);
+      TONIC_MAKE_CTRL_GEN_SETTERS(ADSR, decay, setDecay);
+      TONIC_MAKE_CTRL_GEN_SETTERS(ADSR, sustain, setSustain);
+      TONIC_MAKE_CTRL_GEN_SETTERS(ADSR, release, setRelease);
+      TONIC_MAKE_CTRL_GEN_SETTERS(ADSR, exponential, setIsExponential);
+      TONIC_MAKE_CTRL_GEN_SETTERS(ADSR, doesSustain, setDoesSustain);
+      TONIC_MAKE_CTRL_GEN_SETTERS(ADSR, legato, setIsLegato);
 
   };
   

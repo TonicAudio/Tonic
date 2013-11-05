@@ -29,7 +29,7 @@ namespace Tonic{
       
     private:
       
-      int                         bufferReadPosition_;
+      unsigned long               bufferReadPosition_;
       TONIC_MUTEX_T               mutex_;
       
     protected:
@@ -80,7 +80,7 @@ namespace Tonic{
       if(numChannels > outputFrames_.channels()) error("Mismatch in channels sent to Synth::fillBufferOfFloats", true);
 #endif
       
-      const unsigned int sampleCount = outputFrames_.size();
+      const unsigned long sampleCount = outputFrames_.size();
       const unsigned int channelsPerSample = (outputFrames_.channels() - numChannels) + 1;
       
       TonicFloat sample = 0.0f;

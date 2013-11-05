@@ -19,8 +19,8 @@ namespace Tonic {
   
   namespace Tonic_ {
     
-    // Registry for all static lookup table data
-    static TonicDictionary<SampleTable> s_oscTables_;
+    // Registry for all static oscillator lookup table data
+    TonicDictionary<SampleTable> * s_oscillatorTables();
     
     class TableLookupOsc_ : public Generator_{
       
@@ -128,7 +128,7 @@ namespace Tonic {
     
       TableLookupOsc & setLookupTable( SampleTable lookupTable );
     
-      createGeneratorSetters(TableLookupOsc, freq, setFrequency);
+      TONIC_MAKE_GEN_SETTERS(TableLookupOsc, freq, setFrequency);
   };
 
 }

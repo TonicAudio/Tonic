@@ -3,22 +3,10 @@
 //  Tonic 
 //
 //  Created by Nick Donaldson on 5/4/13.
-//  Copyright (c) 2013 Nick Donaldson. All rights reserved.
+//
+// See LICENSE.txt for license and usage information.
 //
 
-/*+++++++++++++++++++++ License ++++++++++++++++++++
-
-Use this code for whatever you want. There are NO 
-RESTRICTIONS WHATSOVER. Modify it, repackage it, 
-sell it, get rich from it, whatever. Go crazy. If 
-you want to make mehappy, contribute to this 
-project, but feel free to just use the code as a 
-starting point for whatever you like.
-
-Note that Tonic is heavily indebted to STK
-https://ccrma.stanford.edu/software/stk/
-
-++++++++++++++++++++++++++++++++++++++++++++++++++*/
 
 #ifndef __Tonic__CombFilter__
 #define __Tonic__CombFilter__
@@ -173,8 +161,8 @@ namespace Tonic {
   public:
     
     FFCombFilter(float initialDelayTime = 0.1f, float maxDelayTime = -1);
-    createGeneratorSetters(FFCombFilter, delayTime, setDelayTimeGen);
-    createControlGeneratorSetters(FFCombFilter, scaleFactor, setScaleFactorGen);
+    TONIC_MAKE_GEN_SETTERS(FFCombFilter, delayTime, setDelayTimeGen);
+    TONIC_MAKE_CTRL_GEN_SETTERS(FFCombFilter, scaleFactor, setScaleFactorGen);
   };
   
   // -----
@@ -184,8 +172,8 @@ namespace Tonic {
   public:
     
     FBCombFilter(float initialDelayTime = 0.1f, float maxDelayTime = -1);
-    createGeneratorSetters(FBCombFilter, delayTime, setDelayTimeGen);
-    createControlGeneratorSetters(FBCombFilter, scaleFactor, setScaleFactorGen);
+    TONIC_MAKE_GEN_SETTERS(FBCombFilter, delayTime, setDelayTimeGen);
+    TONIC_MAKE_CTRL_GEN_SETTERS(FBCombFilter, scaleFactor, setScaleFactorGen);
   };
   
   // ------
@@ -194,10 +182,10 @@ namespace Tonic {
   {
   public:
     FilteredFBCombFilter6(float initialDelayTime = 0.1f, float maxDelayTime = -1);
-    createGeneratorSetters(FilteredFBCombFilter6, delayTime, setDelayTimeGen);
-    createControlGeneratorSetters(FilteredFBCombFilter6, scaleFactor, setScaleFactorGen);
-    createControlGeneratorSetters(FilteredFBCombFilter6, lowpassCutoff, setLowCutoff);
-    createControlGeneratorSetters(FilteredFBCombFilter6, highpassCutoff, setHighCutoff);
+    TONIC_MAKE_GEN_SETTERS(FilteredFBCombFilter6, delayTime, setDelayTimeGen);
+    TONIC_MAKE_CTRL_GEN_SETTERS(FilteredFBCombFilter6, scaleFactor, setScaleFactorGen);
+    TONIC_MAKE_CTRL_GEN_SETTERS(FilteredFBCombFilter6, lowpassCutoff, setLowCutoff);
+    TONIC_MAKE_CTRL_GEN_SETTERS(FilteredFBCombFilter6, highpassCutoff, setHighCutoff);
   };
 }
 
