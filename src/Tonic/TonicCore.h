@@ -384,9 +384,7 @@ namespace Tonic {
       
       TonicSmartPointer() : obj(NULL), pcount(NULL) {}
       
-      TonicSmartPointer(T * initObj) : obj(initObj) , pcount(initObj ? new int(1) : NULL) {
-		printf(" TonicSmartPointer(T * initObj) called\n");
-	  }
+      TonicSmartPointer(T * initObj) : obj(initObj) , pcount(initObj ? new int(1) : NULL) {}
 
       
       TonicSmartPointer(const TonicSmartPointer& r) : obj(r.obj), pcount(r.pcount){
