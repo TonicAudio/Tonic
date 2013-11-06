@@ -75,6 +75,8 @@ namespace Tonic {
 							last_ = target_;
 							finished_ = true;
 						}
+					}else{
+						finished_ = true;
 					}
 					output_.value = last_;
 					output_.triggered = true;
@@ -121,7 +123,7 @@ namespace Tonic {
 				count_ = 0;
 
 				// ND- Fixes bug with NaN when using Accelerate ramps
-				if (lengthSamp == 0 || target_ == last_){
+				if (lengthSamp == 0){
 					last_ = target_;
 					finished_ = true;
 					inc_ = 0;
