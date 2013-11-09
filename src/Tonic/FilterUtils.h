@@ -5,7 +5,8 @@
 //  Created by Nick Donaldson on 2/20/13.
 
 //
-
+// See LICENSE.txt for license and usage information.
+//
 #ifndef TonicDemo_FilterUtils_h
 #define TonicDemo_FilterUtils_h
 

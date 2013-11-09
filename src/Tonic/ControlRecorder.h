@@ -28,7 +28,6 @@ namespace Tonic {
       
     public:
       ControlRecorder_();
-      ~ControlRecorder_();
       
       void setMode(ControlGenerator);
 
@@ -46,7 +45,7 @@ namespace Tonic {
       STOP
     };
     
-    createControlGeneratorSetters(ControlRecorder, mode, setMode)
+    TONIC_MAKE_CTRL_GEN_SETTERS(ControlRecorder, mode, setMode)
 
   };
   
@@ -58,15 +57,15 @@ namespace Tonic {
       ControlGeneratorOutput inputOut = input_.tick(context);
       ControlGeneratorOutput modeOut = mode.tick(context);
       
-      ControlRecorder::Mode currenMode = (ControlRecorder::Mode)modeOut.value;
+      ControlRecorder::Mode currentMode = (ControlRecorder::Mode)((int)modeOut.value);
       
       if(modeOut.triggered){
-        if(currenMode == ControlRecorder::STOP){
+        if(currentMode == ControlRecorder::STOP){
           printf("ControlRecorder_::computeOutput STOP\n");
           recording.clear();
-        }else if(currenMode == ControlRecorder::PLAY){
+        }else if(currentMode == ControlRecorder::PLAY){
           playbackHead = recording.begin();
-        }else if(currenMode == ControlRecorder::RECORD){
+        }else if(currentMode == ControlRecorder::RECORD){
           playbackHead = recording.begin();
           recording.clear();
         }
@@ -75,7 +74,7 @@ namespace Tonic {
       // temp
       static int count = 0;
       
-      switch (currenMode) {
+      switch (currentMode) {
         case ControlRecorder::RECORD:
           recording.push_back(inputOut);
           output_ = inputOut;

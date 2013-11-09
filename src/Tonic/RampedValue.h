@@ -232,20 +232,20 @@ namespace Tonic {
     /*!
         Changes to target gen input will create a new ramp from current value to target over the current length
     */
-    createControlGeneratorSetters(RampedValue, target, setTargetGen);
+    TONIC_MAKE_CTRL_GEN_SETTERS(RampedValue, target, setTargetGen);
     
     //! Set length before reaching target value, in ms
     /*!
         Changes to length gen input will create a new ramp from current value to target over the provided length
     */
-    createControlGeneratorSetters(RampedValue, length, setLengthGen);
+    TONIC_MAKE_CTRL_GEN_SETTERS(RampedValue, length, setLengthGen);
     
     //! Go to value immediately
     /*!
         Changes to the value gen input will abort the current ramp and go immediately to the specified value.
         Output will remain steady until a new target or length is set.
     */
-    createControlGeneratorSetters(RampedValue, value, setValueGen);
+    TONIC_MAKE_CTRL_GEN_SETTERS(RampedValue, value, setValueGen);
 
     bool isFinished();
 
