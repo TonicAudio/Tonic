@@ -237,18 +237,6 @@ using namespace Tonic;
         };
       }
       
-      {
-        SynthDemoDef* def = [[SynthDemoDef alloc] init];
-        [synthDefinitions addObject:def];
-        def.synthClassName = @"BufferPlayerTest";
-        def.synthDisplayName = @"Buffer player";
-        def.synthDescription = @"play back a buffer!";
-        def.synthInstructions = @"blah blah blah";
-        def.synthAction = ^(Tonic::Synth synth, CGPoint touchPointNorm){
-//          synth.setParameter("Q", touchPointNorm.y * 135);
-        };
-      }
-      
     }
     return self;
 }

@@ -59,6 +59,11 @@ namespace Tonic {
     Simply plays back a buffer. "loop" parameter works, but doesn't wrap between ticks, so mostly likely you'll wind up with a few zeroes at the end of 
     the last buffer if you're looping. In other words, buffer lenghts are rounded up to the nearest kSynthesisBlockSize 
    
+    Usage:
+    
+    SampleTable buffer = loadAudioFile("/Users/morganpackard/Desktop/trashme/2013.6.5.mp3");
+    bPlayer.setBuffer(buffer).loop(false).trigger(ControlMetro().bpm(100));
+   
   */
   
   class BufferPlayer : public TemplatedGenerator<Tonic_::BufferPlayer_>{
