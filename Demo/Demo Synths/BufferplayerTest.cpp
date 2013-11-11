@@ -35,9 +35,10 @@ class BufferPlayerTest : public Synth{
       angle = fmod(angle + angleInc, TWO_PI);
     }
     
-//    buffer = loadAudioFile("/Users/morganpackard/Desktop/trashme/2013.6.5.mp3");
+    buffer = loadAudioFile("/Users/morganpackard/Desktop/trashme/2013.6.5.mp3");
 //
-    bPlayer.setBuffer(buffer).loop(true);
+    ControlGenerator bpm = ControlMetro().bpm(100);
+    bPlayer.setBuffer(buffer).loop(false).trigger(bpm).startPosition( ControlRandom().trigger(bpm).min(0).max(1) );
     
     setOutputGen(bPlayer);
   }

@@ -7,11 +7,14 @@
 //
 
 #include "BufferPlayer.h"
+#include "ControlTrigger.h"
 
 namespace Tonic { namespace Tonic_{
   
-  BufferPlayer_::BufferPlayer_() : currentSample(0), isFinished_(false){
-    
+  BufferPlayer_::BufferPlayer_() : currentSample(0), isFinished_(true){
+    doesLoop_ = ControlValue(false);
+    trigger_ = ControlTrigger();
+    startPosition_ = ControlValue(0);
   }
   
   BufferPlayer_::~BufferPlayer_(){
@@ -27,6 +30,13 @@ namespace Tonic { namespace Tonic_{
   inline void BufferPlayer_::computeSynthesisBlock(const SynthesisContext_ &context){
     
     bool doesLoop = doesLoop_.tick(context).value;
+    bool trigger = trigger_.tick(context).triggered;
+    float startPosition = startPosition_.tick(context).value;
+    
+    if(trigger){
+      isFinished_ = false;
+      currentSample = startPosition * sampleRate() * buffer_.channels();
+    }
     
     if(isFinished_){
       outputFrames_.clear();

@@ -30,6 +30,8 @@ namespace Tonic {
     int currentSample;
     int samplesPerSynthesisBlock;
     ControlGenerator doesLoop_;
+    ControlGenerator trigger_;
+    ControlGenerator startPosition_;
     bool isFinished_;
     
     void copySamplesToOutputBuffer(int startSample, int numSamples);
@@ -41,6 +43,8 @@ namespace Tonic {
       
       void setBuffer(SampleTable sampleTable);
       void setDoesLoop(ControlGenerator doesLoop){doesLoop_ = doesLoop;}
+      void setTrigger(ControlGenerator trigger){trigger_ = trigger;}
+      void setStartPosition(ControlGenerator startPosition){startPosition_ = startPosition;}
       
     };
     
@@ -67,6 +71,8 @@ namespace Tonic {
     };
     
     TONIC_MAKE_CTRL_GEN_SETTERS(BufferPlayer, loop, setDoesLoop)
+    TONIC_MAKE_CTRL_GEN_SETTERS(BufferPlayer, trigger, setTrigger)
+    TONIC_MAKE_CTRL_GEN_SETTERS(BufferPlayer, startPosition, setStartPosition)
 
   };
 }
