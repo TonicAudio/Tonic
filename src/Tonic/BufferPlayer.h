@@ -27,6 +27,7 @@ namespace Tonic {
     SampleTable buffer_;
     int testVar;
     int currentSample;
+    int samplesPerSynthesisBlock;
       
     public:
       BufferPlayer_();
@@ -39,12 +40,12 @@ namespace Tonic {
     
     inline void BufferPlayer_::computeSynthesisBlock(const SynthesisContext_ &context){
       int samplesLeftInBuf = buffer_.size() - currentSample;
-      int samplesToCopy = min(kSynthesisBlockSize, samplesLeftInBuf);
-      memcpy(&outputFrames_[0], &buffer_.dataPointer()[currentSample], samplesToCopy * sizeof(TonicFloat));
-      if (samplesToCopy < kSynthesisBlockSize) {
+      int samplesToCopy = min(samplesPerSynthesisBlock, samplesLeftInBuf);
+      memcpy(&outputFrames_[0], &buffer_.dataPointer()[currentSample], samplesToCopy * sizeof(TonicFloat) * buffer_.channels());
+      if (samplesToCopy < samplesPerSynthesisBlock) {
         currentSample = 0;
       }else{
-        currentSample += kSynthesisBlockSize;
+        currentSample += samplesPerSynthesisBlock;
       }
     }
     

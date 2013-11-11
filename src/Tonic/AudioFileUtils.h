@@ -14,7 +14,7 @@
 
 namespace Tonic {
   
-  static SampleTable loadAudioFile(string path);
+  SampleTable loadAudioFile(string path, int numChannels = 2);
   
 }
 

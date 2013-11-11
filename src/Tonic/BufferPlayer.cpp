@@ -21,7 +21,7 @@ namespace Tonic { namespace Tonic_{
   void  BufferPlayer_::setBuffer(SampleTable buffer){
     buffer_ = buffer;
     setIsStereoOutput(buffer.channels() == 2);
-    
+    samplesPerSynthesisBlock = kSynthesisBlockSize * buffer_.channels();
   }
 
 } // Namespace Tonic_
