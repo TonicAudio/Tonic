@@ -36,14 +36,17 @@ namespace Tonic {
 
   SampleTable loadAudioFile(string path, int numChannels){
   
-    static const float BYTES_PER_SAMPLE = 4;
+    static const int BYTES_PER_SAMPLE = sizeof(TonicFloat);
     
     // Get the file handle
     ExtAudioFileRef inputFile;
     CFStringRef cfStringRef; 
     cfStringRef = CFStringCreateWithCString(kCFAllocatorDefault, path.c_str(), kCFStringEncodingMacRoman);
     CFURLRef inputFileURL = CFURLCreateWithFileSystemPath(kCFAllocatorDefault, cfStringRef, kCFURLPOSIXPathStyle, false);
+    CFRelease(cfStringRef);
+    
     checkCAError(ExtAudioFileOpenURL(inputFileURL,  &inputFile), "ExtAudioFileOpenURL failed");
+    CFRelease(inputFileURL);
     
     // Define the format for the data we want to extract from the audio file
     AudioStreamBasicDescription outputFormat;
@@ -78,12 +81,17 @@ namespace Tonic {
     UInt32 numFrames32 = (UInt32)numFrames;
     ExtAudioFileRead(inputFile, &numFrames32, &convertedData);
     
+    ExtAudioFileDispose(inputFile);
+    
     return destinationTable;
     
   }
   
   #else
   
+  SampleTable loadAudioFile(string path, int numChannels){
+    Tonic::error("loadAudioFile is currently only implemented for Apple platforms.");
+  }
   
   
   #endif
