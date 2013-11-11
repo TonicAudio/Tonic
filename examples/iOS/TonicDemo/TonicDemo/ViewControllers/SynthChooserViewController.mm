@@ -236,7 +236,7 @@ using namespace Tonic;
           synth.setParameter("stepperSpread", touchPointNorm.x);
         };
       }
-
+      
     }
     return self;
 }
