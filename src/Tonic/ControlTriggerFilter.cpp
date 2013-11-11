@@ -11,7 +11,8 @@
 namespace Tonic { namespace Tonic_{
   
   ControlTriggerFilter_::ControlTriggerFilter_(): step(0){
-    
+    loop_ = ControlValue(true);
+    finished = false;
   }
   
   ControlTriggerFilter_::~ControlTriggerFilter_(){
@@ -20,12 +21,22 @@ namespace Tonic { namespace Tonic_{
   
   void ControlTriggerFilter_::computeOutput(const SynthesisContext_ & context){
     ControlGeneratorOutput triggerOut = trigger_.tick(context);
+    ControlGeneratorOutput loopOut = loop_.tick(context);
     if(triggerOut.triggered){
-      output_.triggered = sequence_.at(step) ? true : false;
-      if(output_.triggered){
-        output_.value = triggerOut.value;
+      if (finished) {
+        output_ = triggerOut;
+      }else{
+        output_.triggered = sequence_.at(step) ? true : false;
+        if(output_.triggered){
+          output_.value = triggerOut.value;
+        }
+        step = (step + 1) % sequence_.size();
+        if (step == 0 && !loopOut.value) {
+          finished = true;
+        }
       }
-      step = (step + 1) % sequence_.size();
+
+     
     }else{
       output_.triggered = false;
     }
@@ -45,6 +56,10 @@ namespace Tonic { namespace Tonic_{
   
   void ControlTriggerFilter_::trigger(ControlGenerator trigger){
     trigger_ = trigger;
+  }
+  
+  void ControlTriggerFilter_::setLoop(ControlGenerator loop){
+    loop_ = loop;
   }
   
   
