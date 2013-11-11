@@ -99,7 +99,7 @@ void TonicFrames :: resize( size_t nFrames, unsigned int nChannels )
 
     // preserve as much of old data as we can
     TonicFloat * oldData = data_;
-    unsigned int oldSize = size_;
+    unsigned long oldSize = size_;
     
     size_ = nFrames_ * nChannels_;
     
@@ -151,7 +151,7 @@ void TonicFrames :: resample( size_t nFrames , unsigned int nChannels )
       
       // preserve as much of old data as we can
       TonicFloat * oldData = data_;
-      unsigned int oldFrames = nFrames_;
+      unsigned long oldFrames = nFrames_;
       unsigned int oldchannels = nChannels_;
       
       nFrames_ = nFrames;

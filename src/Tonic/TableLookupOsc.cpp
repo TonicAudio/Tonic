@@ -11,6 +11,12 @@
 namespace Tonic {
   
   namespace Tonic_{
+    
+    TonicDictionary<SampleTable> * s_oscillatorTables()
+    {
+      static TonicDictionary<SampleTable> * s_oscillatorTables = new TonicDictionary<SampleTable>;
+      return s_oscillatorTables;
+    }
   
     TableLookupOsc_::TableLookupOsc_() :
       phase_(0.0)
