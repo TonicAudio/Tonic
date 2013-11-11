@@ -10,7 +10,7 @@
 
 namespace Tonic { namespace Tonic_{
   
-  BufferPlayer_::BufferPlayer_() : currentSample(0){
+  BufferPlayer_::BufferPlayer_() : currentSample(0), isFinished_(false){
     
   }
   
@@ -23,6 +23,29 @@ namespace Tonic { namespace Tonic_{
     setIsStereoOutput(buffer.channels() == 2);
     samplesPerSynthesisBlock = kSynthesisBlockSize * buffer_.channels();
   }
+  
+  inline void BufferPlayer_::computeSynthesisBlock(const SynthesisContext_ &context){
+    
+    bool doesLoop = doesLoop_.tick(context).value;
+    
+    if(isFinished_){
+      outputFrames_.clear();
+    }else{
+      int samplesLeftInBuf = buffer_.size() - currentSample;
+      int samplesToCopy = min(samplesPerSynthesisBlock, samplesLeftInBuf);
+      copySamplesToOutputBuffer(currentSample, samplesToCopy);
+      if (samplesToCopy < samplesPerSynthesisBlock) {
+        if(doesLoop){
+          currentSample = 0;
+        }else{
+          isFinished_ = true;
+        }
+      }else{
+        currentSample += samplesPerSynthesisBlock;
+      }
+    }
+  }
+
 
 } // Namespace Tonic_
   
