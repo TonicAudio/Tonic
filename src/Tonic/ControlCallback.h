@@ -27,6 +27,7 @@ namespace Tonic {
     class ControlCallback_ : public ControlConditioner_{
       
     protected:
+	  TonicFloat lastOutputValue_;
       void computeOutput(const SynthesisContext_ & context);
       function<void(ControlGeneratorOutput)> callback_;
       

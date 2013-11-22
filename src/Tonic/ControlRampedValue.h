@@ -22,6 +22,7 @@ namespace Tonic {
 				ControlGenerator lengthGen_;
 				ControlGenerator valueGen_;
 				ControlTrigger finishedTrigger_;
+				ControlTrigger shouldLoop_;
 
 				void computeOutput(const SynthesisContext_ & context);
 
@@ -32,6 +33,7 @@ namespace Tonic {
 				void setValueGen( ControlGenerator value );
 				void setTargetGen( ControlGenerator target );
 				void setLengthGen( ControlGenerator length );
+				void setShouldLoopGen(ControlGenerator sholdLoop);
 
 				// internal state setters
 				void updateValue( TonicFloat value);
@@ -42,6 +44,9 @@ namespace Tonic {
 			};
 
 			inline void ControlRampedValue_::computeOutput(const SynthesisContext_ & context){
+
+				bool shouldLoop = shouldLoop_.tick(context).value;
+
 				// First set the value, if necessary (abort ramp, go immediately to value)
 				ControlGeneratorOutput valueOutput = valueGen_.tick(context);
 				if(valueOutput.triggered){
@@ -52,6 +57,7 @@ namespace Tonic {
 				ControlGeneratorOutput lengthOutput = lengthGen_.tick(context);
 				ControlGeneratorOutput targetOutput = targetGen_.tick(context);
 				if (lengthOutput.triggered || targetOutput.triggered){
+					finished_ = false;
 					unsigned long lSamp = lengthOutput.value*Tonic::sampleRate();
 					updateTarget(targetOutput.value, lSamp);
 				}
@@ -69,7 +75,7 @@ namespace Tonic {
 							finished_ = true;
 						}
 						
-					}else if(last_ < 0){
+					}else if(inc_ < 0){
 						if (last_ <= target_)
 						{
 							last_ = target_;
@@ -83,6 +89,12 @@ namespace Tonic {
 					if (finished_)
 					{
 						finishedTrigger_.trigger();
+						if (shouldLoop)
+						{
+							last_ = valueOutput.value;
+							finished_ = false;
+						}
+						
 					}
 					
 				}
@@ -102,6 +114,10 @@ namespace Tonic {
 
 			inline void ControlRampedValue_::setLengthGen(ControlGenerator length){
 				lengthGen_ = length;
+			}
+
+			inline void ControlRampedValue_::setShouldLoopGen(ControlGenerator shouldLoop){
+				shouldLoop = shouldLoop;
 			}
 
 #pragma mark - Internal State setters
@@ -160,7 +176,7 @@ namespace Tonic {
 		    
 		TONIC_MAKE_CTRL_GEN_SETTERS(ControlRampedValue, target, setTargetGen);
     
-		//! Set length before reaching target value, in ms
+		//! Set length before reaching target value, in seconds
 		/*!
 			Changes to length gen input will create a new ramp from current value to target over the provided length
 		*/
@@ -172,6 +188,12 @@ namespace Tonic {
 			Output will remain steady until a new target or length is set.
 		*/
 		TONIC_MAKE_CTRL_GEN_SETTERS(ControlRampedValue, value, setValueGen);
+
+		//! Loop the ramp
+		/*!
+			If this is true at the moment the ramp finishes, it will reset itself to whatever the value of the "value" generator is.
+		*/
+		TONIC_MAKE_CTRL_GEN_SETTERS(ControlRampedValue, shouldLoop, setShouldLoopGen);
 
 		//! Get a ControlTrigger which will be triggered when the target value is reached.
 		ControlTrigger getFinishedTrigger();

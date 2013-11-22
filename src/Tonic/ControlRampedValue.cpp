@@ -17,7 +17,6 @@ Tonic::ControlTrigger Tonic::Tonic_::ControlRampedValue_::getFinishedTrigger()
 	return finishedTrigger_;
 }
 
-
 Tonic::ControlTrigger Tonic::ControlRampedValue::getFinishedTrigger()
 {
 	return gen()->getFinishedTrigger();
