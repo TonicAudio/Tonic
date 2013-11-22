@@ -44,22 +44,22 @@ namespace Tonic{
 				output_.value = points_.front().y;
 			}else if(inputVal >= points_.back().x){
 				output_.value = points_.back().y;
+			}else{
+				int nextPointIndex = 0;
+				while (nextPointIndex < points_.size() && points_.at(nextPointIndex).x <= inputVal)
+				{
+					nextPointIndex++;
+				}
+				nextPointIndex = Tonic::clamp(nextPointIndex, 0, points_.size() - 1);
+				ControlMapperPoint prevPoint = points_.at(nextPointIndex -1);
+				ControlMapperPoint nextPoint = points_.at(nextPointIndex);
+				float distBetweenPoints = nextPoint.x - prevPoint.x;
+				float distancePastPrev = inputVal -prevPoint.x;
+				float percentBetweenPoints = distancePastPrev / distBetweenPoints;
+				float val = (prevPoint.y * (1 - percentBetweenPoints)) + (nextPoint.y * percentBetweenPoints);
+				output_.value = val;
 			}
 
-			int nextPointIndex = 0;
-			while (nextPointIndex < points_.size() && points_.at(nextPointIndex).x <= inputVal)
-			{
-				nextPointIndex++;
-			}
-			nextPointIndex = Tonic::clamp(nextPointIndex, 0, points_.size() - 1);
-			ControlMapperPoint prevPoint = points_.at(nextPointIndex -1);
-			ControlMapperPoint nextPoint = points_.at(nextPointIndex);
-			float distBetweenPoints = nextPoint.x - prevPoint.x;
-			float distancePastPrev = inputVal -prevPoint.x;
-			float percentBetweenPoints = distancePastPrev / distBetweenPoints;
-			float val = (prevPoint.y * (1 - percentBetweenPoints)) + (nextPoint.y * percentBetweenPoints);
-
-			output_.value = val;
 			output_.triggered = inputOut.triggered;
 		}
 
