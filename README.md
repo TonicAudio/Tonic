@@ -35,12 +35,13 @@ You can browse more synth examples [here](http://github.com/TonicAudio/Tonic/tre
 
 ### Example Projects
 
-Tonic comes with three flavors of demo, currently only for OSX. We plan to add demo projects for Windows and Linux in the future.
+Tonic comes with several example projects, found in the "examples" directory. We plan to add more demo projects for Windows and Linux in the future.
 
-- Very simple [Standalone Demo](http://github.com/TonicAudio/Tonic/tree/master/Demo/Standalone) for building a non-interactive synth patch that runs from the command line
-- Two [openFrameworks Demos](http://github.com/TonicAudio/Tonic/tree/master/Demo/openFrameworks) for integrating tonic with [openFrameworks](http://www.openframeworks.cc). **Check the README for installation instructions**
-- [iOS Demo](http://github.com/TonicAudio/Tonic/tree/master/Demo/iOS) for making synths on your iPhone/iPad.
+- Several example synth patches in `Demo Synths`
+- Standalone example using RTAudio for building a non-interactive synth patch that runs from the command line
+- iOS example for making synths on your iPhone/iPad.
 
+See [ofxTonic](https://github.com/TonicAudio/ofxTonic) for examples in openFrameworks.
 
 ##### Development
 

@@ -63,6 +63,10 @@
 #include "Tonic/RingBuffer.h"
 #include "Tonic/LFNoise.h"
 
+// Non-Oscillator Audio Sources
+#include "Tonic/BufferPlayer.h"
+
+
 // ------- Control Generators --------
 
 #include "Tonic/ControlDelay.h"
@@ -81,5 +85,9 @@
 #include "Tonic/ControlMidiToFreq.h"
 #include "Tonic/ControlTriggerFilter.h"
 #include "Tonic/ControlCallback.h" // C++11 only
+
+// -------- Util ---------
+
+#include "Tonic/AudioFileUtils.h"
 
 #endif
