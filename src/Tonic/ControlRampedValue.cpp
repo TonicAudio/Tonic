@@ -17,7 +17,17 @@ Tonic::ControlTrigger Tonic::Tonic_::ControlRampedValue_::getFinishedTrigger()
 	return finishedTrigger_;
 }
 
+bool Tonic::Tonic_::ControlRampedValue_::isFinished()
+{
+	return finished_;
+}
+
 Tonic::ControlTrigger Tonic::ControlRampedValue::getFinishedTrigger()
 {
 	return gen()->getFinishedTrigger();
+}
+
+bool Tonic::ControlRampedValue::isFinished()
+{
+	return gen()->isFinished();
 }
