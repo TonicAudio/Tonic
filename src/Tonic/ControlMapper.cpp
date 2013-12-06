@@ -17,6 +17,7 @@ namespace Tonic{
 				Tonic::error("ControlMapper_::setValues values must be an even length. The vector needs to be input/output pairs.");
 			}
 
+			points_.clear();
 			for (int i = 0; i < vals.size(); i += 2)
 			{
 				ControlMapperPoint point;
