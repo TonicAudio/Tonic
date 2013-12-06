@@ -35,7 +35,6 @@ namespace Tonic { namespace Tonic_{
 	}
 	
     callback_ = fn;
-	printf("ControlCallback_::setCallback\n");
   }
   
 } // Namespace Tonic_

@@ -84,5 +84,6 @@
 #include "Tonic/ControlRampedValue.h"
 #include "Tonic/ControlMapper.h"
 #include "Tonic/ControlSineOsc.h"
+#include "Tonic/ControlBreakpoints.h"
 
 #endif
