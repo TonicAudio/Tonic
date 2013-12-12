@@ -4,7 +4,7 @@ namespace Tonic{
 
 	namespace Tonic_{
 
-		ControlBreakpoints_::ControlBreakpoints_() : currentPoint_(0), timeOfLastBreakpointStart(-1), finished_(false)
+		ControlBreakpoints_::ControlBreakpoints_() : currentPoint_(-1), state_(INITAL)
 		{
 
 		}
@@ -35,7 +35,17 @@ namespace Tonic{
 
 		bool ControlBreakpoints_::isFinished()
 		{
-			return finished_;
+			return state_ == FINISHED;
+		}
+
+		void ControlBreakpoints_::setTrigger( ControlGenerator trigger )
+		{
+			trigger_ = trigger;
+		}
+
+		Tonic::ControlGenerator ControlBreakpoints_::getFinishedTrigger()
+		{
+			return finishedTrigger_;
 		}
 
 	}
@@ -55,7 +65,12 @@ namespace Tonic{
 
 	bool ControlBreakpoints::isFinished()
 	{
-		return isFinished();
+		return gen()->isFinished();
+	}
+
+	Tonic::ControlGenerator ControlBreakpoints::getFinishedTrigger()
+	{
+		return gen()->getFinishedTrigger();
 	}
 
 }

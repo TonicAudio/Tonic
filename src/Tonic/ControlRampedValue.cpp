@@ -2,7 +2,7 @@
 #include "ControlRampedValue.h"
 
 Tonic::Tonic_::ControlRampedValue_::ControlRampedValue_() : 	
-	finished_(true),
+	finished_(false),
 	count_(0),
 	len_(0),
 	target_(0),
@@ -20,6 +20,11 @@ Tonic::ControlTrigger Tonic::Tonic_::ControlRampedValue_::getFinishedTrigger()
 bool Tonic::Tonic_::ControlRampedValue_::isFinished()
 {
 	return finished_;
+}
+
+void Tonic::Tonic_::ControlRampedValue_::resetStartTime( double time )
+{
+	startTime_ = time;
 }
 
 Tonic::ControlTrigger Tonic::ControlRampedValue::getFinishedTrigger()

@@ -23,8 +23,9 @@ namespace Tonic {
 				ControlGenerator valueGen_;
 				ControlTrigger finishedTrigger_;
 				ControlTrigger shouldLoop_;
-
+				double startTime_;
 				void computeOutput(const SynthesisContext_ & context);
+				void resetStartTime(double time);
 
 			public:
 
@@ -51,6 +52,8 @@ namespace Tonic {
 				ControlGeneratorOutput valueOutput = valueGen_.tick(context);
 				if(valueOutput.triggered){
 					updateValue(valueOutput.value);
+					resetStartTime(context.elapsedTime);
+					finished_ = false;
 				}
 
 				// Then update the target or ramp length (start a new ramp)
@@ -60,7 +63,14 @@ namespace Tonic {
 					finished_ = false;
 					unsigned long lSamp = lengthOutput.value*Tonic::sampleRate();
 					updateTarget(targetOutput.value, lSamp);
+					resetStartTime(context.elapsedTime);
 				}
+
+				if (context.elapsedTime - startTime_ >= lengthOutput.value)
+				{
+					finished_ = true;
+				}
+				
 
 				if (finished_){
 					output_.value = target_;
@@ -72,17 +82,13 @@ namespace Tonic {
 						if (last_ >= target_)
 						{
 							last_ = target_;
-							finished_ = true;
 						}
 						
 					}else if(inc_ < 0){
 						if (last_ <= target_)
 						{
 							last_ = target_;
-							finished_ = true;
 						}
-					}else{
-						finished_ = true;
 					}
 					output_.value = last_;
 					output_.triggered = true;

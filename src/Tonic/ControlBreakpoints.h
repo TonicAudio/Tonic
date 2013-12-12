@@ -23,33 +23,44 @@ namespace Tonic{
 
 		class ControlBreakpoints_ : public ControlGenerator_{
 
+			enum State{
+				INITAL,
+				RUNNING,
+				FINISHED
+			};
+
 			struct Point{float value; float time;};
 
 			ControlRampedValue		rampedValue_;
 			vector<Point>			points_;
 			int						currentPoint_;
-			double					timeOfLastBreakpointStart;
-			bool					finished_;
+			ControlGenerator		trigger_;
+			State					state_;
+			ControlTrigger			finishedTrigger_;
 
 			inline void computeOutput(const SynthesisContext_ & context){
 				output_ = rampedValue_.tick(context);
+				ControlGeneratorOutput triggerOut = trigger_.tick(context);
 
-				// maybe remove this check and initialize the time with a start() method
-				if (timeOfLastBreakpointStart < 0)
+				if (triggerOut.triggered)
 				{
-					timeOfLastBreakpointStart = context.elapsedTime;
+					goToPoint(0);
+					state_ = RUNNING;
 				}
 				
-				if ( context.elapsedTime - timeOfLastBreakpointStart  >=  points_.at(currentPoint_).time )
+				if (rampedValue_.isFinished())
 				{
-					timeOfLastBreakpointStart = context.elapsedTime;
-
-					if(currentPoint_ < points_.size() -1){
+					if (currentPoint_ >= points_.size() -1)
+					{
+						state_ = FINISHED;
+						finishedTrigger_.trigger();
+					}else
+					{
 						goToPoint(currentPoint_ + 1);
-					}else{
-						finished_ = true;
 					}
+					
 				}
+				
 			}
 
 			public:
@@ -58,15 +69,19 @@ namespace Tonic{
 				void setPoints(vector<float> points);
 				void goToPoint(int point);
 				bool isFinished();
+				void setTrigger(ControlGenerator trigger);
+				ControlGenerator getFinishedTrigger();
 		};
 
 	}
 
 	class ControlBreakpoints : public TemplatedControlGenerator<Tonic_::ControlBreakpoints_> {
 	public:
+		TONIC_MAKE_CTRL_GEN_SETTERS(ControlBreakpoints, trigger, setTrigger)
 		ControlBreakpoints&	points(vector<float> points);
 		ControlBreakpoints&	goToPoint(int point);
 		bool			isFinished();
+		ControlGenerator getFinishedTrigger();
 	};
 
 }
