@@ -31,8 +31,6 @@ namespace Tonic {
       function<void(ControlGeneratorOutput)> callback_;
       
     public:
-      ControlCallback_();
-      ~ControlCallback_();
       void setCallback(function<void(ControlGeneratorOutput)> fn);
       
     };

@@ -12,14 +12,6 @@
 
 namespace Tonic { namespace Tonic_{
   
-  ControlCallback_::ControlCallback_(){
-    
-  }
-  
-  ControlCallback_::~ControlCallback_(){
-    
-  }
-  
   void ControlCallback_::computeOutput(const SynthesisContext_ & context){
     ControlGeneratorOutput inputOut = input_.tick(context);
     if(inputOut.triggered){
