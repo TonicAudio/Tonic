@@ -30,7 +30,8 @@ namespace Tonic {
 	  TonicFloat lastOutputValue_;
       void computeOutput(const SynthesisContext_ & context);
       function<void(ControlGeneratorOutput)> callback_;
-      
+      bool hasBeenTicked;
+
     public:
       ControlCallback_();
       ~ControlCallback_();
