@@ -78,10 +78,10 @@ namespace Tonic{
 	class ControlBreakpoints : public TemplatedControlGenerator<Tonic_::ControlBreakpoints_> {
 	public:
 		TONIC_MAKE_CTRL_GEN_SETTERS(ControlBreakpoints, trigger, setTrigger)
-		ControlBreakpoints&	points(vector<float> points);
-		ControlBreakpoints&	goToPoint(int point);
-		bool			isFinished();
-		ControlGenerator getFinishedTrigger();
+		ControlBreakpoints&		points(vector<float> points);
+		ControlBreakpoints&		goToPoint(int point);
+		bool					isFinished();
+		ControlGenerator		getFinishedTrigger();
 	};
 
 }

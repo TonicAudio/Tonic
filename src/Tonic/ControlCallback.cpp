@@ -12,8 +12,7 @@
 
 namespace Tonic { namespace Tonic_{
   
-
-  ControlCallback_::ControlCallback_() : synthWasSet(false){
+  ControlCallback_::ControlCallback_() : synthWasSet(false), hasBeenTicked(false){
     
   }
   
@@ -23,7 +22,13 @@ namespace Tonic { namespace Tonic_{
   
   void ControlCallback_::computeOutput(const SynthesisContext_ & context){
     ControlGeneratorOutput inputOut = input_.tick(context);
-    if(inputOut.triggered || inputOut.value != lastOutputValue_){
+	if (!hasBeenTicked)
+	{
+		lastOutputValue_ = inputOut.value;
+		hasBeenTicked = true;
+	}
+	
+    if(inputOut.triggered || (inputOut.value != lastOutputValue_) ){
       callback_(inputOut);
 	  lastOutputValue_ = inputOut.value;
     }
