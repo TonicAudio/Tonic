@@ -234,7 +234,7 @@ namespace Tonic {
     */
     TONIC_MAKE_CTRL_GEN_SETTERS(RampedValue, target, setTargetGen);
     
-    //! Set length before reaching target value, in ms
+    //! Set length before reaching target value, in seconds
     /*!
         Changes to length gen input will create a new ramp from current value to target over the provided length
     */
