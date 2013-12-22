@@ -23,7 +23,7 @@ namespace Tonic {
     protected:
       void computeOutput(const SynthesisContext_ & context);
       vector<ControlGeneratorOutput> recording;
-      vector<ControlGeneratorOutput>::iterator playbackHead;
+      int playbackHead;
       ControlGenerator mode;
       
     public:
@@ -64,15 +64,13 @@ namespace Tonic {
           printf("ControlRecorder_::computeOutput STOP\n");
           recording.clear();
         }else if(currentMode == ControlRecorder::PLAY){
-          playbackHead = recording.begin();
+          playbackHead = 0;
         }else if(currentMode == ControlRecorder::RECORD){
-          playbackHead = recording.begin();
+          playbackHead = 0;
           recording.clear();
         }
       }
       
-      // temp
-      static int count = 0;
       
       switch (currentMode) {
         case ControlRecorder::RECORD:
@@ -85,12 +83,10 @@ namespace Tonic {
           break;
           
         case ControlRecorder::PLAY:
-          output_ = *playbackHead;
+          output_ = recording.at(playbackHead);
           playbackHead++;
-          count++;
-          if (playbackHead >= recording.end()) {
-            playbackHead = recording.begin();
-            count = 0;
+          if (playbackHead >= recording.size()) {
+            playbackHead = 0;
           }
           //        printf("ControlRecorder_::computeOutput playing back sample: %i of %lu. Value is: %f\n", count, recording.size(), output_.value);
           break;

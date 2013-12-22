@@ -10,7 +10,7 @@
 
 namespace Tonic { namespace Tonic_{
   
-  ControlRecorder_::ControlRecorder_() : playbackHead(recording.begin()) {}
+  ControlRecorder_::ControlRecorder_() : playbackHead(0) {}
   
   void  ControlRecorder_::setMode(ControlGenerator modeArg){
     mode = modeArg;
