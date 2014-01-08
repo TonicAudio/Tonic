@@ -27,14 +27,16 @@ namespace Tonic {
     class ControlCallback_ : public ControlConditioner_{
       
     protected:
+	  TonicFloat lastOutputValue_;
       void computeOutput(const SynthesisContext_ & context);
       function<void(ControlGeneratorOutput)> callback_;
-      
+      bool hasBeenTicked;
+
     public:
       ControlCallback_();
       ~ControlCallback_();
-      void setCallback(function<void(ControlGeneratorOutput)> fn);
-      
+	  void setCallback(function<void(ControlGeneratorOutput)> fn);
+      bool synthWasSet;
     };
     
   }
@@ -43,7 +45,15 @@ namespace Tonic {
     
   public:
   
-    ControlCallback(Synth* synth, function<void(ControlGeneratorOutput)>);
+    ControlCallback(Synth synth, function<void(ControlGeneratorOutput)>);
+
+	ControlCallback();
+
+
+	ControlCallback& callback(function<void(ControlGeneratorOutput)> fn);;
+
+
+	ControlCallback& synth(Synth synth);
     
 
   };

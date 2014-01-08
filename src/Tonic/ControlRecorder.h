@@ -56,7 +56,7 @@ namespace Tonic {
       
       ControlGeneratorOutput inputOut = input_.tick(context);
       ControlGeneratorOutput modeOut = mode.tick(context);
-      
+     
       ControlRecorder::Mode currentMode = (ControlRecorder::Mode)((int)modeOut.value);
       
       if(modeOut.triggered){
