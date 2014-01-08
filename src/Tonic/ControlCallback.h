@@ -16,7 +16,7 @@
 
 #include "ControlConditioner.h"
 
-#ifdef TONIC_HAS_CPP_11
+#if TONIC_HAS_CPP_11
 #include <functional>
 #include "Synth.h"
 
@@ -27,33 +27,25 @@ namespace Tonic {
     class ControlCallback_ : public ControlConditioner_{
       
     protected:
-	  TonicFloat lastOutputValue_;
       void computeOutput(const SynthesisContext_ & context);
       function<void(ControlGeneratorOutput)> callback_;
-      bool hasBeenTicked;
-
+      
     public:
-      ControlCallback_();
-      ~ControlCallback_();
-	  void setCallback(function<void(ControlGeneratorOutput)> fn);
-      bool synthWasSet;
+      void setCallback(function<void(ControlGeneratorOutput)> fn);
+      
     };
     
   }
+  
+  /*!
+    Pass a lambda function to a controlgenerator. That function will be called when the input ControlGenerator sends a "triggered" message. Constructor takes two arguments -- the synth that owns the ControlCallback, and a lambda function
+  */
   
   class ControlCallback : public TemplatedControlConditioner<ControlCallback, Tonic_::ControlCallback_>{
     
   public:
   
-    ControlCallback(Synth synth, function<void(ControlGeneratorOutput)>);
-
-	ControlCallback();
-
-
-	ControlCallback& callback(function<void(ControlGeneratorOutput)> fn);;
-
-
-	ControlCallback& synth(Synth synth);
+    ControlCallback(Synth* synth, function<void(ControlGeneratorOutput)>);
     
 
   };
@@ -62,5 +54,4 @@ namespace Tonic {
 #endif
 
 #endif /* defined(__Tonic__ControlCallback__) */
-
 
