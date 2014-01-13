@@ -166,6 +166,9 @@
 		A82430C2187CEE0D00B88362 /* ControlRampedValue.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A82430C0187CEE0D00B88362 /* ControlRampedValue.cpp */; };
 		A82430C3187CEE0D00B88362 /* ControlRampedValue.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A82430C0187CEE0D00B88362 /* ControlRampedValue.cpp */; };
 		A82430C4187CEE0D00B88362 /* ControlRampedValue.h in Headers */ = {isa = PBXBuildFile; fileRef = A82430C1187CEE0D00B88362 /* ControlRampedValue.h */; };
+		A8243102188317DA00B88362 /* ControlScaleDegree.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A8243100188317DA00B88362 /* ControlScaleDegree.cpp */; };
+		A8243103188317DA00B88362 /* ControlScaleDegree.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A8243100188317DA00B88362 /* ControlScaleDegree.cpp */; };
+		A8243104188317DA00B88362 /* ControlScaleDegree.h in Headers */ = {isa = PBXBuildFile; fileRef = A8243101188317DA00B88362 /* ControlScaleDegree.h */; };
 		A883ED7B17B468EA00F60C06 /* ControlTriggerFilter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A883ED7917B468EA00F60C06 /* ControlTriggerFilter.cpp */; };
 		A883ED7C17B468EA00F60C06 /* ControlTriggerFilter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A883ED7917B468EA00F60C06 /* ControlTriggerFilter.cpp */; };
 		A883ED7D17B468EA00F60C06 /* ControlTriggerFilter.h in Headers */ = {isa = PBXBuildFile; fileRef = A883ED7A17B468EA00F60C06 /* ControlTriggerFilter.h */; };
@@ -317,6 +320,8 @@
 		A82430A4187CEC2100B88362 /* ControlCallback.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ControlCallback.h; sourceTree = "<group>"; };
 		A82430C0187CEE0D00B88362 /* ControlRampedValue.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ControlRampedValue.cpp; sourceTree = "<group>"; };
 		A82430C1187CEE0D00B88362 /* ControlRampedValue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ControlRampedValue.h; sourceTree = "<group>"; };
+		A8243100188317DA00B88362 /* ControlScaleDegree.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ControlScaleDegree.cpp; sourceTree = "<group>"; };
+		A8243101188317DA00B88362 /* ControlScaleDegree.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ControlScaleDegree.h; sourceTree = "<group>"; };
 		A883ED7917B468EA00F60C06 /* ControlTriggerFilter.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ControlTriggerFilter.cpp; sourceTree = "<group>"; };
 		A883ED7A17B468EA00F60C06 /* ControlTriggerFilter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ControlTriggerFilter.h; sourceTree = "<group>"; };
 		A8F87054181C3B6500B82527 /* BufferPlayer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = BufferPlayer.cpp; sourceTree = "<group>"; };
@@ -428,6 +433,8 @@
 				0183D0231735D0E6004638EB /* ControlRandom.h */,
 				0183D0241735D0E6004638EB /* ControlRecorder.cpp */,
 				0183D0251735D0E6004638EB /* ControlRecorder.h */,
+				A8243100188317DA00B88362 /* ControlScaleDegree.cpp */,
+				A8243101188317DA00B88362 /* ControlScaleDegree.h */,
 				0183D0261735D0E6004638EB /* ControlSnapToScale.cpp */,
 				0183D0271735D0E6004638EB /* ControlSnapToScale.h */,
 				0183D0281735D0E6004638EB /* ControlStepper.cpp */,
@@ -584,6 +591,7 @@
 				0183D0B91735D0E6004638EB /* FixedValue.h in Headers */,
 				0183D0BC1735D0E6004638EB /* SawtoothWave.h in Headers */,
 				0183D0BF1735D0E6004638EB /* Generator.h in Headers */,
+				A8243104188317DA00B88362 /* ControlScaleDegree.h in Headers */,
 				0183D0C21735D0E6004638EB /* LFNoise.h in Headers */,
 				0183D0C51735D0E6004638EB /* Mixer.h in Headers */,
 				0183D0C81735D0E6004638EB /* MonoToStereoPanner.h in Headers */,
@@ -733,6 +741,7 @@
 				0183D08B1735D0E6004638EB /* ControlPrinter.cpp in Sources */,
 				0183D08E1735D0E6004638EB /* ControlPulse.cpp in Sources */,
 				0183D0911735D0E6004638EB /* ControlRandom.cpp in Sources */,
+				A8243102188317DA00B88362 /* ControlScaleDegree.cpp in Sources */,
 				0183D0941735D0E6004638EB /* ControlRecorder.cpp in Sources */,
 				0183D0971735D0E6004638EB /* ControlSnapToScale.cpp in Sources */,
 				0183D09A1735D0E6004638EB /* ControlStepper.cpp in Sources */,
@@ -798,6 +807,7 @@
 				0183D08C1735D0E6004638EB /* ControlPrinter.cpp in Sources */,
 				0183D08F1735D0E6004638EB /* ControlPulse.cpp in Sources */,
 				0183D0921735D0E6004638EB /* ControlRandom.cpp in Sources */,
+				A8243103188317DA00B88362 /* ControlScaleDegree.cpp in Sources */,
 				0183D0951735D0E6004638EB /* ControlRecorder.cpp in Sources */,
 				0183D0981735D0E6004638EB /* ControlSnapToScale.cpp in Sources */,
 				0183D09B1735D0E6004638EB /* ControlStepper.cpp in Sources */,

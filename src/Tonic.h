@@ -82,6 +82,7 @@
 #include "Tonic/ControlStepper.h"
 #include "Tonic/ControlRandom.h"
 #include "Tonic/ControlSnapToScale.h"
+#include "Tonic/ControlScaleDegree.h"
 #include "Tonic/ControlMidiToFreq.h"
 #include "Tonic/ControlTriggerFilter.h"
 #include "Tonic/ControlCallback.h" // C++11 only
