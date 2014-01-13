@@ -20,6 +20,7 @@
 #include <iostream>
 #include <limits>
 #include <cstring>
+#include <string>
 #include <cstdio>
 #include <cmath>
 #include <sstream>
@@ -293,7 +294,7 @@ namespace Tonic {
   }
 
 
-#ifdef TONIC_HAS_CPP_11
+#if TONIC_HAS_CPP_11
 
   // -- String --
   /*
