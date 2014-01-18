@@ -695,6 +695,8 @@ using namespace Tonic;
   
 }
 
+#pragma mark - synth tests
+
 -(void)test304ControlChangeNotifierTest
 {
 
@@ -801,6 +803,80 @@ using namespace Tonic;
   STAssertTrue(subscriber1.valueChangedFlag, @"Value changed notification should have happened");
   STAssertTrue(subscriber2.valueChangedFlag, @"Value changed notification should have happened");
 
+}
+
+-(void)test305AddSubscriberBeforeControlChangeNotifier{
+  Synth synth;
+  const float VALUE_1 = 0.5;
+  ControlValue val1(VALUE_1);
+  
+  TestControlChangeSubscriber subscriber1;
+
+  synth.addControlChangeSubscriber(&subscriber1);
+  synth.publishChanges(val1, "test");
+  
+  for(int i = 0; i < 10; i++){
+    synth.fillBufferOfFloats(stereoOutBuffer, kTestOutputBlockSize, 2);
+  }
+  
+  synth.sendControlChangesToSubscribers();
+  STAssertTrue(subscriber1.valueChangedFlag, @"Value changed notification should have happened");
+  
+}
+
+
+
+-(void)test306RemoveControlChangeNotifier{
+  Synth synth;
+  const float VALUE_1 = 0.5;
+  ControlValue val1(VALUE_1);
+  
+  TestControlChangeSubscriber* subscriber1 = new TestControlChangeSubscriber();
+
+  synth.publishChanges(val1);
+  synth.addControlChangeSubscriber(subscriber1);
+  
+  for(int i = 0; i < 10; i++){
+    synth.fillBufferOfFloats(stereoOutBuffer, kTestOutputBlockSize, 2);
+  }
+  
+  synth.sendControlChangesToSubscribers();
+  STAssertTrue(subscriber1->valueChangedFlag, @"Value changed notification should have happened");
+  
+  subscriber1->valueChangedFlag = false;
+  
+  synth.removeControlChangeSubscriber(subscriber1);
+  delete subscriber1;
+  
+  for(int i = 0; i < 10; i++){
+    synth.fillBufferOfFloats(stereoOutBuffer, kTestOutputBlockSize, 2);
+  }
+  
+  synth.sendControlChangesToSubscribers();
+  
+  STAssertTrue(subscriber1->valueChangedFlag == false, @"Value changed notification should not have happened");
+  
+}
+
+-(void)test307UnnamedControlChangeSubscriber{
+  
+  Synth synth;
+  const float VALUE_1 = 0.5;
+  ControlValue val1(VALUE_1);
+  
+  TestControlChangeSubscriber subscriber1;
+
+  synth.publishChanges(val1, "test");
+  synth.addControlChangeSubscriber(&subscriber1);
+  
+  for(int i = 0; i < 10; i++){
+    synth.fillBufferOfFloats(stereoOutBuffer, kTestOutputBlockSize, 2);
+  }
+  
+  synth.sendControlChangesToSubscribers();
+  
+  STAssertTrue(subscriber1.valueChangedFlag, @"Value changed notification should have happened");
+  
 }
 
 #pragma mark operator tests

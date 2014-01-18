@@ -85,20 +85,29 @@ namespace Tonic {
     }
     
     void Synth_::addControlChangeSubscriber(string name, ControlChangeSubscriber* resp){
-      if(controlChangeNotifiers_.find(name) != controlChangeNotifiers_.end()){
+      controlChangeSubscribers.push_back(pair<ControlChangeSubscriber*, string>(resp, name));
+      if (name == "") {
+        for(vector<ControlChangeNotifier>::iterator it = controlChangeNotifiersList_.begin(); it != controlChangeNotifiersList_.end(); it++){
+          it->addValueChangedSubscriber(resp);
+        }
+      }else if(controlChangeNotifiers_.find(name) != controlChangeNotifiers_.end()){
         controlChangeNotifiers_[name].addValueChangedSubscriber(resp);
-      }else{
-        error("No value called " + name + " was exposed to the UI.");
       }
     }
     
     void Synth_::addControlChangeSubscriber(ControlChangeSubscriber* sub){
-      for(vector<ControlChangeNotifier>::iterator it = controlChangeNotifiersList_.begin(); it != controlChangeNotifiersList_.end(); it++){
-        it->addValueChangedSubscriber(sub);
-      }
+        addControlChangeSubscriber("", sub);
     }
     
     void Synth_::removeControlChangeSubscriber(ControlChangeSubscriber* sub){
+      vector<pair<ControlChangeSubscriber*, string>> newList;
+      for (int i = 0; i < controlChangeSubscribers.size(); i++) {
+        if (controlChangeSubscribers.at(i).first != sub) {
+          newList.push_back(pair<ControlChangeSubscriber*, string>(sub, controlChangeSubscribers.at(i).second));
+        }
+      }
+      controlChangeSubscribers = newList;
+    
       vector<ControlChangeNotifier>::iterator it = controlChangeNotifiersList_.begin();
       for (; it != controlChangeNotifiersList_.end(); it++) {
         it->removeValueChangedSubscriber(sub);
@@ -114,6 +123,15 @@ namespace Tonic {
         controlChangeNotifiers_[name] = messenger;
       }
       addAuxControlGenerator(messenger);
+      
+      // add any previously registered subscribers
+      for (int i = 0; i < controlChangeSubscribers.size(); i++) {
+      string subsriberName = controlChangeSubscribers.at(i).second;
+        if (subsriberName == name || subsriberName == "") {
+          messenger.addValueChangedSubscriber(controlChangeSubscribers.at(i).first);
+        }
+      }
+      
       return messenger;
     }
     

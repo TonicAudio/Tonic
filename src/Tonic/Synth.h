@@ -28,6 +28,7 @@ namespace Tonic{
   
   namespace Tonic_ {
     
+    
     class Synth_ : public BufferFiller_ {
       
     protected:
@@ -45,6 +46,8 @@ namespace Tonic{
       vector<ControlGenerator> auxControlGenerators_;
       
       void computeSynthesisBlock(const Tonic::Tonic_::SynthesisContext_ &context);
+      
+      vector<pair<ControlChangeSubscriber*, string>> controlChangeSubscribers;
       
     public:
       
