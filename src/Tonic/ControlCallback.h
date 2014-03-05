@@ -32,7 +32,6 @@ namespace Tonic {
       
     public:
       void setCallback(function<void(ControlGeneratorOutput)> fn);
-      
     };
     
   }
@@ -46,7 +45,10 @@ namespace Tonic {
   public:
   
     ControlCallback(Synth* synth, function<void(ControlGeneratorOutput)>);
-    
+    inline ControlCallback trigger(ControlGenerator gen) {
+			this->input(gen);
+			return static_cast<ControlCallback&>(*this);
+		};
 
   };
 }
