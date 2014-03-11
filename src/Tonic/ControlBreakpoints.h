@@ -52,8 +52,12 @@ namespace Tonic{
 				{
 					if (currentPoint_ >= points_.size() -1)
 					{
-						state_ = FINISHED;
-						finishedTrigger_.trigger();
+						if (state_ != FINISHED)
+						{
+							state_ = FINISHED;
+							finishedTrigger_.trigger();
+						}
+						
 					}else
 					{
 						goToPoint(currentPoint_ + 1);
