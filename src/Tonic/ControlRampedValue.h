@@ -68,13 +68,23 @@ namespace Tonic {
 
 				if (context.elapsedTime - startTime_ >= lengthOutput.value)
 				{
-					finished_ = true;
+					if (!finished_)
+					{
+						finished_ = true;
+						finishedTrigger_.trigger();
+					}
 				}
 				
 
 				if (finished_){
 					output_.value = target_;
 					output_.triggered = false;
+					if (shouldLoop)
+					{
+						last_ = valueOutput.value;
+						finished_ = false;
+					}
+
 				}else{
 					last_ += inc_;
 					if (inc_ > 0)
@@ -92,16 +102,6 @@ namespace Tonic {
 					}
 					output_.value = last_;
 					output_.triggered = true;
-					if (finished_)
-					{
-						finishedTrigger_.trigger();
-						if (shouldLoop)
-						{
-							last_ = valueOutput.value;
-							finished_ = false;
-						}
-						
-					}
 					
 				}
 
