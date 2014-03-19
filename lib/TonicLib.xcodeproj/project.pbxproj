@@ -135,6 +135,8 @@
 		01C65FF517372A5F003B2661 /* Effect.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 01C65FF1173723C6003B2661 /* Effect.cpp */; };
 		01C65FF617372CD3003B2661 /* FilterUtils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 01C65FF317372407003B2661 /* FilterUtils.cpp */; };
 		01F7273E1715225500EBB4BB /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 01F7273D1715225500EBB4BB /* Accelerate.framework */; };
+		03C6ED5818D7BD7C00B68FC7 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 03C6ED5618D7BD7C00B68FC7 /* AudioToolbox.framework */; };
+		03C6ED5918D7BD7C00B68FC7 /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 03C6ED5718D7BD7C00B68FC7 /* Accelerate.framework */; };
 		9A5FB71B17591983007A2F31 /* ControlMetroDivider.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9A5FB71917591983007A2F31 /* ControlMetroDivider.cpp */; };
 		9A5FB71C17591983007A2F31 /* ControlMetroDivider.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9A5FB71917591983007A2F31 /* ControlMetroDivider.cpp */; };
 		9A5FB71D17591983007A2F31 /* ControlMetroDivider.h in Headers */ = {isa = PBXBuildFile; fileRef = 9A5FB71A17591983007A2F31 /* ControlMetroDivider.h */; };
@@ -170,8 +172,6 @@
 		A8F8705C181C506800B82527 /* AudioFileUtils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A8F87059181C506700B82527 /* AudioFileUtils.cpp */; };
 		A8F8705D181C506800B82527 /* AudioFileUtils.h in Headers */ = {isa = PBXBuildFile; fileRef = A8F8705A181C506700B82527 /* AudioFileUtils.h */; };
 		A8F87062181C648700B82527 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A8F87061181C648700B82527 /* AudioToolbox.framework */; };
-		A8F87064181C64B600B82527 /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A8F87063181C64B600B82527 /* Accelerate.framework */; };
-		A8F87066181C64C200B82527 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A8F87065181C64C200B82527 /* AudioToolbox.framework */; };
 		F218C86F179C73F6000906B2 /* DSPUtils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F218C86D179C73F6000906B2 /* DSPUtils.cpp */; };
 		F218C870179C73F6000906B2 /* DSPUtils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F218C86D179C73F6000906B2 /* DSPUtils.cpp */; };
 		F218C871179C73F6000906B2 /* DSPUtils.h in Headers */ = {isa = PBXBuildFile; fileRef = F218C86E179C73F6000906B2 /* DSPUtils.h */; };
@@ -285,6 +285,8 @@
 		01C65FF317372407003B2661 /* FilterUtils.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = FilterUtils.cpp; sourceTree = "<group>"; };
 		01F72690171520F900EBB4BB /* libTonic-OSX.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libTonic-OSX.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		01F7273D1715225500EBB4BB /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.7.sdk/System/Library/Frameworks/Accelerate.framework; sourceTree = DEVELOPER_DIR; };
+		03C6ED5618D7BD7C00B68FC7 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS7.0.sdk/System/Library/Frameworks/AudioToolbox.framework; sourceTree = "<absolute>"; };
+		03C6ED5718D7BD7C00B68FC7 /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS7.0.sdk/System/Library/Frameworks/Accelerate.framework; sourceTree = "<absolute>"; };
 		9A5FB71917591983007A2F31 /* ControlMetroDivider.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ControlMetroDivider.cpp; sourceTree = "<group>"; };
 		9A5FB71A17591983007A2F31 /* ControlMetroDivider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ControlMetroDivider.h; sourceTree = "<group>"; };
 		9A5FB71E175928FC007A2F31 /* ControlComparison.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ControlComparison.cpp; sourceTree = "<group>"; };
@@ -314,8 +316,6 @@
 		A8F87059181C506700B82527 /* AudioFileUtils.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AudioFileUtils.cpp; sourceTree = "<group>"; };
 		A8F8705A181C506700B82527 /* AudioFileUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AudioFileUtils.h; sourceTree = "<group>"; };
 		A8F87061181C648700B82527 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
-		A8F87063181C64B600B82527 /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS6.1.sdk/System/Library/Frameworks/Accelerate.framework; sourceTree = DEVELOPER_DIR; };
-		A8F87065181C64C200B82527 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS6.1.sdk/System/Library/Frameworks/AudioToolbox.framework; sourceTree = DEVELOPER_DIR; };
 		F218C86D179C73F6000906B2 /* DSPUtils.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = DSPUtils.cpp; sourceTree = "<group>"; };
 		F218C86E179C73F6000906B2 /* DSPUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DSPUtils.h; sourceTree = "<group>"; };
 		F218C872179C763A000906B2 /* ControlDbToLinear.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ControlDbToLinear.cpp; sourceTree = "<group>"; };
@@ -331,7 +331,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				A8F87062181C648700B82527 /* AudioToolbox.framework in Frameworks */,
+				03C6ED5918D7BD7C00B68FC7 /* Accelerate.framework in Frameworks */,
 				01F7273E1715225500EBB4BB /* Accelerate.framework in Frameworks */,
+				03C6ED5818D7BD7C00B68FC7 /* AudioToolbox.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -339,8 +341,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A8F87066181C64C200B82527 /* AudioToolbox.framework in Frameworks */,
-				A8F87064181C64B600B82527 /* Accelerate.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -482,8 +482,8 @@
 		01F72687171520F900EBB4BB = {
 			isa = PBXGroup;
 			children = (
-				A8F87065181C64C200B82527 /* AudioToolbox.framework */,
-				A8F87063181C64B600B82527 /* Accelerate.framework */,
+				03C6ED5618D7BD7C00B68FC7 /* AudioToolbox.framework */,
+				03C6ED5718D7BD7C00B68FC7 /* Accelerate.framework */,
 				A8F87061181C648700B82527 /* AudioToolbox.framework */,
 				0183CFFE1735D0E6004638EB /* src */,
 				9AB5C24517BE757F00695790 /* Derp */,
@@ -903,6 +903,10 @@
 				CLANG_CXX_LIBRARY = "compiler-default";
 				CONFIGURATION_BUILD_DIR = "$(BUILD_DIR)/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)";
 				EXECUTABLE_PREFIX = lib;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(DEVELOPER_DIR)/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS7.0.sdk/System/Library/Frameworks",
+				);
 				GCC_C_LANGUAGE_STANDARD = "compiler-default";
 				GCC_INLINES_ARE_PRIVATE_EXTERN = YES;
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
@@ -926,6 +930,10 @@
 				CLANG_CXX_LIBRARY = "compiler-default";
 				CONFIGURATION_BUILD_DIR = "$(BUILD_DIR)/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)";
 				EXECUTABLE_PREFIX = lib;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(DEVELOPER_DIR)/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS7.0.sdk/System/Library/Frameworks",
+				);
 				GCC_C_LANGUAGE_STANDARD = "compiler-default";
 				GCC_INLINES_ARE_PRIVATE_EXTERN = YES;
 				GCC_SYMBOLS_PRIVATE_EXTERN = YES;
