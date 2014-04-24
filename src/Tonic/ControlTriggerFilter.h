@@ -24,14 +24,15 @@ namespace Tonic {
       void computeOutput(const SynthesisContext_ & context);
       vector<bool> sequence_;
       ControlGenerator trigger_;
+      ControlGenerator loop_;
       int step;
-      
+      bool finished; // for cases when loop is false
     public:
       ControlTriggerFilter_();
       ~ControlTriggerFilter_();
       void sequence(string);
       void trigger(ControlGenerator);
-      
+      void setLoop(ControlGenerator);
     };
     
   }
@@ -46,6 +47,7 @@ namespace Tonic {
   public:
   
   TONIC_MAKE_CTRL_GEN_SETTERS(ControlTriggerFilter, trigger, trigger)
+  TONIC_MAKE_CTRL_GEN_SETTERS(ControlTriggerFilter, loop, setLoop)
   ControlTriggerFilter sequence(string seqArg){gen()->sequence(seqArg); return *this;};
 
   };
