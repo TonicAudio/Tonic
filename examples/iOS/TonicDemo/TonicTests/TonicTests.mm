@@ -74,7 +74,7 @@ using namespace Tonic;
 - (void)verifyStereoFixedOutputEqualsLeft:(float)l right:(float)r
 {
   for (unsigned int i=0; i<testFrames.frames(); i++){
-    STAssertEquals(l, testFrames[2*i], @"Left channel not produce expected output on frame %i", i);
+    STAssertEquals(l, testFrames[2*i], @"Left channel did not produce expected output on frame %i", i);
     if (testFrames[2*i] != l) break;
     
     STAssertEquals(r, testFrames[2*i+1], @"Right channel did not produce expected output on frame %i", i);
@@ -345,6 +345,17 @@ using namespace Tonic;
   STAssertTrue(*stereoOutBuffer != 0, @"Limiter shouldn't limit 100 to zero");
   
 }
+
+-(void)test120TestBitCrusherStereoPreservation{
+
+  [self configureStereo:YES];
+  BitCrusher bitCrusher = BitCrusher().bitDepth(16).input(StereoFixedTestGen(0.0, 1.0));
+  STAssertTrue(bitCrusher.isStereoOutput(), @"bitcrusher should know that it's strereo output");
+  bitCrusher.tick(testFrames, testContext);
+  [self verifyStereoFixedOutputEqualsLeft:0 right:1];
+}
+
+
 
 #pragma mark - Control Generator Tests
 

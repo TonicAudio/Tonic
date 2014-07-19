@@ -163,6 +163,9 @@
 		A886CA37183958B100AAFBB2 /* ControlCallback.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A886CA35183958B100AAFBB2 /* ControlCallback.cpp */; };
 		A886CA38183958B100AAFBB2 /* ControlCallback.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A886CA35183958B100AAFBB2 /* ControlCallback.cpp */; };
 		A886CA39183958B100AAFBB2 /* ControlCallback.h in Headers */ = {isa = PBXBuildFile; fileRef = A886CA36183958B100AAFBB2 /* ControlCallback.h */; };
+		A8E1A20B197ACABA0089060E /* BitCrusher.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A8E1A209197ACABA0089060E /* BitCrusher.cpp */; };
+		A8E1A20C197ACABA0089060E /* BitCrusher.h in Headers */ = {isa = PBXBuildFile; fileRef = A8E1A20A197ACABA0089060E /* BitCrusher.h */; };
+		A8E1A20D197ACDA70089060E /* BitCrusher.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A8E1A209197ACABA0089060E /* BitCrusher.cpp */; };
 		A8F87056181C3B6500B82527 /* BufferPlayer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A8F87054181C3B6500B82527 /* BufferPlayer.cpp */; };
 		A8F87057181C3B6500B82527 /* BufferPlayer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A8F87054181C3B6500B82527 /* BufferPlayer.cpp */; };
 		A8F87058181C3B6500B82527 /* BufferPlayer.h in Headers */ = {isa = PBXBuildFile; fileRef = A8F87055181C3B6500B82527 /* BufferPlayer.h */; };
@@ -309,6 +312,8 @@
 		A883ED7A17B468EA00F60C06 /* ControlTriggerFilter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ControlTriggerFilter.h; sourceTree = "<group>"; };
 		A886CA35183958B100AAFBB2 /* ControlCallback.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ControlCallback.cpp; sourceTree = "<group>"; };
 		A886CA36183958B100AAFBB2 /* ControlCallback.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ControlCallback.h; sourceTree = "<group>"; };
+		A8E1A209197ACABA0089060E /* BitCrusher.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = BitCrusher.cpp; sourceTree = "<group>"; };
+		A8E1A20A197ACABA0089060E /* BitCrusher.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BitCrusher.h; sourceTree = "<group>"; };
 		A8F87054181C3B6500B82527 /* BufferPlayer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = BufferPlayer.cpp; sourceTree = "<group>"; };
 		A8F87055181C3B6500B82527 /* BufferPlayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BufferPlayer.h; sourceTree = "<group>"; };
 		A8F87059181C506700B82527 /* AudioFileUtils.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AudioFileUtils.cpp; sourceTree = "<group>"; };
@@ -368,6 +373,8 @@
 				A8F8705A181C506700B82527 /* AudioFileUtils.h */,
 				0183D0041735D0E6004638EB /* BasicDelay.cpp */,
 				0183D0051735D0E6004638EB /* BasicDelay.h */,
+				A8E1A209197ACABA0089060E /* BitCrusher.cpp */,
+				A8E1A20A197ACABA0089060E /* BitCrusher.h */,
 				F278D370179C8227004EBCA3 /* BLEPOscillator.cpp */,
 				F278D371179C8227004EBCA3 /* BLEPOscillator.h */,
 				0183D0061735D0E6004638EB /* BufferFiller.cpp */,
@@ -566,6 +573,7 @@
 				0183D0B91735D0E6004638EB /* FixedValue.h in Headers */,
 				0183D0BC1735D0E6004638EB /* SawtoothWave.h in Headers */,
 				0183D0BF1735D0E6004638EB /* Generator.h in Headers */,
+				A8E1A20C197ACABA0089060E /* BitCrusher.h in Headers */,
 				0183D0C21735D0E6004638EB /* LFNoise.h in Headers */,
 				0183D0C51735D0E6004638EB /* Mixer.h in Headers */,
 				0183D0C81735D0E6004638EB /* MonoToStereoPanner.h in Headers */,
@@ -750,6 +758,7 @@
 				9A5FB720175928FC007A2F31 /* ControlComparison.cpp in Sources */,
 				9AE5AA0217601CB4001F3E60 /* ControlTrigger.cpp in Sources */,
 				A883ED7B17B468EA00F60C06 /* ControlTriggerFilter.cpp in Sources */,
+				A8E1A20B197ACABA0089060E /* BitCrusher.cpp in Sources */,
 				F218C86F179C73F6000906B2 /* DSPUtils.cpp in Sources */,
 				F218C874179C7642000906B2 /* ControlDbToLinear.cpp in Sources */,
 				F218C876179C7642000906B2 /* ControlFloor.cpp in Sources */,
@@ -813,6 +822,7 @@
 				9A5FB721175928FC007A2F31 /* ControlComparison.cpp in Sources */,
 				9AE5AA0317601CB4001F3E60 /* ControlTrigger.cpp in Sources */,
 				A883ED7C17B468EA00F60C06 /* ControlTriggerFilter.cpp in Sources */,
+				A8E1A20D197ACDA70089060E /* BitCrusher.cpp in Sources */,
 				F218C870179C73F6000906B2 /* DSPUtils.cpp in Sources */,
 				F218C875179C7642000906B2 /* ControlDbToLinear.cpp in Sources */,
 				F218C877179C7642000906B2 /* ControlFloor.cpp in Sources */,
