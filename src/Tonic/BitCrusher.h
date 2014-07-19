@@ -42,8 +42,6 @@ namespace Tonic {
       float bitDepthValue = clamp(bitDepth.tick(context).value, 0, 16) ;
       float bitDepthMax = pow(2, bitDepthValue);
       
-      
-      
       while (nSamples--){
         TonicFloat dry = *(dryFramesReadHead++);
         TonicInt32 snapped = bitDepthMax * dry;
@@ -51,13 +49,12 @@ namespace Tonic {
         *(synthBlockWriteHead++) =  snappedFloat;
       }
     }
-    
   }
   
   class BitCrusher : public TemplatedEffect<BitCrusher, Tonic_::BitCrusher_>{
     
     public:
-      // pan is a -1 to 1 value
+    
       TONIC_MAKE_CTRL_GEN_SETTERS(BitCrusher, bitDepth, setBitDepth);
 
   };
