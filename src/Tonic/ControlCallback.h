@@ -32,11 +32,10 @@ namespace Tonic {
       
     public:
       void setCallback(function<void(ControlGeneratorOutput)> fn);
-      
     };
     
   }
-  
+
   /*!
     Pass a lambda function to a controlgenerator. That function will be called when the input ControlGenerator sends a "triggered" message. Constructor takes two arguments -- the synth that owns the ControlCallback, and a lambda function
   */
@@ -46,7 +45,6 @@ namespace Tonic {
   public:
   
     ControlCallback(Synth* synth, function<void(ControlGeneratorOutput)>);
-    
 
   };
 }
