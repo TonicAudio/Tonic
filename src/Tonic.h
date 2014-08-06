@@ -57,6 +57,7 @@
 #include "Tonic/FilterUtils.h"
 #include "Tonic/DelayUtils.h"
 #include "Tonic/Reverb.h"
+#include "Tonic/BitCrusher.h"
 
 // Utilities
 #include "Tonic/ADSR.h"
