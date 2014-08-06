@@ -53,7 +53,6 @@
 		F256C8E516C5A0BF0096574D /* SynthChooserViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = F256C8E216C5A0BF0096574D /* SynthChooserViewController.mm */; };
 		F256C8E616C5A0BF0096574D /* SynthChooserViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F256C8E316C5A0BF0096574D /* SynthChooserViewController.xib */; };
 		F256C8E816C5A6DF0096574D /* SynthTestViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F256C8E716C5A6DF0096574D /* SynthTestViewController.xib */; };
-		F2B853191721AAE000C3921A /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F25317E016EBA0A100A8CFDC /* SenTestingKit.framework */; };
 		F2B8531A1721AAE000C3921A /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A86C3EC016B2B4FD002A50F0 /* UIKit.framework */; };
 		F2B8531B1721AAE000C3921A /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A86C3EC216B2B4FD002A50F0 /* Foundation.framework */; };
 		F2B853291721AB1E00C3921A /* TonicTests.mm in Sources */ = {isa = PBXBuildFile; fileRef = F25317EB16EBA0A100A8CFDC /* TonicTests.mm */; };
@@ -148,7 +147,6 @@
 		F24A98CF173EAB8500BE47CB /* SynthParameterCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SynthParameterCell.h; sourceTree = "<group>"; };
 		F24A98D0173EAB8500BE47CB /* SynthParameterCell.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = SynthParameterCell.mm; sourceTree = "<group>"; };
 		F24A98D2173EC45700BE47CB /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
-		F25317E016EBA0A100A8CFDC /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
 		F25317E616EBA0A100A8CFDC /* TonicTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "TonicTests-Info.plist"; sourceTree = "<group>"; };
 		F25317E816EBA0A100A8CFDC /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		F25317EA16EBA0A100A8CFDC /* TonicTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TonicTests.h; sourceTree = "<group>"; };
@@ -163,7 +161,7 @@
 		F256C8E316C5A0BF0096574D /* SynthChooserViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SynthChooserViewController.xib; sourceTree = "<group>"; };
 		F256C8E716C5A6DF0096574D /* SynthTestViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SynthTestViewController.xib; sourceTree = "<group>"; };
 		F278D375179C927D004EBCA3 /* BandlimitedOscillatorTest.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = BandlimitedOscillatorTest.cpp; sourceTree = "<group>"; };
-		F2B853181721AAE000C3921A /* TonicTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TonicTests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
+		F2B853181721AAE000C3921A /* TonicTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TonicTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		F2C6D3E317245C7F006455E7 /* TonicLoggingTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TonicLoggingTests.h; sourceTree = "<group>"; };
 		F2C6D3E417245C7F006455E7 /* TonicLoggingTests.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = TonicLoggingTests.mm; sourceTree = "<group>"; };
 		F2C6D3EB17245CF7006455E7 /* TestBufferFiller.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestBufferFiller.h; sourceTree = "<group>"; };
@@ -195,7 +193,6 @@
 			files = (
 				F2B8532E1721ACE100C3921A /* Accelerate.framework in Frameworks */,
 				F2B8532D1721ACDE00C3921A /* libTonic-iOS.a in Frameworks */,
-				F2B853191721AAE000C3921A /* SenTestingKit.framework in Frameworks */,
 				F2B8531A1721AAE000C3921A /* UIKit.framework in Frameworks */,
 				F2B8531B1721AAE000C3921A /* Foundation.framework in Frameworks */,
 			);
@@ -245,7 +242,7 @@
 			isa = PBXGroup;
 			children = (
 				A86C3EBC16B2B4FD002A50F0 /* TonicDemo.app */,
-				F2B853181721AAE000C3921A /* TonicTests.octest */,
+				F2B853181721AAE000C3921A /* TonicTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -263,7 +260,6 @@
 				A86C3EC016B2B4FD002A50F0 /* UIKit.framework */,
 				A86C3EC216B2B4FD002A50F0 /* Foundation.framework */,
 				A86C3EC416B2B4FD002A50F0 /* CoreGraphics.framework */,
-				F25317E016EBA0A100A8CFDC /* SenTestingKit.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -437,8 +433,8 @@
 			);
 			name = TonicTests;
 			productName = TonicTests;
-			productReference = F2B853181721AAE000C3921A /* TonicTests.octest */;
-			productType = "com.apple.product-type.bundle";
+			productReference = F2B853181721AAE000C3921A /* TonicTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
 
@@ -447,7 +443,8 @@
 			isa = PBXProject;
 			attributes = {
 				CLASSPREFIX = Tonic;
-				LastUpgradeCheck = 0450;
+				LastTestingUpgradeCheck = 0510;
+				LastUpgradeCheck = 0510;
 				ORGANIZATIONNAME = "Morgan Packard";
 			};
 			buildConfigurationList = A86C3EB616B2B4FC002A50F0 /* Build configuration list for PBXProject "TonicDemo" */;
@@ -731,6 +728,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"\"$(SDKROOT)/Developer/Library/Frameworks\"",
 					"\"$(DEVELOPER_LIBRARY_DIR)/Frameworks\"",
+					"$(inherited)",
 				);
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -740,7 +738,6 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUNDLE_LOADER)";
-				WRAPPER_EXTENSION = octest;
 			};
 			name = Debug;
 		};
@@ -757,6 +754,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"\"$(SDKROOT)/Developer/Library/Frameworks\"",
 					"\"$(DEVELOPER_LIBRARY_DIR)/Frameworks\"",
+					"$(inherited)",
 				);
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -766,7 +764,6 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUNDLE_LOADER)";
-				WRAPPER_EXTENSION = octest;
 			};
 			name = Release;
 		};
