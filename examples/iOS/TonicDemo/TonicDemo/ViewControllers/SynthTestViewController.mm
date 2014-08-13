@@ -35,6 +35,10 @@ using namespace Tonic;
     
     _synth = SynthFactory::createInstance(def.synthClassName.UTF8String);
     [[TonicSynthManager sharedManager] addSynth:_synth forKey:@"testsynth"];
+    
+    if ( [self respondsToSelector:@selector(setEdgesForExtendedLayout:)] ) {
+      self.edgesForExtendedLayout = UIRectEdgeNone;
+    }
   }
   return self;
 }

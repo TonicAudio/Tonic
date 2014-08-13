@@ -14,8 +14,13 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-  
-  [[UINavigationBar appearance] setTintColor:[UIColor blackColor]];
+  if ( [UINavigationBar instancesRespondToSelector:@selector(setBarTintColor:)] ) {
+    [[UINavigationBar appearance] setBarTintColor:[UIColor blackColor]];
+    [[UINavigationBar appearance] setBarStyle:UIBarStyleBlackTranslucent];
+  }
+  else {
+    [[UINavigationBar appearance] setTintColor:[UIColor blackColor]];
+  }
   [[UINavigationBar appearance] setTitleTextAttributes:@{UITextAttributeFont : [UIFont fontWithName:@"HelveticaNeue-Bold" size:20], UITextAttributeTextColor : [UIColor whiteColor]}];
   
   SynthChooserViewController *scVC = [[SynthChooserViewController alloc] initWithNibName:nil bundle:nil];
