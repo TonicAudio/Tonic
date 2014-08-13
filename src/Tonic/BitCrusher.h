@@ -38,7 +38,7 @@ namespace Tonic {
       TonicFloat *synthBlockWriteHead = &outputFrames_[0];
       TonicFloat *dryFramesReadHead = &dryFrames_[0];
       
-      unsigned int nSamples = outputFrames_.size();
+      unsigned int nSamples = (unsigned int)outputFrames_.size();
       float bitDepthValue = clamp(bitDepth.tick(context).value, 0, 16) ;
       float bitDepthMax = pow(2, bitDepthValue);
       
