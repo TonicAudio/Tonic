@@ -416,7 +416,7 @@ namespace Tonic {
       
       void release(){
         if(pcount && --(*pcount) == 0){
-          if (obj) delete obj;
+          delete obj;
           delete pcount;
           
           obj = NULL;
