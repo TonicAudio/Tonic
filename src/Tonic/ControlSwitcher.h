@@ -9,8 +9,8 @@
 //
 
 
-#ifndef TONIC_ControlSwitcher_H
-#define TONIC_ControlSwitcher_H
+#ifndef TONIC_CONTROLSWITCHER_H
+#define TONIC_CONTROLSWITCHER_H
 
 #include "ControlGenerator.h"
 

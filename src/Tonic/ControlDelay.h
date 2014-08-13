@@ -7,8 +7,8 @@
 // See LICENSE.txt for license and usage information.
 //
 
-#ifndef TONIC_ControlDelay_H
-#define TONIC_ControlDelay_H
+#ifndef TONIC_CONTROLDELAY_H
+#define TONIC_CONTROLDELAY_H
 
 #include "ControlConditioner.h"
 

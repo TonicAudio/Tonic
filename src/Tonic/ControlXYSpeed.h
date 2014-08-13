@@ -9,8 +9,8 @@
 // See LICENSE.txt for license and usage information.
 //
 
-#ifndef TONIC_ControlXYSpeed_H
-#define TONIC_ControlXYSpeed_H
+#ifndef TONIC_CONTROLXYSPEED_H
+#define TONIC_CONTROLXYSPEED_H
 
 #include "ControlGenerator.h"
 #include <list>

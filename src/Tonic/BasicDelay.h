@@ -9,8 +9,8 @@
 //
 
 
-#ifndef TONIC_BasicDelay_H
-#define TONIC_BasicDelay_H
+#ifndef TONIC_BASICDELAY_H
+#define TONIC_BASICDELAY_H
 
 #include "Effect.h"
 #include "DelayUtils.h"

@@ -18,8 +18,8 @@
  *
  ***************************************************/
 
-#ifndef TONIC_ControlComparison_H
-#define TONIC_ControlComparison_H
+#ifndef TONIC_CONTROLCOMPARISON_H
+#define TONIC_CONTROLCOMPARISON_H
 
 #include "ControlValue.h"
 

@@ -8,8 +8,8 @@
 //
 
 
-#ifndef TONIC_ControlCounter_H
-#define TONIC_ControlCounter_H
+#ifndef TONIC_CONTROLCOUNTER_H
+#define TONIC_CONTROLCOUNTER_H
 
 #include "ControlGenerator.h"
 

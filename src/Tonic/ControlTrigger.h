@@ -6,8 +6,8 @@
 //
 // See LICENSE.txt for license and usage information.
 
-#ifndef TONIC_ControlTrigger_H
-#define TONIC_ControlTrigger_H
+#ifndef TONIC_CONTROLTRIGGER_H
+#define TONIC_CONTROLTRIGGER_H
 
 #include "ControlGenerator.h"
 

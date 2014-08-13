@@ -8,8 +8,8 @@
 // See LICENSE.txt for license and usage information.
 //
 
-#ifndef Tonic_TriangleWave_h
-#define Tonic_TriangleWave_h
+#ifndef TONIC_TRIANGLEWAVE_H
+#define TONIC_TRIANGLEWAVE_H
 
 #include "SawtoothWave.h"
 

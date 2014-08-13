@@ -9,8 +9,8 @@
 //
 
 
-#ifndef TONIC_Synth_H
-#define TONIC_Synth_H
+#ifndef TONIC_SYNTH_H
+#define TONIC_SYNTH_H
 
 #include <map>
 #include "BufferFiller.h"

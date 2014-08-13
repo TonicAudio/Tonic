@@ -7,8 +7,8 @@
 // See LICENSE.txt for license and usage information.
 //
 
-#ifndef TONIC_DelayUtils_H
-#define TONIC_DelayUtils_H
+#ifndef TONIC_DELAYUTILS_H
+#define TONIC_DELAYUTILS_H
 
 #include "TonicFrames.h"
 #include <cmath>

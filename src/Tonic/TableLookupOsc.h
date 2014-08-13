@@ -9,8 +9,8 @@
 //
 
 
-#ifndef TONIC_TableLookupOsc_H
-#define TONIC_TableLookupOsc_H
+#ifndef TONIC_TABLELOOKUPOSC_H
+#define TONIC_TABLELOOKUPOSC_H
 
 #include "Generator.h"
 #include "SampleTable.h"

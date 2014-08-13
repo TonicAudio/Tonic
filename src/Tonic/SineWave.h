@@ -9,8 +9,8 @@
 //
 
 
-#ifndef TONIC_SineWave_H
-#define TONIC_SineWave_H
+#ifndef TONIC_SINEWAVE_H
+#define TONIC_SINEWAVE_H
 
 #include "TableLookupOsc.h"
 

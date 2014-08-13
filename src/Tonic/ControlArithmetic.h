@@ -9,8 +9,8 @@
 //
 
 
-#ifndef TONIC_ControlArithmetic_H
-#define TONIC_ControlArithmetic_H
+#ifndef TONIC_CONTROLARITHMETIC_H
+#define TONIC_CONTROLARITHMETIC_H
 
 #include "ControlGenerator.h"
 #include "ControlValue.h"

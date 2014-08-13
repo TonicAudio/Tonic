@@ -9,8 +9,8 @@
 //
 
 
-#ifndef TONIC_MonoToStereoPanner_H
-#define TONIC_MonoToStereoPanner_H
+#ifndef TONIC_MONOTOSTEREOPANNER_H
+#define TONIC_MONOTOSTEREOPANNER_H
 
 #include <iostream>
 #include "Effect.h"

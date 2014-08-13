@@ -9,8 +9,8 @@
 //
 
 
-#ifndef TONIC_ControlRecorder_H
-#define TONIC_ControlRecorder_H
+#ifndef TONIC_CONTROLRECORDER_H
+#define TONIC_CONTROLRECORDER_H
 
 #include "ControlConditioner.h"
 

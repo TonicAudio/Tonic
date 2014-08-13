@@ -9,8 +9,8 @@
 //
 
 
-#ifndef TONIC_ControlTriggerFilter_H
-#define TONIC_ControlTriggerFilter_H
+#ifndef TONIC_CONTROLTRIGGERFILTER_H
+#define TONIC_CONTROLTRIGGERFILTER_H
 
 #include "ControlGenerator.h"
 

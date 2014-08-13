@@ -8,8 +8,8 @@
 //
 
 
-#ifndef TONIC_ControlChangeNotifier_H
-#define TONIC_ControlChangeNotifier_H
+#ifndef TONIC_CONTROLCHANGENOTIFIER_H
+#define TONIC_CONTROLCHANGENOTIFIER_H
 
 #include "ControlGenerator.h"
 #include "ControlConditioner.h"

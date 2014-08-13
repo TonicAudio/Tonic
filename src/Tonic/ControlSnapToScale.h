@@ -9,8 +9,8 @@
 //
 
 
-#ifndef TONIC_ControlSnapToScale_H
-#define TONIC_ControlSnapToScale_H
+#ifndef TONIC_CONTROLSNAPTOSCALE_H
+#define TONIC_CONTROLSNAPTOSCALE_H
 
 #include "ControlConditioner.h"
 

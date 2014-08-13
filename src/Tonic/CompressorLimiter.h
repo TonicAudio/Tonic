@@ -9,8 +9,8 @@
 //
 
 
-#ifndef TONIC_Compressor_H
-#define TONIC_Compressor_H
+#ifndef TONIC_COMPRESSOR_H
+#define TONIC_COMPRESSOR_H
 
 #include "Effect.h"
 #include "DelayUtils.h"

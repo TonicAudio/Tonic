@@ -9,8 +9,8 @@
 //
 
 
-#ifndef TONIC_Noise_H
-#define TONIC_Noise_H
+#ifndef TONIC_NOISE_H
+#define TONIC_NOISE_H
 
 #include "Generator.h"
 

@@ -9,8 +9,8 @@
 //
 
 
-#ifndef TONIC_Generator_H
-#define TONIC_Generator_H
+#ifndef TONIC_GENERATOR_H
+#define TONIC_GENERATOR_H
 
 #include "TonicFrames.h"
 #include <cmath>

@@ -9,8 +9,8 @@
 //
 
 
-#ifndef TONIC_TonicCore_H
-#define TONIC_TonicCore_H
+#ifndef TONIC_TONICCORE_H
+#define TONIC_TONICCORE_H
 
 #include <string>
 #include <vector>
