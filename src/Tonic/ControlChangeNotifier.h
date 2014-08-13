@@ -8,8 +8,8 @@
 //
 
 
-#ifndef __Tonic__ControlChangeNotifier__
-#define __Tonic__ControlChangeNotifier__
+#ifndef TONIC_ControlChangeNotifier_H
+#define TONIC_ControlChangeNotifier_H
 
 #include "ControlGenerator.h"
 #include "ControlConditioner.h"
@@ -61,6 +61,6 @@ namespace Tonic {
   };
 }
 
-#endif /* defined(__Tonic__ControlChangeNotifier__) */
+#endif
 
 

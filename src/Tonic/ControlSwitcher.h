@@ -9,8 +9,8 @@
 //
 
 
-#ifndef __Tonic__ControlSwitcher__
-#define __Tonic__ControlSwitcher__
+#ifndef TONIC_ControlSwitcher_H
+#define TONIC_ControlSwitcher_H
 
 #include "ControlGenerator.h"
 
@@ -71,6 +71,6 @@ namespace Tonic {
   };
 }
 
-#endif /* defined(__Tonic__ControlSwitcher__) */
+#endif
 
 

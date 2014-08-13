@@ -9,8 +9,8 @@
 //
 
 
-#ifndef __Tonic__ControlPulse__
-#define __Tonic__ControlPulse__
+#ifndef TONIC_ControlPulse_H
+#define TONIC_ControlPulse_H
 
 #include "ControlGenerator.h"
 
@@ -87,6 +87,6 @@ namespace Tonic {
   };
 }
 
-#endif /* defined(__Tonic__ControlPulse__) */
+#endif
 
 

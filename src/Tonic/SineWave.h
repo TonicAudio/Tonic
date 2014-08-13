@@ -9,8 +9,8 @@
 //
 
 
-#ifndef __Tonic__SineWave__
-#define __Tonic__SineWave__
+#ifndef TONIC_SineWave_H
+#define TONIC_SineWave_H
 
 #include "TableLookupOsc.h"
 
@@ -27,6 +27,6 @@ namespace Tonic {
   };
 }
 
-#endif /* defined(__Tonic__SineWave__) */
+#endif
 
 

@@ -9,8 +9,8 @@
 //
 
 
-#ifndef __Tonic__Adder__
-#define __Tonic__Adder__
+#ifndef TONIC_Adder_H
+#define TONIC_Adder_H
 
 #include "Generator.h"
 

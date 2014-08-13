@@ -9,8 +9,8 @@
 //
 
 
-#ifndef __Tonic__MonoToStereoPanner__
-#define __Tonic__MonoToStereoPanner__
+#ifndef TONIC_MonoToStereoPanner_H
+#define TONIC_MonoToStereoPanner_H
 
 #include <iostream>
 #include "Effect.h"
@@ -62,6 +62,6 @@ namespace Tonic {
   
 }
 
-#endif /* defined(__Tonic__MonoToStereoPanner__) */
+#endif
 
 

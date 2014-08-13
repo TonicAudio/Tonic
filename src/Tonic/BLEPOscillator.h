@@ -20,8 +20,8 @@
  *****************************************************/
 
 
-#ifndef __Tonic__BLEPOscillator__
-#define __Tonic__BLEPOscillator__
+#ifndef TONIC_BLEPOscillator_H
+#define TONIC_BLEPOscillator_H
 
 #include "Generator.h"
 
@@ -98,6 +98,6 @@ namespace Tonic {
   }
 }
 
-#endif /* defined(__Tonic__BLEPOscillator__) */
+#endif
 
 

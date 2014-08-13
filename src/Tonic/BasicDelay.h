@@ -9,8 +9,8 @@
 //
 
 
-#ifndef __Tonic__BasicDelay__
-#define __Tonic__BasicDelay__
+#ifndef TONIC_BasicDelay_H
+#define TONIC_BasicDelay_H
 
 #include "Effect.h"
 #include "DelayUtils.h"
@@ -96,6 +96,6 @@ namespace Tonic {
   };
 }
 
-#endif /* defined(__Tonic__BasicDelay__) */
+#endif
 
 

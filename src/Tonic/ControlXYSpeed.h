@@ -9,8 +9,8 @@
 // See LICENSE.txt for license and usage information.
 //
 
-#ifndef __Tonic__ControlXYSpeed__
-#define __Tonic__ControlXYSpeed__
+#ifndef TONIC_ControlXYSpeed_H
+#define TONIC_ControlXYSpeed_H
 
 #include "ControlGenerator.h"
 #include <list>
@@ -82,6 +82,6 @@ namespace Tonic {
   };
 }
 
-#endif /* defined(__Tonic__ControlXYSpeed__) */
+#endif
 
 

@@ -9,8 +9,8 @@
 //
 
 
-#ifndef __Tonic__ControlPrinter__
-#define __Tonic__ControlPrinter__
+#ifndef TONIC_ControlPrinter_H
+#define TONIC_ControlPrinter_H
 
 #include "ControlConditioner.h"
 
@@ -58,6 +58,6 @@ namespace Tonic {
   };
 }
 
-#endif /* defined(__Tonic__ControlPrinter__) */
+#endif
 
 
