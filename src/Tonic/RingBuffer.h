@@ -8,8 +8,8 @@
 //
 
 
-#ifndef __Tonic__RingBuffer__
-#define __Tonic__RingBuffer__
+#ifndef TONIC_RingBuffer_H
+#define TONIC_RingBuffer_H
 
 #include "Effect.h"
 #include "SampleTable.h"
@@ -267,6 +267,6 @@ namespace Tonic {
     
 }
 
-#endif /* defined(__Tonic__RingBuffer__) */
+#endif
 
 

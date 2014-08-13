@@ -9,8 +9,8 @@
 //
 
 
-#ifndef __Tonic__Noise__
-#define __Tonic__Noise__
+#ifndef TONIC_Noise_H
+#define TONIC_Noise_H
 
 #include "Generator.h"
 
@@ -114,6 +114,6 @@ namespace Tonic {
 
 }
 
-#endif /* defined(__Tonic__Noise__) */
+#endif
 
 

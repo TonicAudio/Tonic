@@ -9,8 +9,8 @@
 //
 
 
-#ifndef __Tonic__StereoDelay__
-#define __Tonic__StereoDelay__
+#ifndef TONIC_StereoDelay_H
+#define TONIC_StereoDelay_H
 
 #include "Effect.h"
 #include "DelayUtils.h"
@@ -104,6 +104,6 @@ namespace Tonic {
   };
 }
 
-#endif /* defined(__Tonic__StereoDelay__) */
+#endif
 
 

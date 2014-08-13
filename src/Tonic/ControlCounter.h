@@ -8,8 +8,8 @@
 //
 
 
-#ifndef __Tonic__ControlCounter__
-#define __Tonic__ControlCounter__
+#ifndef TONIC_ControlCounter_H
+#define TONIC_ControlCounter_H
 
 #include "ControlGenerator.h"
 
@@ -57,6 +57,6 @@ namespace Tonic {
   };
 }
 
-#endif /* defined(__Tonic__ControlCounter__) */
+#endif
 
 

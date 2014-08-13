@@ -9,8 +9,8 @@
 //
 
 
-#ifndef __Tonic__AngularWave__
-#define __Tonic__AngularWave__
+#ifndef TONIC_AngularWave_H
+#define TONIC_AngularWave_H
 
 #include "Generator.h"
 #include "BLEPOscillator.h"
@@ -211,6 +211,6 @@ namespace Tonic {
   
 }
 
-#endif /* defined(__Tonic__SawWave__) */
+#endif
 
 

@@ -9,8 +9,8 @@
 //
 
 
-#ifndef __Tonic__ControlSnapToScale__
-#define __Tonic__ControlSnapToScale__
+#ifndef TONIC_ControlSnapToScale_H
+#define TONIC_ControlSnapToScale_H
 
 #include "ControlConditioner.h"
 
@@ -91,6 +91,6 @@ namespace Tonic {
   };
 }
 
-#endif /* defined(__Tonic__ControlSnapToScale__) */
+#endif
 
 

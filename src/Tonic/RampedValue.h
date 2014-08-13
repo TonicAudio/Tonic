@@ -9,8 +9,8 @@
 //
 
 
-#ifndef __Tonic__RampedValue__
-#define __Tonic__RampedValue__
+#ifndef TONIC_RampedValue_H
+#define TONIC_RampedValue_H
 
 #include <iostream>
 #include "Generator.h"
@@ -252,6 +252,6 @@ namespace Tonic {
   };
 }
 
-#endif /* defined(__Tonic__RampedValue__) */
+#endif
 
 

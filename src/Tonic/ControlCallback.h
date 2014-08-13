@@ -9,8 +9,8 @@
 //
 
 
-#ifndef __Tonic__ControlCallback__
-#define __Tonic__ControlCallback__
+#ifndef TONIC_ControlCallback_H
+#define TONIC_ControlCallback_H
 
 #include "ControlConditioner.h"
 
@@ -51,6 +51,6 @@ namespace Tonic {
 
 #endif
 
-#endif /* defined(__Tonic__ControlCallback__) */
+#endif
 
 

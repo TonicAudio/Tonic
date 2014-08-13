@@ -6,8 +6,8 @@
 //
 // See LICENSE.txt for license and usage information.
 
-#ifndef __Tonic__ControlTrigger__
-#define __Tonic__ControlTrigger__
+#ifndef TONIC_ControlTrigger_H
+#define TONIC_ControlTrigger_H
 
 #include "ControlGenerator.h"
 
@@ -48,6 +48,6 @@ namespace Tonic {
   };
 }
 
-#endif /* defined(__Tonic__ControlTrigger__) */
+#endif
 
 

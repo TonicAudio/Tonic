@@ -10,8 +10,8 @@
 
 
 
-#ifndef __Tonic__ControlMetro__
-#define __Tonic__ControlMetro__
+#ifndef TONIC_ControlMetro_H
+#define TONIC_ControlMetro_H
 
 #include "ControlGenerator.h"
 
@@ -74,6 +74,6 @@ namespace Tonic {
   };
 }
 
-#endif /* defined(__Tonic__ControlMetro__) */
+#endif
 
 

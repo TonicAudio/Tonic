@@ -7,8 +7,8 @@
 // See LICENSE.txt for license and usage information.
 //
 
-#ifndef __Tonic__ControlDelay__
-#define __Tonic__ControlDelay__
+#ifndef TONIC_ControlDelay_H
+#define TONIC_ControlDelay_H
 
 #include "ControlConditioner.h"
 
@@ -79,6 +79,6 @@ namespace Tonic {
   };
 }
 
-#endif /* defined(__Tonic__ControlDelay__) */
+#endif
 
 
