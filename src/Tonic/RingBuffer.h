@@ -168,7 +168,7 @@ namespace Tonic {
   public:
     
     RingBuffer(unsigned int nFrames = 64, unsigned int nChannels = 2){
-      if (obj) delete obj;
+      delete obj;
       obj = new Tonic_::RingBuffer_(nFrames, nChannels);
     }
     
