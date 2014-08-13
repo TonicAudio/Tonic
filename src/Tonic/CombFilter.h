@@ -8,8 +8,8 @@
 //
 
 
-#ifndef TONIC_CombFilter_H
-#define TONIC_CombFilter_H
+#ifndef TONIC_COMBFILTER_H
+#define TONIC_COMBFILTER_H
 
 #include "Effect.h"
 #include "DelayUtils.h"

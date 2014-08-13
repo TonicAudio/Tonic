@@ -9,8 +9,8 @@
 //
 
 
-#ifndef TONIC_AngularWave_H
-#define TONIC_AngularWave_H
+#ifndef TONIC_ANGULARWAVE_H
+#define TONIC_ANGULARWAVE_H
 
 #include "Generator.h"
 #include "BLEPOscillator.h"

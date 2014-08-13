@@ -8,8 +8,8 @@
 //
 
 
-#ifndef TONIC_ControlParameter_H
-#define TONIC_ControlParameter_H
+#ifndef TONIC_CONTROLPARAMETER_H
+#define TONIC_CONTROLPARAMETER_H
 
 #include "ControlValue.h"
 

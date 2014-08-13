@@ -9,8 +9,8 @@
 //
 
 
-#ifndef TONIC_Effect_H
-#define TONIC_Effect_H
+#ifndef TONIC_EFFECT_H
+#define TONIC_EFFECT_H
 
 #include "Generator.h"
 

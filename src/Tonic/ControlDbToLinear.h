@@ -9,8 +9,8 @@
 //
 
 
-#ifndef TONIC_ControlDbToLinear_H
-#define TONIC_ControlDbToLinear_H
+#ifndef TONIC_CONTROLDBTOLINEAR_H
+#define TONIC_CONTROLDBTOLINEAR_H
 
 #include "ControlConditioner.h"
 

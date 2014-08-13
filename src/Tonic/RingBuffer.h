@@ -8,8 +8,8 @@
 //
 
 
-#ifndef TONIC_RingBuffer_H
-#define TONIC_RingBuffer_H
+#ifndef TONIC_RINGBUFFER_H
+#define TONIC_RINGBUFFER_H
 
 #include "Effect.h"
 #include "SampleTable.h"

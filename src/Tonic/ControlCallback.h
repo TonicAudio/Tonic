@@ -9,8 +9,8 @@
 //
 
 
-#ifndef TONIC_ControlCallback_H
-#define TONIC_ControlCallback_H
+#ifndef TONIC_CONTROLCALLBACK_H
+#define TONIC_CONTROLCALLBACK_H
 
 #include "ControlConditioner.h"
 

@@ -9,8 +9,8 @@
 //
 
 
-#ifndef TONIC_ControlPulse_H
-#define TONIC_ControlPulse_H
+#ifndef TONIC_CONTROLPULSE_H
+#define TONIC_CONTROLPULSE_H
 
 #include "ControlGenerator.h"
 

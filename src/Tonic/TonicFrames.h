@@ -9,8 +9,8 @@
 //
 
 
-#ifndef TONIC_TonicFrames_H
-#define TONIC_TonicFrames_H
+#ifndef TONIC_TONICFRAMES_H
+#define TONIC_TONICFRAMES_H
 
 #include "TonicCore.h"
 #include <sstream>

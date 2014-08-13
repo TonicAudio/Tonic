@@ -10,8 +10,8 @@
 
 
 
-#ifndef TONIC_ControlMetro_H
-#define TONIC_ControlMetro_H
+#ifndef TONIC_CONTROLMETRO_H
+#define TONIC_CONTROLMETRO_H
 
 #include "ControlGenerator.h"
 

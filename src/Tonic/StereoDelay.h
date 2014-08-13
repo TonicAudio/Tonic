@@ -9,8 +9,8 @@
 //
 
 
-#ifndef TONIC_StereoDelay_H
-#define TONIC_StereoDelay_H
+#ifndef TONIC_STEREODELAY_H
+#define TONIC_STEREODELAY_H
 
 #include "Effect.h"
 #include "DelayUtils.h"

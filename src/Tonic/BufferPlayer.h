@@ -10,8 +10,8 @@
 
 
 
-#ifndef TONIC_BufferPlayer_H
-#define TONIC_BufferPlayer_H
+#ifndef TONIC_BUFFERPLAYER_H
+#define TONIC_BUFFERPLAYER_H
 
 #include "Generator.h"
 #include "FixedValue.h"

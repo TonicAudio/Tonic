@@ -8,8 +8,8 @@
 //
 
 
-#ifndef TONIC_ControlMetroDivider_H
-#define TONIC_ControlMetroDivider_H
+#ifndef TONIC_CONTROLMETRODIVIDER_H
+#define TONIC_CONTROLMETRODIVIDER_H
 
 #include "ControlConditioner.h"
 

@@ -9,8 +9,8 @@
 //
 
 
-#ifndef TONIC_ControlPrinter_H
-#define TONIC_ControlPrinter_H
+#ifndef TONIC_CONTROLPRINTER_H
+#define TONIC_CONTROLPRINTER_H
 
 #include "ControlConditioner.h"
 

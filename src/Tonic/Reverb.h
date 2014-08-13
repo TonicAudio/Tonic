@@ -9,8 +9,8 @@
 // See LICENSE.txt for license and usage information.
 //
 
-#ifndef TONIC_Reverb_H
-#define TONIC_Reverb_H
+#ifndef TONIC_REVERB_H
+#define TONIC_REVERB_H
 
 #include "Effect.h"
 #include "DelayUtils.h"

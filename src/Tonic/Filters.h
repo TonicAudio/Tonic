@@ -9,8 +9,8 @@
 //
 
 
-#ifndef TONIC_Filters_H
-#define TONIC_Filters_H
+#ifndef TONIC_FILTERS_H
+#define TONIC_FILTERS_H
 
 #include "Effect.h"
 #include "FilterUtils.h"

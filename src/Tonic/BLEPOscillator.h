@@ -20,8 +20,8 @@
  *****************************************************/
 
 
-#ifndef TONIC_BLEPOscillator_H
-#define TONIC_BLEPOscillator_H
+#ifndef TONIC_BLEPOSCILLATOR_H
+#define TONIC_BLEPOSCILLATOR_H
 
 #include "Generator.h"
 

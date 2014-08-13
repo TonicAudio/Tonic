@@ -9,8 +9,8 @@
 //
 
 
-#ifndef TONIC_RampedValue_H
-#define TONIC_RampedValue_H
+#ifndef TONIC_RAMPEDVALUE_H
+#define TONIC_RAMPEDVALUE_H
 
 #include <iostream>
 #include "Generator.h"

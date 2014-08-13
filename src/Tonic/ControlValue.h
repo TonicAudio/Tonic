@@ -8,8 +8,8 @@
 // See LICENSE.txt for license and usage information.
 //
 
-#ifndef TONIC_ControlValue_H
-#define TONIC_ControlValue_H
+#ifndef TONIC_CONTROLVALUE_H
+#define TONIC_CONTROLVALUE_H
 
 #include "ControlGenerator.h"
 

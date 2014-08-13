@@ -15,8 +15,8 @@
  *
  ***********************************************************/
 
-#ifndef TONIC_TonicHeader_H
-#define TONIC_TonicHeader_H
+#ifndef TONIC_TONICHEADER_H
+#define TONIC_TONICHEADER_H
 
 // ------- Core Objects --------
 
