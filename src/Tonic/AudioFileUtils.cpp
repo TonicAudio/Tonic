@@ -75,7 +75,7 @@ namespace Tonic {
     AudioBufferList convertedData;
     convertedData.mNumberBuffers = 1;
     convertedData.mBuffers[0].mNumberChannels = outputFormat.mChannelsPerFrame;
-    convertedData.mBuffers[0].mDataByteSize = destinationTable.size() * BYTES_PER_SAMPLE;
+    convertedData.mBuffers[0].mDataByteSize = (UInt32)destinationTable.size() * BYTES_PER_SAMPLE;
     convertedData.mBuffers[0].mData = destinationTable.dataPointer();
     
     UInt32 numFrames32 = (UInt32)numFrames;

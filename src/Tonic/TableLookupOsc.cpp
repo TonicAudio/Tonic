@@ -36,7 +36,7 @@ namespace Tonic {
       }
       
       unsigned int nearestPo2;
-      if (!isPowerOf2(table.size()-1, &nearestPo2)){
+      if (!isPowerOf2((unsigned int)table.size() - 1, &nearestPo2)){
         
         warning("TableLookUpOsc lookup tables must have a (power-of-two + 1) number of samples (example 2049 or 4097). Resizing to nearest power-of-two + 1");
         
