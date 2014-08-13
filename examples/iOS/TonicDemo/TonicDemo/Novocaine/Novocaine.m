@@ -41,6 +41,64 @@
 
 #import "TargetConditionals.h"
 
+
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+	
+    void CheckError(OSStatus error, const char *operation)
+    {
+        if (error == noErr) return;
+        
+        char str[20];
+        // see if it appears to be a 4-char-code
+        *(UInt32 *)(str + 1) = CFSwapInt32HostToBig(error);
+        if (isprint(str[1]) && isprint(str[2]) && isprint(str[3]) && isprint(str[4])) {
+            str[0] = str[5] = '\'';
+            str[6] = '\0';
+        } else
+            // no, format it as an integer
+            sprintf(str, "%d", (int)error);
+        
+        fprintf(stderr, "Error: %s (%s)\n", operation, str);
+        
+        exit(1);
+    }
+    
+    
+    OSStatus inputCallback (void						*inRefCon,
+                            AudioUnitRenderActionFlags	* ioActionFlags,
+                            const AudioTimeStamp 		* inTimeStamp,
+                            UInt32						inOutputBusNumber,
+                            UInt32						inNumberFrames,
+                            AudioBufferList				* ioData);
+    
+    OSStatus renderCallback (void						*inRefCon,
+                             AudioUnitRenderActionFlags	* ioActionFlags,
+                             const AudioTimeStamp 		* inTimeStamp,
+                             UInt32						inOutputBusNumber,
+                             UInt32						inNumberFrames,
+                             AudioBufferList				* ioData);
+    
+    
+#if defined (USING_IOS)
+    void sessionPropertyListener(void *                  inClientData,
+                                 AudioSessionPropertyID  inID,
+                                 UInt32                  inDataSize,
+                                 const void *            inData);
+    
+#endif
+    
+    
+    void sessionInterruptionListener(void *inClientData, UInt32 inInterruption);
+    
+#ifdef __cplusplus
+}
+#endif
+
+
+
 static Novocaine *audioManager = nil;
 
 @interface Novocaine()
@@ -792,13 +850,14 @@ OSStatus renderCallback (void						*inRefCon,
                 int thisNumChannels = ioData->mBuffers[iBuffer].mNumberChannels;
                 
                 for (int iChannel = 0; iChannel < thisNumChannels; ++iChannel) {
-                  
-                  int interleaveOffset = iChannel;
-                  if (iBuffer < sm.numOutputChannels){
-                    interleaveOffset += iBuffer;
-                  }
-                  
-                  vDSP_vsadd(sm.outData+interleaveOffset, sm.numOutputChannels, &zero, (float *)ioData->mBuffers[iBuffer].mData, thisNumChannels, inNumberFrames);
+
+                    int interleaveOffset = iChannel;
+                    if (iBuffer < sm.numOutputChannels){
+                        interleaveOffset += iBuffer;
+                    }
+                    
+                    vDSP_vsadd(sm.outData+interleaveOffset, sm.numOutputChannels, &zero, (float *)ioData->mBuffers[iBuffer].mData, thisNumChannels, inNumberFrames);
+                    
                 }
             }
         }
@@ -812,7 +871,13 @@ OSStatus renderCallback (void						*inRefCon,
                 int thisNumChannels = ioData->mBuffers[iBuffer].mNumberChannels;
                 
                 for (int iChannel = 0; iChannel < thisNumChannels; ++iChannel) {
-                    vDSP_vfix16(sm.outData+iChannel, sm.numOutputChannels, (SInt16 *)ioData->mBuffers[iBuffer].mData+iChannel, thisNumChannels, inNumberFrames);
+                    
+                    int interleaveOffset = iChannel;
+                    if (iBuffer < sm.numOutputChannels){
+                        interleaveOffset += iBuffer;
+                    }
+                    
+                    vDSP_vfix16(sm.outData+interleaveOffset, sm.numOutputChannels, (SInt16 *)ioData->mBuffers[iBuffer].mData+iChannel, thisNumChannels, inNumberFrames);
                 }
             }
             
@@ -882,7 +947,7 @@ void sessionPropertyListener(void *                  inClientData,
     CheckError( AudioSessionGetProperty(kAudioSessionProperty_CurrentHardwareInputNumberChannels, &size, &newNumChannels), "Checking number of input channels");
     self.numInputChannels = newNumChannels;
     //    self.numInputChannels = 1;
-    NSLog(@"We've got %lu input channels", self.numInputChannels);
+    NSLog(@"We've got %u input channels", (unsigned int)self.numInputChannels);
     
     
     // Check the number of input channels.
@@ -890,7 +955,7 @@ void sessionPropertyListener(void *                  inClientData,
     CheckError( AudioSessionGetProperty(kAudioSessionProperty_CurrentHardwareOutputNumberChannels, &size, &newNumChannels), "Checking number of output channels");
     self.numOutputChannels = newNumChannels;
     //    self.numOutputChannels = 1;
-    NSLog(@"We've got %lu output channels", self.numOutputChannels);
+    NSLog(@"We've got %u output channels", (unsigned int)self.numOutputChannels);
     
     
     // Get the hardware sampling rate. This is settable, but here we're only reading.
