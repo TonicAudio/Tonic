@@ -12,8 +12,6 @@
 #ifndef __Tonic__ControlCallback__
 #define __Tonic__ControlCallback__
 
-
-
 #include "ControlConditioner.h"
 
 #if TONIC_HAS_CPP_11

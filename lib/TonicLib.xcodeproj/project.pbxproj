@@ -134,7 +134,10 @@
 		01C65FF417372407003B2661 /* FilterUtils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 01C65FF317372407003B2661 /* FilterUtils.cpp */; };
 		01C65FF517372A5F003B2661 /* Effect.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 01C65FF1173723C6003B2661 /* Effect.cpp */; };
 		01C65FF617372CD3003B2661 /* FilterUtils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 01C65FF317372407003B2661 /* FilterUtils.cpp */; };
-		01F7273E1715225500EBB4BB /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 01F7273D1715225500EBB4BB /* Accelerate.framework */; };
+		9A54ADCC199BBDEB00B3DEF4 /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9A54ADCB199BBDEB00B3DEF4 /* Accelerate.framework */; };
+		9A54ADCE199BBDF700B3DEF4 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9A54ADCD199BBDF700B3DEF4 /* AudioToolbox.framework */; };
+		9A54ADD0199BBE0000B3DEF4 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9A54ADCF199BBE0000B3DEF4 /* AudioToolbox.framework */; };
+		9A54ADD4199BBE0E00B3DEF4 /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9A54ADD3199BBE0E00B3DEF4 /* Accelerate.framework */; };
 		9A5FB71B17591983007A2F31 /* ControlMetroDivider.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9A5FB71917591983007A2F31 /* ControlMetroDivider.cpp */; };
 		9A5FB71C17591983007A2F31 /* ControlMetroDivider.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9A5FB71917591983007A2F31 /* ControlMetroDivider.cpp */; };
 		9A5FB71D17591983007A2F31 /* ControlMetroDivider.h in Headers */ = {isa = PBXBuildFile; fileRef = 9A5FB71A17591983007A2F31 /* ControlMetroDivider.h */; };
@@ -172,9 +175,6 @@
 		A8F8705B181C506800B82527 /* AudioFileUtils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A8F87059181C506700B82527 /* AudioFileUtils.cpp */; };
 		A8F8705C181C506800B82527 /* AudioFileUtils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A8F87059181C506700B82527 /* AudioFileUtils.cpp */; };
 		A8F8705D181C506800B82527 /* AudioFileUtils.h in Headers */ = {isa = PBXBuildFile; fileRef = A8F8705A181C506700B82527 /* AudioFileUtils.h */; };
-		A8F87062181C648700B82527 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A8F87061181C648700B82527 /* AudioToolbox.framework */; };
-		A8F87064181C64B600B82527 /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A8F87063181C64B600B82527 /* Accelerate.framework */; };
-		A8F87066181C64C200B82527 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A8F87065181C64C200B82527 /* AudioToolbox.framework */; };
 		F218C86F179C73F6000906B2 /* DSPUtils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F218C86D179C73F6000906B2 /* DSPUtils.cpp */; };
 		F218C870179C73F6000906B2 /* DSPUtils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F218C86D179C73F6000906B2 /* DSPUtils.cpp */; };
 		F218C871179C73F6000906B2 /* DSPUtils.h in Headers */ = {isa = PBXBuildFile; fileRef = F218C86E179C73F6000906B2 /* DSPUtils.h */; };
@@ -287,7 +287,10 @@
 		01C65FF1173723C6003B2661 /* Effect.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Effect.cpp; sourceTree = "<group>"; };
 		01C65FF317372407003B2661 /* FilterUtils.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = FilterUtils.cpp; sourceTree = "<group>"; };
 		01F72690171520F900EBB4BB /* libTonic-OSX.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libTonic-OSX.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		01F7273D1715225500EBB4BB /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.7.sdk/System/Library/Frameworks/Accelerate.framework; sourceTree = DEVELOPER_DIR; };
+		9A54ADCB199BBDEB00B3DEF4 /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS7.1.sdk/System/Library/Frameworks/Accelerate.framework; sourceTree = DEVELOPER_DIR; };
+		9A54ADCD199BBDF700B3DEF4 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS7.1.sdk/System/Library/Frameworks/AudioToolbox.framework; sourceTree = DEVELOPER_DIR; };
+		9A54ADCF199BBE0000B3DEF4 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
+		9A54ADD3199BBE0E00B3DEF4 /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = System/Library/Frameworks/Accelerate.framework; sourceTree = SDKROOT; };
 		9A5FB71917591983007A2F31 /* ControlMetroDivider.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ControlMetroDivider.cpp; sourceTree = "<group>"; };
 		9A5FB71A17591983007A2F31 /* ControlMetroDivider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ControlMetroDivider.h; sourceTree = "<group>"; };
 		9A5FB71E175928FC007A2F31 /* ControlComparison.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ControlComparison.cpp; sourceTree = "<group>"; };
@@ -296,10 +299,6 @@
 		9A75063E174689FD00373E88 /* SampleTable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = SampleTable.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		9A7DB3E7174670DF009C9A8F /* TriangleWave.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TriangleWave.h; sourceTree = "<group>"; };
 		9A7DB3F417467C81009C9A8F /* SquareWave.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SquareWave.h; sourceTree = "<group>"; };
-		9AB5C24317BE757F00695790 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
-		9AB5C24717BE757F00695790 /* Derp-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Derp-Prefix.pch"; sourceTree = "<group>"; };
-		9AB5C24817BE757F00695790 /* Derp.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Derp.h; sourceTree = "<group>"; };
-		9AB5C24A17BE757F00695790 /* Derp.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Derp.m; sourceTree = "<group>"; };
 		9AE5AA0017601CB1001F3E60 /* ControlTrigger.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ControlTrigger.cpp; sourceTree = "<group>"; };
 		9AE5AA0117601CB2001F3E60 /* ControlTrigger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ControlTrigger.h; sourceTree = "<group>"; };
 		9AEDB5C617430E7B00C6A77C /* ControlParameter.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ControlParameter.cpp; sourceTree = "<group>"; };
@@ -318,9 +317,6 @@
 		A8F87055181C3B6500B82527 /* BufferPlayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BufferPlayer.h; sourceTree = "<group>"; };
 		A8F87059181C506700B82527 /* AudioFileUtils.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AudioFileUtils.cpp; sourceTree = "<group>"; };
 		A8F8705A181C506700B82527 /* AudioFileUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AudioFileUtils.h; sourceTree = "<group>"; };
-		A8F87061181C648700B82527 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
-		A8F87063181C64B600B82527 /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS6.1.sdk/System/Library/Frameworks/Accelerate.framework; sourceTree = DEVELOPER_DIR; };
-		A8F87065181C64C200B82527 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS6.1.sdk/System/Library/Frameworks/AudioToolbox.framework; sourceTree = DEVELOPER_DIR; };
 		F218C86D179C73F6000906B2 /* DSPUtils.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = DSPUtils.cpp; sourceTree = "<group>"; };
 		F218C86E179C73F6000906B2 /* DSPUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DSPUtils.h; sourceTree = "<group>"; };
 		F218C872179C763A000906B2 /* ControlDbToLinear.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ControlDbToLinear.cpp; sourceTree = "<group>"; };
@@ -335,8 +331,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A8F87062181C648700B82527 /* AudioToolbox.framework in Frameworks */,
-				01F7273E1715225500EBB4BB /* Accelerate.framework in Frameworks */,
+				9A54ADD4199BBE0E00B3DEF4 /* Accelerate.framework in Frameworks */,
+				9A54ADD0199BBE0000B3DEF4 /* AudioToolbox.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -344,8 +340,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A8F87066181C64C200B82527 /* AudioToolbox.framework in Frameworks */,
-				A8F87064181C64B600B82527 /* Accelerate.framework in Frameworks */,
+				9A54ADCE199BBDF700B3DEF4 /* AudioToolbox.framework in Frameworks */,
+				9A54ADCC199BBDEB00B3DEF4 /* Accelerate.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -489,12 +485,9 @@
 		01F72687171520F900EBB4BB = {
 			isa = PBXGroup;
 			children = (
-				A8F87065181C64C200B82527 /* AudioToolbox.framework */,
-				A8F87063181C64B600B82527 /* Accelerate.framework */,
-				A8F87061181C648700B82527 /* AudioToolbox.framework */,
 				0183CFFE1735D0E6004638EB /* src */,
-				9AB5C24517BE757F00695790 /* Derp */,
-				01F7273F171522B600EBB4BB /* Frameworks */,
+				9A54ADCA199BBDE000B3DEF4 /* Frameworks-iOS */,
+				01F7273F171522B600EBB4BB /* Frameworks-OSX */,
 				01F72691171520F900EBB4BB /* Products */,
 			);
 			indentWidth = 2;
@@ -510,31 +503,22 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		01F7273F171522B600EBB4BB /* Frameworks */ = {
+		01F7273F171522B600EBB4BB /* Frameworks-OSX */ = {
 			isa = PBXGroup;
 			children = (
-				01F7273D1715225500EBB4BB /* Accelerate.framework */,
-				9AB5C24317BE757F00695790 /* Foundation.framework */,
+				9A54ADD3199BBE0E00B3DEF4 /* Accelerate.framework */,
+				9A54ADCF199BBE0000B3DEF4 /* AudioToolbox.framework */,
 			);
-			name = Frameworks;
+			name = "Frameworks-OSX";
 			sourceTree = "<group>";
 		};
-		9AB5C24517BE757F00695790 /* Derp */ = {
+		9A54ADCA199BBDE000B3DEF4 /* Frameworks-iOS */ = {
 			isa = PBXGroup;
 			children = (
-				9AB5C24817BE757F00695790 /* Derp.h */,
-				9AB5C24A17BE757F00695790 /* Derp.m */,
-				9AB5C24617BE757F00695790 /* Supporting Files */,
+				9A54ADCB199BBDEB00B3DEF4 /* Accelerate.framework */,
+				9A54ADCD199BBDF700B3DEF4 /* AudioToolbox.framework */,
 			);
-			path = Derp;
-			sourceTree = "<group>";
-		};
-		9AB5C24617BE757F00695790 /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
-				9AB5C24717BE757F00695790 /* Derp-Prefix.pch */,
-			);
-			name = "Supporting Files";
+			name = "Frameworks-iOS";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
