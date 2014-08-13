@@ -45,6 +45,10 @@ using Tonic::ControlParameter;
         [[TonicSynthManager sharedManager] setInputEnabled:YES];
       }
       
+      if ( [self respondsToSelector:@selector(setEdgesForExtendedLayout:)] ) {
+        self.edgesForExtendedLayout = UIRectEdgeNone;
+      }
+      
     }
     return self;
 }
@@ -60,7 +64,6 @@ using Tonic::ControlParameter;
   [super viewDidLoad];
   
   self.navigationItem.title = self.demoDef.synthDisplayName;
-  self.descLabel.text = self.demoDef.synthInstructions;
  
   self.controlTableView.rowHeight = [SynthParameterCell height];
   [self.controlTableView registerClass:[SynthParameterCell class] forCellReuseIdentifier:kCellIdentifier];
@@ -74,19 +77,6 @@ using Tonic::ControlParameter;
   
   self.cellColors = cellColors;
   
-  // shadow for label
-  CALayer* cl = self.descContainer.layer;
-  cl.masksToBounds = NO;
-  cl.shadowColor = [UIColor blackColor].CGColor;
-  cl.shadowOpacity = 0.4f;
-  cl.shadowRadius = 3.0f;
-  cl.shadowOffset = CGSizeMake(0, 1);
-  
-}
-
-- (void)viewWillLayoutSubviews
-{
-  self.descContainer.layer.shadowPath = [UIBezierPath bezierPathWithRect:self.descContainer.bounds].CGPath;
 }
 
 #pragma mark - Table Delegate

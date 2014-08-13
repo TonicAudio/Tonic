@@ -12,8 +12,6 @@
 
 @interface SynthAutoUIViewController : UIViewController <UITableViewDelegate, UITableViewDataSource>
 
-@property (nonatomic, weak) IBOutlet UIView *descContainer;
-@property (nonatomic, weak) IBOutlet UILabel *descLabel;
 @property (nonatomic, weak) IBOutlet UITableView *controlTableView;
 
 - (id)initWithSynthDemoDef:(SynthDemoDef*)demoDef;
