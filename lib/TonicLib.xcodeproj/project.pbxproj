@@ -379,8 +379,6 @@
 				0183D0031735D0E6004638EB /* ADSR.h */,
 				0183D0001735D0E6004638EB /* Arithmetic.cpp */,
 				0183D0011735D0E6004638EB /* Arithmetic.h */,
-				A8F87059181C506700B82527 /* AudioFileUtils.cpp */,
-				A8F8705A181C506700B82527 /* AudioFileUtils.h */,
 				0183D0041735D0E6004638EB /* BasicDelay.cpp */,
 				0183D0051735D0E6004638EB /* BasicDelay.h */,
 				F278D370179C8227004EBCA3 /* BLEPOscillator.cpp */,
@@ -976,7 +974,7 @@
 		F23A7D12171B3D2E00AE8353 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				ARCHS = "$(ARCHS_STANDARD)";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CONFIGURATION_BUILD_DIR = "$(BUILD_DIR)/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)";
 				DSTROOT = "/tmp/libTonic-iOS.dst";
@@ -984,7 +982,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = NO;
 				GCC_PREFIX_HEADER = "";
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
-				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.1.1;
 				MACOSX_DEPLOYMENT_TARGET = "";
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_CPLUSPLUSFLAGS = "$(OTHER_CFLAGS)";
@@ -995,14 +993,14 @@
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 				SYMROOT = build;
-				VALID_ARCHS = "armv7 armv7s i386";
+				VALID_ARCHS = "armv7 armv7s arm64";
 			};
 			name = Debug;
 		};
 		F23A7D13171B3D2E00AE8353 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				ARCHS = "$(ARCHS_STANDARD)";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CONFIGURATION_BUILD_DIR = "$(BUILD_DIR)/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)";
 				DSTROOT = "/tmp/libTonic-iOS.dst";
@@ -1010,7 +1008,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = NO;
 				GCC_PREFIX_HEADER = "";
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
-				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.1.1;
 				MACOSX_DEPLOYMENT_TARGET = "";
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_CPLUSPLUSFLAGS = "$(OTHER_CFLAGS)";
@@ -1022,7 +1020,7 @@
 				SKIP_INSTALL = YES;
 				SYMROOT = build;
 				VALIDATE_PRODUCT = YES;
-				VALID_ARCHS = "armv7 armv7s i386";
+				VALID_ARCHS = "armv7 armv7s arm64";
 			};
 			name = Release;
 		};
