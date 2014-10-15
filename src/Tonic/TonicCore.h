@@ -60,10 +60,12 @@ extern "C" {
   #undef min
   #undef max
 
+#if _MSC_VER < 1800
   // Windows' C90 <cmath> header does not define log2
   inline static float log2(float n) {
 	return log(n) / log(2);
   }
+#endif
 
   // Windows native mutexes
   #define TONIC_MUTEX_T CRITICAL_SECTION
