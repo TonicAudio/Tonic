@@ -91,6 +91,7 @@ namespace Tonic {
   
   SampleTable loadAudioFile(string path, int numChannels){
     Tonic::error("loadAudioFile is currently only implemented for Apple platforms.");
+    return NULL;
   }
   
   
