@@ -10,8 +10,8 @@
 
 
 
-#ifndef __Tonic__BufferPlayer__
-#define __Tonic__BufferPlayer__
+#ifndef TONIC_BUFFERPLAYER_H
+#define TONIC_BUFFERPLAYER_H
 
 #include "Generator.h"
 #include "FixedValue.h"
@@ -82,6 +82,6 @@ namespace Tonic {
   };
 }
 
-#endif /* defined(__Tonic__BufferPlayer__) */
+#endif
 
 

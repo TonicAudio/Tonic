@@ -9,8 +9,8 @@
 //
 
 
-#ifndef __Tonic__Synth__
-#define __Tonic__Synth__
+#ifndef TONIC_SYNTH_H
+#define TONIC_SYNTH_H
 
 #include <map>
 #include "BufferFiller.h"
@@ -272,4 +272,4 @@ protected:                                    \
                                                                                 \
 SourceRegister<SynthName> SynthName ## _RegistrationPoint::reg(#SynthName);     \
 
-#endif /* defined(__Tonic__Synth__) */
+#endif

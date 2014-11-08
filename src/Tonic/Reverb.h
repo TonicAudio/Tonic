@@ -9,8 +9,8 @@
 // See LICENSE.txt for license and usage information.
 //
 
-#ifndef __Tonic__Reverb__
-#define __Tonic__Reverb__
+#ifndef TONIC_REVERB_H
+#define TONIC_REVERB_H
 
 #include "Effect.h"
 #include "DelayUtils.h"
@@ -259,6 +259,6 @@ namespace Tonic {
   };
 }
 
-#endif /* defined(__Tonic__Reverb__) */
+#endif
 
 

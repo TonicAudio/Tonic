@@ -8,8 +8,8 @@
 //
 
 
-#ifndef __Tonic__CombFilter__
-#define __Tonic__CombFilter__
+#ifndef TONIC_COMBFILTER_H
+#define TONIC_COMBFILTER_H
 
 #include "Effect.h"
 #include "DelayUtils.h"
@@ -189,6 +189,6 @@ namespace Tonic {
   };
 }
 
-#endif /* defined(__Tonic__CombFilter__) */
+#endif
 
 

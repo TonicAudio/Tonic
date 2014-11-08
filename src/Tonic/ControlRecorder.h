@@ -9,8 +9,8 @@
 //
 
 
-#ifndef __Tonic__ControlRecorder__
-#define __Tonic__ControlRecorder__
+#ifndef TONIC_CONTROLRECORDER_H
+#define TONIC_CONTROLRECORDER_H
 
 #include "ControlConditioner.h"
 
@@ -104,6 +104,6 @@ namespace Tonic {
   }
 }
 
-#endif /* defined(__Tonic__ControlRecorder__) */
+#endif
 
 

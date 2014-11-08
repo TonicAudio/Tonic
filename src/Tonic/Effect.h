@@ -9,8 +9,8 @@
 //
 
 
-#ifndef __Tonic__Effect__
-#define __Tonic__Effect__
+#ifndef TONIC_EFFECT_H
+#define TONIC_EFFECT_H
 
 #include "Generator.h"
 
@@ -294,6 +294,6 @@ namespace Tonic {
   }
 }
 
-#endif /* defined(__Tonic__Effect__) */
+#endif
 
 

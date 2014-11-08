@@ -9,8 +9,8 @@
 //
 
 
-#ifndef __Tonic__Compressor__
-#define __Tonic__Compressor__
+#ifndef TONIC_COMPRESSOR_H
+#define TONIC_COMPRESSOR_H
 
 #include "Effect.h"
 #include "DelayUtils.h"
@@ -243,6 +243,6 @@ namespace Tonic {
 
 }
 
-#endif /* defined(__Tonic__Compressor__) */
+#endif
 
 

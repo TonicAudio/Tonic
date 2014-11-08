@@ -9,8 +9,8 @@
 //
 
 
-#ifndef __Tonic__TonicCore__
-#define __Tonic__TonicCore__
+#ifndef TONIC_TONICCORE_H
+#define TONIC_TONICCORE_H
 
 #include <string>
 #include <vector>
@@ -416,7 +416,7 @@ namespace Tonic {
       
       void release(){
         if(pcount && --(*pcount) == 0){
-          if (obj) delete obj;
+          delete obj;
           delete pcount;
           
           obj = NULL;

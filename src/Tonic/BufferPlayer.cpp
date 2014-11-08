@@ -41,7 +41,7 @@ namespace Tonic { namespace Tonic_{
     if(isFinished_){
       outputFrames_.clear();
     }else{
-      int samplesLeftInBuf = buffer_.size() - currentSample;
+      int samplesLeftInBuf = (int)buffer_.size() - currentSample;
       int samplesToCopy = min(samplesPerSynthesisBlock, samplesLeftInBuf);
       copySamplesToOutputBuffer(currentSample, samplesToCopy);
       if (samplesToCopy < samplesPerSynthesisBlock) {

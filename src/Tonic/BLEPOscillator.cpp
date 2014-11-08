@@ -32,11 +32,8 @@ namespace Tonic { namespace Tonic_{
   
   BLEPOscillator_::~BLEPOscillator_()
   {
-    if (ringBuf_)
-    {
       delete [] ringBuf_;
       ringBuf_ = NULL;
-    }
   }
   
   const int BLEPOscillator_::minBLEPOversampling_ = TONIC_MINBLEP_OVERSAMPLING;

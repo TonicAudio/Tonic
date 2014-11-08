@@ -9,8 +9,8 @@
 //
 
 
-#ifndef __Tonic__Generator__
-#define __Tonic__Generator__
+#ifndef TONIC_GENERATOR_H
+#define TONIC_GENERATOR_H
 
 #include "TonicFrames.h"
 #include <cmath>
@@ -114,4 +114,4 @@ namespace Tonic {
 
 
 
-#endif /* defined(__Tonic__Generator__) */
+#endif

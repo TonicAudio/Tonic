@@ -134,7 +134,10 @@
 		01C65FF417372407003B2661 /* FilterUtils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 01C65FF317372407003B2661 /* FilterUtils.cpp */; };
 		01C65FF517372A5F003B2661 /* Effect.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 01C65FF1173723C6003B2661 /* Effect.cpp */; };
 		01C65FF617372CD3003B2661 /* FilterUtils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 01C65FF317372407003B2661 /* FilterUtils.cpp */; };
-		01F7273E1715225500EBB4BB /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 01F7273D1715225500EBB4BB /* Accelerate.framework */; };
+		9A54ADCC199BBDEB00B3DEF4 /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9A54ADCB199BBDEB00B3DEF4 /* Accelerate.framework */; };
+		9A54ADCE199BBDF700B3DEF4 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9A54ADCD199BBDF700B3DEF4 /* AudioToolbox.framework */; };
+		9A54ADD0199BBE0000B3DEF4 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9A54ADCF199BBE0000B3DEF4 /* AudioToolbox.framework */; };
+		9A54ADD4199BBE0E00B3DEF4 /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9A54ADD3199BBE0E00B3DEF4 /* Accelerate.framework */; };
 		9A5FB71B17591983007A2F31 /* ControlMetroDivider.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9A5FB71917591983007A2F31 /* ControlMetroDivider.cpp */; };
 		9A5FB71C17591983007A2F31 /* ControlMetroDivider.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9A5FB71917591983007A2F31 /* ControlMetroDivider.cpp */; };
 		9A5FB71D17591983007A2F31 /* ControlMetroDivider.h in Headers */ = {isa = PBXBuildFile; fileRef = 9A5FB71A17591983007A2F31 /* ControlMetroDivider.h */; };
@@ -163,15 +166,15 @@
 		A886CA37183958B100AAFBB2 /* ControlCallback.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A886CA35183958B100AAFBB2 /* ControlCallback.cpp */; };
 		A886CA38183958B100AAFBB2 /* ControlCallback.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A886CA35183958B100AAFBB2 /* ControlCallback.cpp */; };
 		A886CA39183958B100AAFBB2 /* ControlCallback.h in Headers */ = {isa = PBXBuildFile; fileRef = A886CA36183958B100AAFBB2 /* ControlCallback.h */; };
+		A8E1A20B197ACABA0089060E /* BitCrusher.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A8E1A209197ACABA0089060E /* BitCrusher.cpp */; };
+		A8E1A20C197ACABA0089060E /* BitCrusher.h in Headers */ = {isa = PBXBuildFile; fileRef = A8E1A20A197ACABA0089060E /* BitCrusher.h */; };
+		A8E1A20D197ACDA70089060E /* BitCrusher.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A8E1A209197ACABA0089060E /* BitCrusher.cpp */; };
 		A8F87056181C3B6500B82527 /* BufferPlayer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A8F87054181C3B6500B82527 /* BufferPlayer.cpp */; };
 		A8F87057181C3B6500B82527 /* BufferPlayer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A8F87054181C3B6500B82527 /* BufferPlayer.cpp */; };
 		A8F87058181C3B6500B82527 /* BufferPlayer.h in Headers */ = {isa = PBXBuildFile; fileRef = A8F87055181C3B6500B82527 /* BufferPlayer.h */; };
 		A8F8705B181C506800B82527 /* AudioFileUtils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A8F87059181C506700B82527 /* AudioFileUtils.cpp */; };
 		A8F8705C181C506800B82527 /* AudioFileUtils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A8F87059181C506700B82527 /* AudioFileUtils.cpp */; };
 		A8F8705D181C506800B82527 /* AudioFileUtils.h in Headers */ = {isa = PBXBuildFile; fileRef = A8F8705A181C506700B82527 /* AudioFileUtils.h */; };
-		A8F87062181C648700B82527 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A8F87061181C648700B82527 /* AudioToolbox.framework */; };
-		A8F87064181C64B600B82527 /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A8F87063181C64B600B82527 /* Accelerate.framework */; };
-		A8F87066181C64C200B82527 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A8F87065181C64C200B82527 /* AudioToolbox.framework */; };
 		F218C86F179C73F6000906B2 /* DSPUtils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F218C86D179C73F6000906B2 /* DSPUtils.cpp */; };
 		F218C870179C73F6000906B2 /* DSPUtils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F218C86D179C73F6000906B2 /* DSPUtils.cpp */; };
 		F218C871179C73F6000906B2 /* DSPUtils.h in Headers */ = {isa = PBXBuildFile; fileRef = F218C86E179C73F6000906B2 /* DSPUtils.h */; };
@@ -198,27 +201,27 @@
 
 /* Begin PBXFileReference section */
 		0183D0001735D0E6004638EB /* Arithmetic.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Arithmetic.cpp; sourceTree = "<group>"; };
-		0183D0011735D0E6004638EB /* Arithmetic.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Arithmetic.h; sourceTree = "<group>"; };
+		0183D0011735D0E6004638EB /* Arithmetic.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = Arithmetic.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		0183D0021735D0E6004638EB /* ADSR.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ADSR.cpp; sourceTree = "<group>"; };
-		0183D0031735D0E6004638EB /* ADSR.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ADSR.h; sourceTree = "<group>"; };
+		0183D0031735D0E6004638EB /* ADSR.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = ADSR.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		0183D0041735D0E6004638EB /* BasicDelay.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = BasicDelay.cpp; sourceTree = "<group>"; };
-		0183D0051735D0E6004638EB /* BasicDelay.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BasicDelay.h; sourceTree = "<group>"; };
+		0183D0051735D0E6004638EB /* BasicDelay.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = BasicDelay.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		0183D0061735D0E6004638EB /* BufferFiller.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = BufferFiller.cpp; sourceTree = "<group>"; };
-		0183D0071735D0E6004638EB /* BufferFiller.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BufferFiller.h; sourceTree = "<group>"; };
+		0183D0071735D0E6004638EB /* BufferFiller.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = BufferFiller.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		0183D0081735D0E6004638EB /* CompressorLimiter.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CompressorLimiter.cpp; sourceTree = "<group>"; };
-		0183D0091735D0E6004638EB /* CompressorLimiter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CompressorLimiter.h; sourceTree = "<group>"; };
+		0183D0091735D0E6004638EB /* CompressorLimiter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = CompressorLimiter.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		0183D00A1735D0E6004638EB /* ControlArithmetic.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ControlArithmetic.cpp; sourceTree = "<group>"; };
-		0183D00B1735D0E6004638EB /* ControlArithmetic.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ControlArithmetic.h; sourceTree = "<group>"; };
+		0183D00B1735D0E6004638EB /* ControlArithmetic.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = ControlArithmetic.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		0183D00C1735D0E6004638EB /* ControlConditioner.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ControlConditioner.cpp; sourceTree = "<group>"; };
 		0183D00D1735D0E6004638EB /* ControlConditioner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ControlConditioner.h; sourceTree = "<group>"; };
 		0183D00E1735D0E6004638EB /* ControlCounter.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ControlCounter.cpp; sourceTree = "<group>"; };
-		0183D00F1735D0E6004638EB /* ControlCounter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ControlCounter.h; sourceTree = "<group>"; };
-		0183D0111735D0E6004638EB /* ControlDbToLinear.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ControlDbToLinear.h; sourceTree = "<group>"; };
+		0183D00F1735D0E6004638EB /* ControlCounter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = ControlCounter.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
+		0183D0111735D0E6004638EB /* ControlDbToLinear.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = ControlDbToLinear.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		0183D0151735D0E6004638EB /* ControlFloor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ControlFloor.h; sourceTree = "<group>"; };
 		0183D0161735D0E6004638EB /* ControlGenerator.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ControlGenerator.cpp; sourceTree = "<group>"; };
-		0183D0171735D0E6004638EB /* ControlGenerator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ControlGenerator.h; sourceTree = "<group>"; };
+		0183D0171735D0E6004638EB /* ControlGenerator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = ControlGenerator.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		0183D0181735D0E6004638EB /* ControlMetro.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ControlMetro.cpp; sourceTree = "<group>"; };
-		0183D0191735D0E6004638EB /* ControlMetro.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ControlMetro.h; sourceTree = "<group>"; };
+		0183D0191735D0E6004638EB /* ControlMetro.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = ControlMetro.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		0183D01A1735D0E6004638EB /* ControlMidiToFreq.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ControlMidiToFreq.cpp; sourceTree = "<group>"; };
 		0183D01B1735D0E6004638EB /* ControlMidiToFreq.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ControlMidiToFreq.h; sourceTree = "<group>"; };
 		0183D01E1735D0E6004638EB /* ControlPrinter.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ControlPrinter.cpp; sourceTree = "<group>"; };
@@ -278,25 +281,24 @@
 		0183D10B1735D835004638EB /* Reverb.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Reverb.cpp; sourceTree = "<group>"; };
 		0183D10C1735D835004638EB /* Reverb.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reverb.h; sourceTree = "<group>"; };
 		0183D10F1735DCAF004638EB /* CombFilter.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CombFilter.cpp; sourceTree = "<group>"; };
-		0183D1101735DCB0004638EB /* CombFilter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CombFilter.h; sourceTree = "<group>"; };
+		0183D1101735DCB0004638EB /* CombFilter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = CombFilter.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		01C65FEC17371C45003B2661 /* ControlDelay.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ControlDelay.cpp; sourceTree = "<group>"; };
-		01C65FED17371C45003B2661 /* ControlDelay.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ControlDelay.h; sourceTree = "<group>"; };
+		01C65FED17371C45003B2661 /* ControlDelay.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = ControlDelay.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		01C65FF1173723C6003B2661 /* Effect.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Effect.cpp; sourceTree = "<group>"; };
 		01C65FF317372407003B2661 /* FilterUtils.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = FilterUtils.cpp; sourceTree = "<group>"; };
 		01F72690171520F900EBB4BB /* libTonic-OSX.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libTonic-OSX.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		01F7273D1715225500EBB4BB /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.7.sdk/System/Library/Frameworks/Accelerate.framework; sourceTree = DEVELOPER_DIR; };
+		9A54ADCB199BBDEB00B3DEF4 /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS7.1.sdk/System/Library/Frameworks/Accelerate.framework; sourceTree = DEVELOPER_DIR; };
+		9A54ADCD199BBDF700B3DEF4 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS7.1.sdk/System/Library/Frameworks/AudioToolbox.framework; sourceTree = DEVELOPER_DIR; };
+		9A54ADCF199BBE0000B3DEF4 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
+		9A54ADD3199BBE0E00B3DEF4 /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = System/Library/Frameworks/Accelerate.framework; sourceTree = SDKROOT; };
 		9A5FB71917591983007A2F31 /* ControlMetroDivider.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ControlMetroDivider.cpp; sourceTree = "<group>"; };
 		9A5FB71A17591983007A2F31 /* ControlMetroDivider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ControlMetroDivider.h; sourceTree = "<group>"; };
 		9A5FB71E175928FC007A2F31 /* ControlComparison.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ControlComparison.cpp; sourceTree = "<group>"; };
-		9A5FB71F175928FC007A2F31 /* ControlComparison.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ControlComparison.h; sourceTree = "<group>"; };
+		9A5FB71F175928FC007A2F31 /* ControlComparison.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = ControlComparison.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		9A75063D174689FD00373E88 /* SampleTable.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; lineEnding = 0; path = SampleTable.cpp; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.cpp; };
 		9A75063E174689FD00373E88 /* SampleTable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = SampleTable.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		9A7DB3E7174670DF009C9A8F /* TriangleWave.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TriangleWave.h; sourceTree = "<group>"; };
 		9A7DB3F417467C81009C9A8F /* SquareWave.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SquareWave.h; sourceTree = "<group>"; };
-		9AB5C24317BE757F00695790 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
-		9AB5C24717BE757F00695790 /* Derp-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Derp-Prefix.pch"; sourceTree = "<group>"; };
-		9AB5C24817BE757F00695790 /* Derp.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Derp.h; sourceTree = "<group>"; };
-		9AB5C24A17BE757F00695790 /* Derp.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Derp.m; sourceTree = "<group>"; };
 		9AE5AA0017601CB1001F3E60 /* ControlTrigger.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ControlTrigger.cpp; sourceTree = "<group>"; };
 		9AE5AA0117601CB2001F3E60 /* ControlTrigger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ControlTrigger.h; sourceTree = "<group>"; };
 		9AEDB5C617430E7B00C6A77C /* ControlParameter.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ControlParameter.cpp; sourceTree = "<group>"; };
@@ -308,21 +310,20 @@
 		A883ED7917B468EA00F60C06 /* ControlTriggerFilter.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ControlTriggerFilter.cpp; sourceTree = "<group>"; };
 		A883ED7A17B468EA00F60C06 /* ControlTriggerFilter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ControlTriggerFilter.h; sourceTree = "<group>"; };
 		A886CA35183958B100AAFBB2 /* ControlCallback.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ControlCallback.cpp; sourceTree = "<group>"; };
-		A886CA36183958B100AAFBB2 /* ControlCallback.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ControlCallback.h; sourceTree = "<group>"; };
+		A886CA36183958B100AAFBB2 /* ControlCallback.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = ControlCallback.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
+		A8E1A209197ACABA0089060E /* BitCrusher.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = BitCrusher.cpp; sourceTree = "<group>"; };
+		A8E1A20A197ACABA0089060E /* BitCrusher.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BitCrusher.h; sourceTree = "<group>"; };
 		A8F87054181C3B6500B82527 /* BufferPlayer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = BufferPlayer.cpp; sourceTree = "<group>"; };
-		A8F87055181C3B6500B82527 /* BufferPlayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BufferPlayer.h; sourceTree = "<group>"; };
+		A8F87055181C3B6500B82527 /* BufferPlayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = BufferPlayer.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		A8F87059181C506700B82527 /* AudioFileUtils.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AudioFileUtils.cpp; sourceTree = "<group>"; };
 		A8F8705A181C506700B82527 /* AudioFileUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AudioFileUtils.h; sourceTree = "<group>"; };
-		A8F87061181C648700B82527 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
-		A8F87063181C64B600B82527 /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS6.1.sdk/System/Library/Frameworks/Accelerate.framework; sourceTree = DEVELOPER_DIR; };
-		A8F87065181C64C200B82527 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS6.1.sdk/System/Library/Frameworks/AudioToolbox.framework; sourceTree = DEVELOPER_DIR; };
 		F218C86D179C73F6000906B2 /* DSPUtils.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = DSPUtils.cpp; sourceTree = "<group>"; };
 		F218C86E179C73F6000906B2 /* DSPUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DSPUtils.h; sourceTree = "<group>"; };
 		F218C872179C763A000906B2 /* ControlDbToLinear.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ControlDbToLinear.cpp; sourceTree = "<group>"; };
 		F218C873179C763D000906B2 /* ControlFloor.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ControlFloor.cpp; sourceTree = "<group>"; };
 		F23A7CF1171B3D2E00AE8353 /* libTonic-iOS.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libTonic-iOS.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		F278D370179C8227004EBCA3 /* BLEPOscillator.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = BLEPOscillator.cpp; sourceTree = "<group>"; };
-		F278D371179C8227004EBCA3 /* BLEPOscillator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BLEPOscillator.h; sourceTree = "<group>"; };
+		F278D371179C8227004EBCA3 /* BLEPOscillator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = BLEPOscillator.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -330,8 +331,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A8F87062181C648700B82527 /* AudioToolbox.framework in Frameworks */,
-				01F7273E1715225500EBB4BB /* Accelerate.framework in Frameworks */,
+				9A54ADD4199BBE0E00B3DEF4 /* Accelerate.framework in Frameworks */,
+				9A54ADD0199BBE0000B3DEF4 /* AudioToolbox.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -339,8 +340,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A8F87066181C64C200B82527 /* AudioToolbox.framework in Frameworks */,
-				A8F87064181C64B600B82527 /* Accelerate.framework in Frameworks */,
+				9A54ADCE199BBDF700B3DEF4 /* AudioToolbox.framework in Frameworks */,
+				9A54ADCC199BBDEB00B3DEF4 /* Accelerate.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -368,6 +369,8 @@
 				A8F8705A181C506700B82527 /* AudioFileUtils.h */,
 				0183D0041735D0E6004638EB /* BasicDelay.cpp */,
 				0183D0051735D0E6004638EB /* BasicDelay.h */,
+				A8E1A209197ACABA0089060E /* BitCrusher.cpp */,
+				A8E1A20A197ACABA0089060E /* BitCrusher.h */,
 				F278D370179C8227004EBCA3 /* BLEPOscillator.cpp */,
 				F278D371179C8227004EBCA3 /* BLEPOscillator.h */,
 				0183D0061735D0E6004638EB /* BufferFiller.cpp */,
@@ -482,12 +485,9 @@
 		01F72687171520F900EBB4BB = {
 			isa = PBXGroup;
 			children = (
-				A8F87065181C64C200B82527 /* AudioToolbox.framework */,
-				A8F87063181C64B600B82527 /* Accelerate.framework */,
-				A8F87061181C648700B82527 /* AudioToolbox.framework */,
 				0183CFFE1735D0E6004638EB /* src */,
-				9AB5C24517BE757F00695790 /* Derp */,
-				01F7273F171522B600EBB4BB /* Frameworks */,
+				9A54ADCA199BBDE000B3DEF4 /* Frameworks-iOS */,
+				01F7273F171522B600EBB4BB /* Frameworks-OSX */,
 				01F72691171520F900EBB4BB /* Products */,
 			);
 			indentWidth = 2;
@@ -503,31 +503,22 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		01F7273F171522B600EBB4BB /* Frameworks */ = {
+		01F7273F171522B600EBB4BB /* Frameworks-OSX */ = {
 			isa = PBXGroup;
 			children = (
-				01F7273D1715225500EBB4BB /* Accelerate.framework */,
-				9AB5C24317BE757F00695790 /* Foundation.framework */,
+				9A54ADD3199BBE0E00B3DEF4 /* Accelerate.framework */,
+				9A54ADCF199BBE0000B3DEF4 /* AudioToolbox.framework */,
 			);
-			name = Frameworks;
+			name = "Frameworks-OSX";
 			sourceTree = "<group>";
 		};
-		9AB5C24517BE757F00695790 /* Derp */ = {
+		9A54ADCA199BBDE000B3DEF4 /* Frameworks-iOS */ = {
 			isa = PBXGroup;
 			children = (
-				9AB5C24817BE757F00695790 /* Derp.h */,
-				9AB5C24A17BE757F00695790 /* Derp.m */,
-				9AB5C24617BE757F00695790 /* Supporting Files */,
+				9A54ADCB199BBDEB00B3DEF4 /* Accelerate.framework */,
+				9A54ADCD199BBDF700B3DEF4 /* AudioToolbox.framework */,
 			);
-			path = Derp;
-			sourceTree = "<group>";
-		};
-		9AB5C24617BE757F00695790 /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
-				9AB5C24717BE757F00695790 /* Derp-Prefix.pch */,
-			);
-			name = "Supporting Files";
+			name = "Frameworks-iOS";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -566,6 +557,7 @@
 				0183D0B91735D0E6004638EB /* FixedValue.h in Headers */,
 				0183D0BC1735D0E6004638EB /* SawtoothWave.h in Headers */,
 				0183D0BF1735D0E6004638EB /* Generator.h in Headers */,
+				A8E1A20C197ACABA0089060E /* BitCrusher.h in Headers */,
 				0183D0C21735D0E6004638EB /* LFNoise.h in Headers */,
 				0183D0C51735D0E6004638EB /* Mixer.h in Headers */,
 				0183D0C81735D0E6004638EB /* MonoToStereoPanner.h in Headers */,
@@ -644,7 +636,7 @@
 		01F72688171520F900EBB4BB /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0460;
+				LastUpgradeCheck = 0600;
 				ORGANIZATIONNAME = "Nick Donaldson";
 			};
 			buildConfigurationList = 01F7268B171520F900EBB4BB /* Build configuration list for PBXProject "TonicLib" */;
@@ -750,6 +742,7 @@
 				9A5FB720175928FC007A2F31 /* ControlComparison.cpp in Sources */,
 				9AE5AA0217601CB4001F3E60 /* ControlTrigger.cpp in Sources */,
 				A883ED7B17B468EA00F60C06 /* ControlTriggerFilter.cpp in Sources */,
+				A8E1A20B197ACABA0089060E /* BitCrusher.cpp in Sources */,
 				F218C86F179C73F6000906B2 /* DSPUtils.cpp in Sources */,
 				F218C874179C7642000906B2 /* ControlDbToLinear.cpp in Sources */,
 				F218C876179C7642000906B2 /* ControlFloor.cpp in Sources */,
@@ -813,6 +806,7 @@
 				9A5FB721175928FC007A2F31 /* ControlComparison.cpp in Sources */,
 				9AE5AA0317601CB4001F3E60 /* ControlTrigger.cpp in Sources */,
 				A883ED7C17B468EA00F60C06 /* ControlTriggerFilter.cpp in Sources */,
+				A8E1A20D197ACDA70089060E /* BitCrusher.cpp in Sources */,
 				F218C870179C73F6000906B2 /* DSPUtils.cpp in Sources */,
 				F218C875179C7642000906B2 /* ControlDbToLinear.cpp in Sources */,
 				F218C877179C7642000906B2 /* ControlFloor.cpp in Sources */,
@@ -830,7 +824,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
@@ -868,7 +861,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
@@ -898,9 +890,9 @@
 		01F72695171520F900EBB4BB /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
 				CLANG_CXX_LANGUAGE_STANDARD = "compiler-default";
 				CLANG_CXX_LIBRARY = "compiler-default";
+				COMBINE_HIDPI_IMAGES = YES;
 				CONFIGURATION_BUILD_DIR = "$(BUILD_DIR)/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)";
 				EXECUTABLE_PREFIX = lib;
 				GCC_C_LANGUAGE_STANDARD = "compiler-default";
@@ -921,9 +913,9 @@
 		01F72696171520F900EBB4BB /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
 				CLANG_CXX_LANGUAGE_STANDARD = "compiler-default";
 				CLANG_CXX_LIBRARY = "compiler-default";
+				COMBINE_HIDPI_IMAGES = YES;
 				CONFIGURATION_BUILD_DIR = "$(BUILD_DIR)/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)";
 				EXECUTABLE_PREFIX = lib;
 				GCC_C_LANGUAGE_STANDARD = "compiler-default";
@@ -944,7 +936,6 @@
 		F23A7D12171B3D2E00AE8353 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CONFIGURATION_BUILD_DIR = "$(BUILD_DIR)/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)";
 				DSTROOT = "/tmp/libTonic-iOS.dst";
@@ -963,14 +954,13 @@
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 				SYMROOT = build;
-				VALID_ARCHS = "armv7 armv7s i386";
+				VALID_ARCHS = "armv7 armv7s i386 x86_64 arm64";
 			};
 			name = Debug;
 		};
 		F23A7D13171B3D2E00AE8353 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CONFIGURATION_BUILD_DIR = "$(BUILD_DIR)/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)";
 				DSTROOT = "/tmp/libTonic-iOS.dst";
@@ -990,7 +980,7 @@
 				SKIP_INSTALL = YES;
 				SYMROOT = build;
 				VALIDATE_PRODUCT = YES;
-				VALID_ARCHS = "armv7 armv7s i386";
+				VALID_ARCHS = "armv7 armv7s i386 x86_64 arm64";
 			};
 			name = Release;
 		};

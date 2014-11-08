@@ -9,8 +9,8 @@
 //
 
 
-#ifndef __Tonic__ControlArithmetic__
-#define __Tonic__ControlArithmetic__
+#ifndef TONIC_CONTROLARITHMETIC_H
+#define TONIC_CONTROLARITHMETIC_H
 
 #include "ControlGenerator.h"
 #include "ControlValue.h"
@@ -323,6 +323,6 @@ namespace Tonic {
 
 }
 
-#endif /* defined(__Tonic__ControlAdder__) */
+#endif
 
 

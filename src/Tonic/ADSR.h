@@ -9,8 +9,8 @@
 //
 
 
-#ifndef __Tonic__ADSR__
-#define __Tonic__ADSR__
+#ifndef TONIC_ADSR_H
+#define TONIC_ADSR_H
 
 #include "Generator.h"
 #include "ControlGenerator.h"
@@ -263,6 +263,6 @@ namespace Tonic {
   
 }
 
-#endif /* defined(__Tonic__ADSR__) */
+#endif
 
 

@@ -11,8 +11,8 @@
 
 //! A mixer is like an adder but acts as a source and allows dynamic removal
 
-#ifndef __Tonic__Mixer__
-#define __Tonic__Mixer__
+#ifndef TONIC_MIXER_H
+#define TONIC_MIXER_H
 
 #include "Synth.h"
 #include "CompressorLimiter.h"
@@ -75,6 +75,6 @@ namespace Tonic {
   };
 }
 
-#endif /* defined(__Tonic__Mixer__) */
+#endif
 
 

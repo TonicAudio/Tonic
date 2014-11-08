@@ -18,8 +18,8 @@
  *
  ***************************************************/
 
-#ifndef __Tonic__ControlComparison__
-#define __Tonic__ControlComparison__
+#ifndef TONIC_CONTROLCOMPARISON_H
+#define TONIC_CONTROLCOMPARISON_H
 
 #include "ControlValue.h"
 
@@ -294,6 +294,6 @@ namespace Tonic {
     
 }
 
-#endif /* defined(__Tonic__ControlBooleanLogic__) */
+#endif
 
 

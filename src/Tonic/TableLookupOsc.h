@@ -9,8 +9,8 @@
 //
 
 
-#ifndef __Tonic__TableLookupOsc__
-#define __Tonic__TableLookupOsc__
+#ifndef TONIC_TABLELOOKUPOSC_H
+#define TONIC_TABLELOOKUPOSC_H
 
 #include "Generator.h"
 #include "SampleTable.h"
@@ -133,6 +133,6 @@ namespace Tonic {
 
 }
 
-#endif /* defined(__Tonic__TableLookupOsc__) */
+#endif
 
 

@@ -8,8 +8,8 @@
 //
 
 
-#ifndef __Tonic__ControlParameter__
-#define __Tonic__ControlParameter__
+#ifndef TONIC_CONTROLPARAMETER_H
+#define TONIC_CONTROLPARAMETER_H
 
 #include "ControlValue.h"
 
@@ -104,6 +104,6 @@ namespace Tonic {
   };
 }
 
-#endif /* defined(__Tonic__ControlParameter__) */
+#endif
 
 

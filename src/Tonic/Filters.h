@@ -9,8 +9,8 @@
 //
 
 
-#ifndef __Tonic__Filters__
-#define __Tonic__Filters__
+#ifndef TONIC_FILTERS_H
+#define TONIC_FILTERS_H
 
 #include "Effect.h"
 #include "FilterUtils.h"
@@ -444,6 +444,6 @@ namespace Tonic {
   
 }
 
-#endif /* defined(__Tonic__Filters__) */
+#endif
 
 

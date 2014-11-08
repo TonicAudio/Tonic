@@ -6,8 +6,8 @@
 //  Copyright (c) 2013 Morgan Packard. All rights reserved.
 //
 
-#import <SenTestingKit/SenTestingKit.h>
+#import <XCTest/XCTest.h>
 
-@interface TonicTests : SenTestCase
+@interface TonicTests : XCTestCase
 
 @end

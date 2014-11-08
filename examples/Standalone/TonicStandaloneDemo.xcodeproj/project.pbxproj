@@ -12,7 +12,7 @@
 		9AB59D3A17456B54001E6837 /* RtAudio.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9AB59D3317456B54001E6837 /* RtAudio.cpp */; };
 		9AB59D4017456ED6001E6837 /* CoreAudio.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9AB59D3F17456ED6001E6837 /* CoreAudio.framework */; };
 		9AB59D4217456EE1001E6837 /* CoreFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9AB59D4117456EE1001E6837 /* CoreFoundation.framework */; };
-		9AB59D5117457358001E6837 /* libTonic-OSX-Debug.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9AB59D4C17457335001E6837 /* libTonic-OSX-Debug.a */; };
+		9AB59D5117457358001E6837 /* libTonic-OSX.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9AB59D4C17457335001E6837 /* libTonic-OSX.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -68,7 +68,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9AB59D5117457358001E6837 /* libTonic-OSX-Debug.a in Frameworks */,
+				9AB59D5117457358001E6837 /* libTonic-OSX.a in Frameworks */,
 				9AB59D4217456EE1001E6837 /* CoreFoundation.framework in Frameworks */,
 				9AB59D4017456ED6001E6837 /* CoreAudio.framework in Frameworks */,
 				9AB59D1F17456A15001E6837 /* Accelerate.framework in Frameworks */,
@@ -136,8 +136,8 @@
 		9AB59D4717457335001E6837 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				9AB59D4C17457335001E6837 /* libTonic-OSX-Debug.a */,
-				9AB59D4E17457335001E6837 /* libTonic-iOS-Debug.a */,
+				9AB59D4C17457335001E6837 /* libTonic-OSX.a */,
+				9AB59D4E17457335001E6837 /* libTonic-iOS.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -169,7 +169,7 @@
 		9AB59CFD174569A6001E6837 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0460;
+				LastUpgradeCheck = 0510;
 			};
 			buildConfigurationList = 9AB59D00174569A6001E6837 /* Build configuration list for PBXProject "TonicStandaloneDemo" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -195,17 +195,17 @@
 /* End PBXProject section */
 
 /* Begin PBXReferenceProxy section */
-		9AB59D4C17457335001E6837 /* libTonic-OSX-Debug.a */ = {
+		9AB59D4C17457335001E6837 /* libTonic-OSX.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
-			path = "libTonic-OSX-Debug.a";
+			path = "libTonic-OSX.a";
 			remoteRef = 9AB59D4B17457335001E6837 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		9AB59D4E17457335001E6837 /* libTonic-iOS-Debug.a */ = {
+		9AB59D4E17457335001E6837 /* libTonic-iOS.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
-			path = "libTonic-iOS-Debug.a";
+			path = "libTonic-iOS.a";
 			remoteRef = 9AB59D4D17457335001E6837 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
@@ -238,6 +238,7 @@
 				GCC_PREPROCESSOR_DEFINITIONS = __MACOSX_CORE__;
 				HEADER_SEARCH_PATHS = ../../../../src;
 				MACOSX_DEPLOYMENT_TARGET = 10.6;
+				ONLY_ACTIVE_ARCH = YES;
 			};
 			name = Debug;
 		};
@@ -254,8 +255,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LANGUAGE_STANDARD = "compiler-default";
 				CLANG_CXX_LIBRARY = "compiler-default";
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
@@ -288,8 +288,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LANGUAGE_STANDARD = "compiler-default";
 				CLANG_CXX_LIBRARY = "compiler-default";
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
 				CLANG_WARN_EMPTY_BODY = YES;

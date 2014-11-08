@@ -9,8 +9,8 @@
 //
 
 
-#ifndef __Tonic__Adder__
-#define __Tonic__Adder__
+#ifndef TONIC_ADDER_H
+#define TONIC_ADDER_H
 
 #include "Generator.h"
 
@@ -38,7 +38,7 @@ namespace Tonic {
       void setIsStereoOutput( bool stereo );
       
       Generator getInput(unsigned int index) { return inputs_[index]; };
-      unsigned int numInputs() { return inputs_.size(); };
+      unsigned int numInputs() { return (unsigned int)inputs_.size(); };
             
     };
     
@@ -218,7 +218,7 @@ namespace Tonic {
       void setIsStereoOutput( bool stereo );
       
       Generator getInput(unsigned int index) { return inputs_[index]; };
-      unsigned int numInputs() { return inputs_.size(); };
+      unsigned int numInputs() { return (unsigned int)inputs_.size(); };
 
     };
     
