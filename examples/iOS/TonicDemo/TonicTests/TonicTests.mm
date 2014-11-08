@@ -238,7 +238,7 @@ using namespace Tonic;
   
   Multiplier stereoMult =  StereoFixedTestGen(0.0, 1.0) * FixedValue(0.5);
   
-  STAssertTrue(stereoMult.isStereoOutput(), @"Multiplier should be stereo");
+  XCTAssertTrue(stereoMult.isStereoOutput(), @"Multiplier should be stereo");
   
   stereoMult.tick(testFrames, testContext);
   
@@ -350,7 +350,7 @@ using namespace Tonic;
 
   [self configureStereo:YES];
   BitCrusher bitCrusher = BitCrusher().bitDepth(16).input(StereoFixedTestGen(0.0, 1.0));
-  STAssertTrue(bitCrusher.isStereoOutput(), @"bitcrusher should know that it's strereo output");
+  XCTAssertTrue(bitCrusher.isStereoOutput(), @"bitcrusher should know that it's strereo output");
   bitCrusher.tick(testFrames, testContext);
   [self verifyStereoFixedOutputEqualsLeft:0 right:1];
 }
