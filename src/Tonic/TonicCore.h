@@ -54,6 +54,7 @@ extern "C" {
 #elif (defined (_WIN32) || defined (__WIN32__))
 
   #define WIN32_LEAN_AND_MEAN
+  #define __LITTLE_ENDIAN__ // safe to assume little endian on windows? 
   #include <Windows.h>
   
   // Clear these macros to avoid interfering with ControlParameter::min and ::max
