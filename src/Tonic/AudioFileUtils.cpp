@@ -100,8 +100,15 @@ namespace Tonic {
 #else
 
 	SampleTable loadAudioFile(string path, int numChannels){
-		Tonic::error("loadAudioFile is currently only implemented for Apple platforms.");
-		return NULL;
+
+		Tonic_::FileRead fileRead(path, false, numChannels);
+
+		TonicFrames frames(fileRead.fileSize(), fileRead.channels());
+		fileRead.read(frames);
+		SampleTable ret(frames.frames(), frames.channels());
+		memcpy(ret.dataPointer(), &frames[0], frames.frames() * frames.channels() * sizeof(TonicFloat));
+		return ret;
+
 	}
 
 
