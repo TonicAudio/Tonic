@@ -29,7 +29,14 @@ namespace Tonic { namespace Tonic_{
     synth->addAuxControlGenerator(*this);
     gen()->setCallback(fn);
   }
-  
+
+  ControlCallback::ControlCallback(Synth synth, function<void(ControlGeneratorOutput)> fn)
+  {
+	  synth.addAuxControlGenerator(*this);
+	  gen()->setCallback(fn);
+  }
+
+
   
 } // Namespace Tonic
 

@@ -43,7 +43,8 @@ namespace Tonic {
     
   public:
   
-    ControlCallback(Synth* synth, function<void(ControlGeneratorOutput)>);
+	  ControlCallback(Synth* synth, function<void(ControlGeneratorOutput)>);
+	  ControlCallback(Synth synth, function<void(ControlGeneratorOutput)>);
     
 
   };

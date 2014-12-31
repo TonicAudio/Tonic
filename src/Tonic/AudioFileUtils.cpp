@@ -7,10 +7,12 @@
 //
 
 #include "AudioFileUtils.h"
+#include "FileRead.h"
 
 #ifdef __APPLE__
 #include <AudioToolbox/AudioToolbox.h>
 #endif
+
 
 namespace Tonic {
 
@@ -90,8 +92,13 @@ namespace Tonic {
   #else
   
   SampleTable loadAudioFile(string path, int numChannels){
-    Tonic::error("loadAudioFile is currently only implemented for Apple platforms.");
-    return NULL;
+	FileRead fileRead(path, false, numChannels);
+
+	TonicFrames frames(fileRead.fileSize(), fileRead.channels());
+	fileRead.read(frames);
+	SampleTable ret(frames.frames(), frames.channels());
+	memcpy(ret.dataPointer(), &frames[0], frames.frames() * frames.channels() * sizeof(TonicFloat));
+	return ret;
   }
   
   
