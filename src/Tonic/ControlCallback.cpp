@@ -52,22 +52,10 @@ namespace Tonic { namespace Tonic_{
 
   }
 
-  ControlCallback::ControlCallback()
-  {
-
-  }
-
-  ControlCallback& ControlCallback::synth( Synth synth )
+  ControlCallback::ControlCallback(Synth synth, function<void(ControlGeneratorOutput)> fn)
   {
 	  synth.addAuxControlGenerator(*this);
-	  gen()->synthWasSet =  true;
-	  return static_cast<ControlCallback&>(*this);
-  }
-
-  ControlCallback& ControlCallback::callback( function<void(ControlGeneratorOutput)> fn ){
-	  Tonic_::ControlCallback_* obj = gen();
-	  obj->setCallback(fn);
-	  return static_cast<ControlCallback&>(*this);
+	  gen()->setCallback(fn);
   }
 
   

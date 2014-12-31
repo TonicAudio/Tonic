@@ -31,7 +31,7 @@ extern "C" {
 // #define TONIC_DEBUG
 
 // Determine if C++11 is available. If not, some synths cannot be used. (applies to oF demos, mostly)
-#define TONIC_HAS_CPP_11 (__cplusplus > 199711L)
+#define TONIC_HAS_CPP_11 (_MSC_VER == 1800 || __cplusplus > 199711L)
 
 // Platform-specific macros and includes
 #if defined (__APPLE__)
