@@ -41,7 +41,7 @@ int main(int argc, const char * argv[])
     
     // --------- MAKE A SYNTH HERE -----------
         
-    ControlMetro metro = ControlMetro().bpm(100);
+    ControlMetro metro = ControlMetro().bpm(30);
     ControlGenerator freq = ControlRandom().trigger(metro).min(0).max(1);
     
     Generator tone = SquareWaveBL().freq(
@@ -52,9 +52,9 @@ int main(int argc, const char * argv[])
     ADSR env = ADSR()
     .attack(0.01)
     .decay( 0.4 )
-    .sustain(0)
-    .release(0)
-    .doesSustain(false)
+    .sustain(1)
+    .release(0.2)
+    .doesSustain(true)
     .trigger(metro);
     
     StereoDelay delay = StereoDelay(3.0f,3.0f)

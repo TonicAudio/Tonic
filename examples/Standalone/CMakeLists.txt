@@ -11,12 +11,11 @@ file(GLOB STANDALONE_SOURCES TonicStandaloneDemo/*.cpp RTAudio/*.cpp )
 enable_testing()
 add_definitions("${CFLAGS}")
 link_libraries("${LINK_LIBS}")
-link_libraries("${PRJ_NAME}-static")
+link_libraries("${PRJ_NAME}")
 link_libraries("${EXTRA_LIBS}")
 
-if (APPLE)
-	add_definitions("-D__MACOSX_CORE__")
-endif(APPLE)
+# include RTAudio Config directly
+include(RTAudio/CMakeLists.txt)
 
 #create executable
 add_executable(TonicStandaloneDemo ${OBJECTS} ${STANDALONE_SOURCES})
