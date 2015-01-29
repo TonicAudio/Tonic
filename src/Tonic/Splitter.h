@@ -30,7 +30,6 @@ namespace Tonic {
 			~Splitter_();
 			void setInput(Generator);
 			void computeSynthesisBlock(const SynthesisContext_ &context);
-			TonicFrames* getOutputFramesPointer();
 		};
 	}
 

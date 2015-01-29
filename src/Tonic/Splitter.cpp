@@ -2,8 +2,6 @@
 //  Splitter.cpp
 //  Tonic
 //
-//  Created by Morgan Packard on 10/26/13.
-//  Copyright (c) 2013 Nick Donaldson. All rights reserved.
 //
 
 #include "Splitter.h"
@@ -82,11 +80,6 @@ namespace Tonic {
 		void Splitter_::setInput(Generator in)
 		{
 			input_ = in;
-		}
-
-		TonicFrames* Splitter_::getOutputFramesPointer()
-		{
-			return &outputFrames_;
 		}
 
 
