@@ -21,6 +21,16 @@ namespace Tonic {
     bool        triggered;
     
     ControlGeneratorOutput() : value(0), triggered(false) {};
+
+	bool operator==(const ControlGeneratorOutput& r){
+		return value == r.value && triggered == r.triggered;
+	}
+
+	bool operator!=(const ControlGeneratorOutput& r){
+		return !((*this) == r);
+	}
+
+
   };
 
   namespace Tonic_{
