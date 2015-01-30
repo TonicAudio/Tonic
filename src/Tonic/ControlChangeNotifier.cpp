@@ -19,11 +19,12 @@ namespace Tonic { namespace Tonic_{
   
   void ControlChangeNotifier_::computeOutput(const SynthesisContext_ & context){
     output_ = input_.tick(context);
-    if(output_.triggered){
+    if(output_.triggered || output_.value != lastOutput.value){
       outputReadyToBeSentToUI = false; // maybe silly, but a tiny bit of atomicness/thread safety here
       outputToSendToUI = output_;
       outputReadyToBeSentToUI = true;
     }
+	lastOutput = output_;
   }
   
   void  ControlChangeNotifier_::sendControlChangesToSubscribers(){

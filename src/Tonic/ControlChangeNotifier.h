@@ -32,7 +32,8 @@ namespace Tonic {
       vector<ControlChangeSubscriber*> subscribers;
       bool outputReadyToBeSentToUI;
       ControlGeneratorOutput outputToSendToUI;
-      
+	  ControlGeneratorOutput lastOutput;
+
     public:
       ControlChangeNotifier_();
       ~ControlChangeNotifier_();
@@ -56,7 +57,7 @@ namespace Tonic {
     void sendControlChangesToSubscribers();
     void addValueChangedSubscriber(ControlChangeSubscriber* resp){gen()->addValueChangedSubscriber(resp);};
     void removeValueChangedSubscriber(ControlChangeSubscriber* sub){gen()->removeValueChangedSubscriber(sub);};
-    void setName(string name){gen()->name = name;}
+	ControlChangeNotifier setName(string name){ gen()->name = name; return *this; }
 
   };
 }
