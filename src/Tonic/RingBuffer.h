@@ -210,7 +210,7 @@ namespace Tonic {
     inline void RingBufferReader_::computeSynthesisBlock(const SynthesisContext_ &context){
       // get some output from the table
       ringBuffer_.read(outputFrames_);
-    };
+    }
     
     // TODO: Maybe make this an Effect_?
     class RingBufferWriter_ {

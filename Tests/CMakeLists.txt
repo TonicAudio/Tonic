@@ -5,7 +5,7 @@ include_directories(. ../src)
 include_directories(${INCLUDE_DIR})
 
 #add test sources
-file(GLOB TEST_SOURCES *.cpp)
+file(GLOB TEST_SOURCES tonictests.cpp)
 
 #set enable testing
 enable_testing()

@@ -14,10 +14,26 @@ set(LINK_LIBS "")
 #define cflags
 set(CFLAGS "")
 #define header include directories as list
-set(INCLUDE_DIR )
+set(INCLUDE_DIR)
 
-#set(WARNING_CFLAGS "-pedantic")
-set(OTHER_CFLAGS "-pedantic")
+
+# Compiler Specific 
+if ("${CMAKE_CXX_COMPILER_ID}" STREQUAL "Clang")
+  # using Clang
+elseif ("${CMAKE_CXX_COMPILER_ID}" STREQUAL "GNU")
+  # using GCC
+elseif ("${CMAKE_CXX_COMPILER_ID}" STREQUAL "Intel")
+  # using Intel C++
+elseif ("${CMAKE_CXX_COMPILER_ID}" STREQUAL "MSVC")
+  # using Visual Studio C++
+endif()
+
+# Generator Specific
+# Compiler Specific 
+if ("${CMAKE_GENERATOR}" STREQUAL "Xcode")
+# fixes an issues in the Xcode generator which produces endless warnings
+add_definitions("-Wno-unused")
+endif()
 
 # Including the required Frameworks
 IF(APPLE)
