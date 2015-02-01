@@ -16,6 +16,9 @@ set(CFLAGS "")
 #define header include directories as list
 set(INCLUDE_DIR )
 
+#set(WARNING_CFLAGS "-pedantic")
+set(OTHER_CFLAGS "-pedantic")
+
 # Including the required Frameworks
 IF(APPLE)
    INCLUDE_DIRECTORIES ( /System/Library/Frameworks )
