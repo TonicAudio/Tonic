@@ -19,8 +19,11 @@ namespace Tonic {
 				TonicFloat last_;
 				TonicFloat inc_;
 				ControlGenerator targetGen_;
+				float lastTargetVal_;
 				ControlGenerator lengthGen_;
+				float lastLengthVal_;
 				ControlGenerator valueGen_;
+				float lastValueVal_;
 				ControlTrigger finishedTrigger_;
 				ControlTrigger shouldLoop_;
 				double startTime_;
@@ -50,21 +53,24 @@ namespace Tonic {
 
 				// First set the value, if necessary (abort ramp, go immediately to value)
 				ControlGeneratorOutput valueOutput = valueGen_.tick(context);
-				if(valueOutput.triggered){
+				if(valueOutput.value != lastValueVal_){
 					updateValue(valueOutput.value);
 					resetStartTime(context.elapsedTime);
 					finished_ = false;
 				}
+				lastValueVal_ = valueOutput.value;
 
 				// Then update the target or ramp length (start a new ramp)
 				ControlGeneratorOutput lengthOutput = lengthGen_.tick(context);
 				ControlGeneratorOutput targetOutput = targetGen_.tick(context);
-				if (lengthOutput.triggered || targetOutput.triggered){
+				if (lengthOutput.value != lastLengthVal_ || targetOutput.value != lastTargetVal_){
 					finished_ = false;
 					unsigned long lSamp = lengthOutput.value*Tonic::sampleRate();
 					updateTarget(targetOutput.value, lSamp);
 					resetStartTime(context.elapsedTime);
 				}
+				lastLengthVal_ = lengthOutput.value;
+				lastTargetVal_ = targetOutput.value;
 
 				if (context.elapsedTime - startTime_ >= lengthOutput.value)
 				{

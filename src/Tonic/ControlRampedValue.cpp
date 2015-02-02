@@ -7,7 +7,10 @@ Tonic::Tonic_::ControlRampedValue_::ControlRampedValue_() :
 	len_(0),
 	target_(0),
 	last_(0),
-	inc_(0)
+	inc_(0),
+	lastLengthVal_(0),
+	lastTargetVal_(0),
+	lastValueVal_(0)
 {
 
 }
