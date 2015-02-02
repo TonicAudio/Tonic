@@ -33,13 +33,23 @@
 
 option(BUILD_PYTHON "Build PyRtAudio python bindings" OFF)
 option(AUDIO_WINDOWS_DS "Build Windows DirectSound API" OFF)
-option(AUDIO_WINDOWS_ASIO "Build Windows ASIO API" OFF)
-option(AUDIO_WINDOWS_WASAPI "Build Windows WASAPI API" OFF)
+
+# TODO: ASIO currently not supported in Tonic
+#option(AUDIO_WINDOWS_ASIO "Build Windows ASIO API" OFF)
+set(AUDIO_WINDOWS_ASIO OFF)
+
+# TODO: WSAPI is currently not supported in Tonic
+#option(AUDIO_WINDOWS_WASAPI "Build Windows WASAPI API" OFF)
+set(AUDIO_WINDOWS_WASAPI OFF)
+
 option(AUDIO_LINUX_OSS "Build Linux OSS API" OFF)
 option(AUDIO_LINUX_ALSA "Build Linux ALSA API" OFF)
 option(AUDIO_LINUX_PULSE "Build Linux PulseAudio API" OFF)
 option(AUDIO_UNIX_JACK "Build Unix JACK audio server API" OFF)
 option(AUDIO_OSX_CORE "Build Mac OSX CoreAudio API" OFF)
+
+# for development currently
+option(AUDIO_FORCE_MINGW "force MinGW passing (for development)" OFF)
 
 if (CMAKE_BUILD_TYPE STREQUAL "Debug")
     add_definitions(-D__RTAUDIO_DEBUG__)
@@ -124,20 +134,26 @@ if (WIN32)
         message(STATUS "Using Windows DirectSound")
         list(APPEND RTAudio_LINKLIBS dsound)
     endif (AUDIO_WINDOWS_DS)
-    if (AUDIO_WINDOWS_WASAPI)
-        add_definitions(-D__WINDOWS_WASAPI__)
-        message(STATUS "Using Windows WASAPI")
-        list(APPEND RTAudio_LINKLIBS uuid ksuser)
-    endif (AUDIO_WINDOWS_WASAPI)
-    if (AUDIO_WINDOWS_ASIO)
-        list(APPEND rtaudio_SOURCES
-            include/asio.cpp
-            include/asiodrivers.cpp
-            include/asiolist.cpp
-            include/iasiothiscallresolver.cpp)
-        add_definitions(-D__WINDOWS_ASIO__)
-        message(STATUS "Using Windows ASIO")
-    endif (AUDIO_WINDOWS_ASIO)
+
+# TODO: currently not supported in Tonic
+#    if (AUDIO_WINDOWS_WASAPI)
+#        add_definitions(-D__WINDOWS_WASAPI__)
+#        message(STATUS "Using Windows WASAPI")
+#        list(APPEND RTAudio_LINKLIBS uuid ksuser)
+#        message( FATAL_ERROR "using WSAPI is currently not supported in Tonic" )
+#    endif (AUDIO_WINDOWS_WASAPI)
+
+
+# TODO: currently not supported in Tonic
+#    if (AUDIO_WINDOWS_ASIO)
+#        list(APPEND rtaudio_SOURCES
+#            include/asio.cpp
+#            include/asiodrivers.cpp
+#            include/asiolist.cpp
+#            include/iasiothiscallresolver.cpp)
+#        add_definitions(-D__WINDOWS_ASIO__)
+#        message(STATUS "Using Windows ASIO")
+#    endif (AUDIO_WINDOWS_ASIO)
 endif (WIN32)
 
 # add_library(rtaudio SHARED ${rtaudio_SOURCES})

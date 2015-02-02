@@ -16,21 +16,19 @@ link_libraries("${EXTRA_LIBS}")
 
 #adding tests foreach test source file
 foreach(filename ${TEST_SOURCES})
-	
-	#get the file name of the source file
-	if(WIN32) 
-		string(REGEX REPLACE ".*\\\\" "" testname "${filename}" )
-	else(WIN32)
-		string(REGEX REPLACE ".*/" "" testname "${filename}" )
-	endif(WIN32)
+
+	#get the basename of the source file
+	get_filename_component(testname ${filename} NAME)
 
 	#remove .cpp extension
 	string(REGEX REPLACE ".cpp" "" testname "${testname}" )
 
 	#create executable
 	add_executable(${testname} ${SOURCES} ${filename})
+	
 	#configure for testing
 	add_test(${testname} ${testname})
 
-	message("${testname} ${filename}")
+	message("using testsuite ${testname}")
+
 endforeach(filename)

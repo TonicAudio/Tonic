@@ -21,19 +21,32 @@ set(INCLUDE_DIR)
 if ("${CMAKE_CXX_COMPILER_ID}" STREQUAL "Clang")
   # using Clang
 elseif ("${CMAKE_CXX_COMPILER_ID}" STREQUAL "GNU")
-  # using GCC
+  # enable sse
+  add_definitions("-msse2")
+  # using GNU
 elseif ("${CMAKE_CXX_COMPILER_ID}" STREQUAL "Intel")
   # using Intel C++
 elseif ("${CMAKE_CXX_COMPILER_ID}" STREQUAL "MSVC")
   # using Visual Studio C++
 endif()
 
+message("using compiler '${CMAKE_CXX_COMPILER_ID}' ('${CMAKE_CXX_COMPILER}')")
+
 # Generator Specific
 # Compiler Specific 
 if ("${CMAKE_GENERATOR}" STREQUAL "Xcode")
-# fixes an issues in the Xcode generator which produces endless warnings
-add_definitions("-Wno-unused")
+  # fixes an issues in the Xcode generator which produces endless warnings
+  add_definitions("-Wno-unused")
+elseif ("${CMAKE_GENERATOR}" STREQUAL "MinGW Makefiles")
+  # MinGW needs to explicitely enable sse
+  add_definitions("-msse2")
+  # disable xcode pragma warning
+  add_definitions("-Wno-unknown-pragmas")
+  # disable unused XYZ warnings
+  add_definitions("-Wno-unused")
 endif()
+
+message("using generator '${CMAKE_GENERATOR}'")
 
 # Including the required Frameworks
 IF(APPLE)
