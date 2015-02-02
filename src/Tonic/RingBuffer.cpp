@@ -16,8 +16,8 @@ namespace Tonic {
     
     RingBuffer_::RingBuffer_(unsigned int frames, unsigned int channels) :
       SampleTable_(frames, channels),
-      writeHead_(0),
-      readHead_(0)
+      readHead_(0),
+      writeHead_(0)
     {}
     
     RingBufferWriter_::~RingBufferWriter_(){

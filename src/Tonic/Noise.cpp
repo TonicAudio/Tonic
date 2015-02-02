@@ -14,7 +14,7 @@
 namespace Tonic {
   namespace Tonic_ {
   
-    PinkNoise_::PinkNoise_() : pinkCount_(1), pinkAccum_(0) {
+    PinkNoise_::PinkNoise_() :pinkAccum_(0),  pinkCount_(1) {
       memset(pinkBins_, 0, kNumPinkNoiseBins * sizeof(TonicFloat));
     }
   

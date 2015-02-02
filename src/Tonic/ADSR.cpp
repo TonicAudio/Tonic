@@ -11,13 +11,13 @@
 namespace Tonic { namespace Tonic_{
   
   ADSR_::ADSR_() :
-    state(NEUTRAL),
-    lastValue(0),
-    targetValue(0),
-    increment(0),
     segCounter(0),
     segLength(0),
-    pole(0)
+    targetValue(0),
+    lastValue(0),
+    increment(0),
+    pole(0),
+    state(NEUTRAL)
   {
     mTrigger = ControlValue(0); // empty trigger by default
     isLegato = ControlValue(false);
