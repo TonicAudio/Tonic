@@ -15,7 +15,6 @@ namespace Tonic {
     lastDelayTime_(0),
     isInitialized_(false),
     writeHead_(0),
-
     interpolates_(true)
   {
     resize(kSynthesisBlockSize, 1, 0);
