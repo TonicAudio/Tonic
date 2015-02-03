@@ -58,34 +58,18 @@ namespace Tonic {
       void resample(unsigned int frames, unsigned int channels){
         frames_.resample(frames, channels);
       }
-
-      //! direct data access
-      TonicFloat& operator() ( size_t frame, unsigned int channel ) {
-        return frames_(frame, channel);
-      }
-
-      TonicFloat operator() ( size_t frame, unsigned int channel ) const {
-        return frames_(frame, channel);
-      }
       
     };
     
   }
   
   //! Access to a persistent TonicFrames instance, so the same audio data can be read from multiple places
-  class SampleTable : public  TonicSmartPointer<Tonic_::SampleTable_>
+  class SampleTable : public TonicSmartPointer<Tonic_::SampleTable_>
   {
     
   public:
     
-    SampleTable(unsigned int nFrames = 64, unsigned int nChannels = 2) 
-    : TonicSmartPointer<Tonic_::SampleTable_>( 
-      new Tonic_::SampleTable_(nFrames, nChannels) ) 
-    {}
-
-    SampleTable(Tonic_::SampleTable_* o) 
-    : TonicSmartPointer<Tonic_::SampleTable_>( o ) 
-    {}
+    SampleTable(unsigned int nFrames = 64, unsigned int nChannels = 2) : TonicSmartPointer<Tonic_::SampleTable_>( new Tonic_::SampleTable_(nFrames, nChannels) ) {}
   
     // Property getters
     unsigned int channels() const {
@@ -114,16 +98,6 @@ namespace Tonic {
     void resample(unsigned int frames, unsigned int channels){
       obj->resample(frames, channels);
     }
-      
-    //! direct data access
-    TonicFloat& operator() ( size_t frame, unsigned int channel ) {
-      return (*obj)(frame, channel);
-    }
-
-    TonicFloat operator() ( size_t frame, unsigned int channel ) const {
-      return (*obj)(frame, channel);
-    }
-
     
   };
 

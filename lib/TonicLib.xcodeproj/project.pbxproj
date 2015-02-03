@@ -175,9 +175,6 @@
 		A8F8705B181C506800B82527 /* AudioFileUtils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A8F87059181C506700B82527 /* AudioFileUtils.cpp */; };
 		A8F8705C181C506800B82527 /* AudioFileUtils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A8F87059181C506700B82527 /* AudioFileUtils.cpp */; };
 		A8F8705D181C506800B82527 /* AudioFileUtils.h in Headers */ = {isa = PBXBuildFile; fileRef = A8F8705A181C506700B82527 /* AudioFileUtils.h */; };
-		E1668A7B1A705FCE0008C265 /* LazySampleTable.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E1668A791A705FCE0008C265 /* LazySampleTable.cpp */; };
-		E1668A7C1A705FCE0008C265 /* LazySampleTable.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E1668A791A705FCE0008C265 /* LazySampleTable.cpp */; };
-		E1668A7D1A705FCE0008C265 /* LazySampleTable.h in Headers */ = {isa = PBXBuildFile; fileRef = E1668A7A1A705FCE0008C265 /* LazySampleTable.h */; };
 		F218C86F179C73F6000906B2 /* DSPUtils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F218C86D179C73F6000906B2 /* DSPUtils.cpp */; };
 		F218C870179C73F6000906B2 /* DSPUtils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F218C86D179C73F6000906B2 /* DSPUtils.cpp */; };
 		F218C871179C73F6000906B2 /* DSPUtils.h in Headers */ = {isa = PBXBuildFile; fileRef = F218C86E179C73F6000906B2 /* DSPUtils.h */; };
@@ -320,8 +317,6 @@
 		A8F87055181C3B6500B82527 /* BufferPlayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = BufferPlayer.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		A8F87059181C506700B82527 /* AudioFileUtils.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AudioFileUtils.cpp; sourceTree = "<group>"; };
 		A8F8705A181C506700B82527 /* AudioFileUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AudioFileUtils.h; sourceTree = "<group>"; };
-		E1668A791A705FCE0008C265 /* LazySampleTable.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = LazySampleTable.cpp; sourceTree = "<group>"; };
-		E1668A7A1A705FCE0008C265 /* LazySampleTable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LazySampleTable.h; sourceTree = "<group>"; };
 		F218C86D179C73F6000906B2 /* DSPUtils.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = DSPUtils.cpp; sourceTree = "<group>"; };
 		F218C86E179C73F6000906B2 /* DSPUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DSPUtils.h; sourceTree = "<group>"; };
 		F218C872179C763A000906B2 /* ControlDbToLinear.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ControlDbToLinear.cpp; sourceTree = "<group>"; };
@@ -366,8 +361,6 @@
 		0183CFFF1735D0E6004638EB /* Tonic */ = {
 			isa = PBXGroup;
 			children = (
-				E1668A791A705FCE0008C265 /* LazySampleTable.cpp */,
-				E1668A7A1A705FCE0008C265 /* LazySampleTable.h */,
 				0183D0021735D0E6004638EB /* ADSR.cpp */,
 				0183D0031735D0E6004638EB /* ADSR.h */,
 				0183D0001735D0E6004638EB /* Arithmetic.cpp */,
@@ -588,7 +581,6 @@
 				9AF6A731174AFCF900C70173 /* RingBuffer.h in Headers */,
 				9A5FB71D17591983007A2F31 /* ControlMetroDivider.h in Headers */,
 				9A5FB722175928FC007A2F31 /* ControlComparison.h in Headers */,
-				E1668A7D1A705FCE0008C265 /* LazySampleTable.h in Headers */,
 				9AE5AA0417601CB4001F3E60 /* ControlTrigger.h in Headers */,
 				A883ED7D17B468EA00F60C06 /* ControlTriggerFilter.h in Headers */,
 				F218C871179C73F6000906B2 /* DSPUtils.h in Headers */,
@@ -707,7 +699,6 @@
 				0183D0671735D0E6004638EB /* BufferFiller.cpp in Sources */,
 				0183D06A1735D0E6004638EB /* CompressorLimiter.cpp in Sources */,
 				0183D06D1735D0E6004638EB /* ControlArithmetic.cpp in Sources */,
-				E1668A7B1A705FCE0008C265 /* LazySampleTable.cpp in Sources */,
 				0183D0701735D0E6004638EB /* ControlConditioner.cpp in Sources */,
 				0183D0731735D0E6004638EB /* ControlCounter.cpp in Sources */,
 				0183D07F1735D0E6004638EB /* ControlGenerator.cpp in Sources */,
@@ -772,7 +763,6 @@
 				0183D0681735D0E6004638EB /* BufferFiller.cpp in Sources */,
 				0183D06B1735D0E6004638EB /* CompressorLimiter.cpp in Sources */,
 				0183D06E1735D0E6004638EB /* ControlArithmetic.cpp in Sources */,
-				E1668A7C1A705FCE0008C265 /* LazySampleTable.cpp in Sources */,
 				0183D0711735D0E6004638EB /* ControlConditioner.cpp in Sources */,
 				0183D0741735D0E6004638EB /* ControlCounter.cpp in Sources */,
 				0183D0801735D0E6004638EB /* ControlGenerator.cpp in Sources */,
