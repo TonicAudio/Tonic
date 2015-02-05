@@ -94,14 +94,111 @@ namespace TonicTests {
 
 	// Logging of Testcase output
 	// --------------------------
+
+	class TestsuiteBase;
 	
 	class Logger {
 	public:
+		// test_start always is followed by a call to the same following object
+		virtual void test_start(Testcase& testcase) = 0;
 		virtual void test_passed(Testcase& testcase) = 0;
 		virtual void test_failed(Testcase& testcase, std::ostringstream& failmsg) = 0;
+
+		// testsuite_start always is followed by a call to the same following object
+		virtual void testsuite_start(TestsuiteBase& suite) = 0;
+		virtual void testsuite_done(TestsuiteBase& suite) = 0;
 	};
 
-	//--------------------------------------------------------------------------
+	// ================================================================
+
+	// Test Suite
+	// ----------
+
+	class TestsuiteBase {
+	private:
+		Logger& logger;
+		std::string name;
+	public:
+		TestsuiteBase(Logger& mylogger, const char * myname)
+		: logger(mylogger)
+		, name(myname)
+		{}
+
+		std::string& getName() {
+			return name;
+		}
+
+		// Run Testsuite
+		void run(Testcases& tests) {
+			logger.testsuite_start(*this);
+
+			for (typename Testcases::iterator i = tests.begin(); i != tests.end(); ++i)
+			{
+				Testcase* test = i->second;
+				std::ostringstream failmsg;
+
+				logger.test_start(*test);
+
+					// run testcase
+				test->setUp();
+				const Result retval = test->run(failmsg);
+				test->tearDown();
+
+				if (retval != OK) {
+					logger.test_failed(*test, failmsg);
+				} else {
+					logger.test_passed(*test);
+				}
+
+				delete test;
+			}
+
+			logger.testsuite_done(*this);
+		}
+	};
+
+	template<class TestcaseClass, Testcases** testcaseStorage>
+	class Testsuite : public TestsuiteBase {
+	public:
+		typedef Testsuite<TestcaseClass, testcaseStorage> LocalTestsuite;
+		typedef TestcaseClass LocalTestcase;
+		
+		Testsuite(Logger& mylogger, const char * myname)
+		: TestsuiteBase(mylogger, myname)
+		{}
+
+		static Testcases& getTests() {
+			if (!*testcaseStorage) *testcaseStorage = new Testcases();
+			return **testcaseStorage;
+		}
+
+    static void addTestcase( Testcase* testcase, const int line ) {
+			getTests()[line] = testcase;
+		} 
+
+		template <class CurrentTestcase, int Line>
+		class TestcaseRegistration {
+		public:
+			// constructor which in fact registers the testcase
+			TestcaseRegistration() {
+        LocalTestsuite::addTestcase(new CurrentTestcase(), Line);
+			}
+		};
+
+		// Run Testsuite
+		using TestsuiteBase::run;
+		void run() {
+			run(getTests());
+		}
+
+	};
+
+
+	// ======================================================================== 
+
+
+	// Logging unto the Console
+	// ------------------------
 
 	class ConsoleLogger : public Logger {
 	private:
@@ -138,86 +235,28 @@ namespace TonicTests {
 				<< std::setw(40)
 				<< test.getName()
 				<< " : "
+				<< std::left
 				<< std::setw(40)
 				<< failmsg.str()
 				<< std::endl;
 			failed_tests++;
 			num_tests++;
 		}
-	};
 
-
-	// ================================================================
-
-	// Test Suite
-	// ----------
-
-	class TestsuiteBase {
-	private:
-		Logger& logger;
-	public:
-		TestsuiteBase(Logger& mylogger)
-		: logger(mylogger)
-		{}
-
-		// Run Testsuite
-		void run(Testcases& tests) {
-			for (typename Testcases::iterator i = tests.begin(); i != tests.end(); ++i)
-			{
-				Testcase* test = i->second;
-				std::ostringstream failmsg;
-
-					// run testcase
-				test->setUp();
-				const Result retval = test->run(failmsg);
-				test->tearDown();
-
-				if (retval != OK) {
-					logger.test_failed(*test, failmsg);
-				} else {
-					logger.test_passed(*test);
-				}
-
-				delete test;
-			}
-		}
-	};
-
-	template<class TestcaseClass, Testcases** testcaseStorage>
-	class Testsuite : public TestsuiteBase {
-	public:
-		typedef Testsuite<TestcaseClass, testcaseStorage> LocalTestsuite;
-		typedef TestcaseClass LocalTestcase;
-		
-		Testsuite(Logger& mylogger)
-		: TestsuiteBase(mylogger)
-		{}
-
-		static Testcases& getTests() {
-			if (!*testcaseStorage) *testcaseStorage = new Testcases();
-			return **testcaseStorage;
+		virtual void testsuite_start(TestsuiteBase& suite)
+		{
+			std::cout << "processing testsuite " << suite.getName() << std::endl;
 		}
 
-    static void addTestcase( Testcase* testcase, const int line ) {
-			getTests()[line] = testcase;
-		} 
-
-		template <class CurrentTestcase, int Line>
-		class TestcaseRegistration {
-		public:
-			// constructor which in fact registers the testcase
-			TestcaseRegistration() {
-        LocalTestsuite::addTestcase(new CurrentTestcase(), Line);
-			}
-		};
-
-		// Run Testsuite
-		using TestsuiteBase::run;
-		void run() {
-			run(getTests());
+		virtual void testsuite_done(TestsuiteBase& suite) 	
+		{
 		}
 
-	};
+		virtual void test_start(Testcase& testcase)
+		{
+			std::cout << "." << std::endl;
+		}
+	};	
 
 } // namespace TonicTests
 

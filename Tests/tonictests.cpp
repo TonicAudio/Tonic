@@ -144,7 +144,7 @@ class MyTests : public TonicTests::Testsuite<TonicTestcase, &MyTests_Storage>
 {
 public:
   MyTests(Logger& mylogger)
-  : TonicTests::Testsuite<TonicTestcase, &MyTests_Storage>(mylogger)
+  : TonicTests::Testsuite<TonicTestcase, &MyTests_Storage>(mylogger, "MySuite")
   {}
 private:
 
