@@ -47,7 +47,7 @@ namespace Tonic {
 
 // ======================================================
 
-class TonicTestcase : public TestcaseBase {
+class TonicTestcase : public Testcase {
 public:
 
   TonicFrames testFrames;
@@ -75,11 +75,11 @@ public:
 
   // ----------------------------------------------------------------
 
-    Result testFixedOutputEquals(
+    Result test_FixedOutputEquals(
       float expectedOutput, std::string name, std::ostream& failmsg) 
     {
       for (unsigned int i=0; i<testFrames.size(); i++){
-        TEST_EQUAL(expectedOutput, testFrames[i],
+        TEST(eq, expectedOutput, testFrames[i],
                    "%s: Did not produce expected output at index %i" /*, name.c_str(), i*/ );
       }
 
@@ -88,14 +88,14 @@ public:
 
   // ----------------------------------------------------------------
 
-    Result testStereoFixedOutputEquals( 
+    Result test_StereoFixedOutputEquals( 
       float l, float r, std::string name, std::ostream& failmsg) 
     {
       for (unsigned int i=0; i<testFrames.frames(); i++){
-        TEST_EQUAL(l, testFrames[2*i], 
+        TEST(eq, l, testFrames[2*i], 
            "%s: Left channel not produce expected output on frame %i" /*, name.c_str(), i*/ );
 
-        TEST_EQUAL(r, testFrames[2*i+1], 
+        TEST(eq, r, testFrames[2*i+1], 
           "%s: Right channel did not produce expected output on frame %i" /*, name.c_str(), i*/ );
       }
 
@@ -104,11 +104,11 @@ public:
 
   // ----------------------------------------------------------------
 
-    Result testBufferFillerMonoFixedOutputEquals( 
+    Result test_BufferFillerMonoFixedOutputEquals( 
       float expectedOutput, std::string name, std::ostream& failmsg)
     {
       for (unsigned int i=0; i<kTestOutputBlockSize; i++){
-        TEST_EQUAL(expectedOutput, monoOutBuffer[i], 
+        TEST(eq, expectedOutput, monoOutBuffer[i], 
                    "%s: Did not produce expected output at index %i" /*, name.c_str(), i*/ );
       }
 
@@ -117,15 +117,15 @@ public:
 
   // ----------------------------------------------------------------
 
-    Result testBufferFillerStereoFixedOutputEquals( 
+    Result test_BufferFillerStereoFixedOutputEquals( 
       float l, float r, std::string name, std::ostream& failmsg)
     {
       for (unsigned int i=0; i<kTestOutputBlockSize; i++)
       {
-        TEST_EQUAL(l, stereoOutBuffer[2*i], 
+        TEST(eq, l, stereoOutBuffer[2*i], 
            "%s: Left channel not produce expected output on frame %i" /*, name.c_str(), i*/ );
 
-        TEST_EQUAL(r, stereoOutBuffer[2*i+1], 
+        TEST(eq, r, stereoOutBuffer[2*i+1], 
           "%s: Right channel did not produce expected output on frame %i" /*, name.c_str(), i*/ );
       }
 
@@ -134,20 +134,27 @@ public:
 
 };
 
-template <>
-TonicTests::Testsuite<TonicTestcase>::Testcases* 
-  TonicTests::Testsuite<TonicTestcase>::s_tests = 0;
-
 // ================================================================
 
 // The Tests
 // ---------
 
-class MyTests : public TonicTests::Testsuite<TonicTestcase>
+TonicTests::Testcases* MyTests_Storage = 0;
+class MyTests : public TonicTests::Testsuite<TonicTestcase, &MyTests_Storage>
 {
+public:
+  MyTests(Logger& mylogger)
+  : TonicTests::Testsuite<TonicTestcase, &MyTests_Storage>(mylogger)
+  {}
+private:
+
+  TESTCASE("Demo")
+    int i = 0;
+    TEST(eq, 1, i, "i")
+  END_TESTCASE()
 
   #pragma mark - Generator Tests
-  #include "generator.tests"
+  //#include "generator.tests"
 
   // #pragma mark - Control Generator Tests
   //#include "controlgenerator.tests"
@@ -162,7 +169,8 @@ class MyTests : public TonicTests::Testsuite<TonicTestcase>
 
 int main(int argc, char const *argv[])
 {
-  MyTests suite;
+  ConsoleLogger logger;
+  MyTests suite(logger);
   suite.run();
   return 0;
 }
