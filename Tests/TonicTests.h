@@ -249,13 +249,10 @@ namespace TonicTests {
 		}
 
 		virtual void testsuite_done(TestsuiteBase& suite) 	
-		{
-		}
+		{}
 
 		virtual void test_start(Testcase& testcase)
-		{
-			std::cout << "." << std::endl;
-		}
+		{}
 	};	
 
 } // namespace TonicTests
