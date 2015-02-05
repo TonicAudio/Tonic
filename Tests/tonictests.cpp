@@ -75,8 +75,8 @@ public:
 
   // ----------------------------------------------------------------
 
-    Result test_FixedOutputEquals(
-      float expectedOutput, std::string name, std::ostream& failmsg) 
+    Result test_fixedOutputEquals(
+      std::ostream& failmsg, const int line, float expectedOutput, std::string name) 
     {
       for (unsigned int i=0; i<testFrames.size(); i++){
         TEST(eq, expectedOutput, testFrames[i],
@@ -88,8 +88,8 @@ public:
 
   // ----------------------------------------------------------------
 
-    Result test_StereoFixedOutputEquals( 
-      float l, float r, std::string name, std::ostream& failmsg) 
+    Result test_stereoFixedOutputEquals( 
+      std::ostream& failmsg, const int line, float l, float r, std::string name) 
     {
       for (unsigned int i=0; i<testFrames.frames(); i++){
         TEST(eq, l, testFrames[2*i], 
@@ -104,8 +104,8 @@ public:
 
   // ----------------------------------------------------------------
 
-    Result test_BufferFillerMonoFixedOutputEquals( 
-      float expectedOutput, std::string name, std::ostream& failmsg)
+    Result test_bufferFillerMonoFixedOutputEquals( 
+      std::ostream& failmsg, const int line, float expectedOutput, std::string name)
     {
       for (unsigned int i=0; i<kTestOutputBlockSize; i++){
         TEST(eq, expectedOutput, monoOutBuffer[i], 
@@ -117,8 +117,8 @@ public:
 
   // ----------------------------------------------------------------
 
-    Result test_BufferFillerStereoFixedOutputEquals( 
-      float l, float r, std::string name, std::ostream& failmsg)
+    Result test_bufferFillerStereoFixedOutputEquals( 
+      std::ostream& failmsg, const int line, float l, float r, std::string name)
     {
       for (unsigned int i=0; i<kTestOutputBlockSize; i++)
       {
@@ -148,13 +148,13 @@ public:
   {}
 private:
 
-  TESTCASE("Demo")
-    int i = 0;
-    TEST(eq, 1, i, "i")
-  END_TESTCASE()
+  // TESTCASE("Demo")
+  //   int i = 0;
+  //   TEST(eq, 1, i, "i")
+  // END_TESTCASE()
 
   #pragma mark - Generator Tests
-  //#include "generator.tests"
+  #include "generator.tests"
 
   // #pragma mark - Control Generator Tests
   //#include "controlgenerator.tests"
