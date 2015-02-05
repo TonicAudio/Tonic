@@ -1,0 +1,170 @@
+  TESTCASE("test300BufferFillerMonoOutMonoSource"){
+    TestBufferFiller testFiller;
+    
+    // Mono fixed value
+    FixedValue fv = FixedValue(0.5);
+    testFiller.setOutputGen(fv);
+    
+    testFiller.fillBufferOfFloats(monoOutBuffer, kTestOutputBlockSize, 1);
+    
+    verifyBufferFillerMonoFixedOutputEquals(0.5);
+  
+    return OK;
+  }
+
+  TESTCASE("test301BufferFillerMonoOutStereoSource"){
+    TestBufferFiller testFiller;
+    
+    // Stereo fixed value
+    StereoFixedTestGen fv = StereoFixedTestGen(0.5, 1.0);
+    testFiller.setOutputGen(fv);
+    
+    testFiller.fillBufferOfFloats(monoOutBuffer, kTestOutputBlockSize, 1);
+    
+    // average
+    verifyBufferFillerMonoFixedOutputEquals(0.75);
+  
+    return OK;
+  }
+
+  TESTCASE("test302BufferFillerStereoOutMonoSource"){
+    TestBufferFiller testFiller;
+    
+    // Mono fixed value
+    FixedValue fv = FixedValue(0.5);
+    testFiller.setOutputGen(fv);
+    
+    testFiller.fillBufferOfFloats(stereoOutBuffer, kTestOutputBlockSize, 2);
+    
+    [self verifyBufferFillerStereoFixedOutputEqualsLeft:0.5 right:0.5];
+  
+    return OK;
+  }
+
+  TESTCASE("test303BufferFillerStereoOutStereoSource"){
+    TestBufferFiller testFiller;
+    
+    // Stereo fixed value
+    StereoFixedTestGen fv = StereoFixedTestGen(0.5, 1.0);
+    testFiller.setOutputGen(fv);
+    
+    testFiller.fillBufferOfFloats(stereoOutBuffer, kTestOutputBlockSize, 2);
+    
+    [self verifyBufferFillerStereoFixedOutputEqualsLeft:0.5 right:1.0];
+    
+  
+    return OK;
+  }
+
+  TESTCASE("test304ControlChangeNotifierTest"){
+
+    class TestSynth : public Synth {
+      public:
+      TestSynth(){
+        ControlGenerator random = ControlRandom().trigger(ControlMetro().bpm(1000));
+        publishChanges(random, "random");
+      }
+    };
+    
+    TestControlChangeSubscriber subscriber;
+    TestSynth synth;
+    synth.addControlChangeSubscriber("random", &subscriber);
+    for(int i = 0; i < 1000; i++){
+      synth.fillBufferOfFloats(stereoOutBuffer, kTestOutputBlockSize, 2);
+    }
+    
+    TEST_FALSE(subscriber.valueChangedFlag, "Value changed notification should not have happened");
+    subscriber.valueChangedFlag = false;
+    synth.sendControlChangesToSubscribers();
+    TEST_TRUE(subscriber.valueChangedFlag, "Value changed notification should have happened");
+    subscriber.valueChangedFlag = false;
+    synth.sendControlChangesToSubscribers();
+    TEST_FALSE(subscriber.valueChangedFlag, "Value changed notification should not have happened");
+   
+    for(int i = 0; i < 1000; i++){
+      synth.fillBufferOfFloats(stereoOutBuffer, kTestOutputBlockSize, 2);
+    }
+    
+    subscriber.valueChangedFlag = false;
+    synth.sendControlChangesToSubscribers();
+    TEST_TRUE(subscriber.valueChangedFlag, "Value changed notification should have happened");
+    
+    // now remove the subscriber and make sure it's not notified any more
+    
+    synth.removeControlChangeSubscriber(&subscriber);
+    subscriber.valueChangedFlag = false;
+    for(int i = 0; i < 1000; i++){
+      synth.fillBufferOfFloats(stereoOutBuffer, kTestOutputBlockSize, 2);
+    }
+    synth.sendControlChangesToSubscribers();
+    TEST_FALSE(subscriber.valueChangedFlag, "Value changed notification should not have happened");
+    
+    ////////////////////////////
+    // Unnamed notifier test
+    ////////////////////////////
+    
+    synth = TestSynth();
+
+    subscriber.valueChangedFlag = false;
+    synth.addControlChangeSubscriber(&subscriber);
+    for(int i = 0; i < 1000; i++){
+      synth.fillBufferOfFloats(stereoOutBuffer, kTestOutputBlockSize, 2);
+    }
+    
+    TEST_FALSE(subscriber.valueChangedFlag, "Value changed notification should not have happened");
+    synth.sendControlChangesToSubscribers();
+    TEST_TRUE(subscriber.valueChangedFlag, "Value changed notification should have happened");
+    
+  
+    return OK;
+  }
+
+  // publishChanges should return a ControlChangeNotifier which we can subscribe to
+  // directly, as an alternative to going through Synth::addControlChangeSubscriber
+  TESTCASE("test304ControlChangeNotifierInlineTest"){
+    Synth synth;
+    const float VALUE = 0.5;
+    ControlValue val(VALUE);
+    TestControlChangeSubscriber subscriber;
+    ControlChangeNotifier notifier = synth.publishChanges(val, "controlValue");
+    notifier.addValueChangedSubscriber(&subscriber);
+    
+    Tonic_::SynthesisContext_ context;
+    TEST_EQUAL(notifier.tick(context).value, VALUE, "A controlChangeNotifier should wrap the ControlGenerator it's observing");
+    
+    for(int i = 0; i < 1000; i++){
+      synth.fillBufferOfFloats(stereoOutBuffer, kTestOutputBlockSize, 2);
+    }
+    TEST_FALSE(subscriber.valueChangedFlag, "Value changed notification should not have happened");
+    synth.sendControlChangesToSubscribers();
+    TEST_TRUE(subscriber.valueChangedFlag, "Value changed notification should have happened");
+    
+  
+    return OK;
+  }
+
+  TESTCASE("test304UnNamedControlChangeNotifier"){
+    Synth synth;
+    const float VALUE_1 = 0.5;
+    ControlValue val1(VALUE_1);
+    
+    const float VALUE_2 = 1;
+    ControlValue val2(VALUE_2);
+    
+    TestControlChangeSubscriber subscriber1;
+    TestControlChangeSubscriber subscriber2;
+    synth.publishChanges(val1).addValueChangedSubscriber(&subscriber1);
+    synth.publishChanges(val2).addValueChangedSubscriber(&subscriber2);
+    
+    for(int i = 0; i < 1000; i++){
+      synth.fillBufferOfFloats(stereoOutBuffer, kTestOutputBlockSize, 2);
+    }
+    
+    synth.sendControlChangesToSubscribers();
+    
+    TEST_TRUE(subscriber1.valueChangedFlag, "Value changed notification should have happened");
+    TEST_TRUE(subscriber2.valueChangedFlag, "Value changed notification should have happened");
+
+  
+    return OK;
+  }
