@@ -28,7 +28,7 @@ namespace TonicTests {
 	// Test Case
 	// ---------
 	
-	class TestcaseBase {
+	class Testcase {
 	public:
 		virtual std::string& getName() = 0;
 		virtual Result run(std::ostream&) = 0;
@@ -40,8 +40,8 @@ namespace TonicTests {
 
 		// test if a value is as expected
 		template <class T>
-		Result testEqual(
-			T expected, T value, std::string name, std::ostream& failmsg) 
+		Result test_eq(
+			std::ostream& failmsg, const int line, T expected, T value, std::string name) 
 		{
 			if (expected != value) {
 				failmsg << name << " expected to be " << expected << " but is " << value;
@@ -56,25 +56,10 @@ namespace TonicTests {
 	// ----------------------------------------------------------------
 
 	// test if value is true
-		Result testTrue(
-			bool value, std::string testname, std::ostream& failmsg) 
+		Result test_true(
+			std::ostream& failmsg, const int line, bool value, std::string testname) 
 		{
 			if (!value) {
-				failmsg << testname << " expected to be true but is false";
-				return FAILED;
-			}
-			else
-			{
-				return OK;
-			}
-		}	
-	// ----------------------------------------------------------------
-
-	// test if value is true
-		Result testOK(
-			Result value, std::string testname, std::ostream& failmsg) 
-		{
-			if (value != OK) {
 				failmsg << testname << " expected to be true but is false";
 				return FAILED;
 			}
@@ -87,8 +72,8 @@ namespace TonicTests {
 	// ----------------------------------------------------------------
 
 	// test if value is false
-		Result testFalse(
-			bool value, std::string testname, std::ostream& failmsg) 
+		Result test_false(
+			std::ostream& failmsg, const int line, bool value, std::string testname) 
 		{
 			if (value) {
 				failmsg << testname << " expected to be false but is true";
@@ -100,60 +85,86 @@ namespace TonicTests {
 			}
 		}	
 	};
+	// ================================================================
+
+	// the testcase registration list
+	typedef std::map<int, Testcase*> Testcases;	
+
+	// ================================================================
+
+	// Logging of Testcase output
+	// --------------------------
+	
+	class Logger {
+	public:
+		virtual void test_passed(Testcase& testcase) = 0;
+		virtual void test_failed(Testcase& testcase, std::ostringstream& failmsg) = 0;
+	};
+
+	//--------------------------------------------------------------------------
+
+	class ConsoleLogger : public Logger {
+	private:
+			int num_tests;
+			int passed_tests;
+			int failed_tests;
+
+	public:
+
+		ConsoleLogger()
+			: num_tests(0)
+			, passed_tests(0)
+			, failed_tests(0)
+		{}
+
+		virtual ~ConsoleLogger() {
+			std::cout << num_tests
+				<< " tests done: " 
+				<< " passed: " << passed_tests 
+				<< " failed: " << failed_tests
+				<< std::endl;			
+		}
+
+		virtual void test_passed(Testcase& test)
+		{
+			passed_tests++;
+			num_tests++;
+		}
+
+		virtual void test_failed(Testcase& test, std::ostringstream& failmsg)
+		{
+			std::cout 
+				<< std::right
+				<< std::setw(40)
+				<< test.getName()
+				<< " : "
+				<< std::setw(40)
+				<< failmsg.str()
+				<< std::endl;
+			failed_tests++;
+			num_tests++;
+		}
+	};
+
 
 	// ================================================================
 
 	// Test Suite
 	// ----------
 
-	template<class SuiteTestcaseBase>
-	class Testsuite {
+	class TestsuiteBase {
+	private:
+		Logger& logger;
 	public:
-		typedef SuiteTestcaseBase Testcase;
-
-    // the testcase registration list
-		typedef std::map<int, TestcaseBase*> Testcases;
-
-		static Testcases* s_tests ;
-
-		static Testcases& getTests() {
-			if (!s_tests) {
-				s_tests = new Testcases();
-			}
-			return *s_tests;
-		}
-
-    static void addTestcase( TestcaseBase* testcase, const int line ) {
-			getTests()[line] = testcase;
-		} 
-
-		template <class Testcase, int Line>
-		class TestcaseRegistration {
-		public:
-			// constructor which in fact registers the testcase
-			TestcaseRegistration() {
-        Testsuite::addTestcase(new Testcase(), Line);
-			}
-		};
-
-		// ----------------------------------------------------------------
-
-
-		// ================================================================
+		TestsuiteBase(Logger& mylogger)
+		: logger(mylogger)
+		{}
 
 		// Run Testsuite
-		// -------------
-
-		void run() {
-			int num_tests = 0;
-			int passed_tests = 0;
-			int failed_tests = 0;
-
-			Testcases& tests = getTests();
+		void run(Testcases& tests) {
 			for (typename Testcases::iterator i = tests.begin(); i != tests.end(); ++i)
 			{
-				TestcaseBase* test = i->second;
-				num_tests++;
+				Testcase* test = i->second;
 				std::ostringstream failmsg;
 
 					// run testcase
@@ -162,27 +173,48 @@ namespace TonicTests {
 				test->tearDown();
 
 				if (retval != OK) {
-					std::cout << test->getName()
-					<< std::setw(20)
-					<< " : "
-					<< failmsg.str()
-					<< std::setw(40)
-					<< " : "
-					<< ((retval == OK) ? "OK" : "FAILED")
-					<< std::endl;
-					failed_tests++;
+					logger.test_failed(*test, failmsg);
 				} else {
-					passed_tests++;
+					logger.test_passed(*test);
 				}
 
 				delete test;
 			}
+		}
+	};
 
-			std::cout << num_tests
-			<< " tests done: " 
-			<< " passed: " << passed_tests 
-			<< " failed: " << failed_tests
-			<< std::endl;
+	template<class TestcaseClass, Testcases** testcaseStorage>
+	class Testsuite : public TestsuiteBase {
+	public:
+		typedef Testsuite<TestcaseClass, testcaseStorage> LocalTestsuite;
+		typedef TestcaseClass LocalTestcase;
+		
+		Testsuite(Logger& mylogger)
+		: TestsuiteBase(mylogger)
+		{}
+
+		static Testcases& getTests() {
+			if (!*testcaseStorage) *testcaseStorage = new Testcases();
+			return **testcaseStorage;
+		}
+
+    static void addTestcase( Testcase* testcase, const int line ) {
+			getTests()[line] = testcase;
+		} 
+
+		template <class CurrentTestcase, int Line>
+		class TestcaseRegistration {
+		public:
+			// constructor which in fact registers the testcase
+			TestcaseRegistration() {
+        LocalTestsuite::addTestcase(new CurrentTestcase(), Line);
+			}
+		};
+
+		// Run Testsuite
+		using TestsuiteBase::run;
+		void run() {
+			run(getTests());
 		}
 
 	};
@@ -201,27 +233,34 @@ namespace TonicTests {
 // Declare a Testcase
 // ------------------
 
-#define TESTCASE(_name)                                     \
-	class TESTCASE_NAME( class );                             \
-	TestcaseRegistration<TESTCASE_NAME( class ), __LINE__>    \
-		TESTCASE_NAME( reg );                                   \
-	class TESTCASE_NAME( class ) : public Testcase            \
-	{                                                         \
-		std::string name;                                       \
-		public:                                                 \
-		TESTCASE_NAME( class )() : name(_name) {}               \
-		virtual string& getName() { return name; }              \
-		virtual Result run(std::ostream& failmsg) {             \
+#define TESTCASE(_name)                                                  \
+	class TESTCASE_NAME( class );                                          \
+	TestcaseRegistration<TESTCASE_NAME( class ), __LINE__>                 \
+		TESTCASE_NAME( reg );                                                \
+	class TESTCASE_NAME( class ) : public LocalTestcase {                  \
+		std::string name;                                                    \
+		public:                                                              \
+		TESTCASE_NAME( class )() : name(_name) {}                            \
+		virtual string& getName() { return name; }                           \
+		virtual Result run(std::ostream& failmsg) {                          \
 
-#define END_TESTCASE()                                      \
-			return OK;                                            \
-		}                                                       \
-	};                                                        \
+#define END_TESTCASE()                                                   \
+			return OK;                                                         \
+		}                                                                    \
+	};                                                                     \
 
 // Macros for Tests
 // ----------------
 
 
+// call a test function and return upon failure. DRY principle
+#define TEST(testtype, ...)  {                                               \
+const Result retval = test_##testtype(failmsg, __LINE__, __VA_ARGS__);       \
+	if (retval != OK) return retval;                                           \
+}
+
+// only keep for reference
+#if 0
 // call outsourced test function with any argument
 #define TEST_OK(function, msg)  {                                            \
 	const Result retval = testOK(                                              \
@@ -264,5 +303,6 @@ namespace TonicTests {
 		const Result retval = testBufferFillerStereoFixedOutputEquals(l, r, msg, failmsg); \
 		if (retval != OK) return retval;                                                   \
 }
+#endif
 
 #endif //TONICTESTS_H
