@@ -9,6 +9,7 @@
 //
 
 #include "TonicTests.h"
+#include "TonicTestsFloat.h"
 
 #include "Tonic.h"
 #include "TestBufferFiller.h"
@@ -47,7 +48,7 @@ namespace Tonic {
 
 // ======================================================
 
-class TonicTestcase : public Testcase {
+class TonicTestcase : public FloatingPointTestcase {
 public:
 
   TonicFrames testFrames;
@@ -75,6 +76,9 @@ public:
 
   // ----------------------------------------------------------------
 
+    // allow overriding of test_eq with buffers
+    using FloatingPointTestcase::test_eq;
+
     Result test_fixedOutputEquals(
       std::ostream& failmsg, const int line, float expectedOutput, std::string name) 
     {
@@ -89,14 +93,11 @@ public:
   // ----------------------------------------------------------------
 
     Result test_stereoFixedOutputEquals( 
-      std::ostream& failmsg, const int line, float l, float r, std::string name) 
+      std::ostream& failmsg, const int line, TonicFrames& frames, float l, float r, std::string name) 
     {
-      for (unsigned int i=0; i<testFrames.frames(); i++){
-        TEST(eq, l, testFrames[2*i], 
-           "%s: Left channel not produce expected output on frame %i" /*, name.c_str(), i*/ );
-
-        TEST(eq, r, testFrames[2*i+1], 
-          "%s: Right channel did not produce expected output on frame %i" /*, name.c_str(), i*/ );
+      for (unsigned int i=0; i<frames.frames(); i++){
+        TEST(eq, l, frames[2*i],   Formatted("Left channel, frame %i", i))
+        TEST(eq, r, frames[2*i+1], Formatted("Right channel, frame %i", i))
       }
 
       return OK;
@@ -139,23 +140,26 @@ public:
 // The Tests
 // ---------
 
-TonicTests::Testcases* MyTests_Storage = 0;
-class MyTests : public TonicTests::Testsuite<TonicTestcase, &MyTests_Storage>
-{
-public:
-  MyTests(Logger& mylogger)
-  : TonicTests::Testsuite<TonicTestcase, &MyTests_Storage>(mylogger, "MySuite")
-  {}
-private:
+TESTSUITE(MyTests, TonicTestcase, "a simple Testsuite")
 
-  // TESTCASE("Demo")
-  //   int i = 0;
-  //   TEST(eq, 1, i, "i")
-  // END_TESTCASE()
+  // a simple toggle for me ^^ 
+  //#define DEMO_TESTCASE
+  
+  #ifdef DEMO_TESTCASE
+  TESTCASE("Demo")
+    int i = 0;
+    TEST(eq, 0, i, "i")
+    TEST(eq, true, true, "true")
+    TEST(eq, false, false, "false")
+    TEST(eq, 0.1f, 0.1f, "0.1f")
+  END_TESTCASE()
+
+  #else
 
   #pragma mark - Generator Tests
   #include "generator.tests"
 
+  #endif
   // #pragma mark - Control Generator Tests
   //#include "controlgenerator.tests"
   
@@ -165,7 +169,8 @@ private:
   // #pragma mark operator tests
   // #include "operator.tests"
 
-}; // namespace TonicTests
+END_TESTSUITE()
+
 
 int main(int argc, char const *argv[])
 {
