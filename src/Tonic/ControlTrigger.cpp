@@ -21,8 +21,9 @@ namespace Tonic { namespace Tonic_{
 } // Namespace Tonic_
   
   
-  void  ControlTrigger::trigger(float value){
+  ControlTrigger&  ControlTrigger::trigger(float value){
     gen()->trigger(value);
+	return *this;
   }
   
 } // Namespace Tonic
