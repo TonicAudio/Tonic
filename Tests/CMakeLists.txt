@@ -9,10 +9,10 @@ file(GLOB TEST_SOURCES tonictests.cpp)
 
 #set enable testing
 enable_testing()
-add_definitions("${CFLAGS}")
-link_libraries("${LINK_LIBS}")
-link_libraries("${PRJ_NAME}")
-link_libraries("${EXTRA_LIBS}")
+add_definitions(${CFLAGS})
+link_libraries(${LINK_LIBS})
+link_libraries(${PRJ_NAME})
+link_libraries(${EXTRA_LIBS})
 
 #adding tests foreach test source file
 foreach(filename ${TEST_SOURCES})
