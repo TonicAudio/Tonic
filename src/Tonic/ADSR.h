@@ -33,6 +33,7 @@ namespace Tonic {
       ControlGenerator doesSustain;
       ControlGenerator isLegato;
       ControlGenerator isExponential;
+	  ControlGenerator releaseTrigger_;
       
       TonicFloat attackTime;
       TonicFloat decayTime;
@@ -73,6 +74,7 @@ namespace Tonic {
       void setDecay(ControlGenerator gen){decay = gen;}
       void setSustain(ControlGenerator gen){sustain = gen;}
       void setRelease(ControlGenerator gen){release = gen;}
+	  void setReleaseTrigger(ControlGenerator gen){ releaseTrigger_ = gen; }
       
       //! Exponential or linear ramp
       void setIsExponential(ControlGenerator gen){isExponential = gen;}
@@ -88,7 +90,8 @@ namespace Tonic {
     inline void ADSR_::computeSynthesisBlock(const SynthesisContext_ &context){
       
       ControlGeneratorOutput triggerOutput = mTrigger.tick(context);
-      
+	  ControlGeneratorOutput releaseTriggerOutput = releaseTrigger_.tick(context);
+
       // frames to go in this block
       
       // Tick ALL inputs every time to keep everything in sync
@@ -100,17 +103,19 @@ namespace Tonic {
       bDoesSustain = (bool)doesSustain.tick(context).value;
       bIsLegato = (bool)isLegato.tick(context).value;
       
+
       TonicFloat * fdata = &outputFrames_[0];
       
       if(triggerOutput.triggered){
-        
         if(triggerOutput.value != 0){
           switchState(ATTACK);
         }else if(bDoesSustain){
           switchState(RELEASE);
         }
-        
-      }
+	  }
+	  else if (releaseTriggerOutput.triggered){
+		  switchState(RELEASE);
+	  }
       
       int samplesRemaining = kSynthesisBlockSize;
       
@@ -250,7 +255,8 @@ namespace Tonic {
     
       ADSR(float attack = 0.001f, float decay = 0.03f, float sustain = 1.0f, float release = 0.05f);
     
-      TONIC_MAKE_CTRL_GEN_SETTERS(ADSR, trigger, setTrigger);
+	  TONIC_MAKE_CTRL_GEN_SETTERS(ADSR, trigger, setTrigger);
+	  TONIC_MAKE_CTRL_GEN_SETTERS(ADSR, releaseTrigger, setReleaseTrigger);
       TONIC_MAKE_CTRL_GEN_SETTERS(ADSR, attack, setAttack);
       TONIC_MAKE_CTRL_GEN_SETTERS(ADSR, decay, setDecay);
       TONIC_MAKE_CTRL_GEN_SETTERS(ADSR, sustain, setSustain);
