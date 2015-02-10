@@ -1,4 +1,16 @@
-TESTCASE("test200ControlStepper"){
+//
+//  TonicTests.mm
+//  TonicTests
+//
+//  Created by Nick Donaldson on 3/9/13.
+//  adapted by Andreas Koerner 2015-02-10
+//
+
+#include "tonictests.h"
+
+TESTSUITE(ControlGeneratorTests, TonicTestcase, "")
+
+  TESTCASE(test200ControlStepper, "")
     // there's a bug involving ControlStepper where it appears to output zeros when it shares an metro with another controlgenerator
     
     {
@@ -7,10 +19,10 @@ TESTCASE("test200ControlStepper"){
       stepper = ControlStepper().start(1).end(2).step(1).trigger(trig);
       Tonic_::SynthesisContext_ context;
       ControlGeneratorOutput result = stepper.tick(context);
-      TEST_EQUAL(result.value, 1.0f, "ControlStepper did not produce expected output");
+      TEST(eq, result.value, 1.0f, "ControlStepper did not produce expected output");
     }
     
-      {
+    {
       //setup
       ControlTrigger trig;
       ControlStepper stepper;
@@ -18,44 +30,41 @@ TESTCASE("test200ControlStepper"){
 
       Tonic_::SynthesisContext_ context;
       ControlGeneratorOutput result = stepper.tick(context);
-      TEST_EQUAL(result.value, 1.0f, "ControlStepper did not produce expected output");
+      TEST(eq, result.value, 1.0f, "ControlStepper did not produce expected output");
       
       trig.trigger();
       context.tick();
       result = stepper.tick(context);
-      TEST_EQUAL(result.value, 2.0f, "ControlStepper did not produce expected output");
+      TEST(eq, result.value, 2.0f, "ControlStepper did not produce expected output");
       
       trig.trigger();
       context.tick();
       result = stepper.tick(context);
-      TEST_EQUAL(result.value, 3.0f, "ControlStepper did not produce expected output");
+      TEST(eq, result.value, 3.0f, "ControlStepper did not produce expected output");
       
       trig.trigger();
       context.tick();
       result = stepper.tick(context);
-      TEST_EQUAL(result.value, 2.0f, "ControlStepper did not produce expected output");
+      TEST(eq, result.value, 2.0f, "ControlStepper did not produce expected output");
       
       trig.trigger();
       context.tick();
       result = stepper.tick(context);
-      TEST_EQUAL(result.value, 1.0f, "ControlStepper did not produce expected output");
+      TEST(eq, result.value, 1.0f, "ControlStepper did not produce expected output");
       
       trig.trigger();
       context.tick();
       result = stepper.tick(context);
-      TEST_EQUAL(result.value, 2.0f, "ControlStepper did not produce expected output");
+      TEST(eq, result.value, 2.0f, "ControlStepper did not produce expected output");
       
       
       stepper = ControlStepper();
       
     }
 
-    
-  
-    return OK;
-  }
+  END_TESTCASE()
 
-  TESTCASE("test201ControlStepperSharedTrigger"){
+  TESTCASE(test201ControlStepperSharedTrigger, "")
     {
       ControlTrigger trig;
       ControlStepper stepper;
@@ -65,52 +74,47 @@ TESTCASE("test200ControlStepper"){
       
       env.tick(testFrames, context);
       ControlGeneratorOutput result = stepper.tick(context);
-      TEST_EQUAL(result.value, 1.0f, "ControlStepper did not produce expected output");
+      TEST(eq, result.value, 1.0f, "ControlStepper did not produce expected output");
       
       trig.trigger();
       context.tick();
       env.tick(testFrames, context);
       result = stepper.tick(context);
-      TEST_EQUAL(result.value, 2.0f, "ControlStepper did not produce expected output");
+      TEST(eq, result.value, 2.0f, "ControlStepper did not produce expected output");
       
       
     }
-  
-    return OK;
-  }
+  END_TESTCASE()
 
-  TESTCASE("test202ControlTrigger"){
+  TESTCASE(test202ControlTrigger, "")
     ControlTrigger trig;
     Tonic_::SynthesisContext_ context;
-    TEST_FALSE(trig.tick(context).triggered, "ControlGenerator did not produce expected output");
+    TEST(false, trig.tick(context).triggered, "ControlGenerator did not produce expected output");
     
     trig.trigger();
     context.tick();
-    TEST_TRUE(trig.tick(context).triggered, "ControlGenerator did not produce expected output");
-    
-  
-    return OK;
-  }
+    TEST(true, trig.tick(context).triggered, "ControlGenerator did not produce expected output");
+  END_TESTCASE()
 
-  TESTCASE("test203ControlRandom"){
+  TESTCASE(test203ControlRandom, "")
 
     ControlTrigger trig = ControlTrigger();
     ControlRandom random = ControlRandom().min(10).max(20).trigger(trig);
     Tonic_::SynthesisContext_ context;  
-    TEST_TRUE(random.tick(context).value > 0, "ControlRandom should start out with a value inside its range.");
+    TEST(true, random.tick(context).value > 0, "ControlRandom should start out with a value inside its range.");
     
     random.min(1).max(2);
-    TEST_TRUE(random.tick(context).value <= 2, "ControlRandom should start out with a value inside its range.");
-    TEST_FALSE(random.tick(context).triggered, "ControlRandom should not produce new trigger unless input is triggered.");
+    TEST(true, random.tick(context).value <= 2, "ControlRandom should start out with a value inside its range.");
+    TEST(false, random.tick(context).triggered, "ControlRandom should not produce new trigger unless input is triggered.");
     
     float randVal = random.tick(context).value;
     trig.trigger();
-    TEST_TRUE(random.tick(context).triggered, "ControlRandom should report change if triggered");
-    TEST_TRUE(random.tick(context).value != randVal, "ControlRandom should not have the same value after trigger.");
+    TEST(true, random.tick(context).triggered, "ControlRandom should report change if triggered");
+    TEST(true, random.tick(context).value != randVal, "ControlRandom should not have the same value after trigger.");
     
-  }
+  END_TESTCASE()
 
-  TESTCASE("test204ControlMetro"){
+  TESTCASE(test204ControlMetro, "")
     ControlMetro metro = ControlMetro().bpm(0.001);
     Tonic_::SynthesisContext_ context;
     context.tick();
@@ -120,67 +124,61 @@ TESTCASE("test200ControlStepper"){
     context.tick();
     metro.tick(context);
     context.tick();
-    TEST_FALSE( metro.tick(context).triggered, "Metro shouldn't report trigger.");
+    TEST(false,  metro.tick(context).triggered, "Metro shouldn't report trigger.");
     
   
-    return OK;
-  }
+  END_TESTCASE()
 
-  TESTCASE("test205ControlAdder"){
+  TESTCASE(test205ControlAdder, "")
     ControlValue left = ControlValue(2);
     ControlValue right = ControlValue(3);
     ControlAdder adder = left + right;
-    TEST_EQUAL(adder.tick(testContext).value, 5.0f, "Adder isn't adding correctly");
+    TEST(eq, adder.tick(testContext).value, 5.0f, "Adder isn't adding correctly");
     
   
-    return OK;
-  }
+  END_TESTCASE()
 
 
-  TESTCASE("test206SmoothedChangedStatus"){
+  TESTCASE(test206SmoothedChangedStatus, "")
     ControlValue val(100);
-    TEST_TRUE(val.tick(testContext).triggered, "Inital status of Control Gen should be 'triggered'");
+    TEST(true, val.tick(testContext).triggered, "Inital status of Control Gen should be 'triggered'");
     
     ControlValue val2(100);
     val2.smoothed();
-    TEST_TRUE(val2.tick(testContext).triggered, "Inital status of Control Gen should be 'triggered'");
+    TEST(true, val2.tick(testContext).triggered, "Inital status of Control Gen should be 'triggered'");
     
     // reset and try again
     testContext.forceNewOutput = true;
-    TEST_TRUE(val2.tick(testContext).triggered, "Inital status of Control Gen should be 'triggered'");
+    TEST(true, val2.tick(testContext).triggered, "Inital status of Control Gen should be 'triggered'");
     
   
-    return OK;
-  }
+  END_TESTCASE()
 
-  TESTCASE("test207ControlAdderAndMultiplier"){
+  TESTCASE(test207ControlAdderAndMultiplier, "")
     ControlGenerator val1 = ControlValue(2);
     ControlGenerator val2 = ControlValue(2);
     ControlGenerator final = val1 + val1 * val2;
-    TEST_EQUAL(final.tick(testContext).value, 6.0f, "val1 + val1 * val2 doesn't combine correctly with ControlGenerators");
+    TEST(eq, final.tick(testContext).value, 6.0f, "val1 + val1 * val2 doesn't combine correctly with ControlGenerators");
   
-    return OK;
-  }
+  END_TESTCASE()
 
 
-  TESTCASE("testControlValueTriggering")){
+  TESTCASE(testControlValueTriggering, "")
     Tonic_::SynthesisContext_ context;
     context.forceNewOutput = false;
     context.tick();
     ControlGenerator val1 = ControlValue(2);
-    TEST_TRUE(val1.tick(context).triggered, "Fist tick to ControlGen should cause trigger");
-    TEST_TRUE(val1.tick(context).triggered, "Subsequent ticks (with no context change) should still report triggered.");
+    TEST(true, val1.tick(context).triggered, "Fist tick to ControlGen should cause trigger");
+    TEST(true, val1.tick(context).triggered, "Subsequent ticks (with no context change) should still report triggered.");
     
     context.tick();
     
-    TEST_FALSE(val1.tick(context).triggered, "Triggered should be false on subsequent ticks after context has advanced.");
+    TEST(false, val1.tick(context).triggered, "Triggered should be false on subsequent ticks after context has advanced.");
    
   
-    return OK;
-  }
+  END_TESTCASE()
 
-  TESTCASE("test208ControlSwitcher"){
-
+  TESTCASE(test208ControlSwitcher, "")
 
     Tonic_::SynthesisContext_ localContext;
     
@@ -206,53 +204,52 @@ TESTCASE("test200ControlStepper"){
     
     localContext.tick();
     output = switcher.tick(localContext);
-    TEST_EQUAL( output.value, index0Val.getValue(), "InputIndex should be zero");
+    TEST(eq,  output.value, index0Val.getValue(), "InputIndex should be zero");
     
     localContext.tick();
     output = switcher.tick(localContext);
-    TEST_FALSE(output.triggered, "Second tick with no change should not result in trigger.");
+    TEST(false, output.triggered, "Second tick with no change should not result in trigger.");
     
     inputIndex.value(1);
     
     localContext.tick();
     output = switcher.tick(localContext);
-    TEST_EQUAL( output.value, index1Val.getValue(), "InputIndex should be one");
+    TEST(eq,  output.value, index1Val.getValue(), "InputIndex should be one");
     
     index1Val.value(100);
     localContext.tick();
     output = switcher.tick(localContext);
-    TEST_TRUE(output.triggered, "Change in input value should pass through to output.");
+    TEST(true, output.triggered, "Change in input value should pass through to output.");
     
     
     localContext.tick();
     output = switcher.tick(localContext);
-    TEST_FALSE(output.triggered, "Change in input value should pass through to output.");
+    TEST(false, output.triggered, "Change in input value should pass through to output.");
     
     input0Trig.trigger();
     localContext.tick();
     output = switcher.tick(localContext);
-    TEST_EQUAL( output.value, index0Val.getValue(), "InputIndex should be zero");
+    TEST(eq,  output.value, index0Val.getValue(), "InputIndex should be zero");
     
     input0Trig.trigger();
     localContext.tick();
     output = switcher.tick(localContext);
-    TEST_FALSE( output.triggered, "Repeat call to same input shouldn't trigger if the input didn't trigger");
+    TEST(false,  output.triggered, "Repeat call to same input shouldn't trigger if the input didn't trigger");
     
     input1Trig.trigger();
     localContext.tick();
     output = switcher.tick(localContext);
-    TEST_TRUE( output.triggered, "Switching inputs should cause a trigger.");
+    TEST(true,  output.triggered, "Switching inputs should cause a trigger.");
     
     inputIndex.value(0);
     localContext.tick();
     output = switcher.tick(localContext);
-    TEST_EQUAL( output.value, index0Val.getValue(), "Changing the inputIndex should work, even after using an input trigger.");
+    TEST(eq,  output.value, index0Val.getValue(), "Changing the inputIndex should work, even after using an input trigger.");
     
   
-    return OK;
-  }
+  END_TESTCASE()
 
-  TESTCASE("test209ControlSwitcherWrap"){
+  TESTCASE(test209ControlSwitcherWrap, "")
 
     Tonic_::SynthesisContext_ localContext;
     localContext.forceNewOutput = false;
@@ -270,33 +267,42 @@ TESTCASE("test200ControlStepper"){
     switcher.inputIndex(0);
     localContext.tick();
     switcher.tick(localContext);
-    TEST_EQUAL(switcher.tick(localContext).value, inputZero, "ControlSwitcher basic test.");
+    TEST(eq, switcher.tick(localContext).value, inputZero, "ControlSwitcher basic test.");
     
     
     switcher.inputIndex(2);
     localContext.tick();
     switcher.tick(localContext);
-    TEST_EQUAL(switcher.tick(localContext).value, inputZero + addAfterWrap, "ControlSwitcher basic test.");
+    TEST(eq, switcher.tick(localContext).value, inputZero + addAfterWrap, "ControlSwitcher basic test.");
     
     
     switcher.inputIndex(3);
     localContext.tick();
     switcher.tick(localContext);
-    TEST_EQUAL(switcher.tick(localContext).value, inputOne + addAfterWrap, "ControlSwitcher basic test.");
+    TEST(eq, switcher.tick(localContext).value, inputOne + addAfterWrap, "ControlSwitcher basic test.");
     
     
     switcher.inputIndex(4);
     localContext.tick();
     switcher.tick(localContext);
-    TEST_EQUAL(switcher.tick(localContext).value, inputZero + addAfterWrap * 2, "ControlSwitcher basic test.");
+    TEST(eq, switcher.tick(localContext).value, inputZero + addAfterWrap * 2, "ControlSwitcher basic test.");
     
     
     switcher.inputIndex(5);
     localContext.tick();
     switcher.tick(localContext);
-    TEST_EQUAL(switcher.tick(localContext).value, inputOne + addAfterWrap * 2, "ControlSwitcher basic test.");
-    
-    
-  
-    return OK;
-  }
+    TEST(eq, switcher.tick(localContext).value, inputOne + addAfterWrap * 2, "ControlSwitcher basic test.");
+
+  END_TESTCASE()
+
+END_TESTSUITE()
+
+
+int main(int argc, char const *argv[])
+{
+  ConsoleLogger logger;
+  ControlGeneratorTests suite(logger);
+  suite.run();
+  return logger.getFailed();
+}
+

@@ -165,3 +165,26 @@ endif (WIN32)
 #    add_subdirectory(tests)
 # endif (BUILD_TESTING)
 
+# MinGW support for dsound requires locating that libraries, Visual Studio
+# does not require that step
+if (AUDIO_WINDOWS_DS)
+    if ("${CMAKE_GENERATOR}" STREQUAL "MinGW Makefiles")
+      # looking for directX
+      include("RTAudio/FindDirectX.cmake")
+        
+        if (NOT DirectX_FOUND)
+        
+            message( STATUS "Directsound was not found" )
+            message( STATUS "Standalone example can't be compiled" )
+
+            set(TONIC_USE_STANDALONE_EXAMPLE OFF)
+        
+        else(NOT DirectX_FOUND)
+      
+        target_link_libraries(DirectX_LIBRARY)
+        target_compile_definitions("-I${DirectX_INCLUDE_DIR}" )
+        
+        endif(NOT DirectX_FOUND)
+
+    endif("${CMAKE_GENERATOR}" STREQUAL "MinGW Makefiles")
+endif(AUDIO_WINDOWS_DS)

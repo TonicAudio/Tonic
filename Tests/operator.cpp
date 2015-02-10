@@ -1,4 +1,16 @@
-  TESTCASE("test400CombineGeneratorControlGenerator"){
+//
+//  TonicTests.mm
+//  TonicTests
+//
+//  Created by Nick Donaldson on 3/9/13.
+//  adapted by Andreas Koerner 2015-02-10
+//
+
+#include "tonictests.h"
+
+TESTSUITE(OperatorTests, TonicTestcase, "")
+
+  TESTCASE(test400CombineGeneratorControlGenerator, "")
 
     {
 
@@ -6,7 +18,7 @@
       Generator gen =  ControlValue(1) + FixedValue(1);
       testFiller.setOutputGen(gen);
       testFiller.fillBufferOfFloats(stereoOutBuffer, kTestOutputBlockSize, 2);
-      TEST_EQUAL(2.f, *stereoOutBuffer, "ControlValue(1) + FixedValue(1) failed");
+      TEST(eq, 2.f, *stereoOutBuffer, "ControlValue(1) + FixedValue(1) failed");
     
     }
     
@@ -16,7 +28,7 @@
       Generator gen =   FixedValue(1) + ControlValue(1);
       testFiller.setOutputGen(gen);
       testFiller.fillBufferOfFloats(stereoOutBuffer, kTestOutputBlockSize, 2);
-      TEST_EQUAL(2.f, *stereoOutBuffer, "FixedValue(1) + ControlValue(1) failed");
+      TEST(eq, 2.f, *stereoOutBuffer, "FixedValue(1) + ControlValue(1) failed");
     
     }
     
@@ -26,7 +38,7 @@
       Generator gen =   FixedValue(3) - ControlValue(2);
       testFiller.setOutputGen(gen);
       testFiller.fillBufferOfFloats(stereoOutBuffer, kTestOutputBlockSize, 2);
-      TEST_EQUAL(1.f, *stereoOutBuffer, "FixedValue(1) + ControlValue(1) failed");
+      TEST(eq, 1.f, *stereoOutBuffer, "FixedValue(1) + ControlValue(1) failed");
 
     }
     
@@ -36,7 +48,7 @@
       Generator gen =   ControlValue(3) - FixedValue(2);
       testFiller.setOutputGen(gen);
       testFiller.fillBufferOfFloats(stereoOutBuffer, kTestOutputBlockSize, 2);
-      TEST_EQUAL(1.f, *stereoOutBuffer, "ControlValue(3) - FixedValue(2) failed");
+      TEST(eq, 1.f, *stereoOutBuffer, "ControlValue(3) - FixedValue(2) failed");
     }
     
     {
@@ -45,7 +57,7 @@
       Generator gen =   ControlValue(3) * FixedValue(2);
       testFiller.setOutputGen(gen);
       testFiller.fillBufferOfFloats(stereoOutBuffer, kTestOutputBlockSize, 2);
-      TEST_EQUAL(6.f, *stereoOutBuffer, "ControlValue(3) * FixedValue(2) failed");
+      TEST(eq, 6.f, *stereoOutBuffer, "ControlValue(3) * FixedValue(2) failed");
     }
     
     {
@@ -54,14 +66,12 @@
       Generator gen =  FixedValue(3) * ControlValue(2);
       testFiller.setOutputGen(gen);
       testFiller.fillBufferOfFloats(stereoOutBuffer, kTestOutputBlockSize, 2);
-      TEST_EQUAL(6.f, *stereoOutBuffer, " FixedValue(3) * ControlValue(2) failed");
+      TEST(eq, 6.f, *stereoOutBuffer, " FixedValue(3) * ControlValue(2) failed");
     }
     
-  
-    return OK;
-  }
+  END_TESTCASE()
 
-  TESTCASE("test401GeneratorMinusControlGenerator"){
+  TESTCASE(test401GeneratorMinusControlGenerator, "")
 
     {
 
@@ -69,7 +79,7 @@
     Generator gen =  ControlValue(2) - FixedValue(1);
     testFiller.setOutputGen(gen);
     testFiller.fillBufferOfFloats(stereoOutBuffer, kTestOutputBlockSize, 2);
-    TEST_EQUAL(1.f, *stereoOutBuffer, "ControlValue(2) - FixedValue(1) failed");
+    TEST(eq, 1.f, *stereoOutBuffer, "ControlValue(2) - FixedValue(1) failed");
     
     }
     
@@ -79,51 +89,48 @@
     Generator gen =   FixedValue(2) - ControlValue(1);
     testFiller.setOutputGen(gen);
     testFiller.fillBufferOfFloats(stereoOutBuffer, kTestOutputBlockSize, 2);
-    TEST_EQUAL(1.f, *stereoOutBuffer, "FixedValue(1) - ControlValue(1) failed");
+    TEST(eq, 1.f, *stereoOutBuffer, "FixedValue(1) - ControlValue(1) failed");
     
     }
     
   
-    return OK;
-  }
+  END_TESTCASE()
 
-  TESTCASE("test402ControlGeneratorDivide"){
+  TESTCASE(test402ControlGeneratorDivide, "")
     {
       ControlGenerator gen = ControlValue(10) / ControlValue(5);
       Tonic_::SynthesisContext_ context;
-      TEST_EQUAL(gen.tick(context).value, 2.f, "ControlValue(10) / ControlValue(5) failed.");
+      TEST(eq, gen.tick(context).value, 2.f, "ControlValue(10) / ControlValue(5) failed.");
     }
 
     {
       ControlGenerator gen = 10 / ControlValue(5);
       Tonic_::SynthesisContext_ context;
-      TEST_EQUAL(gen.tick(context).value, 2.f, "10 / ControlValue(5) failed.");
+      TEST(eq, gen.tick(context).value, 2.f, "10 / ControlValue(5) failed.");
     }
 
     {
       ControlGenerator gen = ControlValue(10) / 5;
       Tonic_::SynthesisContext_ context;
-      TEST_EQUAL(gen.tick(context).value, 2.f, "ControlValue(10) / 5 failed.");
+      TEST(eq, gen.tick(context).value, 2.f, "ControlValue(10) / 5 failed.");
     }
 
   
-    return OK;
-  }
+  END_TESTCASE()
 
-  TESTCASE("test403ControlGenDivideByZero"){
+  TESTCASE(test403ControlGenDivideByZero, "")
     ControlValue right = ControlValue(5);
     ControlGenerator gen = ControlValue(10) / right;
     Tonic_::SynthesisContext_ context;
     gen.tick(context);
     right.value(0);
     
-    TEST_EQUAL(gen.tick(context).value, 2.f, "Divide by zero should return the last valid value.");
+    TEST(eq, gen.tick(context).value, 2.f, "Divide by zero should return the last valid value.");
   
-    return OK;
-  }
+  END_TESTCASE()
 
 
-  TESTCASE("test404TestCombinationsOfGenAndControlGen"){
+  TESTCASE(test404TestCombinationsOfGenAndControlGen, "")
 
     TestBufferFiller testFiller;
     ControlGenerator ctrlGen1 = ControlValue(2);
@@ -131,18 +138,17 @@
     testFiller.setLimitOutput(false);
     testFiller.setOutputGen(gen1);
     testFiller.fillBufferOfFloats(stereoOutBuffer, kTestOutputBlockSize, 2);
-    TEST_EQUAL(*stereoOutBuffer, 6.f, "Complex combination of control gen and gen failed");
+    TEST(eq, *stereoOutBuffer, 6.f, "Complex combination of control gen and gen failed");
      
     // set the force output flag and try it again to ensure it still works
     testFiller.forceNewOutput();
     testFiller.fillBufferOfFloats(stereoOutBuffer, kTestOutputBlockSize, 2);
-    TEST_EQUAL(*stereoOutBuffer, 6.f, "Complex combination of control gen and gen failed");
+    TEST(eq, *stereoOutBuffer, 6.f, "Complex combination of control gen and gen failed");
     
   
-    return OK;
-  }
+  END_TESTCASE()
 
-  TESTCASE("test405ControlGeneratorComparison"){
+  TESTCASE(test405ControlGeneratorComparison, "")
     
     const int n_iterations = 10;
     Tonic_::SynthesisContext_ context;
@@ -156,11 +162,11 @@
       ControlGenerator g1 = ControlValue(rf) == rf;
       ControlGenerator g2 = ControlValue(rf) == ControlValue(99999.f);
       
-      TEST_TRUE(g.tick(context).triggered, "Every tick should produce a change");
+      TEST(true, g.tick(context).triggered, "Every tick should produce a change");
       
-      TEST_EQUAL(g.tick(context).value, 1.0f, "%.2f should equal itself", rf);
-      TEST_EQUAL(g1.tick(context).value, 1.0f, "%.2f should equal itself", rf);
-      TEST_EQUAL(g2.tick(context).value, 0.0f, "%.2f should not be equal to rhs", rf);
+      TEST(eq, g.tick(context).value, 1.0f, Formatted("%.2f should equal itself", rf));
+      TEST(eq, g1.tick(context).value, 1.0f, Formatted("%.2f should equal itself", rf));
+      TEST(eq, g2.tick(context).value, 0.0f, Formatted("%.2f should not be equal to rhs", rf));
 
     }
     
@@ -173,11 +179,11 @@
       ControlGenerator g1 = ControlValue(rf) != 99999.f;
       ControlGenerator g2 = ControlValue(rf) != ControlValue(rf);
       
-      TEST_TRUE(g.tick(context).triggered, "Every tick should produce a change");
+      TEST(true, g.tick(context).triggered, "Every tick should produce a change");
       
-      TEST_EQUAL(g.tick(context).value, 1.0f, "%.2f should not be equal to rhs", rf);
-      TEST_EQUAL(g1.tick(context).value, 1.0f, "%.2f should not be equal to rhs", rf);
-      TEST_EQUAL(g2.tick(context).value, 0.0f, "%.2f should be equal to rhs", rf);
+      TEST(eq, g.tick(context).value, 1.0f, Formatted("%.2f should not be equal to rhs", rf));
+      TEST(eq, g1.tick(context).value, 1.0f, Formatted("%.2f should not be equal to rhs", rf));
+      TEST(eq, g2.tick(context).value, 0.0f, Formatted("%.2f should be equal to rhs", rf));
       
     }
     
@@ -190,11 +196,11 @@
       ControlGenerator g1 = ControlValue(rf) > 0.f;
       ControlGenerator g2 = ControlValue(rf) > ControlValue(99999.f);
       
-      TEST_TRUE(g.tick(context).triggered, "Every tick should produce a change");
+      TEST(true, g.tick(context).triggered, "Every tick should produce a change");
       
-      TEST_EQUAL(g.tick(context).value, 1.0f, "%.2f should be greater than rhs", rf);
-      TEST_EQUAL(g1.tick(context).value, 1.0f, "%.2f should be greater than rhs", rf);
-      TEST_EQUAL(g2.tick(context).value, 0.0f, "%.2f should not be greater than rhs", rf);
+      TEST(eq, g.tick(context).value, 1.0f, Formatted("%.2f should be greater than rhs", rf));
+      TEST(eq, g1.tick(context).value, 1.0f, Formatted("%.2f should be greater than rhs", rf));
+      TEST(eq, g2.tick(context).value, 0.0f, Formatted("%.2f should not be greater than rhs", rf));
       
     }
     
@@ -207,11 +213,11 @@
       ControlGenerator g1 = ControlValue(rf) > 0.f;
       ControlGenerator g2 = ControlValue(rf) >= ControlValue(99999.f);
       
-      TEST_TRUE(g.tick(context).triggered, "Every tick should produce a change");
+      TEST(true, g.tick(context).triggered, "Every tick should produce a change");
       
-      TEST_EQUAL(g.tick(context).value, 1.0f, "%.2f should be greater than or equal to rhs", rf);
-      TEST_EQUAL(g1.tick(context).value, 1.0f, "%.2f should be greater than or equal to rhs", rf);
-      TEST_EQUAL(g2.tick(context).value, 0.0f, "%.2f should not be greater than or equal rhs", rf);
+      TEST(eq, g.tick(context).value, 1.0f, Formatted("%.2f should be greater than or equal to rhs", rf));
+      TEST(eq, g1.tick(context).value, 1.0f, Formatted("%.2f should be greater than or equal to rhs", rf));
+      TEST(eq, g2.tick(context).value, 0.0f, Formatted("%.2f should not be greater than or equal rhs", rf));
       
     }
     
@@ -224,16 +230,16 @@
       ControlGenerator g1 = ControlValue(rf) < 99999.f;
       ControlGenerator g2 = ControlValue(rf) < ControlValue(0.f);
       
-      TEST_TRUE(g.tick(context).triggered, "Every tick should produce a change");
+      TEST(true, g.tick(context).triggered, "Every tick should produce a change");
       
-      TEST_EQUAL(g.tick(context).value, 1.0f, "%.2f should be less than rhs", rf);
-      TEST_EQUAL(g1.tick(context).value, 1.0f, "%.2f should be less than rhs", rf);
-      TEST_EQUAL(g2.tick(context).value, 0.0f, "%.2f should not be less than rhs", rf);
+      TEST(eq, g.tick(context).value, 1.0f, Formatted("%.2f should be less than rhs", rf));
+      TEST(eq, g1.tick(context).value, 1.0f, Formatted("%.2f should be less than rhs", rf));
+      TEST(eq, g2.tick(context).value, 0.0f, Formatted("%.2f should not be less than rhs", rf));
       
     }
     
     // less than or equal
-    for (int i=0; i<n_iterations; i+){
+    for (int i=0; i<n_iterations; i++) {
       
       float rf = randomFloat(0.1f, 1000.f);
       
@@ -241,13 +247,23 @@
       ControlGenerator g1 = ControlValue(rf) <= 99999.f;
       ControlGenerator g2 = ControlValue(rf) <= ControlValue(0.f);
       
-      TEST_TRUE(g.tick(context).triggered, "Every tick should produce a change");
+      TEST(true, g.tick(context).triggered, "Every tick should produce a change");
       
-      TEST_EQUAL(g.tick(context).value, 1.0f, "%.2f should be less than or equal to rhs", rf);
-      TEST_EQUAL(g1.tick(context).value, 1.0f, "%.2f should be less than or equal to rhs", rf);
-      TEST_EQUAL(g2.tick(context).value, 0.0f, "%.2f should not be less than or equal to rhs", rf);
+      TEST(eq, g.tick(context).value, 1.0f, Formatted("%.2f should be less than or equal to rhs", rf));
+      TEST(eq, g1.tick(context).value, 1.0f, Formatted("%.2f should be less than or equal to rhs", rf));
+      TEST(eq, g2.tick(context).value, 0.0f, Formatted("%.2f should not be less than or equal to rhs", rf));
       
     }
   
-    return OK;
-  }
+  END_TESTCASE()
+
+END_TESTSUITE()
+
+
+int main(int argc, char const *argv[])
+{
+  ConsoleLogger logger;
+  OperatorTests suite(logger);
+  suite.run();
+  return logger.getFailed();
+}

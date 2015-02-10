@@ -1,4 +1,16 @@
-  TESTCASE("test100FixedValue")
+//
+//  TonicTests.mm
+//  TonicTests
+//
+//  Created by Nick Donaldson on 3/9/13.
+//  adapted by Andreas Koerner 2015-02-10
+//
+
+#include "tonictests.h"
+
+TESTSUITE(GeneratorTests, TonicTestcase, "")
+
+  TESTCASE(test100FixedValue, "")
 
     // See if FixedValue is correctly filled with a float
     
@@ -9,11 +21,11 @@
     
     testVal.tick(testFrames, testContext);
 
-    TEST(stereoFixedOutputEquals, testFrames, testFloat, testFloat, "buffer");
+    TEST(fixedOutputEquals, testFrames, testFloat);
   
   END_TESTCASE()
 
-  TESTCASE("test101TickMonoToStereo")
+  TESTCASE(test101TickMonoToStereo, "")
     // Tick a mono source to a stereo frames object. Ensure both channels equal.
     
     configureStereo(true);
@@ -25,11 +37,11 @@
     
     TEST(eq, testFrames.channels(), (unsigned int)2, "TestFrames should have 2 channels");
     
-    TEST(stereoFixedOutputEquals, testFrames, testFloat, testFloat, "buffer");
+    TEST(stereoFixedOutputEquals, testFrames, testFloat, testFloat);
   END_TESTCASE()
 
-  TESTCASE("test102TickStereoToMono")
-    // Tick a stereo source to a mono frames object. Ensure mono value is as expected (average of L-R channels)
+  TESTCASE(test102TickStereoToMono, "")
+    // Tick a stereo soqrce to a mono frames object. Ensure mono value is as expected (average of L-R channels)
     
     configureStereo(false);
     
@@ -40,10 +52,10 @@
     stereoVal.tick(testFrames, testContext);
     
     // Result should be average, or 0.75
-    TEST(stereoFixedOutputEquals, testFrames, 0.75f, 0.75f, "buffer");
+    TEST(fixedOutputEquals, testFrames, 0.75f);
   END_TESTCASE()
 
-  TESTCASE("test103AdderMonoMono")
+  TESTCASE(test103AdderMonoMono, "")
     // Add two mono generators, ensure result is mono
     
     configureStereo(false);
@@ -54,11 +66,11 @@
     
     monoAdder.tick(testFrames, testContext);
     
-    TEST(stereoFixedOutputEquals, testFrames, 1.0f, 1.0f, "buffer");
+    TEST(fixedOutputEquals, testFrames, 1.0f);
     
   END_TESTCASE()
 
-  TESTCASE("test104AdderMonoStereo")
+  TESTCASE(test104AdderMonoStereo, "")
     // Add one mono, one stereo, ensure result is stereo
     
     configureStereo(true);
@@ -69,11 +81,11 @@
     
     stereoAdder.tick(testFrames, testContext);
     
-    TEST(stereoFixedOutputEquals, testFrames, 0.5f, 1.5f, "buffer");
+    TEST(stereoFixedOutputEquals, testFrames, 0.5f, 1.5f);
     
   END_TESTCASE()
 
-  TESTCASE("test105AdderStereoStereo")
+  TESTCASE(test105AdderStereoStereo, "")
     configureStereo(true);
     
     Adder stereoAdder = StereoFixedTestGen(1.0, 0.0) + StereoFixedTestGen(0.0, 1.0);
@@ -82,11 +94,11 @@
     
     stereoAdder.tick(testFrames, testContext);
     
-    TEST(stereoFixedOutputEquals, testFrames, 1.0f, 1.0f, "buffer");
+    TEST(stereoFixedOutputEquals, testFrames, 1.0f, 1.0f);
     
   END_TESTCASE()
 
-  TESTCASE("test106MultMonoMono")
+  TESTCASE(test106MultMonoMono, "")
     // Multiply two mono generators, ensure result is mono
     
     configureStereo(false);
@@ -97,11 +109,11 @@
     
     monoMult.tick(testFrames, testContext);
     
-    TEST(stereoFixedOutputEquals, testFrames, 0.25f, 0.25f, "buffer");
+    TEST(fixedOutputEquals, testFrames, 0.25f);
     
   END_TESTCASE()
 
-  TESTCASE("test107MultMonoStereo")
+  TESTCASE(test107MultMonoStereo, "")
     // Multiply one mono, one stereo, ensure result is stereo
     
     configureStereo(true);
@@ -112,13 +124,13 @@
     
     stereoMult.tick(testFrames, testContext);
     
-    TEST(stereoFixedOutputEquals, testFrames, 0.0f, 0.5f, "buffer");
+    TEST(stereoFixedOutputEquals, testFrames, 0.0f, 0.5f);
     
   END_TESTCASE()
 
 
 
-  TESTCASE("test107_1_MultStereoMono")
+  TESTCASE(test107_1_MultStereoMono, "")
     // Multiply one stereo, one mono, with stereo on the right side, ensure result is stereo
     
     configureStereo(true);
@@ -129,11 +141,11 @@
     
     stereoMult.tick(testFrames, testContext);
     
-    TEST(stereoFixedOutputEquals, testFrames, 0.0f, 0.5f, "buffer");
+    TEST(stereoFixedOutputEquals, testFrames, 0.0f, 0.5f);
     
   END_TESTCASE()
 
-  TESTCASE("test108MultStereoStereo")
+  TESTCASE(test108MultStereoStereo, "")
     configureStereo(true);
     
     Multiplier stereoMult = StereoFixedTestGen(1.0, 0.0) * StereoFixedTestGen(0.0, 1.0);
@@ -143,12 +155,12 @@
     stereoMult.tick(testFrames, testContext);
     
     // Both channels 0
-    TEST(stereoFixedOutputEquals, testFrames, 0.0f, 0.0f, "buffer");
+    TEST(stereoFixedOutputEquals, testFrames, 0.0f, 0.0f);
     
   END_TESTCASE()
 
 
-  TESTCASE("test1081DivMonoMono")
+  TESTCASE(test1081DivMonoMono, "")
     configureStereo(false);
     
     Divider divMono = FixedValue(1) / FixedValue(2);
@@ -157,11 +169,11 @@
     
     divMono.tick(testFrames, testContext);
     
-    TEST(stereoFixedOutputEquals, testFrames, 0.5f, 0.5f, "buffer");
+    TEST(fixedOutputEquals, testFrames, 0.5f);
     
   END_TESTCASE()
 
-  TESTCASE("test1082DivGenControlGenCombos")
+  TESTCASE(test1082DivGenControlGenCombos, "")
 
     {
       configureStereo(false);
@@ -172,7 +184,7 @@
       
       divMono.tick(testFrames, testContext);
       
-      TEST(stereoFixedOutputEquals, testFrames, 0.5f, 0.5f, "buffer");
+      TEST(fixedOutputEquals, testFrames, 0.5f);
     }
 
     {
@@ -184,30 +196,30 @@
       
       divMono.tick(testFrames, testContext);
       
-      TEST(stereoFixedOutputEquals, testFrames, 0.5f, 0.5f, "buffer");
+      TEST(fixedOutputEquals, testFrames, 0.5f);
     }
       
   END_TESTCASE()
 
-  TESTCASE("test109PannerMonoToStereo")
+  TESTCASE(test109PannerMonoToStereo, "")
     
     configureStereo(true);
     
     MonoToStereoPanner panner = MonoToStereoPanner().pan(-1).input(FixedValue(1));
     panner.tick(testFrames, testContext);
-    TEST(stereoFixedOutputEquals, testFrames, 1, 0, "buffer");
+    TEST(stereoFixedOutputEquals, testFrames, 1, 0);
     
     panner.pan(0);
     panner.tick(testFrames, testContext);
-    TEST(stereoFixedOutputEquals, testFrames, 1, 1, "buffer");
+    TEST(stereoFixedOutputEquals, testFrames, 1, 1);
     
     panner.pan(1);
     panner.tick(testFrames, testContext);
-    TEST(stereoFixedOutputEquals, testFrames, 0, 1, "buffer");
+    TEST(stereoFixedOutputEquals, testFrames, 0, 1);
     
   END_TESTCASE()
 
-  TESTCASE("test110SubtractorTest")
+  TESTCASE(test110SubtractorTest, "")
     Generator gen = FixedValue(2) - FixedValue(1);
     TestBufferFiller testFiller;
     testFiller.setOutputGen(gen);
@@ -217,7 +229,7 @@
 
   // For the limiter output to be observable, limiter must be ticked until the output frame index exceeds the limiter
   // lookahead time (default 3ms), otherwise the output will be zero. Lookahead used to reduce distortion.
-  TESTCASE("testSynthLimiter")
+  TESTCASE(testSynthLimiter, "")
     TestBufferFiller testFiller;
     testFiller.setLimitOutput(true);
     testFiller.setOutputGen(FixedValue(100));
@@ -230,11 +242,22 @@
     
   END_TESTCASE()
 
-  TESTCASE("test120TestBitCrusherStereoPreservation")
+  TESTCASE(test120TestBitCrusherStereoPreservation, "")
 
     configureStereo(true);
     BitCrusher bitCrusher = BitCrusher().bitDepth(16).input(StereoFixedTestGen(0.0, 1.0));
     TEST(true, bitCrusher.isStereoOutput(), "bitcrusher should know that it's strereo output");
     bitCrusher.tick(testFrames, testContext);
-    TEST(stereoFixedOutputEquals, testFrames, 0, 1, "buffer");
+    TEST(stereoFixedOutputEquals, testFrames, 0, 1);
   END_TESTCASE()
+
+END_TESTSUITE()
+
+
+int main(int argc, char const *argv[])
+{
+  ConsoleLogger logger;
+  GeneratorTests suite(logger);
+  suite.run();
+  return logger.getFailed();
+}

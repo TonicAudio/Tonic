@@ -1,4 +1,17 @@
-  TESTCASE("test300BufferFillerMonoOutMonoSource"){
+//
+//  TonicTests.mm
+//  TonicTests
+//
+//  Created by Nick Donaldson on 3/9/13.
+//  adapted by Andreas Koerner 2015-02-10
+//
+
+#include "tonictests.h"
+
+TESTSUITE(BufferFillerTests, TonicTestcase, "")
+
+
+  TESTCASE(test300BufferFillerMonoOutMonoSource,"")
     TestBufferFiller testFiller;
     
     // Mono fixed value
@@ -7,12 +20,10 @@
     
     testFiller.fillBufferOfFloats(monoOutBuffer, kTestOutputBlockSize, 1);
     
-    verifyBufferFillerMonoFixedOutputEquals(0.5);
-  
-    return OK;
-  }
+    TEST(bufferFillerMonoFixedOutputEquals, 0.5);
+  END_TESTCASE()
 
-  TESTCASE("test301BufferFillerMonoOutStereoSource"){
+  TESTCASE(test301BufferFillerMonoOutStereoSource,"")
     TestBufferFiller testFiller;
     
     // Stereo fixed value
@@ -22,12 +33,10 @@
     testFiller.fillBufferOfFloats(monoOutBuffer, kTestOutputBlockSize, 1);
     
     // average
-    verifyBufferFillerMonoFixedOutputEquals(0.75);
-  
-    return OK;
-  }
+    TEST(bufferFillerMonoFixedOutputEquals, 0.75);
+  END_TESTCASE()
 
-  TESTCASE("test302BufferFillerStereoOutMonoSource"){
+  TESTCASE(test302BufferFillerStereoOutMonoSource,"")
     TestBufferFiller testFiller;
     
     // Mono fixed value
@@ -36,12 +45,10 @@
     
     testFiller.fillBufferOfFloats(stereoOutBuffer, kTestOutputBlockSize, 2);
     
-    [self verifyBufferFillerStereoFixedOutputEqualsLeft:0.5 right:0.5];
-  
-    return OK;
-  }
+    TEST(bufferFillerStereoFixedOutputEquals, 0.5, 0.5);
+  END_TESTCASE()
 
-  TESTCASE("test303BufferFillerStereoOutStereoSource"){
+  TESTCASE(test303BufferFillerStereoOutStereoSource,"")
     TestBufferFiller testFiller;
     
     // Stereo fixed value
@@ -50,13 +57,11 @@
     
     testFiller.fillBufferOfFloats(stereoOutBuffer, kTestOutputBlockSize, 2);
     
-    [self verifyBufferFillerStereoFixedOutputEqualsLeft:0.5 right:1.0];
+    TEST(bufferFillerStereoFixedOutputEquals, 0.5, 1.0);
     
-  
-    return OK;
-  }
+  END_TESTCASE()
 
-  TESTCASE("test304ControlChangeNotifierTest"){
+  TESTCASE(test304ControlChangeNotifierTest,"")
 
     class TestSynth : public Synth {
       public:
@@ -73,13 +78,13 @@
       synth.fillBufferOfFloats(stereoOutBuffer, kTestOutputBlockSize, 2);
     }
     
-    TEST_FALSE(subscriber.valueChangedFlag, "Value changed notification should not have happened");
+    TEST(false, subscriber.valueChangedFlag, "Value changed notification should not have happened");
     subscriber.valueChangedFlag = false;
     synth.sendControlChangesToSubscribers();
-    TEST_TRUE(subscriber.valueChangedFlag, "Value changed notification should have happened");
+    TEST(true, subscriber.valueChangedFlag, "Value changed notification should have happened");
     subscriber.valueChangedFlag = false;
     synth.sendControlChangesToSubscribers();
-    TEST_FALSE(subscriber.valueChangedFlag, "Value changed notification should not have happened");
+    TEST(false, subscriber.valueChangedFlag, "Value changed notification should not have happened");
    
     for(int i = 0; i < 1000; i++){
       synth.fillBufferOfFloats(stereoOutBuffer, kTestOutputBlockSize, 2);
@@ -87,7 +92,7 @@
     
     subscriber.valueChangedFlag = false;
     synth.sendControlChangesToSubscribers();
-    TEST_TRUE(subscriber.valueChangedFlag, "Value changed notification should have happened");
+    TEST(true, subscriber.valueChangedFlag, "Value changed notification should have happened");
     
     // now remove the subscriber and make sure it's not notified any more
     
@@ -97,7 +102,7 @@
       synth.fillBufferOfFloats(stereoOutBuffer, kTestOutputBlockSize, 2);
     }
     synth.sendControlChangesToSubscribers();
-    TEST_FALSE(subscriber.valueChangedFlag, "Value changed notification should not have happened");
+    TEST(false, subscriber.valueChangedFlag, "Value changed notification should not have happened");
     
     ////////////////////////////
     // Unnamed notifier test
@@ -111,17 +116,15 @@
       synth.fillBufferOfFloats(stereoOutBuffer, kTestOutputBlockSize, 2);
     }
     
-    TEST_FALSE(subscriber.valueChangedFlag, "Value changed notification should not have happened");
+    TEST(false, subscriber.valueChangedFlag, "Value changed notification should not have happened");
     synth.sendControlChangesToSubscribers();
-    TEST_TRUE(subscriber.valueChangedFlag, "Value changed notification should have happened");
+    TEST(true, subscriber.valueChangedFlag, "Value changed notification should have happened");
     
-  
-    return OK;
-  }
+  END_TESTCASE()
 
   // publishChanges should return a ControlChangeNotifier which we can subscribe to
   // directly, as an alternative to going through Synth::addControlChangeSubscriber
-  TESTCASE("test304ControlChangeNotifierInlineTest"){
+  TESTCASE(test304ControlChangeNotifierInlineTest,"")
     Synth synth;
     const float VALUE = 0.5;
     ControlValue val(VALUE);
@@ -130,20 +133,18 @@
     notifier.addValueChangedSubscriber(&subscriber);
     
     Tonic_::SynthesisContext_ context;
-    TEST_EQUAL(notifier.tick(context).value, VALUE, "A controlChangeNotifier should wrap the ControlGenerator it's observing");
+    TEST(eq, notifier.tick(context).value, VALUE, "A controlChangeNotifier should wrap the ControlGenerator it's observing");
     
     for(int i = 0; i < 1000; i++){
       synth.fillBufferOfFloats(stereoOutBuffer, kTestOutputBlockSize, 2);
     }
-    TEST_FALSE(subscriber.valueChangedFlag, "Value changed notification should not have happened");
+    TEST(false, subscriber.valueChangedFlag, "Value changed notification should not have happened");
     synth.sendControlChangesToSubscribers();
-    TEST_TRUE(subscriber.valueChangedFlag, "Value changed notification should have happened");
+    TEST(true, subscriber.valueChangedFlag, "Value changed notification should have happened");
     
-  
-    return OK;
-  }
+  END_TESTCASE()
 
-  TESTCASE("test304UnNamedControlChangeNotifier"){
+  TESTCASE(test304UnNamedControlChangeNotifier,"")
     Synth synth;
     const float VALUE_1 = 0.5;
     ControlValue val1(VALUE_1);
@@ -162,9 +163,18 @@
     
     synth.sendControlChangesToSubscribers();
     
-    TEST_TRUE(subscriber1.valueChangedFlag, "Value changed notification should have happened");
-    TEST_TRUE(subscriber2.valueChangedFlag, "Value changed notification should have happened");
+    TEST(true, subscriber1.valueChangedFlag, "Value changed notification should have happened");
+    TEST(true, subscriber2.valueChangedFlag, "Value changed notification should have happened");
 
-  
-    return OK;
-  }
+  END_TESTCASE()
+
+END_TESTSUITE()
+
+
+int main(int argc, char const *argv[])
+{
+  ConsoleLogger logger;
+  BufferFillerTests suite(logger);
+  suite.run();
+  return logger.getFailed();
+}

@@ -1,24 +1,24 @@
 // Tonictest Testcase with test_eq specialised for Floats
 
-#ifndef TONICTESTSFLOAT_H
-#define TONICTESTSFLOAT_H
+#ifndef ADAPTEST_FLOAT_H
+#define ADAPTEST_FLOAT_H
 
-#include "TonicTests.h"
+#include <adaptest.h>
 #include <cmath>
 
 // set testcase default epsilon for comparing float and double
 // NOTE: these value are completely arbitrary currently
-#ifndef TONICTESTS_DEFAULT_EPSILON_FLOAT
-#define TONICTESTS_DEFAULT_EPSILON_FLOAT 0.000000001
+#ifndef ADAPTEST_DEFAULT_EPSILON_FLOAT
+#define ADAPTEST_DEFAULT_EPSILON_FLOAT 0.000000001
 #endif
 
 // set testcase default epsilon for comparing float and double
 // NOTE: these value are completely arbitrary currently
-#ifndef TONICTESTS_DEFAULT_EPSILON_DOUBLE
-#define TONICTESTS_DEFAULT_EPSILON_DOUBLE 0.000000000000001
+#ifndef ADAPTEST_DEFAULT_EPSILON_DOUBLE
+#define ADAPTEST_DEFAULT_EPSILON_DOUBLE 0.000000000000001
 #endif
 
-namespace TONICTESTS_NAMESPACE {
+namespace ADAPTEST_NAMESPACE {
 
 	class FloatingPointTestcase : public Testcase {
 	public:
@@ -29,8 +29,8 @@ namespace TONICTESTS_NAMESPACE {
 		double epsilon_double;
 
 		FloatingPointTestcase()
-		: epsilon_float(TONICTESTS_DEFAULT_EPSILON_FLOAT)
-		, epsilon_double(TONICTESTS_DEFAULT_EPSILON_DOUBLE)
+		: epsilon_float(ADAPTEST_DEFAULT_EPSILON_FLOAT)
+		, epsilon_double(ADAPTEST_DEFAULT_EPSILON_DOUBLE)
 		{}
 
 		// make test_eq overridable
@@ -38,7 +38,7 @@ namespace TONICTESTS_NAMESPACE {
 
 	private:			
 		template <class T>
-		Result float_test(
+		Result test_diff(
 			std::ostream& failmsg, const int line, 
 			T expected, T value, T epsilon, std::string testname) 
 		{
@@ -55,7 +55,7 @@ namespace TONICTESTS_NAMESPACE {
 			std::ostream& failmsg, const int line, 
 			float expected, float value, std::string testname)
 		{
-			return float_test(failmsg, line, expected, value, epsilon_float,testname);
+			return test_diff(failmsg, line, expected, value, epsilon_float,testname);
 		}
 
 
@@ -63,7 +63,7 @@ namespace TONICTESTS_NAMESPACE {
 			std::ostream& failmsg, const int line, 
 			double expected, double value, std::string testname)
 		{
-			return float_test(failmsg, line, expected,value,epsilon_double, testname);
+			return test_diff(failmsg, line, expected,value,epsilon_double, testname);
 		}
 
 		//--------------------------------------------------------------------------
@@ -83,6 +83,6 @@ namespace TONICTESTS_NAMESPACE {
 
 	};
 
-} // namespace TONICTESTS_NAMESPACE
+} // namespace ADAPTEST_NAMESPACE
 
-#endif //TONICTESTSFLOAT_H
+#endif //ADAPTEST_FLOAT_H

@@ -16,7 +16,7 @@
 # DirectX9_ROOT_DIR
 
 if(WIN32) # The only platform it makes sense to check for DirectX9 SDK
-  include(FindPkgMacros)
+  include("RTAudio/FindPkgMacros.cmake")
   findpkg_begin(DirectX9)
   
   # Get path, convert backslashes as ${ENV_DXSDK_DIR}
