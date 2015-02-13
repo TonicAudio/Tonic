@@ -13,6 +13,7 @@
 
 #include <adaptest.h>
 #include <adaptest/float.h>
+#include <adaptest/buf.h>
 
 #include "Tonic.h"
 #include "TestBufferFiller.h"
@@ -50,7 +51,8 @@ namespace Tonic {
 
 // ======================================================
 
-class TonicTestcase : public FloatingPointTestcase {
+class TonicTestcase : public FloatingPointTestcase, 
+                      public BufferTestcase<CSVBufferWriter> {
 public:
 
   TonicFrames testFrames;
@@ -82,7 +84,7 @@ public:
     using FloatingPointTestcase::test_eq;
 
     Result test_fixedOutputEquals(
-      std::ostream& failmsg, const int line, 
+      std::ostream& msg, const int line, 
       TonicFrames& frames, float expectedOutput) 
     {
       for (unsigned int i=0; i<frames.size(); i++){
@@ -95,7 +97,7 @@ public:
   // ----------------------------------------------------------------
 
     Result test_stereoFixedOutputEquals( 
-      std::ostream& failmsg, const int line, 
+      std::ostream& msg, const int line, 
       TonicFrames& frames, float l, float r) 
     {
       for (unsigned int i=0; i<frames.frames(); i++){
@@ -109,7 +111,7 @@ public:
   // ----------------------------------------------------------------
 
     Result test_bufferFillerMonoFixedOutputEquals( 
-      std::ostream& failmsg, const int line, 
+      std::ostream& msg, const int line, 
       float expectedOutput)
     {
       for (unsigned int i=0; i<kTestOutputBlockSize; i++){
@@ -123,7 +125,7 @@ public:
   // ----------------------------------------------------------------
 
     Result test_bufferFillerStereoFixedOutputEquals( 
-      std::ostream& failmsg, const int line, 
+      std::ostream& msg, const int line, 
       float l, float r)
     {
       for (unsigned int i=0; i<kTestOutputBlockSize; i++)
