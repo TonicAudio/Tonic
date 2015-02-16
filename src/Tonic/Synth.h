@@ -62,6 +62,7 @@ namespace Tonic{
       void setParameter(string name, float value, bool normalized = false);
       
       vector<ControlParameter>  getParameters();
+	  void printParameters();
       
       ControlChangeNotifier publishChanges(ControlGenerator input, string name);
       
@@ -195,6 +196,8 @@ namespace Tonic{
     {
       return gen()->getParameters();
     }
+
+	void printParameters(){ gen()->printParameters(); }
     
     void forceNewOutput(){
       gen()->lockMutex();
