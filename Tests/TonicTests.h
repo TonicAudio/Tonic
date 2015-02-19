@@ -10,6 +10,7 @@
 #define TONICTESTS_H
 
 #define ADAPTEST_NAMESPACE TonicTests
+#define ADAPTEST_BUFWRITE_FILE 1
 
 #include <adaptest.h>
 #include <adaptest/float.h>

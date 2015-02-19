@@ -51,7 +51,7 @@
 
 namespace ADAPTEST_NAMESPACE {
 
-  class FloatingPointTestcase : public Testcase {
+  class FloatingPointTestcase : public virtual Testcase {
   public:
     virtual std::string& getName() = 0;
     virtual std::string& getDesc() = 0;
