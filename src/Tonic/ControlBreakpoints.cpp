@@ -1,6 +1,5 @@
 #include "ControlBreakpoints.h"
 #include <string>
-#include <sstream>
 
 namespace Tonic{
 
@@ -65,13 +64,7 @@ namespace Tonic{
 #ifdef TONIC_HAS_CPP_11
 	ControlBreakpoints& ControlBreakpoints::points(string pointsString)
 	{
-		vector<float> pointsVec;
-		std::stringstream ss(pointsString);
-		std::string item;
-		while (std::getline(ss, item, ',')) {
-			pointsVec.push_back(stof(item));
-		}
-		return points(pointsVec);
+		return points(stringToVec(pointsString));
 	}
 #endif
 

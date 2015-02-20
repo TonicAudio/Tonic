@@ -88,6 +88,13 @@ namespace Tonic {
       return *this;
     }
 
+
+#ifdef TONIC_HAS_CPP_11
+	ControlSnapToScale setScale(string scale){
+		return setScale(stringToVec(scale));
+	}
+#endif
+
   };
 }
 
