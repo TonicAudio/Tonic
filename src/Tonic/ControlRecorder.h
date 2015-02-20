@@ -15,16 +15,19 @@
 #include "ControlConditioner.h"
 
 namespace Tonic {
-  
+
+
   namespace Tonic_ {
+
 
     class ControlRecorder_ : public ControlConditioner_{
       
     protected:
       void computeOutput(const SynthesisContext_ & context);
-      vector<ControlGeneratorOutput> recording;
-      vector<ControlGeneratorOutput>::iterator playbackHead;
+	  vector<ControlGeneratorOutput> recording;
+	  int playbackHead;
       ControlGenerator mode;
+	  int currentMode; // actuall a ControlRecorder::Mode, but difficult to declare it as such
       
     public:
       ControlRecorder_();
@@ -56,25 +59,24 @@ namespace Tonic {
       
       ControlGeneratorOutput inputOut = input_.tick(context);
       ControlGeneratorOutput modeOut = mode.tick(context);
+     
+      ControlRecorder::Mode newMode = (ControlRecorder::Mode)((int)modeOut.value);
       
-      ControlRecorder::Mode currentMode = (ControlRecorder::Mode)((int)modeOut.value);
-      
-      if(modeOut.triggered){
-        if(currentMode == ControlRecorder::STOP){
+      if(newMode!= currentMode){
+		 currentMode = newMode;
+        if(newMode == ControlRecorder::STOP){
           printf("ControlRecorder_::computeOutput STOP\n");
           recording.clear();
-        }else if(currentMode == ControlRecorder::PLAY){
-          playbackHead = recording.begin();
-        }else if(currentMode == ControlRecorder::RECORD){
-          playbackHead = recording.begin();
+        }else if(newMode == ControlRecorder::PLAY){
+          playbackHead = 0;
+        }else if(newMode == ControlRecorder::RECORD){
+          playbackHead =0;
           recording.clear();
         }
       }
       
-      // temp
-      static int count = 0;
       
-      switch (currentMode) {
+      switch (newMode) {
         case ControlRecorder::RECORD:
           recording.push_back(inputOut);
           output_ = inputOut;
@@ -85,12 +87,10 @@ namespace Tonic {
           break;
           
         case ControlRecorder::PLAY:
-          output_ = *playbackHead;
+          output_ = recording[playbackHead];
           playbackHead++;
-          count++;
-          if (playbackHead >= recording.end()) {
-            playbackHead = recording.begin();
-            count = 0;
+          if (playbackHead >= recording.size()) {
+            playbackHead = 0;
           }
           //        printf("ControlRecorder_::computeOutput playing back sample: %i of %lu. Value is: %f\n", count, recording.size(), output_.value);
           break;
