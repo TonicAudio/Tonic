@@ -297,12 +297,5 @@ TESTSUITE(ControlGeneratorTests, TonicTestcase, "")
 
 END_TESTSUITE()
 
-
-int main(int argc, char const *argv[])
-{
-  ConsoleLogger logger;
-  ControlGeneratorTests suite(logger);
-  suite.run();
-  return logger.getFailed();
-}
+TONICTEST_MAIN()
 

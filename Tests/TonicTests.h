@@ -20,8 +20,27 @@
 #include "TestBufferFiller.h"
 #include "StereoFixedTestGen.h"
 
+#include <iostream>
+
+using std::cin;
+using std::cout;
 using namespace TonicTests;
 using namespace Tonic;
+
+#define TONICTEST_MAIN()                                                       \
+  ADAPTEST_GLOBALS()                                                           \
+  int main(int argc, char const *argv[])                                       \
+  {                                                                            \
+    int res;                                                                   \
+    {                                                                          \
+      ADAPTEST_NAMESPACE::ConsoleLogger logger;                                \
+      res = ADAPTEST_NAMESPACE::run(logger);                                   \
+    }                                                                          \
+    cout << "Press Return to exit" << std::endl;                               \
+    cin.get();                                                                 \
+    return res;                                                                \
+  }                                                                            \
+
 
 #define kTestOutputBlockSize kSynthesisBlockSize*4
 
@@ -85,11 +104,10 @@ public:
     using FloatingPointTestcase::test_eq;
 
     Result test_fixedOutputEquals(
-      std::ostream& msg, const int line, 
-      TonicFrames& frames, float expectedOutput) 
+      TonicFrames& frames, float expectedOutput, const int line) 
     {
       for (unsigned int i=0; i<frames.size(); i++){
-        TEST(eq, expectedOutput, frames[i], Formatted("frame %i", i))
+        TEST(eq, expectedOutput, frames[i], format("frame {}", i))
       }
 
       return OK;
@@ -98,12 +116,11 @@ public:
   // ----------------------------------------------------------------
 
     Result test_stereoFixedOutputEquals( 
-      std::ostream& msg, const int line, 
-      TonicFrames& frames, float l, float r) 
+      TonicFrames& frames, float l, float r, const int line) 
     {
       for (unsigned int i=0; i<frames.frames(); i++){
-        TEST(eq, l, frames[2*i],   Formatted("Left channel, frame %i", i))
-        TEST(eq, r, frames[2*i+1], Formatted("Right channel, frame %i", i))
+        TEST(eq, l, frames[2*i],   format("Left channel, frame {}", i))
+        TEST(eq, r, frames[2*i+1], format("Right channel, frame {}", i))
       }
 
       return OK;
@@ -112,8 +129,7 @@ public:
   // ----------------------------------------------------------------
 
     Result test_bufferFillerMonoFixedOutputEquals( 
-      std::ostream& msg, const int line, 
-      float expectedOutput)
+      float expectedOutput, const int line)
     {
       for (unsigned int i=0; i<kTestOutputBlockSize; i++){
         TEST(eq, expectedOutput, monoOutBuffer[i], 
@@ -126,8 +142,7 @@ public:
   // ----------------------------------------------------------------
 
     Result test_bufferFillerStereoFixedOutputEquals( 
-      std::ostream& msg, const int line, 
-      float l, float r)
+      float l, float r, const int line)
     {
       for (unsigned int i=0; i<kTestOutputBlockSize; i++)
       {

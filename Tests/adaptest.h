@@ -43,12 +43,6 @@
 #define ADAPTEST_NAMESPACE AdapTest
 #endif
 
-// you can supply your custom testsuite baseclass if you #define
-// ADAPTEST_BASECLASS. Your Class must implement TestsuiteBase.
-#ifndef ADAPTEST_BASECLASS
-#define ADAPTEST_BASECLASS BasicTestsuite
-#endif
-
 // if set to one you do not need to provide a name to your testcases aka
 // TESTCASE("desc") instead of TESTCASE(name, "desc"). this has the drawback
 // of not being able to easily set breakpoints using gdb.
@@ -67,6 +61,7 @@
 #endif
 
 #include <map>
+#include <list>
 #include <sstream>
 #include <string>
 
@@ -77,38 +72,96 @@
 
 #include <cstdio>
 
+using std::string;
+using std::stringstream;
+
 // ======================================================================== 
 
 // Testsuite Class System
 // ----------------------
 
 namespace ADAPTEST_NAMESPACE {
-  // Return Value of a testcase
-  enum Result {
+  
+  // Testcase Result
+  // ---------------
+
+  enum ResultEnum {
     OK, FAILED, ERROR
   };
 
-  // Static Name Formatter
-  // ---------------------
-  
-  class Formatted {
-    static const int buflen = ADAPTEST_FORMATED_BUFLEN;
-    char buf[buflen];
+  struct Result
+  {
+    ResultEnum resval;
+    string test;
+    int line;
+    string msg;
 
-  public:
-    operator const char * () { return buf; }
-    operator std::string  () { return std::string(buf); }
-    const char * ptr()       { return buf; }
-    std::string  str()       { return std::string(buf); }
+    Result(ResultEnum _resval, string _test, int _line, string _msg)
+    : resval(_resval) , test(_test) , line(_line) , msg(_msg)
+    {}
 
-    template <class T>
-    Formatted(const char * fmt, T v1) 
-    { snprintf(buf, buflen, fmt, v1); }
-    template <class T1, class T2>
-    Formatted(const char * fmt, T1 v1, T2 v2) 
-    { snprintf(buf, buflen, fmt, v1, v2); }
+    Result(ResultEnum _resval)
+    : resval(_resval), test(""), line(0), msg("")
+    {}
+
+    bool operator == (ResultEnum o) { return resval == 0; }
+    bool operator != (ResultEnum o) { return resval != 0; }
   };
+
+  // Simple String Formatter
+  // -----------------------
+
+  template <class A, class B, class C, class D, class E>
+  string 
+  format(string fmt, const A& a, const B& b, const C& c, const D& d, const E& e) 
+  {
+    stringstream output;
+    size_t offset = 0;
+    size_t param  = -1;
+    size_t find   = 0;
+    while ((find = fmt.find('{', offset)) != string::npos) {
+        output << fmt.substr(offset, find - offset);
+        offset = find + 1;
+        char selection = fmt[offset];
+        if ((selection >= '0') && (selection < '5')) {
+            offset++;
+            param = (size_t) selection - '0';
+        } else if (selection == '}') {
+            param++;
+        } else {
+            offset = fmt.find('}', offset) + 1;
+            continue;
+        }
+        switch (param) {
+            case 0: output << a; break;
+            case 1: output << b; break;
+            case 2: output << c; break;
+            case 3: output << d; break;
+            case 4: output << e; break;
+            default: break;
+        }
+        offset++;
+    }
+    output << fmt.substr(offset, fmt.length() - offset);
+    return output.str();
+  }
   
+  template <class A>
+  string format(string fmt, const A& a)
+  { return format(fmt, a, "", "", "", ""); }
+
+  template <class A, class B>
+  string format(string fmt, const A& a, const B& b)
+  { return format(fmt, a, b, "", "", ""); }
+
+  template <class A, class B, class C>
+  string format(string fmt, const A& a, const B& b, const C& c)
+  { return format(fmt, a, b, c, "", ""); }
+
+  template <class A, class B, class C, class D>
+  string format(string fmt, const A& a, const B& b, const C& c, const D& d)
+  { return format(fmt, a, b, c, d, ""); }
+
   // ================================================================
 
   // Logging of Testcase output
@@ -122,8 +175,8 @@ namespace ADAPTEST_NAMESPACE {
     // test_start always is followed by a call to the same following object
     virtual void test_start(Testcase& testcase) = 0;
     virtual void test_passed(Testcase& testcase) = 0;
-    virtual void test_failed(Testcase& testcase, std::ostringstream& msg)=0;
-    virtual void test_error(Testcase& testcase, std::ostringstream& errmsg)=0;
+    virtual void test_failed(Testcase& testcase, Result& res)=0;
+    virtual void test_error(Testcase& testcase,  Result& res)=0;
 
     // testsuite_start always is followed by a call to the same following object
     virtual void testsuite_start(TestsuiteBase& suite) = 0;
@@ -144,7 +197,7 @@ namespace ADAPTEST_NAMESPACE {
   public:
     virtual std::string& getName() = 0;
     virtual std::string& getDesc() = 0;
-    virtual Result run(std::ostream&) = 0;
+    virtual Result run() = 0;
     virtual void setUp() {}
     virtual void tearDown() {}
     virtual ~Testcase() {}
@@ -165,10 +218,10 @@ namespace ADAPTEST_NAMESPACE {
     // test if a value is as expected
     template <class A, class B>
     Result test_eq(
-      std::ostream& msg, const int line, A expected, B value, std::string name) 
+      A expected, B value, std::string name, const int line) 
     {
       if (expected != value) 
-        return fail(msg, line, expected, value, name);
+        return fail(expected, value, name, line);
       return OK;
     }
 
@@ -176,10 +229,10 @@ namespace ADAPTEST_NAMESPACE {
 
   // test if value is true
     Result test_true(
-      std::ostream& msg, const int line, bool value, std::string testname) 
+      bool value, std::string testname, const int line) 
     {
       if (!value) 
-        return fail(msg, line, true, value, testname);
+        return fail(true, value, testname, line);
       return OK;
     } 
 
@@ -187,10 +240,10 @@ namespace ADAPTEST_NAMESPACE {
 
   // test if value is false
     Result test_false(
-      std::ostream& msg, const int line, bool value, std::string testname) 
+      bool value, std::string testname, const int line) 
     {
       if (value) 
-        return fail(msg, line, false, value, testname);
+        return fail(false, value, testname, line);
       return OK;
     }
 
@@ -198,24 +251,19 @@ namespace ADAPTEST_NAMESPACE {
 
     template<class A, class B>
     Result fail(
-      std::ostream& msg, const int line, 
-      A expected, B value, std::string& testname) 
+      A expected, B value, std::string& testname, const int line) 
     {
-      msg << testname 
-          << " expected to be " << expected 
-          << " but is " << value
-          << " on line " << line;
-      return FAILED;
+      return Result(FAILED, testname, line, 
+                    format("{} expected to be {}, but is {}", 
+                           testname, expected, value));
     }
 
     //--------------------------------------------------------------------------
 
     Result error(
-      std::ostream& msg, const int line, 
-      std::string& errmsg) 
+      std::string& errmsg, const int line) 
     {
-      msg << errmsg;
-      return ERROR;
+      return Result(ERROR, "", line, errmsg);
     }
   };
   
@@ -231,50 +279,36 @@ namespace ADAPTEST_NAMESPACE {
 
   class TestsuiteBase {
   protected:
-    Logger& logger;
     std::string name;
     std::string description;
   public:
-    TestsuiteBase(Logger& mylogger, const char * myname, const char * mydesc)
-    : logger(mylogger)
-    , name(myname)
+    TestsuiteBase(const char * myname, const char * mydesc)
+    : name(myname)
     , description(mydesc)
     {}
 
-    std::string& getName() {
-      return name;
-    }
+    std::string& getName()          { return name; }
 
     // Run Testsuite
-    virtual void run(Testcases& tests) = 0;
-  };  
-
-  class BasicTestsuite : public TestsuiteBase {
-  public:
-    BasicTestsuite(Logger& mylogger, const char * myname, const char * mydesc)
-    : TestsuiteBase(mylogger, myname, mydesc)
-    {}
-
-    // Run Testsuite
-    virtual void run(Testcases& tests) {
+    void run_tests(Testcases& tests, Logger& logger) {
       logger.testsuite_start(*this);
 
       for (Testcases::iterator i = tests.begin(); i != tests.end(); ++i)
       {
         Testcase* test = i->second;
-        std::ostringstream msg;
 
         logger.test_start(*test);
 
-          // run testcase
+        // run testcase
+        test->setTestsuite(*this);
         test->setUp();
-        const Result retval = test->run(msg);
+        Result retval = test->run();
         test->tearDown();
 
-        if (retval == FAILED) {
-          logger.test_failed(*test, msg);
-        } else if (retval == ERROR) {
-          logger.test_error(*test, msg);
+        if (retval.resval == FAILED) {
+          logger.test_failed(*test, retval);
+        } else if (retval.resval == ERROR) {
+          logger.test_error(*test, retval);
         } else {
           logger.test_passed(*test);
         }
@@ -284,18 +318,20 @@ namespace ADAPTEST_NAMESPACE {
 
       logger.testsuite_done(*this);
     }
+
+    virtual void run(Logger& logger) = 0;
   };
 
   //--------------------------------------------------------------------------
 
   template<class TestcaseClass, Testcases*& testcaseStorage>
-  class Testsuite : public ADAPTEST_BASECLASS {
+  class Testsuite : public TestsuiteBase {
   public:
     typedef Testsuite<TestcaseClass, testcaseStorage> LocalTestsuite;
     typedef TestcaseClass LocalTestcase;
     
-    Testsuite(Logger& mylogger, const char * myname, const char * mydesc)
-    : ADAPTEST_BASECLASS(mylogger, myname, mydesc)
+    Testsuite(const char * myname, const char * mydesc)
+    : TestsuiteBase(myname, mydesc)
     {}
 
     static Testcases& getTests() {
@@ -316,20 +352,50 @@ namespace ADAPTEST_NAMESPACE {
       }
     };
 
-    // Run Testsuite
-    using BasicTestsuite::run;
-    void run() {
-      Testcases& tests = getTests();
-      for (Testcases::iterator i = tests.begin(); i != tests.end(); ++i)
-      {
-        Testcase* test = i->second;
-        test->setTestsuite(*this);
-      }
-      
-      run(tests);
+    virtual void run(Logger& logger) {
+      run_tests(getTests(), logger);
     }
   };
 
+  // ------------------------------------------------------------------------
+
+  // Testsuite Auto registration
+  // ---------------------------
+
+  typedef std::list<TestsuiteBase*> Testsuites;
+  Logger* logger;
+
+  class TestsuiteRegistration {
+  public:
+    static Testsuites* storage;
+
+    // constructor which in fact registers the testsuite
+    static void add(TestsuiteBase* testsuite) {
+      if (!storage) storage = new Testsuites();
+      storage->push_back(testsuite);
+    }
+
+    static int run(Logger& logger) {
+      if (!storage) return -1;
+
+      for (Testsuites::iterator i = storage->begin(); 
+           i != storage->end(); ++i)
+      {
+        (*i)->run(logger);  
+      }
+
+      return logger.getFailed();
+    }
+  };
+
+  template <class CurrentTestsuite>
+  class RegisterTestsuite {
+  public:
+    // constructor which in fact registers the testsuite
+    RegisterTestsuite() {
+      TestsuiteRegistration::add(new CurrentTestsuite());
+    }
+  };
 
   // ======================================================================== 
 
@@ -366,21 +432,23 @@ namespace ADAPTEST_NAMESPACE {
         num_tests++;
       }
 
-      virtual void test_failed(Testcase& test, std::ostringstream& msg)
+      virtual void test_failed(Testcase& testcase, Result& res)
       {
         std::cout 
           << std::right
           #if ADAPTEST_AUTONAMES
           << std::setw(40)
-          << test.getDesc()
+          << testcase.getDesc()
           #else
           << std::setw(20)
-          << test.getName()
+          << testcase.getName()
           #endif
+          << " : "
+          << res.line
           << " : "
           << std::left
           << std::setw(40)
-          << msg.str()
+          << res.msg
           << std::endl;
         failed_tests++;
         num_tests++;
@@ -400,7 +468,7 @@ namespace ADAPTEST_NAMESPACE {
       virtual int getFailed()
       { return failed_tests; }
 
-      virtual void test_error(Testcase& test, std::ostringstream& msg)
+      virtual void test_error(Testcase& test, Result& res)
       {
         std::cout 
           << "ERROR : "
@@ -411,9 +479,11 @@ namespace ADAPTEST_NAMESPACE {
           << test.getName()
           #endif
           << " : "
+          << res.line
+          << " : "
           << std::left
           << std::setw(40)
-          << msg.str()
+          << res.msg
           << std::endl;
         failed_tests++;
         num_tests++;
@@ -422,7 +492,16 @@ namespace ADAPTEST_NAMESPACE {
 
   #endif //ADAPTEST_DEFAULT_LOGGER
 
+  // Main entrance Functions
+  // -----------------------
+
+  inline
+  int run(Logger& logger) {
+    return TestsuiteRegistration::run(logger);
+  }
+
 } // namespace ADAPTEST_NAMESPACE
+
 
 // ================================================================
 
@@ -440,13 +519,15 @@ namespace ADAPTEST_NAMESPACE {
 #define TESTSUITE(_name, _testcase, _desc) TESTSUITE_(_name, _testcase, _desc)
 
 #define TESTSUITE_(_name, _testcase, _desc)                                    \
+  class _name;                                                                 \
+  ADAPTEST_NAMESPACE::RegisterTestsuite<_name> _name##Reg;                     \
   ADAPTEST_NAMESPACE::Testcases* _name##List = 0;                              \
   typedef ADAPTEST_NAMESPACE::Testsuite<_testcase,_name##List> _name##Base;    \
   class _name : public _name##Base                                             \
   {                                                                            \
   public:                                                                      \
-    _name(ADAPTEST_NAMESPACE::Logger& mylogger)                                \
-    : _name##Base(mylogger, #_name, _desc)                                     \
+    _name()                                                                    \
+    : _name##Base(#_name, _desc)                                               \
     {}                                                                         \
   private:                                                                     \
 
@@ -470,13 +551,13 @@ namespace ADAPTEST_NAMESPACE {
   class _name;                                                                 \
   TestcaseRegistration<_name, __LINE__> _name##Reg;                            \
   class _name : public LocalTestcase {                                         \
-    std::string desc;                                                          \
     std::string name;                                                          \
+    std::string desc;                                                          \
     public:                                                                    \
     _name() : name(#_name), desc(_desc) {}                                     \
     virtual std::string& getName() { return name; }                            \
     virtual std::string& getDesc() { return desc; }                            \
-    virtual ADAPTEST_NAMESPACE::Result run(std::ostream& msg) {                \
+    virtual ADAPTEST_NAMESPACE::Result run() {                                 \
 
 #define END_TESTCASE()                                                         \
       return ADAPTEST_NAMESPACE::OK;                                           \
@@ -489,8 +570,27 @@ namespace ADAPTEST_NAMESPACE {
 // call a test function and return upon failure. DRY principle
 #define TEST(testtype, ...)  {                                                 \
   const ADAPTEST_NAMESPACE::Result retval =                                    \
-    test_##testtype(msg, __LINE__, __VA_ARGS__);                               \
-  if (retval != ADAPTEST_NAMESPACE::OK) return retval;                         \
+    test_##testtype(__VA_ARGS__, __LINE__);                                    \
+  if (retval.resval != ADAPTEST_NAMESPACE::OK) return retval;                  \
 }
+
+// Adapted Global Variables
+// ------------------------
+
+#define ADAPTEST_GLOBALS()                                                     \
+  ADAPTEST_NAMESPACE::Testsuites*                                              \
+    ADAPTEST_NAMESPACE::TestsuiteRegistration::storage = 0;                    \
+
+
+// Run Autoregistered Testsuites
+// -----------------------------
+
+#define ADAPTEST_MAIN(LoggerClass)                                             \
+  ADAPTEST_GLOBALS()                                                           \
+  int main(int argc, char const *argv[])                                       \
+  {                                                                            \
+    ADAPTEST_NAMESPACE::LoggerClass logger;                                    \
+    return ADAPTEST_NAMESPACE::run(logger);                                    \
+  }                                                                            \
 
 #endif //ADAPTEST_H

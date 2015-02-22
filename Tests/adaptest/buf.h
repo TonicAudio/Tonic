@@ -13,15 +13,15 @@
 #endif // !ADAPTEST_BUFWRITE_FILE
 
 #ifndef ADAPTEST_BUFWRITE_CSV_FILENAME_FORMAT
-#define ADAPTEST_BUFWRITE_CSV_FILENAME_FORMAT "%s-%s.csv"
+#define ADAPTEST_BUFWRITE_CSV_FILENAME_FORMAT "{}-{}.csv"
 #endif // !ADAPTEST_BUFWRITE_CSV_FILENAME_FORMAT
 
 #ifndef ADAPTEST_BUFWRITE_GNUPLOT_FILENAME_FORMAT
-#define ADAPTEST_BUFWRITE_GNUPLOT_FILENAME_FORMAT "%s-%s.plt"
+#define ADAPTEST_BUFWRITE_GNUPLOT_FILENAME_FORMAT "{}-{}.plt"
 #endif
 
 #ifndef ADAPTEST_BUFWRITE_HTML_FILENAME_FORMAT
-#define ADAPTEST_BUFWRITE_HTML_FILENAME_FORMAT "%s-%s.html"
+#define ADAPTEST_BUFWRITE_HTML_FILENAME_FORMAT "{}-{}.html"
 #endif // !ADAPTEST_BUFWRITE_HTML_FILENAME_FORMAT
 
 #if ADAPTEST_BUFWRITE_FILE
@@ -57,17 +57,13 @@ namespace ADAPTEST_NAMESPACE {
     typedef typename BufferList::iterator BufferListIter;
     BufferList data;
     BufferList& getData() { return data; }
-    std::ostream& msg;
     const int line;
     Testcase& testcase;
 
     virtual Result write() = 0;
 
-    BufferWriter(
-      std::ostream& _msg, const int _line, 
-      class Testcase& _testcase)
-    : msg(_msg)
-    , line(_line)
+    BufferWriter(const int _line, class Testcase& _testcase)
+    : line(_line)
     , testcase(_testcase)
     {}
 
@@ -77,7 +73,7 @@ namespace ADAPTEST_NAMESPACE {
     }
 
     Result error(std::string errmsg) {
-      return testcase.error(msg, line, errmsg);
+      return testcase.error(errmsg, line);
     }
 
     const char * getTestcaseName() {
@@ -103,9 +99,8 @@ namespace ADAPTEST_NAMESPACE {
       using BufferWriter<T>::getData;
     public:
       CSVBufferWriter(
-        std::ostream& _msg, const int _line, 
-        class Testcase& _testcase)
-      : BufferWriter<T>(_msg,_line, _testcase)
+        const int _line, class Testcase& _testcase)
+      : BufferWriter<T>(_line, _testcase)
       {}
 
       virtual Result write_buffers(std::ostream& datafile)
@@ -126,7 +121,7 @@ namespace ADAPTEST_NAMESPACE {
         return OK;
       }
 
-      virtual Result write_gnuplot(std::ostream& gnuplot, Formatted& filename)
+      virtual Result write_gnuplot(std::ostream& gnuplot, string& filename)
       {
         gnuplot << "plot ";
         int bufidx = 0;
@@ -147,7 +142,7 @@ namespace ADAPTEST_NAMESPACE {
         return OK;
       }
 
-      virtual Result write_html(std::ostream& html, Formatted& filename)
+      virtual Result write_html(std::ostream& html, string& filename)
       {
         html <<
           "<html><head>"
@@ -211,28 +206,34 @@ namespace ADAPTEST_NAMESPACE {
 
 
       Result write() {
-        Formatted filename(ADAPTEST_BUFWRITE_CSV_FILENAME_FORMAT,
-                           getTestsuiteName(), getTestcaseName());
-        std::fstream datafile(filename.ptr(), std::ios::out);
+        string filename = format(
+          ADAPTEST_BUFWRITE_CSV_FILENAME_FORMAT,
+          getTestsuiteName(), getTestcaseName());
+
+        std::fstream datafile(filename, std::ios::out);
         
         if (!datafile.good()) {
-          return error(Formatted("could not open %s", filename.ptr()));
+          return error(format("could not open {}", filename));
         }
 
-        Formatted gnuplot_filename(ADAPTEST_BUFWRITE_GNUPLOT_FILENAME_FORMAT, 
-                                   getTestsuiteName(), getTestcaseName());        
-        std::fstream gnuplot_file(gnuplot_filename.ptr(), std::ios::out);
+        string gnuplot_filename = format(
+          ADAPTEST_BUFWRITE_GNUPLOT_FILENAME_FORMAT, 
+          getTestsuiteName(), getTestcaseName());
+
+        std::fstream gnuplot_file(gnuplot_filename, std::ios::out);
 
         if (!gnuplot_file.good()) {
-          return error(Formatted("could not open %s", gnuplot_filename.ptr()));
+          return error(format("could not open {}", gnuplot_filename));
         }
 
-        Formatted html_filename(ADAPTEST_BUFWRITE_HTML_FILENAME_FORMAT, 
-                                   getTestsuiteName(), getTestcaseName());        
-        std::fstream html_file(html_filename.ptr(), std::ios::out);
+        string html_filename = format(
+          ADAPTEST_BUFWRITE_HTML_FILENAME_FORMAT, 
+          getTestsuiteName(), getTestcaseName());
+
+        std::fstream html_file(html_filename, std::ios::out);
 
         if (!html_file.good()) {
-          return error(Formatted("could not open %s", html_filename.ptr()));
+          return error(format("could not open {}", html_filename));
         }
 
         write_buffers(datafile);
@@ -256,21 +257,21 @@ namespace ADAPTEST_NAMESPACE {
 
     template <class T>
     Result test_buf( 
-      std::ostream& msg, const int line, 
-      const size_t buflen, const T* buf, const T* expected, std::string name)
+      const size_t buflen, const T* buf, const T* expected, 
+      std::string name, const int line)
     {
       Result res = OK;
       for (size_t i=0; i<buflen; i++){
-        res = test_eq(msg, line, expected[i], buf[i], 
-                      Formatted("%s[%i]", name.c_str(), i));
+        res = test_eq(expected[i], buf[i], 
+                      format("{}[{}]", name, i), line);
         if (res != OK ) break;
       }
 
       #if ADAPTEST_BUFWRITE_FILE
         if (res != OK) {
-          WriterPolicy<T> writer(msg, line, *this);
+          WriterPolicy<T> writer(line, *this);
           writer.add_buf(buf, buflen, name);
-          writer.add_buf(expected, buflen, Formatted("%s-expected", name.c_str()));
+          writer.add_buf(expected, buflen, format("{}-expected", name));
           writer.write();
         }
       #endif // ADAPTEST_BUFWRITE_FILE
@@ -280,35 +281,33 @@ namespace ADAPTEST_NAMESPACE {
 
     template <class T>
     Result test_buf( 
-      std::ostream& msg, const int line, 
-      const T* buf, const size_t buflen, const T expected, std::string name)
+      const T* buf, const size_t buflen, const T expected, 
+      std::string name, const int line)
     {
       T expectedBuf[buflen];
       for (size_t i=0; i<buflen; i++){
         expectedBuf[i] = expected;
       }
-      return test_buf(msg, line, buflen, buf, expectedBuf, 
-                      Formatted("%s-expected", name.c_str()));
-    }    
+      return test_buf(buflen, buf, expectedBuf, name, line);
+    }
 
     template <class T>
     Result test_buf( 
-      std::ostream& msg, const int line, 
       const size_t buflen, const T* buf, const size_t offset, const size_t step, 
-      const T* expected, std::string name)
+      const T* expected, std::string name, const int line)
     {
       Result res = OK;
       for (size_t i=0; i<buflen; i++){
-        res = test_eq(msg, line, expected[i], buf[i], 
-                      Formatted("%s[%i]", name.c_str(), i));
+        res = test_eq(expected[i], buf[i], 
+                      format("{}[{}]", name, i), line);
         if (res != OK ) break;
       }
 
       #if ADAPTEST_BUFWRITE_FILE
         if (res != OK) {
-          WriterPolicy<T> writer(msg, line, *this);
+          WriterPolicy<T> writer(line, *this);
           writer.add_buf(buf, buflen, name);
-          writer.add_buf(expected, buflen, Formatted("%s-expected", name.c_str()));
+          writer.add_buf(expected, buflen, format("{}-expected", name));
           writer.write();
         }
       #endif // ADAPTEST_BUFWRITE_FILE
@@ -318,18 +317,17 @@ namespace ADAPTEST_NAMESPACE {
 
     template <class T, size_t N>
     Result test_buf( 
-      std::ostream& msg, const int line, 
-      const T (&buf)[N], const T expected, std::string name)
+      const T (&buf)[N], const T expected, std::string name, const int line)
     {
-      return test_buf(msg, line, &buf[0], N, expected, name);
+      return test_buf(&buf[0], N, expected, name, line);
     }
 
     template <class T, size_t N>
     Result test_buf( 
-      std::ostream& msg, const int line, 
-      const T (&buf)[N], const T (&expected)[N], std::string name)
+      const T (&buf)[N], const T (&expected)[N], 
+      std::string name, const int line)
     {
-      return test_buf(msg, line, N, &buf[0], &expected[0], name);
+      return test_buf(N, &buf[0], &expected[0], name, line);
     }    
 
   };

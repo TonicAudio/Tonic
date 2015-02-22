@@ -162,11 +162,11 @@ TESTSUITE(OperatorTests, TonicTestcase, "")
       ControlGenerator g1 = ControlValue(rf) == rf;
       ControlGenerator g2 = ControlValue(rf) == ControlValue(99999.f);
       
-      TEST(true, g.tick(context).triggered, "Every tick should produce a change");
+      TEST(true, g.tick(context).triggered, "Every tick produce a change");
       
-      TEST(eq, g.tick(context).value, 1.0f, Formatted("%.2f should equal itself", rf));
-      TEST(eq, g1.tick(context).value, 1.0f, Formatted("%.2f should equal itself", rf));
-      TEST(eq, g2.tick(context).value, 0.0f, Formatted("%.2f should not be equal to rhs", rf));
+      TEST(eq, g.tick(context).value, 1.0f, format("{} equal itself", rf));
+      TEST(eq, g1.tick(context).value, 1.0f, format("{} equal itself", rf));
+      TEST(eq, g2.tick(context).value, 0.0f, format("{} not be equal to rhs", rf));
 
     }
     
@@ -179,11 +179,11 @@ TESTSUITE(OperatorTests, TonicTestcase, "")
       ControlGenerator g1 = ControlValue(rf) != 99999.f;
       ControlGenerator g2 = ControlValue(rf) != ControlValue(rf);
       
-      TEST(true, g.tick(context).triggered, "Every tick should produce a change");
+      TEST(true, g.tick(context).triggered, "Every tick produce a change");
       
-      TEST(eq, g.tick(context).value, 1.0f, Formatted("%.2f should not be equal to rhs", rf));
-      TEST(eq, g1.tick(context).value, 1.0f, Formatted("%.2f should not be equal to rhs", rf));
-      TEST(eq, g2.tick(context).value, 0.0f, Formatted("%.2f should be equal to rhs", rf));
+      TEST(eq, g.tick(context).value, 1.0f, format("{} not be equal to rhs", rf));
+      TEST(eq, g1.tick(context).value, 1.0f, format("{} not be equal to rhs", rf));
+      TEST(eq, g2.tick(context).value, 0.0f, format("{} be equal to rhs", rf));
       
     }
     
@@ -196,11 +196,11 @@ TESTSUITE(OperatorTests, TonicTestcase, "")
       ControlGenerator g1 = ControlValue(rf) > 0.f;
       ControlGenerator g2 = ControlValue(rf) > ControlValue(99999.f);
       
-      TEST(true, g.tick(context).triggered, "Every tick should produce a change");
+      TEST(true, g.tick(context).triggered, "Every tick produce a change");
       
-      TEST(eq, g.tick(context).value, 1.0f, Formatted("%.2f should be greater than rhs", rf));
-      TEST(eq, g1.tick(context).value, 1.0f, Formatted("%.2f should be greater than rhs", rf));
-      TEST(eq, g2.tick(context).value, 0.0f, Formatted("%.2f should not be greater than rhs", rf));
+      TEST(eq, g.tick(context).value, 1.0f, format("{} be greater than rhs", rf));
+      TEST(eq, g1.tick(context).value, 1.0f, format("{} be greater than rhs", rf));
+      TEST(eq, g2.tick(context).value, 0.0f, format("{} not be greater than rhs", rf));
       
     }
     
@@ -213,11 +213,11 @@ TESTSUITE(OperatorTests, TonicTestcase, "")
       ControlGenerator g1 = ControlValue(rf) > 0.f;
       ControlGenerator g2 = ControlValue(rf) >= ControlValue(99999.f);
       
-      TEST(true, g.tick(context).triggered, "Every tick should produce a change");
+      TEST(true, g.tick(context).triggered, "Every tick produce a change");
       
-      TEST(eq, g.tick(context).value, 1.0f, Formatted("%.2f should be greater than or equal to rhs", rf));
-      TEST(eq, g1.tick(context).value, 1.0f, Formatted("%.2f should be greater than or equal to rhs", rf));
-      TEST(eq, g2.tick(context).value, 0.0f, Formatted("%.2f should not be greater than or equal rhs", rf));
+      TEST(eq, g.tick(context).value, 1.0f, format("{} be greater than or equal to rhs", rf));
+      TEST(eq, g1.tick(context).value, 1.0f, format("{} be greater than or equal to rhs", rf));
+      TEST(eq, g2.tick(context).value, 0.0f, format("{} not be greater than or equal rhs", rf));
       
     }
     
@@ -232,9 +232,9 @@ TESTSUITE(OperatorTests, TonicTestcase, "")
       
       TEST(true, g.tick(context).triggered, "Every tick should produce a change");
       
-      TEST(eq, g.tick(context).value, 1.0f, Formatted("%.2f should be less than rhs", rf));
-      TEST(eq, g1.tick(context).value, 1.0f, Formatted("%.2f should be less than rhs", rf));
-      TEST(eq, g2.tick(context).value, 0.0f, Formatted("%.2f should not be less than rhs", rf));
+      TEST(eq, g.tick(context).value, 1.0f, format("{} should be less than rhs", rf));
+      TEST(eq, g1.tick(context).value, 1.0f, format("{} should be less than rhs", rf));
+      TEST(eq, g2.tick(context).value, 0.0f, format("{} should not be less than rhs", rf));
       
     }
     
@@ -249,9 +249,9 @@ TESTSUITE(OperatorTests, TonicTestcase, "")
       
       TEST(true, g.tick(context).triggered, "Every tick should produce a change");
       
-      TEST(eq, g.tick(context).value, 1.0f, Formatted("%.2f should be less than or equal to rhs", rf));
-      TEST(eq, g1.tick(context).value, 1.0f, Formatted("%.2f should be less than or equal to rhs", rf));
-      TEST(eq, g2.tick(context).value, 0.0f, Formatted("%.2f should not be less than or equal to rhs", rf));
+      TEST(eq, g.tick(context).value, 1.0f, format("{} should be less than or equal to rhs", rf));
+      TEST(eq, g1.tick(context).value, 1.0f, format("{} should be less than or equal to rhs", rf));
+      TEST(eq, g2.tick(context).value, 0.0f, format("{} should not be less than or equal to rhs", rf));
       
     }
   
@@ -259,11 +259,4 @@ TESTSUITE(OperatorTests, TonicTestcase, "")
 
 END_TESTSUITE()
 
-
-int main(int argc, char const *argv[])
-{
-  ConsoleLogger logger;
-  OperatorTests suite(logger);
-  suite.run();
-  return logger.getFailed();
-}
+TONICTEST_MAIN()
