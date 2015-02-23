@@ -7,6 +7,7 @@
 //
 
 #include "tonictests.h"
+#include "Tonic/ControlRecorder.h"
 
 TESTSUITE(ControlGeneratorTests, TonicTestcase, "")
 
@@ -293,9 +294,99 @@ TESTSUITE(ControlGeneratorTests, TonicTestcase, "")
     switcher.tick(localContext);
     TEST(eq, switcher.tick(localContext).value, inputOne + addAfterWrap * 2, "ControlSwitcher basic test.");
 
-  END_TESTCASE()
+	END_TESTCASE()
+
+
+TESTCASE(test210ControlRecorder, "")
+
+	Tonic_::SynthesisContext_ localContext;
+	ControlValue val;
+	ControlRecorder recorder = ControlRecorder().input(val);
+	
+	vector<float> sequence;
+	for (int i = 0; i < 100; i++)
+	{
+		sequence.push_back(i);
+	}
+	
+	//-- test that the thing doesn't blow up if you try to play with no data
+	//-- If there's no recording, behavior of PLAY is the same as STOP
+	val.value(randomFloat(0, 1));
+	recorder.mode(ControlRecorder::PLAY);
+	TEST(eq, recorder.tick(localContext).value, val.getValue(), "ControlRecorder  input is passed through.");
+
+	//-- test with recorder stopped
+	for (int i = 0; i < sequence.size(); i++)
+	{
+		val.value(sequence[i]);
+		//-- test that the recorder just passes through
+		TEST(eq, recorder.tick(localContext).value, sequence[i], "ControlRecorder  input is passed through.");
+		localContext.tick();
+	}
+
+	for (int i = 0; i < sequence.size(); i++)
+	{
+		val.value(0);
+		//-- test that the recorder just passes through
+		TEST(eq, recorder.tick(localContext).value, val.getValue(), "ControlRecorder  input is passed through.");
+		localContext.tick();
+	}
+	
+	//-- test with recorder recording
+	recorder.mode(ControlRecorder::RECORD);
+	for (int i = 0; i < sequence.size(); i++)
+	{
+		val.value(sequence[i]);
+		//-- test that the recorder just passes through
+		TEST(eq, recorder.tick(localContext).value, sequence[i], "ControlRecorder  input is passed through.");
+		localContext.tick();
+	}
+
+
+	//-- test playback
+	recorder.mode(ControlRecorder::PLAY);
+	for (int i = 0; i < sequence.size() * 4; i++)
+	{
+		val.value(0);
+		//-- test that the recorder just passes through
+		ControlGeneratorOutput output = recorder.tick(localContext);
+
+		TEST(eq, output.value, sequence[i % sequence.size()], "ControlRecorder input is ignored, recording is used. Iteration: " + to_string(i));
+		
+		
+		localContext.tick();
+	}
+
+
+	//-- test stopping in the middle of a sequence. 
+	recorder.mode(ControlRecorder::STOP);
+	for (int i = 0; i < sequence.size() - 13; i++)
+	{
+		val.value(0);
+		//-- test that the recorder just passes through
+		TEST(eq, recorder.tick(localContext).value, val.getValue(), "ControlRecorder  input is passed through.");
+		localContext.tick();
+	}
+
+	//-- test playback after stopping. Playback should start from the beginning.
+	recorder.mode(ControlRecorder::PLAY);
+	for (int i = 0; i < sequence.size() * 4 - 30; i++)
+	{
+		val.value(0);
+		//-- test that the recorder just passes through
+		ControlGeneratorOutput output = recorder.tick(localContext);
+
+		TEST(eq, output.value, sequence[i % sequence.size()], "ControlRecorder input is ignored, recording is used. Iteration: " + to_string(i));
+
+
+		localContext.tick();
+	}
+
+
+END_TESTCASE()
 
 END_TESTSUITE()
 
 TONICTEST_MAIN()
+
 

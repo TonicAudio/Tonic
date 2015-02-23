@@ -52,7 +52,7 @@ namespace Tonic {
 
   };
   
-  // put down here so we can use the enum
+  //-- put down here so we can use the enum
   namespace Tonic_ {
     
     inline void ControlRecorder_::computeOutput(const SynthesisContext_ & context){
@@ -61,12 +61,17 @@ namespace Tonic {
       ControlGeneratorOutput modeOut = mode.tick(context);
      
       ControlRecorder::Mode newMode = (ControlRecorder::Mode)((int)modeOut.value);
+
+	  //-- If there's no recording, PLAY mode behaves the same as STOP mode
+	  if (newMode == ControlRecorder::PLAY && recording.empty())
+	  {
+		  newMode = ControlRecorder::STOP;
+	  }
+	  
       
       if(newMode!= currentMode){
 		 currentMode = newMode;
         if(newMode == ControlRecorder::STOP){
-          printf("ControlRecorder_::computeOutput STOP\n");
-          recording.clear();
         }else if(newMode == ControlRecorder::PLAY){
           playbackHead = 0;
         }else if(newMode == ControlRecorder::RECORD){
@@ -74,7 +79,6 @@ namespace Tonic {
           recording.clear();
         }
       }
-      
       
       switch (newMode) {
         case ControlRecorder::RECORD:
