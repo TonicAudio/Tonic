@@ -50,12 +50,10 @@ namespace Tonic {
         
         unsigned delayBlocks = max(delayTimeOutput.value * sampleRate() / kSynthesisBlockSize, 1);
         
-#ifdef TONIC_DEBUG
         if (delayBlocks >= maxDelay_){
-          debug("ControlDelay: delay time greater than maximum delay (defaults to 1 scond). Use constructor to set max delay -- ex. ControlDelay(2.0))");
+          warning("ControlDelay: delay time greater than maximum delay (defaults to 1 scond). Use constructor to set max delay -- ex. ControlDelay(2.0))");
         }
-#endif
-        
+
         readHead_ = writeHead_ - delayBlocks;
         if (readHead_ < 0) readHead_ += maxDelay_;
         
@@ -73,7 +71,7 @@ namespace Tonic {
     
   public:
     
-    ControlDelay(float maxDelayTime = 1.0f);
+    ControlDelay(float maxDelayTime = 30.0f);
     TONIC_MAKE_CTRL_GEN_SETTERS(ControlDelay, delayTime, setDelayTimeGen);
     
   };
