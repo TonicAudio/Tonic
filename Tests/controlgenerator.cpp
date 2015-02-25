@@ -127,7 +127,38 @@ TESTSUITE(ControlGeneratorTests, TonicTestcase, "")
     context.tick();
     TEST(false,  metro.tick(context).triggered, "Metro shouldn't report trigger.");
     
-  
+	END_TESTCASE()
+
+	TESTCASE(test204_1ControlMetro, "")
+		
+    ControlTrigger stopTrigger = ControlTrigger().trigger();
+    ControlTrigger startTrigger;
+    ControlMetro metro = ControlMetro().bpm(1000).stopTrigger(stopTrigger).startTrigger(startTrigger);
+    Tonic_::SynthesisContext_ context;
+
+    bool triggered = false;
+    for (int i = 0; i < 1000; i++)
+    {
+      context.tick();
+     if (metro.tick(context).triggered){
+        triggered = true;
+      }
+    }
+
+    TEST(false,triggered, "Metro should have been stopped, and should not be triggering.");
+
+    startTrigger.trigger(); 
+
+    for (int i = 0; i < 1000; i++)
+    {
+      context.tick();
+      if (metro.tick(context).triggered){
+        triggered = true;
+      }
+    }
+
+    TEST(true, triggered, "Metro should have run, and should be triggering.");
+
   END_TESTCASE()
 
   TESTCASE(test205ControlAdder, "")

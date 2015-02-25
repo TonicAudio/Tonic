@@ -10,7 +10,7 @@
 
 namespace Tonic { namespace Tonic_{
   
-  ControlMetro_::ControlMetro_() : lastClickTime_(0) {}
+  ControlMetro_::ControlMetro_() : lastClickTime_(0), isRunning_(true) {}
   
 } // Namespace Tonic_
   
