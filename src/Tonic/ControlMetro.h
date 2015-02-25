@@ -44,7 +44,8 @@ namespace Tonic {
     inline void ControlMetro_::computeOutput(const SynthesisContext_ & context){
       
       if (startTrigger_.tick(context).triggered)
-      {
+	  {
+        lastClickTime_ = 0; // reset
         isRunning_ = true;
       }
       if(stopTrigger_.tick(context).triggered){

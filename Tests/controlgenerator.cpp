@@ -133,11 +133,16 @@ TESTSUITE(ControlGeneratorTests, TonicTestcase, "")
 		
     ControlTrigger stopTrigger = ControlTrigger().trigger();
     ControlTrigger startTrigger;
-    ControlMetro metro = ControlMetro().bpm(1000).stopTrigger(stopTrigger).startTrigger(startTrigger);
+	 float bpm = 1000;
+	float bps = bpm / 60;
+	float spb = 1 / bps;
+	float ticksPerSecond = Tonic::sampleRate() / kSynthesisBlockSize;
+	float ticksPerBeat = ticksPerSecond * spb;
+	ControlMetro metro = ControlMetro().bpm(bpm).stopTrigger(stopTrigger).startTrigger(startTrigger);
     Tonic_::SynthesisContext_ context;
 
     bool triggered = false;
-    for (int i = 0; i < 1000; i++)
+	for (int i = 0; i < 2.5 * ticksPerBeat; i++)
     {
       context.tick();
      if (metro.tick(context).triggered){
@@ -149,15 +154,30 @@ TESTSUITE(ControlGeneratorTests, TonicTestcase, "")
 
     startTrigger.trigger(); 
 
-    for (int i = 0; i < 1000; i++)
+	context.tick();
+
+	TEST(true, metro.tick(context).triggered, "Metro should trigger on the frame after start.");
+
+	for (int i = 0; i < 0.9 * ticksPerBeat; i++)
+	{
+		context.tick();
+		if (metro.tick(context).triggered){
+			triggered = true;
+		}
+	}
+
+	TEST(false, triggered, "After start, metro should complete a ");
+
+	int triggerCount = 0;
+	for (int i = 0; i < ticksPerBeat; i++)
     {
       context.tick();
       if (metro.tick(context).triggered){
-        triggered = true;
+		  triggerCount++;
       }
     }
 
-    TEST(true, triggered, "Metro should have run, and should be triggering.");
+	TEST(eq, triggerCount, 1, "Metro should have triggered exactly once.");
 
   END_TESTCASE()
 
