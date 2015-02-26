@@ -88,6 +88,7 @@ namespace Tonic {
 
   // forward declaration
   class RampedValue;
+  class ControlPrinter;
 
   class ControlGenerator : public TonicSmartPointer<Tonic_::ControlGenerator_>{
 
@@ -101,6 +102,9 @@ namespace Tonic {
     
     // shortcut for creating ramped value
     RampedValue smoothed(float length = 0.05);
+
+	// shortcut for wrapping with a ControlPrinter
+	ControlPrinter print(string message = "ControlGenerator triggered. Output value is: %f");
     
     ControlGeneratorOutput getLastOutput();
     
