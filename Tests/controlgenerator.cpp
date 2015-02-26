@@ -434,7 +434,67 @@ TESTCASE(test210ControlRecorder, "")
 	}
 
 
-END_TESTCASE()
+	END_TESTCASE()
+
+
+
+	TESTCASE(test310ControlScaleDegree, "")
+
+		vector<float> scale;
+		scale.push_back(1);
+		scale.push_back(2);
+
+
+		ControlScaleDegree gen = ControlScaleDegree().setScale(scale);
+
+
+		int scaleDegree = 0;
+
+		gen.input(scaleDegree);
+
+		Tonic_::SynthesisContext_ context;
+
+		ControlGeneratorOutput output;
+
+		output = gen.tick(context);
+
+		TEST(eq, output.value, scale[scaleDegree], "ControlScaleDegree should index in to scale ");
+
+
+
+
+		scaleDegree = 1;
+
+		gen.input(scaleDegree);
+
+		context.tick();
+		output = gen.tick(context);
+
+		TEST(eq, output.value, scale[scaleDegree], "ControlScaleDegree should index in to scale ");
+
+
+
+		scaleDegree = 2;
+
+		gen.input(scaleDegree);
+
+		context.tick();
+		output = gen.tick(context);
+
+		TEST(eq, output.value, scale[scaleDegree % scale.size()] + 12, "ControlScaleDegree should add an octave when wrapping up");
+
+
+		scaleDegree = -1;
+
+		gen.input(scaleDegree);
+
+		context.tick();
+		output = gen.tick(context);
+
+		TEST(eq, output.value, scale[scaleDegree % scale.size()] - 12, "ControlScaleDegree should subtract an octave when wrapping down");
+
+
+	END_TESTCASE()
 
 END_TESTSUITE()
 
