@@ -494,6 +494,17 @@ TESTCASE(test210ControlRecorder, "")
 		TEST(eq, output.value, scale[scaleDegree % scale.size()] - 12, "ControlScaleDegree should subtract an octave when wrapping down");
 
 
+
+		scaleDegree = -3;
+
+		gen.input(scaleDegree);
+
+		context.tick();
+		output = gen.tick(context);
+
+		TEST(eq, output.value, scale[scaleDegree % scale.size()] - 24, "ControlScaleDegree should subtract two octaves when wrapping down twice");
+
+
 	END_TESTCASE()
 
 END_TESTSUITE()

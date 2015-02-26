@@ -32,9 +32,14 @@ namespace Tonic {
       if( input_.tick(context).triggered ){
         
         int scaleDegree = input_.tick(context).value;
-        int octave = scaleDegree / scale.size();
+        int octave = scaleDegree / (int)scale.size();
+		if (scaleDegree < 0)
+		{
+			octave -= 1;
+		}
+		
         float baseNumber = scaleDegree % scale.size();
-        output_.value = scale.at(baseNumber) + 12 * octave;
+		output_.value = scale.at(baseNumber) + NOTES_PER_OCTAVE * octave;
         output_.triggered = true;
       }else{
         output_.triggered = false;
