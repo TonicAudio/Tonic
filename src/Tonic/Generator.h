@@ -61,6 +61,9 @@ namespace Tonic {
 
   }
 
+  //-- forward delcaration
+  class MonoToStereoPanner;
+  class ControlGenerator;
   
   class Generator : public TonicSmartPointer<Tonic_::Generator_>{
 
@@ -75,6 +78,14 @@ namespace Tonic {
     virtual void tick(TonicFrames& frames, const Tonic_::SynthesisContext_ & context){
       obj->tick(frames, context);
     }
+
+
+	//! Shortcut for wrapping with a MonoToStereoPanner
+	Generator pan(ControlGenerator pan);
+
+	//! Shortcut for wrapping with a MonoToStereoPanner
+	Generator pan(float pan);
+
 
   };
   
