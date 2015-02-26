@@ -249,6 +249,17 @@ TESTSUITE(GeneratorTests, TonicTestcase, "")
     TEST(true, bitCrusher.isStereoOutput(), "bitcrusher should know that it's strereo output");
     bitCrusher.tick(testFrames, testContext);
     TEST(stereoFixedOutputEquals, testFrames, 0, 1);
+	END_TESTCASE()
+
+
+TESTCASE(test200TestMixerPreserversStereo, "")
+
+	MonoToStereoPanner stereoSignal = MonoToStereoPanner();
+	Mixer mixer;
+	mixer.addInput(stereoSignal);
+
+	TEST(true, mixer.isStereoOutput(), "Mixer should know that it's stereo.");
+
   END_TESTCASE()
 
 END_TESTSUITE()
