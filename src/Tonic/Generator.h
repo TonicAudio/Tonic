@@ -24,6 +24,10 @@ namespace Tonic {
       
       Generator_();
       virtual ~Generator_();
+
+	  // Keep track of whether this Generator_ has been added, via TONIC_MAKE_GEN_SETTERS to another generator
+	  // If it has been added, the number of channels should not be allowed to change
+	  bool hasBeenAdded; 
       
       virtual void tick( TonicFrames& frames, const SynthesisContext_ &context );
       
@@ -86,6 +90,7 @@ namespace Tonic {
 	//! Shortcut for wrapping with a MonoToStereoPanner
 	Generator pan(float pan);
 
+	void ____recordAdditionAsParameter____(){ obj->hasBeenAdded = true; }
 
   };
   
@@ -112,6 +117,7 @@ namespace Tonic {
                                                                                         \
   generatorClassName& methodNameInGenerator(Generator arg){                             \
     this->gen()->methodNameInGenerator_(arg);                                           \
+	arg.____recordAdditionAsParameter____();											\
     return static_cast<generatorClassName&>(*this);                                     \
   }                                                                                     \
                                                                                         \

@@ -106,6 +106,7 @@ namespace Tonic{
     //! Set the output gen that produces audio for the Synth
     void  setOutputGen(Generator generator){
       gen()->lockMutex();
+	  generator.____recordAdditionAsParameter____();
       gen()->setOutputGen(generator);
       gen()->unlockMutex();
     }

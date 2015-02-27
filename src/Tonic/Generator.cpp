@@ -17,7 +17,7 @@ namespace Tonic{
 
 namespace Tonic_{
   
-	Generator_::Generator_() : isStereoOutput_(false), lastFrameIndex_(0) {
+	Generator_::Generator_() : isStereoOutput_(false), lastFrameIndex_(0), hasBeenAdded(false){
 		outputFrames_.resize(kSynthesisBlockSize, 1, 0);
 	}
 
@@ -25,6 +25,11 @@ namespace Tonic_{
 
 	void Generator_::setIsStereoOutput(bool stereo){
 		if (stereo != isStereoOutput_){
+			if (hasBeenAdded)
+			{
+				error("You must not change the number of channels of a generator after adding it as an input to another generator.", true);
+			}
+			
 			outputFrames_.resize(kSynthesisBlockSize, stereo ? 2 : 1, 0);
 		}
 		isStereoOutput_ = stereo;
