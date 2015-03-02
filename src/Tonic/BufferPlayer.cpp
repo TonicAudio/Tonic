@@ -49,7 +49,7 @@ namespace Tonic { namespace Tonic_{
           currentSample = 0;
         }else{
           isFinished_ = true;
-		  finishedTrigger_.trigger();
+          finishedTrigger_.trigger();
         }
       }else{
         currentSample += samplesPerSynthesisBlock;
