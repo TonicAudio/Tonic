@@ -47,7 +47,7 @@
 @property (nonatomic, assign) UInt32 numSamplesReadPerPacket;
 @property (nonatomic, assign) UInt32 desiredPrebufferedSamples;
 @property (nonatomic, assign) SInt64 currentFileTime;
-@property (nonatomic, assign) dispatch_source_t callbackTimer;
+@property (nonatomic, strong) dispatch_source_t callbackTimer;
 
 - (void)bufferNewAudio;
 
@@ -163,6 +163,13 @@
     ExtAudioFileTell(self.inputFile, &frameOffset);
     self.currentFileTime = (float)frameOffset / self.samplingRate;
     
+    // Seems to fix issue #85 corrupted sample reads
+    // ExtAudioFileRead(self.inputFile, &framesRead, &incomingAudio);
+    
+    if ( framesRead == 0 ) { // EOF.
+        [self pause];
+    }
+    
     // Add the new audio to the ring buffer
     ringBuffer->AddNewInterleavedFloatData(self.outputBuffer, framesRead, self.numChannels);
     
@@ -187,13 +194,7 @@
 - (void)setCurrentTime:(float)thisCurrentTime
 {
     dispatch_async(dispatch_get_main_queue(), ^{
-        [self pause];
         ExtAudioFileSeek(self.inputFile, thisCurrentTime*self.samplingRate);
-        
-        [self clearBuffer];
-        [self bufferNewAudio];
-        
-        [self play];
     });
 }
 
@@ -273,7 +274,7 @@
     // Release the dispatch timer because it holds a reference to this class instance
     [self pause];
     if (self.callbackTimer) {
-        dispatch_release(self.callbackTimer);
+        self.callbackTimer = nil;
     }
 }
 

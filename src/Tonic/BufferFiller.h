@@ -9,8 +9,8 @@
 //
 
 
-#ifndef __Tonic__BufferFiller__
-#define __Tonic__BufferFiller__
+#ifndef TONIC_BUFFERFILLER_H
+#define TONIC_BUFFERFILLER_H
 
 #include "Generator.h"
 

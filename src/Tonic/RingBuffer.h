@@ -8,8 +8,8 @@
 //
 
 
-#ifndef __Tonic__RingBuffer__
-#define __Tonic__RingBuffer__
+#ifndef TONIC_RINGBUFFER_H
+#define TONIC_RINGBUFFER_H
 
 #include "Effect.h"
 #include "SampleTable.h"
@@ -168,7 +168,7 @@ namespace Tonic {
   public:
     
     RingBuffer(unsigned int nFrames = 64, unsigned int nChannels = 2){
-      if (obj) delete obj;
+      delete obj;
       obj = new Tonic_::RingBuffer_(nFrames, nChannels);
     }
     
@@ -267,6 +267,6 @@ namespace Tonic {
     
 }
 
-#endif /* defined(__Tonic__RingBuffer__) */
+#endif
 
 

@@ -11,8 +11,8 @@
 // Global storage for sampled audio data - wavetables, in-memory samples, ring buffers, audio input, etc
 // Allows registration of a TonicFrames object with a name (string)
 
-#ifndef __Tonic__SampleTable__
-#define __Tonic__SampleTable__
+#ifndef TONIC_SAMPLETABLE_H
+#define TONIC_SAMPLETABLE_H
 
 #include "TonicFrames.h"
 

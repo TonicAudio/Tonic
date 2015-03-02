@@ -8,8 +8,8 @@
 //
 
 
-#ifndef __Tonic__ControlMetroDivider__
-#define __Tonic__ControlMetroDivider__
+#ifndef TONIC_CONTROLMETRODIVIDER_H
+#define TONIC_CONTROLMETRODIVIDER_H
 
 #include "ControlConditioner.h"
 
@@ -69,6 +69,6 @@ namespace Tonic {
   };
 }
 
-#endif /* defined(__Tonic__ControlMetroDivider__) */
+#endif
 
 

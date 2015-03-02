@@ -9,8 +9,8 @@
 //
 
 
-#ifndef __Tonic__ControlTriggerFilter__
-#define __Tonic__ControlTriggerFilter__
+#ifndef TONIC_CONTROLTRIGGERFILTER_H
+#define TONIC_CONTROLTRIGGERFILTER_H
 
 #include "ControlGenerator.h"
 
@@ -53,6 +53,6 @@ namespace Tonic {
   };
 }
 
-#endif /* defined(__Tonic__ControlTriggerFilter__) */
+#endif
 
 

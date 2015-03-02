@@ -44,7 +44,7 @@
 @property (nonatomic, assign) float *outputBuffer;
 @property (nonatomic, assign) float *holdingBuffer;
 @property (nonatomic, assign) SInt64 currentFileTime;
-@property (nonatomic, assign) dispatch_source_t callbackTimer;
+@property (nonatomic, strong) dispatch_source_t callbackTimer;
 
 @end
 

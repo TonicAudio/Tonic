@@ -9,8 +9,8 @@
 //
 
 
-#ifndef __Tonic__TonicCore__
-#define __Tonic__TonicCore__
+#ifndef TONIC_TONICCORE_H
+#define TONIC_TONICCORE_H
 
 #include <string>
 #include <vector>
@@ -60,10 +60,12 @@ extern "C" {
   #undef min
   #undef max
 
+#if _MSC_VER < 1800
   // Windows' C90 <cmath> header does not define log2
   inline static float log2(float n) {
 	return log(n) / log(2);
   }
+#endif
 
   // Windows native mutexes
   #define TONIC_MUTEX_T CRITICAL_SECTION
@@ -414,7 +416,7 @@ namespace Tonic {
       
       void release(){
         if(pcount && --(*pcount) == 0){
-          if (obj) delete obj;
+          delete obj;
           delete pcount;
           
           obj = NULL;

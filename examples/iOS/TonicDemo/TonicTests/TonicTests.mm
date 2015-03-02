@@ -66,7 +66,7 @@ using namespace Tonic;
 - (void)verifyFixedOutputEquals:(float)expectedOutput
 {
   for (unsigned int i=0; i<testFrames.size(); i++){
-    STAssertEquals(expectedOutput, testFrames[i], @"Did not produce expected output");
+    XCTAssertEqual(expectedOutput, testFrames[i], @"Did not produce expected output");
     if (testFrames[i] != expectedOutput) break;
   }
 }
@@ -74,10 +74,10 @@ using namespace Tonic;
 - (void)verifyStereoFixedOutputEqualsLeft:(float)l right:(float)r
 {
   for (unsigned int i=0; i<testFrames.frames(); i++){
-    STAssertEquals(l, testFrames[2*i], @"Left channel not produce expected output on frame %i", i);
+    XCTAssertEqual(l, testFrames[2*i], @"Left channel not produce expected output on frame %i", i);
     if (testFrames[2*i] != l) break;
     
-    STAssertEquals(r, testFrames[2*i+1], @"Right channel did not produce expected output on frame %i", i);
+    XCTAssertEqual(r, testFrames[2*i+1], @"Right channel did not produce expected output on frame %i", i);
     if (testFrames[2*i+1] != r) break;
   }
 }
@@ -85,7 +85,7 @@ using namespace Tonic;
 - (void)verifyBufferFillerMonoFixedOutputEquals:(float)expectedOutput
 {
   for (unsigned int i=0; i<kTestOutputBlockSize; i++){
-    STAssertEquals(expectedOutput, monoOutBuffer[i], @"Did not produce expected output");
+    XCTAssertEqual(expectedOutput, monoOutBuffer[i], @"Did not produce expected output");
     if (monoOutBuffer[i] != expectedOutput) break;
   }
 }
@@ -93,10 +93,10 @@ using namespace Tonic;
 - (void)verifyBufferFillerStereoFixedOutputEqualsLeft:(float)l right:(float)r
 {
   for (unsigned int i=0; i<kTestOutputBlockSize; i++){
-    STAssertEquals(l, stereoOutBuffer[2*i], @"Left channel not produce expected output");
+    XCTAssertEqual(l, stereoOutBuffer[2*i], @"Left channel not produce expected output");
     if (stereoOutBuffer[2*i] != l) break;
     
-    STAssertEquals(r, stereoOutBuffer[2*i+1], @"Right channel did not produce expected output");
+    XCTAssertEqual(r, stereoOutBuffer[2*i+1], @"Right channel did not produce expected output");
     if (stereoOutBuffer[2*i+1] != r) break;
   }
 }
@@ -129,7 +129,7 @@ using namespace Tonic;
   
   testVal.tick(testFrames, testContext);
   
-  STAssertEquals(testFrames.channels(), (unsigned int)2, @"TestFrames should have 2 channels");
+  XCTAssertEqual(testFrames.channels(), (unsigned int)2, @"TestFrames should have 2 channels");
   
   [self verifyFixedOutputEquals:testFloat];
 }
@@ -142,7 +142,7 @@ using namespace Tonic;
   
   StereoFixedTestGen stereoVal = StereoFixedTestGen(0.5, 1.0); // 0.5 in left channel, 1.0 in right
   
-  STAssertTrue(stereoVal.isStereoOutput(), @"StereoFixedTestGen should output stereo");
+  XCTAssertTrue(stereoVal.isStereoOutput(), @"StereoFixedTestGen should output stereo");
   
   stereoVal.tick(testFrames, testContext);
   
@@ -158,7 +158,7 @@ using namespace Tonic;
   
   Adder monoAdder = FixedValue(0.5) + FixedValue(0.5);
   
-  STAssertFalse(monoAdder.isStereoOutput(), @"Adder should be mono");
+  XCTAssertFalse(monoAdder.isStereoOutput(), @"Adder should be mono");
   
   monoAdder.tick(testFrames, testContext);
   
@@ -174,7 +174,7 @@ using namespace Tonic;
   
   Adder stereoAdder = FixedValue(0.5) + StereoFixedTestGen(0.0, 1.0);
   
-  STAssertTrue(stereoAdder.isStereoOutput(), @"Adder should be stereo");
+  XCTAssertTrue(stereoAdder.isStereoOutput(), @"Adder should be stereo");
   
   stereoAdder.tick(testFrames, testContext);
   
@@ -188,7 +188,7 @@ using namespace Tonic;
   
   Adder stereoAdder = StereoFixedTestGen(1.0, 0.0) + StereoFixedTestGen(0.0, 1.0);
   
-  STAssertTrue(stereoAdder.isStereoOutput(), @"Adder should be stereo");
+  XCTAssertTrue(stereoAdder.isStereoOutput(), @"Adder should be stereo");
   
   stereoAdder.tick(testFrames, testContext);
   
@@ -204,7 +204,7 @@ using namespace Tonic;
   
   Multiplier monoMult = FixedValue(0.5) * FixedValue(0.5);
   
-  STAssertFalse(monoMult.isStereoOutput(), @"Multiplier should be mono");
+  XCTAssertFalse(monoMult.isStereoOutput(), @"Multiplier should be mono");
   
   monoMult.tick(testFrames, testContext);
   
@@ -220,7 +220,25 @@ using namespace Tonic;
   
   Multiplier stereoMult = FixedValue(0.5) * StereoFixedTestGen(0.0, 1.0);
   
-  STAssertTrue(stereoMult.isStereoOutput(), @"Multiplier should be stereo");
+  XCTAssertTrue(stereoMult.isStereoOutput(), @"Multiplier should be stereo");
+  
+  stereoMult.tick(testFrames, testContext);
+  
+  [self verifyStereoFixedOutputEqualsLeft:0.0f right:0.5f];
+  
+}
+
+
+
+- (void)test107_1_MultStereoMono
+{
+  // Multiply one stereo, one mono, with stereo on the right side, ensure result is stereo
+  
+  [self configureStereo:YES];
+  
+  Multiplier stereoMult =  StereoFixedTestGen(0.0, 1.0) * FixedValue(0.5);
+  
+  XCTAssertTrue(stereoMult.isStereoOutput(), @"Multiplier should be stereo");
   
   stereoMult.tick(testFrames, testContext);
   
@@ -252,7 +270,7 @@ using namespace Tonic;
   
   Multiplier stereoMult = StereoFixedTestGen(1.0, 0.0) * StereoFixedTestGen(0.0, 1.0);
   
-  STAssertTrue(stereoMult.isStereoOutput(), @"Multiplier should be stereo");
+  XCTAssertTrue(stereoMult.isStereoOutput(), @"Multiplier should be stereo");
   
   stereoMult.tick(testFrames, testContext);
   
@@ -268,7 +286,7 @@ using namespace Tonic;
   
   Divider divMono = FixedValue(1) / FixedValue(2);
   
-  STAssertFalse(divMono.isStereoOutput(), @"Divider should be mono");
+  XCTAssertFalse(divMono.isStereoOutput(), @"Divider should be mono");
   
   divMono.tick(testFrames, testContext);
   
@@ -284,7 +302,7 @@ using namespace Tonic;
     
     Divider divMono = FixedValue(1) / ControlValue(2);
     
-    STAssertFalse(divMono.isStereoOutput(), @"Divider should be mono");
+    XCTAssertFalse(divMono.isStereoOutput(), @"Divider should be mono");
     
     divMono.tick(testFrames, testContext);
     
@@ -296,7 +314,7 @@ using namespace Tonic;
     
     Divider divMono = ControlValue(1) / FixedValue(2);
     
-    STAssertFalse(divMono.isStereoOutput(), @"Divider should be mono");
+    XCTAssertFalse(divMono.isStereoOutput(), @"Divider should be mono");
     
     divMono.tick(testFrames, testContext);
     
@@ -328,7 +346,7 @@ using namespace Tonic;
   TestBufferFiller testFiller;
   testFiller.setOutputGen(gen);
   testFiller.fillBufferOfFloats(stereoOutBuffer, kTestOutputBlockSize, 1);
-  STAssertEquals((float)1, *stereoOutBuffer, @"FixedValue(2) - FixedValue(1) failed");
+  XCTAssertEqual((float)1, *stereoOutBuffer, @"FixedValue(2) - FixedValue(1) failed");
 }
 
 // For the limiter output to be observable, limiter must be ticked until the output frame index exceeds the limiter
@@ -342,9 +360,20 @@ using namespace Tonic;
   for (int i=0; i<4; i++)
     testFiller.fillBufferOfFloats(stereoOutBuffer, kTestOutputBlockSize, 1);
  
-  STAssertTrue(*stereoOutBuffer != 0, @"Limiter shouldn't limit 100 to zero");
+  XCTAssertTrue(*stereoOutBuffer != 0, @"Limiter shouldn't limit 100 to zero");
   
 }
+
+-(void)test120TestBitCrusherStereoPreservation{
+
+  [self configureStereo:YES];
+  BitCrusher bitCrusher = BitCrusher().bitDepth(16).input(StereoFixedTestGen(0.0, 1.0));
+  XCTAssertTrue(bitCrusher.isStereoOutput(), @"bitcrusher should know that it's strereo output");
+  bitCrusher.tick(testFrames, testContext);
+  [self verifyStereoFixedOutputEqualsLeft:0 right:1];
+}
+
+
 
 #pragma mark - Control Generator Tests
 
@@ -358,7 +387,7 @@ using namespace Tonic;
     stepper = ControlStepper().start(1).end(2).step(1).trigger(trig);
     Tonic_::SynthesisContext_ context;
     ControlGeneratorOutput result = stepper.tick(context);
-    STAssertEquals(result.value, 1.0f, @"ControlStepper did not produce expected output");
+    XCTAssertEqual(result.value, 1.0f, @"ControlStepper did not produce expected output");
   }
   
     {
@@ -369,32 +398,32 @@ using namespace Tonic;
 
     Tonic_::SynthesisContext_ context;
     ControlGeneratorOutput result = stepper.tick(context);
-    STAssertEquals(result.value, 1.0f, @"ControlStepper did not produce expected output");
+    XCTAssertEqual(result.value, 1.0f, @"ControlStepper did not produce expected output");
     
     trig.trigger();
     context.tick();
     result = stepper.tick(context);
-    STAssertEquals(result.value, 2.0f, @"ControlStepper did not produce expected output");
+    XCTAssertEqual(result.value, 2.0f, @"ControlStepper did not produce expected output");
     
     trig.trigger();
     context.tick();
     result = stepper.tick(context);
-    STAssertEquals(result.value, 3.0f, @"ControlStepper did not produce expected output");
+    XCTAssertEqual(result.value, 3.0f, @"ControlStepper did not produce expected output");
     
     trig.trigger();
     context.tick();
     result = stepper.tick(context);
-    STAssertEquals(result.value, 2.0f, @"ControlStepper did not produce expected output");
+    XCTAssertEqual(result.value, 2.0f, @"ControlStepper did not produce expected output");
     
     trig.trigger();
     context.tick();
     result = stepper.tick(context);
-    STAssertEquals(result.value, 1.0f, @"ControlStepper did not produce expected output");
+    XCTAssertEqual(result.value, 1.0f, @"ControlStepper did not produce expected output");
     
     trig.trigger();
     context.tick();
     result = stepper.tick(context);
-    STAssertEquals(result.value, 2.0f, @"ControlStepper did not produce expected output");
+    XCTAssertEqual(result.value, 2.0f, @"ControlStepper did not produce expected output");
     
     
     stepper = ControlStepper();
@@ -415,13 +444,13 @@ using namespace Tonic;
     
     env.tick(testFrames, context);
     ControlGeneratorOutput result = stepper.tick(context);
-    STAssertEquals(result.value, 1.0f, @"ControlStepper did not produce expected output");
+    XCTAssertEqual(result.value, 1.0f, @"ControlStepper did not produce expected output");
     
     trig.trigger();
     context.tick();
     env.tick(testFrames, context);
     result = stepper.tick(context);
-    STAssertEquals(result.value, 2.0f, @"ControlStepper did not produce expected output");
+    XCTAssertEqual(result.value, 2.0f, @"ControlStepper did not produce expected output");
     
     
   }
@@ -430,11 +459,11 @@ using namespace Tonic;
 - (void)test202ControlTrigger{
   ControlTrigger trig;
   Tonic_::SynthesisContext_ context;
-  STAssertFalse(trig.tick(context).triggered, @"ControlGenerator did not produce expected output");
+  XCTAssertFalse(trig.tick(context).triggered, @"ControlGenerator did not produce expected output");
   
   trig.trigger();
   context.tick();
-  STAssertTrue(trig.tick(context).triggered, @"ControlGenerator did not produce expected output");
+  XCTAssertTrue(trig.tick(context).triggered, @"ControlGenerator did not produce expected output");
   
 }
 
@@ -443,16 +472,16 @@ using namespace Tonic;
   ControlTrigger trig = ControlTrigger();
   ControlRandom random = ControlRandom().min(10).max(20).trigger(trig);
   Tonic_::SynthesisContext_ context;  
-  STAssertTrue(random.tick(context).value > 0, @"ControlRandom should start out with a value inside its range.");
+  XCTAssertTrue(random.tick(context).value > 0, @"ControlRandom should start out with a value inside its range.");
   
   random.min(1).max(2);
-  STAssertTrue(random.tick(context).value <= 2, @"ControlRandom should start out with a value inside its range.");
-  STAssertFalse(random.tick(context).triggered, @"ControlRandom should not produce new trigger unless input is triggered.");
+  XCTAssertTrue(random.tick(context).value <= 2, @"ControlRandom should start out with a value inside its range.");
+  XCTAssertFalse(random.tick(context).triggered, @"ControlRandom should not produce new trigger unless input is triggered.");
   
   float randVal = random.tick(context).value;
   trig.trigger();
-  STAssertTrue(random.tick(context).triggered, @"ControlRandom should report change if triggered");
-  STAssertTrue(random.tick(context).value != randVal, @"ControlRandom should not have the same value after trigger.");
+  XCTAssertTrue(random.tick(context).triggered, @"ControlRandom should report change if triggered");
+  XCTAssertTrue(random.tick(context).value != randVal, @"ControlRandom should not have the same value after trigger.");
   
 }
 
@@ -466,7 +495,7 @@ using namespace Tonic;
   context.tick();
   metro.tick(context);
   context.tick();
-  STAssertFalse( metro.tick(context).triggered, @"Metro shouldn't report trigger.");
+  XCTAssertFalse( metro.tick(context).triggered, @"Metro shouldn't report trigger.");
   
 }
 
@@ -474,22 +503,22 @@ using namespace Tonic;
   ControlValue left = ControlValue(2);
   ControlValue right = ControlValue(3);
   ControlAdder adder = left + right;
-  STAssertEquals(adder.tick(testContext).value, 5.0f, @"Adder isn't adding correctly");
+  XCTAssertEqual(adder.tick(testContext).value, 5.0f, @"Adder isn't adding correctly");
   
 }
 
 
 -(void)test206SmoothedChangedStatus{
   ControlValue val(100);
-  STAssertTrue(val.tick(testContext).triggered, @"Inital status of Control Gen should be 'triggered'");
+  XCTAssertTrue(val.tick(testContext).triggered, @"Inital status of Control Gen should be 'triggered'");
   
   ControlValue val2(100);
   val2.smoothed();
-  STAssertTrue(val2.tick(testContext).triggered, @"Inital status of Control Gen should be 'triggered'");
+  XCTAssertTrue(val2.tick(testContext).triggered, @"Inital status of Control Gen should be 'triggered'");
   
   // reset and try again
   testContext.forceNewOutput = true;
-  STAssertTrue(val2.tick(testContext).triggered, @"Inital status of Control Gen should be 'triggered'");
+  XCTAssertTrue(val2.tick(testContext).triggered, @"Inital status of Control Gen should be 'triggered'");
   
 }
 
@@ -497,7 +526,7 @@ using namespace Tonic;
   ControlGenerator val1 = ControlValue(2);
   ControlGenerator val2 = ControlValue(2);
   ControlGenerator final = val1 + val1 * val2;
-  STAssertEquals(final.tick(testContext).value, 6.0f, @"val1 + val1 * val2 doesn't combine correctly with ControlGenerators");
+  XCTAssertEqual(final.tick(testContext).value, 6.0f, @"val1 + val1 * val2 doesn't combine correctly with ControlGenerators");
 }
 
 
@@ -506,12 +535,12 @@ using namespace Tonic;
   context.forceNewOutput = false;
   context.tick();
   ControlGenerator val1 = ControlValue(2);
-  STAssertTrue(val1.tick(context).triggered, @"Fist tick to ControlGen should cause trigger");
-  STAssertTrue(val1.tick(context).triggered, @"Subsequent ticks (with no context change) should still report triggered.");
+  XCTAssertTrue(val1.tick(context).triggered, @"Fist tick to ControlGen should cause trigger");
+  XCTAssertTrue(val1.tick(context).triggered, @"Subsequent ticks (with no context change) should still report triggered.");
   
   context.tick();
   
-  STAssertFalse(val1.tick(context).triggered, @"Triggered should be false on subsequent ticks after context has advanced.");
+  XCTAssertFalse(val1.tick(context).triggered, @"Triggered should be false on subsequent ticks after context has advanced.");
  
 }
 
@@ -542,47 +571,47 @@ using namespace Tonic;
   
   localContext.tick();
   output = switcher.tick(localContext);
-  STAssertEquals( output.value, index0Val.getValue(), @"InputIndex should be zero");
+  XCTAssertEqual( output.value, index0Val.getValue(), @"InputIndex should be zero");
   
   localContext.tick();
   output = switcher.tick(localContext);
-  STAssertFalse(output.triggered, @"Second tick with no change should not result in trigger.");
+  XCTAssertFalse(output.triggered, @"Second tick with no change should not result in trigger.");
   
   inputIndex.value(1);
   
   localContext.tick();
   output = switcher.tick(localContext);
-  STAssertEquals( output.value, index1Val.getValue(), @"InputIndex should be one");
+  XCTAssertEqual( output.value, index1Val.getValue(), @"InputIndex should be one");
   
   index1Val.value(100);
   localContext.tick();
   output = switcher.tick(localContext);
-  STAssertTrue(output.triggered, @"Change in input value should pass through to output.");
+  XCTAssertTrue(output.triggered, @"Change in input value should pass through to output.");
   
   
   localContext.tick();
   output = switcher.tick(localContext);
-  STAssertFalse(output.triggered, @"Change in input value should pass through to output.");
+  XCTAssertFalse(output.triggered, @"Change in input value should pass through to output.");
   
   input0Trig.trigger();
   localContext.tick();
   output = switcher.tick(localContext);
-  STAssertEquals( output.value, index0Val.getValue(), @"InputIndex should be zero");
+  XCTAssertEqual( output.value, index0Val.getValue(), @"InputIndex should be zero");
   
   input0Trig.trigger();
   localContext.tick();
   output = switcher.tick(localContext);
-  STAssertFalse( output.triggered, @"Repeat call to same input shouldn't trigger if the input didn't trigger");
+  XCTAssertFalse( output.triggered, @"Repeat call to same input shouldn't trigger if the input didn't trigger");
   
   input1Trig.trigger();
   localContext.tick();
   output = switcher.tick(localContext);
-  STAssertTrue( output.triggered, @"Switching inputs should cause a trigger.");
+  XCTAssertTrue( output.triggered, @"Switching inputs should cause a trigger.");
   
   inputIndex.value(0);
   localContext.tick();
   output = switcher.tick(localContext);
-  STAssertEquals( output.value, index0Val.getValue(), @"Changing the inputIndex should work, even after using an input trigger.");
+  XCTAssertEqual( output.value, index0Val.getValue(), @"Changing the inputIndex should work, even after using an input trigger.");
   
 }
 
@@ -604,31 +633,31 @@ using namespace Tonic;
   switcher.inputIndex(0);
   localContext.tick();
   switcher.tick(localContext);
-  STAssertEquals(switcher.tick(localContext).value, inputZero, @"ControlSwitcher basic test.");
+  XCTAssertEqual(switcher.tick(localContext).value, inputZero, @"ControlSwitcher basic test.");
   
   
   switcher.inputIndex(2);
   localContext.tick();
   switcher.tick(localContext);
-  STAssertEquals(switcher.tick(localContext).value, inputZero + addAfterWrap, @"ControlSwitcher basic test.");
+  XCTAssertEqual(switcher.tick(localContext).value, inputZero + addAfterWrap, @"ControlSwitcher basic test.");
   
   
   switcher.inputIndex(3);
   localContext.tick();
   switcher.tick(localContext);
-  STAssertEquals(switcher.tick(localContext).value, inputOne + addAfterWrap, @"ControlSwitcher basic test.");
+  XCTAssertEqual(switcher.tick(localContext).value, inputOne + addAfterWrap, @"ControlSwitcher basic test.");
   
   
   switcher.inputIndex(4);
   localContext.tick();
   switcher.tick(localContext);
-  STAssertEquals(switcher.tick(localContext).value, inputZero + addAfterWrap * 2, @"ControlSwitcher basic test.");
+  XCTAssertEqual(switcher.tick(localContext).value, inputZero + addAfterWrap * 2, @"ControlSwitcher basic test.");
   
   
   switcher.inputIndex(5);
   localContext.tick();
   switcher.tick(localContext);
-  STAssertEquals(switcher.tick(localContext).value, inputOne + addAfterWrap * 2, @"ControlSwitcher basic test.");
+  XCTAssertEqual(switcher.tick(localContext).value, inputOne + addAfterWrap * 2, @"ControlSwitcher basic test.");
   
   
 }
@@ -707,13 +736,13 @@ using namespace Tonic;
     synth.fillBufferOfFloats(stereoOutBuffer, kTestOutputBlockSize, 2);
   }
   
-  STAssertFalse(subscriber.valueChangedFlag, @"Value changed notification should not have happened");
+  XCTAssertFalse(subscriber.valueChangedFlag, @"Value changed notification should not have happened");
   subscriber.valueChangedFlag = false;
   synth.sendControlChangesToSubscribers();
-  STAssertTrue(subscriber.valueChangedFlag, @"Value changed notification should have happened");
+  XCTAssertTrue(subscriber.valueChangedFlag, @"Value changed notification should have happened");
   subscriber.valueChangedFlag = false;
   synth.sendControlChangesToSubscribers();
-  STAssertFalse(subscriber.valueChangedFlag, @"Value changed notification should not have happened");
+  XCTAssertFalse(subscriber.valueChangedFlag, @"Value changed notification should not have happened");
  
   for(int i = 0; i < 1000; i++){
     synth.fillBufferOfFloats(stereoOutBuffer, kTestOutputBlockSize, 2);
@@ -721,7 +750,7 @@ using namespace Tonic;
   
   subscriber.valueChangedFlag = false;
   synth.sendControlChangesToSubscribers();
-  STAssertTrue(subscriber.valueChangedFlag, @"Value changed notification should have happened");
+  XCTAssertTrue(subscriber.valueChangedFlag, @"Value changed notification should have happened");
   
   // now remove the subscriber and make sure it's not notified any more
   
@@ -731,7 +760,7 @@ using namespace Tonic;
     synth.fillBufferOfFloats(stereoOutBuffer, kTestOutputBlockSize, 2);
   }
   synth.sendControlChangesToSubscribers();
-  STAssertFalse(subscriber.valueChangedFlag, @"Value changed notification should not have happened");
+  XCTAssertFalse(subscriber.valueChangedFlag, @"Value changed notification should not have happened");
   
   ////////////////////////////
   // Unnamed notifier test
@@ -745,9 +774,9 @@ using namespace Tonic;
     synth.fillBufferOfFloats(stereoOutBuffer, kTestOutputBlockSize, 2);
   }
   
-  STAssertFalse(subscriber.valueChangedFlag, @"Value changed notification should not have happened");
+  XCTAssertFalse(subscriber.valueChangedFlag, @"Value changed notification should not have happened");
   synth.sendControlChangesToSubscribers();
-  STAssertTrue(subscriber.valueChangedFlag, @"Value changed notification should have happened");
+  XCTAssertTrue(subscriber.valueChangedFlag, @"Value changed notification should have happened");
   
 }
 
@@ -762,14 +791,14 @@ using namespace Tonic;
   notifier.addValueChangedSubscriber(&subscriber);
   
   Tonic_::SynthesisContext_ context;
-  STAssertEquals(notifier.tick(context).value, VALUE, @"A controlChangeNotifier should wrap the ControlGenerator it's observing");
+  XCTAssertEqual(notifier.tick(context).value, VALUE, @"A controlChangeNotifier should wrap the ControlGenerator it's observing");
   
   for(int i = 0; i < 1000; i++){
     synth.fillBufferOfFloats(stereoOutBuffer, kTestOutputBlockSize, 2);
   }
-  STAssertFalse(subscriber.valueChangedFlag, @"Value changed notification should not have happened");
+  XCTAssertFalse(subscriber.valueChangedFlag, @"Value changed notification should not have happened");
   synth.sendControlChangesToSubscribers();
-  STAssertTrue(subscriber.valueChangedFlag, @"Value changed notification should have happened");
+  XCTAssertTrue(subscriber.valueChangedFlag, @"Value changed notification should have happened");
   
 }
 
@@ -792,8 +821,8 @@ using namespace Tonic;
   
   synth.sendControlChangesToSubscribers();
   
-  STAssertTrue(subscriber1.valueChangedFlag, @"Value changed notification should have happened");
-  STAssertTrue(subscriber2.valueChangedFlag, @"Value changed notification should have happened");
+  XCTAssertTrue(subscriber1.valueChangedFlag, @"Value changed notification should have happened");
+  XCTAssertTrue(subscriber2.valueChangedFlag, @"Value changed notification should have happened");
 
 }
 
@@ -807,7 +836,7 @@ using namespace Tonic;
   Generator gen =  ControlValue(1) + FixedValue(1);
   testFiller.setOutputGen(gen);
   testFiller.fillBufferOfFloats(stereoOutBuffer, kTestOutputBlockSize, 2);
-  STAssertEquals(2.f, *stereoOutBuffer, @"ControlValue(1) + FixedValue(1) failed");
+  XCTAssertEqual(2.f, *stereoOutBuffer, @"ControlValue(1) + FixedValue(1) failed");
   
   }
   
@@ -817,7 +846,7 @@ using namespace Tonic;
   Generator gen =   FixedValue(1) + ControlValue(1);
   testFiller.setOutputGen(gen);
   testFiller.fillBufferOfFloats(stereoOutBuffer, kTestOutputBlockSize, 2);
-  STAssertEquals(2.f, *stereoOutBuffer, @"FixedValue(1) + ControlValue(1) failed");
+  XCTAssertEqual(2.f, *stereoOutBuffer, @"FixedValue(1) + ControlValue(1) failed");
   
   }
   
@@ -827,7 +856,7 @@ using namespace Tonic;
     Generator gen =   FixedValue(3) - ControlValue(2);
     testFiller.setOutputGen(gen);
     testFiller.fillBufferOfFloats(stereoOutBuffer, kTestOutputBlockSize, 2);
-    STAssertEquals(1.f, *stereoOutBuffer, @"FixedValue(1) + ControlValue(1) failed");
+    XCTAssertEqual(1.f, *stereoOutBuffer, @"FixedValue(1) + ControlValue(1) failed");
 
   }
   
@@ -837,7 +866,7 @@ using namespace Tonic;
     Generator gen =   ControlValue(3) - FixedValue(2);
     testFiller.setOutputGen(gen);
     testFiller.fillBufferOfFloats(stereoOutBuffer, kTestOutputBlockSize, 2);
-    STAssertEquals(1.f, *stereoOutBuffer, @"ControlValue(3) - FixedValue(2) failed");
+    XCTAssertEqual(1.f, *stereoOutBuffer, @"ControlValue(3) - FixedValue(2) failed");
   }
   
   {
@@ -846,7 +875,7 @@ using namespace Tonic;
     Generator gen =   ControlValue(3) * FixedValue(2);
     testFiller.setOutputGen(gen);
     testFiller.fillBufferOfFloats(stereoOutBuffer, kTestOutputBlockSize, 2);
-    STAssertEquals(6.f, *stereoOutBuffer, @"ControlValue(3) * FixedValue(2) failed");
+    XCTAssertEqual(6.f, *stereoOutBuffer, @"ControlValue(3) * FixedValue(2) failed");
   }
   
   {
@@ -855,7 +884,7 @@ using namespace Tonic;
     Generator gen =  FixedValue(3) * ControlValue(2);
     testFiller.setOutputGen(gen);
     testFiller.fillBufferOfFloats(stereoOutBuffer, kTestOutputBlockSize, 2);
-    STAssertEquals(6.f, *stereoOutBuffer, @" FixedValue(3) * ControlValue(2) failed");
+    XCTAssertEqual(6.f, *stereoOutBuffer, @" FixedValue(3) * ControlValue(2) failed");
   }
   
 }
@@ -868,7 +897,7 @@ using namespace Tonic;
   Generator gen =  ControlValue(2) - FixedValue(1);
   testFiller.setOutputGen(gen);
   testFiller.fillBufferOfFloats(stereoOutBuffer, kTestOutputBlockSize, 2);
-  STAssertEquals(1.f, *stereoOutBuffer, @"ControlValue(2) - FixedValue(1) failed");
+  XCTAssertEqual(1.f, *stereoOutBuffer, @"ControlValue(2) - FixedValue(1) failed");
   
   }
   
@@ -878,7 +907,7 @@ using namespace Tonic;
   Generator gen =   FixedValue(2) - ControlValue(1);
   testFiller.setOutputGen(gen);
   testFiller.fillBufferOfFloats(stereoOutBuffer, kTestOutputBlockSize, 2);
-  STAssertEquals(1.f, *stereoOutBuffer, @"FixedValue(1) - ControlValue(1) failed");
+  XCTAssertEqual(1.f, *stereoOutBuffer, @"FixedValue(1) - ControlValue(1) failed");
   
   }
   
@@ -888,19 +917,19 @@ using namespace Tonic;
   {
     ControlGenerator gen = ControlValue(10) / ControlValue(5);
     Tonic_::SynthesisContext_ context;
-    STAssertEquals(gen.tick(context).value, 2.f, @"ControlValue(10) / ControlValue(5) failed.");
+    XCTAssertEqual(gen.tick(context).value, 2.f, @"ControlValue(10) / ControlValue(5) failed.");
   }
 
   {
     ControlGenerator gen = 10 / ControlValue(5);
     Tonic_::SynthesisContext_ context;
-    STAssertEquals(gen.tick(context).value, 2.f, @"10 / ControlValue(5) failed.");
+    XCTAssertEqual(gen.tick(context).value, 2.f, @"10 / ControlValue(5) failed.");
   }
 
   {
     ControlGenerator gen = ControlValue(10) / 5;
     Tonic_::SynthesisContext_ context;
-    STAssertEquals(gen.tick(context).value, 2.f, @"ControlValue(10) / 5 failed.");
+    XCTAssertEqual(gen.tick(context).value, 2.f, @"ControlValue(10) / 5 failed.");
   }
 
 }
@@ -912,7 +941,7 @@ using namespace Tonic;
   gen.tick(context);
   right.value(0);
   
-  STAssertEquals(gen.tick(context).value, 2.f, @"Divide by zero should return the last valid value.");
+  XCTAssertEqual(gen.tick(context).value, 2.f, @"Divide by zero should return the last valid value.");
 }
 
 
@@ -924,12 +953,12 @@ using namespace Tonic;
   testFiller.setLimitOutput(false);
   testFiller.setOutputGen(gen1);
   testFiller.fillBufferOfFloats(stereoOutBuffer, kTestOutputBlockSize, 2);
-  STAssertEquals(*stereoOutBuffer, 6.f, @"Complex combination of control gen and gen failed");
+  XCTAssertEqual(*stereoOutBuffer, 6.f, @"Complex combination of control gen and gen failed");
    
   // set the force output flag and try it again to ensure it still works
   testFiller.forceNewOutput();
   testFiller.fillBufferOfFloats(stereoOutBuffer, kTestOutputBlockSize, 2);
-  STAssertEquals(*stereoOutBuffer, 6.f, @"Complex combination of control gen and gen failed");
+  XCTAssertEqual(*stereoOutBuffer, 6.f, @"Complex combination of control gen and gen failed");
   
 }
 
@@ -947,11 +976,11 @@ using namespace Tonic;
     ControlGenerator g1 = ControlValue(rf) == rf;
     ControlGenerator g2 = ControlValue(rf) == ControlValue(99999.f);
     
-    STAssertTrue(g.tick(context).triggered, @"Every tick should produce a change");
+    XCTAssertTrue(g.tick(context).triggered, @"Every tick should produce a change");
     
-    STAssertEquals(g.tick(context).value, 1.0f, @"%.2f should equal itself", rf);
-    STAssertEquals(g1.tick(context).value, 1.0f, @"%.2f should equal itself", rf);
-    STAssertEquals(g2.tick(context).value, 0.0f, @"%.2f should not be equal to rhs", rf);
+    XCTAssertEqual(g.tick(context).value, 1.0f, @"%.2f should equal itself", rf);
+    XCTAssertEqual(g1.tick(context).value, 1.0f, @"%.2f should equal itself", rf);
+    XCTAssertEqual(g2.tick(context).value, 0.0f, @"%.2f should not be equal to rhs", rf);
 
   }
   
@@ -964,11 +993,11 @@ using namespace Tonic;
     ControlGenerator g1 = ControlValue(rf) != 99999.f;
     ControlGenerator g2 = ControlValue(rf) != ControlValue(rf);
     
-    STAssertTrue(g.tick(context).triggered, @"Every tick should produce a change");
+    XCTAssertTrue(g.tick(context).triggered, @"Every tick should produce a change");
     
-    STAssertEquals(g.tick(context).value, 1.0f, @"%.2f should not be equal to rhs", rf);
-    STAssertEquals(g1.tick(context).value, 1.0f, @"%.2f should not be equal to rhs", rf);
-    STAssertEquals(g2.tick(context).value, 0.0f, @"%.2f should be equal to rhs", rf);
+    XCTAssertEqual(g.tick(context).value, 1.0f, @"%.2f should not be equal to rhs", rf);
+    XCTAssertEqual(g1.tick(context).value, 1.0f, @"%.2f should not be equal to rhs", rf);
+    XCTAssertEqual(g2.tick(context).value, 0.0f, @"%.2f should be equal to rhs", rf);
     
   }
   
@@ -981,11 +1010,11 @@ using namespace Tonic;
     ControlGenerator g1 = ControlValue(rf) > 0.f;
     ControlGenerator g2 = ControlValue(rf) > ControlValue(99999.f);
     
-    STAssertTrue(g.tick(context).triggered, @"Every tick should produce a change");
+    XCTAssertTrue(g.tick(context).triggered, @"Every tick should produce a change");
     
-    STAssertEquals(g.tick(context).value, 1.0f, @"%.2f should be greater than rhs", rf);
-    STAssertEquals(g1.tick(context).value, 1.0f, @"%.2f should be greater than rhs", rf);
-    STAssertEquals(g2.tick(context).value, 0.0f, @"%.2f should not be greater than rhs", rf);
+    XCTAssertEqual(g.tick(context).value, 1.0f, @"%.2f should be greater than rhs", rf);
+    XCTAssertEqual(g1.tick(context).value, 1.0f, @"%.2f should be greater than rhs", rf);
+    XCTAssertEqual(g2.tick(context).value, 0.0f, @"%.2f should not be greater than rhs", rf);
     
   }
   
@@ -998,11 +1027,11 @@ using namespace Tonic;
     ControlGenerator g1 = ControlValue(rf) > 0.f;
     ControlGenerator g2 = ControlValue(rf) >= ControlValue(99999.f);
     
-    STAssertTrue(g.tick(context).triggered, @"Every tick should produce a change");
+    XCTAssertTrue(g.tick(context).triggered, @"Every tick should produce a change");
     
-    STAssertEquals(g.tick(context).value, 1.0f, @"%.2f should be greater than or equal to rhs", rf);
-    STAssertEquals(g1.tick(context).value, 1.0f, @"%.2f should be greater than or equal to rhs", rf);
-    STAssertEquals(g2.tick(context).value, 0.0f, @"%.2f should not be greater than or equal rhs", rf);
+    XCTAssertEqual(g.tick(context).value, 1.0f, @"%.2f should be greater than or equal to rhs", rf);
+    XCTAssertEqual(g1.tick(context).value, 1.0f, @"%.2f should be greater than or equal to rhs", rf);
+    XCTAssertEqual(g2.tick(context).value, 0.0f, @"%.2f should not be greater than or equal rhs", rf);
     
   }
   
@@ -1015,11 +1044,11 @@ using namespace Tonic;
     ControlGenerator g1 = ControlValue(rf) < 99999.f;
     ControlGenerator g2 = ControlValue(rf) < ControlValue(0.f);
     
-    STAssertTrue(g.tick(context).triggered, @"Every tick should produce a change");
+    XCTAssertTrue(g.tick(context).triggered, @"Every tick should produce a change");
     
-    STAssertEquals(g.tick(context).value, 1.0f, @"%.2f should be less than rhs", rf);
-    STAssertEquals(g1.tick(context).value, 1.0f, @"%.2f should be less than rhs", rf);
-    STAssertEquals(g2.tick(context).value, 0.0f, @"%.2f should not be less than rhs", rf);
+    XCTAssertEqual(g.tick(context).value, 1.0f, @"%.2f should be less than rhs", rf);
+    XCTAssertEqual(g1.tick(context).value, 1.0f, @"%.2f should be less than rhs", rf);
+    XCTAssertEqual(g2.tick(context).value, 0.0f, @"%.2f should not be less than rhs", rf);
     
   }
   
@@ -1032,11 +1061,11 @@ using namespace Tonic;
     ControlGenerator g1 = ControlValue(rf) <= 99999.f;
     ControlGenerator g2 = ControlValue(rf) <= ControlValue(0.f);
     
-    STAssertTrue(g.tick(context).triggered, @"Every tick should produce a change");
+    XCTAssertTrue(g.tick(context).triggered, @"Every tick should produce a change");
     
-    STAssertEquals(g.tick(context).value, 1.0f, @"%.2f should be less than or equal to rhs", rf);
-    STAssertEquals(g1.tick(context).value, 1.0f, @"%.2f should be less than or equal to rhs", rf);
-    STAssertEquals(g2.tick(context).value, 0.0f, @"%.2f should not be less than or equal to rhs", rf);
+    XCTAssertEqual(g.tick(context).value, 1.0f, @"%.2f should be less than or equal to rhs", rf);
+    XCTAssertEqual(g1.tick(context).value, 1.0f, @"%.2f should be less than or equal to rhs", rf);
+    XCTAssertEqual(g2.tick(context).value, 0.0f, @"%.2f should not be less than or equal to rhs", rf);
     
   }
   

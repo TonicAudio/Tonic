@@ -11,8 +11,8 @@
 // See LICENSE.txt for license and usage information.
 //
 
-#ifndef __Tonic__DSPUtils__
-#define __Tonic__DSPUtils__
+#ifndef TONIC_DSPUTILS_H
+#define TONIC_DSPUTILS_H
 
 #include "TonicCore.h"
 

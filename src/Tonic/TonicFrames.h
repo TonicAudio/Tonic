@@ -9,8 +9,8 @@
 //
 
 
-#ifndef __Tonic__TonicFrames__
-#define __Tonic__TonicFrames__
+#ifndef TONIC_TONICFRAMES_H
+#define TONIC_TONICFRAMES_H
 
 #include "TonicCore.h"
 #include <sstream>
@@ -535,4 +535,4 @@ namespace Tonic {
   
 }
 
-#endif /* defined(__Tonic__TonicFrames__) */
+#endif

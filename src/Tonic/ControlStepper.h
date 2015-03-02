@@ -9,8 +9,8 @@
 //
 
 
-#ifndef __Tonic__ControlStepper__
-#define __Tonic__ControlStepper__
+#ifndef TONIC_CONTROLSTEPPER_H
+#define TONIC_CONTROLSTEPPER_H
 
 #include "ControlGenerator.h"
 
@@ -87,6 +87,6 @@ namespace Tonic {
   };
 }
 
-#endif /* defined(__Tonic__ControlStepper__) */
+#endif
 
 

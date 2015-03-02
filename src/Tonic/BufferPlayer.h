@@ -10,12 +10,13 @@
 
 
 
-#ifndef __Tonic__BufferPlayer__
-#define __Tonic__BufferPlayer__
+#ifndef TONIC_BUFFERPLAYER_H
+#define TONIC_BUFFERPLAYER_H
 
 #include "Generator.h"
 #include "FixedValue.h"
 #include "SampleTable.h"
+#include "ControlTrigger.h"
 
 namespace Tonic {
   
@@ -24,40 +25,43 @@ namespace Tonic {
     class BufferPlayer_ : public Generator_{
       
     protected:
-    
-    SampleTable buffer_;
-    int testVar;
-    int currentSample;
-    int samplesPerSynthesisBlock;
-    ControlGenerator doesLoop_;
-    ControlGenerator trigger_;
-    ControlGenerator startPosition_;
-    bool isFinished_;
-    
-    void copySamplesToOutputBuffer(int startSample, int numSamples);
-    
-    public:
-      BufferPlayer_();
-      ~BufferPlayer_();
-      void computeSynthesisBlock( const SynthesisContext_ &context );
-      
-      void setBuffer(SampleTable sampleTable);
-      void setDoesLoop(ControlGenerator doesLoop){doesLoop_ = doesLoop;}
-      void setTrigger(ControlGenerator trigger){trigger_ = trigger;}
-      void setStartPosition(ControlGenerator startPosition){startPosition_ = startPosition;}
-      
-    };
-    
-    inline void BufferPlayer_::copySamplesToOutputBuffer(int startSample, int numSamples){
-      memcpy(&outputFrames_[0], &buffer_.dataPointer()[startSample], numSamples * sizeof(TonicFloat));
-    }
-    
-    
+
+		SampleTable buffer_;
+		int testVar;
+		int currentSample;
+		int samplesPerSynthesisBlock;
+		ControlGenerator doesLoop_;
+		ControlGenerator trigger_;
+		ControlGenerator startPosition_;
+		ControlTrigger finishedTrigger_;
+		bool isFinished_;
+
+		void copySamplesToOutputBuffer(int startSample, int numSamples);
+
+	public:
+		BufferPlayer_();
+		~BufferPlayer_();
+		void computeSynthesisBlock(const SynthesisContext_ &context);
+
+		void setBuffer(SampleTable sampleTable);
+		void setDoesLoop(ControlGenerator doesLoop){ doesLoop_ = doesLoop; }
+		void setTrigger(ControlGenerator trigger){ trigger_ = trigger; }
+		void setStartPosition(ControlGenerator startPosition){ startPosition_ = startPosition; }
+		bool isFinished(){ return isFinished_; }
+		bool isStereoOutput(){ return buffer_.channels() == 2; }
+		ControlGenerator finishedTrigger(){ return finishedTrigger_; };
+
+	};
+
+	inline void BufferPlayer_::copySamplesToOutputBuffer(int startSample, int numSamples){
+		memcpy(&outputFrames_[0], &buffer_.dataPointer()[startSample], numSamples * sizeof(TonicFloat));
+	}
+
   }
   
   /*!
     Simply plays back a buffer. "loop" parameter works, but doesn't wrap between ticks, so mostly likely you'll wind up with a few zeroes at the end of 
-    the last buffer if you're looping. In other words, buffer lenghts are rounded up to the nearest kSynthesisBlockSize 
+    the last buffer if you're looping. In other words, buffer lengths are rounded up to the nearest kSynthesisBlockSize 
    
     Usage:
     
@@ -74,14 +78,19 @@ namespace Tonic {
       gen()->setBuffer(buffer);
       return *this;
     };
-    
-    TONIC_MAKE_CTRL_GEN_SETTERS(BufferPlayer, loop, setDoesLoop)
-    TONIC_MAKE_CTRL_GEN_SETTERS(BufferPlayer, trigger, setTrigger)
-    TONIC_MAKE_CTRL_GEN_SETTERS(BufferPlayer, startPosition, setStartPosition)
+
+	bool isFinished(){ return gen()->isFinished(); }
+
+	//! returns a ControlGenerator that emits a trigger message when the buffer reaches the end
+	ControlGenerator finishedTrigger(){ return gen()->finishedTrigger(); }; 
+
+	TONIC_MAKE_CTRL_GEN_SETTERS(BufferPlayer, loop, setDoesLoop)
+	TONIC_MAKE_CTRL_GEN_SETTERS(BufferPlayer, trigger, setTrigger)
+	TONIC_MAKE_CTRL_GEN_SETTERS(BufferPlayer, startPosition, setStartPosition)
 
   };
 }
 
-#endif /* defined(__Tonic__BufferPlayer__) */
+#endif
 
 

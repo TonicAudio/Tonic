@@ -15,8 +15,8 @@
  *
  ***********************************************************/
 
-#ifndef __Tonic_TonicHeader__
-#define __Tonic_TonicHeader__
+#ifndef TONIC_TONICHEADER_H
+#define TONIC_TONICHEADER_H
 
 // ------- Core Objects --------
 
@@ -57,6 +57,7 @@
 #include "Tonic/FilterUtils.h"
 #include "Tonic/DelayUtils.h"
 #include "Tonic/Reverb.h"
+#include "Tonic/BitCrusher.h"
 
 // Utilities
 #include "Tonic/ADSR.h"

@@ -9,8 +9,8 @@
 //
 
 
-#ifndef __Tonic__ControlDbToLinear__
-#define __Tonic__ControlDbToLinear__
+#ifndef TONIC_CONTROLDBTOLINEAR_H
+#define TONIC_CONTROLDBTOLINEAR_H
 
 #include "ControlConditioner.h"
 
@@ -45,6 +45,6 @@ namespace Tonic {
   };
 }
 
-#endif /* defined(__Tonic__ControlDbToLinear__) */
+#endif
 
 

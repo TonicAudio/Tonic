@@ -8,8 +8,8 @@
 
 // These tests produce an output in the console and are intended for visual verification of algorithms
 
-#import <SenTestingKit/SenTestingKit.h>
+#import <XCTest/XCTest.h>
 
-@interface TonicLoggingTests : SenTestCase
+@interface TonicLoggingTests : XCTestCase
 
 @end
