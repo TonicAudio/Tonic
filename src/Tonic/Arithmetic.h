@@ -54,7 +54,7 @@ namespace Tonic {
       }
       
     }
-	
+    
   }
   
   class Adder : public TemplatedGenerator<Tonic_::Adder_>{
