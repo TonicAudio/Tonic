@@ -26,36 +26,36 @@ namespace Tonic {
       
     protected:
 
-		SampleTable buffer_;
-		int testVar;
-		int currentSample;
-		int samplesPerSynthesisBlock;
-		ControlGenerator doesLoop_;
-		ControlGenerator trigger_;
-		ControlGenerator startPosition_;
-		ControlTrigger finishedTrigger_;
-		bool isFinished_;
+        SampleTable buffer_;
+        int testVar;
+        int currentSample;
+        int samplesPerSynthesisBlock;
+        ControlGenerator doesLoop_;
+        ControlGenerator trigger_;
+        ControlGenerator startPosition_;
+        ControlTrigger finishedTrigger_;
+        bool isFinished_;
 
-		void copySamplesToOutputBuffer(int startSample, int numSamples);
+        void copySamplesToOutputBuffer(int startSample, int numSamples);
 
-	public:
-		BufferPlayer_();
-		~BufferPlayer_();
-		void computeSynthesisBlock(const SynthesisContext_ &context);
+    public:
+        BufferPlayer_();
+        ~BufferPlayer_();
+        void computeSynthesisBlock(const SynthesisContext_ &context);
 
-		void setBuffer(SampleTable sampleTable);
-		void setDoesLoop(ControlGenerator doesLoop){ doesLoop_ = doesLoop; }
-		void setTrigger(ControlGenerator trigger){ trigger_ = trigger; }
-		void setStartPosition(ControlGenerator startPosition){ startPosition_ = startPosition; }
-		bool isFinished(){ return isFinished_; }
-		bool isStereoOutput(){ return buffer_.channels() == 2; }
-		ControlGenerator finishedTrigger(){ return finishedTrigger_; };
+        void setBuffer(SampleTable sampleTable);
+        void setDoesLoop(ControlGenerator doesLoop){ doesLoop_ = doesLoop; }
+        void setTrigger(ControlGenerator trigger){ trigger_ = trigger; }
+        void setStartPosition(ControlGenerator startPosition){ startPosition_ = startPosition; }
+        bool isFinished(){ return isFinished_; }
+        bool isStereoOutput(){ return buffer_.channels() == 2; }
+        ControlGenerator finishedTrigger(){ return finishedTrigger_; };
 
-	};
+    };
 
-	inline void BufferPlayer_::copySamplesToOutputBuffer(int startSample, int numSamples){
-		memcpy(&outputFrames_[0], &buffer_.dataPointer()[startSample], numSamples * sizeof(TonicFloat));
-	}
+    inline void BufferPlayer_::copySamplesToOutputBuffer(int startSample, int numSamples){
+        memcpy(&outputFrames_[0], &buffer_.dataPointer()[startSample], numSamples * sizeof(TonicFloat));
+    }
 
   }
   
@@ -79,14 +79,14 @@ namespace Tonic {
       return *this;
     };
 
-	bool isFinished(){ return gen()->isFinished(); }
+    bool isFinished(){ return gen()->isFinished(); }
 
-	//! returns a ControlGenerator that emits a trigger message when the buffer reaches the end
-	ControlGenerator finishedTrigger(){ return gen()->finishedTrigger(); }; 
+    //! returns a ControlGenerator that emits a trigger message when the buffer reaches the end
+    ControlGenerator finishedTrigger(){ return gen()->finishedTrigger(); }; 
 
-	TONIC_MAKE_CTRL_GEN_SETTERS(BufferPlayer, loop, setDoesLoop)
-	TONIC_MAKE_CTRL_GEN_SETTERS(BufferPlayer, trigger, setTrigger)
-	TONIC_MAKE_CTRL_GEN_SETTERS(BufferPlayer, startPosition, setStartPosition)
+    TONIC_MAKE_CTRL_GEN_SETTERS(BufferPlayer, loop, setDoesLoop)
+    TONIC_MAKE_CTRL_GEN_SETTERS(BufferPlayer, trigger, setTrigger)
+    TONIC_MAKE_CTRL_GEN_SETTERS(BufferPlayer, startPosition, setStartPosition)
 
   };
 }

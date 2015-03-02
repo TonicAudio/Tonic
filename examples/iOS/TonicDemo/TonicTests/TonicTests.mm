@@ -246,6 +246,24 @@ using namespace Tonic;
   
 }
 
+
+
+- (void)test107_1_MultStereoMono
+{
+  // Multiply one stereo, one mono, with stereo on the right side, ensure result is stereo
+  
+  [self configureStereo:YES];
+  
+  Multiplier stereoMult =  StereoFixedTestGen(0.0, 1.0) * FixedValue(0.5);
+  
+  STAssertTrue(stereoMult.isStereoOutput(), @"Multiplier should be stereo");
+  
+  stereoMult.tick(testFrames, testContext);
+  
+  [self verifyStereoFixedOutputEqualsLeft:0.0f right:0.5f];
+  
+}
+
 - (void)test108MultStereoStereo
 {
   [self configureStereo:YES];
