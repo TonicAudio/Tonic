@@ -132,7 +132,7 @@ namespace Tonic {
   //! Return sample rate
   static TonicFloat sampleRate(){
     return Tonic_::sampleRate_;
-  };
+  }
 
   //! "Vector" size for audio processing. ControlGenerators update at this rate.
   /*! !!!: THIS VALUE SHOULD BE A POWER-OF-TWO WHICH IS LESS THAN THE HARDWARE BUFFER SIZE */
