@@ -62,7 +62,7 @@ namespace Tonic{
       void setParameter(string name, float value, bool normalized = false);
       
       vector<ControlParameter>  getParameters();
-	  void printParameters();
+      void printParameters();
       
       ControlChangeNotifier publishChanges(ControlGenerator input, string name);
       
@@ -106,7 +106,7 @@ namespace Tonic{
     //! Set the output gen that produces audio for the Synth
     void  setOutputGen(Generator generator){
       gen()->lockMutex();
-	  generator.____recordAdditionAsParameter____();
+    generator.____recordAdditionAsParameter____();
       gen()->setOutputGen(generator);
       gen()->unlockMutex();
     }
@@ -198,7 +198,7 @@ namespace Tonic{
       return gen()->getParameters();
     }
 
-	void printParameters(){ gen()->printParameters(); }
+  void printParameters(){ gen()->printParameters(); }
     
     void forceNewOutput(){
       gen()->lockMutex();

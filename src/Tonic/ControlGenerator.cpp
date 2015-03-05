@@ -41,11 +41,9 @@ namespace Tonic{
     return RampedValue( obj->initialOutput().value, length ).target(*this);
   }
 
-
-
   ControlPrinter ControlGenerator::print(string message)
   {
-	  return ControlPrinter().input(*this).message(message);
+    return ControlPrinter().input(*this).message(message);
   }
 
   

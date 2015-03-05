@@ -8,7 +8,7 @@
 //
 
 /*
-	Separate a stereo signal into two mono signals.
+  Separate a stereo signal into two mono signals.
 */
 
 #ifndef TONIC_SPLITTER_H
@@ -18,33 +18,33 @@
 
 namespace Tonic {
 
-	namespace Tonic_ {
+  namespace Tonic_ {
 
-		class Splitter_ : public Generator_{
+    class Splitter_ : public Generator_{
 
-		protected:
-			Generator input_;
-	
-		public:
-			Splitter_();
-			~Splitter_();
-			void setInput(Generator);
-			void computeSynthesisBlock(const SynthesisContext_ &context);
-		};
-	}
+    protected:
+      Generator input_;
+  
+    public:
+      Splitter_();
+      ~Splitter_();
+      void setInput(Generator);
+      void computeSynthesisBlock(const SynthesisContext_ &context);
+    };
+  }
 
 
-	class Splitter : public TemplatedGenerator<Tonic_::Splitter_>{
+  class Splitter : public TemplatedGenerator<Tonic_::Splitter_>{
 
-	protected:
+  protected:
 
-		Generator createSplitterChannel(int channel);
+    Generator createSplitterChannel(int channel);
 
-	public:
-		TONIC_MAKE_GEN_SETTERS(Splitter, input, setInput)
-		Generator left();
-		Generator right();
-	};
+  public:
+    TONIC_MAKE_GEN_SETTERS(Splitter, input, setInput)
+    Generator left();
+    Generator right();
+  };
 }
 
 #endif

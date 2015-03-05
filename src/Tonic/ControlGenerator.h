@@ -22,14 +22,13 @@ namespace Tonic {
     
     ControlGeneratorOutput() : value(0), triggered(false) {};
 
-	bool operator==(const ControlGeneratorOutput& r){
-		return value == r.value && triggered == r.triggered;
-	}
+    bool operator==(const ControlGeneratorOutput& r){
+      return value == r.value && triggered == r.triggered;
+    }
 
-	bool operator!=(const ControlGeneratorOutput& r){
-		return !((*this) == r);
-	}
-
+    bool operator!=(const ControlGeneratorOutput& r){
+      return !((*this) == r);
+    }
 
   };
 
@@ -103,8 +102,8 @@ namespace Tonic {
     // shortcut for creating ramped value
     RampedValue smoothed(float length = 0.05);
 
-	// shortcut for wrapping with a ControlPrinter
-	ControlPrinter print(string message = "ControlGenerator triggered. Output value is: %f");
+  // shortcut for wrapping with a ControlPrinter
+  ControlPrinter print(string message = "ControlGenerator triggered. Output value is: %f");
     
     ControlGeneratorOutput getLastOutput();
     

@@ -24,14 +24,13 @@ namespace Tonic {
       
     protected:
       void computeOutput(const SynthesisContext_ & context);
-	  vector<ControlGeneratorOutput> recording;
-	  int playbackHead;
+      vector<ControlGeneratorOutput> recording;
+      int playbackHead;
       ControlGenerator mode;
-	  int currentMode; // actuall a ControlRecorder::Mode, but difficult to declare it as such
+      int currentMode; // actuall a ControlRecorder::Mode, but difficult to declare it as such
       
     public:
       ControlRecorder_();
-      
       void setMode(ControlGenerator);
 
     };
@@ -62,15 +61,15 @@ namespace Tonic {
      
       ControlRecorder::Mode newMode = (ControlRecorder::Mode)((int)modeOut.value);
 
-	  //-- If there's no recording, PLAY mode behaves the same as STOP mode
-	  if (newMode == ControlRecorder::PLAY && recording.empty())
-	  {
-		  newMode = ControlRecorder::STOP;
-	  }
-	  
+      //-- If there's no recording, PLAY mode behaves the same as STOP mode
+      if (newMode == ControlRecorder::PLAY && recording.empty())
+      {
+        newMode = ControlRecorder::STOP;
+      }
+    
       
       if(newMode!= currentMode){
-		 currentMode = newMode;
+        currentMode = newMode;
         if(newMode == ControlRecorder::STOP){
         }else if(newMode == ControlRecorder::PLAY){
           playbackHead = 0;
@@ -96,7 +95,6 @@ namespace Tonic {
           if (playbackHead >= recording.size()) {
             playbackHead = 0;
           }
-          //        printf("ControlRecorder_::computeOutput playing back sample: %i of %lu. Value is: %f\n", count, recording.size(), output_.value);
           break;
           
         default:

@@ -5,30 +5,30 @@
 
 namespace Tonic{
 
-	namespace Tonic_{
+  namespace Tonic_{
 
-		class ControlSineOsc_ : public ControlGenerator_{
+    class ControlSineOsc_ : public ControlGenerator_{
 
-		ControlGenerator freq_;
-		float phase_;
+    ControlGenerator freq_;
+    float phase_;
 
-		public:
+    public:
 
-			ControlSineOsc_();
+      ControlSineOsc_();
 
-			void computeOutput(const SynthesisContext_ & context);
-			void setFreq(ControlGenerator gen){freq_ = gen;}
-		};
+      void computeOutput(const SynthesisContext_ & context);
+      void setFreq(ControlGenerator gen){freq_ = gen;}
+    };
 
-	}
+  }
 
-	class ControlSineOsc : public TemplatedControlGenerator<Tonic_::ControlSineOsc_>
-	{
-	public:
+  class ControlSineOsc : public TemplatedControlGenerator<Tonic_::ControlSineOsc_>
+  {
+  public:
 
-		TONIC_MAKE_CTRL_GEN_SETTERS(ControlSineOsc, freq, setFreq)
+    TONIC_MAKE_CTRL_GEN_SETTERS(ControlSineOsc, freq, setFreq)
 
-	};
+  };
 
 }
 

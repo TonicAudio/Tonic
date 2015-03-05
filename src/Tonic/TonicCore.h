@@ -298,16 +298,16 @@ namespace Tonic {
 
   // -- String --
   /*
-	Take a string of comma-delimited numbers, turn it in to a vector of floats
+  Take a string of comma-delimited numbers, turn it in to a vector of floats
   */
   inline static vector<TonicFloat> stringToVec(string input){
-	  vector<float> pointsVec;
-	  std::stringstream ss(input);
-	  std::string item;
-	  while (std::getline(ss, item, ',')) {
-		  pointsVec.push_back(stof(item));
-	  }
-	  return pointsVec;
+    vector<float> pointsVec;
+    std::stringstream ss(input);
+    std::string item;
+    while (std::getline(ss, item, ',')) {
+      pointsVec.push_back(stof(item));
+    }
+    return pointsVec;
   }
 
 #endif

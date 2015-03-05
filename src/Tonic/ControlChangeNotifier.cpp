@@ -7,45 +7,47 @@
 
 #include "ControlChangeNotifier.h"
 
-namespace Tonic { namespace Tonic_{
+namespace Tonic { 
   
-  ControlChangeNotifier_::ControlChangeNotifier_() : outputReadyToBeSentToUI(false){
+  namespace Tonic_{
+  
+    ControlChangeNotifier_::ControlChangeNotifier_() : outputReadyToBeSentToUI(false){
     
-  }
-  
-  ControlChangeNotifier_::~ControlChangeNotifier_(){
-    
-  }
-  
-  void ControlChangeNotifier_::computeOutput(const SynthesisContext_ & context){
-    output_ = input_.tick(context);
-    if(output_.triggered || output_.value != lastOutput.value){
-      outputReadyToBeSentToUI = false; // maybe silly, but a tiny bit of atomicness/thread safety here
-      outputToSendToUI = output_;
-      outputReadyToBeSentToUI = true;
     }
-	lastOutput = output_;
-  }
   
-  void  ControlChangeNotifier_::sendControlChangesToSubscribers(){
-    if(outputReadyToBeSentToUI){
-      for(vector<ControlChangeSubscriber*>::iterator it = subscribers.begin(); it != subscribers.end(); it++){
-        (*it)->valueChanged(name, outputToSendToUI.value);
+    ControlChangeNotifier_::~ControlChangeNotifier_(){
+    
+    }
+  
+    void ControlChangeNotifier_::computeOutput(const SynthesisContext_ & context){
+      output_ = input_.tick(context);
+      if(output_.triggered || output_.value != lastOutput.value){
+        outputReadyToBeSentToUI = false; // maybe silly, but a tiny bit of atomicness/thread safety here
+        outputToSendToUI = output_;
+        outputReadyToBeSentToUI = true;
       }
-      outputReadyToBeSentToUI = false;
+    lastOutput = output_;
     }
-  }
   
-  void ControlChangeNotifier_::addValueChangedSubscriber(ControlChangeSubscriber* sub){
-    subscribers.push_back(sub);
-  }
+    void  ControlChangeNotifier_::sendControlChangesToSubscribers(){
+      if(outputReadyToBeSentToUI){
+        for(vector<ControlChangeSubscriber*>::iterator it = subscribers.begin(); it != subscribers.end(); it++){
+          (*it)->valueChanged(name, outputToSendToUI.value);
+        }
+        outputReadyToBeSentToUI = false;
+      }
+    }
+  
+    void ControlChangeNotifier_::addValueChangedSubscriber(ControlChangeSubscriber* sub){
+      subscribers.push_back(sub);
+    }
   
   
-  void ControlChangeNotifier_::removeValueChangedSubscriber(ControlChangeSubscriber* sub){
-    subscribers.erase( std::remove( subscribers.begin(), subscribers.end(), sub ), subscribers.end() );
-  }
+    void ControlChangeNotifier_::removeValueChangedSubscriber(ControlChangeSubscriber* sub){
+      subscribers.erase( std::remove( subscribers.begin(), subscribers.end(), sub ), subscribers.end() );
+    }
   
-} // Namespace Tonic_
+  } // Namespace Tonic_
   
   
   void ControlChangeNotifier::sendControlChangesToSubscribers(){

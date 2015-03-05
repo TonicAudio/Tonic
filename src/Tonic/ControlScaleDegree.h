@@ -12,9 +12,6 @@
 #ifndef __Tonic__ControlScaleDegree__
 #define __Tonic__ControlScaleDegree__
 
-
-
-
 #include "ControlConditioner.h"
 
 namespace Tonic {
@@ -33,13 +30,13 @@ namespace Tonic {
         
         int scaleDegree = input_.tick(context).value;
         int octave = scaleDegree / (int)scale.size();
-		if (scaleDegree < 0)
-		{
-			octave -= 1;
-		}
-		
+        if (scaleDegree < 0)
+        {
+          octave -= 1;
+        }
+    
         float baseNumber = scaleDegree % scale.size();
-		output_.value = scale.at(baseNumber) + NOTES_PER_OCTAVE * octave;
+        output_.value = scale.at(baseNumber) + NOTES_PER_OCTAVE * octave;
         output_.triggered = true;
       }else{
         output_.triggered = false;
@@ -52,14 +49,7 @@ namespace Tonic {
       vector<float> scale;
     };
     
-     
-
-    
   }
-  
-  
-
-  
   
   /*!
     Takes a scale (expressed in midi notes) and maps index values on to the scale. If the index points
