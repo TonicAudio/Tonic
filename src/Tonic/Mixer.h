@@ -9,7 +9,6 @@
 //
 
 
-//! A mixer is like an adder but acts as a source and allows dynamic removal
 
 #ifndef TONIC_MIXER_H
 #define TONIC_MIXER_H
@@ -56,6 +55,8 @@ namespace Tonic {
 
   }
   
+  
+  //! A mixer is like an adder but acts as a source and allows dynamic removal
   class Mixer : public TemplatedBufferFiller<Tonic_::Mixer_>{
     
   public:

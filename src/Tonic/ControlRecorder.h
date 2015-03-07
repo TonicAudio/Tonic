@@ -37,6 +37,7 @@ namespace Tonic {
     
   }
   
+  //! Record and play back a control-rate data stream
   class ControlRecorder :  public TemplatedControlConditioner<ControlRecorder, Tonic_::ControlRecorder_>{
     
   public:

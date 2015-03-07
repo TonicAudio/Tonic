@@ -6,10 +6,6 @@
 // See LICENSE.txt for license and usage information.
 //
 
-/*
-
-A breakpoint envelope. Takes a vector of duration/value pairs, where the second number is the final value, and the first is the amount of time (in seconds) it takes to get there. 
-*/
 
 #ifndef __TonicDemo__ControlBreakpoints__
 #define __TonicDemo__ControlBreakpoints__
@@ -78,6 +74,11 @@ namespace Tonic{
     };
 
   }
+  
+  //!A breakpoint envelope.
+  /*!
+  Takes a vector of duration/value pairs, where the second number is the final value, and the first is the amount of time (in seconds) it takes to get there.
+  */
 
   class ControlBreakpoints : public TemplatedControlGenerator<Tonic_::ControlBreakpoints_> {
   public:

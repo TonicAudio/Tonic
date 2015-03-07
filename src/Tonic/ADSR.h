@@ -248,13 +248,12 @@ namespace Tonic {
 
   }
 
-
+  //! Classic ADSR envelope.
   /*!
-  Classic ADSR envelope. Non-zero trigger values correspond to key down. Trigger values of zero correspond to keyup.
+  Non-zero trigger values correspond to key down. Trigger values of zero correspond to keyup.
   Time values are rounded up to the nearest buffer size.
   Time values are in milliseconds.
   */
-
   class ADSR : public TemplatedGenerator<Tonic_::ADSR_>{
 
   public:

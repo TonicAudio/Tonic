@@ -45,7 +45,8 @@ namespace Tonic {
     
   }
   
-  /*! 
+  //! Mechanism for observing audio-thread events from a UI (or other) thread.
+  /** 
     A ControlChangeNotifier observes a ControlGenerator and notifies its subscribers when its value changes, 
     or when the value of its outputs "triggered" flag is true. Generally you don't instantiate this object directly,
     rather you "publish" a controlGenerator using Synth::publishChanges(myControlGen, "nameOfMyControlGen");

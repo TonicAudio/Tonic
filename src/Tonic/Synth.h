@@ -99,6 +99,8 @@ namespace Tonic{
   
   // ---- Smart Pointer -----
   
+  //! The basic Tonic "patch" wrapper. In normal usage, all of your signal chain is encompassed in a synth object.
+  
   class Synth  : public TemplatedBufferFiller<Tonic_::Synth_> {
     
   public:
