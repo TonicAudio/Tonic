@@ -81,6 +81,8 @@ namespace Tonic{
     return static_cast<ControlMapper&>(*this);
   }
 
+
+
   ControlMapper& ControlMapper::setValues( string values)
   {
     vector<string> stringVals;

@@ -61,13 +61,10 @@ namespace Tonic{
 
 
 
-#ifdef TONIC_HAS_CPP_11
   ControlBreakpoints& ControlBreakpoints::points(string pointsString)
   {
     return points(stringToVec(pointsString));
   }
-#endif
-
 
   ControlBreakpoints& ControlBreakpoints::goToPoint( int point )
   {

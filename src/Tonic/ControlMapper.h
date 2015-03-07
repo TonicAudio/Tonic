@@ -45,7 +45,9 @@ namespace Tonic{
     /*!
       You can also pass a string of the format "0,0, 1,0.5". C++11 initializer lists would be better, but support is spotty 
     */
+    
     ControlMapper& setValues(string);
+
   };
 
 }

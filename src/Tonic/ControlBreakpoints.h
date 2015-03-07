@@ -85,10 +85,9 @@ namespace Tonic{
 
     //! Set a vector of time/value pairs for the object to interpolate through. First value in the pair is time, second value is value at that time. 
     ControlBreakpoints&   points(vector<float> points);
-#ifdef TONIC_HAS_CPP_11
+
     //! Set a comma-delimited list of time/value pairs for the object to interpolate through. First value in the pair is time, second value is value at that time. 
     ControlBreakpoints&   points(string points);
-#endif
     ControlBreakpoints&   goToPoint(int point);
     bool          isFinished();
     ControlGenerator    getFinishedTrigger();

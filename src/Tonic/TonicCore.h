@@ -294,8 +294,6 @@ namespace Tonic {
   }
 
 
-#if TONIC_HAS_CPP_11
-
   // -- String --
   /*
   Take a string of comma-delimited numbers, turn it in to a vector of floats
@@ -305,12 +303,11 @@ namespace Tonic {
     std::stringstream ss(input);
     std::string item;
     while (std::getline(ss, item, ',')) {
-      pointsVec.push_back(stof(item));
+      pointsVec.push_back(atof(item.c_str()));
     }
     return pointsVec;
   }
 
-#endif
   
   // -- Misc --
   
