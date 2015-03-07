@@ -7,18 +7,20 @@
 
 #include "ControlTrigger.h"
 
-namespace Tonic { namespace Tonic_{
-  
-  ControlTrigger_::ControlTrigger_() : doTrigger(false){
+namespace Tonic {
+
+  namespace Tonic_{
     
-  }
-  
-  void ControlTrigger_::trigger(float value){
-    doTrigger = true;
-    output_.value = value;
-  }
-  
-} // Namespace Tonic_
+    ControlTrigger_::ControlTrigger_() : doTrigger(false){
+      
+    }
+    
+    void ControlTrigger_::trigger(float value){
+      doTrigger = true;
+      output_.value = value;
+    }
+    
+  } // Namespace Tonic_
   
   
   ControlTrigger&  ControlTrigger::trigger(float value){
