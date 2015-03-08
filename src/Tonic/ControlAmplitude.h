@@ -29,7 +29,7 @@ namespace Tonic {
     public:
       ControlAmplitude_();
       ~ControlAmplitude_();
-      void setInput(Generator input){ input_ = input; };
+      void setInput(Generator input);
       void computeOutput(const SynthesisContext_ &context);
     };
   }
@@ -49,7 +49,10 @@ namespace Tonic {
 
 
   public:
-    TONIC_MAKE_GEN_SETTERS(ControlAmplitude, input, setInput)
+    ControlAmplitude& input(Generator input){
+        gen()->setInput(input);
+        return *this;
+    }
   };
 }
 

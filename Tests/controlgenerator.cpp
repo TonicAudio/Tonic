@@ -8,6 +8,7 @@
 
 #include "tonictests.h"
 #include "Tonic/ControlRecorder.h"
+#include "Tonic/ControlAmplitude.h"
 
 TESTSUITE(ControlGeneratorTests, TonicTestcase, "")
 
@@ -505,6 +506,40 @@ TESTCASE(test210ControlRecorder, "")
 		TEST(eq, output.value, scale[scaleDegree % scale.size()] - 24, "ControlScaleDegree should subtract two octaves when wrapping down twice");
 
 
+	END_TESTCASE()
+	
+	
+  TESTCASE(test410ControlAmplitudeMono, "")
+  {
+    
+	  Tonic_::SynthesisContext_ context;
+    ControlAmplitude levelMeter;
+    float fixedValueValue = 1;
+    Generator signal = FixedValue().setValue(fixedValueValue);
+    levelMeter.input(signal);    
+    
+    ControlGeneratorOutput output = levelMeter.tick(context);
+    TEST(eq, output.value, fixedValueValue, "ControlAmplitude output makes sense for a mono signal");
+    
+  }
+  
+	END_TESTCASE()
+  
+  TESTCASE(test410ControlAmplitudeStereo, "")
+  {
+    
+	  Tonic_::SynthesisContext_ context;
+    ControlAmplitude levelMeter;
+    float fixedValueValue = 1;
+    Generator signal = FixedValue().setValue(fixedValueValue).pan(-1);
+    levelMeter.input(signal);    
+    
+    ControlGeneratorOutput output = levelMeter.tick(context);
+    TEST(eq, output.value, fixedValueValue/2, "ControlAmplitude output makes sense for a mono signal");
+    
+  }
+  
+  
 	END_TESTCASE()
 
 END_TESTSUITE()
