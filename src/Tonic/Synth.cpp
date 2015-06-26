@@ -100,7 +100,7 @@ namespace Tonic {
     }
     
     void Synth_::removeControlChangeSubscriber(ControlChangeSubscriber* sub){
-      vector<pair<ControlChangeSubscriber*, string>> newList;
+      vector<pair<ControlChangeSubscriber*, string> > newList;
       for (int i = 0; i < controlChangeSubscribers.size(); i++) {
         if (controlChangeSubscribers.at(i).first != sub) {
           newList.push_back(pair<ControlChangeSubscriber*, string>(sub, controlChangeSubscribers.at(i).second));

@@ -47,7 +47,7 @@ namespace Tonic{
       
       void computeSynthesisBlock(const Tonic::Tonic_::SynthesisContext_ &context);
       
-      vector<pair<ControlChangeSubscriber*, string>> controlChangeSubscribers;
+      vector<pair< ControlChangeSubscriber*, string> > controlChangeSubscribers;
       
     public:
       
