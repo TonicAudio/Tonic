@@ -50,7 +50,7 @@ RTAUDIO_LIBS = -lpulse-simple -lpulse -lpthread
 endif
 
 ifeq ($(AUDIO_API),UNIX_JACK)
-RTAUDIO_LIBS = pkg-config --cflags --libs jack -lpthread
+RTAUDIO_LIBS = `pkg-config --cflags --libs jack` -lpthread
 endif
 
 # == Targets ==
