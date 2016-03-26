@@ -66,8 +66,9 @@ namespace Tonic {
     
   public:
     
-    void input( ControlGenerator input ){
+   ControlAdder& input(ControlGenerator input){
       gen()->input( input );
+    return *this;
     }
     
     ControlGenerator operator[](unsigned int index){

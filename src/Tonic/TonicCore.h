@@ -20,8 +20,10 @@
 #include <iostream>
 #include <limits>
 #include <cstring>
+#include <string>
 #include <cstdio>
 #include <cmath>
+#include <sstream>
 
 extern "C" {
   #include <stdint.h>
@@ -31,7 +33,7 @@ extern "C" {
 // #define TONIC_DEBUG
 
 // Determine if C++11 is available. If not, some synths cannot be used. (applies to oF demos, mostly)
-#define TONIC_HAS_CPP_11 (__cplusplus > 199711L)
+#define TONIC_HAS_CPP_11 (_MSC_VER == 1800 || __cplusplus > 199711L)
 
 // Platform-specific macros and includes
 #if defined (__APPLE__)
@@ -54,6 +56,7 @@ extern "C" {
 #elif (defined (_WIN32) || defined (__WIN32__))
 
   #define WIN32_LEAN_AND_MEAN
+  #define __LITTLE_ENDIAN__ // safe to assume little endian on windows? 
   #include <Windows.h>
   
   // Clear these macros to avoid interfering with ControlParameter::min and ::max
@@ -132,7 +135,7 @@ namespace Tonic {
   //! Return sample rate
   static TonicFloat sampleRate(){
     return Tonic_::sampleRate_;
-  };
+  }
 
   //! "Vector" size for audio processing. ControlGenerators update at this rate.
   /*! !!!: THIS VALUE SHOULD BE A POWER-OF-TWO WHICH IS LESS THAN THE HARDWARE BUFFER SIZE */
@@ -289,6 +292,22 @@ namespace Tonic {
   inline static TonicFloat dBToLin(TonicFloat dBFS){
     return powf(10.f,(dBFS/20.0f));
   }
+
+
+  // -- String --
+  /*
+  Take a string of comma-delimited numbers, turn it in to a vector of floats
+  */
+  inline static vector<TonicFloat> stringToVec(string input){
+    vector<float> pointsVec;
+    std::stringstream ss(input);
+    std::string item;
+    while (std::getline(ss, item, ',')) {
+      pointsVec.push_back(atof(item.c_str()));
+    }
+    return pointsVec;
+  }
+
   
   // -- Misc --
   

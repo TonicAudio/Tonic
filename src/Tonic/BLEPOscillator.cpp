@@ -15,11 +15,11 @@ namespace Tonic { namespace Tonic_{
   
   BLEPOscillator_::BLEPOscillator_() :
     phase_(0),
+    ringBuf_(NULL),
     accum_(0),
     lBuffer_(0),
     iBuffer_(0),
-    nInit_(0),
-    ringBuf_(NULL)
+    nInit_(0)
   {
       
       lBuffer_ = minBLEPlength_/TONIC_MINBLEP_OVERSAMPLING;

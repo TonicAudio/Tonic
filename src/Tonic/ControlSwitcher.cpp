@@ -14,9 +14,9 @@ namespace Tonic {
   
     ControlSwitcher_::ControlSwitcher_() :
       inputIndex_(ControlValue(0)),
-      lastInputIndex_(-1),
       doesWrap_(ControlValue(0)),
       addAfterWrap_(ControlValue(0)),
+      lastInputIndex_(-1),
       lastIndexOutputValue(-1)
       {}
     

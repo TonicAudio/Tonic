@@ -21,6 +21,15 @@ namespace Tonic {
     bool        triggered;
     
     ControlGeneratorOutput() : value(0), triggered(false) {};
+
+    bool operator==(const ControlGeneratorOutput& r){
+      return value == r.value && triggered == r.triggered;
+    }
+
+    bool operator!=(const ControlGeneratorOutput& r){
+      return !((*this) == r);
+    }
+
   };
 
   namespace Tonic_{
@@ -42,6 +51,8 @@ namespace Tonic {
       
       // Used for initializing other generators (see smoothed() method for example)
       virtual ControlGeneratorOutput initialOutput();
+      
+       ControlGeneratorOutput getLastOutput();
       
     protected:
       
@@ -76,6 +87,7 @@ namespace Tonic {
 
   // forward declaration
   class RampedValue;
+  class ControlPrinter;
 
   class ControlGenerator : public TonicSmartPointer<Tonic_::ControlGenerator_>{
 
@@ -89,6 +101,11 @@ namespace Tonic {
     
     // shortcut for creating ramped value
     RampedValue smoothed(float length = 0.05);
+
+  // shortcut for wrapping with a ControlPrinter
+  ControlPrinter print(string message = "ControlGenerator triggered. Output value is: %f");
+    
+    ControlGeneratorOutput getLastOutput();
     
   };
 

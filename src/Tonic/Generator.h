@@ -24,6 +24,10 @@ namespace Tonic {
       
       Generator_();
       virtual ~Generator_();
+
+    // Keep track of whether this Generator_ has been added, via TONIC_MAKE_GEN_SETTERS to another generator
+    // If it has been added, the number of channels should not be allowed to change
+    bool hasBeenAdded; 
       
       virtual void tick( TonicFrames& frames, const SynthesisContext_ &context );
       
@@ -61,6 +65,9 @@ namespace Tonic {
 
   }
 
+  //-- forward delcaration
+  class MonoToStereoPanner;
+  class ControlGenerator;
   
   class Generator : public TonicSmartPointer<Tonic_::Generator_>{
 
@@ -75,6 +82,24 @@ namespace Tonic {
     virtual void tick(TonicFrames& frames, const Tonic_::SynthesisContext_ & context){
       obj->tick(frames, context);
     }
+
+    //! Shortcut for wrapping with a Panner. Currently a MonoToStereoPanner but this could/should
+    // be replaced with a better panner that can handle mono or stereo.
+    Generator pan(ControlGenerator pan);
+
+    //! Shortcut for wrapping with a Panner. Currently a MonoToStereoPanner but this could/should
+    // be replaced with a better panner that can handle mono or stereo.
+    Generator pan(float pan);
+    
+  protected:
+  
+    // keep track of whether an object has been added to the signal chain.
+    // Once it has been added, you're no longer allowed to change the number of channels. Other restrictions may apply.
+    void recordAdditionAsParameter(){ obj->hasBeenAdded = true; }
+    
+    // Subclass instances don't have access to protected members of parent class. This is a workaround.
+    // Described here: http://stackoverflow.com/questions/3561648/why-does-c-not-allow-inherited-friendship/3562096#3562096
+    void proxyRecordAdditionAsParameter(Generator& addition){ addition.recordAdditionAsParameter(); }
 
   };
   
@@ -101,6 +126,7 @@ namespace Tonic {
                                                                                         \
   generatorClassName& methodNameInGenerator(Generator arg){                             \
     this->gen()->methodNameInGenerator_(arg);                                           \
+    Generator::proxyRecordAdditionAsParameter( arg );                                   \
     return static_cast<generatorClassName&>(*this);                                     \
   }                                                                                     \
                                                                                         \

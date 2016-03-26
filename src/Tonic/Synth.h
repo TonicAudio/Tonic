@@ -62,6 +62,7 @@ namespace Tonic{
       void setParameter(string name, float value, bool normalized = false);
       
       vector<ControlParameter>  getParameters();
+      void printParameters();
       
       ControlChangeNotifier publishChanges(ControlGenerator input, string name);
       
@@ -98,6 +99,8 @@ namespace Tonic{
   
   // ---- Smart Pointer -----
   
+  //! The basic Tonic "patch" wrapper. In normal usage, all of your signal chain is encompassed in a synth object.
+  
   class Synth  : public TemplatedBufferFiller<Tonic_::Synth_> {
     
   public:
@@ -105,6 +108,7 @@ namespace Tonic{
     //! Set the output gen that produces audio for the Synth
     void  setOutputGen(Generator generator){
       gen()->lockMutex();
+      Generator::proxyRecordAdditionAsParameter(generator);
       gen()->setOutputGen(generator);
       gen()->unlockMutex();
     }
@@ -195,6 +199,8 @@ namespace Tonic{
     {
       return gen()->getParameters();
     }
+
+  void printParameters(){ gen()->printParameters(); }
     
     void forceNewOutput(){
       gen()->lockMutex();

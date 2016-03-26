@@ -10,7 +10,7 @@
 
 namespace Tonic { namespace Tonic_{
   
-  Compressor_::Compressor_() : isLimiter_(false), gainEnvValue_(1.f), ampEnvValue_(0) {
+  Compressor_::Compressor_() : gainEnvValue_(1.f), isLimiter_(false), ampEnvValue_(0) {
     ampInputFrames_.resize(kSynthesisBlockSize, 1, 0);
     lookaheadDelayLine_.initialize(0.01, 2);
     lookaheadDelayLine_.setInterpolates(false); // No real need to interpolate here for lookahead

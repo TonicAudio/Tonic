@@ -11,6 +11,7 @@
 
 #include "ControlGenerator.h"
 #include "RampedValue.h"
+#include "ControlPrinter.h"
 #include <cmath>
 
 namespace Tonic{
@@ -30,11 +31,26 @@ namespace Tonic{
       return tick(Tonic::DummyContext);
     }
     
+    ControlGeneratorOutput ControlGenerator_::getLastOutput(){
+      return output_;
+    }
+    
   }
+  
   RampedValue ControlGenerator::smoothed(float length){
     return RampedValue( obj->initialOutput().value, length ).target(*this);
   }
+
+  ControlPrinter ControlGenerator::print(string message)
+  {
+    return ControlPrinter().input(*this).message(message);
+  }
+
   
+  ControlGeneratorOutput ControlGenerator::getLastOutput(){
+    return obj->getLastOutput();
+  }
+
 }
 
 #endif

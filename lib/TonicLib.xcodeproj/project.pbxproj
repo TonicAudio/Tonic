@@ -166,6 +166,27 @@
 		A886CA37183958B100AAFBB2 /* ControlCallback.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A886CA35183958B100AAFBB2 /* ControlCallback.cpp */; };
 		A886CA38183958B100AAFBB2 /* ControlCallback.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A886CA35183958B100AAFBB2 /* ControlCallback.cpp */; };
 		A886CA39183958B100AAFBB2 /* ControlCallback.h in Headers */ = {isa = PBXBuildFile; fileRef = A886CA36183958B100AAFBB2 /* ControlCallback.h */; };
+		A890E83C1AAB629C009FA404 /* ControlAmplitude.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A890E82E1AAB629C009FA404 /* ControlAmplitude.cpp */; };
+		A890E83D1AAB629C009FA404 /* ControlAmplitude.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A890E82E1AAB629C009FA404 /* ControlAmplitude.cpp */; };
+		A890E83E1AAB629C009FA404 /* ControlAmplitude.h in Headers */ = {isa = PBXBuildFile; fileRef = A890E82F1AAB629C009FA404 /* ControlAmplitude.h */; };
+		A890E83F1AAB629C009FA404 /* ControlBreakpoints.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A890E8301AAB629C009FA404 /* ControlBreakpoints.cpp */; };
+		A890E8401AAB629C009FA404 /* ControlBreakpoints.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A890E8301AAB629C009FA404 /* ControlBreakpoints.cpp */; };
+		A890E8411AAB629C009FA404 /* ControlBreakpoints.h in Headers */ = {isa = PBXBuildFile; fileRef = A890E8311AAB629C009FA404 /* ControlBreakpoints.h */; };
+		A890E8421AAB629C009FA404 /* ControlMapper.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A890E8321AAB629C009FA404 /* ControlMapper.cpp */; };
+		A890E8431AAB629C009FA404 /* ControlMapper.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A890E8321AAB629C009FA404 /* ControlMapper.cpp */; };
+		A890E8441AAB629C009FA404 /* ControlMapper.h in Headers */ = {isa = PBXBuildFile; fileRef = A890E8331AAB629C009FA404 /* ControlMapper.h */; };
+		A890E8451AAB629C009FA404 /* ControlRampedValue.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A890E8341AAB629C009FA404 /* ControlRampedValue.cpp */; };
+		A890E8461AAB629C009FA404 /* ControlRampedValue.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A890E8341AAB629C009FA404 /* ControlRampedValue.cpp */; };
+		A890E8471AAB629C009FA404 /* ControlRampedValue.h in Headers */ = {isa = PBXBuildFile; fileRef = A890E8351AAB629C009FA404 /* ControlRampedValue.h */; };
+		A890E8481AAB629C009FA404 /* ControlScaleDegree.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A890E8361AAB629C009FA404 /* ControlScaleDegree.cpp */; };
+		A890E8491AAB629C009FA404 /* ControlScaleDegree.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A890E8361AAB629C009FA404 /* ControlScaleDegree.cpp */; };
+		A890E84A1AAB629C009FA404 /* ControlScaleDegree.h in Headers */ = {isa = PBXBuildFile; fileRef = A890E8371AAB629C009FA404 /* ControlScaleDegree.h */; };
+		A890E84B1AAB629C009FA404 /* ControlSineOsc.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A890E8381AAB629C009FA404 /* ControlSineOsc.cpp */; };
+		A890E84C1AAB629C009FA404 /* ControlSineOsc.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A890E8381AAB629C009FA404 /* ControlSineOsc.cpp */; };
+		A890E84D1AAB629C009FA404 /* ControlSineOsc.h in Headers */ = {isa = PBXBuildFile; fileRef = A890E8391AAB629C009FA404 /* ControlSineOsc.h */; };
+		A890E84E1AAB629C009FA404 /* Splitter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A890E83A1AAB629C009FA404 /* Splitter.cpp */; };
+		A890E84F1AAB629C009FA404 /* Splitter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A890E83A1AAB629C009FA404 /* Splitter.cpp */; };
+		A890E8501AAB629C009FA404 /* Splitter.h in Headers */ = {isa = PBXBuildFile; fileRef = A890E83B1AAB629C009FA404 /* Splitter.h */; };
 		A8E1A20B197ACABA0089060E /* BitCrusher.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A8E1A209197ACABA0089060E /* BitCrusher.cpp */; };
 		A8E1A20C197ACABA0089060E /* BitCrusher.h in Headers */ = {isa = PBXBuildFile; fileRef = A8E1A20A197ACABA0089060E /* BitCrusher.h */; };
 		A8E1A20D197ACDA70089060E /* BitCrusher.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A8E1A209197ACABA0089060E /* BitCrusher.cpp */; };
@@ -311,6 +332,20 @@
 		A883ED7A17B468EA00F60C06 /* ControlTriggerFilter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ControlTriggerFilter.h; sourceTree = "<group>"; };
 		A886CA35183958B100AAFBB2 /* ControlCallback.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ControlCallback.cpp; sourceTree = "<group>"; };
 		A886CA36183958B100AAFBB2 /* ControlCallback.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = ControlCallback.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
+		A890E82E1AAB629C009FA404 /* ControlAmplitude.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ControlAmplitude.cpp; sourceTree = "<group>"; };
+		A890E82F1AAB629C009FA404 /* ControlAmplitude.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ControlAmplitude.h; sourceTree = "<group>"; };
+		A890E8301AAB629C009FA404 /* ControlBreakpoints.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ControlBreakpoints.cpp; sourceTree = "<group>"; };
+		A890E8311AAB629C009FA404 /* ControlBreakpoints.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ControlBreakpoints.h; sourceTree = "<group>"; };
+		A890E8321AAB629C009FA404 /* ControlMapper.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ControlMapper.cpp; sourceTree = "<group>"; };
+		A890E8331AAB629C009FA404 /* ControlMapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ControlMapper.h; sourceTree = "<group>"; };
+		A890E8341AAB629C009FA404 /* ControlRampedValue.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ControlRampedValue.cpp; sourceTree = "<group>"; };
+		A890E8351AAB629C009FA404 /* ControlRampedValue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ControlRampedValue.h; sourceTree = "<group>"; };
+		A890E8361AAB629C009FA404 /* ControlScaleDegree.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ControlScaleDegree.cpp; sourceTree = "<group>"; };
+		A890E8371AAB629C009FA404 /* ControlScaleDegree.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ControlScaleDegree.h; sourceTree = "<group>"; };
+		A890E8381AAB629C009FA404 /* ControlSineOsc.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ControlSineOsc.cpp; sourceTree = "<group>"; };
+		A890E8391AAB629C009FA404 /* ControlSineOsc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ControlSineOsc.h; sourceTree = "<group>"; };
+		A890E83A1AAB629C009FA404 /* Splitter.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Splitter.cpp; sourceTree = "<group>"; };
+		A890E83B1AAB629C009FA404 /* Splitter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Splitter.h; sourceTree = "<group>"; };
 		A8E1A209197ACABA0089060E /* BitCrusher.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = BitCrusher.cpp; sourceTree = "<group>"; };
 		A8E1A20A197ACABA0089060E /* BitCrusher.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BitCrusher.h; sourceTree = "<group>"; };
 		A8F87054181C3B6500B82527 /* BufferPlayer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = BufferPlayer.cpp; sourceTree = "<group>"; };
@@ -361,6 +396,20 @@
 		0183CFFF1735D0E6004638EB /* Tonic */ = {
 			isa = PBXGroup;
 			children = (
+				A890E82E1AAB629C009FA404 /* ControlAmplitude.cpp */,
+				A890E82F1AAB629C009FA404 /* ControlAmplitude.h */,
+				A890E8301AAB629C009FA404 /* ControlBreakpoints.cpp */,
+				A890E8311AAB629C009FA404 /* ControlBreakpoints.h */,
+				A890E8321AAB629C009FA404 /* ControlMapper.cpp */,
+				A890E8331AAB629C009FA404 /* ControlMapper.h */,
+				A890E8341AAB629C009FA404 /* ControlRampedValue.cpp */,
+				A890E8351AAB629C009FA404 /* ControlRampedValue.h */,
+				A890E8361AAB629C009FA404 /* ControlScaleDegree.cpp */,
+				A890E8371AAB629C009FA404 /* ControlScaleDegree.h */,
+				A890E8381AAB629C009FA404 /* ControlSineOsc.cpp */,
+				A890E8391AAB629C009FA404 /* ControlSineOsc.h */,
+				A890E83A1AAB629C009FA404 /* Splitter.cpp */,
+				A890E83B1AAB629C009FA404 /* Splitter.h */,
 				0183D0021735D0E6004638EB /* ADSR.cpp */,
 				0183D0031735D0E6004638EB /* ADSR.h */,
 				0183D0001735D0E6004638EB /* Arithmetic.cpp */,
@@ -534,9 +583,11 @@
 				0183D0691735D0E6004638EB /* BufferFiller.h in Headers */,
 				0183D06C1735D0E6004638EB /* CompressorLimiter.h in Headers */,
 				0183D06F1735D0E6004638EB /* ControlArithmetic.h in Headers */,
+				A890E83E1AAB629C009FA404 /* ControlAmplitude.h in Headers */,
 				0183D0721735D0E6004638EB /* ControlConditioner.h in Headers */,
 				0183D0751735D0E6004638EB /* ControlCounter.h in Headers */,
 				0183D0781735D0E6004638EB /* ControlDbToLinear.h in Headers */,
+				A890E8501AAB629C009FA404 /* Splitter.h in Headers */,
 				0183D07E1735D0E6004638EB /* ControlFloor.h in Headers */,
 				0183D0811735D0E6004638EB /* ControlGenerator.h in Headers */,
 				0183D0841735D0E6004638EB /* ControlMetro.h in Headers */,
@@ -560,11 +611,14 @@
 				A8E1A20C197ACABA0089060E /* BitCrusher.h in Headers */,
 				0183D0C21735D0E6004638EB /* LFNoise.h in Headers */,
 				0183D0C51735D0E6004638EB /* Mixer.h in Headers */,
+				A890E8471AAB629C009FA404 /* ControlRampedValue.h in Headers */,
+				A890E8441AAB629C009FA404 /* ControlMapper.h in Headers */,
 				0183D0C81735D0E6004638EB /* MonoToStereoPanner.h in Headers */,
 				0183D0CE1735D0E6004638EB /* Noise.h in Headers */,
 				0183D0D11735D0E6004638EB /* RampedValue.h in Headers */,
 				0183D0D41735D0E6004638EB /* RectWave.h in Headers */,
 				0183D0D71735D0E6004638EB /* SineWave.h in Headers */,
+				A890E84A1AAB629C009FA404 /* ControlScaleDegree.h in Headers */,
 				0183D0DA1735D0E6004638EB /* StereoDelay.h in Headers */,
 				0183D0E01735D0E6004638EB /* Synth.h in Headers */,
 				0183D0E31735D0E6004638EB /* TableLookupOsc.h in Headers */,
@@ -588,6 +642,8 @@
 				A8F87058181C3B6500B82527 /* BufferPlayer.h in Headers */,
 				A8F8705D181C506800B82527 /* AudioFileUtils.h in Headers */,
 				A886CA39183958B100AAFBB2 /* ControlCallback.h in Headers */,
+				A890E8411AAB629C009FA404 /* ControlBreakpoints.h in Headers */,
+				A890E84D1AAB629C009FA404 /* ControlSineOsc.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -697,6 +753,7 @@
 				0183D0611735D0E6004638EB /* ADSR.cpp in Sources */,
 				0183D0641735D0E6004638EB /* BasicDelay.cpp in Sources */,
 				0183D0671735D0E6004638EB /* BufferFiller.cpp in Sources */,
+				A890E8421AAB629C009FA404 /* ControlMapper.cpp in Sources */,
 				0183D06A1735D0E6004638EB /* CompressorLimiter.cpp in Sources */,
 				0183D06D1735D0E6004638EB /* ControlArithmetic.cpp in Sources */,
 				0183D0701735D0E6004638EB /* ControlConditioner.cpp in Sources */,
@@ -708,10 +765,13 @@
 				0183D08E1735D0E6004638EB /* ControlPulse.cpp in Sources */,
 				0183D0911735D0E6004638EB /* ControlRandom.cpp in Sources */,
 				0183D0941735D0E6004638EB /* ControlRecorder.cpp in Sources */,
+				A890E84B1AAB629C009FA404 /* ControlSineOsc.cpp in Sources */,
 				0183D0971735D0E6004638EB /* ControlSnapToScale.cpp in Sources */,
 				0183D09A1735D0E6004638EB /* ControlStepper.cpp in Sources */,
 				0183D0A01735D0E6004638EB /* ControlSwitcher.cpp in Sources */,
+				A890E84E1AAB629C009FA404 /* Splitter.cpp in Sources */,
 				0183D0A61735D0E6004638EB /* ControlValue.cpp in Sources */,
+				A890E8481AAB629C009FA404 /* ControlScaleDegree.cpp in Sources */,
 				0183D0A91735D0E6004638EB /* ControlXYSpeed.cpp in Sources */,
 				0183D0AC1735D0E6004638EB /* DelayUtils.cpp in Sources */,
 				0183D0B31735D0E6004638EB /* Filters.cpp in Sources */,
@@ -722,6 +782,7 @@
 				0183D0C31735D0E6004638EB /* Mixer.cpp in Sources */,
 				0183D0C61735D0E6004638EB /* MonoToStereoPanner.cpp in Sources */,
 				0183D0CC1735D0E6004638EB /* Noise.cpp in Sources */,
+				A890E83C1AAB629C009FA404 /* ControlAmplitude.cpp in Sources */,
 				0183D0CF1735D0E6004638EB /* RampedValue.cpp in Sources */,
 				0183D0D21735D0E6004638EB /* RectWave.cpp in Sources */,
 				0183D0D51735D0E6004638EB /* SineWave.cpp in Sources */,
@@ -729,12 +790,14 @@
 				0183D0DE1735D0E6004638EB /* Synth.cpp in Sources */,
 				0183D0E11735D0E6004638EB /* TableLookupOsc.cpp in Sources */,
 				0183D0E51735D0E6004638EB /* TonicFrames.cpp in Sources */,
+				A890E83F1AAB629C009FA404 /* ControlBreakpoints.cpp in Sources */,
 				0183D10D1735D835004638EB /* Reverb.cpp in Sources */,
 				0183D1111735DCB0004638EB /* CombFilter.cpp in Sources */,
 				01C65FEE17371C45003B2661 /* ControlDelay.cpp in Sources */,
 				01C65FF2173723C6003B2661 /* Effect.cpp in Sources */,
 				01C65FF417372407003B2661 /* FilterUtils.cpp in Sources */,
 				9AEDB5C817430E7B00C6A77C /* ControlParameter.cpp in Sources */,
+				A890E8451AAB629C009FA404 /* ControlRampedValue.cpp in Sources */,
 				A80782D9175591FD009057BC /* ControlChangeNotifier.cpp in Sources */,
 				9A75063F174689FD00373E88 /* SampleTable.cpp in Sources */,
 				9AF6A72F174AFCF900C70173 /* RingBuffer.cpp in Sources */,
@@ -761,6 +824,7 @@
 				0183D0621735D0E6004638EB /* ADSR.cpp in Sources */,
 				0183D0651735D0E6004638EB /* BasicDelay.cpp in Sources */,
 				0183D0681735D0E6004638EB /* BufferFiller.cpp in Sources */,
+				A890E8431AAB629C009FA404 /* ControlMapper.cpp in Sources */,
 				0183D06B1735D0E6004638EB /* CompressorLimiter.cpp in Sources */,
 				0183D06E1735D0E6004638EB /* ControlArithmetic.cpp in Sources */,
 				0183D0711735D0E6004638EB /* ControlConditioner.cpp in Sources */,
@@ -772,10 +836,13 @@
 				0183D08F1735D0E6004638EB /* ControlPulse.cpp in Sources */,
 				0183D0921735D0E6004638EB /* ControlRandom.cpp in Sources */,
 				0183D0951735D0E6004638EB /* ControlRecorder.cpp in Sources */,
+				A890E84C1AAB629C009FA404 /* ControlSineOsc.cpp in Sources */,
 				0183D0981735D0E6004638EB /* ControlSnapToScale.cpp in Sources */,
 				0183D09B1735D0E6004638EB /* ControlStepper.cpp in Sources */,
 				0183D0A11735D0E6004638EB /* ControlSwitcher.cpp in Sources */,
+				A890E84F1AAB629C009FA404 /* Splitter.cpp in Sources */,
 				0183D0A71735D0E6004638EB /* ControlValue.cpp in Sources */,
+				A890E8491AAB629C009FA404 /* ControlScaleDegree.cpp in Sources */,
 				0183D0AA1735D0E6004638EB /* ControlXYSpeed.cpp in Sources */,
 				0183D0AD1735D0E6004638EB /* DelayUtils.cpp in Sources */,
 				0183D0B41735D0E6004638EB /* Filters.cpp in Sources */,
@@ -786,6 +853,7 @@
 				0183D0C41735D0E6004638EB /* Mixer.cpp in Sources */,
 				0183D0C71735D0E6004638EB /* MonoToStereoPanner.cpp in Sources */,
 				0183D0CD1735D0E6004638EB /* Noise.cpp in Sources */,
+				A890E83D1AAB629C009FA404 /* ControlAmplitude.cpp in Sources */,
 				0183D0D01735D0E6004638EB /* RampedValue.cpp in Sources */,
 				0183D0D31735D0E6004638EB /* RectWave.cpp in Sources */,
 				0183D0D61735D0E6004638EB /* SineWave.cpp in Sources */,
@@ -793,12 +861,14 @@
 				0183D0DF1735D0E6004638EB /* Synth.cpp in Sources */,
 				0183D0E21735D0E6004638EB /* TableLookupOsc.cpp in Sources */,
 				0183D0E61735D0E6004638EB /* TonicFrames.cpp in Sources */,
+				A890E8401AAB629C009FA404 /* ControlBreakpoints.cpp in Sources */,
 				0183D1121735DCB0004638EB /* CombFilter.cpp in Sources */,
 				0183D1141735DCBF004638EB /* Reverb.cpp in Sources */,
 				01C65FEF17371C45003B2661 /* ControlDelay.cpp in Sources */,
 				01C65FF517372A5F003B2661 /* Effect.cpp in Sources */,
 				01C65FF617372CD3003B2661 /* FilterUtils.cpp in Sources */,
 				9AEDB5C917430E7B00C6A77C /* ControlParameter.cpp in Sources */,
+				A890E8461AAB629C009FA404 /* ControlRampedValue.cpp in Sources */,
 				A80782DA175591FD009057BC /* ControlChangeNotifier.cpp in Sources */,
 				9A750640174689FD00373E88 /* SampleTable.cpp in Sources */,
 				9AF6A730174AFCF900C70173 /* RingBuffer.cpp in Sources */,

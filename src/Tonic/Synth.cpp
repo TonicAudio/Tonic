@@ -1,6 +1,5 @@
 //
 //  Synth.cpp
-//  2013_1_23_melody
 //
 //  Created by Morgan Packard on 1/23/13.
 //
@@ -116,7 +115,31 @@ namespace Tonic {
       addAuxControlGenerator(messenger);
       return messenger;
     }
+
+  void Synth_::printParameters()
+  {
+    int colWidth = 30;
+    vector<ControlParameter> parameters = getParameters();
+    cout << endl << "=========================================================" << endl;
+    cout << "Tonic::Synth::printParameters. " << endl;
+    cout << "=========================================================" << endl;
+    for (int i = 0; i < parameters.size(); i++)
+    {
+      string parameterName = parameters[i].getName();
+      size_t parameterNameLength = parameterName.size();
+      cout << "name: " << parameterName; 
+      int paddingAmt = colWidth - parameterNameLength;
+      for (int j = 0; j < paddingAmt; j++)
+      {
+        cout << " ";
+      }
+      cout << " value: " << parameters[i].getValue() << endl;
+    }
+    cout << endl;
     
+  }
+
+
   }
   
 

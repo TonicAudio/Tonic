@@ -43,7 +43,7 @@ namespace Tonic {
     
   public:
   
-  void trigger(float value = 1);
+	ControlTrigger& trigger(float value = 1);
 
   };
 }

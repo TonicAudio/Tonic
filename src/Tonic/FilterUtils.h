@@ -149,6 +149,6 @@ namespace Tonic {
   }
   
   
-};
+}
 
 #endif

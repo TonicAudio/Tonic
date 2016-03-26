@@ -20,6 +20,11 @@ namespace Tonic {
     {
       // no checking for duplicates, maybe we should
       inputs_.push_back(input);
+    if (input.isStereoOutput())
+    {
+      setIsStereoOutput(true);
+    }
+    
     }
     
     void Mixer_::removeInput(BufferFiller input)

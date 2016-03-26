@@ -32,7 +32,8 @@ namespace Tonic {
       vector<ControlChangeSubscriber*> subscribers;
       bool outputReadyToBeSentToUI;
       ControlGeneratorOutput outputToSendToUI;
-      
+    ControlGeneratorOutput lastOutput;
+
     public:
       ControlChangeNotifier_();
       ~ControlChangeNotifier_();
@@ -44,7 +45,8 @@ namespace Tonic {
     
   }
   
-  /*! 
+  //! Mechanism for observing audio-thread events from a UI (or other) thread.
+  /** 
     A ControlChangeNotifier observes a ControlGenerator and notifies its subscribers when its value changes, 
     or when the value of its outputs "triggered" flag is true. Generally you don't instantiate this object directly,
     rather you "publish" a controlGenerator using Synth::publishChanges(myControlGen, "nameOfMyControlGen");
@@ -56,7 +58,7 @@ namespace Tonic {
     void sendControlChangesToSubscribers();
     void addValueChangedSubscriber(ControlChangeSubscriber* resp){gen()->addValueChangedSubscriber(resp);};
     void removeValueChangedSubscriber(ControlChangeSubscriber* sub){gen()->removeValueChangedSubscriber(sub);};
-    void setName(string name){gen()->name = name;}
+  ControlChangeNotifier setName(string name){ gen()->name = name; return *this; }
 
   };
 }

@@ -13,8 +13,8 @@ namespace Tonic {
   namespace Tonic_{
   
     ControlValue_::ControlValue_():
-      changed_(false),
-      value_(0)
+      value_(0),
+      changed_(false)
     {}
       
   }
