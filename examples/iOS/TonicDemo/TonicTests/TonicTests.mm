@@ -662,6 +662,30 @@ using namespace Tonic;
   
 }
 
+-(void)test210ControlSwitcherAdvance{
+  Tonic_::SynthesisContext_ localContext;
+  localContext.forceNewOutput = false;
+  
+  ControlTrigger advanceTrigger;
+  
+  ControlSwitcher switcher;
+  switcher.addInput(0)
+  .addInput(1)
+  .addInput(2)
+  .advanceTrigger(advanceTrigger);
+  
+  localContext.tick();
+  switcher.tick(localContext);
+  STAssertEquals(switcher.tick(localContext).value, 0.0f, @"ControlSwitcher basic test.");
+  
+  advanceTrigger.trigger();
+  localContext.tick();
+  switcher.tick(localContext);
+  STAssertEquals(switcher.tick(localContext).value, 1.0f, @"ControlSwitcher advance test.");
+  
+  
+}
+
 #pragma mark - Buffer filler tests
 
 - (void)test300BufferFillerMonoOutMonoSource

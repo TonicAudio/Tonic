@@ -47,6 +47,10 @@ namespace Tonic {
         ControlGeneratorOutput doesWrapOut = doesWrap_.tick(context);
         ControlGeneratorOutput addAfterWrapOut = addAfterWrap_.tick(context);
         
+        if(advanceTrigger_.tick(context).triggered){
+          currentInputIndex_++;
+        }
+        
         int cleanedInput = doesWrapOut.value ? currentInputIndex_ % inputs_.size() : clamp(currentInputIndex_, 0, inputs_.size() -1 );
         
         int index = 0;
@@ -59,8 +63,15 @@ namespace Tonic {
         
         if (doesWrapOut.value) {
           // Do the add after wrap thing. Mostly useful for going to scale degrees in higher octaves
-          int numTimes = currentInputIndex_ / inputs_.size();
-          output_.value += numTimes * addAfterWrapOut.value;
+          if (addAfterWrapOut.value) {
+            int numTimes = currentInputIndex_ / inputs_.size();
+            output_.value += numTimes * addAfterWrapOut.value;
+          }else{
+            // if there's no addAfterWrap, reset the currentInputIndex_ in order to avoid the situation
+            // where it gets indefinitely incremented via advanceTrigger_ and eventually overflows int.
+            currentInputIndex_ = cleanedInput;
+          }
+          
         }
                   
         if (lastInputIndex_ != currentInputIndex_) {
@@ -95,6 +106,10 @@ namespace Tonic {
     
     void  ControlSwitcher_::setTriggerForIndex(ControlGenerator trigger, int index){
       triggers_[index] = trigger;
+    }
+    
+    void ControlSwitcher_::setAdvanceTrigger(ControlGenerator trigger){
+      advanceTrigger_ = trigger;
     }
     
   } // Namespace Tonic_
