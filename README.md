@@ -10,10 +10,10 @@ Prefer coding to patching? Love clean syntax? Care about performance? That's how
 TriangleWave tone1 = TriangleWave();
 SineWave tone2 = SineWave();
 SineWave vibrato = SineWave().freq(10);
-SineWave tremelo = SineWave().freq(1);
+SineWave tremolo = SineWave().freq(1);
 
 //that you can combine using intuitive operators
-Generator combinedSignal = (tone1 + tone2) * tremelo;
+Generator combinedSignal = (tone1 + tone2) * tremolo;
         
 //and plug in to one another
 float baseFreq = 200;
