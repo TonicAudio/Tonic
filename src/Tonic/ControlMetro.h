@@ -69,7 +69,11 @@ namespace Tonic {
     ControlMetro(float bpm = 120){
       gen()->setBPMGen(ControlValue(bpm));
     }
-    
+
+    ControlMetro(ControlGenerator bpm){
+      gen()->setBPMGen(bpm);
+    }
+	  
     TONIC_MAKE_CTRL_GEN_SETTERS(ControlMetro, bpm, setBPMGen);
   };
 }
